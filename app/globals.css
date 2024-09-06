@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
@@ -20,8 +20,54 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.container {
+  max-width: 1500px; /* O el valor que desees */
+  margin: 0 auto;
+  padding: 0 1rem; /* Ajusta el padding según sea necesario */
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column; /* O 'row', según el diseño */
+  align-items: center; /* O 'flex-start', 'flex-end', etc. según el diseño */
+  justify-content: center; /* O 'flex-start', 'flex-end', etc. según el diseño */
+}
+
+:root {
+  --scrollbar-width: 8px;
+  --scrollbar-margin-right: 5px;
+  --scrollbar-track: #ffffff; 
+  --scrollbar-thumb: #dedcdc; 
+}
+
+.dark {
+  --scrollbar-track: #1f1f1f00; 
+  --scrollbar-thumb: #2c2c2c; 
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
   }
 }
