@@ -1,5 +1,5 @@
-import { FullComponent } from "@/components/full-component"
+import { Main } from "@/components/Main"
 
 export default function Page() {
-  return <FullComponent />
+  return <Main />
 }
