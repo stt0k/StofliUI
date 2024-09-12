@@ -1,0 +1,143 @@
+import { ArrowUpRight } from "lucide-react";
+
+const links = {
+  nextjs: "/",
+  astro: "#",
+  vite: "#",
+  laravel: "#",
+  react: "#",
+  angular: "#",
+  svelte: "#",
+  vuejs: "#",
+};
+
+// icons
+import {
+  RiNextjsFill,
+  RiAngularjsFill,
+  RiSvelteFill,
+  RiVuejsFill
+
+} from "react-icons/ri";
+
+import {
+  SiVite,
+  SiAstro,
+  SiLaravel,
+  SiReact
+
+} from "react-icons/si";
+
+export default function svelteGrid() {
+  return (
+    <div className="p-4 md:p-6 lg:p-8 custom-scroll">
+      <div className="grid grid-cols-2 gap-4 max-w-7xl mx-auto xl:px-5">
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <RiNextjsFill />
+            <h3 className="dark:text-[#FFFFFF] font-bold">Next.js</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <SiAstro />
+            <h3 className="dark:text-[#FFFFFF] font-bold">Astro</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <SiVite />
+            <h3 className="dark:text-[#FFFFFF] font-bold">Vite</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <SiLaravel />
+            <h3 className="dark:text-[#FFFFFF] font-bold">Laravel</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <SiReact />
+            <h3 className="dark:text-[#FFFFFF] font-bold">React</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <RiAngularjsFill />
+            <h3 className="dark:text-[#FFFFFF] font-bold">Angular</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <RiSvelteFill />
+            <h3 className="dark:text-[#FFFFFF] font-bold">Svelte</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+        {/* nextjs */}
+        <a
+          href={links.nextjs}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+        > 
+          <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
+            <RiVuejsFill />
+            <h3 className="dark:text-[#FFFFFF] font-bold">Vue.js</h3>
+          </div>
+          <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
+        </a>
+      </div>
+    </div>
+  );
+}

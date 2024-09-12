@@ -11,12 +11,16 @@ const Sidebar = () => {
               <div className="py-1">
                 <h2 className="mb-2 px-2 text-lg font-semibold tracking-tight">Getting Started</h2>
                 <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
-                  <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
-                    Introduction
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
-                    Installation
-                  </Button>
+                  <Link href="/">
+                    <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
+                      Introduction
+                    </Button>
+                  </Link>
+                  <Link href="/">
+                    <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
+                      Installation
+                    </Button>
+                  </Link>
                 </div>
               </div>
               {/* Frameworks */}
@@ -28,37 +32,37 @@ const Sidebar = () => {
                       Next.js
                     </Button>
                   </Link>
-                  <Link href="/list/frameworks.tsx">
+                  <Link href="/docs/frameworks">
                     <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                       Astro
                     </Button>
                   </Link>
-                  <Link href="/list/frameworks.tsx">
+                  <Link href="/docs/frameworks">
                     <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                       Vite
                     </Button>
                   </Link>
-                  <Link href="/list/frameworks.tsx">
+                  <Link href="/docs/frameworks">
                     <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                       Laravel
                     </Button>
                   </Link>
-                  <Link href="/list/frameworks.tsx">
+                  <Link href="/docs/frameworks">
                     <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                       React
                     </Button>
                   </Link>
-                  <Link href="/list/frameworks.tsx">
+                  <Link href="/docs/frameworks">
                     <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                       Angular
                     </Button>
                   </Link>
-                  <Link href="/list/frameworks.tsx">
+                  <Link href="/docs/frameworks">
                     <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                       Svelte
                     </Button>
                   </Link>
-                  <Link href="/list/frameworks.tsx">
+                  <Link href="/docs/frameworks">
                     <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                       Vue.js
                     </Button>

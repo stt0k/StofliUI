@@ -2,8 +2,9 @@
 
 import Sidebar from "@/components/Sidebar"
 import  Header  from "@/components/Header"
+import BentoGrid from "@/components/ui/BentoGrid";
 
-export function Main() {
+export default function Main() {
   return (
     <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
       <Header />
@@ -14,29 +15,11 @@ export function Main() {
             <div className="mb-4 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
               <div className="overflow-hidden text-ellipsis whitespace-nowrap">Docs</div>
               <ChevronRightIcon className="h-4 w-4" />
-              <div className="font-medium text-zinc-950 dark:text-zinc-50">Introduction</div>
+              <div className="font-medium text-zinc-950 dark:text-zinc-50">Frameworks</div>
             </div>
             <div className="space-y-2">
-              <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Introduction</h1>
-              <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
-              </p>
-            </div>
-            <div className="pb-12 pt-8">
-              <div className="flex flex-col gap-4 text-lg">
-                <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  This is NOT a component library. It&apos;s a collection of re-usable components that you can copy and paste into your apps.
-                </p>
-                <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  What do you mean by not a component library? I mean you do not install it as a dependency. It is not available or distributed via npm.
-                </p>
-                <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  Pick the components you need. Copy and paste the code into your project and customize to your needs. The code is yours.
-                </p>
-                <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  Use this as a reference to build your own component libraries.
-                </p>
-              </div>
+              <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Frameworks</h1>
+              <BentoGrid />
             </div>
             <div className="space-y-6">
               <h2 className="mt-10 scroll-m-20 border-b border-[#E4E4E7] dark:border-[#27272A] pb-2 text-2xl font-semibold tracking-tight">FAQ</h2>
