@@ -40,7 +40,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <RiNextjsFill />
+            <RiNextjsFill className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">Next.js</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
@@ -54,7 +54,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <SiAstro />
+            <SiAstro className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">Astro</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
@@ -67,7 +67,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <SiVite />
+            <SiVite className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">Vite</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
@@ -80,7 +80,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <SiLaravel />
+            <SiLaravel className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">Laravel</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
@@ -93,7 +93,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <SiReact />
+            <SiReact className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">React</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
@@ -106,7 +106,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <RiAngularjsFill />
+            <RiAngularjsFill className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">Angular</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
@@ -119,7 +119,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <RiSvelteFill />
+            <RiSvelteFill className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">Svelte</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
@@ -132,7 +132,7 @@ export default function svelteGrid() {
           className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e236] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
-            <RiVuejsFill />
+            <RiVuejsFill className="h-16 w-16" />
             <h3 className="dark:text-[#FFFFFF] font-bold">Vue.js</h3>
           </div>
           <ArrowUpRight className="absolute bottom-2 right-2 dark:text-[#B0B0B0] arrow-animation" />
