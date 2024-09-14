@@ -38,32 +38,32 @@ const Header = () => {
     setSearchQuery('');
   };  
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#E4E4E7] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-[#27272A] dark:bg-black/95 dark:supports-[backdrop-filter]:black/60">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-[#27272A] dark:bg-black/95 dark:supports-[backdrop-filter]:black/60">
         <div className="container flex h-14 items-center">
           <div className="mr-4 hidden md:flex md:flex-1">
             <Link className="mr-6 flex items-center space-x-2" href="/">
-              <span className="hidden font-bold sm:inline-block">StokUI</span>
+              <span className="hidden font-bold sm:inline-block">Stofli/UI</span>
             </Link>
-            <nav className="flex items-center space-x-6 text-sm font-medium">
-              <Link className="transition-colors hover:text-zinc-950/80 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/docs">
+            <nav className="flex items-center space-x-6 text-base font-medium">
+              <Link className="transition-colors hover:text-sky-500 text-sky-600 dark:hover:text-sky-700 dark:text-sky-600" href="/docs">
                 Docs
               </Link>
-              <Link className="transition-colors hover:text-zinc-950/80 text-zinc-950/60 dark:hover:text-zinc-50/80 dark:text-zinc-50/60" href="/docs/components">
+              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/docs/components">
                 Components
               </Link>
-              <Link className="transition-colors hover:text-zinc-950/80 text-zinc-950/60 dark:hover:text-zinc-50/80 dark:text-zinc-50/60" href="/themes">
+              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/themes">
                 Themes
               </Link>
-              <Link className="transition-colors hover:text-zinc-950/80 text-zinc-950/60 dark:hover:text-zinc-50/80 dark:text-zinc-50/60" href="/examples">
+              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/examples">
                 Examples
               </Link>
-              <Link className="transition-colors hover:text-zinc-950/80 text-zinc-950/60 dark:hover:text-zinc-50/80 dark:text-zinc-50/60" href="/blocks">
+              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/blocks">
                 Blocks
               </Link>
-              <Link className="transition-colors hover:text-zinc-950/80 text-zinc-950/60 hidden lg:inline-block dark:hover:text-zinc-50/80 dark:text-zinc-50/60" href="/charts">
+              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 hidden lg:inline-block dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/charts">
                 Charts
               </Link>
-              <Link className="transition-colors hover:text-zinc-950/80 text-zinc-950/60 hidden lg:inline-block dark:hover:text-zinc-50/80 dark:text-zinc-50/60" href="/colors">
+              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 hidden lg:inline-block dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/colors">
                 Colors
               </Link>
             </nav>
@@ -129,15 +129,15 @@ const Header = () => {
                 className="hidden h-9 md:inline-flex"
               />
             </div>
-            <Button variant="ghost" size="icon" className="mr-2 hidden md:inline-flex">
+            <Button variant="ghost" size="icon" className="mr-2 hidden md:inline-flex hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50">
               <GithubIcon className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Button>
-            <Button variant="ghost" size="icon" className="mr-2 hidden md:inline-flex">
+            <Button variant="ghost" size="icon" className="mr-2 hidden md:inline-flex hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50">
               <TwitterIcon className="h-5 w-5" />
               <span className="sr-only">Twitter</span>
             </Button>
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            <Button variant="ghost" className='hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50' size="icon" onClick={toggleTheme}>
               {theme === "light" ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}
               <span className="sr-only">Toggle theme</span>
             </Button>

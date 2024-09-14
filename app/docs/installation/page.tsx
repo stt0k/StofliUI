@@ -1,18 +1,19 @@
 import React from 'react';
 import MainLayout from '@/components/MainLayout';
 import ContentComponent from '@/components/ContentComponent';
-import BentoGrid from "@/components/ui/BentoGrid"
 
-const Frameworks = () => {
+const Installation = () => {
   return (
     <MainLayout>
       <ContentComponent
-        title="Frameworks"
+        title="Installation"
         description="Prueba"
       />
-      <BentoGrid />
     </MainLayout>
   );
 };
 
-export default Frameworks;
+export default Installation;
+
+
+

@@ -14,7 +14,7 @@ export function Main() {
             <div className="mb-4 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
               <div className="overflow-hidden text-ellipsis whitespace-nowrap">Docs</div>
               <ChevronRightIcon className="h-4 w-4" />
-              <div className="font-medium text-zinc-950 dark:text-zinc-50">Introduction</div>
+              <div className="font-medium text-sky-600 dark:text-sky-600">Introduction</div>
             </div>
             <div className="space-y-2">
               <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Introduction</h1>
