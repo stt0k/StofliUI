@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { GithubIcon, TwitterIcon, MenuIcon, SearchIcon, MoonIcon, SunIcon, XIcon } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import Tag from "@/components/ui/Tags"
-import SideBar from "@/components/Sidebar"
 
 const Header = () => {
   const [theme, setTheme] = useState("light")
