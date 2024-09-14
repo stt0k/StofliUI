@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 
 const links = {
   nextjs: "/",
