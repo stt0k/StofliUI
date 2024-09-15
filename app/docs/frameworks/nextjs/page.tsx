@@ -1,16 +1,14 @@
 import React from 'react';
 import MainLayout from '@/components/MainLayout';
 import ContentComponent from '@/components/ContentComponent';
-import BentoGrid from "@/components/ui/BentoGrid"
 
 const Frameworks = () => {
   return (
     <MainLayout>
       <ContentComponent
-        title="Frameworks"
+        title="Next.js"
         description="Prueba"
       />
-      <BentoGrid />
     </MainLayout>
   );
 };
