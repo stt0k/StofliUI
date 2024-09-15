@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { GithubIcon, TwitterIcon, MenuIcon, SearchIcon, MoonIcon, SunIcon, XIcon } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import Tag from "@/components/ui/Tags"
+import HeadLinks from './header/HeadLinks'
+import { headerData } from './header/HeaderData'
 
 const Header = () => {
   const [theme, setTheme] = useState("light")
@@ -15,6 +17,7 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const pathname = usePathname()
+  console.log(pathname)
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light"
@@ -111,28 +114,16 @@ const Header = () => {
               <span className="hidden font-bold sm:inline-block">Stofli/UI</span>
             </Link>
             <nav className="flex items-center space-x-6 text-base font-medium">
-              <Link className="transition-colors hover:text-sky-500 text-sky-600 dark:hover:text-sky-700 dark:text-sky-600" href="/docs">
-                Docs
-              </Link>
-              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/docs/components">
-                Components
-              </Link>
-              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/themes">
-                Themes
-              </Link>
-              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/examples">
-                Examples
-              </Link>
-              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/blocks">
-                Blocks
-              </Link>
-              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 hidden lg:inline-block dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/charts">
-                Charts
-              </Link>
-              <Link className="transition-colors hover:text-zinc-950/70 text-zinc-950/90 hidden lg:inline-block dark:hover:text-zinc-50/80 dark:text-zinc-50" href="/colors">
-                Colors
-              </Link>
-            </nav>
+            {headerData.map((data) => (
+              <HeadLinks
+                key={data.title}
+                href={data.link}
+                title={data.title}
+                isActive={pathname === data.link ? true : false}
+                hidden={data.hidden ? true : false} 
+              />
+            ))}
+          </nav>
           </div>
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
           <SheetTrigger asChild>
@@ -150,13 +141,13 @@ const Header = () => {
           </SheetContent>
         </Sheet>
           <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-            <div className="w-full flex-1 md:w-auto md:flex-none">
+            <div className="w-full flex-1 md:w-fit md:flex-none">
               <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSearch}>
                 <SearchIcon className="h-5 w-5" />
                 <span className="sr-only">Search</span>
               </Button>
               {isSearchOpen && (
-                <form onSubmit={handleSearch} className="absolute left-0 top-full w-full bg-white p-4 md:hidden dark:bg-zinc-950">
+                <form onSubmit={handleSearch} className="absolute  left-0 top-full w-full bg-white p-4 md:hidden dark:bg-zinc-950">
                   <Input
                     type="search"
                     placeholder="Search documentation..."

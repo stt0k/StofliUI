@@ -3,7 +3,7 @@
 import Sidebar from "@/components/sidebar/Sidebar"
 import  Header  from "@/components/Header"
 
-export function Main() {
+export default function Introduction() {
   return (
     <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
       <Header />
@@ -19,22 +19,22 @@ export function Main() {
             <div className="space-y-2">
               <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Introduction</h1>
               <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
+              Beautiful components, ready to be seamlessly integrated into your projects. Fully accessible, easily customizable, and open-source.
               </p>
             </div>
             <div className="pb-12 pt-8">
               <div className="flex flex-col gap-4 text-lg">
                 <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  This is NOT a component library. It&apos;s a collection of re-usable components that you can copy and paste into your apps.
+                  This is not a traditional component library—it&apos;s a curated collection of reusable components designed for direct use in your applications.
                 </p>
                 <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  What do you mean by not a component library? I mean you do not install it as a dependency. It is not available or distributed via npm.
+                What do we mean by not a component library? Unlike conventional libraries, there’s no need to install dependencies or use npm. Instead, simply select the components you need, copy the code, and integrate it directly into your project.
                 </p>
                 <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  Pick the components you need. Copy and paste the code into your project and customize to your needs. The code is yours.
+                Each component is fully customizable, allowing you to adapt it to your specific needs and maintain complete control over your code.
                 </p>
                 <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  Use this as a reference to build your own component libraries.
+                Leverage this collection as a flexible starting point for building your own component libraries, enhancing productivity while retaining full creative freedom.
                 </p>
               </div>
             </div>
@@ -47,7 +47,7 @@ export function Main() {
                     <ChevronDownIcon className="h-5 w-5 transition duration-300 group-open:rotate-180" />
                   </summary>
                   <div className="px-4 py-3 text-zinc-500 dark:text-zinc-400">
-                    The idea behind this is to give you ownership and control over the code, allowing you to decide how the components are built and styled.
+                  The idea is to give you full ownership and control over the code, allowing you to determine how the components are built and styled.
                   </div>
                 </details>
                 {/* FAQ items */}

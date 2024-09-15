@@ -7,8 +7,9 @@ const Frameworks = () => {
     <MainLayout>
       <ContentComponent
         title="Next.js"
-        description="Prueba"
+        description="Start with Next.js"
       />
+      
     </MainLayout>
   );
 };

@@ -2,7 +2,7 @@ export const sections = [
     {
       title: 'Getting Started',
       links: [
-        { href: '/', label: 'Introduction' },
+        { href: '/docs/introduction', label: 'Introduction' },
         { href: '/docs/installation', label: 'Installation' },
         { href: '/docs/cli', label: 'CLI', tag: 'New' },
       ],
