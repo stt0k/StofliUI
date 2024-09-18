@@ -72,6 +72,7 @@ export function SearchCommand({ ...props }: DialogProps) {
                   </CommandPrimitive.Item>
                 ))}
               </CommandPrimitive.Group>
+              
             </CommandPrimitive.List>
           </CommandPrimitive>
         </DialogContent>
