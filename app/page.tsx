@@ -18,6 +18,9 @@ export default function Page() {
           <BentoGrid />
         </div>
       </div>
+      <div className="grid grid-cols-4 gap-x-4">
+        <a href="#" className="">prueba</a>
+      </div>
     </div>
     </>
     )
