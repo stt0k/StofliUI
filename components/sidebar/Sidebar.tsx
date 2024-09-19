@@ -11,7 +11,7 @@ const Sidebar = () => {
       <div className="h-full py-6 pl-8 pr-6 lg:py-8">
         <div className="space-y-4">
           {sections.map((section) => (
-            <SidebarSection key={section.title} title={section.title} links={section.links} currentPath={pathname} />
+            <SidebarSection key={section.title} title={section.title} links={section.links} currentPath={pathname as string} />
           ))}
         </div>
       </div>

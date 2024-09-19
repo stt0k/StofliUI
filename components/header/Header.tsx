@@ -6,10 +6,10 @@ import { usePathname } from 'next/navigation'
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { GithubIcon, TwitterIcon, MenuIcon, MoonIcon, SunIcon, XIcon } from "lucide-react"
-import HeadLinks from './header/HeadLinks'
-import { headerData } from './header/HeaderData'
+import HeadLinks from './HeadLinks'
+import { headerData } from './HeaderData'
 import { SearchCommand } from '@/components/ui/multisector'
-import Tag from "@/components/ui/Tags"
+import Tag from "@/components/Tags"
 
 const Header = () => {
   const [theme, setTheme] = useState("light")

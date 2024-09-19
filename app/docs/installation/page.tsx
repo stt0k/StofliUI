@@ -1,7 +1,7 @@
 import React from 'react';
 import MainLayout from '@/components/MainLayout';
 import ContentComponent from '@/components/ContentComponent';
-import BentoGrid from "@/components/ui/BentoGrid"
+import BentoGrid from "@/components/BentoGrid"
 
 const Installation = () => {
   return (

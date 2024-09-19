@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import Tag from '@/components/ui/Tags';
+import Tag from '@/components/Tags';
 
 type SidebarLinkProps = {
   href: string;

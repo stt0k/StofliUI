@@ -1,7 +1,8 @@
-import Header from "@/components/Header"
-import BentoGrid from "@/components/ui/BentoGrid"
-import SpanHome from "@/components/ui/SpanHome"
-import ButtonHome from "@/components/ui/ButtonHome"
+  import Header from "@/components/header/Header"
+import BentoGrid from "@/components/BentoGrid"
+import SpanHome from "@/components/SpanHome"
+import ButtonHome from "@/components/ButtonHome"
+import Image from "next/image"
 
 export default function Page() {
   return (
@@ -18,8 +19,17 @@ export default function Page() {
           <BentoGrid />
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-x-4">
-        <a href="#" className="">prueba</a>
+      <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 container">
+        <article className="flex-col flex justify-center space-y-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-md dark:border-transparent dark:bg-[#0b0b0b]">
+          <div className="flex items-center space-x-4">
+            <Image src="/imgs/prueba.png" width={40} height={40} alt="prueba" className="w-10 h-10 rounded-full " />
+            <p className="text-base font-bold">Author Name</p>
+          </div>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">Author Description</p>
+        </article>
+        <article className="col-span-1 flex flex-col items-center justify-center space-y-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-md dark:border-zinc-700 dark:bg-zinc-800">Prueba</article>
+        <article className="col-span-1 flex flex-col items-center justify-center space-y-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-md dark:border-zinc-700 dark:bg-zinc-800">Prueba</article>
+        <article className="col-span-1 flex flex-col items-center justify-center space-y-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-md dark:border-zinc-700 dark:bg-zinc-800">Prueba</article>
       </div>
     </div>
     </>
