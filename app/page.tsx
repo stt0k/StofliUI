@@ -11,7 +11,7 @@ export default function Page() {
     <Header />
       <div className="flex items-center justify-center h-screen container max-w-7xl">
         <div className="w-full lg:w-1/2 space-y-7 2xl:mx-4 mx-8 flex justify-center flex-col items-center lg:items-start">
-          <h1 className="text-bold text-[2.5rem] lg:text-5xl text-center lg:text-left">Build <SpanHome>beautiful</SpanHome>, responsive websites with <SpanHome>minimal</SpanHome> effort.</h1>
+          <h1 className="text-bold text-[2.5rem] lg:text-5xl text-center lg:text-left">Build <SpanHome>beautiful</SpanHome>, responsive websites with minimal effort.</h1>
           <p className="text-lg text-zinc-500 dark:text-zinc-400 text-center lg:text-left">A fast, modern, and easy-to-use UI component library for your web projects.</p>
           <ButtonHome />
         </div>

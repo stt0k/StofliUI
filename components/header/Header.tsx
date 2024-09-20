@@ -35,17 +35,24 @@ const Header = () => {
  
   const isActive = (href: string) => pathname === href;
 
+  //ponerlo en componente y pasarle los links
   const SideBar = () => (
     <div className="h-full py-6 px-4 overflow-y-auto">
       <div className="space-y-4">
+        {/* Inicio */}
+        <div className="py-1">
+          <Link href="/" >
+          <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">Stofli/UI</h2>
+          </Link>
+        </div>
         {/* Introduction */}
         <div className="py-1">
-          <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">Getting Started</h2>
-          <div className="space-y-1">
-            <Link href="/" onClick={closeMobileMenu}>
+          <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">Getting Started</h2>
+          <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
+            <Link href="/docs/introduction" onClick={closeMobileMenu}>
               <Button
                 variant="ghost"
-                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/') ? 'text-sky-600 hover:text-sky-500' : ''}`}
+                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/') ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
               >
                 Introduction
               </Button>
@@ -53,7 +60,7 @@ const Header = () => {
             <Link href="/docs/installation" onClick={closeMobileMenu}>
               <Button
                 variant="ghost"
-                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/docs/installation') ? 'text-sky-600 hover:text-sky-500' : ''}`}
+                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/docs/installation') ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
               >
                 Installation
               </Button>
@@ -61,7 +68,7 @@ const Header = () => {
             <Link href="/docs/cli" onClick={closeMobileMenu}>
               <Button
                 variant="ghost"
-                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/docs/cli') ? 'text-sky-600 hover:text-sky-500' : ''}`}
+                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/docs/cli') ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
               >
                 CLI
                 <Tag text='New' />
@@ -72,7 +79,7 @@ const Header = () => {
         {/* Frameworks */}
         <div className="py-1">
           <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">Frameworks</h2>
-          <div className="space-y-1">
+          <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
             {['Next.js', 'Astro', 'Vite', 'Laravel', 'React', 'Angular', 'Svelte', 'Vue.js'].map((framework) => (
               <Link key={framework} href="/docs/frameworks" onClick={closeMobileMenu}>
                 <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
@@ -85,7 +92,7 @@ const Header = () => {
         {/* Components */}
         <div className="py-1">
           <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">Components</h2>
-          <div className="space-y-1">
+          <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
             {['Accordion', 'Autocomplete', 'Avatar', 'Button', 'Badge', 'Calendar', 'Card', 'Checkbox'].map((component) => (
               <Button key={component} variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
                 {component}
