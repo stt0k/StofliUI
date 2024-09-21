@@ -8,8 +8,9 @@ import { Button } from "@/components/ui/button"
 import { GithubIcon, TwitterIcon, MenuIcon, MoonIcon, SunIcon, XIcon } from "lucide-react"
 import HeadLinks from './HeadLinks'
 import { headerData } from './HeaderData'
-import { SearchCommand } from '@/components/ui/multisector'
+import { SearchCommand } from '@/components/search/Search'
 import Tag from "@/components/Tags"
+
 
 const Header = () => {
   const [theme, setTheme] = useState("light")
@@ -105,7 +106,7 @@ const Header = () => {
   )
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-[#27272A] dark:bg-black/95 dark:supports-[backdrop-filter]:black/60">
+    <header className="sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <div className="2xl:m-4 m-8 hidden md:flex md:flex-1">
           <Link className="mr-6 flex items-center space-x-2" href="/">

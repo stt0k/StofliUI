@@ -1,51 +1,47 @@
-"use client"
+"use client";
 
-import React from 'react'
-import Sidebar from "@/components/sidebar/Sidebar"
-import  Header  from "@/components//header/Header"
+import React from 'react';
+import MainLayout from '@/components/MainLayout';
+import ContentComponent from '@/components/ContentComponent';
+import Section from '@/app/docs/cli/sections/Section';
+import CommandCLI from '@/app/docs/cli/sections/CommandCLI';
+import TagsCLI from '@/app/docs/cli/sections/TagsCLI';
 
-const Cli = () => {
-    return (
-        <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
-          <Header />
-          <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-            <Sidebar />
-            <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-              <div className="mx-auto w-full min-w-0">
-                <div className="mb-4 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
-                  <div className="overflow-hidden text-ellipsis whitespace-nowrap">Docs</div>
-                  <ChevronRightIcon className="h-4 w-4" />
-                  <div className="font-medium text-sky-600 dark:text-sky-600">CLI</div>
-                </div>
-                <div className="space-y-2">
-                  <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">CLI</h1>
-                </div>
-        
-              </div>
-              
-            </main>
-          </div>
-        </div>
-      )
-    }
-    
-    function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
-      return (
-        <svg
-          {...props}
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      );
-    }
+const Cli: React.FC = () => (
+  <MainLayout>
+    <ContentComponent
+      title="CLI" 
+      description="Installing stofli/ui with the CLI"
+    />
 
-export default Cli
+    <div className="space-y-12 mt-7">
+      <Section title="Usage">
+        <CommandCLI command="npx stofli-ui@latest init" />
+        <p>
+          <TagsCLI text="init" /> command initializes a <TagsCLI text="components.json" /> file and a <TagsCLI text="tailwind.config.js" /> file for a new project.
+          It installs <TagsCLI text="framer-motion" />, <TagsCLI text="cn" /> and other dependencies, compatible with shadcnui.
+        </p>
+      </Section>
+
+      <Section title="Add">
+        <CommandCLI command="npx stofli-ui@latest add [component]" />
+        <p>
+        Adds a new component to your project.
+        </p>
+      </Section>
+
+      <Section title="Example">
+        <CommandCLI command="npx stofli-ui@latest add bento-grid" />
+        <p className="mb-4">
+          You can also use the optional <TagsCLI text="--all" /> flag to install all components:
+        </p>
+        <CommandCLI command="npx stofli-ui@latest add --all" />
+        <p>
+          You can install the related demos/examples for the related components by using the <TagsCLI text="-e" /> flag with the <TagsCLI text="add" /> command.
+        </p>
+      </Section>
+    </div>
+  </MainLayout>
+);
+
+export default Cli;
