@@ -33,14 +33,12 @@ export default function Page() {
 
           <div className="flex flex-col h-full mb-12 rounded-lg bg-[#1a1d24] text-gray-200 font-mono">
 
-            {/* Header del terminal */}
               <div className="flex items-center h-10 px-4">
                   <div className="h-3 w-3 mr-2 rounded-full bg-[#454952]"></div>
                   <div className="h-3 w-3 mr-2 rounded-full bg-[#454952]"></div>
                   <div className="h-3 w-3 rounded-full bg-[#454952]"></div>
               </div>
 
-              {/* Contenido del terminal */}
               <div className="flex-1 p-4">
                 <div className="flex-col text-left">
                     <p className="text-gray-600">// Styling a button</p><br />
