@@ -41,10 +41,10 @@ export default function Page() {
 
               <div className="flex-1 p-4">
                 <div className="flex-col text-left">
-                    <p className="text-gray-600">// Styling a button</p><br />
+                    <p className="text-gray-600">&#47;&#47; Styling a button</p><br />
                     <p className="text-gray-400">&lt;<span className="text-[#E06C75]">button</span> <span className="text-[#e5ba6a]">class</span><span className="text-[#61AFEF]">=</span><span className="text-[#98C379]">"text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"</span>&gt; <br /> stofli/ui Button <br /> &lt;/<span className="text-[#E06C75]">button</span>&gt;</p>
                     <br />
-                    <p className="text-gray-600">// Result:</p>
+                    <p className="text-gray-600">&#47;&#47; Result:</p>
                     <br />
                     <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">stofli/ui Button</button>
                 </div>
