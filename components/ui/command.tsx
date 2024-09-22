@@ -49,7 +49,7 @@ const CommandInput = React.forwardRef<
         "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-zinc-500 disabled:cursor-not-allowed disabled:opacity-50 dark:placeholder:text-zinc-400",
         className
       )}
-      {...props}
+      {...props}  
     />
   </div>
 ))

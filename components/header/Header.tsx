@@ -5,11 +5,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { GithubIcon, TwitterIcon, MenuIcon, MoonIcon, SunIcon, XIcon } from "lucide-react"
+import { GithubIcon, TwitterIcon, MenuIcon, XIcon } from "lucide-react"
 import HeadLinks from './HeadLinks'
 import { headerData } from './HeaderData'
 import { SearchCommand } from '@/components/search/Search'
 import Tag from "@/components/Tags"
+import { ModeToggle } from "@/components/change-theme"
 
 
 const Header = () => {
@@ -17,7 +18,6 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const pathname = usePathname()
-  console.log(pathname)
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light"
@@ -133,7 +133,7 @@ const Header = () => {
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-white dark:bg-zinc-950 p-0">
             <SideBar />
-            <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-zinc-100 dark:ring-offset-zinc-950 dark:focus:ring-zinc-50 dark:data-[state=open]:bg-zinc-800">
+            <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70  transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 disabled:pointer-events-none data-[state=open]:bg-zinc-100 data-[state=open]:text-zinc-500 dark:data-[state=open]:bg-zinc-800 dark:data-[state=open]:text-zinc-400 dark:text-white">
               <XIcon className="h-4 w-4 dark:text-white" />
               <span className="sr-only">Close</span>
             </SheetClose>
@@ -150,10 +150,7 @@ const Header = () => {
               <TwitterIcon className="h-5 w-5" />
               <span className="sr-only">Twitter</span>
             </Button>
-            <Button variant="ghost" className='hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50' size="icon" onClick={toggleTheme}>
-              {theme === "light" ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
+            <ModeToggle />
           </div>
         </div>
       </div>
