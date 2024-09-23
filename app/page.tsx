@@ -7,7 +7,7 @@ import Footer from "@/components/footer/Footer";
 
 export default function Page() {
   return (
-    <div className="flex flex-col min-h-screen dark:bg-black bg-gray-100 dark:text-white">
+    <div className="flex flex-col min-h-screen dark:bg-black bg-white dark:text-white">
       <Header />
 
       {/* Nebula background top */}
@@ -18,7 +18,7 @@ export default function Page() {
           <div className="absolute top-[40%] -left-[25%] w-1/2 h-1/2 bg-gradient-to-br from-blue-300 to-transparent rounded-full filter blur-3xl dark:from-blue-500/20"></div>
 
           {/* Nebulosa verde */}
-          <div className="absolute dark:top-[60%] top-[50%] -right-[15%] h-[90%] w-1/2 dark:h-1/2 bg-gradient-to-bl from-green-300 to-transparent rounded-full filter blur-3xl dark:from-green-500/20"></div>
+          <div className="absolute dark:top-[60%] top-[50%] dark:md:-right-[15%] -right-[15%] dark:right-[5%] h-[90%] w-1/2 dark:h-1/2 bg-gradient-to-bl from-green-300 to-transparent rounded-full filter blur-3xl dark:from-green-500/20"></div>
 
           {/* Nebulosa morada */}
           <div className="absolute -top-[5%] dark:-right-[40%]
