@@ -4,8 +4,15 @@ import SpanHome from "@/components/home/SpanHome";
 import ButtonHome from "@/components/home/ButtonHome";
 import BentoHome from "@/components/home/BentoHome";
 import Footer from "@/components/footer/Footer";
+import { getAllFilesMetadata } from "@/lib/mdx";
+import { FrontMatter } from "@/lib/mdx";
+import Link from "next/link";
 
-export default function Page() {
+export default async function Page() {
+  // Ahora obtenemos los posts dentro de la función del componente
+  const posts: FrontMatter[] = await getAllFilesMetadata();
+  console.log(posts);
+
   return (
     <div className="flex flex-col min-h-screen dark:bg-black bg-white dark:text-white">
       <Header />
@@ -55,7 +62,6 @@ export default function Page() {
           <br />for you and your users
         </h3>
       </div>
-
       <BentoHome />
 
       <div className="flex flex-col container text-center lg:text-left relative z-10">
@@ -83,7 +89,20 @@ export default function Page() {
           </div>
         </div>
       </div>
+       {/* Renderizar los posts aquí */}
+      <div className="flex flex-col container text-center lg:text-left relative z-10">
+        {posts.length > 0 ? (
+          posts.map((post) => (
+            <div key={post.slug} className="mb-4">
+              <Link href={`/${post.slug}`}><h1>{post.title}</h1></Link>
+            </div>
+          ))
+        ) : (
+          <p>No hay posts disponibles.</p>
+        )}
+      </div>
       <Footer />
     </div>
   );
 }
+
