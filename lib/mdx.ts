@@ -1,73 +1,93 @@
-import fs from 'fs/promises'; // Usar la versión de promesas de fs
+import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { compileMDX } from 'next-mdx-remote/rsc'; // Importar compileMDX para manejar el contenido y frontmatter
+import { compileMDX } from 'next-mdx-remote/rsc';
+import { notFound } from 'next/navigation';
 
 const root = process.cwd();
 
-// Definir los tipos para el archivo
+// Tipos
 export type FrontMatter = {
   [key: string]: unknown;
   title?: string;
+  description?: string;
   date?: string;
   slug?: string;
 };
 
-// Tipo para el retorno de la función getFileBySlug
 type FileBySlugReturn = {
-  content: JSX.Element; // Cambiar a JSX.Element en lugar de string
-  frontMatter: FrontMatter; // Los metadatos extraídos
+  content: JSX.Element;
+  frontMatter: FrontMatter;
 };
 
-// Función que obtiene los archivos
+// Función auxiliar para recorrer directorios recursivamente
+const getAllMdxFiles = async (dir: string): Promise<string[]> => {
+  const dirents = await fs.readdir(dir, { withFileTypes: true });
+  const files = await Promise.all(
+    dirents.map((dirent) => {
+      const res = path.resolve(dir, dirent.name);
+      return dirent.isDirectory() ? getAllMdxFiles(res) : Promise.resolve(res);
+    })
+  );
+  return Array.prototype.concat(...files).filter((file) => file.endsWith('.mdx'));
+};
+
+// Obtener todos los archivos .mdx
 export const getFiles = async (): Promise<string[]> => {
-  return fs.readdir(path.join(root, 'data')); // Usamos fs.readdir de forma asíncrona
+  return getAllMdxFiles(path.join(root, 'data', 'docs'));
 };
 
-// Función que obtiene un archivo por su slug
-export const getFileBySlug = async ({ slug }: { slug: string }): Promise<FileBySlugReturn> => {
-  const filePath = path.join(root, 'data', `${slug}.mdx`);
+// Change the type definition to accept either an array or a string for slug
+export const getFileBySlug = async ({ slug }: { slug: string[] | string }): Promise<FileBySlugReturn> => {
+  // Ensure that `slug` is an array, even if a string is passed
+  const slugArray = Array.isArray(slug) ? slug : [slug]; 
+  
+  const filePath = path.join(root, 'data', 'docs', ...slugArray) + '.mdx';
 
-  // Verifica que el archivo existe y se puede leer
   try {
-    const mdxSource = await fs.readFile(filePath, 'utf8'); // Usa fs.readFile de forma asíncrona
+    const mdxSource = await fs.readFile(filePath, 'utf8');
 
-    // Compilar el contenido y extraer el frontmatter
     const { content, frontmatter } = await compileMDX({
       source: mdxSource,
       options: { parseFrontmatter: true },
     });
 
     return {
-      content, // Retornar el contenido compilado
+      content,
       frontMatter: {
-        slug,
-        ...frontmatter, // Cambiar 'data' a 'frontmatter' para acceder correctamente a los metadatos
+        slug: slugArray.join('/'), // Now this will always be an array
+        ...frontmatter,
       },
     };
   } catch (error) {
-    console.error("Error al leer el archivo:", error);
-    throw new Error(`No se pudo leer el archivo: ${slug}`);
+    console.error('Error al leer el archivo:', error);
+    notFound();
   }
 };
 
-// Función que obtiene todos los metadatos de los archivos
+
+// Obtener todos los metadatos de los archivos
 export const getAllFilesMetadata = async (): Promise<FrontMatter[]> => {
-  const files = await getFiles(); // Llamamos a la función asíncrona getFiles
+  const files = await getFiles();
 
   const allPosts = await Promise.all(
-    files.map(async (postSlug) => {
-      const filePath = path.join(root, 'data', postSlug);
-      const mdxSource = await fs.readFile(filePath, 'utf8'); // Usamos fs.readFile de forma asíncrona
+    files.map(async (filePath) => {
+      const mdxSource = await fs.readFile(filePath, 'utf8');
+      const { data } = matter(mdxSource);
 
-      const { data } = matter(mdxSource); // Extraer los metadatos
+      const relativePath = path
+        .relative(path.join(root, 'data'), filePath)
+        .replace(/\\/g, '/')  // Corrected regex for replacing backslashes
+        .replace('.mdx', '');
 
       return {
         ...data,
-        slug: postSlug.replace('.mdx', ''), // Extraer slug del nombre del archivo
-      };
+        slug: path.basename(filePath, '.mdx'), // Mantén el slug como el nombre del archivo
+        relativePath, // Agrega la ruta relativa
+      } as FrontMatter;
     })
   );
 
-  return allPosts; // Retornar todos los metadatos
+  return allPosts;
 };
+

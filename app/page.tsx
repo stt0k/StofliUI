@@ -94,7 +94,7 @@ export default async function Page() {
         {posts.length > 0 ? (
           posts.map((post) => (
             <div key={post.slug} className="mb-4">
-              <Link href={`/${post.slug}`}><h1>{post.title}</h1></Link>
+              <Link href={`/${post.relativePath}`}><h1>{post.title}</h1></Link>
             </div>
           ))
         ) : (
