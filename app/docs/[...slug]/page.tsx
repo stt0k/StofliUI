@@ -17,7 +17,6 @@ export default async function Post({ params }: PostProps) {
         title={frontMatter.title || 'Titulo no dispo'} // Usar el título del frontMatter
         description={frontMatter.description || 'Descripción no disponible'} // Usar la descripción del frontMatter
       />
-            {/* <h1>{frontMatter.title || "Título no disponible"}</h1>Ejemplo de como usar el frontMatter*/}
             {content} {/* Renderiza directamente el contenido devuelto por compileMDX */}
         </MainLayout>
     );

@@ -37,9 +37,9 @@ export const getFiles = async (): Promise<string[]> => {
   return getAllMdxFiles(path.join(root, 'data', 'docs'));
 };
 
-// Change the type definition to accept either an array or a string for slug
+// Función para obtener un archivo por su slug
 export const getFileBySlug = async ({ slug }: { slug: string[] | string }): Promise<FileBySlugReturn> => {
-  // Ensure that `slug` is an array, even if a string is passed
+  // Si el slug es un string, conviértelo en un array
   const slugArray = Array.isArray(slug) ? slug : [slug]; 
   
   const filePath = path.join(root, 'data', 'docs', ...slugArray) + '.mdx';
