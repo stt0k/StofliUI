@@ -17,7 +17,7 @@ export default async function Page() {
     <div className="flex flex-col min-h-screen dark:bg-black bg-white dark:text-white">
       <Header />
 
-      {/* Nebula background top */}
+      {/* Nebula background topp */}
       <div className="relative min-h-screen overflow-hidden">
         {/* Nebulas */}
         <div className="absolute inset-0">
