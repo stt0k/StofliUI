@@ -1,3 +1,4 @@
+// components/Header.tsx
 "use client"
 
 import React, { useState } from 'react'
@@ -9,9 +10,8 @@ import { GithubIcon, TwitterIcon, MenuIcon, XIcon } from "lucide-react"
 import HeadLinks from './HeadLinks'
 import { headerData } from './HeaderData'
 import { SearchCommand } from '@/components/search/Search'
-import Tag from "@/components/Tags"
 import { ModeToggle } from "@/components/change-theme"
-
+import SideBar from '@/components/sidebar/SideBarMobile'
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -19,81 +19,11 @@ const Header = () => {
   const pathname = usePathname()
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false)
- 
-  const isActive = (href: string) => pathname === href;
-
-  //ponerlo en componente y pasarle los links
-  const SideBar = () => (
-    <div className="h-full py-6 px-4 overflow-y-auto">
-      <div className="space-y-4">
-        {/* Inicio */}
-        <div className="py-1">
-          <Link href="/" >
-          <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">Stofli/UI</h2>
-          </Link>
-        </div>
-        {/* Introduction */}
-        <div className="py-1">
-          <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">Getting Started</h2>
-          <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
-            <Link href="/docs/introduction" onClick={closeMobileMenu}>
-              <Button
-                variant="ghost"
-                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/') ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
-              >
-                Introduction
-              </Button>
-            </Link>
-            <Link href="/docs/installation" onClick={closeMobileMenu}>
-              <Button
-                variant="ghost"
-                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/docs/installation') ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
-              >
-                Installation
-              </Button>
-            </Link>
-            <Link href="/docs/cli" onClick={closeMobileMenu}>
-              <Button
-                variant="ghost"
-                className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive('/docs/cli') ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
-              >
-                CLI
-                <Tag text='New' />
-              </Button>
-            </Link>
-          </div>
-        </div>
-        {/* Frameworks */}
-        <div className="py-1">
-          <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">Frameworks</h2>
-          <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
-            {['Next.js', 'Astro', 'Vite', 'Laravel', 'React', 'Angular', 'Svelte', 'Vue.js'].map((framework) => (
-              <Link key={framework} href="/docs/frameworks" onClick={closeMobileMenu}>
-                <Button variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
-                  {framework}
-                </Button>
-              </Link>
-            ))}
-          </div>
-        </div>
-        {/* Components */}
-        <div className="py-1">
-          <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">Components</h2>
-          <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
-            {['Accordion', 'Autocomplete', 'Avatar', 'Button', 'Badge', 'Calendar', 'Card', 'Checkbox'].map((component) => (
-              <Button key={component} variant="ghost" className="w-full justify-start font-normal transition duration-200 hover:translate-x-1">
-                {component}
-              </Button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
 
   return (
     <header className="sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
+        {/* Navegación para pantallas grandes */}
         <div className="2xl:m-4 m-8 hidden md:flex md:flex-1">
           <Link className="mr-6 flex items-center space-x-2" href="/">
             <span className="hidden font-bold sm:inline-block">Stofli/UI</span>
@@ -110,6 +40,8 @@ const Header = () => {
             ))}
           </nav>
         </div>
+        
+        {/* Sidebar para pantallas móviles */}
         <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
@@ -118,13 +50,16 @@ const Header = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-white dark:bg-zinc-950 p-0">
-            <SideBar />
-            <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70  transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 disabled:pointer-events-none data-[state=open]:bg-zinc-100 data-[state=open]:text-zinc-500 dark:data-[state=open]:bg-zinc-800 dark:data-[state=open]:text-zinc-400 dark:text-white">
+            {/* Renderiza el SideBar con el prop closeMobileMenu */}
+            <SideBar closeMobileMenu={closeMobileMenu} />
+            <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 disabled:pointer-events-none data-[state=open]:bg-zinc-100 data-[state=open]:text-zinc-500 dark:data-[state=open]:bg-zinc-800 dark:data-[state=open]:text-zinc-400 dark:text-white">
               <XIcon className="h-4 w-4 dark:text-white" />
               <span className="sr-only">Close</span>
             </SheetClose>
           </SheetContent>
         </Sheet>
+        
+        {/* Iconos y opciones adicionales */}
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
             <SearchCommand />
