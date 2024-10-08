@@ -45,21 +45,21 @@ export function ModeToggle() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="flex items-center space-x-3"
+          className="flex items-center space-x-3 cursor-pointer"
           onClick={() => setTheme("light")}
         >
           <Sun size={16} />
           <span>Light</span>
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="flex items-center space-x-3"
+          className="flex items-center space-x-3 cursor-pointer"
           onClick={() => setTheme("dark")}
         >
           <MoonIcon size={16} />
           <span>Dark</span>
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="flex items-center space-x-3"
+          className="flex items-center space-x-3 cursor-pointer"
           onClick={() => setTheme("system")}
         >
           <Monitor size={16} />

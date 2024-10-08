@@ -6,7 +6,6 @@ import BentoHome from "@/components/home/BentoHome";
 import Footer from "@/components/footer/Footer";
 import { getAllFilesMetadata } from "@/lib/mdx";
 import { FrontMatter } from "@/lib/mdx";
-import Link from "next/link";
 
 export default async function Page() {
   // Ahora obtenemos los posts dentro de la función del componente
@@ -41,9 +40,9 @@ export default async function Page() {
         {/* Title section with content */}
         <div className="flex items-center justify-center min-h-screen container max-w-7xl relative z-10">
           <div className="w-full lg:w-1/2 space-y-7 2xl:mx-4 mx-8 flex justify-center flex-col items-center lg:items-start">
-            <h1 className="tracking-tight inline font-semibold text-[2.5rem] leading-[3rem] lg:text-6xl text-center lg:text-left text-gray-900 dark:text-white">
+            <p className="tracking-tight inline font-semibold text-[2.5rem] leading-[3rem] lg:text-6xl text-center lg:text-left text-gray-900 dark:text-white">
               Build <SpanHome>beautiful</SpanHome>, responsive websites with minimal effort.
-            </h1>
+            </p>
             <p className="text-lg text-gray-600 dark:text-zinc-400 text-center lg:text-left">
               A fast, modern, and easy-to-use UI component library for your web projects.
             </p>
@@ -57,20 +56,20 @@ export default async function Page() {
 
       {/* Rest of the content (without grid) */}
       <div className="flex flex-col container text-center lg:text-left relative z-10">
-        <h3 className="tracking-tight inline font-semibold text-4xl lg:text-5xl mb-12 text-gray-900 dark:text-white">
+        <p className="tracking-tight inline font-semibold text-4xl lg:text-5xl mb-12 text-gray-900 dark:text-white">
           A <span className="tracking-tight inline font-semibold from-[#6FEE8D] to-[#17c964] text-4xl lg:text-5xl bg-clip-text text-transparent bg-gradient-to-b">delightful experience</span>
           <br />for you and your users
-        </h3>
+        </p>
       </div>
       <BentoHome />
 
       <div className="flex flex-col container text-center lg:text-left relative z-10">
-        <h3 className="tracking-tight inline font-semibold text-4xl lg:text-5xl mb-12 mt-52 text-gray-900 dark:text-white">
+        <p className="tracking-tight inline font-semibold text-4xl lg:text-5xl mb-12 mt-52 text-gray-900 dark:text-white">
           <span className="tracking-tight inline font-semibold from-[#FF705B] to-[#FFB457] text-4xl lg:text-5xl bg-clip-text text-transparent bg-gradient-to-b">Beautiful</span>
           <br />example of use
-        </h3>
+        </p>
 
-        <div className="flex flex-col h-full mb-12 rounded-lg bg-[#1a1d24] text-gray-200 font-mono">
+        <div className="flex flex-col h-full mb-12 rounded-lg bg-[#1a1d24] text-gray-100 font-mono">
           <div className="flex items-center h-10 px-4">
             <div className="h-3 w-3 mr-2 rounded-full bg-[#454952]"></div>
             <div className="h-3 w-3 mr-2 rounded-full bg-[#454952]"></div>
@@ -79,27 +78,15 @@ export default async function Page() {
 
           <div className="flex-1 p-4">
             <div className="flex-col text-left">
-              <p className="text-gray-600">&#47;&#47; Styling a button</p><br />
-              <p className="text-gray-400">&lt;<span className="text-[#E06C75]">button</span> <span className="text-[#e5ba6a]">class</span><span className="text-[#61AFEF]">=</span><span className="text-[#98C379]">"text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"</span>&gt; <br /> stofli/ui Button <br /> &lt;/<span className="text-[#E06C75]">button</span>&gt;</p>
+              <p className="text-gray-200">&#47;&#47; Styling a button</p><br />
+              <p className="text-gray-300">&lt;<span className="text-[#E06C75]">button</span> <span className="text-[#e5ba6a]">class</span><span className="text-[#61AFEF]">=</span><span className="text-[#98C379]">"text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"</span>&gt; <br /> stofli/ui Button <br /> &lt;/<span className="text-[#E06C75]">button</span>&gt;</p>
               <br />
-              <p className="text-gray-600">&#47;&#47; Result:</p>
+              <p className="text-gray-200">&#47;&#47; Result:</p>
               <br />
               <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">stofli/ui Button</button>
             </div>
           </div>
         </div>
-      </div>
-       {/* Renderizar los posts aquí */}
-      <div className="flex flex-col container text-center lg:text-left relative z-10">
-        {posts.length > 0 ? (
-          posts.map((post) => (
-            <div key={post.slug} className="mb-4">
-              <Link href={`/${post.relativePath}`}><h1>{post.title}</h1></Link>
-            </div>
-          ))
-        ) : (
-          <p>No hay posts disponibles.</p>
-        )}
       </div>
       <Footer />
     </div>

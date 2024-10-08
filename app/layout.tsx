@@ -1,17 +1,22 @@
-import type { Metadata } from "next";
+// layout.tsx (o layout.js)
+import { Metadata } from "next";
 import localFont from "next/font/local";
+import Head from "next/head"; // Importa Head de Next
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 
+// Cargar las fuentes de forma global
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+  display: "swap", // Asegúrate de agregar display: swap
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  display: "swap",
 }); 
 
 export const metadata: Metadata = {
@@ -21,23 +26,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+    <>
+      <Head>
+        {/* Preload de las fuentes locales */}
+        <link rel="preload" href="./fonts/GeistVF.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="./fonts/GeistMonoVF.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      </Head>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </>
   );
 }
