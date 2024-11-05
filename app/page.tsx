@@ -6,6 +6,7 @@ import BentoHome from "@/components/home/BentoHome";
 import Footer from "@/components/footer/Footer";
 import { getAllFilesMetadata } from "@/lib/mdx";
 import { FrontMatter } from "@/lib/mdx";
+import TagHome from "@/components/home/TagHome";
 
 export default async function Page() {
   // Ahora obtenemos los posts dentro de la función del componente
@@ -40,6 +41,7 @@ export default async function Page() {
         {/* Title section with content */}
         <div className="flex items-center justify-center min-h-screen container max-w-7xl relative z-10">
           <div className="w-full lg:w-1/2 space-y-7 2xl:mx-4 mx-8 flex justify-center flex-col items-center lg:items-start">
+          <TagHome />
             <p className="tracking-tight inline font-semibold text-[2.5rem] leading-[3rem] lg:text-6xl text-center lg:text-left text-gray-900 dark:text-white">
               Build <SpanHome>beautiful</SpanHome>, responsive websites with minimal effort.
             </p>
@@ -61,7 +63,9 @@ export default async function Page() {
           <br />for you and your users
         </p>
       </div>
-      <BentoHome />
+        <BentoHome />
+        
+      
 
       <div className="flex flex-col container text-center lg:text-left relative z-10">
         <p className="tracking-tight inline font-semibold text-4xl lg:text-5xl mb-12 mt-52 text-gray-900 dark:text-white">
