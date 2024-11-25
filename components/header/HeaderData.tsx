@@ -22,8 +22,8 @@ export const headerData = [
         hidden: true
     },
     {
-        title: 'Charts',
-        link: '/docs/charts',
+        title: 'Changelog',
+        link: '/docs/Changelog',
         hidden: true
     },
     {

@@ -8,6 +8,7 @@ const notFoundPage = () => {
       <div className="flex-grow flex items-center justify-center">
         <div className="mx-auto w-full min-w-0 flex gap-5 items-center justify-center pt-52">
           <h1 className="text-3xl font-bold tracking-tight border-r pr-5">404</h1>
+          
           <h2>This page could not be found</h2>
         </div>
       </div>

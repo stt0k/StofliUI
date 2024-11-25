@@ -7,7 +7,7 @@ export const links = [
     { icon: SunMoon, label: "Themes", link: "/docs/themes" },
     { icon: PanelsTopLeft, label: "Examples", link: "/docs/examples" },
     { icon: Blocks, label: "Blocks", link: "/docs/blocks" },
-    { icon: ChartBar, label: "Charts", link: "/docs/charts" },
+    { icon: ChartBar, label: "Changelog", link: "/docs/changelog" },
     { icon: Palette, label: "Colors", link: "/docs/colors" },
   ];
 
