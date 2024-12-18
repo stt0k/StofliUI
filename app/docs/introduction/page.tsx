@@ -5,7 +5,7 @@ import  Header  from "@/components/header/Header"
 
 export default function Introduction() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
+    <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
       <Header />
       <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
         <Sidebar />
@@ -14,7 +14,7 @@ export default function Introduction() {
             <div className="mb-4 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
               <div className="overflow-hidden text-ellipsis whitespace-nowrap">Docs</div>
               <ChevronRightIcon className="h-4 w-4" />
-              <div className="font-medium text-sky-600 dark:text-sky-600">Introduction</div>
+              <div className="font-medium text-emerald-600 dark:text-emerald-500">Introduction</div>
             </div>
             <div className="space-y-2">
               <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Introduction</h1>

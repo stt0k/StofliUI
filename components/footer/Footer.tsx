@@ -3,7 +3,7 @@ import { socials, linksHeader, linksDocs, linksFrameworks } from './footerData';
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-black mt-44 text-white py-8" role="contentinfo">
+    <footer className="bg-white dark:bg-zinc-950 mt-44 text-white py-8" role="contentinfo">
       <div className="container mx-auto flex flex-col items-center">
         <div className="flex flex-col md:justify-between md:flex-row w-full mb-6">
           <div className="text-center md:text-left">

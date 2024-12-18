@@ -10,8 +10,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
-    --foreground: #000000; /* Asegúrate de que el texto sea legible en modo oscuro */
+    --background: #09090b;
+    --foreground: #09090b; /* Asegúrate de que el texto sea legible en modo oscuro */
   }
 }
 

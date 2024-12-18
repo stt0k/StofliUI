@@ -15,7 +15,7 @@ const SidebarLink = ({ href, label, isActive, tag }: SidebarLinkProps) => (
     <Button
       variant="ghost"
       className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 ${
-        isActive ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0' : ''
+        isActive ? 'hover:text-emerald-500 text-emerald-600 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0' : ''
       }`}
     >
       {label}

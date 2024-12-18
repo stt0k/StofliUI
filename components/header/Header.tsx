@@ -40,7 +40,7 @@ const Header = () => {
                 <Link key={link.href} href={link.href} onClick={closeMobileMenu}>
                   <Button
                     variant="ghost"
-                    className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive(link.href) ? 'hover:text-sky-500 text-sky-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
+                    className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 ${isActive(link.href) ? 'hover:text-emerald-500 text-emerald-600 dark:hover:text-zinc-50/80 dark:text-zinc-50' : ''}`}
                   >
                     {link.label}
                     {link.tag && <Tag text={link.tag} />}
