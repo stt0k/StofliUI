@@ -17,14 +17,14 @@ export default async function Page() {
       <Header />
 
         {/* Grid overlay with gradient fade effect */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] md:bg-[size:200px_200px] bg-[size:50px_50px] dark:bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] mask-image-[linear-gradient(to-bottom, black 60%, transparent 100%)]"></div>
+        <div className="relative inset-0 bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] md:bg-[size:200px_200px] bg-[size:50px_50px] dark:bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] mask-image-[linear-gradient(to-bottom, black 60%, transparent 100%)]"></div>
 
         {/* Adding a fading effect using background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-zinc-950"></div>
 
         {/* Title section with content */}
         <div className="flex items-start justify-center min-h-screen container max-w-7xl z-10">
-          <div className="w-full space-y-7 flex justify-center flex-col items-center text-center mt-16">
+          <div className="w-full space-y-7 flex justify-center flex-col items-center text-center mt-56">
             <TagHome />
             <div className="absolute left-1/2 top-1/2 -z-10 h-[400px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] bg-emerald-500"></div>
             <h1 className="font-display font-bold bg-gradient-to-r from-20% bg-clip-text text-transparent from-emerald-400 to-yellow-300">
