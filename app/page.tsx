@@ -13,7 +13,7 @@ export default async function Page() {
   console.log(posts);
 
   return (
-    <div className="flex flex-col min-h-screen dark:bg-zinc-950 bg-white dark:text-white">
+    <div className="flex flex-col min-h-screen dark:bg-zinc-950 bg-white dark:text-white max-w-screen">
       <Header />
 
         {/* Grid overlay with gradient fade effect */}
@@ -24,10 +24,10 @@ export default async function Page() {
 
         {/* Title section with content */}
         <div className="flex items-start justify-center min-h-screen container max-w-7xl z-10">
-          <div className="w-full space-y-7 flex justify-center flex-col items-center text-center mt-56">
+          <div className="w-full space-y-7 flex justify-center flex-col items-center text-center sm:mt-56 mt-36">
             <TagHome />
-            <div className="absolute left-1/2 top-1/2 -z-10 h-[400px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] bg-emerald-500"></div>
-            <h1 className="font-display font-bold bg-gradient-to-r from-20% bg-clip-text text-transparent from-emerald-400 to-yellow-300">
+          <div className="fixed left-1/2 top-1/2 -z-10 h-[400px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] bg-emerald-500 pointer-events-none" /
+          >   <h1 className="font-display font-bold bg-gradient-to-r from-20% bg-clip-text text-transparent from-emerald-400 to-yellow-300">
               <span className="flex flex-col items-center text-5xl md:text-[5rem] xl:text-[text-8rem] lg:text-[7rem] leading-none">
                 <span className="whitespace-nowrap">Build modern</span>
                 <span className="whitespace-nowrap">UI designs</span>

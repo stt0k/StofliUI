@@ -23,7 +23,7 @@ export function ModeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="space-x-0 focus:outline-none"
+          className="relative z-10 space-x-0 focus:outline-none"
           aria-label="Change theme"
           name="Change theme"
         >
@@ -39,7 +39,7 @@ export function ModeToggle() {
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="z-50">
         <DropdownMenuLabel className="font-normal">
           <p className="text-sm font-medium leading-none">Theme</p>
         </DropdownMenuLabel>

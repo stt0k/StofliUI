@@ -49,11 +49,11 @@ const BentoExample = () => {
             <p className="dark:text-white/40 text-zinc-600 text-base mb-8">
             Example3</p>
 
-            <div className="flex flex-col h-full rounded-2xl bg-[#111111] text-gray-100 font-mono text-sm">
+            <div className="flex flex-col h-full rounded-2xl bg-[#555555] dark:bg-[#111111] text-gray-100 font-mono text-sm">
                 <div className="flex items-center h-10 px-4">
-                    <div className="h-3 w-3 mr-2 rounded-full bg-[#454952]"></div>
-                    <div className="h-3 w-3 mr-2 rounded-full bg-[#454952]"></div>
-                    <div className="h-3 w-3 rounded-full bg-[#454952]"></div>
+                    <div className="h-3 w-3 mr-2 rounded-full bg-[#919191] dark:bg-[#454952]"></div>
+                    <div className="h-3 w-3 mr-2 rounded-full bg-[#919191] dark:bg-[#454952]"></div>
+                    <div className="h-3 w-3 rounded-full bg-[#919191] dark:bg-[#454952]"></div>
                 </div>
 
                 <div className="flex-1 p-4">

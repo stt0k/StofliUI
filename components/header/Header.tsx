@@ -55,7 +55,7 @@ const Header = () => {
   )
 
   return (
-    <header className="sticky top-0 z-50 border-border/40 bg-background/95 container backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-gray-200 dark:border-zinc-500/20 rounded-xl">
+    <header className="sticky top-3 z-50 border-border/40 bg-background/95 container backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-gray-200 dark:border-zinc-500/20 rounded-xl">
       <div className="container flex h-14 items-center">
         <div className="2xl:m-4 m-8 hidden md:flex md:flex-1">
           <Link className="mr-6 flex items-center space-x-2" href="/">
