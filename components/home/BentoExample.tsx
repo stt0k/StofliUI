@@ -20,7 +20,7 @@ const BentoExample = () => {
         >
           <div className="flex flex-col items-center md:items-start text-center md:text-left h-full relative z-10 p-6">
             <h3 className="dark:text-[#FFFFFF] text-gray-800 font-bold text-2xl mb-2">Powerful UI</h3>
-            <p className="dark:text-white/40 text-zinc-600 text-base mb-8">Example4</p>
+            <p className="dark:text-white/40 text-zinc-600 text-base mb-8">Ejemplo1</p>
           </div>
         </a>
 
@@ -33,7 +33,7 @@ const BentoExample = () => {
         >
           <div className="flex flex-col items-center md:items-start text-center md:text-left h-full relative z-10 p-6">
             <h3 className="dark:text-[#FFFFFF] text-gray-800 font-bold text-2xl mb-2">Customizable components</h3>
-            <p className="dark:text-white/40 text-zinc-600 text-base mb-8">Example2</p>
+            <p className="dark:text-white/40 text-zinc-600 text-base mb-8">Ejemplo2</p>
           </div>
         </a>
 
@@ -47,7 +47,7 @@ const BentoExample = () => {
           <div className="flex flex-col items-center md:items-start text-center md:text-left h-full relative z-10 p-6">
             <h3 className="dark:text-[#FFFFFF] text-gray-800 font-bold text-2xl mb-2">Optimized for speed, scalability, and accessibility</h3>
             <p className="dark:text-white/40 text-zinc-600 text-base mb-8">
-            Example3</p>
+            Ejemplo3</p>
 
             <div className="flex flex-col h-full rounded-2xl bg-[#555555] dark:bg-[#111111] text-gray-100 font-mono text-sm">
                 <div className="flex items-center h-10 px-4">
@@ -80,7 +80,7 @@ const BentoExample = () => {
         >
           <div className="flex flex-col items-center md:items-start text-center md:text-left h-full relative z-10 p-6">
             <h3 className="dark:text-[#FFFFFF] text-gray-800 font-bold text-2xl mb-2">Fast & beautiful UI solutions</h3>
-            <p className="dark:text-white/40 text-zinc-600 text-base mb-8">Example4</p>
+            <p className="dark:text-white/40 text-zinc-600 text-base mb-8">Ejemplo4</p>
           </div>
         </a>
         </div>
