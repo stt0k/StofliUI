@@ -1,7 +1,13 @@
 "use client";
 import * as React from "react";
 import { DialogProps } from "@radix-ui/react-dialog";
-import { Command, CommandEmpty, CommandInput, CommandList, CommandSeparator } from "@/components/ui/command";
+import {
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandList,
+  CommandSeparator,
+} from "@/components/ui/command";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
@@ -31,7 +37,9 @@ export function SearchCommand({ ...props }: DialogProps) {
     <>
       <Button
         variant="outline"
-        className={cn("relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64")}
+        className={cn(
+          "relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64 bg-white dark:bg-black hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
+        )}
         onClick={() => setOpen(true)}
         {...props}
       >

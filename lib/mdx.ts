@@ -3,8 +3,12 @@ import path from "path";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import rehypePrism from "rehype-prism-plus";
+import remarkGfm from "remark-gfm";
+import { components } from "./mdx-components";
 
 const root = process.cwd();
+const DOCS_DIRECTORY = path.join(root, "data", "docs");
 
 // Tipos
 export type FrontMatter = {
@@ -13,6 +17,7 @@ export type FrontMatter = {
   description?: string;
   date?: string;
   slug?: string;
+  category?: string;
 };
 
 type FileBySlugReturn = {
@@ -36,43 +41,38 @@ const getAllMdxFiles = async (dir: string): Promise<string[]> => {
 
 // Obtener todos los archivos .mdx
 export const getFiles = async (): Promise<string[]> => {
-  return getAllMdxFiles(path.join(root, "data", "docs"));
+  return getAllMdxFiles(DOCS_DIRECTORY);
 };
 
-// Importar componentes
-import CustomAccordion from "@/components/sections/accordion";
-
-// Define el objeto de componentes
-const components = {
-  CustomAccordion,
-  // Añade más componentes según necesites
-};
-
-// Función para obtener un archivo por su slug
+// Función para obtener un archivo por su slug y categoría
 export const getFileBySlug = async ({
   slug,
 }: {
   slug: string[] | string;
 }): Promise<FileBySlugReturn> => {
   const slugArray = Array.isArray(slug) ? slug : [slug];
-  const filePath = path.join(root, "data", "docs", ...slugArray) + ".mdx";
+  const filePath = path.join(DOCS_DIRECTORY, ...slugArray) + ".mdx";
 
   try {
     const mdxSource = await fs.readFile(filePath, "utf8");
 
     const { content, frontmatter } = await compileMDX({
       source: mdxSource,
+      components,
       options: {
         parseFrontmatter: true,
-        // Añade opciones de MDX aquí si las necesitas
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypePrism],
+        },
       },
-      components, // Pasa el objeto de componentes aquí
     });
 
     return {
       content,
       frontMatter: {
         slug: slugArray.join("/"),
+        category: slugArray.length > 1 ? slugArray[0] : "general",
         ...frontmatter,
       },
     };
@@ -91,18 +91,29 @@ export const getAllFilesMetadata = async (): Promise<FrontMatter[]> => {
       const mdxSource = await fs.readFile(filePath, "utf8");
       const { data } = matter(mdxSource);
 
+      // Obtener la ruta relativa desde la carpeta docs
       const relativePath = path
-        .relative(path.join(root, "data"), filePath)
+        .relative(DOCS_DIRECTORY, filePath)
         .replace(/\\/g, "/")
         .replace(".mdx", "");
 
+      // Separar la ruta en partes para obtener la categoría y el slug
+      const pathParts = relativePath.split("/");
+      const category = pathParts.length > 1 ? pathParts[0] : "general";
+      const slug = relativePath;
+
       return {
         ...data,
-        slug: path.basename(filePath, ".mdx"),
+        slug,
+        category,
         relativePath,
       } as FrontMatter;
     })
   );
 
-  return allPosts;
+  return allPosts.sort((a, b) => {
+    const dateA = (a.date as string) || "";
+    const dateB = (b.date as string) || "";
+    return dateA > dateB ? -1 : 1;
+  });
 };

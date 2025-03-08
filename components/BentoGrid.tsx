@@ -36,7 +36,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <RiNextjsFill className="h-16 w-16" />
@@ -49,7 +49,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <SiAstro className="h-16 w-16" />
@@ -61,7 +61,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <SiVite className="h-16 w-16" />
@@ -73,7 +73,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <SiLaravel className="h-16 w-16" />
@@ -85,7 +85,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <SiReact className="h-16 w-16" />
@@ -97,7 +97,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <RiAngularjsFill className="h-16 w-16" />
@@ -109,7 +109,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <RiSvelteFill className="h-16 w-16" />
@@ -121,7 +121,7 @@ export default function svelteGrid() {
           href={links.nextjs}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative overflow-hidden group transition-colors border shadow hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
+          className="relative overflow-hidden group transition-colors border shadow-sm hover:bg-[#e2e2e2cc] dark:hover:bg-[#3f3f3f5d] dark:border-[#333333] cursor-pointer rounded-lg"
         > 
           <div className="flex flex-col items-center text-center md:text-left h-full relative z-10 p-4">
             <RiVuejsFill className="h-16 w-16" />

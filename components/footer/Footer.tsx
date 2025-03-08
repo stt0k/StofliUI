@@ -4,7 +4,7 @@ import { socials, linksHeader, linksDocs, linksFrameworks } from "./footerData";
 const Footer = () => {
   return (
     <footer
-      className="bg-white dark:bg-zinc-950 mt-44 text-white py-8 z-50"
+      className="bg-white dark:bg-black mt-44 text-white py-8 z-50"
       role="contentinfo"
     >
       <div className="container mx-auto flex flex-col items-center">
@@ -41,7 +41,7 @@ const Footer = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                   >
                     {item.name}
                   </a>
@@ -52,7 +52,7 @@ const Footer = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                   >
                     {item.name}
                   </a>
@@ -63,7 +63,7 @@ const Footer = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                   >
                     {item.name}
                   </a>
