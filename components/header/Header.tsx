@@ -9,13 +9,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import {
-  GithubIcon,
-  TwitterIcon,
-  MenuIcon,
-  XIcon,
-  CodeIcon,
-} from "lucide-react";
+import { GithubIcon, TwitterIcon, MenuIcon, XIcon } from "lucide-react";
 import HeadLinks from "./HeadLinks";
 import { headerData } from "./HeaderData";
 import { SearchCommand } from "@/components/search/Search";
