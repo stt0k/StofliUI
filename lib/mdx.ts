@@ -117,3 +117,34 @@ export const getAllFilesMetadata = async (): Promise<FrontMatter[]> => {
     return dateA > dateB ? -1 : 1;
   });
 };
+
+export async function getPostBySlug(slug: string) {
+  try {
+    const realSlug = slug.replace(/\.mdx$/, "");
+    const filePath = path.join(DOCS_DIRECTORY, `${realSlug}.mdx`);
+    const fileContents = await fs.readFile(filePath, "utf8");
+    const { content, data } = matter(fileContents);
+
+    const mdx = await compileMDX({
+      source: content,
+      components,
+      options: {
+        parseFrontmatter: true,
+        mdxOptions: {
+          rehypePlugins: [rehypePrism],
+          remarkPlugins: [remarkGfm],
+        },
+      },
+    });
+
+    return {
+      meta: {
+        ...data,
+        slug: realSlug,
+      },
+      content: mdx,
+    };
+  } catch (error) {
+    notFound();
+  }
+}

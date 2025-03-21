@@ -18,7 +18,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   onClick,
 }) => {
   return (
-    <div className="border-b border-zinc-200 dark:border-zinc-800 p-3">
+    <div className="border-b border-zinc-200 dark:border-zinc-800 p-3 last:border-0">
       <button
         className="flex w-full items-center justify-between py-4 text-left"
         onClick={onClick}
