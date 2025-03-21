@@ -1,27 +1,16 @@
 ---
 title: "Accordion"
-description: "Un componente de acordeón que muestra una lista de opciones expandibles/colapsables para revelar más información."
+description: "Un componente de acordeón que permite mostrar y ocultar contenido de manera interactiva."
 ---
-
-<div className="flex gap-4 my-6">
-  <a
-    href="https://github.com/tu-usuario/tu-repo/tree/main/components/sections/accordion.tsx"
-    className="inline-flex items-center justify-center gap-1 rounded-lg border border-zinc-600 px-3 py-1 text-sm text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-400 dark:text-zinc-400 dark:hover:bg-zinc-900"
-  >
-    <svg viewBox="0 0 16 16" className="h-4 w-4">
-      <path
-        fill="currentColor"
-        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-      ></path>
-    </svg>
-    Source
-  </a>
-</div>
 
 ## Instalación
 
 ```bash
+# Instalar dependencias necesarias
 npm install framer-motion @heroicons/react
+
+# Instalar el componente
+npx @stofli/ui add accordion
 ```
 
 ## Uso
@@ -29,132 +18,174 @@ npm install framer-motion @heroicons/react
 El componente Accordion acepta un array de items con título y contenido, y opcionalmente puede configurarse para permitir múltiples secciones abiertas.
 
 ```tsx
-const items = [
-  {
-    title: "¿Qué es un Accordion?",
-    content:
-      "Un accordion es un componente que permite mostrar y ocultar contenido...",
-  },
-  {
-    title: "¿Cuándo debería usarlo?",
-    content:
-      "Los accordions son útiles cuando necesitas presentar mucha información...",
-  },
-];
+import { Accordion } from "@stofli/ui";
 
-<Accordion items={items} />;
+export default function App() {
+  return (
+    <Accordion
+      items={[
+        {
+          title: "¿Qué es un Accordion?",
+          content: "Un accordion es un componente que permite mostrar y ocultar contenido...",
+        },
+        {
+          title: "¿Cuándo debería usarlo?",
+          content: "Los accordions son útiles cuando necesitas presentar mucha información...",
+        },
+      ]}
+    />
+  );
+}
 ```
 
 ## Ejemplos
 
 ### Básico
 
-<Accordion
-  items={[
-    {
-      title: "¿Qué es un Accordion?",
-      content:
-        "Un accordion es un componente de interfaz de usuario que organiza el contenido en secciones que se pueden expandir y contraer. Es especialmente útil cuando tienes una lista larga de elementos relacionados que no necesitan mostrarse todos a la vez.",
-    },
-    {
-      title: "¿Cuándo debería usarlo?",
-      content:
-        "Los accordions son ideales para: FAQ's, menús de navegación anidados, formularios largos que necesitan ser divididos en secciones, y cualquier contenido que se beneficie de una presentación progresiva.",
-    },
-  ]}
-/>
+Un acordeón simple que muestra una lista de preguntas frecuentes.
+
+<DemoTabs
+  preview={
+    <Accordion
+      items={[
+        {
+          title: "¿Qué es un Accordion?",
+          content: "Un accordion es un componente de interfaz de usuario que organiza el contenido en secciones que se pueden expandir y contraer. Es especialmente útil cuando tienes una lista larga de elementos relacionados que no necesitan mostrarse todos a la vez.",
+        },
+        {
+          title: "¿Cuándo debería usarlo?",
+          content: "Los accordions son ideales para: FAQ's, menús de navegación anidados, formularios largos que necesitan ser divididos en secciones, y cualquier contenido que se beneficie de una presentación progresiva.",
+        },
+      ]}
+    />
+  }
+>
+```tsx
+import { Accordion } from "@stofli/ui";
+
+export default function AccordionDemo() {
+  return (
+    <Accordion
+      items={[
+        {
+          title: "¿Qué es un Accordion?",
+          content: "Un accordion es un componente de interfaz de usuario que organiza el contenido en secciones...",
+        },
+        {
+          title: "¿Cuándo debería usarlo?",
+          content: "Los accordions son ideales para: FAQ's, menús de navegación anidados...",
+        },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
 
 ### Con múltiples secciones abiertas
 
-<Accordion
-  allowMultiple
-  items={[
-    {
-      title: "Múltiples secciones",
-      content:
-        "Este panel puede estar abierto junto con otros paneles al mismo tiempo, lo que es útil cuando necesitas comparar información entre diferentes secciones.",
-    },
-    {
-      title: "Personalización",
-      content:
-        "El componente es altamente personalizable y se puede adaptar a diferentes estilos y necesidades.",
-    },
-    {
-      title: "Accesibilidad",
-      content:
-        "Diseñado teniendo en cuenta la accesibilidad, funciona correctamente con navegación por teclado y lectores de pantalla.",
-    },
-  ]}
-/>
+Usando `allowMultiple={true}`, permite expandir varias secciones al mismo tiempo.
+
+<DemoTabs
+  preview={
+    <Accordion
+      allowMultiple
+      items={[
+        {
+          title: "Múltiples secciones",
+          content: "Este panel puede estar abierto junto con otros paneles al mismo tiempo, lo que es útil cuando necesitas comparar información entre diferentes secciones.",
+        },
+        {
+          title: "Personalización",
+          content: "El componente es altamente personalizable y se puede adaptar a diferentes estilos y necesidades.",
+        },
+        {
+          title: "Accesibilidad",
+          content: "Diseñado teniendo en cuenta la accesibilidad, funciona correctamente con navegación por teclado y lectores de pantalla.",
+        },
+      ]}
+    />
+  }
+>
+```tsx
+import { Accordion } from "@stofli/ui";
+
+export default function AccordionMultipleDemo() {
+  return (
+    <Accordion
+      allowMultiple
+      items={[
+        {
+          title: "Múltiples secciones",
+          content: "Este panel puede estar abierto junto con otros paneles al mismo tiempo...",
+        },
+        {
+          title: "Personalización",
+          content: "El componente es altamente personalizable y se puede adaptar...",
+        },
+        {
+          title: "Accesibilidad",
+          content: "Diseñado teniendo en cuenta la accesibilidad...",
+        },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
 
 ### Con panel abierto por defecto
 
-<Accordion
-  defaultOpen={0}
-  items={[
-    {
-      title: "Panel abierto por defecto",
-      content:
-        "Este panel se muestra expandido al cargar el componente porque hemos establecido defaultOpen={0}.",
-    },
-    {
-      title: "Panel cerrado",
-      content: "Este panel comienza cerrado.",
-    },
-  ]}
-/>
+Usando `defaultOpen={0}`, muestra el primer panel expandido al cargar el componente.
+
+<DemoTabs
+  preview={
+    <Accordion
+      defaultOpen={0}
+      items={[
+        {
+          title: "Panel abierto por defecto",
+          content: "Este panel se muestra expandido al cargar el componente porque hemos establecido defaultOpen={0}.",
+        },
+        {
+          title: "Panel cerrado",
+          content: "Este panel comienza cerrado.",
+        },
+      ]}
+    />
+  }
+>
+```tsx
+import { Accordion } from "@stofli/ui";
+
+export default function AccordionDefaultOpenDemo() {
+  return (
+    <Accordion
+      defaultOpen={0}
+      items={[
+        {
+          title: "Panel abierto por defecto",
+          content: "Este panel se muestra expandido al cargar el componente porque hemos establecido defaultOpen={0}.",
+        },
+        {
+          title: "Panel cerrado",
+          content: "Este panel comienza cerrado.",
+        },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
 
 ## Props
 
-| Prop            | Tipo      | Default    | Descripción                                    |
-| --------------- | --------- | ---------- | ---------------------------------------------- |
-| `items`         | `Array`   | `required` | Array de objetos con `title` y `content`       |
-| `defaultOpen`   | `number`  | `-1`       | Índice del item que estará abierto por defecto |
-| `allowMultiple` | `boolean` | `false`    | Permite tener múltiples secciones abiertas     |
-
-## Características
-
-- ✨ Animaciones suaves con Framer Motion
-- 🎨 Soporte para modo oscuro
-- ⌨️ Accesible mediante teclado
-- 📱 Diseño responsive
-- 🔄 Permite múltiples secciones abiertas (opcional)
-- 🎯 Estilizado con Tailwind CSS
-
-## Accesibilidad
-
-El componente está construido siguiendo las mejores prácticas de accesibilidad:
-
-- Navegación completa por teclado
-- Roles ARIA apropiados
-- Estados focusables claramente visibles
-- Soporte para lectores de pantalla
-
-## Personalización
-
-El componente utiliza Tailwind CSS para los estilos, lo que facilita su personalización:
-
-```tsx
-// Ejemplo de personalización de estilos
-<Accordion
-  items={items}
-  className="custom-accordion"
-  // Los estilos se pueden sobrescribir usando Tailwind o CSS personalizado
-/>
-```
-
-## Notas de uso
-
-- Utiliza el prop `allowMultiple` cuando necesites que los usuarios puedan comparar información entre diferentes secciones
-- El prop `defaultOpen` es útil cuando quieres guiar la atención del usuario a una sección específica
-- Para contenido dinámico, puedes pasar componentes React como contenido
-
-```tsx
-// Ejemplo con contenido dinámico
-const items = [
-  {
-    title: "Contenido dinámico",
-    content: <CustomComponent />,
-  },
-];
-```
+| Prop          | Tipo                                          | Default     | Descripción                                    |
+| ------------- | --------------------------------------------- | ----------- | ---------------------------------------------- |
+| `type`        | `"single" \| "multiple"`                     | `"single"`  | Tipo de acordeón                              |
+| `defaultValue`| `string \| string[]`                         | -           | Valor inicial del acordeón                     |
+| `value`       | `string \| string[]`                         | -           | Valor controlado del acordeón                  |
+| `onValueChange`| `(value: string \| string[]) => void`       | -           | Función llamada al cambiar el valor           |
+| `className`   | `string`                                     | -           | Clases adicionales                             |
+| `variant`     | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo |
+| `radius`      | `"none" \| "sm" \| "md" \| "full"`          | `"md"`      | Radio de las esquinas                         |

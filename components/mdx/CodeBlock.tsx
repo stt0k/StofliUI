@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { Copy, Check } from "lucide-react";
+import rehypePrism from "rehype-prism-plus";
 
 interface CodeBlockProps {
   children?: React.ReactNode;
@@ -31,7 +32,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
         ref={preRef}
         className={`${className} bg-zinc-900 rounded-lg p-4 overflow-x-auto mb-4`}
       >
-        {children}
+        <code className={className}>
+          {typeof children === 'string' ? children.trim() : children}
+        </code>
       </pre>
       <button
         onClick={copyToClipboard}

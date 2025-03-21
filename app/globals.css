@@ -15,6 +15,13 @@
   --radius-sm: calc(var(--radius) - 4px);
 }
 
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -79,7 +86,7 @@
   :root {
     --scrollbar-width: 8px;
     --scrollbar-margin-right: 5px;
-    --scrollbar-track: #ffffff;
+    --scrollbar-track: transparent;
     --scrollbar-thumb: #dedcdc;
   }
 
@@ -95,11 +102,13 @@
 
   ::-webkit-scrollbar-track {
     background: var(--scrollbar-track);
+    border: none;
   }
 
   ::-webkit-scrollbar-thumb {
     background: var(--scrollbar-thumb);
     border-radius: 10px;
+    border: none;
   }
 }
 
