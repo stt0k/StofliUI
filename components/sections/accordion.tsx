@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ChevronDown } from "lucide-react";
 
 interface AccordionItemProps {
   title: string;
@@ -26,7 +26,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
           {title}
         </span>
-        <ChevronDownIcon
+        <ChevronDown
           className={`h-5 w-5 text-zinc-500 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}

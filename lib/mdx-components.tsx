@@ -49,6 +49,11 @@ const Card = dynamic(() => import("@/components/sections/card"), {
   loading: () => <div>Cargando...</div>,
 });
 
+const Autocomplete = dynamic(() => import("@/components/sections/autocomplete"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
 // Definir los componentes base
 const components: MDXComponents = {
   // Componentes básicos de Markdown
@@ -142,6 +147,7 @@ const components: MDXComponents = {
   Calendar,
   Badge,
   Card,
+  Autocomplete,
   CheckIcon,
   AlertTriangle,
   XIcon,
