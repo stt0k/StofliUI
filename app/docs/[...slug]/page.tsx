@@ -1,4 +1,4 @@
-import MainLayout from "@/components/MainLayout"; // Asegúrate de que la ruta sea correcta
+import MainLayout from "@/components/MainLayout"; // Asegurate de que la ruta sea correcta
 import { getFileBySlug } from "@/lib/mdx"; // Importar la función para obtener el archivo MDX
 import ContentComponent from "@/components/ContentComponent"; // Importar el componente ContentComponent
 import { Suspense } from "react";
