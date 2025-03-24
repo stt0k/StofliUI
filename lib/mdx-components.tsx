@@ -49,6 +49,11 @@ const Card = dynamic(() => import("@/components/sections/card"), {
   loading: () => <div>Cargando...</div>,
 });
 
+const Button = dynamic(() => import("@/components/sections/button"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
 const Autocomplete = dynamic(() => import("@/components/sections/autocomplete"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
@@ -147,6 +152,7 @@ const components: MDXComponents = {
   Calendar,
   Badge,
   Card,
+  Button,
   Autocomplete,
   CheckIcon,
   AlertTriangle,
