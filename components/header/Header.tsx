@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -19,13 +19,26 @@ import { sections } from "@/components/sidebar/sectionsData";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
 
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const isActive = (href: string) => pathname === href;
 
-  //ponerlo en componente y pasarle los links
+  // Sidebar para móvil
   const SideBar = () => (
     <div className="h-full py-6 px-4 overflow-y-auto">
       <div className="space-y-4">
@@ -36,13 +49,12 @@ const Header = () => {
             </h2>
           </Link>
         </div>
-        {/* Mapear secciones desde sectionsData */}
         {sections.map((section) => (
           <div key={section.title} className="py-1">
             <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
               {section.title}
             </h2>
-            <div className="space-y-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60">
+            <div className="space-y-1 dark:text-zinc-50/60 text-zinc-950/60">
               {section.links.map((link) => (
                 <Link
                   key={link.href}
@@ -70,9 +82,25 @@ const Header = () => {
   );
 
   return (
-    <div className="sticky top-3 z-50">
+    <div className="sticky top-6 z-50">
       <div className="mx-3">
-        <header className="container border border-gray-200 dark:border-zinc-800 bg-white/40 dark:bg-black/40 backdrop-blur-md rounded-xl">
+        <header
+          className={`
+            container 
+            bg-white/40 
+            dark:bg-black/40 
+            backdrop-blur-md 
+            rounded-xl 
+            border 
+            shadow-none
+            transition-all duration-300 ease-in-out
+            ${
+              isScrolled
+                ? "border-neutral-200 dark:border-neutral-900 shadow-[0px_5px_18px_rgba(204,_204,_204,_0.2)] dark:shadow-[0px_5px_18px_rgba(204,_204,_204,_0.1)]"
+                : "border-transparent"
+            }
+          `}
+        >
           <div className="container flex h-16 items-center">
             <div className="2xl:m-4 m-8 hidden md:flex md:flex-1">
               <Link className="mr-8 flex items-center space-x-2" href="/">
@@ -86,12 +114,13 @@ const Header = () => {
                     key={data.title}
                     href={data.link}
                     title={data.title}
-                    isActive={pathname === data.link ? true : false}
+                    isActive={pathname === data.link}
                     hidden={data.hidden ? true : false}
                   />
                 ))}
               </nav>
             </div>
+
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
@@ -114,10 +143,10 @@ const Header = () => {
                 </SheetClose>
               </SheetContent>
             </Sheet>
+
             <div className="flex flex-1 items-center justify-between space-x-4 md:justify-end">
               <div className="flex flex-1 items-center justify-between space-x-4 md:justify-end">
                 <SearchCommand />
-
                 <div className="hidden md:flex items-center space-x-1">
                   <Button
                     variant="ghost"
