@@ -12,8 +12,8 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
   description,
 }) => {
   return (
-    <>
-      <div className="mb-4 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
+    <div className="flex flex-col">
+      <div className="mb-4 mt-3 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
         <div className="overflow-hidden text-ellipsis whitespace-nowrap">
           Docs
         </div>
@@ -30,7 +30,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
           {description}
         </p>
       </div>
-    </>
+    </div>
   );
 };
 
