@@ -12,8 +12,8 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
   description,
 }) => {
   return (
-    <div className="flex flex-col">
-      <div className="mb-4 mt-3 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
+    <div className="flex flex-col ms-6">
+      <div className="mb-4 mt-11 flex items-center space-x-1 text-sm text-zinc-500 dark:text-zinc-400">
         <div className="overflow-hidden text-ellipsis whitespace-nowrap">
           Docs
         </div>
