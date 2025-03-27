@@ -19,7 +19,10 @@ export default async function Post({ params }: PostProps) {
         description={frontMatter.description || "Descripción no disponible"} // Usar la descripción del frontMatter
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <div suppressHydrationWarning className="prose prose-invert max-w-none">
+        <div
+          suppressHydrationWarning
+          className="prose prose-invert max-w-none ms-6"
+        >
           {content}
         </div>
       </Suspense>
