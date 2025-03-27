@@ -58,6 +58,10 @@
     }
   }
 
+  html {
+    scrollbar-gutter: stable;
+  }
+
   /* Aplicamos la fuente Geist Sans */
   body {
     color: var(--foreground);
@@ -109,16 +113,6 @@
     background: var(--scrollbar-thumb);
     border-radius: 10px;
     border: none;
-  }
-  
-  /* Ocultar scrollbar */
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
   }
 }
 
