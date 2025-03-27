@@ -3,6 +3,7 @@
 import React from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 import Header from "@/components/header/Header";
+import FooterDocs from "@/components/footer/FooterDocs";
 
 interface NavItem {
   title: string;
@@ -53,6 +54,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
           </div>
         </div>
       </div>
+      <FooterDocs />
     </div>
   );
 };
