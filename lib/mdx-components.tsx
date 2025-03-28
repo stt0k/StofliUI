@@ -3,14 +3,24 @@ import ButtonHome from "@/components/home/ButtonHome";
 import CardSpotlight from "@/components/CardSpotlight";
 import dynamic from "next/dynamic";
 import CodeBlock from "@/components/mdx/CodeBlock";
-import { 
-  CheckIcon, 
-  AlertTriangle, 
-  XIcon, 
-  BellIcon, 
-  MessageSquareIcon, 
+import {
+  CheckIcon,
+  AlertTriangle,
+  XIcon,
+  BellIcon,
+  MessageSquareIcon,
   ShoppingCartIcon,
-  StarIcon 
+  StarIcon,
+  UserIcon,
+  SettingsIcon,
+  LogOutIcon,
+  ChevronDown,
+  MailIcon,
+  SearchIcon,
+  LockIcon,
+  LinkIcon,
+  AlertCircleIcon,
+  PhoneIcon,
 } from "lucide-react";
 
 // Importaciones dinámicas
@@ -54,7 +64,25 @@ const Button = dynamic(() => import("@/components/sections/button"), {
   loading: () => <div>Cargando...</div>,
 });
 
-const Autocomplete = dynamic(() => import("@/components/sections/autocomplete"), {
+const Autocomplete = dynamic(
+  () => import("@/components/sections/autocomplete"),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
+const Tabs = dynamic(() => import("@/components/sections/tabs"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+const Dropdown = dynamic(() => import("@/components/sections/dropdown"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+const Input = dynamic(() => import("@/components/sections/input"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
@@ -87,13 +115,22 @@ const components: MDXComponents = {
     />
   ),
   p: (props) => (
-    <p className="mb-4 leading-relaxed dark:text-zinc-400 text-zinc-600" {...props} />
+    <p
+      className="mb-4 leading-relaxed dark:text-zinc-400 text-zinc-600"
+      {...props}
+    />
   ),
   ul: (props) => (
-    <ul className="list-disc pl-6 mb-4 dark:text-zinc-400 text-zinc-600 space-y-2" {...props} />
+    <ul
+      className="list-disc pl-6 mb-4 dark:text-zinc-400 text-zinc-600 space-y-2"
+      {...props}
+    />
   ),
   ol: (props) => (
-    <ol className="list-decimal pl-6 mb-4 dark:text-zinc-400 text-zinc-600 space-y-2" {...props} />
+    <ol
+      className="list-decimal pl-6 mb-4 dark:text-zinc-400 text-zinc-600 space-y-2"
+      {...props}
+    />
   ),
   li: (props) => <li className="mb-1" {...props} />,
   blockquote: (props) => (
@@ -154,6 +191,9 @@ const components: MDXComponents = {
   Card,
   Button,
   Autocomplete,
+  Tabs,
+  Dropdown,
+  Input,
   CheckIcon,
   AlertTriangle,
   XIcon,
@@ -161,6 +201,16 @@ const components: MDXComponents = {
   MessageSquareIcon,
   ShoppingCartIcon,
   StarIcon,
+  UserIcon,
+  SettingsIcon,
+  LogOutIcon,
+  ChevronDown,
+  MailIcon,
+  SearchIcon,
+  LockIcon,
+  LinkIcon,
+  AlertCircleIcon,
+  PhoneIcon,
 };
 
 // Función para combinar componentes personalizados
@@ -172,6 +222,5 @@ export function useMDXComponents(
     ...customComponents,
   };
 }
-
 // Exportar los componentes directamente
 export { components };
