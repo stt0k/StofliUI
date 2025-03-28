@@ -1,0 +1,837 @@
+---
+title: "Dropdown"
+description: "Un componente de menú desplegable con animaciones y múltiples opciones de personalización."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install framer-motion lucide-react
+
+# Instalar el componente
+npx @stofli/ui add dropdown
+```
+
+## Uso
+
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function App() {
+  return (
+    <Dropdown
+      items={[
+        { label: "Opción 1", value: "1" },
+        { label: "Opción 2", value: "2" },
+        { label: "Opción 3", value: "3" },
+      ]}
+      onChange={(value) => console.log("Valor seleccionado:", value)}
+    />
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Un dropdown básico con varias opciones.
+
+<DemoTabs
+  preview={
+    <Dropdown
+      items={[
+        { label: "Español", value: "es" },
+        { label: "Inglés", value: "en" },
+        { label: "Francés", value: "fr" },
+        { label: "Alemán", value: "de" },
+        { label: "Italiano", value: "it" }
+      ]}
+      placeholder="Selecciona un idioma"
+    />
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownDemo() {
+  return (
+    <Dropdown
+      items={[
+        { label: "Español", value: "es" },
+        { label: "Inglés", value: "en" },
+        { label: "Francés", value: "fr" },
+        { label: "Alemán", value: "de" },
+        { label: "Italiano", value: "it" }
+      ]}
+      placeholder="Selecciona un idioma"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con íconos
+
+Añade íconos a las opciones del dropdown para hacerlas más visuales.
+
+<DemoTabs
+  preview={
+    <Dropdown
+      items={[
+        { 
+          label: "Ajustes de usuario", 
+          value: "user", 
+          icon: <UserIcon className="h-4 w-4" /> 
+        },
+        { 
+          label: "Mensajes", 
+          value: "messages", 
+          icon: <MessageSquareIcon className="h-4 w-4" /> 
+        },
+        { 
+          label: "Notificaciones", 
+          value: "notifications", 
+          icon: <BellIcon className="h-4 w-4" /> 
+        },
+        { 
+          label: "Cerrar sesión", 
+          value: "logout", 
+          icon: <LogOutIcon className="h-4 w-4" /> 
+        }
+      ]}
+      placeholder="Seleccionar opción"
+    />
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+import { UserIcon, MessageSquareIcon, BellIcon, LogOutIcon } from "lucide-react";
+
+export default function DropdownWithIconsDemo() {
+  return (
+    <Dropdown
+      items={[
+        { 
+          label: "Ajustes de usuario", 
+          value: "user", 
+          icon: <UserIcon className="h-4 w-4" /> 
+        },
+        { 
+          label: "Mensajes", 
+          value: "messages", 
+          icon: <MessageSquareIcon className="h-4 w-4" /> 
+        },
+        { 
+          label: "Notificaciones", 
+          value: "notifications", 
+          icon: <BellIcon className="h-4 w-4" /> 
+        },
+        { 
+          label: "Cerrar sesión", 
+          value: "logout", 
+          icon: <LogOutIcon className="h-4 w-4" /> 
+        }
+      ]}
+      placeholder="Seleccionar opción"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+Diferentes variantes de estilo para el dropdown.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        variant="default"
+        items={[
+          { label: "Default", value: "default" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Default"
+      />
+      <Dropdown
+        variant="primary"
+        items={[
+          { label: "Primary", value: "primary" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Primary"
+      />
+      <Dropdown
+        variant="secondary"
+        items={[
+          { label: "Secondary", value: "secondary" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Secondary"
+      />
+      <Dropdown
+        variant="success"
+        items={[
+          { label: "Success", value: "success" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Success"
+      />
+      <Dropdown
+        variant="warning"
+        items={[
+          { label: "Warning", value: "warning" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Warning"
+      />
+      <Dropdown
+        variant="danger"
+        items={[
+          { label: "Danger", value: "danger" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Danger"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownVariantsDemo() {
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        variant="default"
+        items={[
+          { label: "Default", value: "default" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Default"
+      />
+      <Dropdown
+        variant="primary"
+        items={[
+          { label: "Primary", value: "primary" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Variante Primary"
+      />
+      {/* ... otras variantes ... */}
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Tamaños
+
+Diferentes tamaños del dropdown.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        size="sm"
+        items={[
+          { label: "Pequeño", value: "sm" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño pequeño"
+      />
+      <Dropdown
+        size="md"
+        items={[
+          { label: "Mediano", value: "md" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño mediano"
+      />
+      <Dropdown
+        size="lg"
+        items={[
+          { label: "Grande", value: "lg" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño grande"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownSizesDemo() {
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        size="sm"
+        items={[
+          { label: "Pequeño", value: "sm" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño pequeño"
+      />
+      <Dropdown
+        size="md"
+        items={[
+          { label: "Mediano", value: "md" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño mediano"
+      />
+      <Dropdown
+        size="lg"
+        items={[
+          { label: "Grande", value: "lg" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño grande"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Colocación del menú
+
+Puedes controlar dónde aparece el menú desplegable con la prop `placement`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        placement="bottom"
+        items={[
+          { label: "Abajo (por defecto)", value: "bottom" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Menú hacia abajo"
+      />
+      <Dropdown
+        placement="top"
+        items={[
+          { label: "Arriba", value: "top" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Menú hacia arriba"
+      />
+      <Dropdown
+        placement="left"
+        items={[
+          { label: "Izquierda", value: "left" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Menú hacia la izquierda"
+      />
+      <Dropdown
+        placement="right"
+        items={[
+          { label: "Derecha", value: "right" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Menú hacia la derecha"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownPlacementDemo() {
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        placement="bottom"
+        items={[
+          { label: "Abajo (por defecto)", value: "bottom" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Menú hacia abajo"
+      />
+      <Dropdown
+        placement="top"
+        items={[
+          { label: "Arriba", value: "top" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Menú hacia arriba"
+      />
+      {/* ... otras posiciones ... */}
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Con valor por defecto
+
+Puedes definir un valor seleccionado por defecto.
+
+<DemoTabs
+  preview={
+    <Dropdown
+      defaultValue="es"
+      items={[
+        { label: "Español", value: "es" },
+        { label: "Inglés", value: "en" },
+        { label: "Francés", value: "fr" }
+      ]}
+    />
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownDefaultValueDemo() {
+  return (
+    <Dropdown
+      defaultValue="es"
+      items={[
+        { label: "Español", value: "es" },
+        { label: "Inglés", value: "en" },
+        { label: "Francés", value: "fr" }
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Ancho específico
+
+Puedes definir un ancho fijo para el dropdown usando la prop `width`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        width="200px"
+        items={[
+          { label: "Ancho fijo de 200px", value: "1" },
+          { label: "Opción con texto más largo", value: "2" }
+        ]}
+        placeholder="Ancho fijo"
+      />
+      <Dropdown
+        width="300px"
+        items={[
+          { label: "Ancho fijo de 300px", value: "1" },
+          { label: "Opción con texto más largo", value: "2" }
+        ]}
+        placeholder="Ancho fijo más grande"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownFixedWidthDemo() {
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        width="200px"
+        items={[
+          { label: "Ancho fijo de 200px", value: "1" },
+          { label: "Opción con texto más largo", value: "2" }
+        ]}
+        placeholder="Ancho fijo"
+      />
+      <Dropdown
+        width="300px"
+        items={[
+          { label: "Ancho fijo de 300px", value: "1" },
+          { label: "Opción con texto más largo", value: "2" }
+        ]}
+        placeholder="Ancho fijo más grande"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Ancho completo
+
+Usando la prop `fullWidth` para que el dropdown ocupe todo el ancho disponible.
+
+<DemoTabs
+  preview={
+    <Dropdown
+      fullWidth
+      items={[
+        { label: "Opción 1", value: "1" },
+        { label: "Opción 2", value: "2" },
+        { label: "Opción 3", value: "3" }
+      ]}
+      placeholder="Dropdown de ancho completo"
+    />
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownFullWidthDemo() {
+  return (
+    <Dropdown
+      fullWidth
+      items={[
+        { label: "Opción 1", value: "1" },
+        { label: "Opción 2", value: "2" },
+        { label: "Opción 3", value: "3" }
+      ]}
+      placeholder="Dropdown de ancho completo"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con opciones deshabilitadas
+
+Puedes deshabilitar opciones específicas del dropdown.
+
+<DemoTabs
+  preview={
+    <Dropdown
+      items={[
+        { label: "Opción disponible", value: "1", disabled: false },
+        { label: "Opción deshabilitada", value: "2", disabled: true },
+        { label: "Otra opción disponible", value: "3", disabled: false },
+        { label: "Otra opción deshabilitada", value: "4", disabled: true }
+      ]}
+      placeholder="Algunas opciones deshabilitadas"
+    />
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownDisabledOptionsDemo() {
+  return (
+    <Dropdown
+      items={[
+        { label: "Opción disponible", value: "1", disabled: false },
+        { label: "Opción deshabilitada", value: "2", disabled: true },
+        { label: "Otra opción disponible", value: "3", disabled: false },
+        { label: "Otra opción deshabilitada", value: "4", disabled: true }
+      ]}
+      placeholder="Algunas opciones deshabilitadas"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Menú de perfil de usuario
+
+Ejemplo de dropdown estilizado como menú de perfil con avatar, separadores y acciones comunes.
+
+<DemoTabs
+  preview={
+    <div className="flex justify-center">
+      <Dropdown
+        variant="default"
+        radius="md"
+        placement="bottom"
+        width="220px"
+        showSelectedIcon={false}
+        buttonClassName="bg-black dark:bg-black text-white border-zinc-800 dark:border-zinc-800 hover:bg-black dark:hover:bg-black"
+        itemClassName="!hover:bg-black !hover:text-white !focus:bg-black focus:text-white cursor-pointer !opacity-100 !active:bg-black"
+        className="[&>div]:bg-black [&>div]:dark:bg-black [&>div]:border-zinc-800 [&>div]:dark:border-zinc-800 [&>div]:!transition-none [&>div>ul]:p-0 [&_div]:hover:bg-black"
+        items={[
+          {
+            label: (
+              <div className="flex items-center px-3 hover:bg-black">
+                <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden mr-2.5 border border-zinc-700">
+                  <img 
+                    src="https://randomuser.me/api/portraits/men/44.jpg"
+                    alt="Avatar" 
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-medium text-xs text-white">Hector Vázquez</span>
+                  <span className="text-xs text-zinc-400">@gepejuantok</span>
+                </div>
+              </div>
+            ),
+            value: "profile",
+            disabled: true,
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">Dashboard</span>
+                <SettingsIcon className="h-4 w-4 text-zinc-400" />
+              </div>
+            ),
+            value: "dashboard",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">Settings</span>
+                <SettingsIcon className="h-4 w-4 text-zinc-400" />
+              </div>
+            ),
+            value: "settings",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">New Project</span>
+                <span className="flex items-center justify-center h-4 w-4 text-zinc-400">+</span>
+              </div>
+            ),
+            value: "new-project",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
+                <span className="text-zinc-400">Quick search</span>
+                <span className="flex items-center justify-center text-[10px] px-1.5 bg-zinc-900 rounded text-zinc-400">⌘K</span>
+              </div>
+            ),
+            value: "search",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">Theme</span>
+                <span className="flex items-center gap-1 text-[10px] px-2 bg-zinc-900 rounded text-zinc-400">System <ChevronDown className="h-2.5 w-2.5" /></span>
+              </div>
+            ),
+            value: "theme",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
+                <span className="text-zinc-400">Help & Feedback</span>
+              </div>
+            ),
+            value: "help",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 text-red-500 hover:bg-black">
+                <span>Log Out</span>
+                <LogOutIcon className="h-4 w-4" />
+              </div>
+            ),
+            value: "logout",
+            disabled: true
+          }
+        ]}
+        placeholder="Open Menu"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+import { SettingsIcon, LogOutIcon, ChevronDown } from "lucide-react";
+
+export default function ProfileMenuDropdownDemo() {
+  return (
+    <div className="flex justify-center">
+      <Dropdown
+        variant="default"
+        radius="md"
+        placement="bottom"
+        width="220px"
+        showSelectedIcon={false}
+        buttonClassName="bg-black dark:bg-black text-white border-zinc-800 dark:border-zinc-800 hover:bg-black dark:hover:bg-black"
+        itemClassName="!hover:bg-black !hover:text-white !focus:bg-black focus:text-white cursor-pointer !opacity-100 !active:bg-black"
+        className="[&>div]:bg-black [&>div]:dark:bg-black [&>div]:border-zinc-800 [&>div]:dark:border-zinc-800 [&>div]:!transition-none [&>div>ul]:p-0 [&_div]:hover:bg-black"
+        items={[
+          {
+            label: (
+              <div className="flex items-center px-3 hover:bg-black">
+                <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden mr-2.5 border border-zinc-700">
+                  <img 
+                    src="https://randomuser.me/api/portraits/men/44.jpg"
+                    alt="Avatar" 
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-medium text-xs text-white">Hector Vázquez</span>
+                  <span className="text-xs text-zinc-400">@gepejuantok</span>
+                </div>
+              </div>
+            ),
+            value: "profile",
+            disabled: true,
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">Dashboard</span>
+                <SettingsIcon className="h-4 w-4 text-zinc-400" />
+              </div>
+            ),
+            value: "dashboard",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">Settings</span>
+                <SettingsIcon className="h-4 w-4 text-zinc-400" />
+              </div>
+            ),
+            value: "settings",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">New Project</span>
+                <span className="flex items-center justify-center h-4 w-4 text-zinc-400">+</span>
+              </div>
+            ),
+            value: "new-project",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
+                <span className="text-zinc-400">Quick search</span>
+                <span className="flex items-center justify-center text-[10px] py-0.5 px-1.5 bg-zinc-900 rounded text-zinc-400">⌘K</span>
+              </div>
+            ),
+            value: "search",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
+                <span className="text-zinc-400">Theme</span>
+                <span className="flex items-center gap-1 text-[10px] py-0.5 px-2 bg-zinc-900 rounded text-zinc-400">System <ChevronDown className="h-2.5 w-2.5" /></span>
+              </div>
+            ),
+            value: "theme",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
+                <span className="text-zinc-400">Help & Feedback</span>
+              </div>
+            ),
+            value: "help",
+            disabled: true
+          },
+          {
+            label: (
+              <div className="flex items-center justify-between w-full px-3 text-red-500 hover:bg-black">
+                <span>Log Out</span>
+                <LogOutIcon className="h-4 w-4" />
+              </div>
+            ),
+            value: "logout",
+            disabled: true
+          }
+        ]}
+        placeholder="Open Menu"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop               | Tipo                                                                          | Default          | Descripción                                          |
+| ------------------ | ----------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------- |
+| `items`            | `Array<DropdownItem>`                                                         | -                | Lista de elementos del dropdown                      |
+| `placeholder`      | `string`                                                                      | "Seleccionar..." | Texto a mostrar cuando no hay selección              |
+| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`      | Variante de estilo                                   |
+| `size`             | `"sm" \| "md" \| "lg"`                                                        | `"md"`           | Tamaño del dropdown                                  |
+| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`           | Radio de las esquinas                                |
+| `disabled`         | `boolean`                                                                     | `false`          | Deshabilita todo el dropdown                         |
+| `fullWidth`        | `boolean`                                                                     | `false`          | Hace que el dropdown ocupe todo el ancho disponible  |
+| `width`            | `string`                                                                      | -                | Define un ancho específico (ej: "200px", "15rem")    |
+| `placement`        | `"bottom" \| "top" \| "left" \| "right"`                                      | `"bottom"`       | Posición del menú desplegable                        |
+| `onChange`         | `(value: string) => void`                                                     | -                | Función llamada al seleccionar una opción            |
+| `icon`             | `ReactNode`                                                                   | -                | Ícono a mostrar al inicio del dropdown               |
+| `showSelectedIcon` | `boolean`                                                                     | `true`           | Muestra el ícono de selección en la opción elegida   |
+| `defaultValue`     | `string`                                                                      | -                | Valor seleccionado por defecto                       |
+| `value`            | `string`                                                                      | -                | Valor controlado del dropdown                        |
+| `className`        | `string`                                                                      | -                | Clases adicionales para el contenedor                |
+| `buttonClassName`  | `string`                                                                      | -                | Clases adicionales para el botón principal           |
+| `itemClassName`    | `string`                                                                      | -                | Clases adicionales para los elementos de la lista    |
+| `activeColor`      | `string`                                                                      | -                | Color personalizado para los elementos seleccionados |
+| `checkColor`       | `string`                                                                      | -                | Color personalizado para el ícono de verificación    |
+
+### DropdownItem
+
+| Propiedad  | Tipo        | Descripción                     |
+| ---------- | ----------- | ------------------------------- |
+| `label`    | `ReactNode` | Contenido visible de la opción  |
+| `value`    | `string`    | Valor de la opción              |
+| `icon`     | `ReactNode` | Ícono opcional para la opción   |
+| `disabled` | `boolean`   | Si la opción está deshabilitada |
+
+## API Reference
+
+| Prop             | Tipo                                                                                    | Por Defecto        | Descripción                                                                                |
+| ---------------- | --------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------ |
+| items            | `DropdownItem[]`                                                                        | -                  | Lista de elementos a mostrar en el menú desplegable.                                       |
+| placeholder      | `string`                                                                                | `"Seleccionar..."` | Texto a mostrar cuando no hay selección.                                                   |
+| variant          | `"default"` \| `"primary"` \| `"secondary"` \| `"success"` \| `"warning"` \| `"danger"` | `"default"`        | Variante visual del botón desplegable.                                                     |
+| size             | `"sm"` \| `"md"` \| `"lg"`                                                              | `"md"`             | Tamaño del componente.                                                                     |
+| radius           | `"none"` \| `"sm"` \| `"md"` \| `"full"`                                                | `"md"`             | Radio de borde del componente.                                                             |
+| disabled         | `boolean`                                                                               | `false`            | Deshabilita el componente.                                                                 |
+| fullWidth        | `boolean`                                                                               | `false`            | Si es `true`, el componente tendrá ancho completo.                                         |
+| placement        | `"bottom"` \| `"top"` \| `"left"` \| `"right"`                                          | `"bottom"`         | Posición donde aparece el menú desplegable.                                                |
+| onChange         | `(value: string) => void`                                                               | -                  | Función a ejecutar cuando cambia el valor seleccionado.                                    |
+| icon             | `React.ReactNode`                                                                       | -                  | Icono opcional para mostrar en el botón.                                                   |
+| showSelectedIcon | `boolean`                                                                               | `true`             | Si es `true`, muestra un icono de verificación junto al elemento seleccionado.             |
+| defaultValue     | `string`                                                                                | -                  | Valor seleccionado por defecto (no controlado).                                            |
+| value            | `string`                                                                                | -                  | Valor seleccionado (controlado).                                                           |
+| width            | `string`                                                                                | -                  | Ancho fijo para el menú desplegable.                                                       |
+| activeColor      | `string`                                                                                | -                  | Color personalizado para los elementos seleccionados (ej: "#FF5500" o "rgb(100,150,200)"). |
+| checkColor       | `string`                                                                                | -                  | Color personalizado para el icono de verificación (ej: "#FF5500" o "rgb(100,150,200)").    |
+
+## Ejemplos
+
+### Colores personalizados
+
+Puedes personalizar el color de los elementos seleccionados y el color del ícono de verificación:
+
+```tsx
+<Dropdown
+  items={[
+    { label: "Default", value: "default" },
+    { label: "Opción 2", value: "option2" },
+    { label: "Opción 3", value: "option3", disabled: true },
+  ]}
+  activeColor="#FF5500"
+  checkColor="#00AAFF"
+/>
+```
+
+Por defecto, el ícono de verificación (✓) coincide con el color de la variante seleccionada:
+
+- **default, primary**: azul
+- **secondary**: púrpura
+- **success**: verde
+- **warning**: ámbar
+- **danger**: rojo
+
+Si deseas un color específico para el ícono, utiliza la prop `checkColor`.
