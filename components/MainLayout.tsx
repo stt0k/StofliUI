@@ -21,7 +21,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
   return (
     <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
       <Header />
-      <div className="flex-1 min-h-[calc(100vh-4.5rem)]">
+      <div className="flex-1 min-h-[calc(100vh-4.5rem)] pt-16">
         <div className="container mx-auto">
           <Sidebar />
           <div className="md:ml-[220px] lg:ml-[240px] px-4 md:px-6">
@@ -31,7 +31,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
               </div>
               {hasNavItems && (
                 <div className="hidden text-sm xl:block">
-                  <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
+                  <div className="sticky top-25 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
                     <div className="space-y-2">
                       <p className="font-medium">On This Page</p>
                       <ul className="m-0 list-none">
