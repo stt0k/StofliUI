@@ -82,7 +82,7 @@ const Header = () => {
   );
 
   return (
-    <div className="sticky top-6 z-50">
+    <div className="fixed top-6 left-0 right-0 z-50">
       <div className="mx-3">
         <header
           className={`
