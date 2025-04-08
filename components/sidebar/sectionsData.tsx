@@ -27,9 +27,9 @@ export const sections = [
       { href: "/docs/components/calendar", label: "Calendar" },
       { href: "/docs/components/card", label: "Card" },
       { href: "/docs/components/checkbox", label: "Checkbox" },
-      { href: "/docs/components/tabs", label: "Tabs" },
-      { href: "/docs/components/dropdown", label: "Dropdown" },
-      { href: "/docs/components/input", label: "Input" },
+      { href: "/docs/components/tabs", label: "Tabs", tag: "New" },
+      { href: "/docs/components/dropdown", label: "Dropdown", tag: "New" },
+      { href: "/docs/components/input", label: "Input", tag: "New" },
     ],
   },
 ];
