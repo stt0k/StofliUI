@@ -30,6 +30,7 @@ export const sections = [
       { href: "/docs/components/tabs", label: "Tabs", tag: "New" },
       { href: "/docs/components/dropdown", label: "Dropdown", tag: "New" },
       { href: "/docs/components/input", label: "Input", tag: "New" },
+      { href: "/docs/components/toast", label: "Toast", tag: "New" },
     ],
   },
 ];
