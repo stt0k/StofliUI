@@ -87,6 +87,83 @@ const Input = dynamic(() => import("@/components/sections/input"), {
   loading: () => <div>Cargando...</div>,
 });
 
+const ToastWrapper = dynamic(
+  () =>
+    import("@/components/docs/toast-wrapper").then((mod) => ({
+      default: mod.ToastWrapper,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
+const ToastDemo = dynamic(
+  () =>
+    import("@/components/docs/toast-wrapper").then((mod) => ({
+      default: mod.ToastDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
+const ToastVariantsDemo = dynamic(
+  () =>
+    import("@/components/docs/toast-wrapper").then((mod) => ({
+      default: mod.ToastVariantsDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
+const ToastPositionsDemo = dynamic(
+  () =>
+    import("@/components/docs/toast-wrapper").then((mod) => ({
+      default: mod.ToastPositionsDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
+const ToastIconsDemo = dynamic(
+  () =>
+    import("@/components/docs/toast-wrapper").then((mod) => ({
+      default: mod.ToastIconsDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
+const ToastDurationDemo = dynamic(
+  () =>
+    import("@/components/docs/toast-wrapper").then((mod) => ({
+      default: mod.ToastDurationDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
+const ToastMultipleDemo = dynamic(
+  () =>
+    import("@/components/docs/toast-wrapper").then((mod) => ({
+      default: mod.ToastMultipleDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
+
 // Definir los componentes base
 const components: MDXComponents = {
   // Componentes básicos de Markdown
@@ -194,6 +271,13 @@ const components: MDXComponents = {
   Tabs,
   Dropdown,
   Input,
+  ToastWrapper,
+  ToastDemo,
+  ToastVariantsDemo,
+  ToastPositionsDemo,
+  ToastIconsDemo,
+  ToastDurationDemo,
+  ToastMultipleDemo,
   CheckIcon,
   AlertTriangle,
   XIcon,
