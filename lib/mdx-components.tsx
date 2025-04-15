@@ -77,10 +77,28 @@ const Tabs = dynamic(() => import("@/components/sections/tabs"), {
   loading: () => <div>Cargando...</div>,
 });
 
+const Tooltip = dynamic(() => import("@/components/sections/tooltip"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
 const Dropdown = dynamic(() => import("@/components/sections/dropdown"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
+
+const Progress = dynamic(() => import("@/components/sections/progress"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+const CircularProgress = dynamic(
+  () => import("@/components/sections/circular-progress"),
+  {
+    ssr: false,
+    loading: () => <div>Cargando...</div>,
+  }
+);
 
 const Input = dynamic(() => import("@/components/sections/input"), {
   ssr: false,
@@ -271,6 +289,9 @@ const components: MDXComponents = {
   Tabs,
   Dropdown,
   Input,
+  Progress,
+  CircularProgress,
+  Tooltip,
   ToastWrapper,
   ToastDemo,
   ToastVariantsDemo,
