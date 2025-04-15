@@ -31,6 +31,13 @@ export const sections = [
       { href: "/docs/components/dropdown", label: "Dropdown", tag: "New" },
       { href: "/docs/components/input", label: "Input", tag: "New" },
       { href: "/docs/components/toast", label: "Toast", tag: "New" },
+      { href: "/docs/components/tooltip", label: "Tooltip", tag: "New" },
+      { href: "/docs/components/progress", label: "Progress", tag: "New" },
+      {
+        href: "/docs/components/circular-progress",
+        label: "Circular Progress",
+        tag: "New",
+      },
     ],
   },
 ];
