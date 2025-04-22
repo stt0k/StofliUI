@@ -21,6 +21,9 @@ import {
   LinkIcon,
   AlertCircleIcon,
   PhoneIcon,
+  BookIcon,
+  LayoutIcon,
+  ListIcon,
 } from "lucide-react";
 
 // Importaciones dinámicas
@@ -182,30 +185,35 @@ const ToastMultipleDemo = dynamic(
   }
 );
 
+const Breadcrumbs = dynamic(() => import("@/components/sections/breadcrumbs"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
 // Definir los componentes base
 const components: MDXComponents = {
   // Componentes básicos de Markdown
   h1: (props) => (
     <h1
-      className="text-4xl font-bold mb-4 mt-8 dark:text-zinc-100 text-zinc-900 tracking-tight"
+      className="mt-8 mb-4 text-4xl font-bold tracking-tight dark:text-zinc-100 text-zinc-900"
       {...props}
     />
   ),
   h2: (props) => (
     <h2
-      className="text-3xl font-bold mb-3 mt-6 dark:text-zinc-100 text-zinc-900 tracking-tight"
+      className="mt-6 mb-3 text-3xl font-bold tracking-tight dark:text-zinc-100 text-zinc-900"
       {...props}
     />
   ),
   h3: (props) => (
     <h3
-      className="text-2xl font-bold mb-3 mt-5 dark:text-zinc-200 text-zinc-800 tracking-tight"
+      className="mt-5 mb-3 text-2xl font-bold tracking-tight dark:text-zinc-200 text-zinc-800"
       {...props}
     />
   ),
   h4: (props) => (
     <h4
-      className="text-xl font-bold mb-2 mt-4 dark:text-zinc-200 text-zinc-800 tracking-tight"
+      className="mt-4 mb-2 text-xl font-bold tracking-tight dark:text-zinc-200 text-zinc-800"
       {...props}
     />
   ),
@@ -217,20 +225,20 @@ const components: MDXComponents = {
   ),
   ul: (props) => (
     <ul
-      className="list-disc pl-6 mb-4 dark:text-zinc-400 text-zinc-600 space-y-2"
+      className="pl-6 mb-4 space-y-2 list-disc dark:text-zinc-400 text-zinc-600"
       {...props}
     />
   ),
   ol: (props) => (
     <ol
-      className="list-decimal pl-6 mb-4 dark:text-zinc-400 text-zinc-600 space-y-2"
+      className="pl-6 mb-4 space-y-2 list-decimal dark:text-zinc-400 text-zinc-600"
       {...props}
     />
   ),
   li: (props) => <li className="mb-1" {...props} />,
   blockquote: (props) => (
     <blockquote
-      className="border-l-4 dark:border-zinc-700 border-zinc-300 pl-4 italic my-4 dark:text-zinc-400 text-zinc-600"
+      className="pl-4 my-4 italic border-l-4 dark:border-zinc-700 border-zinc-300 dark:text-zinc-400 text-zinc-600"
       {...props}
     />
   ),
@@ -243,7 +251,7 @@ const components: MDXComponents = {
   pre: (props) => <CodeBlock {...props} />,
   a: (props) => (
     <a
-      className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors duration-200 underline underline-offset-2"
+      className="text-blue-600 underline transition-colors duration-200 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 underline-offset-2"
       target="_blank"
       rel="noopener noreferrer"
       {...props}
@@ -252,14 +260,14 @@ const components: MDXComponents = {
   table: (props) => (
     <div className="overflow-x-auto mb-4">
       <table
-        className="min-w-full divide-y dark:divide-zinc-700 divide-zinc-200 border dark:border-zinc-800 border-zinc-200 rounded-lg"
+        className="min-w-full rounded-lg border divide-y dark:divide-zinc-700 divide-zinc-200 dark:border-zinc-800 border-zinc-200"
         {...props}
       />
     </div>
   ),
   th: (props) => (
     <th
-      className="px-4 py-2 dark:bg-zinc-800 bg-zinc-100 font-semibold dark:text-zinc-200 text-zinc-800"
+      className="px-4 py-2 font-semibold dark:bg-zinc-800 bg-zinc-100 dark:text-zinc-200 text-zinc-800"
       {...props}
     />
   ),
@@ -292,6 +300,7 @@ const components: MDXComponents = {
   Progress,
   CircularProgress,
   Tooltip,
+  Breadcrumbs,
   ToastWrapper,
   ToastDemo,
   ToastVariantsDemo,
@@ -316,6 +325,9 @@ const components: MDXComponents = {
   LinkIcon,
   AlertCircleIcon,
   PhoneIcon,
+  BookIcon,
+  LayoutIcon,
+  ListIcon,
 };
 
 // Función para combinar componentes personalizados
