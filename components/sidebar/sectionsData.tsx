@@ -38,6 +38,11 @@ export const sections = [
         label: "Circular Progress",
         tag: "New",
       },
+      {
+        href: "/docs/components/breadcrumbs",
+        label: "Breadcrumbs",
+        tag: "New",
+      },
     ],
   },
 ];
