@@ -190,6 +190,12 @@ const Breadcrumbs = dynamic(() => import("@/components/sections/breadcrumbs"), {
   loading: () => <div>Cargando...</div>,
 });
 
+// Spinner
+const Spinner = dynamic(() => import("@/components/sections/spinner"), {
+  ssr: false,
+  loading: () => <p>Cargando...</p>,
+});
+
 // Definir los componentes base
 const components: MDXComponents = {
   // Componentes básicos de Markdown
@@ -328,6 +334,7 @@ const components: MDXComponents = {
   BookIcon,
   LayoutIcon,
   ListIcon,
+  Spinner,
 };
 
 // Función para combinar componentes personalizados
