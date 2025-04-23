@@ -43,6 +43,11 @@ export const sections = [
         label: "Breadcrumbs",
         tag: "New",
       },
+      {
+        href: "/docs/components/spinner",
+        label: "Spinner",
+        tag: "New",
+      },
     ],
   },
 ];
