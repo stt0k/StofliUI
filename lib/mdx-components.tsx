@@ -196,6 +196,12 @@ const Spinner = dynamic(() => import("@/components/sections/spinner"), {
   loading: () => <p>Cargando...</p>,
 });
 
+// Pagination
+const Pagination = dynamic(() => import("@/components/sections/pagination"), {
+  ssr: false,
+  loading: () => <p>Cargando...</p>,
+});
+
 // Definir los componentes base
 const components: MDXComponents = {
   // Componentes básicos de Markdown
@@ -335,6 +341,7 @@ const components: MDXComponents = {
   LayoutIcon,
   ListIcon,
   Spinner,
+  Pagination,
 };
 
 // Función para combinar componentes personalizados
