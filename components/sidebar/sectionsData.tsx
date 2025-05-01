@@ -48,6 +48,11 @@ export const sections = [
         label: "Spinner",
         tag: "New",
       },
+      {
+        href: "/docs/components/pagination",
+        label: "Pagination",
+        tag: "New",
+      },
     ],
   },
 ];
