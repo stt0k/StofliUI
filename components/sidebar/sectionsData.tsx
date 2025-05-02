@@ -53,6 +53,12 @@ export const sections = [
         label: "Pagination",
         tag: "New",
       },
+      {
+        href: "/docs/components/date-picker",
+        label: "Date Picker",
+        tag: "New",
+      },
+      { href: "/docs/components/switch", label: "Switch", tag: "New" },
     ],
   },
 ];
