@@ -202,6 +202,30 @@ const Pagination = dynamic(() => import("@/components/sections/pagination"), {
   loading: () => <p>Cargando...</p>,
 });
 
+// DatePicker
+const DatePicker = dynamic(() => import("@/components/sections/date-picker"), {
+  ssr: false,
+  loading: () => <p>Cargando...</p>,
+});
+
+// Switch
+const Switch = dynamic(() => import("@/components/sections/switch"), {
+  ssr: false,
+  loading: () => <p>Cargando...</p>,
+});
+
+// SwitchControlledDemo
+const SwitchControlledDemo = dynamic(
+  () =>
+    import("@/components/docs/switch-wrapper").then((mod) => ({
+      default: mod.SwitchControlledDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <p>Cargando...</p>,
+  }
+);
+
 // Definir los componentes base
 const components: MDXComponents = {
   // Componentes básicos de Markdown
@@ -342,6 +366,9 @@ const components: MDXComponents = {
   ListIcon,
   Spinner,
   Pagination,
+  DatePicker,
+  Switch,
+  SwitchControlledDemo,
 };
 
 // Función para combinar componentes personalizados
