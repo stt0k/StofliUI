@@ -301,12 +301,20 @@ const DatePicker: React.FC<DatePickerProps> = ({
               <button
                 type="button"
                 onClick={handleClear}
-                className={`${iconSizes[size]} mr-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full p-0.5`}
+                className={`h-4 w-4 mr-2 text-${
+                  variant === "default" ? "zinc" : variant
+                }-400 hover:text-${
+                  variant === "default" ? "zinc" : variant
+                }-600 
+                dark:text-${
+                  variant === "default" ? "zinc" : variant
+                }-500 dark:hover:text-${
+                  variant === "default" ? "zinc" : variant
+                }-300 
+                opacity-70 hover:opacity-100 transition-opacity`}
                 aria-label="Limpiar fecha"
               >
-                <X
-                  className={`${iconSizes[size]} text-zinc-500 dark:text-zinc-400`}
-                />
+                <X size={16} />
               </button>
             )}
 
