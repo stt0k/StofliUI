@@ -59,6 +59,11 @@ export const sections = [
         tag: "New",
       },
       { href: "/docs/components/switch", label: "Switch", tag: "New" },
+      {
+        href: "/docs/components/number-input",
+        label: "Number Input",
+        tag: "New",
+      },
     ],
   },
 ];
