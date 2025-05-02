@@ -214,11 +214,65 @@ const Switch = dynamic(() => import("@/components/sections/switch"), {
   loading: () => <p>Cargando...</p>,
 });
 
+// NumberInput
+const NumberInput = dynamic(
+  () => import("@/components/sections/number-input"),
+  {
+    ssr: false,
+    loading: () => <p>Cargando...</p>,
+  }
+);
+
 // SwitchControlledDemo
 const SwitchControlledDemo = dynamic(
   () =>
     import("@/components/docs/switch-wrapper").then((mod) => ({
       default: mod.SwitchControlledDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <p>Cargando...</p>,
+  }
+);
+
+// Importar los componentes de demostración de NumberInput
+const NumberInputControlledDemo = dynamic(
+  () =>
+    import("@/components/docs/number-input-wrapper").then((mod) => ({
+      default: mod.NumberInputControlledDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <p>Cargando...</p>,
+  }
+);
+
+const NumberInputPercentageDemo = dynamic(
+  () =>
+    import("@/components/docs/number-input-wrapper").then((mod) => ({
+      default: mod.NumberInputPercentageDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <p>Cargando...</p>,
+  }
+);
+
+const NumberInputCurrencyDemo = dynamic(
+  () =>
+    import("@/components/docs/number-input-wrapper").then((mod) => ({
+      default: mod.NumberInputCurrencyDemo,
+    })),
+  {
+    ssr: false,
+    loading: () => <p>Cargando...</p>,
+  }
+);
+
+const NumberInputSignedDemo = dynamic(
+  () =>
+    import("@/components/docs/number-input-wrapper").then((mod) => ({
+      default: mod.NumberInputSignedDemo,
     })),
   {
     ssr: false,
@@ -369,6 +423,11 @@ const components: MDXComponents = {
   DatePicker,
   Switch,
   SwitchControlledDemo,
+  NumberInput,
+  NumberInputControlledDemo,
+  NumberInputPercentageDemo,
+  NumberInputCurrencyDemo,
+  NumberInputSignedDemo,
 };
 
 // Función para combinar componentes personalizados
