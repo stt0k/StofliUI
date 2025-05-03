@@ -41,22 +41,67 @@ const Tabs: React.FC<TabsProps> = ({
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [hoverTab, setHoverTab] = useState<number | null>(null);
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({
     left: 0,
     width: 0,
   });
+  // Referencia para el contenedor de pestañas
+  const tabsContainerRef = useRef<HTMLDivElement | null>(null);
 
   // Actualizar la posición del indicador cuando cambia la pestaña activa o hover
   useEffect(() => {
     const tabIndex = hoverEffect && hoverTab !== null ? hoverTab : activeTab;
     if (tabsRef.current[tabIndex]) {
       const tabElement = tabsRef.current[tabIndex];
-      setIndicatorStyle({
-        left: tabElement?.offsetLeft || 0,
-        width: tabElement?.offsetWidth || 0,
-      });
+      const container = scrollContainerRef.current;
+
+      if (container) {
+        // Calcular la posición relativa al contenedor visible
+        setIndicatorStyle({
+          left: tabElement.offsetLeft,
+          width: tabElement.offsetWidth,
+        });
+      }
     }
   }, [activeTab, hoverTab, hoverEffect]);
+
+  // Manejar el desplazamiento cuando cambia la pestaña activa
+  useEffect(() => {
+    if (!tabsRef.current[activeTab] || !scrollContainerRef.current) return;
+
+    const tabElement = tabsRef.current[activeTab];
+    const container = scrollContainerRef.current;
+    const tabLeft = tabElement.offsetLeft;
+    const tabWidth = tabElement.offsetWidth;
+    const containerWidth = container.offsetWidth;
+    const containerScrollLeft = container.scrollLeft;
+    const containerScrollRight = containerScrollLeft + containerWidth;
+
+    // Verificar si el tab necesita desplazamiento
+    const needsScroll =
+      tabLeft + tabWidth > containerScrollRight ||
+      tabLeft < containerScrollLeft;
+
+    if (needsScroll) {
+      // Si el tab está parcial o totalmente fuera de la vista por la derecha
+      if (tabLeft + tabWidth > containerScrollRight) {
+        // Scroll para mostrar el tab en el lado derecho
+        container.scrollTo({
+          left: tabLeft - containerWidth + tabWidth,
+          behavior: "smooth",
+        });
+      }
+      // Si el tab está parcial o totalmente fuera de la vista por la izquierda
+      else if (tabLeft < containerScrollLeft) {
+        // Scroll para mostrar el tab en el lado izquierdo
+        container.scrollTo({
+          left: tabLeft,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [activeTab]);
 
   const variantClasses = {
     default:
@@ -104,73 +149,93 @@ const Tabs: React.FC<TabsProps> = ({
     full: "rounded-full",
   };
 
-  return (
-    <div
-      className={`${className} ${
-        fullWidth ? "w-full" : "inline-flex flex-col"
-      }`}
-    >
-      <div
-        className={`flex relative p-1 bg-zinc-100/60 dark:bg-zinc-800/20 backdrop-blur-sm ${
-          radiusClasses[radius]
-        } ${fullWidth ? "w-full" : "inline-flex"}`}
-      >
-        {/* Indicador de la pestaña activa */}
-        <motion.div
-          className={`absolute ${radiusClasses[radius]} z-0 ${indicatorBgClasses[variant]} shadow-sm`}
-          initial={false}
-          animate={{
-            left: indicatorStyle.left,
-            width: indicatorStyle.width,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 400,
-            damping: 30,
-          }}
-          style={{
-            top: 4,
-            bottom: 4,
-            height: "calc(100% - 8px)",
-          }}
-        />
+  const handleTabClick = (index: number) => {
+    setActiveTab(index);
+  };
 
-        {/* Pestañas */}
-        {tabs.map((tab, index) => (
-          <button
-            key={index}
-            ref={(el) => {
-              tabsRef.current[index] = el;
+  return (
+    <div className={`${className} flex flex-col w-full`}>
+      {/* Contenedor de los tabs con ancho adaptativo */}
+      <div className="w-full flex">
+        <div
+          className={`relative p-1 bg-zinc-100/60 dark:bg-zinc-800/20 backdrop-blur-sm ${
+            radiusClasses[radius]
+          } overflow-hidden ${fullWidth ? "w-full" : "inline-block"}`}
+        >
+          {/* Contenedor con scroll horizontal */}
+          <div
+            ref={scrollContainerRef}
+            className="overflow-x-auto scrollbar-hide"
+            style={{
+              WebkitOverflowScrolling: "touch",
+              msOverflowStyle: "none",
+              scrollbarWidth: "none",
             }}
-            onClick={() => setActiveTab(index)}
-            onMouseEnter={() => hoverEffect && setHoverTab(index)}
-            onMouseLeave={() => hoverEffect && setHoverTab(null)}
-            className={`
-              relative z-10 font-medium whitespace-nowrap
-              ${sizeClasses[size]}
-              ${fullWidth ? "flex-1" : ""}
-              ${radiusClasses[radius]}
-              ${
-                activeTab === index
-                  ? activeVariantClasses[variant]
-                  : variantClasses[variant]
-              }
-              transition-colors duration-200
-              flex items-center justify-center gap-2
-              ${tabClassName}
-            `}
           >
-            {tab.icon && <span className="flex-shrink-0">{tab.icon}</span>}
-            {tab.label}
-          </button>
-        ))}
+            {/* Contenedor para las pestañas */}
+            <div
+              ref={tabsContainerRef}
+              className={`flex ${fullWidth ? "w-full" : "min-w-max"} relative`}
+            >
+              {/* Indicador de la pestaña activa/hover */}
+              <motion.div
+                className={`absolute ${radiusClasses[radius]} z-0 ${indicatorBgClasses[variant]} shadow-sm`}
+                initial={false}
+                animate={{
+                  left: indicatorStyle.left,
+                  width: indicatorStyle.width,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 26,
+                }}
+                style={{
+                  top: 0,
+                  bottom: 0,
+                  height: "100%",
+                }}
+              />
+
+              {/* Pestañas */}
+              {tabs.map((tab, index) => (
+                <button
+                  key={index}
+                  ref={(el) => {
+                    tabsRef.current[index] = el;
+                  }}
+                  onClick={() => handleTabClick(index)}
+                  onMouseEnter={() => hoverEffect && setHoverTab(index)}
+                  onMouseLeave={() => hoverEffect && setHoverTab(null)}
+                  className={`
+                    relative z-10 font-medium whitespace-nowrap flex-shrink-0
+                    ${sizeClasses[size]}
+                    ${fullWidth ? "flex-1" : ""}
+                    ${radiusClasses[radius]}
+                    ${
+                      activeTab === index
+                        ? activeVariantClasses[variant]
+                        : variantClasses[variant]
+                    }
+                    transition-colors duration-200
+                    flex items-center justify-center gap-2
+                    ${tabClassName}
+                  `}
+                >
+                  {tab.icon && (
+                    <span className="flex-shrink-0">{tab.icon}</span>
+                  )}
+                  <span className="truncate">{tab.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Contenido de las pestañas */}
+      {/* Contenido de las pestañas separado completamente */}
       <div
-        className={`mt-4 relative ${
-          fullWidth ? "w-full" : "min-w-full"
-        } ${contentClassName}`}
+        className={`mt-4 relative w-full overflow-hidden ${contentClassName}`}
       >
         <AnimatePresence mode="wait">
           {tabs.map(
