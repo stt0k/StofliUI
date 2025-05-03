@@ -145,11 +145,25 @@ export default function ToastVariantsDemo() {
       >
         Primary
       </Button>
-      
+
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Secondary",
+            description: "Toast con estilo secundario",
+            variant: "secondary"
+          })
+        }
+      >
+        Primary
+      </Button>
+
       <Button
         variant="success"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Success",
             description: "Operación completada correctamente",
@@ -159,11 +173,11 @@ export default function ToastVariantsDemo() {
       >
         Success
       </Button>
-      
+
       <Button
         variant="warning"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Warning",
             description: "Ten precaución con esta acción",
@@ -173,11 +187,11 @@ export default function ToastVariantsDemo() {
       >
         Warning
       </Button>
-      
+
       <Button
         variant="danger"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Danger",
             description: "Error al procesar la información",
@@ -188,9 +202,11 @@ export default function ToastVariantsDemo() {
         Danger
       </Button>
     </div>
-  );
+
+);
 }
-```
+
+````
 </DemoTabs>
 
 ### Posiciones
@@ -212,13 +228,13 @@ import { Button } from "@/components/sections/button";
 
 export default function ToastPositionsDemo() {
   const { open } = useToast();
-  
+
   return (
     <div className="grid grid-cols-3 gap-2">
       <Button
         variant="primary"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Superior izquierda",
             description: "top-left",
@@ -229,11 +245,11 @@ export default function ToastPositionsDemo() {
       >
         Superior izquierda
       </Button>
-      
+
       <Button
         variant="primary"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Superior centro",
             description: "top-center",
@@ -244,11 +260,11 @@ export default function ToastPositionsDemo() {
       >
         Superior centro
       </Button>
-      
+
       <Button
         variant="success"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Superior derecha",
             description: "top-right",
@@ -259,11 +275,11 @@ export default function ToastPositionsDemo() {
       >
         Superior derecha
       </Button>
-      
+
       <Button
         variant="warning"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Inferior izquierda",
             description: "bottom-left",
@@ -274,11 +290,11 @@ export default function ToastPositionsDemo() {
       >
         Inferior izquierda
       </Button>
-      
+
       <Button
         variant="warning"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Inferior centro",
             description: "bottom-center",
@@ -289,11 +305,11 @@ export default function ToastPositionsDemo() {
       >
         Inferior centro
       </Button>
-      
+
       <Button
         variant="danger"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Inferior derecha",
             description: "bottom-right",
@@ -307,7 +323,8 @@ export default function ToastPositionsDemo() {
     </div>
   );
 }
-```
+````
+
 </DemoTabs>
 
 ### Con iconos
