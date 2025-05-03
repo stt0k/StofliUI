@@ -23,7 +23,6 @@ export interface SwitchProps {
   id?: string;
   icon?: boolean;
   iconType?: "check" | "cross" | "none";
-  withRipple?: boolean;
 }
 
 const Switch: React.FC<SwitchProps> = ({
@@ -40,7 +39,6 @@ const Switch: React.FC<SwitchProps> = ({
   id,
   icon = false,
   iconType = "check",
-  withRipple = true,
 }) => {
   const [isChecked, setIsChecked] = useState(checked);
   const uniqueId = id || `switch-${Math.random().toString(36).substring(2, 9)}`;
@@ -56,21 +54,18 @@ const Switch: React.FC<SwitchProps> = ({
       wrapper: "h-4 w-7",
       circle: "h-3 w-3",
       iconSize: "h-2 w-2",
-      rippleSize: "h-5 w-5",
       label: "text-sm",
     },
     md: {
       wrapper: "h-5 w-10",
       circle: "h-4 w-4",
       iconSize: "h-2.5 w-2.5",
-      rippleSize: "h-7 w-7",
       label: "text-base",
     },
     lg: {
       wrapper: "h-7 w-14",
       circle: "h-6 w-6",
       iconSize: "h-3.5 w-3.5",
-      rippleSize: "h-9 w-9",
       label: "text-lg",
     },
   };
@@ -78,70 +73,64 @@ const Switch: React.FC<SwitchProps> = ({
   // Clases para los colores según la variante
   const variantClasses = {
     default: {
-      bg: "bg-zinc-200 dark:bg-zinc-700",
+      bg: "bg-zinc-200 dark:bg-zinc-800",
       activeBg: "bg-zinc-600 dark:bg-zinc-400",
       circle: "bg-white dark:bg-zinc-200",
       activeCircle: "bg-white",
-      icon: "text-zinc-600",
-      hover: "hover:bg-zinc-300 dark:hover:bg-zinc-600",
+      icon: "text-zinc-700 dark:text-zinc-300",
+      hover: "hover:border-zinc-300 dark:hover:border-zinc-700",
       activeHover: "hover:bg-zinc-700 dark:hover:bg-zinc-500",
-      ripple: "bg-zinc-500/40",
       label: "text-zinc-700 dark:text-zinc-300",
     },
     primary: {
-      bg: "bg-blue-100 dark:bg-blue-900/40",
+      bg: "bg-blue-200 dark:bg-blue-800",
       activeBg: "bg-blue-500 dark:bg-blue-600",
       circle: "bg-white dark:bg-zinc-200",
       activeCircle: "bg-white",
-      icon: "text-blue-600",
-      hover: "hover:bg-blue-200 dark:hover:bg-blue-800/40",
+      icon: "text-blue-600 dark:text-blue-400",
+      hover: "hover:border-blue-300 dark:hover:border-blue-700",
       activeHover: "hover:bg-blue-600 dark:hover:bg-blue-500",
-      ripple: "bg-blue-400/50",
-      label: "text-blue-700 dark:text-blue-300",
+      label: "text-blue-600 dark:text-blue-400",
     },
     secondary: {
-      bg: "bg-purple-100 dark:bg-purple-900/40",
+      bg: "bg-purple-200 dark:bg-purple-800",
       activeBg: "bg-purple-500 dark:bg-purple-600",
       circle: "bg-white dark:bg-zinc-200",
       activeCircle: "bg-white",
-      icon: "text-purple-600",
-      hover: "hover:bg-purple-200 dark:hover:bg-purple-800/40",
+      icon: "text-purple-600 dark:text-purple-400",
+      hover: "hover:border-purple-300 dark:hover:border-purple-700",
       activeHover: "hover:bg-purple-600 dark:hover:bg-purple-500",
-      ripple: "bg-purple-400/50",
-      label: "text-purple-700 dark:text-purple-300",
+      label: "text-purple-600 dark:text-purple-400",
     },
     success: {
-      bg: "bg-green-100 dark:bg-green-900/40",
+      bg: "bg-green-200 dark:bg-green-800",
       activeBg: "bg-green-500 dark:bg-green-600",
       circle: "bg-white dark:bg-zinc-200",
       activeCircle: "bg-white",
-      icon: "text-green-600",
-      hover: "hover:bg-green-200 dark:hover:bg-green-800/40",
+      icon: "text-green-600 dark:text-green-400",
+      hover: "hover:border-green-300 dark:hover:border-green-700",
       activeHover: "hover:bg-green-600 dark:hover:bg-green-500",
-      ripple: "bg-green-400/50",
-      label: "text-green-700 dark:text-green-300",
+      label: "text-green-600 dark:text-green-400",
     },
     warning: {
-      bg: "bg-amber-100 dark:bg-amber-900/40",
+      bg: "bg-amber-200 dark:bg-amber-800",
       activeBg: "bg-amber-500 dark:bg-amber-600",
       circle: "bg-white dark:bg-zinc-200",
       activeCircle: "bg-white",
-      icon: "text-amber-600",
-      hover: "hover:bg-amber-200 dark:hover:bg-amber-800/40",
+      icon: "text-amber-600 dark:text-amber-400",
+      hover: "hover:border-amber-300 dark:hover:border-amber-700",
       activeHover: "hover:bg-amber-600 dark:hover:bg-amber-500",
-      ripple: "bg-amber-400/50",
-      label: "text-amber-700 dark:text-amber-300",
+      label: "text-amber-600 dark:text-amber-400",
     },
     danger: {
-      bg: "bg-red-100 dark:bg-red-900/40",
+      bg: "bg-red-200 dark:bg-red-800",
       activeBg: "bg-red-500 dark:bg-red-600",
       circle: "bg-white dark:bg-zinc-200",
       activeCircle: "bg-white",
-      icon: "text-red-600",
-      hover: "hover:bg-red-200 dark:hover:bg-red-800/40",
+      icon: "text-red-600 dark:text-red-400",
+      hover: "hover:border-red-300 dark:hover:border-red-700",
       activeHover: "hover:bg-red-600 dark:hover:bg-red-500",
-      ripple: "bg-red-400/50",
-      label: "text-red-700 dark:text-red-300",
+      label: "text-red-600 dark:text-red-400",
     },
   };
 
@@ -276,43 +265,6 @@ const Switch: React.FC<SwitchProps> = ({
             }}
             transition={{ duration: 0.25 }}
           />
-
-          {/* Efecto de ripple dentro del switch */}
-          {withRipple && !disabled && (
-            <motion.div
-              className={`
-                absolute rounded-full 
-                pointer-events-none 
-                ${variantClasses[variant].ripple}
-              `}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={
-                isChecked
-                  ? {
-                      opacity: [0, 0.7, 0],
-                      scale: [0.5, 1.8, 2.0],
-                    }
-                  : {
-                      opacity: 0,
-                      scale: 0.5,
-                    }
-              }
-              transition={{
-                duration: 0.7,
-                times: [0, 0.4, 1],
-                ease: "easeOut",
-              }}
-              style={{
-                left: isChecked ? "70%" : "30%",
-                top: "50%",
-                width: "70%",
-                height: "170%",
-                transform: "translate(-50%, -50%)",
-                transformOrigin: "center",
-                mixBlendMode: "lighten",
-              }}
-            />
-          )}
 
           <motion.div
             className={`
