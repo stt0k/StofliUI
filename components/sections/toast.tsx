@@ -79,17 +79,17 @@ const Toast: React.FC<ToastProps> = ({
 
   const variantClasses = {
     default:
-      "bg-zinc-800 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-800 border-zinc-700 dark:border-zinc-300",
+      "bg-gradient-to-r from-zinc-300/90 to-zinc-400/90 dark:from-zinc-800/90 dark:to-zinc-700/90 text-zinc-800 dark:text-zinc-100 border border-zinc-400/30 dark:border-zinc-600/30 backdrop-blur-sm shadow-sm",
     primary:
-      "bg-blue-500 dark:bg-blue-400 text-white dark:text-zinc-800 border-blue-600 dark:border-blue-500",
+      "bg-gradient-to-r from-blue-400/90 to-blue-500/90 dark:from-blue-900/90 dark:to-blue-800/90 text-white dark:text-blue-50 border border-blue-500/30 dark:border-blue-700/30 backdrop-blur-sm shadow-sm",
     secondary:
-      "bg-purple-500 dark:bg-purple-400 text-white dark:text-zinc-800 border-purple-600 dark:border-purple-500",
+      "bg-gradient-to-r from-purple-400/90 to-purple-500/90 dark:from-purple-900/90 dark:to-purple-800/90 text-white dark:text-purple-50 border border-purple-500/30 dark:border-purple-700/30 backdrop-blur-sm shadow-sm",
     success:
-      "bg-green-500 dark:bg-green-400 text-white dark:text-zinc-800 border-green-600 dark:border-green-500",
+      "bg-gradient-to-r from-green-400/90 to-green-500/90 dark:from-green-900/90 dark:to-green-800/90 text-white dark:text-green-50 border border-green-500/30 dark:border-green-700/30 backdrop-blur-sm shadow-sm",
     warning:
-      "bg-amber-500 dark:bg-amber-400 text-white dark:text-zinc-800 border-amber-600 dark:border-amber-500",
+      "bg-gradient-to-r from-amber-400/90 to-amber-500/90 dark:from-amber-900/90 dark:to-amber-800/90 text-white dark:text-amber-50 border border-amber-500/30 dark:border-amber-700/30 backdrop-blur-sm shadow-sm",
     danger:
-      "bg-red-500 dark:bg-red-400 text-white dark:text-zinc-800 border-red-600 dark:border-red-500",
+      "bg-gradient-to-r from-red-400/90 to-red-500/90 dark:from-red-900/90 dark:to-red-800/90 text-white dark:text-red-50 border border-red-500/30 dark:border-red-700/30 backdrop-blur-sm shadow-sm",
   };
 
   const variants = {
