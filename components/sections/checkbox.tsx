@@ -62,31 +62,32 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const variantClasses = {
     default:
-      "border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-zinc-400 dark:hover:border-zinc-600",
+      "border-zinc-400 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-800 dark:hover:border-zinc-600",
     primary:
-      "border-blue-400 dark:border-blue-400 bg-white dark:bg-zinc-900 hover:border-blue-500 dark:hover:border-blue-300",
+      "border-blue-400 dark:border-blue-800 bg-white dark:bg-zinc-900 hover:border-blue-600 dark:hover:border-blue-500",
     secondary:
-      "border-purple-400 dark:border-purple-400 bg-white dark:bg-zinc-900 hover:border-purple-500 dark:hover:border-purple-300",
+      "border-purple-400 dark:border-purple-800 bg-white dark:bg-zinc-900 hover:border-purple-600 dark:hover:border-purple-500",
     success:
-      "border-green-400 dark:border-green-400 bg-white dark:bg-zinc-900 hover:border-green-500 dark:hover:border-green-300",
+      "border-green-400 dark:border-green-800 bg-white dark:bg-zinc-900 hover:border-green-600 dark:hover:border-green-500",
     warning:
-      "border-amber-400 dark:border-amber-400 bg-white dark:bg-zinc-900 hover:border-amber-500 dark:hover:border-amber-300",
+      "border-amber-400 dark:border-amber-800 bg-white dark:bg-zinc-900 hover:border-amber-600 dark:hover:border-amber-500",
     danger:
-      "border-red-400 dark:border-red-400 bg-white dark:bg-zinc-900 hover:border-red-500 dark:hover:border-red-300",
+      "border-red-400 dark:border-red-800 bg-white dark:bg-zinc-900 hover:border-red-600 dark:hover:border-red-500",
   };
 
   const checkedClasses = {
-    default: "bg-zinc-900 dark:bg-white border-zinc-900 dark:border-white",
+    default:
+      "bg-zinc-400 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-800 text-zinc-50 dark:text-zinc-200",
     primary:
-      "bg-blue-500 dark:bg-blue-400 border-blue-500 dark:border-blue-400 ring-2 ring-blue-100 dark:ring-blue-500/20",
+      "bg-blue-400 dark:bg-blue-800 border-blue-400 dark:border-blue-800 text-white ring-2 ring-blue-100 dark:ring-blue-900/20",
     secondary:
-      "bg-purple-500 dark:bg-purple-400 border-purple-500 dark:border-purple-400 ring-2 ring-purple-100 dark:ring-purple-500/20",
+      "bg-purple-400 dark:bg-purple-800 border-purple-400 dark:border-purple-800 text-white ring-2 ring-purple-100 dark:ring-purple-900/20",
     success:
-      "bg-green-500 dark:bg-green-400 border-green-500 dark:border-green-400 ring-2 ring-green-100 dark:ring-green-500/20",
+      "bg-green-400 dark:bg-green-800 border-green-400 dark:border-green-800 text-white ring-2 ring-green-100 dark:ring-green-900/20",
     warning:
-      "bg-amber-500 dark:bg-amber-400 border-amber-500 dark:border-amber-400 ring-2 ring-amber-100 dark:ring-amber-500/20",
+      "bg-amber-400 dark:bg-amber-800 border-amber-400 dark:border-amber-800 text-white ring-2 ring-amber-100 dark:ring-amber-900/20",
     danger:
-      "bg-red-500 dark:bg-red-400 border-red-500 dark:border-red-400 ring-2 ring-red-100 dark:ring-red-500/20",
+      "bg-red-400 dark:bg-red-800 border-red-400 dark:border-red-800 text-white ring-2 ring-red-100 dark:ring-red-900/20",
   };
 
   const radiusClasses = {
@@ -158,7 +159,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           <motion.svg
             className={`w-[80%] h-[80%] ${
               variant === "default"
-                ? "text-white dark:text-zinc-900"
+                ? "text-white dark:text-zinc-200"
                 : "text-white"
             }`}
             viewBox="0 0 24 24"
