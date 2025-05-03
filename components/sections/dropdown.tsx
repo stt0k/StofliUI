@@ -146,17 +146,17 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const variantClasses = {
     default:
-      "border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800",
+      "border border-zinc-400 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800",
     primary:
-      "border border-blue-300 dark:border-blue-700 bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20",
+      "border border-blue-400 dark:border-blue-800 bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20",
     secondary:
-      "border border-purple-300 dark:border-purple-700 bg-white dark:bg-zinc-900 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20",
+      "border border-purple-400 dark:border-purple-800 bg-white dark:bg-zinc-900 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20",
     success:
-      "border border-green-300 dark:border-green-700 bg-white dark:bg-zinc-900 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20",
+      "border border-green-400 dark:border-green-800 bg-white dark:bg-zinc-900 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20",
     warning:
-      "border border-amber-300 dark:border-amber-700 bg-white dark:bg-zinc-900 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20",
+      "border border-amber-400 dark:border-amber-800 bg-white dark:bg-zinc-900 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20",
     danger:
-      "border border-red-300 dark:border-red-700 bg-white dark:bg-zinc-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20",
+      "border border-red-400 dark:border-red-800 bg-white dark:bg-zinc-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20",
   };
 
   const placementStyles = {
@@ -201,12 +201,12 @@ const Dropdown: React.FC<DropdownProps> = ({
   // Determine list item classes
   const getItemClasses = (isSelected: boolean, isDisabled: boolean) => {
     const selectedClasses = {
-      default: "bg-zinc-300/90 dark:bg-zinc-700 dark:text-white",
-      primary: "bg-blue-600 dark:bg-blue-500 text-white",
-      secondary: "bg-purple-600 dark:bg-purple-500 text-white",
-      success: "bg-green-600 dark:bg-green-500 text-white",
-      warning: "bg-amber-600 dark:bg-amber-500 text-white",
-      danger: "bg-red-600 dark:bg-red-500 text-white",
+      default: "bg-zinc-400 dark:bg-zinc-800 text-zinc-50 dark:text-zinc-200",
+      primary: "bg-blue-400 dark:bg-blue-800 text-white",
+      secondary: "bg-purple-400 dark:bg-purple-800 text-white",
+      success: "bg-green-400 dark:bg-green-800 text-white",
+      warning: "bg-amber-400 dark:bg-amber-800 text-white",
+      danger: "bg-red-400 dark:bg-red-800 text-white",
     };
 
     return `
@@ -230,12 +230,12 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   // Define check colors based on variant
   const checkVariantColors = {
-    default: "text-blue-500 dark:text-blue-400",
-    primary: "text-blue-500 dark:text-blue-400",
-    secondary: "text-purple-500 dark:text-purple-400",
-    success: "text-green-500 dark:text-green-400",
-    warning: "text-amber-500 dark:text-amber-400",
-    danger: "text-red-500 dark:text-red-400",
+    default: "text-zinc-50 dark:text-zinc-200",
+    primary: "text-white",
+    secondary: "text-white",
+    success: "text-white",
+    warning: "text-white",
+    danger: "text-white",
   };
 
   return (
