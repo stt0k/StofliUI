@@ -1,9 +1,7 @@
 import {
   File,
   Component,
-  SunMoon,
   PanelsTopLeft,
-  Blocks,
   ChartBar,
   Palette,
   Circle,
@@ -13,9 +11,7 @@ import {
 export const links = [
   { icon: File, label: "Docs", link: "/docs/introduction" },
   { icon: Component, label: "Components", link: "/docs/components/accordion" },
-  { icon: SunMoon, label: "Themes", link: "/docs/themes" },
   { icon: PanelsTopLeft, label: "Examples", link: "/docs/examples" },
-  { icon: Blocks, label: "Blocks", link: "/docs/blocks" },
   { icon: ChartBar, label: "Changelog", link: "/docs/changelog" },
   { icon: Palette, label: "Colors", link: "/docs/colors" },
 ];
