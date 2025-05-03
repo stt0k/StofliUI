@@ -296,7 +296,7 @@ const Input: React.FC<InputProps> = ({
 
   const variantClasses = {
     default: {
-      base: "border-zinc-300 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-600",
+      base: "border-zinc-400 dark:border-zinc-800 hover:border-zinc-500 dark:hover:border-zinc-700",
       focused:
         "border-zinc-500 dark:border-zinc-400 ring-2 ring-zinc-100 dark:ring-zinc-800",
       error:
@@ -305,7 +305,7 @@ const Input: React.FC<InputProps> = ({
         "border-green-500 dark:border-green-400 hover:border-green-600 dark:hover:border-green-300",
     },
     primary: {
-      base: "border-blue-300 dark:border-blue-700 hover:border-blue-400 dark:hover:border-blue-600",
+      base: "border-blue-400 dark:border-blue-800 hover:border-blue-500 dark:hover:border-blue-700",
       focused:
         "border-blue-500 dark:border-blue-400 ring-2 ring-blue-100 dark:ring-blue-500/20",
       error:
@@ -314,7 +314,7 @@ const Input: React.FC<InputProps> = ({
         "border-green-500 dark:border-green-400 hover:border-green-600 dark:hover:border-green-300",
     },
     secondary: {
-      base: "border-purple-300 dark:border-purple-700 hover:border-purple-400 dark:hover:border-purple-600",
+      base: "border-purple-400 dark:border-purple-800 hover:border-purple-500 dark:hover:border-purple-700",
       focused:
         "border-purple-500 dark:border-purple-400 ring-2 ring-purple-100 dark:ring-purple-500/20",
       error:
@@ -323,7 +323,7 @@ const Input: React.FC<InputProps> = ({
         "border-green-500 dark:border-green-400 hover:border-green-600 dark:hover:border-green-300",
     },
     success: {
-      base: "border-green-300 dark:border-green-700 hover:border-green-400 dark:hover:border-green-600",
+      base: "border-green-400 dark:border-green-800 hover:border-green-500 dark:hover:border-green-700",
       focused:
         "border-green-500 dark:border-green-400 ring-2 ring-green-100 dark:ring-green-500/20",
       error:
@@ -332,7 +332,7 @@ const Input: React.FC<InputProps> = ({
         "border-green-500 dark:border-green-400 hover:border-green-600 dark:hover:border-green-300",
     },
     warning: {
-      base: "border-amber-300 dark:border-amber-700 hover:border-amber-400 dark:hover:border-amber-600",
+      base: "border-amber-400 dark:border-amber-800 hover:border-amber-500 dark:hover:border-amber-700",
       focused:
         "border-amber-500 dark:border-amber-400 ring-2 ring-amber-100 dark:ring-amber-500/20",
       error:
@@ -341,7 +341,7 @@ const Input: React.FC<InputProps> = ({
         "border-green-500 dark:border-green-400 hover:border-green-600 dark:hover:border-green-300",
     },
     danger: {
-      base: "border-red-300 dark:border-red-700 hover:border-red-400 dark:hover:border-red-600",
+      base: "border-red-400 dark:border-red-800 hover:border-red-500 dark:hover:border-red-700",
       focused:
         "border-red-500 dark:border-red-400 ring-2 ring-red-100 dark:ring-red-500/20",
       error:
