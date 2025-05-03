@@ -105,7 +105,7 @@ const Tabs: React.FC<TabsProps> = ({
 
   const variantClasses = {
     default:
-      "bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100",
+      "bg-transparent text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100",
     primary:
       "bg-transparent text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300",
     secondary:
@@ -128,12 +128,12 @@ const Tabs: React.FC<TabsProps> = ({
   };
 
   const indicatorBgClasses = {
-    default: "bg-zinc-200/80 dark:bg-zinc-700/80",
-    primary: "bg-blue-100/80 dark:bg-blue-900/30",
-    secondary: "bg-purple-100/80 dark:bg-purple-900/30",
-    success: "bg-green-100/80 dark:bg-green-900/30",
-    warning: "bg-amber-100/80 dark:bg-amber-900/30",
-    danger: "bg-red-100/80 dark:bg-red-900/30",
+    default: "bg-zinc-200 dark:bg-zinc-800",
+    primary: "bg-blue-200 dark:bg-blue-800",
+    secondary: "bg-purple-200 dark:bg-purple-800",
+    success: "bg-green-200 dark:bg-green-800",
+    warning: "bg-amber-200 dark:bg-amber-800",
+    danger: "bg-red-200 dark:bg-red-800",
   };
 
   const sizeClasses = {
