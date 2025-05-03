@@ -211,7 +211,8 @@ Usando la prop `variant`: default, primary, secondary, success, warning y danger
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-6">
+    
+    <div className="flex flex-col gap-6 items-start">
       <Tabs
         variant="default"
         tabs={[
@@ -226,6 +227,7 @@ Usando la prop `variant`: default, primary, secondary, success, warning y danger
           { label: "Tab 2", content: <p>Contenido 2</p> }
         ]}
       />
+
       <Tabs
         variant="secondary"
         tabs={[
@@ -255,8 +257,11 @@ Usando la prop `variant`: default, primary, secondary, success, warning y danger
         ]}
       />
     </div>
-  }
+
+}
+
 >
+
 ```tsx
 import { Tabs } from "@stofli/ui";
 
@@ -267,14 +272,14 @@ export default function TabsVariantsDemo() {
         variant="default"
         tabs={[
           { label: "Default", content: <p>Variante predeterminada</p> },
-          { label: "Tab 2", content: <p>Contenido 2</p> }
+          { label: "Tab 2", content: <p>Contenido 2</p> },
         ]}
       />
       <Tabs
         variant="primary"
         tabs={[
           { label: "Primary", content: <p>Variante principal</p> },
-          { label: "Tab 2", content: <p>Contenido 2</p> }
+          { label: "Tab 2", content: <p>Contenido 2</p> },
         ]}
       />
       {/* ... otras variantes ... */}
@@ -282,6 +287,7 @@ export default function TabsVariantsDemo() {
   );
 }
 ```
+
 </DemoTabs>
 
 ### Tamaños
