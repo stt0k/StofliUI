@@ -1,35 +1,33 @@
-import { FaTwitter, FaLinkedin, FaDiscord, FaGithub } from 'react-icons/fa';
+import { FaTwitter, FaLinkedin, FaDiscord, FaGithub } from "react-icons/fa";
 
 export const socials = [
-  { icon: FaTwitter, name: 'Twitter', href: '#' },
-  { icon: FaDiscord, name: 'Discord', href: '#' },
-  { icon: FaLinkedin, name: 'LinkedIn', href: '#' },
-  { icon: FaGithub, name: 'Github', href: '#' },
+  { icon: FaTwitter, name: "Twitter", href: "#" },
+  { icon: FaDiscord, name: "Discord", href: "#" },
+  { icon: FaLinkedin, name: "LinkedIn", href: "#" },
+  { icon: FaGithub, name: "Github", href: "#" },
 ];
 
 export const linksHeader = [
-  { name: 'Docs', href: '#' },
-  { name: 'Components', href: '#' },
-  { name: 'Themes', href: '#' },
-  { name: 'Examples', href: '#' },
-  { name: 'Blocks', href: '#' },
-  { name: 'Charts', href: '#' },
-  { name: 'Colors', href: '#' },
+  { name: "Docs", href: "#" },
+  { name: "Components", href: "#" },
+  { name: "Examples", href: "#" },
+  { name: "Charts", href: "#" },
+  { name: "Colors", href: "#" },
 ];
 
 export const linksDocs = [
-  { name: 'Introduction', href: '#' },
-  { name: 'Installation', href: '#' },
-  { name: 'CLI', href: '#' }, 
+  { name: "Introduction", href: "#" },
+  { name: "Installation", href: "#" },
+  { name: "CLI", href: "#" },
 ];
 
 export const linksFrameworks = [
-  { name: 'Next.js', href: '#' },
-  { name: 'Astro', href: '#' },
-  { name: 'Vite', href: '#' }, 
-  { name: 'Laravel', href: '#' }, 
-  { name: 'React', href: '#' }, 
-  { name: 'Angular', href: '#' }, 
-  { name: 'Svelte', href: '#' }, 
-  { name: 'Vue.js', href: '#' }, 
+  { name: "Next.js", href: "#" },
+  { name: "Astro", href: "#" },
+  { name: "Vite", href: "#" },
+  { name: "Laravel", href: "#" },
+  { name: "React", href: "#" },
+  { name: "Angular", href: "#" },
+  { name: "Svelte", href: "#" },
+  { name: "Vue.js", href: "#" },
 ];
