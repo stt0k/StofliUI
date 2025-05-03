@@ -9,7 +9,11 @@ export interface DemoTabsProps {
   className?: string;
 }
 
-export default function DemoTabs({ preview, children, className }: DemoTabsProps) {
+export default function DemoTabs({
+  preview,
+  children,
+  className,
+}: DemoTabsProps) {
   return (
     <Tabs defaultValue="preview" className={cn("relative w-full", className)}>
       <TabsList className="inline-flex gap-x-4 bg-transparent p-0">
@@ -26,7 +30,10 @@ export default function DemoTabs({ preview, children, className }: DemoTabsProps
           Code
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="preview" className="relative rounded-md border p-4 mt-2">
+      <TabsContent
+        value="preview"
+        className="relative rounded-md border p-4 mt-2"
+      >
         {preview}
       </TabsContent>
       <TabsContent value="code" className="mt-2">
@@ -34,4 +41,4 @@ export default function DemoTabs({ preview, children, className }: DemoTabsProps
       </TabsContent>
     </Tabs>
   );
-} 
+}
