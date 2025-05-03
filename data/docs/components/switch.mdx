@@ -183,35 +183,6 @@ export default function SwitchIconsDemo() {
 ```
 </DemoTabs>
 
-### Con efecto ripple
-
-El switch puede incluir un efecto de ondulación al cambiar de estado.
-
-<DemoTabs
-  preview={
-    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
-      <div className="max-w-xs mx-auto flex flex-col gap-4">
-        <Switch withRipple label="Con efecto ripple" variant="primary" />
-        <Switch withRipple={false} label="Sin efecto ripple" variant="primary" />
-      </div>
-    </div>
-  }
->
-```tsx
-import { Switch } from "@stofli/ui";
-
-export default function SwitchRippleDemo() {
-  return (
-    <div className="flex flex-col gap-4">
-      <Switch withRipple label="Con efecto ripple" variant="primary" />
-      <Switch withRipple={false} label="Sin efecto ripple" variant="primary" />
-    </div>
-  );
-}
-````;
-
-</DemoTabs>
-
 ### Requerido
 
 El switch puede marcarse como requerido, mostrando un asterisco junto a la etiqueta.
@@ -322,4 +293,3 @@ export default function SwitchControlledDemo() {
 | `className`     | `string`                                                                      | -           | Clases adicionales para el componente                         |
 | `icon`          | `boolean`                                                                     | `false`     | Muestra un icono dentro del círculo                           |
 | `iconType`      | `"check" \| "cross" \| "none"`                                                | `"check"`   | Tipo de icono a mostrar                                       |
-| `withRipple`    | `boolean`                                                                     | `true`      | Muestra un efecto de onda al cambiar                          |
