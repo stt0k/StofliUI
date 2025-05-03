@@ -70,6 +70,20 @@ export function ToastVariantsDemo() {
       <Button
         onClick={() =>
           open({
+            title: "Secondary",
+            description: "Toast con estilo secundario",
+            variant: "secondary",
+          })
+        }
+        variant="secondary"
+        size="sm"
+      >
+        Secondary
+      </Button>
+
+      <Button
+        onClick={() =>
+          open({
             title: "Success",
             description: "Operación completada correctamente",
             variant: "success",
