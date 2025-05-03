@@ -9,13 +9,20 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-zinc-900 text-zinc-50 dark:bg-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100",
-        primary: "bg-blue-500 text-white dark:bg-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500",
-        secondary: "bg-purple-500 text-white dark:bg-purple-400 hover:bg-purple-600 dark:hover:bg-purple-500",
-        success: "bg-green-500 text-white dark:bg-green-400 hover:bg-green-600 dark:hover:bg-green-500",
-        warning: "bg-amber-500 text-white dark:bg-amber-400 hover:bg-amber-600 dark:hover:bg-amber-500",
-        danger: "bg-red-500 text-white dark:bg-red-400 hover:bg-red-600 dark:hover:bg-red-500",
-        outline: "border-2 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800",
+        default:
+          "bg-zinc-400 text-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 hover:bg-zinc-800 dark:hover:bg-zinc-600",
+        primary:
+          "bg-blue-400 text-white dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-500",
+        secondary:
+          "bg-purple-400 text-white dark:bg-purple-800 hover:bg-purple-600 dark:hover:bg-purple-500",
+        success:
+          "bg-green-400 text-white dark:bg-green-800 hover:bg-green-600 dark:hover:bg-green-500",
+        warning:
+          "bg-amber-400 text-white dark:bg-amber-800 hover:bg-amber-600 dark:hover:bg-amber-500",
+        danger:
+          "bg-red-400 text-white dark:bg-red-800 hover:bg-red-600 dark:hover:bg-red-500",
+        outline:
+          "border-2 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800",
       },
       size: {
         sm: "h-5 px-2 text-xs",
@@ -52,18 +59,21 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
 }
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
-  ({ 
-    children, 
-    className = "", 
-    variant = "default",
-    size = "md",
-    radius = "full",
-    withDot = false,
-    dotColor,
-    icon,
-    onClick,
-    dismissible = false,
-  }, ref) => {
+  (
+    {
+      children,
+      className = "",
+      variant = "default",
+      size = "md",
+      radius = "full",
+      withDot = false,
+      dotColor,
+      icon,
+      onClick,
+      dismissible = false,
+    },
+    ref
+  ) => {
     const [isVisible, setIsVisible] = React.useState(true);
 
     if (!isVisible) return null;
@@ -86,9 +96,12 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         style={{ cursor: onClick || dismissible ? "pointer" : "default" }}
       >
         {withDot && (
-          <div 
+          <div
             className={`w-2 h-2 rounded-full mr-1.5 ${
-              dotColor || (variant === "outline" ? "bg-zinc-500 dark:bg-zinc-400" : "bg-white dark:bg-white")
+              dotColor ||
+              (variant === "outline"
+                ? "bg-zinc-500 dark:bg-zinc-400"
+                : "bg-white dark:bg-white")
             }`}
           />
         )}
@@ -101,4 +114,4 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
 
 Badge.displayName = "Badge";
 
-export default Badge; 
+export default Badge;
