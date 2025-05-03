@@ -14,7 +14,7 @@ import {
   subMonths,
 } from "date-fns";
 
-type CalendarSystem = 
+type CalendarSystem =
   | "buddhist"
   | "ethiopic"
   | "ethioaa"
@@ -34,7 +34,13 @@ export interface CalendarProps {
   value?: Date;
   onChange?: (date: Date) => void;
   className?: string;
-  variant?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
   radius?: "none" | "sm" | "md" | "full";
   readOnly?: boolean;
   minValue?: Date;
@@ -62,21 +68,23 @@ const CalendarContent: React.FC<CalendarProps> = ({
     }
     return value || new Date();
   });
-  const [selectedDate, setSelectedDate] = React.useState(readOnly ? new Date() : value);
+  const [selectedDate, setSelectedDate] = React.useState(
+    readOnly ? new Date() : value
+  );
 
   // Función para formatear fechas según el calendario seleccionado
   const formatDate = (date: Date, formatStr: string) => {
     if (formatStr === "MMMM yyyy") {
       const formatter = new Intl.DateTimeFormat(locale, {
         calendar: calendar,
-        month: 'long',
-        year: 'numeric'
+        month: "long",
+        year: "numeric",
       });
       return formatter.format(date).replace(" de ", " ");
     }
     return new Intl.DateTimeFormat(locale, {
       calendar: calendar,
-      day: 'numeric'
+      day: "numeric",
     }).format(date);
   };
 
@@ -103,12 +111,24 @@ const CalendarContent: React.FC<CalendarProps> = ({
   };
 
   const variantClasses = {
-    default: `bg-zinc-100 dark:bg-zinc-800 ${!readOnly && 'hover:bg-zinc-200 dark:hover:bg-zinc-700'}`,
-    primary: `bg-blue-100 dark:bg-blue-900/30 ${!readOnly && 'hover:bg-blue-200 dark:hover:bg-blue-800/40'}`,
-    secondary: `bg-purple-100 dark:bg-purple-900/30 ${!readOnly && 'hover:bg-purple-200 dark:hover:bg-purple-800/40'}`,
-    success: `bg-green-100 dark:bg-green-900/30 ${!readOnly && 'hover:bg-green-200 dark:hover:bg-green-800/40'}`,
-    warning: `bg-amber-100 dark:bg-amber-900/30 ${!readOnly && 'hover:bg-amber-200 dark:hover:bg-amber-800/40'}`,
-    danger: `bg-red-100 dark:bg-red-900/30 ${!readOnly && 'hover:bg-red-200 dark:hover:bg-red-800/40'}`,
+    default: `bg-zinc-100 dark:bg-zinc-800 ${
+      !readOnly && "hover:bg-zinc-200 dark:hover:bg-zinc-700"
+    }`,
+    primary: `bg-blue-100 dark:bg-blue-900/30 ${
+      !readOnly && "hover:bg-blue-200 dark:hover:bg-blue-800/40"
+    }`,
+    secondary: `bg-purple-100 dark:bg-purple-900/30 ${
+      !readOnly && "hover:bg-purple-200 dark:hover:bg-purple-800/40"
+    }`,
+    success: `bg-green-100 dark:bg-green-900/30 ${
+      !readOnly && "hover:bg-green-200 dark:hover:bg-green-800/40"
+    }`,
+    warning: `bg-amber-100 dark:bg-amber-900/30 ${
+      !readOnly && "hover:bg-amber-200 dark:hover:bg-amber-800/40"
+    }`,
+    danger: `bg-red-100 dark:bg-red-900/30 ${
+      !readOnly && "hover:bg-red-200 dark:hover:bg-red-800/40"
+    }`,
   };
 
   const selectedVariantClasses = {
@@ -130,7 +150,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
   const buttonClasses = `
     aspect-square flex items-center justify-center text-sm
     transition-colors duration-200
-    ${!readOnly && 'hover:scale-110 active:scale-95'}
+    ${!readOnly && "hover:scale-110 active:scale-95"}
     ${radiusClasses[radius]}
   `;
 
@@ -177,7 +197,9 @@ const CalendarContent: React.FC<CalendarProps> = ({
     const date = new Date(2024, 0, 1); // Usar una fecha fija para obtener los nombres
     for (let i = 0; i < 7; i++) {
       days.push(
-        new Intl.DateTimeFormat(locale, { weekday: 'narrow', calendar }).format(date)
+        new Intl.DateTimeFormat(locale, { weekday: "narrow", calendar }).format(
+          date
+        )
       );
       date.setDate(date.getDate() + 1);
     }
@@ -185,7 +207,9 @@ const CalendarContent: React.FC<CalendarProps> = ({
   }, [locale, calendar]);
 
   return (
-    <div className={`w-full max-w-sm p-4 ${radiusClasses[radius]} bg-white dark:bg-zinc-900 shadow-lg ${className}`}>
+    <div
+      className={`w-full max-w-sm p-4 ${radiusClasses[radius]} bg-white dark:bg-zinc-900 shadow-lg ${className}`}
+    >
       {calendarName && (
         <div className="text-sm text-center mb-2 text-zinc-500 dark:text-zinc-400">
           Calendario {calendarName}
@@ -240,21 +264,27 @@ const CalendarContent: React.FC<CalendarProps> = ({
                 key={day.toString()}
                 className={`
                   ${buttonClasses}
-                  ${isSelected 
-                    ? selectedVariantClasses[variant]
-                    : isCurrentMonth
-                    ? isDisabled 
-                      ? 'bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-zinc-600 cursor-not-allowed'
-                      : variantClasses[variant]
-                    : "text-zinc-300 dark:text-zinc-600"
+                  ${
+                    isSelected
+                      ? selectedVariantClasses[variant]
+                      : isCurrentMonth
+                      ? isDisabled
+                        ? "bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-zinc-600 cursor-not-allowed"
+                        : variantClasses[variant]
+                      : "text-zinc-300 dark:text-zinc-600"
                   }
-                  ${!isDisabled && !readOnly ? 'cursor-pointer' : 'cursor-default'}
+                  ${
+                    !isDisabled && !readOnly
+                      ? "cursor-pointer"
+                      : "cursor-default"
+                  }
                 `}
-                {...(!readOnly && !isDisabled && {
-                  onClick: () => handleDateSelect(day),
-                  role: "button",
-                  tabIndex: 0,
-                })}
+                {...(!readOnly &&
+                  !isDisabled && {
+                    onClick: () => handleDateSelect(day),
+                    role: "button",
+                    tabIndex: 0,
+                  })}
               >
                 {formatDate(day, "d")}
               </div>
@@ -267,8 +297,10 @@ const CalendarContent: React.FC<CalendarProps> = ({
 };
 
 const Calendar: React.FC<CalendarProps> = (props) => {
-  const localeString = `${props.locale || 'es'}-u-ca-${props.calendar || 'gregory'}`;
-  
+  const localeString = `${props.locale || "es"}-u-ca-${
+    props.calendar || "gregory"
+  }`;
+
   return (
     <I18nProvider locale={localeString}>
       <CalendarContent {...props} />
@@ -276,4 +308,4 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   );
 };
 
-export default Calendar; 
+export default Calendar;
