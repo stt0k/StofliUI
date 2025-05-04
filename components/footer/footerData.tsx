@@ -18,7 +18,6 @@ export const linksHeader = [
 export const linksDocs = [
   { name: "Introduction", href: "#" },
   { name: "Installation", href: "#" },
-  { name: "CLI", href: "#" },
 ];
 
 export const linksFrameworks = [
