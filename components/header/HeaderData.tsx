@@ -14,7 +14,7 @@ export const headerData = [
   },
   {
     title: "Changelog",
-    link: "/docs/Changelog",
+    link: "/docs/changelog",
     hidden: true,
   },
   {
