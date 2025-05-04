@@ -4,7 +4,6 @@ export const sections = [
     links: [
       { href: "/docs/introduction", label: "Introduction" },
       { href: "/docs/installation", label: "Installation" },
-      { href: "/docs/cli", label: "CLI", tag: "New" },
     ],
   },
   {
