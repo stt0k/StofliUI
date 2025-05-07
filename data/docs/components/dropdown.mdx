@@ -230,7 +230,7 @@ export default function DropdownVariantsDemo() {
 
 ### Tamaños
 
-Diferentes tamaños del dropdown.
+El dropdown está disponible en 4 tamaños: pequeño, mediano, grande y extra grande.
 
 <DemoTabs
   preview={
@@ -258,6 +258,14 @@ Diferentes tamaños del dropdown.
           { label: "Opción 2", value: "2" }
         ]}
         placeholder="Tamaño grande"
+      />
+      <Dropdown
+        size="xl"
+        items={[
+          { label: "Extra grande", value: "xl" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño extra grande"
       />
     </div>
   }
@@ -291,6 +299,464 @@ export default function DropdownSizesDemo() {
           { label: "Opción 2", value: "2" }
         ]}
         placeholder="Tamaño grande"
+      />
+      <Dropdown
+        size="xl"
+        items={[
+          { label: "Extra grande", value: "xl" },
+          { label: "Opción 2", value: "2" }
+        ]}
+        placeholder="Tamaño extra grande"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Sin flecha
+
+Puedes ocultar la flecha del dropdown con la prop `showArrow`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        showArrow={false}
+        items={[
+          { label: "Sin flecha", value: "no-arrow" },
+          { label: "Opción 2", value: "2" },
+          { label: "Opción 3", value: "3" }
+        ]}
+        placeholder="Sin flecha"
+      />
+      <Dropdown
+        items={[
+          { label: "Con flecha (por defecto)", value: "arrow" },
+          { label: "Opción 2", value: "2" },
+          { label: "Opción 3", value: "3" }
+        ]}
+        placeholder="Con flecha"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownNoArrowDemo() {
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        showArrow={false}
+        items={[
+          { label: "Sin flecha", value: "no-arrow" },
+          { label: "Opción 2", value: "2" },
+          { label: "Opción 3", value: "3" }
+        ]}
+        placeholder="Sin flecha"
+      />
+      <Dropdown
+        items={[
+          { label: "Con flecha (por defecto)", value: "arrow" },
+          { label: "Opción 2", value: "2" },
+          { label: "Opción 3", value: "3" }
+        ]}
+        placeholder="Con flecha"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Selección múltiple
+
+Permite seleccionar varias opciones al mismo tiempo con la prop `multiSelect`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        multiSelect
+        items={[
+          { label: "Opción 1", value: "1" },
+          { label: "Opción 2", value: "2" },
+          { label: "Opción 3", value: "3" },
+          { label: "Opción 4", value: "4" }
+        ]}
+        placeholder="Selecciona varias opciones"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownMultiSelectDemo() {
+  return (
+    <Dropdown
+      multiSelect
+      items={[
+        { label: "Opción 1", value: "1" },
+        { label: "Opción 2", value: "2" },
+        { label: "Opción 3", value: "3" },
+        { label: "Opción 4", value: "4" }
+      ]}
+      placeholder="Selecciona varias opciones"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### No seleccionable
+
+Puedes crear un dropdown que solo muestre opciones pero no permita seleccionarlas, útil para menús de navegación.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        selectable={false}
+        items={[
+          { label: "Opción 1 (no seleccionable)", value: "1" },
+          { label: "Opción 2 (no seleccionable)", value: "2" },
+          { label: "Opción 3 (no seleccionable)", value: "3" }
+        ]}
+        placeholder="Menú no seleccionable"
+      />
+      <p className="text-xs text-zinc-500">Las opciones tienen efecto hover pero no pueden ser seleccionadas</p>
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownNonSelectableDemo() {
+  return (
+    <Dropdown
+      selectable={false}
+      items={[
+        { label: "Opción 1 (no seleccionable)", value: "1" },
+        { label: "Opción 2 (no seleccionable)", value: "2" },
+        { label: "Opción 3 (no seleccionable)", value: "3" }
+      ]}
+      placeholder="Menú no seleccionable"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con avatar
+
+Usa avatares en el dropdown y en sus opciones.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="md"
+        size="lg"
+        items={[
+          { 
+            label: "Tony Reichert", 
+            value: "user1", 
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          { 
+            label: "Zoey Lang", 
+            value: "user2", 
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          { 
+            label: "Jane Doe", 
+            value: "user3", 
+            avatarSrc: "https://randomuser.me/api/portraits/women/21.jpg"
+          }
+        ]}
+        placeholder="Seleccionar usuario"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownWithAvatarDemo() {
+  return (
+    <Dropdown
+      avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+      avatarSize="md"
+      size="lg"
+      items={[
+        {
+          label: "Tony Reichert",
+          value: "user1",
+          avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+        },
+        {
+          label: "Zoey Lang",
+          value: "user2",
+          avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+        },
+        {
+          label: "Jane Doe",
+          value: "user3",
+          avatarSrc: "https://randomuser.me/api/portraits/women/21.jpg"
+        }
+      ]}
+      placeholder="Seleccionar usuario"
+    />
+
+);
+}
+
+````
+</DemoTabs>
+
+### Tamaños de avatar
+
+Puedes usar diferentes tamaños de avatar con la prop `avatarSize`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="xs"
+        size="sm"
+        items={[
+          {
+            label: "Tony Reichert (xs)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar pequeño (xs)"
+      />
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="sm"
+        items={[
+          {
+            label: "Tony Reichert (sm)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar pequeño (sm)"
+      />
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="md"
+        size="lg"
+        items={[
+          {
+            label: "Tony Reichert (md)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar mediano (md)"
+      />
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="lg"
+        size="xl"
+        items={[
+          {
+            label: "Tony Reichert (lg)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar grande (lg)"
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function DropdownAvatarSizesDemo() {
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="xs"
+        size="sm"
+        items={[
+          {
+            label: "Tony Reichert (xs)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar pequeño (xs)"
+      />
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="sm"
+        items={[
+          {
+            label: "Tony Reichert (sm)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar pequeño (sm)"
+      />
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="md"
+        size="lg"
+        items={[
+          {
+            label: "Tony Reichert (md)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar mediano (md)"
+      />
+      <Dropdown
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="lg"
+        size="xl"
+        items={[
+          {
+            label: "Tony Reichert (lg)",
+            value: "user1",
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            label: "Zoey Lang",
+            value: "user2",
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+          }
+        ]}
+        placeholder="Avatar grande (lg)"
+      />
+    </div>
+  );
+}
+````
+
+</DemoTabs>
+
+### Solo avatar
+
+Puedes mostrar solo un avatar como botón del dropdown usando `avatarOnly={true}`. Ideal para menús de usuario compactos.
+
+<DemoTabs
+  preview={
+    <div className="flex items-center gap-8">
+      <Dropdown
+        avatarOnly
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="md"
+        items={[
+          { label: "Ver perfil", value: "profile" },
+          { label: "Configuración", value: "settings" },
+          { label: "Cerrar sesión", value: "logout" }
+        ]}
+      />
+      <Dropdown
+        avatarOnly
+        avatarSrc="https://randomuser.me/api/portraits/women/44.jpg"
+        avatarSize="lg"
+        items={[
+          { label: "Ver perfil", value: "profile" },
+          { label: "Configuración", value: "settings" },
+          { label: "Cerrar sesión", value: "logout" }
+        ]}
+      />
+      <Dropdown
+        avatarOnly
+        avatarSrc="https://randomuser.me/api/portraits/men/85.jpg"
+        avatarSize="sm"
+        items={[
+          { label: "Ver perfil", value: "profile" },
+          { label: "Configuración", value: "settings" },
+          { label: "Cerrar sesión", value: "logout" }
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Dropdown } from "@stofli/ui";
+
+export default function AvatarOnlyDropdownDemo() {
+  return (
+    <div className="flex items-center gap-8">
+      <Dropdown
+        avatarOnly
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="md"
+        items={[
+          { label: "Ver perfil", value: "profile" },
+          { label: "Configuración", value: "settings" },
+          { label: "Cerrar sesión", value: "logout" }
+        ]}
+      />
+      <Dropdown
+        avatarOnly
+        avatarSrc="https://randomuser.me/api/portraits/women/44.jpg"
+        avatarSize="lg"
+        items={[
+          { label: "Ver perfil", value: "profile" },
+          { label: "Configuración", value: "settings" },
+          { label: "Cerrar sesión", value: "logout" }
+        ]}
+      />
+      <Dropdown
+        avatarOnly
+        avatarSrc="https://randomuser.me/api/portraits/men/85.jpg"
+        avatarSize="sm"
+        items={[
+          { label: "Ver perfil", value: "profile" },
+          { label: "Configuración", value: "settings" },
+          { label: "Cerrar sesión", value: "logout" }
+        ]}
       />
     </div>
   );
@@ -529,309 +995,115 @@ export default function DropdownDisabledOptionsDemo() {
 ```
 </DemoTabs>
 
-### Menú de perfil de usuario
+### Combinando avatarOnly con opciones con avatares
 
-Ejemplo de dropdown estilizado como menú de perfil con avatar, separadores y acciones comunes.
+El modo `avatarOnly` también funciona perfectamente con opciones que tienen avatares. Cuando selecciones una opción con avatar, ese avatar se mostrará en el botón principal automáticamente.
 
 <DemoTabs
   preview={
-    <div className="flex justify-center">
+    <div className="flex items-center gap-8">
       <Dropdown
-        variant="default"
-        radius="md"
-        placement="bottom"
-        width="220px"
-        showSelectedIcon={false}
-        buttonClassName="bg-black dark:bg-black text-white border-zinc-800 dark:border-zinc-800 hover:bg-black dark:hover:bg-black"
-        itemClassName="!hover:bg-black !hover:text-white !focus:bg-black focus:text-white cursor-pointer !opacity-100 !active:bg-black"
-        className="[&>div]:bg-black [&>div]:dark:bg-black [&>div]:border-zinc-800 [&>div]:dark:border-zinc-800 [&>div]:!transition-none [&>div>ul]:p-0 [&_div]:hover:bg-black"
+        avatarOnly
+        avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+        avatarSize="md"
         items={[
-          {
-            label: (
-              <div className="flex items-center px-3 hover:bg-black">
-                <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden mr-2.5 border border-zinc-700">
-                  <img 
-                    src="https://randomuser.me/api/portraits/men/44.jpg"
-                    alt="Avatar" 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-medium text-xs text-white">Hector Vázquez</span>
-                  <span className="text-xs text-zinc-400">@gepejuantok</span>
-                </div>
-              </div>
-            ),
-            value: "profile",
-            disabled: true,
+          { 
+            label: "Tony Reichert", 
+            value: "user1", 
+            avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
           },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">Dashboard</span>
-                <SettingsIcon className="h-4 w-4 text-zinc-400" />
-              </div>
-            ),
-            value: "dashboard",
-            disabled: true
+          { 
+            label: "Zoey Lang", 
+            value: "user2", 
+            avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
           },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">Settings</span>
-                <SettingsIcon className="h-4 w-4 text-zinc-400" />
-              </div>
-            ),
-            value: "settings",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">New Project</span>
-                <span className="flex items-center justify-center h-4 w-4 text-zinc-400">+</span>
-              </div>
-            ),
-            value: "new-project",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
-                <span className="text-zinc-400">Quick search</span>
-                <span className="flex items-center justify-center text-[10px] px-1.5 bg-zinc-900 rounded text-zinc-400">⌘K</span>
-              </div>
-            ),
-            value: "search",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">Theme</span>
-                <span className="flex items-center gap-1 text-[10px] px-2 bg-zinc-900 rounded text-zinc-400">System <ChevronDown className="h-2.5 w-2.5" /></span>
-              </div>
-            ),
-            value: "theme",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
-                <span className="text-zinc-400">Help & Feedback</span>
-              </div>
-            ),
-            value: "help",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 text-red-500 hover:bg-black">
-                <span>Log Out</span>
-                <LogOutIcon className="h-4 w-4" />
-              </div>
-            ),
-            value: "logout",
-            disabled: true
+          { 
+            label: "Jane Doe", 
+            value: "user3", 
+            avatarSrc: "https://randomuser.me/api/portraits/women/21.jpg"
           }
         ]}
-        placeholder="Open Menu"
       />
     </div>
   }
 >
 ```tsx
 import { Dropdown } from "@stofli/ui";
-import { SettingsIcon, LogOutIcon, ChevronDown } from "lucide-react";
 
-export default function ProfileMenuDropdownDemo() {
+export default function AvatarOnlyWithAvatarItemsDemo() {
   return (
-    <div className="flex justify-center">
-      <Dropdown
-        variant="default"
-        radius="md"
-        placement="bottom"
-        width="220px"
-        showSelectedIcon={false}
-        buttonClassName="bg-black dark:bg-black text-white border-zinc-800 dark:border-zinc-800 hover:bg-black dark:hover:bg-black"
-        itemClassName="!hover:bg-black !hover:text-white !focus:bg-black focus:text-white cursor-pointer !opacity-100 !active:bg-black"
-        className="[&>div]:bg-black [&>div]:dark:bg-black [&>div]:border-zinc-800 [&>div]:dark:border-zinc-800 [&>div]:!transition-none [&>div>ul]:p-0 [&_div]:hover:bg-black"
-        items={[
-          {
-            label: (
-              <div className="flex items-center px-3 hover:bg-black">
-                <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden mr-2.5 border border-zinc-700">
-                  <img 
-                    src="https://randomuser.me/api/portraits/men/44.jpg"
-                    alt="Avatar" 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-medium text-xs text-white">Hector Vázquez</span>
-                  <span className="text-xs text-zinc-400">@gepejuantok</span>
-                </div>
-              </div>
-            ),
-            value: "profile",
-            disabled: true,
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">Dashboard</span>
-                <SettingsIcon className="h-4 w-4 text-zinc-400" />
-              </div>
-            ),
-            value: "dashboard",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">Settings</span>
-                <SettingsIcon className="h-4 w-4 text-zinc-400" />
-              </div>
-            ),
-            value: "settings",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">New Project</span>
-                <span className="flex items-center justify-center h-4 w-4 text-zinc-400">+</span>
-              </div>
-            ),
-            value: "new-project",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
-                <span className="text-zinc-400">Quick search</span>
-                <span className="flex items-center justify-center text-[10px] py-0.5 px-1.5 bg-zinc-900 rounded text-zinc-400">⌘K</span>
-              </div>
-            ),
-            value: "search",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 hover:bg-black">
-                <span className="text-zinc-400">Theme</span>
-                <span className="flex items-center gap-1 text-[10px] py-0.5 px-2 bg-zinc-900 rounded text-zinc-400">System <ChevronDown className="h-2.5 w-2.5" /></span>
-              </div>
-            ),
-            value: "theme",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full pt-4 px-3 border-t border-zinc-800 hover:bg-black">
-                <span className="text-zinc-400">Help & Feedback</span>
-              </div>
-            ),
-            value: "help",
-            disabled: true
-          },
-          {
-            label: (
-              <div className="flex items-center justify-between w-full px-3 text-red-500 hover:bg-black">
-                <span>Log Out</span>
-                <LogOutIcon className="h-4 w-4" />
-              </div>
-            ),
-            value: "logout",
-            disabled: true
-          }
-        ]}
-        placeholder="Open Menu"
-      />
-    </div>
+<Dropdown
+      avatarOnly
+      avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+      avatarSize="md"
+  items={[
+        { 
+          label: "Tony Reichert", 
+          value: "user1", 
+          avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg"
+        },
+        { 
+          label: "Zoey Lang", 
+          value: "user2", 
+          avatarSrc: "https://randomuser.me/api/portraits/women/44.jpg"
+        },
+        { 
+          label: "Jane Doe", 
+          value: "user3", 
+          avatarSrc: "https://randomuser.me/api/portraits/women/21.jpg"
+        }
+      ]}
+    />
   );
 }
 ```
 </DemoTabs>
 
+Características inteligentes del dropdown:
+
+- Con `avatarOnly={true}`, cuando selecciones un usuario, su avatar aparecerá en el botón dropdown
+- El tamaño del dropdown se ajusta automáticamente según el tamaño del avatar
+- El menú desplegable tiene un ancho mínimo para evitar que los elementos queden cortados
+- Todos los elementos mantienen un estilo coherente y funcional
+
 ## Props
 
-| Prop               | Tipo                                                                          | Default          | Descripción                                          |
-| ------------------ | ----------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------- |
-| `items`            | `Array<DropdownItem>`                                                         | -                | Lista de elementos del dropdown                      |
-| `placeholder`      | `string`                                                                      | "Seleccionar..." | Texto a mostrar cuando no hay selección              |
-| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`      | Variante de estilo                                   |
-| `size`             | `"sm" \| "md" \| "lg"`                                                        | `"md"`           | Tamaño del dropdown                                  |
-| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`           | Radio de las esquinas                                |
-| `disabled`         | `boolean`                                                                     | `false`          | Deshabilita todo el dropdown                         |
-| `fullWidth`        | `boolean`                                                                     | `false`          | Hace que el dropdown ocupe todo el ancho disponible  |
-| `width`            | `string`                                                                      | -                | Define un ancho específico (ej: "200px", "15rem")    |
-| `placement`        | `"bottom" \| "top" \| "left" \| "right"`                                      | `"bottom"`       | Posición del menú desplegable                        |
-| `onChange`         | `(value: string) => void`                                                     | -                | Función llamada al seleccionar una opción            |
-| `icon`             | `ReactNode`                                                                   | -                | Ícono a mostrar al inicio del dropdown               |
-| `showSelectedIcon` | `boolean`                                                                     | `true`           | Muestra el ícono de selección en la opción elegida   |
-| `defaultValue`     | `string`                                                                      | -                | Valor seleccionado por defecto                       |
-| `value`            | `string`                                                                      | -                | Valor controlado del dropdown                        |
-| `className`        | `string`                                                                      | -                | Clases adicionales para el contenedor                |
-| `buttonClassName`  | `string`                                                                      | -                | Clases adicionales para el botón principal           |
-| `itemClassName`    | `string`                                                                      | -                | Clases adicionales para los elementos de la lista    |
-| `activeColor`      | `string`                                                                      | -                | Color personalizado para los elementos seleccionados |
-| `checkColor`       | `string`                                                                      | -                | Color personalizado para el ícono de verificación    |
+| Prop               | Tipo                                                                          | Default          | Descripción                                                                              |
+| ------------------ | ----------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| `items`            | `Array<DropdownItem>`                                                         | -                | Lista de elementos del dropdown                                                          |
+| `placeholder`      | `string`                                                                      | "Seleccionar..." | Texto a mostrar cuando no hay selección                                                  |
+| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`      | Variante de estilo                                                                       |
+| `size`             | `"sm" \| "md" \| "lg" \| "xl"`                                                | `"md"`           | Tamaño del dropdown                                                                      |
+| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`           | Radio de las esquinas                                                                    |
+| `disabled`         | `boolean`                                                                     | `false`          | Deshabilita todo el dropdown                                                             |
+| `fullWidth`        | `boolean`                                                                     | `false`          | Hace que el dropdown ocupe todo el ancho disponible                                      |
+| `width`            | `string`                                                                      | -                | Define un ancho específico (ej: "200px", "15rem")                                        |
+| `placement`        | `"bottom" \| "top" \| "left" \| "right"`                                      | `"bottom"`       | Posición del menú desplegable                                                            |
+| `onChange`         | `(value: string \| string[]) => void`                                         | -                | Función llamada al seleccionar una opción                                                |
+| `icon`             | `ReactNode`                                                                   | -                | Ícono a mostrar al inicio del dropdown                                                   |
+| `showSelectedIcon` | `boolean`                                                                     | `true`           | Muestra el ícono de selección en la opción elegida                                       |
+| `defaultValue`     | `string \| string[]`                                                          | -                | Valor seleccionado por defecto                                                           |
+| `value`            | `string \| string[]`                                                          | -                | Valor controlado del dropdown                                                            |
+| `className`        | `string`                                                                      | -                | Clases adicionales para el contenedor                                                    |
+| `buttonClassName`  | `string`                                                                      | -                | Clases adicionales para el botón principal                                               |
+| `itemClassName`    | `string`                                                                      | -                | Clases adicionales para los elementos de la lista                                        |
+| `activeColor`      | `string`                                                                      | -                | Color personalizado para los elementos seleccionados                                     |
+| `checkColor`       | `string`                                                                      | -                | Color personalizado para el ícono de verificación                                        |
+| `showArrow`        | `boolean`                                                                     | `true`           | Muestra u oculta la flecha del dropdown                                                  |
+| `multiSelect`      | `boolean`                                                                     | `false`          | Permite seleccionar múltiples opciones                                                   |
+| `avatarSize`       | `"xs" \| "sm" \| "md" \| "lg"`                                                | `"md"`           | Tamaño de los avatares                                                                   |
+| `avatarSrc`        | `string`                                                                      | -                | URL de la imagen para el avatar del dropdown                                             |
+| `avatarAlt`        | `string`                                                                      | "Avatar"         | Texto alternativo para el avatar                                                         |
+| `selectable`       | `boolean`                                                                     | `true`           | Si es `false`, el dropdown muestra hover en las opciones pero no permite seleccionarlas. |
+| `avatarOnly`       | `boolean`                                                                     | `false`          | Si es `true`, muestra solo el avatar como botón, sin texto ni placeholder.               |
 
 ### DropdownItem
 
-| Propiedad  | Tipo        | Descripción                     |
-| ---------- | ----------- | ------------------------------- |
-| `label`    | `ReactNode` | Contenido visible de la opción  |
-| `value`    | `string`    | Valor de la opción              |
-| `icon`     | `ReactNode` | Ícono opcional para la opción   |
-| `disabled` | `boolean`   | Si la opción está deshabilitada |
-
-## API Reference
-
-| Prop             | Tipo                                                                                    | Por Defecto        | Descripción                                                                                |
-| ---------------- | --------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------ |
-| items            | `DropdownItem[]`                                                                        | -                  | Lista de elementos a mostrar en el menú desplegable.                                       |
-| placeholder      | `string`                                                                                | `"Seleccionar..."` | Texto a mostrar cuando no hay selección.                                                   |
-| variant          | `"default"` \| `"primary"` \| `"secondary"` \| `"success"` \| `"warning"` \| `"danger"` | `"default"`        | Variante visual del botón desplegable.                                                     |
-| size             | `"sm"` \| `"md"` \| `"lg"`                                                              | `"md"`             | Tamaño del componente.                                                                     |
-| radius           | `"none"` \| `"sm"` \| `"md"` \| `"full"`                                                | `"md"`             | Radio de borde del componente.                                                             |
-| disabled         | `boolean`                                                                               | `false`            | Deshabilita el componente.                                                                 |
-| fullWidth        | `boolean`                                                                               | `false`            | Si es `true`, el componente tendrá ancho completo.                                         |
-| placement        | `"bottom"` \| `"top"` \| `"left"` \| `"right"`                                          | `"bottom"`         | Posición donde aparece el menú desplegable.                                                |
-| onChange         | `(value: string) => void`                                                               | -                  | Función a ejecutar cuando cambia el valor seleccionado.                                    |
-| icon             | `React.ReactNode`                                                                       | -                  | Icono opcional para mostrar en el botón.                                                   |
-| showSelectedIcon | `boolean`                                                                               | `true`             | Si es `true`, muestra un icono de verificación junto al elemento seleccionado.             |
-| defaultValue     | `string`                                                                                | -                  | Valor seleccionado por defecto (no controlado).                                            |
-| value            | `string`                                                                                | -                  | Valor seleccionado (controlado).                                                           |
-| width            | `string`                                                                                | -                  | Ancho fijo para el menú desplegable.                                                       |
-| activeColor      | `string`                                                                                | -                  | Color personalizado para los elementos seleccionados (ej: "#FF5500" o "rgb(100,150,200)"). |
-| checkColor       | `string`                                                                                | -                  | Color personalizado para el icono de verificación (ej: "#FF5500" o "rgb(100,150,200)").    |
-
-## Ejemplos
-
-### Colores personalizados
-
-Puedes personalizar el color de los elementos seleccionados y el color del ícono de verificación:
-
-```tsx
-<Dropdown
-  items={[
-    { label: "Default", value: "default" },
-    { label: "Opción 2", value: "option2" },
-    { label: "Opción 3", value: "option3", disabled: true },
-  ]}
-  activeColor="#FF5500"
-  checkColor="#00AAFF"
-/>
-```
-
-Por defecto, el ícono de verificación (✓) coincide con el color de la variante seleccionada:
-
-- **default, primary**: azul
-- **secondary**: púrpura
-- **success**: verde
-- **warning**: ámbar
-- **danger**: rojo
-
-Si deseas un color específico para el ícono, utiliza la prop `checkColor`.
+| Propiedad   | Tipo        | Descripción                      |
+| ----------- | ----------- | -------------------------------- |
+| `label`     | `ReactNode` | Contenido visible de la opción   |
+| `value`     | `string`    | Valor de la opción               |
+| `icon`      | `ReactNode` | Ícono opcional para la opción    |
+| `disabled`  | `boolean`   | Si la opción está deshabilitada  |
+| `avatarSrc` | `string`    | URL de la imagen para el avatar  |
+| `avatarAlt` | `string`    | Texto alternativo para el avatar |
