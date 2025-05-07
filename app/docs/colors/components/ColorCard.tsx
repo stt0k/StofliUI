@@ -2,7 +2,6 @@ import React, { memo } from "react";
 import { Copy, Check } from "lucide-react";
 
 interface ColorCardProps {
-  colorName: string;
   shade: {
     level: string | number;
     hex: string;
@@ -31,26 +30,26 @@ const ColorCard: React.FC<ColorCardProps> = memo(
         ></div>
 
         {/* Panel de información */}
-        <div className="p-2 md:p-3 bg-zinc-900 border border-zinc-800">
+        <div className="p-2 md:p-3 bg-white border border-gray-200 dark:bg-zinc-900 dark:border-zinc-800">
           <div className="flex justify-between items-center mb-1">
-            <span className="text-xs md:text-sm font-semibold text-white">
+            <span className="text-xs md:text-sm font-semibold text-gray-900 dark:text-white">
               {shade.level}
             </span>
             {/* Botón de copiar */}
             <button
               onClick={handleClick}
-              className="p-1 md:p-1.5 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors"
+              className="p-1 md:p-1.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors"
               aria-label="Copiar"
             >
               {copiedColor === shade[format] ? (
                 <Check className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-500" />
               ) : (
-                <Copy className="w-3 h-3 md:w-3.5 md:h-3.5 text-zinc-400 group-hover:text-zinc-100" />
+                <Copy className="w-3 h-3 md:w-3.5 md:h-3.5 text-gray-500 group-hover:text-gray-700 dark:text-zinc-400 dark:group-hover:text-zinc-100" />
               )}
             </button>
           </div>
           <div
-            className="font-mono text-xs text-zinc-400 break-all select-all cursor-pointer truncate md:truncate-none"
+            className="font-mono text-xs text-gray-600 dark:text-zinc-400 break-all select-all cursor-pointer truncate md:truncate-none"
             onClick={() => onCopy(shade[format])}
             title={shade[format]}
           >
@@ -61,7 +60,7 @@ const ColorCard: React.FC<ColorCardProps> = memo(
         {/* Indicador de copiado */}
         {copiedColor === shade[format] && (
           <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/10 transition-all duration-300 pointer-events-none">
-            <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs md:text-sm font-medium px-2 py-1 md:px-3 md:py-1.5 rounded-lg shadow-lg">
+            <div className="bg-white/80 dark:bg-white/20 backdrop-blur-md border border-white/50 dark:border-white/30 text-gray-800 dark:text-white text-xs md:text-sm font-medium px-2 py-1 md:px-3 md:py-1.5 rounded-lg shadow-lg">
               ¡Copiado!
             </div>
           </div>
