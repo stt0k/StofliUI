@@ -10,20 +10,30 @@ type SidebarLinkProps = {
   tag?: string;
 };
 
-const SidebarLink = ({ href, label, isActive, tag }: SidebarLinkProps) => (
-  <Link href={href}>
-    <Button
-      variant="ghost"
-      className={`w-full justify-start font-normal cursor-pointer transition duration-200 hover:translate-x-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 ${
-        isActive
-          ? "hover:text-cyan-500 text-cyan-600 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
-          : ""
-      }`}
-    >
-      {label}
-      {tag && <Tag text={tag} />}
-    </Button>
-  </Link>
-);
+const SidebarLink = ({ href, label, isActive, tag }: SidebarLinkProps) => {
+  // Función para truncar el texto a 11 caracteres y añadir ...
+  const truncateText = (text: string) => {
+    if (text.length > 11) {
+      return text.substring(0, 11) + "...";
+    }
+    return text;
+  };
+
+  return (
+    <Link href={href}>
+      <Button
+        variant="ghost"
+        className={`w-full justify-start font-normal cursor-pointer transition duration-200 hover:translate-x-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
+          isActive
+            ? "hover:text-zinc-950/85 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
+            : ""
+        }`}
+      >
+        <span className="truncate">{truncateText(label)}</span>
+        {tag && <Tag text={tag} />}
+      </Button>
+    </Link>
+  );
+};
 
 export default SidebarLink;
