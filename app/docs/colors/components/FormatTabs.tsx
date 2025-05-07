@@ -39,12 +39,12 @@ const FormatTabs: React.FC = memo(() => {
   };
 
   return (
-    <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-3 md:p-6 backdrop-blur-sm shadow-lg overflow-hidden">
+    <div className="bg-white/80 dark:bg-zinc-900/70 border border-gray-200 dark:border-zinc-800 rounded-xl p-3 md:p-6 backdrop-blur-sm shadow-md dark:shadow-lg overflow-hidden">
       <TabsWrapper
         tabs={formatTabs}
         defaultTab={activeTabIndex}
         variant="primary"
-        size="lg"
+        size="md"
         radius="md"
         fullWidth
         className="mb-4 md:mb-8"
