@@ -28,7 +28,7 @@ import Badge from "@/components/sections/badge";
 import Tabs from "@/components/sections/tabs";
 import Card from "@/components/sections/card";
 import Accordion from "@/components/sections/accordion";
-import Avatar from "@/components/sections/avatar";
+import Dropdown from "@/components/sections/dropdown";
 
 export default function ExamplesPage() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -159,27 +159,97 @@ export default function ExamplesPage() {
                 </div>
 
                 <div className="flex-1 min-h-[400px] lg:min-h-[600px]">
-                  <div className="p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-gray-200 dark:border-zinc-800">
-                    <h2 className="font-semibold text-lg mb-3 sm:mb-0">
-                      Dashboard
-                    </h2>
-                    <div className="flex flex-col sm:flex-row w-full sm:w-auto items-center space-y-2 sm:space-y-0 sm:space-x-2">
-                      <Button variant="ghost" size="icon">
-                        <Bell className="h-5 w-5" />
-                      </Button>
-                      <div className="relative flex items-center w-full sm:w-auto">
-                        <Search className="h-4 w-4 text-gray-400 dark:text-zinc-400 absolute left-3" />
+                  <div className="p-4 border-b border-gray-200 dark:border-zinc-800">
+                    <div className="flex justify-between items-center">
+                      <h2 className="font-semibold text-lg">Dashboard</h2>
+
+                      {/* Versión móvil: Solo iconos de notificación y perfil */}
+                      <div className="flex items-center gap-2 sm:hidden">
+                        <Button variant="ghost" size="icon">
+                          <Bell className="h-5 w-5" />
+                        </Button>
+                        <Dropdown
+                          avatarOnly
+                          avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+                          avatarSize="md"
+                          variant="default"
+                          placement="left"
+                          items={[
+                            {
+                              label: "Carlos Rodríguez",
+                              value: "profile",
+                              avatarSrc:
+                                "https://randomuser.me/api/portraits/men/32.jpg",
+                            },
+                            {
+                              label: "Configuración",
+                              value: "settings",
+                            },
+                            {
+                              label: "Mis proyectos",
+                              value: "projects",
+                            },
+                            {
+                              label: "Cerrar sesión",
+                              value: "logout",
+                            },
+                          ]}
+                        />
+                      </div>
+
+                      {/* Versión desktop: Todo en una línea */}
+                      <div className="hidden sm:flex items-center space-x-2">
+                        <div className="relative w-64">
+                          <Search className="h-4 w-4 text-gray-400 dark:text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                          <input
+                            type="text"
+                            placeholder="Search..."
+                            className="w-full bg-gray-50 dark:bg-transparent border border-gray-200 dark:border-zinc-800 rounded-md pl-10 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-blue-600"
+                          />
+                        </div>
+                        <Button variant="ghost" size="icon">
+                          <Bell className="h-5 w-5" />
+                        </Button>
+                        <Dropdown
+                          avatarOnly
+                          avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+                          avatarSize="md"
+                          variant="default"
+                          placement="left"
+                          items={[
+                            {
+                              label: "Carlos Rodríguez",
+                              value: "profile",
+                              avatarSrc:
+                                "https://randomuser.me/api/portraits/men/32.jpg",
+                            },
+                            {
+                              label: "Configuración",
+                              value: "settings",
+                            },
+                            {
+                              label: "Mis proyectos",
+                              value: "projects",
+                            },
+                            {
+                              label: "Cerrar sesión",
+                              value: "logout",
+                            },
+                          ]}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Barra de búsqueda solo en móvil */}
+                    <div className="mt-3 sm:hidden">
+                      <div className="relative w-full">
+                        <Search className="h-4 w-4 text-gray-400 dark:text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
                         <input
                           type="text"
                           placeholder="Search..."
-                          className="w-full sm:w-64 bg-gray-50 dark:bg-transparent border border-gray-200 dark:border-zinc-800 rounded-md pl-10 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-blue-600"
+                          className="w-full bg-gray-50 dark:bg-transparent border border-gray-200 dark:border-zinc-800 rounded-md pl-10 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-blue-600"
                         />
                       </div>
-                      <Avatar
-                        fallback="JD"
-                        alt="John Doe"
-                        className="h-8 w-8"
-                      />
                     </div>
                   </div>
 
