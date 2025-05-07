@@ -135,8 +135,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       outline:
         "bg-transparent border-2 border-zinc-300 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
       ghost:
-        "bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
-      link: "bg-transparent underline-offset-4 hover:underline text-zinc-900 dark:text-zinc-100 hover:bg-transparent dark:hover:bg-transparent p-0 h-auto",
+        "bg-transparent border-0 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
+      link: "bg-transparent border-0 underline-offset-4 hover:underline text-zinc-900 dark:text-zinc-100 hover:bg-transparent dark:hover:bg-transparent p-0 h-auto",
     };
 
     // Estilos por tamaño
@@ -161,19 +161,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Construir la clase CSS combinada
     const buttonClasses = `
       inline-flex items-center justify-center font-medium transition-colors duration-200
-      active:shadow-inner
-      focus:outline-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-offset-2 
+      ${variant !== "link" && variant !== "ghost" ? "active:shadow-inner" : ""}
+      focus:outline-none focus:ring-0 ${
+        variant !== "link" && variant !== "ghost"
+          ? "focus-visible:ring-2 focus-visible:ring-offset-2"
+          : ""
+      }
       disabled:opacity-50 disabled:pointer-events-none
       ${variantStyles[variant]}
       ${sizeStyles[size]}
       ${radiusStyles[radius]}
       ${fullWidth ? "w-full" : ""}
       ${
-        withRing
+        withRing && variant !== "link" && variant !== "ghost"
           ? "ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10"
           : ""
       }
-      ${variant === "link" ? "" : "relative overflow-hidden"}
+      relative overflow-hidden
       ${className}
     `;
 
@@ -200,7 +204,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={handleRef}
         className={buttonClasses}
         whileTap={
-          isDisabled
+          isDisabled || variant === "link" || variant === "ghost"
             ? undefined
             : { scale: 0.97, boxShadow: "inset 0 0 5px rgba(0, 0, 0, 0.2)" }
         }
@@ -215,14 +219,29 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ripples.map((ripple) => (
               <motion.span
                 key={ripple.id}
-                className="absolute rounded-full bg-white dark:bg-zinc-200 pointer-events-none"
+                className={`absolute rounded-full pointer-events-none ${
+                  variant === "outline" ||
+                  variant === "ghost" ||
+                  variant === "link"
+                    ? "bg-zinc-800 dark:bg-zinc-200 opacity-15"
+                    : "bg-white dark:bg-zinc-200 opacity-35"
+                }`}
                 style={{
                   left: ripple.x - ripple.size / 2,
                   top: ripple.y - ripple.size / 2,
                   width: ripple.size,
                   height: ripple.size,
                 }}
-                initial={{ opacity: 0.35, scale: 0, zIndex: 1 }}
+                initial={{
+                  opacity:
+                    variant === "outline" ||
+                    variant === "ghost" ||
+                    variant === "link"
+                      ? 0.15
+                      : 0.35,
+                  scale: 0,
+                  zIndex: 1,
+                }}
                 animate={{ opacity: 0, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.75, ease: "easeOut" }}
