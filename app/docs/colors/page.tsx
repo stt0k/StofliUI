@@ -19,7 +19,7 @@ function ColorsPageContent() {
   const { selectedFamily, setSelectedFamily } = useColorContext();
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
       <Header />
 
       {/* Espaciador para header fijo */}
@@ -27,14 +27,14 @@ function ColorsPageContent() {
 
       <main className="container mx-auto px-4 pt-4 md:pt-8 pb-20 md:pb-32">
         {/* Hero Section */}
-        <div className="relative mb-8 md:mb-12 pb-8 md:pb-12 border-b border-zinc-800">
+        <div className="relative mb-8 md:mb-12 pb-8 md:pb-12 border-b border-gray-200 dark:border-zinc-800">
           <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
             <div className="w-full md:w-2/3">
               <m.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 md:mb-6 text-white"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 md:mb-6 text-black dark:text-white"
               >
                 Paleta de Colores
               </m.h1>
@@ -42,7 +42,7 @@ function ColorsPageContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-base md:text-xl text-zinc-400 max-w-3xl mb-6 md:mb-8"
+                className="text-base md:text-xl text-gray-600 dark:text-zinc-400 max-w-3xl mb-6 md:mb-8"
               >
                 Explora la paleta completa de colores de Tailwind CSS en
                 diferentes formatos: HEX, RGB, HSL y OKLCH. Estos colores han
