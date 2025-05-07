@@ -2,13 +2,15 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 
 export interface DropdownItem {
   label: React.ReactNode;
   value: string;
   icon?: React.ReactNode;
   disabled?: boolean;
+  avatarSrc?: string;
+  avatarAlt?: string;
 }
 
 export interface DropdownProps {
@@ -21,7 +23,7 @@ export interface DropdownProps {
     | "success"
     | "warning"
     | "danger";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   radius?: "none" | "sm" | "md" | "full";
   disabled?: boolean;
   fullWidth?: boolean;
@@ -29,14 +31,21 @@ export interface DropdownProps {
   itemClassName?: string;
   buttonClassName?: string;
   placement?: "bottom" | "top" | "left" | "right";
-  onChange?: (value: string) => void;
+  onChange?: (value: string | string[]) => void;
   icon?: React.ReactNode;
   showSelectedIcon?: boolean;
-  defaultValue?: string;
-  value?: string;
+  defaultValue?: string | string[];
+  value?: string | string[];
   width?: string;
   activeColor?: string;
   checkColor?: string;
+  showArrow?: boolean;
+  multiSelect?: boolean;
+  avatarSize?: "xs" | "sm" | "md" | "lg";
+  avatarSrc?: string;
+  avatarAlt?: string;
+  selectable?: boolean;
+  avatarOnly?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -59,26 +68,58 @@ const Dropdown: React.FC<DropdownProps> = ({
   width,
   activeColor,
   checkColor,
+  showArrow = true,
+  multiSelect = false,
+  avatarSize = "md",
+  avatarSrc,
+  avatarAlt = "Avatar",
+  selectable = true,
+  avatarOnly = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(
-    defaultValue
-      ? items.find((item) => item.value === defaultValue) || null
-      : null
-  );
+  const [selectedItems, setSelectedItems] = useState<DropdownItem[]>(() => {
+    if (!defaultValue) return [];
+
+    if (multiSelect && Array.isArray(defaultValue)) {
+      return items.filter((item) => defaultValue.includes(item.value));
+    }
+
+    const singleValue = Array.isArray(defaultValue)
+      ? defaultValue[0]
+      : defaultValue;
+    const item = items.find((item) => item.value === singleValue);
+    return item ? [item] : [];
+  });
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownWidth, setDropdownWidth] = useState<number | null>(null);
 
   // Determine if component is controlled or uncontrolled
   const isControlled = controlledValue !== undefined;
-  const currentValue = isControlled ? controlledValue : selectedItem?.value;
+  const currentValues = isControlled
+    ? Array.isArray(controlledValue)
+      ? controlledValue
+      : controlledValue
+      ? [controlledValue]
+      : []
+    : selectedItems.map((item) => item.value);
 
-  // Update selected item if controlled value changes
+  // Update selected items if controlled value changes
   useEffect(() => {
-    if (isControlled && controlledValue) {
-      const newSelectedItem =
-        items.find((item) => item.value === controlledValue) || null;
-      setSelectedItem(newSelectedItem);
+    if (isControlled) {
+      if (Array.isArray(controlledValue)) {
+        const newSelectedItems = items.filter((item) =>
+          controlledValue.includes(item.value)
+        );
+        setSelectedItems(newSelectedItems);
+      } else if (controlledValue) {
+        const newSelectedItem = items.find(
+          (item) => item.value === controlledValue
+        );
+        setSelectedItems(newSelectedItem ? [newSelectedItem] : []);
+      } else {
+        setSelectedItems([]);
+      }
     }
   }, [controlledValue, items, isControlled]);
 
@@ -117,31 +158,98 @@ const Dropdown: React.FC<DropdownProps> = ({
   const handleItemClick = (item: DropdownItem) => {
     if (item.disabled) return;
 
-    if (!isControlled) {
-      setSelectedItem(item);
+    // Solo ejecutar la lógica de selección si selectable es true
+    if (selectable) {
+      if (!isControlled) {
+        if (multiSelect) {
+          const isSelected = selectedItems.some(
+            (selected) => selected.value === item.value
+          );
+          if (isSelected) {
+            setSelectedItems(
+              selectedItems.filter((selected) => selected.value !== item.value)
+            );
+          } else {
+            setSelectedItems([...selectedItems, item]);
+          }
+        } else {
+          setSelectedItems([item]);
+        }
+      }
+
+      if (onChange) {
+        if (multiSelect) {
+          const newValues = [...currentValues];
+          const valueIndex = newValues.indexOf(item.value);
+
+          if (valueIndex >= 0) {
+            newValues.splice(valueIndex, 1);
+          } else {
+            newValues.push(item.value);
+          }
+
+          onChange(newValues);
+        } else {
+          onChange(item.value);
+        }
+      }
     }
 
-    onChange?.(item.value);
-    setIsOpen(false);
+    // Cerrar el dropdown al hacer clic en una opción, independientemente de si es seleccionable o no
+    // Solo mantenemos abierto en caso de multiSelect y selectable
+    if (!(multiSelect && selectable)) {
+      setIsOpen(false);
+    }
   };
 
   const sizeClasses = {
     sm: "text-xs py-1.5 px-3",
     md: "text-sm py-2 px-4",
     lg: "text-base py-2.5 px-5",
+    xl: "text-lg py-3 px-6",
+  };
+
+  const avatarOnlySizeClasses = {
+    sm: "p-0",
+    md: "p-0",
+    lg: "p-0",
+    xl: "p-0",
   };
 
   const buttonSizeClasses = {
     sm: "h-8",
     md: "h-10",
     lg: "h-12",
+    xl: "h-14",
   };
+
+  const avatarOnlyButtonSizeClasses = {
+    sm: "h-8 w-8",
+    md: "h-10 w-10",
+    lg: "h-12 w-12",
+    xl: "h-14 w-14",
+  };
+
+  const adjustedSize = avatarOnly
+    ? avatarSize === "lg"
+      ? "lg"
+      : avatarSize === "md"
+      ? "md"
+      : "sm"
+    : size;
 
   const radiusClasses = {
     none: "rounded-none",
     sm: "rounded-sm",
     md: "rounded-md",
     full: "rounded-full",
+  };
+
+  const avatarSizeClasses = {
+    xs: "h-6 w-6",
+    sm: "h-8 w-8",
+    md: "h-10 w-10",
+    lg: "h-12 w-12",
   };
 
   const variantClasses = {
@@ -180,6 +288,34 @@ const Dropdown: React.FC<DropdownProps> = ({
     ? {}
     : { width: dropdownWidth ? `${dropdownWidth}px` : "auto" };
 
+  // Para dropdown con avatares, asegurar un ancho mínimo adecuado
+  const hasItemsWithAvatars = items.some((item) => item.avatarSrc);
+  const minWidth = avatarOnly
+    ? {
+        minWidth:
+          avatarSize === "lg"
+            ? "220px"
+            : avatarSize === "md"
+            ? "200px"
+            : "180px",
+        width: "auto", // Asegurar que el ancho no se limite al botón cuando es avatarOnly
+      }
+    : hasItemsWithAvatars
+    ? {
+        minWidth:
+          avatarSize === "lg"
+            ? "200px"
+            : avatarSize === "md"
+            ? "180px"
+            : "160px",
+      }
+    : {};
+
+  // Combinar los estilos de ancho
+  const dropdownWidthStyle = avatarOnly
+    ? minWidth // Usar solo el minWidth para avatarOnly
+    : { ...widthStyle, ...minWidth };
+
   // Calculate max height based on number of items
   const getMaxHeight = () => {
     // Estimate item height based on size
@@ -187,10 +323,11 @@ const Dropdown: React.FC<DropdownProps> = ({
       sm: 28, // approximate height in pixels for small items
       md: 36, // approximate height for medium items
       lg: 44, // approximate height for large items
+      xl: 52, // approximate height for extra large items
     };
 
     // Get estimated height plus some padding
-    const contentHeight = items.length * itemHeights[size] + 10;
+    const contentHeight = items.length * itemHeights[adjustedSize] + 10;
 
     // Set a maximum height if there are many items
     const maxHeight = Math.min(contentHeight, 300);
@@ -210,9 +347,9 @@ const Dropdown: React.FC<DropdownProps> = ({
     };
 
     return `
-      flex items-center gap-3 px-3 py-2 text-sm rounded mx-1.5 my-0.5
+      text-sm rounded mx-1.5 my-0.5
       ${
-        isSelected
+        isSelected && selectable
           ? activeColor
             ? ""
             : selectedClasses[variant]
@@ -220,10 +357,11 @@ const Dropdown: React.FC<DropdownProps> = ({
       }
       ${
         isDisabled
-          ? "opacity-70 cursor-not-allowed pointer-events-none text-zinc-500 dark:text-zinc-500"
+          ? "opacity-50 cursor-not-allowed pointer-events-none !text-zinc-400/70 dark:!text-zinc-600"
           : "cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800"
       }
       transition-colors duration-200
+      ${avatarOnly ? "py-2 px-3" : "py-2 px-3"}
       ${itemClassName}
     `;
   };
@@ -238,11 +376,83 @@ const Dropdown: React.FC<DropdownProps> = ({
     danger: "text-white",
   };
 
+  // Función para renderizar avatares
+  const renderAvatar = (src?: string, alt?: string) => {
+    if (!src) return null;
+
+    return (
+      <div
+        className={`${avatarSizeClasses[avatarSize]} rounded-full overflow-hidden flex-shrink-0`}
+      >
+        <img
+          src={src}
+          alt={alt || "Avatar"}
+          className="h-full w-full object-cover"
+        />
+      </div>
+    );
+  };
+
+  // Renderizar contenido seleccionado
+  const renderSelectedContent = () => {
+    if (avatarOnly) {
+      return null;
+    }
+
+    if (selectedItems.length === 0) {
+      return (
+        <span className="text-zinc-500 dark:text-zinc-400">{placeholder}</span>
+      );
+    }
+
+    if (multiSelect) {
+      return (
+        <span className="flex items-center gap-1 flex-wrap">
+          {selectedItems.map((item, i) => (
+            <span
+              key={i}
+              className="bg-zinc-200 dark:bg-zinc-700 px-2 py-0.5 text-xs rounded-full inline-flex items-center gap-1"
+            >
+              {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
+              {item.label}
+            </span>
+          ))}
+        </span>
+      );
+    }
+
+    // Single select
+    const selectedItem = selectedItems[0];
+    return (
+      <>
+        {showSelectedIcon && selectedItem.icon && (
+          <span className="flex-shrink-0 mr-2">{selectedItem.icon}</span>
+        )}
+        {typeof selectedItem.label === "string" ? (
+          selectedItem.label
+        ) : (
+          <span className="flex items-center">{selectedItem.label}</span>
+        )}
+      </>
+    );
+  };
+
+  // Determinar qué avatar mostrar en el botón
+  const selectedItemAvatar =
+    !multiSelect && selectedItems.length > 0 && selectedItems[0].avatarSrc;
+  const buttonAvatarSrc = selectedItemAvatar || avatarSrc;
+  const buttonAvatarAlt =
+    !multiSelect && selectedItems.length > 0
+      ? selectedItems[0].avatarAlt ||
+        selectedItems[0].label?.toString() ||
+        avatarAlt
+      : avatarAlt;
+
   return (
     <div
       ref={dropdownRef}
       className={`relative ${
-        fullWidth ? "w-full" : "inline-block"
+        fullWidth && !avatarOnly ? "w-full" : "inline-block"
       } ${className}`}
     >
       <button
@@ -250,8 +460,12 @@ const Dropdown: React.FC<DropdownProps> = ({
         disabled={disabled}
         onClick={() => !disabled && setIsOpen(!isOpen)}
         className={`
-          flex items-center justify-between w-full ${buttonSizeClasses[size]}
-          ${sizeClasses[size]} ${radiusClasses[radius]} ${
+          ${
+            avatarOnly
+              ? `flex items-center justify-center ${avatarOnlyButtonSizeClasses[adjustedSize]} ${avatarOnlySizeClasses[adjustedSize]}`
+              : `flex items-center justify-between w-full ${buttonSizeClasses[adjustedSize]} ${sizeClasses[adjustedSize]}`
+          }
+          ${radiusClasses[avatarOnly ? "full" : radius]} ${
           variantClasses[variant]
         }
           ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
@@ -261,30 +475,21 @@ const Dropdown: React.FC<DropdownProps> = ({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        <span className="flex items-center gap-2 truncate">
-          {icon && <span className="flex-shrink-0">{icon}</span>}
-          {selectedItem ? (
-            <>
-              {showSelectedIcon && selectedItem.icon && (
-                <span className="flex-shrink-0 mr-2">{selectedItem.icon}</span>
-              )}
-              {typeof selectedItem.label === "string" ? (
-                selectedItem.label
-              ) : (
-                <span className="flex items-center">{selectedItem.label}</span>
-              )}
-            </>
-          ) : (
-            <span className="text-zinc-500 dark:text-zinc-400">
-              {placeholder}
-            </span>
-          )}
+        <span
+          className={`flex items-center gap-2 ${avatarOnly ? "" : "truncate"}`}
+        >
+          {buttonAvatarSrc && renderAvatar(buttonAvatarSrc, buttonAvatarAlt)}
+          {icon && !avatarOnly && <span className="flex-shrink-0">{icon}</span>}
+          {!avatarOnly && renderSelectedContent()}
         </span>
-        <ChevronDown
-          className={`ml-2 h-4 w-4 flex-shrink-0 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
+
+        {showArrow && !avatarOnly && (
+          <ChevronDown
+            className={`ml-2 h-4 w-4 flex-shrink-0 transition-transform duration-200 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          />
+        )}
       </button>
 
       <AnimatePresence>
@@ -295,7 +500,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             exit={{ opacity: 0, ...placementAnimation[placement] }}
             transition={{ duration: 0.15, ease: "easeOut" }}
             className={`absolute z-50 min-w-[8rem] ${placementStyles[placement]} ${radiusClasses[radius]} border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1 shadow-lg`}
-            style={widthStyle}
+            style={dropdownWidthStyle}
           >
             <motion.ul
               initial={{ opacity: 0 }}
@@ -306,55 +511,58 @@ const Dropdown: React.FC<DropdownProps> = ({
               className="overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               style={{ maxHeight: getMaxHeight() }}
             >
-              {items.map((item, index) => (
-                <motion.li
-                  key={index}
-                  onClick={() => !item.disabled && handleItemClick(item)}
-                  role="option"
-                  aria-selected={item.value === currentValue}
-                  aria-disabled={item.disabled}
-                  tabIndex={item.disabled ? -1 : 0}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.15, delay: index * 0.03 }}
-                  className={getItemClasses(
-                    item.value === currentValue,
-                    Boolean(item.disabled)
-                  )}
-                  style={
-                    item.value === currentValue && activeColor
-                      ? { background: activeColor, color: "white" }
-                      : {}
-                  }
-                >
-                  {item.icon && (
-                    <span className="flex-shrink-0">{item.icon}</span>
-                  )}
-                  {item.label}
-                  {item.value === currentValue &&
-                    showSelectedIcon &&
-                    !item.disabled && (
-                      <motion.svg
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className={`h-4 w-4 ml-auto flex-shrink-0 ${
-                          checkColor ? "" : checkVariantColors[variant]
-                        }`}
-                        style={checkColor ? { color: checkColor } : {}}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                      >
-                        <polyline
-                          points="20 6 9 17 4 12"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </motion.svg>
+              {items.map((item, index) => {
+                const isSelected = currentValues.includes(item.value);
+
+                return (
+                  <motion.li
+                    key={index}
+                    onClick={() => !item.disabled && handleItemClick(item)}
+                    role="option"
+                    aria-selected={isSelected}
+                    aria-disabled={item.disabled}
+                    tabIndex={item.disabled ? -1 : 0}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.15, delay: index * 0.03 }}
+                    className={getItemClasses(
+                      isSelected,
+                      Boolean(item.disabled)
                     )}
-                </motion.li>
-              ))}
+                    style={
+                      isSelected && activeColor && selectable
+                        ? { background: activeColor, color: "white" }
+                        : {}
+                    }
+                  >
+                    <div className="flex items-center w-full justify-between">
+                      <div className="flex items-center gap-2">
+                        {item.avatarSrc &&
+                          renderAvatar(item.avatarSrc, item.avatarAlt)}
+                        {item.icon && (
+                          <span className="flex-shrink-0">{item.icon}</span>
+                        )}
+                        {item.label}
+                      </div>
+                      {isSelected &&
+                        showSelectedIcon &&
+                        !item.disabled &&
+                        selectable && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className={`flex-shrink-0 ${
+                              checkColor ? "" : checkVariantColors[variant]
+                            }`}
+                            style={checkColor ? { color: checkColor } : {}}
+                          >
+                            <Check size={16} />
+                          </motion.div>
+                        )}
+                    </div>
+                  </motion.li>
+                );
+              })}
             </motion.ul>
           </motion.div>
         )}
