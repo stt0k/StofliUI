@@ -121,17 +121,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Estilos por variante
     const variantStyles = {
       default:
-        "bg-zinc-400 text-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 hover:bg-zinc-800 dark:hover:bg-zinc-600 focus:ring-zinc-500",
+        "bg-zinc-600 text-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 hover:bg-zinc-700 dark:hover:bg-zinc-600 focus:ring-zinc-500",
       primary:
-        "bg-blue-400 text-white dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-500 focus:ring-blue-400",
+        "bg-blue-600 text-white dark:bg-blue-800 hover:bg-blue-700 dark:hover:bg-blue-500 focus:ring-blue-400",
       secondary:
-        "bg-purple-400 text-white dark:bg-purple-800 hover:bg-purple-600 dark:hover:bg-purple-500 focus:ring-purple-400",
+        "bg-purple-600 text-white dark:bg-purple-800 hover:bg-purple-700 dark:hover:bg-purple-500 focus:ring-purple-400",
       success:
-        "bg-green-400 text-white dark:bg-green-800 hover:bg-green-600 dark:hover:bg-green-500 focus:ring-green-400",
+        "bg-green-600 text-white dark:bg-green-800 hover:bg-green-700 dark:hover:bg-green-500 focus:ring-green-400",
       warning:
-        "bg-amber-400 text-white dark:bg-amber-800 hover:bg-amber-600 dark:hover:bg-amber-500 focus:ring-amber-400",
+        "bg-amber-600 text-white dark:bg-amber-800 hover:bg-amber-700 dark:hover:bg-amber-500 focus:ring-amber-400",
       danger:
-        "bg-red-400 text-white dark:bg-red-800 hover:bg-red-600 dark:hover:bg-red-500 focus:ring-red-400",
+        "bg-red-600 text-white dark:bg-red-800 hover:bg-red-700 dark:hover:bg-red-500 focus:ring-red-400",
       outline:
         "bg-transparent border-2 border-zinc-300 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
       ghost:
