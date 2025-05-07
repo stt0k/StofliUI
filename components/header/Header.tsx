@@ -22,6 +22,23 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
+  // Nueva función para verificar si una ruta está activa usando relatedPaths
+  const isLinkActive = (item: (typeof headerData)[0]) => {
+    // Comprobar si la ruta actual coincide exactamente
+    if (pathname === item.link) return true;
+
+    // Comprobar si la ruta actual coincide con cualquiera de las rutas relacionadas
+    return item.relatedPaths.some((path) => {
+      // Si el path termina con *, es un comodín que coincide con cualquier cosa que empiece igual
+      if (path.endsWith("*")) {
+        const prefix = path.slice(0, -1);
+        return pathname.startsWith(prefix);
+      }
+      // Coincidencia exacta con la ruta relacionada
+      return pathname === path;
+    });
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -126,7 +143,7 @@ const Header = () => {
                     key={data.title}
                     href={data.link}
                     title={data.title}
-                    isActive={pathname === data.link}
+                    isActive={isLinkActive(data)}
                     hidden={data.hidden ? true : false}
                   />
                 ))}
