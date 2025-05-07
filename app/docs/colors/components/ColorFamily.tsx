@@ -22,7 +22,7 @@ const ColorFamily: React.FC<ColorFamilyProps> = memo(
     return (
       <div className="mb-10 md:mb-16">
         <div className="flex items-center mb-4">
-          <h2 className="text-xl md:text-2xl font-bold capitalize text-white">
+          <h2 className="text-xl md:text-2xl font-bold capitalize text-black dark:text-white">
             {name}
           </h2>
           <div className="h-0.5 bg-gradient-to-r from-zinc-700 to-transparent flex-grow ml-4"></div>
@@ -32,7 +32,6 @@ const ColorFamily: React.FC<ColorFamilyProps> = memo(
           {shades.map((shade) => (
             <ColorCard
               key={`${name}-${shade.level}`}
-              colorName={name}
               shade={shade}
               format={format}
               copiedColor={copiedColor}
