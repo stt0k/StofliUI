@@ -188,7 +188,7 @@ export default function ChangelogPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
       <Header />
 
       {/* Espaciador para header fijo */}
@@ -197,10 +197,10 @@ export default function ChangelogPage() {
       <main className="container mx-auto px-4 pt-8 pb-16">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-white">
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white">
             Changelog
           </h1>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-white/80 max-w-3xl mx-auto">
             Sigue la evolución de stofli/ui, descubre las novedades mejoras y
             características que hemos ido incorporando a nuestra biblioteca de
             componentes.
@@ -213,7 +213,7 @@ export default function ChangelogPage() {
             {releases.map((release, index) => (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 to-black transition-all duration-200 hover:shadow-lg hover:shadow-blue-900/20 hover:border-blue-800"
+                className="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-zinc-800 bg-gradient-to-b from-gray-50 to-white dark:from-zinc-900 dark:to-black transition-all duration-200 hover:shadow-lg hover:shadow-blue-900/20 hover:border-blue-300 dark:hover:border-blue-800"
               >
                 <div className="relative aspect-video overflow-hidden">
                   <div className="absolute inset-0 z-10">
@@ -224,11 +224,11 @@ export default function ChangelogPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 dark:from-black via-gray-900/70 dark:via-black/70 to-gray-900/20 dark:to-black/20 z-10" />
                   </div>
                   <div className="absolute z-20 p-5 flex items-start justify-between w-full">
                     <div className="flex flex-col">
-                      <span className="inline-flex items-center rounded-full border border-zinc-700 bg-zinc-800/80 backdrop-blur-sm px-2.5 py-0.5 text-sm font-medium text-white">
+                      <span className="inline-flex items-center rounded-full border border-gray-300 dark:border-zinc-700 bg-gray-100/80 dark:bg-zinc-800/80 backdrop-blur-sm px-2.5 py-0.5 text-sm font-medium text-gray-800 dark:text-white">
                         {release.version}
                       </span>
                       <h3 className="text-xl font-bold mt-2 text-white drop-shadow-md">
@@ -236,7 +236,7 @@ export default function ChangelogPage() {
                       </h3>
                     </div>
                     {release.icon && (
-                      <div className="w-8 h-8 rounded-full bg-zinc-800/80 backdrop-blur-sm flex items-center justify-center text-white">
+                      <div className="w-8 h-8 rounded-full bg-gray-100/80 dark:bg-zinc-800/80 backdrop-blur-sm flex items-center justify-center text-gray-800 dark:text-white">
                         {release.icon}
                       </div>
                     )}
@@ -244,21 +244,27 @@ export default function ChangelogPage() {
                 </div>
 
                 <div className="p-5">
-                  <p className="text-sm text-zinc-400 mb-4">{release.date}</p>
-                  <p className="text-white mb-4">{release.description}</p>
+                  <p className="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+                    {release.date}
+                  </p>
+                  <p className="text-gray-800 dark:text-white mb-4">
+                    {release.description}
+                  </p>
 
                   <ul className="space-y-2 mb-6">
                     {release.features.map((feature, i) => (
                       <li key={i} className="flex items-start">
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 mr-2"></div>
-                        <span className="text-sm text-zinc-300">{feature}</span>
+                        <span className="text-sm text-gray-700 dark:text-zinc-300">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="relative h-8 w-8 rounded-full overflow-hidden border border-zinc-700">
+                      <div className="relative h-8 w-8 rounded-full overflow-hidden border border-gray-300 dark:border-zinc-700">
                         <Image
                           src={release.author.image}
                           alt={release.author.name}
@@ -268,10 +274,10 @@ export default function ChangelogPage() {
                         />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-white">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">
                           {release.author.name}
                         </p>
-                        <p className="text-xs text-zinc-400">
+                        <p className="text-xs text-gray-500 dark:text-zinc-400">
                           {release.author.role}
                         </p>
                       </div>
@@ -281,7 +287,7 @@ export default function ChangelogPage() {
                       href={`/docs/changelog/${release.version
                         .toLowerCase()
                         .replace("v", "")}`}
-                      className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors"
+                      className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
                     >
                       <span className="text-sm">Leer más</span>
                       <ArrowRight className="ml-1 h-4 w-4" />
