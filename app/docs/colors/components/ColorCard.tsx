@@ -21,6 +21,34 @@ const ColorCard: React.FC<ColorCardProps> = memo(
       onCopy(shade[format]);
     };
 
+    React.useEffect(() => {
+      // Agregar animaciones globales si no existen
+      if (!document.getElementById("color-card-animations")) {
+        const styleSheet = document.createElement("style");
+        styleSheet.id = "color-card-animations";
+        styleSheet.innerHTML = `
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+          }
+          
+          .animate-fadeIn {
+            animation: fadeIn 0.5s ease-in-out;
+          }
+          
+          .animate-scaleIn {
+            animation: scaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+        `;
+        document.head.appendChild(styleSheet);
+      }
+    }, []);
+
     return (
       <div className="relative group overflow-hidden rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
         {/* Fondo de color */}
@@ -59,8 +87,8 @@ const ColorCard: React.FC<ColorCardProps> = memo(
 
         {/* Indicador de copiado */}
         {copiedColor === shade[format] && (
-          <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/10 transition-all duration-300 pointer-events-none">
-            <div className="bg-white/80 dark:bg-white/20 backdrop-blur-md border border-white/50 dark:border-white/30 text-gray-800 dark:text-white text-xs md:text-sm font-medium px-2 py-1 md:px-3 md:py-1.5 rounded-lg shadow-lg">
+          <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/10 transition-all duration-500 ease-in-out pointer-events-none rounded-lg overflow-hidden animate-fadeIn">
+            <div className="bg-white/80 dark:bg-white/20 backdrop-blur-md border border-white/50 dark:border-white/30 text-gray-800 dark:text-white text-xs md:text-sm font-medium px-2 py-1 md:px-3 md:py-1.5 rounded-lg shadow-lg animate-scaleIn">
               ¡Copiado!
             </div>
           </div>
