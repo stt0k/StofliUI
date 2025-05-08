@@ -16,6 +16,7 @@ import { SearchCommand } from "@/components/search/Search";
 import Tag from "@/components/Tags";
 import { ModeToggle } from "@/components/change-theme";
 import { sections } from "@/components/sidebar/sectionsData";
+import { RemoveScroll } from "react-remove-scroll";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -123,6 +124,7 @@ const Header = () => {
             border 
             shadow-none
             transition-all duration-300 ease-in-out
+            ${RemoveScroll.classNames.zeroRight}
             ${
               isScrolled
                 ? "border-neutral-200 dark:border-neutral-900 shadow-[0px_5px_18px_rgba(204,_204,_204,_0.2)] dark:shadow-[0px_5px_18px_rgba(204,_204,_204,_0.1)]"
@@ -163,9 +165,11 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent
                 side="left"
-                className="w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0"
+                className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
               >
-                <SideBar />
+                <RemoveScroll>
+                  <SideBar />
+                </RemoveScroll>
                 <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-400 disabled:pointer-events-none text-zinc-950 dark:text-white">
                   <XIcon className="h-4 w-4" />
                   <span className="sr-only">Close</span>
