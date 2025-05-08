@@ -1,0 +1,441 @@
+---
+title: "DatePicker"
+description: "Un componente de selección de fechas interactivo con calendario emergente y múltiples opciones de personalización."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install date-fns framer-motion @react-aria/i18n lucide-react
+
+# Instalar el componente
+npx @stofli/ui add date-picker
+```
+
+## Uso
+
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function App() {
+  return (
+    <DatePicker onChange={(date) => console.log("Fecha seleccionada:", date)} />
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Un selector de fechas básico que muestra un campo de entrada con un calendario emergente.
+
+<DemoTabs
+  preview={
+    <div className="max-w-sm mx-auto">
+      <DatePicker />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerDemo() {
+  return <DatePicker />;
+}
+```
+</DemoTabs>
+
+### Con Etiqueta y Requerido
+
+Usando las props `label` y `required` para mostrar una etiqueta descriptiva e indicar que el campo es obligatorio.
+
+<DemoTabs
+  preview={
+    <div className="max-w-sm mx-auto">
+      <DatePicker 
+        label="Fecha de nacimiento" 
+        required 
+        variant="primary"
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerLabelDemo() {
+  return (
+    <DatePicker 
+      label="Fecha de nacimiento" 
+      required 
+      variant="primary"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con Mensaje de Error
+
+Usando la prop `errorMessage` para mostrar un mensaje de error debajo del campo.
+
+<DemoTabs
+  preview={
+    <div className="max-w-sm mx-auto">
+      <DatePicker 
+        label="Fecha límite" 
+        errorMessage="La fecha es obligatoria" 
+        variant="danger"
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerErrorDemo() {
+  return (
+    <DatePicker 
+      label="Fecha límite" 
+      errorMessage="La fecha es obligatoria" 
+      variant="danger"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+Seis estilos diferentes usando la prop `variant`: default, primary, secondary, success, warning y danger.
+
+<DemoTabs
+  preview={
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker variant="default" label="Default" />
+      <DatePicker variant="primary" label="Primary" />
+      <DatePicker variant="secondary" label="Secondary" />
+      <DatePicker variant="success" label="Success" />
+      <DatePicker variant="warning" label="Warning" />
+      <DatePicker variant="danger" label="Danger" />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerVariantsDemo() {
+  return (
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker variant="default" label="Default" />
+      <DatePicker variant="primary" label="Primary" />
+      <DatePicker variant="secondary" label="Secondary" />
+      <DatePicker variant="success" label="Success" />
+      <DatePicker variant="warning" label="Warning" />
+      <DatePicker variant="danger" label="Danger" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Tamaños
+
+Tres tamaños disponibles usando la prop `size`: sm, md, y lg.
+
+<DemoTabs
+  preview={
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker size="sm" label="Pequeño" />
+      <DatePicker size="md" label="Mediano" />
+      <DatePicker size="lg" label="Grande" />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerSizesDemo() {
+  return (
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker size="sm" label="Pequeño" />
+      <DatePicker size="md" label="Mediano" />
+      <DatePicker size="lg" label="Grande" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Radios
+
+Cuatro opciones de redondeo usando la prop `radius`: none, sm, md y full.
+
+<DemoTabs
+  preview={
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker radius="none" label="Sin redondeo" />
+      <DatePicker radius="sm" label="Redondeo pequeño" />
+      <DatePicker radius="md" label="Redondeo mediano" />
+      <DatePicker radius="full" label="Redondeo grande" />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerRadiusDemo() {
+  return (
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker radius="none" label="Sin redondeo" />
+      <DatePicker radius="sm" label="Redondeo pequeño" />
+      <DatePicker radius="md" label="Redondeo mediano" />
+      <DatePicker radius="full" label="Redondeo grande" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Deshabilitado
+
+Usando `disabled={true}` para mostrar un campo deshabilitado que no permite interacción.
+
+<DemoTabs
+  preview={
+    <div className="max-w-sm mx-auto">
+      <DatePicker 
+        disabled 
+        label="Campo deshabilitado" 
+        value={new Date(2024, 3, 15)} // 15 de abril de 2024
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerDisabledDemo() {
+  return (
+    <DatePicker 
+      disabled 
+      label="Campo deshabilitado" 
+      value={new Date(2024, 3, 15)} // 15 de abril de 2024
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Solo lectura
+
+Usando `readOnly={true}` para mostrar un campo de solo lectura que no permite modificación.
+
+<DemoTabs
+  preview={
+    <div className="max-w-sm mx-auto">
+      <DatePicker 
+        readOnly 
+        label="Campo de solo lectura" 
+        value={new Date(2024, 3, 15)} // 15 de abril de 2024
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerReadOnlyDemo() {
+  return (
+    <DatePicker 
+      readOnly 
+      label="Campo de solo lectura" 
+      value={new Date(2024, 3, 15)} // 15 de abril de 2024
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con fecha mínima
+
+Usando la prop `minValue` para limitar la selección de fechas a partir de una fecha específica.
+
+<DemoTabs
+  preview={
+    <div className="max-w-sm mx-auto">
+      <DatePicker 
+        label="Fecha con mínimo" 
+        minValue={new Date()} // Fecha actual como mínima
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerMinDemo() {
+  return (
+    <DatePicker 
+      label="Fecha con mínimo" 
+      minValue={new Date()} // Solo permite seleccionar desde hoy en adelante
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con fecha máxima
+
+Usando la prop `maxValue` para limitar la selección de fechas hasta una fecha específica.
+
+<DemoTabs
+  preview={
+    <div className="max-w-sm mx-auto">
+      <DatePicker 
+        label="Fecha con máximo" 
+        maxValue={new Date()} // Fecha actual como máxima
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerMaxDemo() {
+  return (
+    <DatePicker 
+      label="Fecha con máximo" 
+      maxValue={new Date()} // Solo permite seleccionar hasta hoy
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Formato personalizado
+
+Usando la prop `format` para personalizar el formato de visualización de la fecha.
+
+<DemoTabs
+  preview={
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker 
+        label="Formato por defecto (dd/MM/yyyy)" 
+        value={new Date(2024, 3, 15)}
+      />
+      <DatePicker 
+        label="Formato personalizado (yyyy-MM-dd)" 
+        format="yyyy-MM-dd"
+        value={new Date(2024, 3, 15)}
+      />
+      <DatePicker 
+        label="Formato con nombre del mes (dd 'de' MMMM 'de' yyyy)" 
+        format="dd 'de' MMMM 'de' yyyy"
+        value={new Date(2024, 3, 15)}
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerFormatDemo() {
+  return (
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker 
+        label="Formato por defecto (dd/MM/yyyy)" 
+        value={new Date(2024, 3, 15)}
+      />
+      <DatePicker 
+        label="Formato personalizado (yyyy-MM-dd)" 
+        format="yyyy-MM-dd"
+        value={new Date(2024, 3, 15)}
+      />
+      <DatePicker 
+        label="Formato con nombre del mes (dd 'de' MMMM 'de' yyyy)" 
+        format="dd 'de' MMMM 'de' yyyy"
+        value={new Date(2024, 3, 15)}
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Calendarios Internacionales
+
+Utilizando las props `calendar` y `locale` para mostrar diferentes sistemas de calendario y localizaciones.
+
+<DemoTabs
+  preview={
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker 
+        label="Calendario chino" 
+        calendar="chinese"
+        locale="zh-CN"
+      />
+      <DatePicker 
+        label="Calendario islámico" 
+        calendar="islamic-civil"
+        locale="ar-SA"
+      />
+      <DatePicker 
+        label="Calendario budista" 
+        calendar="buddhist"
+        locale="th-TH"
+      />
+    </div>
+  }
+>
+```tsx
+import { DatePicker } from "@stofli/ui";
+
+export default function DatePickerCalendarSystemsDemo() {
+  return (
+    <div className="max-w-md mx-auto flex flex-col gap-4">
+      <DatePicker 
+        label="Calendario chino" 
+        calendar="chinese"
+        locale="zh-CN"
+      />
+      <DatePicker 
+        label="Calendario islámico" 
+        calendar="islamic-civil"
+        locale="ar-SA"
+      />
+      <DatePicker 
+        label="Calendario budista" 
+        calendar="buddhist"
+        locale="th-TH"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop           | Tipo                                                                                                                                                                                                 | Default             | Descripción                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------ |
+| `value`        | `Date`                                                                                                                                                                                               | -                   | Fecha seleccionada                         |
+| `onChange`     | `(date: Date \| null) => void`                                                                                                                                                                       | -                   | Función llamada al seleccionar una fecha   |
+| `placeholder`  | `string`                                                                                                                                                                                             | "Seleccionar fecha" | Texto de marcador de posición              |
+| `className`    | `string`                                                                                                                                                                                             | -                   | Clases adicionales                         |
+| `variant`      | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"`                                                                                                                        | `"default"`         | Variante de estilo                         |
+| `size`         | `"sm" \| "md" \| "lg"`                                                                                                                                                                               | `"md"`              | Tamaño del componente                      |
+| `radius`       | `"none" \| "sm" \| "md" \| "full"`                                                                                                                                                                   | `"md"`              | Radio de las esquinas                      |
+| `disabled`     | `boolean`                                                                                                                                                                                            | `false`             | Deshabilita el componente                  |
+| `readOnly`     | `boolean`                                                                                                                                                                                            | `false`             | Modo solo lectura                          |
+| `minValue`     | `Date`                                                                                                                                                                                               | -                   | Fecha mínima seleccionable                 |
+| `maxValue`     | `Date`                                                                                                                                                                                               | -                   | Fecha máxima seleccionable                 |
+| `format`       | `string`                                                                                                                                                                                             | `"dd/MM/yyyy"`      | Formato de visualización de la fecha       |
+| `clearable`    | `boolean`                                                                                                                                                                                            | `true`              | Permite limpiar la fecha seleccionada      |
+| `label`        | `string`                                                                                                                                                                                             | -                   | Etiqueta descriptiva                       |
+| `errorMessage` | `string`                                                                                                                                                                                             | -                   | Mensaje de error                           |
+| `required`     | `boolean`                                                                                                                                                                                            | `false`             | Indica si el campo es obligatorio          |
+| `calendar`     | `"buddhist" \| "ethiopic" \| "ethioaa" \| "coptic" \| "hebrew" \| "indian" \| "islamic-civil" \| "islamic-tbla" \| "islamic-umalqura" \| "japanese" \| "persian" \| "roc" \| "gregory" \| "chinese"` | `"gregory"`         | Sistema de calendario                      |
+| `locale`       | `string`                                                                                                                                                                                             | `"es"`              | Código de idioma (ej: "es", "en", "zh-CN") |
