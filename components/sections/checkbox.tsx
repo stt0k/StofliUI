@@ -38,12 +38,22 @@ const Checkbox: React.FC<CheckboxProps> = ({
   onChange,
   radius = "md",
 }) => {
-  const [isChecked, setIsChecked] = React.useState(defaultChecked);
+  const [isChecked, setIsChecked] = React.useState(
+    checked === undefined ? defaultChecked : checked
+  );
+
+  React.useEffect(() => {
+    if (checked !== undefined) {
+      setIsChecked(checked);
+    }
+  }, [checked]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!disabled) {
       const newChecked = event.target.checked;
-      setIsChecked(newChecked);
+      if (checked === undefined) {
+        setIsChecked(newChecked);
+      }
       onChange?.(newChecked);
     }
   };
@@ -130,8 +140,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         <input
           type="checkbox"
           className="sr-only"
-          checked={checked ?? isChecked}
-          defaultChecked={defaultChecked}
+          checked={isChecked}
           disabled={disabled}
           required={required}
           name={name}
@@ -144,16 +153,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
             border-2 
             ${radiusClasses[radius]}
             flex items-center justify-center
-            ${
-              checked ?? isChecked
-                ? checkedClasses[variant]
-                : variantClasses[variant]
-            }
+            ${isChecked ? checkedClasses[variant] : variantClasses[variant]}
             ${className}
           `}
           variants={checkboxVariants}
           initial="unchecked"
-          animate={checked ?? isChecked ? "checked" : "unchecked"}
+          animate={isChecked ? "checked" : "unchecked"}
           whileTap={!disabled ? { scale: 0.95 } : undefined}
         >
           <motion.svg
@@ -173,7 +178,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
               d="M4 12l5 5L20 7"
               variants={pathVariants}
               initial="unchecked"
-              animate={checked ?? isChecked ? "checked" : "unchecked"}
+              animate={isChecked ? "checked" : "unchecked"}
             />
           </motion.svg>
         </motion.div>
