@@ -117,6 +117,32 @@
     border-radius: 10px;
     border: none;
   }
+
+  /* Estilos específicos para el scrollbar principal cuando el diálogo de búsqueda está abierto */
+  html.search-dialog-open::-webkit-scrollbar-track,
+  body.search-dialog-open::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  html.search-dialog-open::-webkit-scrollbar-thumb,
+  body.search-dialog-open::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  /* Modo oscuro */
+  html.dark.search-dialog-open::-webkit-scrollbar-track,
+  html.dark body.search-dialog-open::-webkit-scrollbar-track,
+  .dark html.search-dialog-open::-webkit-scrollbar-track,
+  .dark body.search-dialog-open::-webkit-scrollbar-track {
+    background: black;
+  }
+
+  html.dark.search-dialog-open::-webkit-scrollbar-thumb,
+  html.dark body.search-dialog-open::-webkit-scrollbar-thumb,
+  .dark html.search-dialog-open::-webkit-scrollbar-thumb,
+  .dark body.search-dialog-open::-webkit-scrollbar-thumb {
+    background: black;
+  }
 }
 
 @layer base {
