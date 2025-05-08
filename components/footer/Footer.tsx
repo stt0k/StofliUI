@@ -74,7 +74,8 @@ const Footer = () => {
         </div>
         <div className="border-t border-gray-400/20 w-full mt-4 pt-4 text-center text-black dark:text-white">
           <p className="text-sm">
-            &copy; {new Date().getFullYear()} stofli/ui. All rights reserved.
+            &copy; {new Date().getFullYear()} stofli/ui. Todos los derechos
+            reservados.
           </p>
         </div>
       </div>
