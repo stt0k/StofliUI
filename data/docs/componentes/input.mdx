@@ -1,0 +1,952 @@
+---
+title: "Input"
+description: "Un componente de entrada de texto moderno con efectos de foco y múltiples variantes de estilo."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install framer-motion
+
+# Instalar el componente
+npx @stofli/ui add input
+```
+
+## Uso
+
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function App() {
+  return (
+    <Input
+      label="Correo electrónico"
+      placeholder="ejemplo@correo.com"
+      onChange={(e) => console.log("Valor:", e.target.value)}
+    />
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Un input básico con diferentes variantes.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input label="Nombre" placeholder="Introduce tu nombre" />
+      <Input label="Correo electrónico" placeholder="ejemplo@correo.com" />
+      <Input 
+        label="Contraseña" 
+        type="password" 
+        placeholder="Introduce tu contraseña" 
+      />
+      <Input 
+        label="Input deshabilitado" 
+        placeholder="No puedes modificar este campo" 
+        disabled 
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function InputDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input label="Nombre" placeholder="Introduce tu nombre" />
+      <Input label="Correo electrónico" placeholder="ejemplo@correo.com" />
+      <Input 
+        label="Contraseña" 
+        type="password" 
+        placeholder="Introduce tu contraseña" 
+      />
+      <Input 
+        label="Input deshabilitado" 
+        placeholder="No puedes modificar este campo" 
+        disabled 
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Tamaños
+
+Usando la prop `size`: sm, md y lg.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input size="sm" label="Pequeño" placeholder="Tamaño pequeño" />
+      <Input size="md" label="Mediano" placeholder="Tamaño mediano (por defecto)" />
+      <Input size="lg" label="Grande" placeholder="Tamaño grande" />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function InputSizesDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input size="sm" label="Pequeño" placeholder="Tamaño pequeño" />
+      <Input size="md" label="Mediano" placeholder="Tamaño mediano (por defecto)" />
+      <Input size="lg" label="Grande" placeholder="Tamaño grande" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+Usando la prop `variant`: default, primary, secondary, success, warning y danger.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input 
+        variant="default" 
+        label="Variante Default" 
+        placeholder="Variante por defecto"
+      />
+      <Input 
+        variant="primary" 
+        label="Variante Primary" 
+        placeholder="Variante primaria"
+      />
+      <Input 
+        variant="secondary" 
+        label="Variante Secondary" 
+        placeholder="Variante secundaria"
+      />
+      <Input 
+        variant="success" 
+        label="Variante Success" 
+        placeholder="Variante éxito"
+      />
+      <Input 
+        variant="warning" 
+        label="Variante Warning" 
+        placeholder="Variante advertencia"
+      />
+      <Input 
+        variant="danger" 
+        label="Variante Danger" 
+        placeholder="Variante peligro"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function InputVariantsDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input 
+        variant="default" 
+        label="Variante Default" 
+        placeholder="Variante por defecto"
+      />
+      <Input 
+        variant="primary" 
+        label="Variante Primary" 
+        placeholder="Variante primaria"
+      />
+      <Input 
+        variant="secondary" 
+        label="Variante Secondary" 
+        placeholder="Variante secundaria"
+      />
+      <Input 
+        variant="success" 
+        label="Variante Success" 
+        placeholder="Variante éxito"
+      />
+      <Input 
+        variant="warning" 
+        label="Variante Warning" 
+        placeholder="Variante advertencia"
+      />
+      <Input 
+        variant="danger" 
+        label="Variante Danger" 
+        placeholder="Variante peligro"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Con Íconos
+
+Añade íconos al inicio o final del input para mejorar la experiencia visual.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input 
+        label="Correo electrónico" 
+        placeholder="ejemplo@correo.com" 
+        icon={<MailIcon />}
+        iconPosition="left"
+      />
+      <Input 
+        label="Buscar" 
+        placeholder="Buscar productos..." 
+        icon={<SearchIcon />}
+        iconPosition="left"
+        variant="primary"
+      />
+      <Input 
+        label="Contraseña" 
+        type="password"
+        placeholder="Introduce tu contraseña" 
+        icon={<LockIcon />}
+        iconPosition="left"
+        variant="secondary"
+      />
+      <Input 
+        label="URL del sitio web" 
+        placeholder="https://ejemplo.com" 
+        icon={<LinkIcon />}
+        iconPosition="right"
+        variant="success"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+import { MailIcon, SearchIcon, LockIcon, LinkIcon } from "lucide-react";
+
+export default function InputWithIconDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input 
+        label="Correo electrónico" 
+        placeholder="ejemplo@correo.com" 
+        icon={<MailIcon />}
+        iconPosition="left"
+      />
+      <Input 
+        label="Buscar" 
+        placeholder="Buscar productos..." 
+        icon={<SearchIcon />}
+        iconPosition="left"
+        variant="primary"
+      />
+      <Input 
+        label="Contraseña" 
+        type="password"
+        placeholder="Introduce tu contraseña" 
+        icon={<LockIcon />}
+        iconPosition="left"
+        variant="secondary"
+      />
+      <Input 
+        label="URL del sitio web" 
+        placeholder="https://ejemplo.com" 
+        icon={<LinkIcon />}
+        iconPosition="right"
+        variant="success"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Validación integrada
+
+El componente Input incluye validación automática para tipos específicos como email y url, además de mostrar mensajes de error y éxito.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input 
+        type="email"
+        label="Correo electrónico" 
+        placeholder="ejemplo@correo.com" 
+        icon={<MailIcon />}
+        required
+        successMessage="¡Correo válido!"
+      />
+      <Input 
+        type="url"
+        label="URL del sitio web" 
+        placeholder="https://ejemplo.com" 
+        icon={<LinkIcon />}
+        successMessage="¡URL válida!"
+      />
+      <Input 
+        type="password"
+        label="Contraseña" 
+        placeholder="Mínimo 8 caracteres"
+        icon={<LockIcon />}
+        required
+        validate="min:8"
+        successMessage="¡Contraseña segura!"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+import { MailIcon, LinkIcon, LockIcon } from "lucide-react";
+
+export default function InputValidationDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input 
+        type="email"
+        label="Correo electrónico" 
+        placeholder="ejemplo@correo.com" 
+        icon={<MailIcon />}
+        required
+        successMessage="¡Correo válido!"
+      />
+      <Input 
+        type="url"
+        label="URL del sitio web" 
+        placeholder="https://ejemplo.com" 
+        icon={<LinkIcon />}
+        successMessage="¡URL válida!"
+      />
+      <Input 
+        type="password"
+        label="Contraseña" 
+        placeholder="Mínimo 8 caracteres"
+        icon={<LockIcon />}
+        required
+        validate="min:8"
+        successMessage="¡Contraseña segura!"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Estados de validación
+
+Controla manualmente los estados de error y éxito con las props `error` y `success`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input 
+        label="Usuario válido" 
+        placeholder="Nombre de usuario" 
+        defaultValue="usuario123"
+        success={true}
+        successMessage="¡Usuario disponible!"
+        icon={<CheckIcon />}
+        iconPosition="right"
+      />
+      <Input 
+        label="Correo electrónico" 
+        placeholder="ejemplo@correo.com" 
+        defaultValue="ghij"
+        error="Introduce un correo electrónico válido"
+        icon={<XIcon />}
+        iconPosition="right"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+import { CheckIcon, XIcon } from "lucide-react";
+
+export default function InputValidationStatesDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input
+        label="Usuario válido"
+        placeholder="Nombre de usuario"
+        defaultValue="usuario123"
+        success={true}
+        successMessage="¡Usuario disponible!"
+        icon={<CheckIcon />}
+        iconPosition="right"
+      />
+      <Input
+        label="Correo electrónico"
+        placeholder="ejemplo@correo.com"
+        defaultValue="ghij"
+        error="Introduce un correo electrónico válido"
+        icon={<XIcon />}
+        iconPosition="right"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Placeholder animado
+
+Activa el efecto de placeholder flotante que se mueve suavemente cuando el campo está enfocado o tiene valor. Utiliza diferentes posiciones con la prop `placeholderPosition`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-6 w-full">
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Inside (por defecto)</p>
+        <Input 
+          placeholder="Nombre completo"
+          animatedPlaceholder
+          placeholderPosition="inside"
+        />
+      </div>
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside</p>
+        <Input 
+          placeholder="Email"
+          icon={<MailIcon />}
+          animatedPlaceholder
+          placeholderPosition="outside"
+        />
+      </div>
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-left</p>
+        <Input 
+          placeholder="Email"
+          icon={<MailIcon />}
+          animatedPlaceholder
+          placeholderPosition="outside-left"
+          variant="primary"
+        />
+      </div>
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-top</p>
+        <Input 
+          placeholder="Email"
+          icon={<MailIcon />}
+          animatedPlaceholder
+          placeholderPosition="outside-top"
+          variant="secondary"
+        />
+      </div>
+      <div className="grid grid-cols-4 gap-4 pt-4">
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Sin placeholder</p>
+          <Input />
+        </div>
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Inside</p>
+          <Input 
+            placeholder="Email"
+            animatedPlaceholder
+          />
+        </div>
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-left</p>
+          <Input 
+            placeholder="Email"
+            animatedPlaceholder
+            placeholderPosition="outside-left"
+          />
+        </div>
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-top</p>
+          <Input 
+            placeholder="Email"
+            animatedPlaceholder
+            placeholderPosition="outside-top"
+          />
+        </div>
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+import { MailIcon } from "lucide-react";
+
+export default function AnimatedPlaceholderDemo() {
+  return (
+    <div className="flex flex-col gap-6 w-full">
+      {/* Inside (por defecto) */}
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Inside (por defecto)</p>
+        <Input 
+          placeholder="Nombre completo"
+          animatedPlaceholder
+          placeholderPosition="inside"
+        />
+      </div>
+      
+      {/* Outside */}
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside</p>
+        <Input 
+          placeholder="Email"
+          icon={<MailIcon />}
+          animatedPlaceholder
+          placeholderPosition="outside"
+        />
+      </div>
+      
+      {/* Outside-left */}
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-left</p>
+        <Input 
+          placeholder="Email"
+          icon={<MailIcon />}
+          animatedPlaceholder
+          placeholderPosition="outside-left"
+          variant="primary"
+        />
+      </div>
+      
+      {/* Outside-top */}
+      <div>
+        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-top</p>
+        <Input 
+          placeholder="Email"
+          icon={<MailIcon />}
+          animatedPlaceholder
+          placeholderPosition="outside-top"
+          variant="secondary"
+        />
+      </div>
+      
+      {/* Comparación rápida */}
+      <div className="grid grid-cols-4 gap-4 pt-4">
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Sin placeholder</p>
+          <Input />
+        </div>
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Inside</p>
+          <Input 
+            placeholder="Email"
+            animatedPlaceholder
+          />
+        </div>
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-left</p>
+          <Input 
+            placeholder="Email"
+            animatedPlaceholder
+            placeholderPosition="outside-left"
+          />
+        </div>
+        <div>
+          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-top</p>
+          <Input 
+            placeholder="Email"
+            animatedPlaceholder
+            placeholderPosition="outside-top"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Validación con patrones
+
+Usa la prop `pattern` para validar el input con expresiones regulares personalizadas.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input
+        label="Código postal (5 dígitos)"
+        placeholder="Ej. 28001"
+        pattern="^\d{5}$"
+        successMessage="¡Código postal válido!"
+      />
+      <Input
+        label="Número de teléfono"
+        placeholder="Ej. 600123456"
+        pattern="^[6-9]\d{8}$"
+        successMessage="¡Número de teléfono válido!"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function InputPatternDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input
+        label="Código postal (5 dígitos)"
+        placeholder="Ej. 28001"
+        pattern="^\d{5}$"
+        successMessage="¡Código postal válido!"
+      />
+      <Input
+        label="Número de teléfono"
+        placeholder="Ej. 600123456"
+        pattern="^[6-9]\d{8}$"
+        successMessage="¡Número de teléfono válido!"
+      />
+    </div>
+  );
+}
+```
+
+</DemoTabs>
+
+### Radios
+
+Usando la prop `radius`: none, sm, md y full.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input 
+        radius="none" 
+        label="Sin radio" 
+        placeholder="Esquinas rectas"
+        variant="primary"
+      />
+      <Input 
+        radius="sm" 
+        label="Radio pequeño" 
+        placeholder="Esquinas ligeramente redondeadas"
+        variant="primary"
+      />
+      <Input 
+        radius="md" 
+        label="Radio mediano" 
+        placeholder="Esquinas redondeadas (por defecto)"
+        variant="primary"
+      />
+      <Input 
+        radius="full" 
+        label="Radio completo" 
+        placeholder="Esquinas totalmente redondeadas"
+        variant="primary"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function InputRadiusDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input 
+        radius="none" 
+        label="Sin radio" 
+        placeholder="Esquinas rectas"
+        variant="primary"
+      />
+      <Input 
+        radius="sm" 
+        label="Radio pequeño" 
+        placeholder="Esquinas ligeramente redondeadas"
+        variant="primary"
+      />
+      <Input 
+        radius="md" 
+        label="Radio mediano" 
+        placeholder="Esquinas redondeadas (por defecto)"
+        variant="primary"
+      />
+      <Input 
+        radius="full" 
+        label="Radio completo" 
+        placeholder="Esquinas totalmente redondeadas"
+        variant="primary"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Ancho completo
+
+Utilizando la prop `fullWidth` para que el input ocupe todo el ancho disponible.
+
+<DemoTabs
+  preview={
+    <div className="space-y-4">
+      <Input 
+        fullWidth 
+        label="Input de ancho completo" 
+        placeholder="Este input ocupa todo el ancho disponible"
+      />
+      <Input 
+        label="Input normal" 
+        placeholder="Este input tiene su ancho por defecto"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function InputFullWidthDemo() {
+  return (
+    <div className="space-y-4">
+      <Input 
+        fullWidth 
+        label="Input de ancho completo" 
+        placeholder="Este input ocupa todo el ancho disponible"
+      />
+      <Input 
+        label="Input normal" 
+        placeholder="Este input tiene su ancho por defecto"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Formulario de contacto
+
+Ejemplo de un formulario de contacto con validación integrada.
+
+<DemoTabs
+  preview={
+    <div className="w-full max-w-lg mx-auto p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-6">
+      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">Formulario de Contacto</h2>
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <Input 
+            label="Nombre" 
+            placeholder="Tu nombre" 
+            icon={<UserIcon />}
+            required
+            successMessage="¡Perfecto!"
+          />
+          <Input 
+            label="Apellido" 
+            placeholder="Tu apellido" 
+            icon={<UserIcon />}
+            required
+            successMessage="¡Perfecto!"
+          />
+        </div>
+        <Input 
+          label="Correo electrónico" 
+          type="email"
+          placeholder="ejemplo@correo.com" 
+          icon={<MailIcon />}
+          required
+          fullWidth
+          successMessage="¡Correo válido!"
+        />
+        <Input 
+          label="Teléfono" 
+          placeholder="Ej. 600123456" 
+          pattern="^[6-9]\d{8}$"
+          icon={<PhoneIcon />}
+          fullWidth
+          successMessage="¡Teléfono válido!"
+        />
+        <Input 
+          label="Asunto" 
+          placeholder="Asunto de tu mensaje" 
+          required
+          fullWidth
+          successMessage="¡Gracias!"
+        />
+        <div className="pt-2">
+          <Button variant="primary" fullWidth>
+            Enviar mensaje
+          </Button>
+        </div>
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Input, Button } from "@stofli/ui";
+import { UserIcon, MailIcon, PhoneIcon } from "lucide-react";
+
+export default function ContactFormDemo() {
+  return (
+    <div className="w-full max-w-lg mx-auto p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-6">
+      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">Formulario de Contacto</h2>
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <Input 
+            label="Nombre" 
+            placeholder="Tu nombre" 
+            icon={<UserIcon />}
+            required
+            successMessage="¡Perfecto!"
+          />
+          <Input 
+            label="Apellido" 
+            placeholder="Tu apellido" 
+            icon={<UserIcon />}
+            required
+            successMessage="¡Perfecto!"
+          />
+        </div>
+        <Input 
+          label="Correo electrónico" 
+          type="email"
+          placeholder="ejemplo@correo.com" 
+          icon={<MailIcon />}
+          required
+          fullWidth
+          successMessage="¡Correo válido!"
+        />
+        <Input 
+          label="Teléfono" 
+          placeholder="Ej. 600123456" 
+          pattern="^[6-9]\d{8}$"
+          icon={<PhoneIcon />}
+          fullWidth
+          successMessage="¡Teléfono válido!"
+        />
+        <Input 
+          label="Asunto" 
+          placeholder="Asunto de tu mensaje" 
+          required
+          fullWidth
+          successMessage="¡Gracias!"
+        />
+        <div className="pt-2">
+          <Button variant="primary" fullWidth>
+            Enviar mensaje
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Reglas de validación
+
+El componente Input soporta validación mediante reglas predefinidas en formato de cadena de texto, lo que evita problemas de serialización en componentes cliente.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input 
+        label="Email (validación por tipo)" 
+        type="email"
+        placeholder="ejemplo@correo.com" 
+        required
+        successMessage="¡Correo válido!"
+      />
+      <Input 
+        label="Email (validación por regla)" 
+        placeholder="ejemplo@correo.com" 
+        validate="email"
+        successMessage="¡Correo válido!"
+      />
+      <Input 
+        label="URL" 
+        placeholder="https://ejemplo.com" 
+        validate="url"
+        successMessage="¡URL válida!"
+      />
+      <Input 
+        label="Mínimo 8 caracteres" 
+        placeholder="Al menos 8 caracteres" 
+        validate="min:8"
+        successMessage="¡Longitud correcta!"
+      />
+      <Input 
+        label="Mínimo 12 caracteres" 
+        placeholder="Al menos 12 caracteres" 
+        validate="min:12"
+        successMessage="¡Longitud correcta!"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+
+export default function InputValidationRulesDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input 
+        label="Email (validación por tipo)" 
+        type="email"
+        placeholder="ejemplo@correo.com" 
+        required
+        successMessage="¡Correo válido!"
+      />
+      <Input 
+        label="Email (validación por regla)" 
+        placeholder="ejemplo@correo.com" 
+        validate="email"
+        successMessage="¡Correo válido!"
+      />
+      <Input 
+        label="URL" 
+        placeholder="https://ejemplo.com" 
+        validate="url"
+        successMessage="¡URL válida!"
+      />
+      <Input 
+        label="Mínimo 8 caracteres" 
+        placeholder="Al menos 8 caracteres" 
+        validate="min:8"
+        successMessage="¡Longitud correcta!"
+      />
+      <Input 
+        label="Mínimo 12 caracteres" 
+        placeholder="Al menos 12 caracteres" 
+        validate="min:12"
+        successMessage="¡Longitud correcta!"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop                  | Tipo                                                                          | Default     | Descripción                                                                                                                                            |
+| --------------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `label`               | `string`                                                                      | -           | Etiqueta para el campo de entrada                                                                                                                      |
+| `placeholder`         | `string`                                                                      | `""`        | Texto de marcador de posición                                                                                                                          |
+| `type`                | `string`                                                                      | `"text"`    | Tipo de input (text, password, email, etc.)                                                                                                            |
+| `defaultValue`        | `string`                                                                      | `""`        | Valor por defecto (componente no controlado)                                                                                                           |
+| `value`               | `string`                                                                      | -           | Valor controlado del input                                                                                                                             |
+| `name`                | `string`                                                                      | -           | Nombre del campo para formularios                                                                                                                      |
+| `id`                  | `string`                                                                      | -           | ID del elemento input                                                                                                                                  |
+| `disabled`            | `boolean`                                                                     | `false`     | Deshabilita el input                                                                                                                                   |
+| `required`            | `boolean`                                                                     | `false`     | Marca el campo como requerido                                                                                                                          |
+| `error`               | `string`                                                                      | -           | Mensaje de error para mostrar                                                                                                                          |
+| `success`             | `boolean`                                                                     | `false`     | Indica si el campo tiene un valor válido                                                                                                               |
+| `pattern`             | `string`                                                                      | -           | Patrón de expresión regular para validación                                                                                                            |
+| `validate`            | `string \| ((value: string) => string \| undefined)`                          | -           | Regla de validación predefinida o función personalizada. Las reglas disponibles son: "email", "url", "min:N" donde N es el número mínimo de caracteres |
+| `successMessage`      | `string`                                                                      | -           | Mensaje a mostrar cuando el input es válido                                                                                                            |
+| `animatedPlaceholder` | `boolean`                                                                     | `false`     | Activa el efecto de placeholder flotante que se mueve suavemente                                                                                       |
+| `placeholderPosition` | `"inside" \| "outside" \| "outside-left" \| "outside-top"`                    | `"inside"`  | Posición del placeholder animado cuando está enfocado o tiene valor                                                                                    |
+| `icon`                | `ReactNode`                                                                   | -           | Ícono para mostrar junto al input                                                                                                                      |
+| `iconPosition`        | `"left" \| "right"`                                                           | `"left"`    | Posición del ícono                                                                                                                                     |
+| `variant`             | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                                                                                                                                     |
+| `size`                | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del input                                                                                                                                       |
+| `radius`              | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                                                                                                                                  |
+| `fullWidth`           | `boolean`                                                                     | `false`     | Hace que el input ocupe todo el ancho disponible                                                                                                       |
+| `className`           | `string`                                                                      | -           | Clases adicionales para el contenedor                                                                                                                  |
+| `inputClassName`      | `string`                                                                      | -           | Clases adicionales para el elemento input                                                                                                              |
+| `labelClassName`      | `string`                                                                      | -           | Clases adicionales para la etiqueta                                                                                                                    |
+| `onChange`            | `(e: React.ChangeEvent<HTMLInputElement>) => void`                            | -           | Función llamada al cambiar el valor                                                                                                                    |
+| `onFocus`             | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al enfocar el input                                                                                                                    |
+| `onBlur`              | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al perder el foco                                                                                                                      |
