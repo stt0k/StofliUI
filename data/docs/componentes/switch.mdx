@@ -1,0 +1,295 @@
+---
+title: "Switch"
+description: "Un componente de interruptor elegante y animado para alternar entre dos estados."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install framer-motion
+
+# Instalar el componente
+npx @stofli/ui add switch
+```
+
+## Uso
+
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function App() {
+  return (
+    <Switch
+      checked={true}
+      onChange={(checked) => console.log("Switch estado:", checked)}
+    />
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Un switch básico con animaciones fluidas para alternar entre estados.
+
+<DemoTabs
+  preview={
+    <div className="flex justify-center items-center p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <Switch />
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function SwitchDemo() {
+  return <Switch />;
+}
+```
+</DemoTabs>
+
+### Con etiqueta
+
+El switch puede incluir una etiqueta descriptiva a la izquierda o derecha.
+
+<DemoTabs
+  preview={
+    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-xs mx-auto flex flex-col gap-4">
+        <Switch label="Modo oscuro" />
+        <Switch label="Notificaciones" labelPosition="left" />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function SwitchLabelDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Switch label="Modo oscuro" />
+      <Switch label="Notificaciones" labelPosition="left" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+El switch está disponible en diferentes variantes de color.
+
+<DemoTabs
+  preview={
+    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-xs mx-auto grid grid-cols-1 gap-4">
+        <Switch variant="default" label="Default" checked />
+        <Switch variant="primary" label="Primary" checked />
+        <Switch variant="secondary" label="Secondary" checked />
+        <Switch variant="success" label="Success" checked />
+        <Switch variant="warning" label="Warning" checked />
+        <Switch variant="danger" label="Danger" checked />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function SwitchVariantsDemo() {
+  return (
+    <div className="grid grid-cols-1 gap-4">
+      <Switch variant="default" label="Default" checked />
+      <Switch variant="primary" label="Primary" checked />
+      <Switch variant="secondary" label="Secondary" checked />
+      <Switch variant="success" label="Success" checked />
+      <Switch variant="warning" label="Warning" checked />
+      <Switch variant="danger" label="Danger" checked />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Tamaños
+
+El switch está disponible en tres tamaños: sm, md y lg.
+
+<DemoTabs
+  preview={
+    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-xs mx-auto flex flex-col gap-4">
+        <Switch size="sm" label="Pequeño" checked />
+        <Switch size="md" label="Mediano" checked />
+        <Switch size="lg" label="Grande" checked />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function SwitchSizesDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Switch size="sm" label="Pequeño" checked />
+      <Switch size="md" label="Mediano" checked />
+      <Switch size="lg" label="Grande" checked />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Con iconos
+
+El switch puede mostrar iconos dentro del círculo para indicar el estado actual.
+
+<DemoTabs
+  preview={
+    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-xs mx-auto flex flex-col gap-3">
+        <Switch icon iconType="check" label="Con icono de check" variant="primary" />
+        <Switch icon iconType="cross" label="Con icono de cruz" variant="danger" checked />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function SwitchIconsDemo() {
+  return (
+    <div className="flex flex-col gap-3">
+      <Switch
+        icon
+        iconType="check"
+        label="Con icono de check"
+        variant="primary"
+      />
+      <Switch
+        icon
+        iconType="cross"
+        label="Con icono de cruz"
+        variant="danger"
+        checked
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Requerido
+
+El switch puede marcarse como requerido, mostrando un asterisco junto a la etiqueta.
+
+<DemoTabs
+  preview={
+    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-xs mx-auto">
+        <Switch required label="Acepto los términos y condiciones" variant="primary" />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function SwitchRequiredDemo() {
+  return (
+    <Switch 
+      required 
+      label="Acepto los términos y condiciones" 
+      variant="primary" 
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Deshabilitado
+
+Un switch deshabilitado que no permite interacción.
+
+<DemoTabs
+  preview={
+    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-xs mx-auto flex flex-col gap-4">
+        <Switch disabled label="Switch deshabilitado (apagado)" />
+        <Switch disabled checked label="Switch deshabilitado (encendido)" variant="primary" />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+
+export default function SwitchDisabledDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Switch disabled label="Switch deshabilitado (apagado)" />
+      <Switch disabled checked label="Switch deshabilitado (encendido)" variant="primary" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Controlado
+
+Un ejemplo de cómo usar el switch de forma controlada.
+
+<DemoTabs
+  preview={
+    <div className="p-8 bg-white dark:bg-zinc-950 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-xs mx-auto">
+        <SwitchControlledDemo />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Switch } from "@stofli/ui";
+import { useState } from "react";
+
+export default function SwitchControlledDemo() {
+  const [isChecked, setIsChecked] = useState(false);
+  
+  return (
+    <div className="space-y-4">
+      <Switch 
+        checked={isChecked}
+        onChange={setIsChecked}
+        label={isChecked ? "Activado" : "Desactivado"} 
+        variant="primary"
+      />
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        El switch está actualmente: <strong>{isChecked ? "Encendido" : "Apagado"}</strong>
+      </p>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop            | Tipo                                                                          | Default     | Descripción                                                   |
+| --------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| `checked`       | `boolean`                                                                     | `false`     | Estado del switch                                             |
+| `onChange`      | `(checked: boolean) => void`                                                  | -           | Función a ejecutar cuando cambia el estado                    |
+| `disabled`      | `boolean`                                                                     | `false`     | Deshabilita el switch                                         |
+| `size`          | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del switch                                             |
+| `variant`       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de color                                             |
+| `label`         | `string`                                                                      | -           | Etiqueta descriptiva                                          |
+| `labelPosition` | `"left" \| "right"`                                                           | `"right"`   | Posición de la etiqueta                                       |
+| `required`      | `boolean`                                                                     | `false`     | Indica si el switch es obligatorio                            |
+| `name`          | `string`                                                                      | -           | Nombre del input para formularios                             |
+| `id`            | `string`                                                                      | -           | ID único (se genera uno automáticamente si no se proporciona) |
+| `className`     | `string`                                                                      | -           | Clases adicionales para el componente                         |
+| `icon`          | `boolean`                                                                     | `false`     | Muestra un icono dentro del círculo                           |
+| `iconType`      | `"check" \| "cross" \| "none"`                                                | `"check"`   | Tipo de icono a mostrar                                       |
