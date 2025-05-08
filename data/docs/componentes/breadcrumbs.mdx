@@ -1,0 +1,501 @@
+---
+title: "Breadcrumbs"
+description: "Un componente de breadcrumbs para mostrar la navegación jerárquica de forma clara y accesible."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install lucide-react
+
+# Instalar el componente
+npx @stofli/ui add breadcrumbs
+```
+
+## Uso
+
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+
+export default function App() {
+  return (
+    <Breadcrumbs
+      items={[
+        { label: "Inicio" },
+        { label: "Componentes" },
+        { label: "Breadcrumbs" },
+      ]}
+    />
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Un ejemplo básico de breadcrumbs con múltiples niveles.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-8 items-center justify-start">
+      <Breadcrumbs
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+
+export default function BreadcrumbsDemo() {
+  return (
+    <Breadcrumbs
+      items={[
+        { label: "Inicio" },
+        { label: "Componentes" },
+        { label: "Breadcrumbs" },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con icono de inicio
+
+Usando la prop `homeIcon` para mostrar un icono de inicio.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-8 items-center justify-start">
+      <Breadcrumbs
+        homeIcon
+        variant="default"
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+
+export default function BreadcrumbsHomeIconDemo() {
+  return (
+    <Breadcrumbs
+      homeIcon
+      variant="default"
+      items={[
+        { label: "Componentes" },
+        { label: "Breadcrumbs" },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Tamaños
+
+Usando la prop `size`: sm, md y lg.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4 justify-start">
+      <Breadcrumbs
+        size="sm"
+        variant="default"
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        size="md"
+        variant="default"
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        size="lg"
+        variant="default"
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+
+export default function BreadcrumbsSizesDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Breadcrumbs
+        size="sm"
+        variant="default"
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        size="md"
+        variant="default"
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        size="lg"
+        variant="default"
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+Usando la prop `variant`: default, primary, secondary, success, warning y danger.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4 justify-start">
+      <Breadcrumbs
+        variant="default"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="primary"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="secondary"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="success"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="warning"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="danger"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+
+export default function BreadcrumbsVariantsDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Breadcrumbs
+        variant="default"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="primary"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="secondary"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="success"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="warning"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="danger"
+        homeIcon
+        items={[
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Con separador personalizado
+
+Personaliza el separador usando la prop `separator`.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4 justify-start">
+      <Breadcrumbs
+        variant="default"
+        separator={<span>/</span>}
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="default"
+        separator={<span>•</span>}
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="default"
+        separator={<span>→</span>}
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+
+export default function BreadcrumbsSeparatorDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Breadcrumbs
+        variant="default"
+        separator={<span>/</span>}
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="default"
+        separator={<span>•</span>}
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+      <Breadcrumbs
+        variant="default"
+        separator={<span>→</span>}
+        items={[
+          { label: "Inicio" },
+          { label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Con iconos
+
+Añade iconos a los elementos del breadcrumb.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-8 items-center justify-start">
+      <Breadcrumbs
+        homeIcon
+        variant="default"
+        items={[
+          { 
+            label: "Documentación",
+            icon: <BookIcon className="h-4 w-4" />
+          },
+          { 
+            label: "Componentes", 
+            icon: <LayoutIcon className="h-4 w-4" />
+          },
+          { 
+            label: "Breadcrumbs", 
+            icon: <ListIcon className="h-4 w-4" />
+          },
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+import { BookIcon, LayoutIcon, ListIcon } from "lucide-react";
+
+export default function BreadcrumbsIconsDemo() {
+  return (
+    <Breadcrumbs
+      homeIcon
+      variant="default"
+      items={[
+        { 
+          label: "Documentación",
+          icon: <BookIcon className="h-4 w-4" />
+        },
+        { 
+          label: "Componentes", 
+          icon: <LayoutIcon className="h-4 w-4" />
+        },
+        { 
+          label: "Breadcrumbs", 
+          icon: <ListIcon className="h-4 w-4" />
+        },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con navegación
+
+Usando la prop `clickable` para crear breadcrumbs que funcionen como enlaces de navegación.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-8 items-center justify-start">
+      <Breadcrumbs
+        homeIcon
+        clickable
+        variant="default"
+        items={[
+          { 
+            label: "Accordion", 
+            href: "/docs/componentes/accordion"
+          },
+          { 
+            label: "Input", 
+            href: "/docs/componentes/input"
+          },
+          { 
+            label: "Breadcrumbs", 
+            href: "/docs/componentes/breadcrumbs"
+          },
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Breadcrumbs } from "@stofli/ui";
+
+export default function BreadcrumbsNavigationDemo() {
+  return (
+    <Breadcrumbs
+      homeIcon
+      clickable
+      variant="default"
+      items={[
+        { 
+          label: "Accordion", 
+          href: "/docs/componentes/accordion"
+        },
+        { 
+          label: "Input", 
+          href: "/docs/componentes/input"
+        },
+        { 
+          label: "Breadcrumbs", 
+          href: "/docs/componentes/breadcrumbs"
+        },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop        | Tipo                                                                          | Default            | Descripción                             |
+| ----------- | ----------------------------------------------------------------------------- | ------------------ | --------------------------------------- |
+| `items`     | `{ label: string; href?: string; icon?: React.ReactNode }[]`                  | `[]`               | Elementos de la ruta de navegación      |
+| `separator` | `React.ReactNode`                                                             | `<ChevronRight />` | Icono o texto separador entre elementos |
+| `homeIcon`  | `boolean`                                                                     | `false`            | Muestra un icono de inicio al principio |
+| `clickable` | `boolean`                                                                     | `false`            | Determina si los items son enlaces      |
+| `variant`   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`        | Variante de estilo                      |
+| `size`      | `"sm" \| "md" \| "lg"`                                                        | `"md"`             | Tamaño del componente                   |
+| `className` | `string`                                                                      | -                  | Clases adicionales para el componente   |
