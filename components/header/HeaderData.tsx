@@ -1,27 +1,27 @@
 export const headerData = [
   {
     title: "Docs",
-    link: "/docs/introduction",
+    link: "/docs/introduccion",
     relatedPaths: [
-      "/docs/introduction",
-      "/docs/installation",
+      "/docs/introduccion",
+      "/docs/instalacion",
       //"/docs/frameworks/nextjs",
       "/docs/frameworks*", // Comodín para futuras frameworks
     ],
   },
   {
-    title: "Components",
-    link: "/docs/components/accordion",
+    title: "Componentes",
+    link: "/docs/componentes/accordion",
     relatedPaths: [
-      //"/docs/components/accordion",
-      "/docs/components*", // Comodín para cualquier ruta de componentes
+      //"/docs/componentes/accordion",
+      "/docs/componentes*", // Comodín para cualquier ruta de componentes
     ],
   },
   {
-    title: "Examples",
-    link: "/docs/examples",
+    title: "Ejemplos",
+    link: "/docs/ejemplos",
     hidden: true,
-    relatedPaths: ["/docs/examples"],
+    relatedPaths: ["/docs/ejemplos"],
   },
   {
     title: "Changelog",
@@ -30,9 +30,9 @@ export const headerData = [
     relatedPaths: ["/docs/changelog"],
   },
   {
-    title: "Colors",
-    link: "/docs/colors",
+    title: "Colores",
+    link: "/docs/colores",
     hidden: true,
-    relatedPaths: ["/docs/colors"],
+    relatedPaths: ["/docs/colores"],
   },
 ];
