@@ -1,0 +1,650 @@
+---
+title: "Toast"
+description: "Un componente de notificaciones toast moderno con animaciones fluidas, múltiples posiciones y variantes de estilo."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install framer-motion lucide-react
+
+# Instalar los componentes
+npx @stofli/ui add toast
+npx @stofli/ui add button
+```
+
+## Uso
+
+```tsx
+import { Toast, ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
+
+// Usando el componente directamente
+export function ToastExample() {
+  return (
+    <Toast
+      defaultOpen
+      title="Notificación"
+      description="Este es un toast de ejemplo"
+      variant="success"
+    />
+  );
+}
+
+// Usando el hook useToast para mostrar toasts desde cualquier lugar
+export function ToastWithProvider() {
+  return (
+    <ToastProvider>
+      <ToastButton />
+    </ToastProvider>
+  );
+}
+
+function ToastButton() {
+  const { open } = useToast();
+
+  return (
+    <Button
+      variant="success"
+      onClick={() =>
+        open({
+          title: "Guardado",
+          description: "Tu información se ha guardado correctamente",
+          variant: "success",
+        })
+      }
+    >
+      Mostrar Toast
+    </Button>
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Un toast simple con título y descripción.
+
+<DemoTabs
+  preview={
+    <ToastWrapper>
+      <ToastDemo />
+    </ToastWrapper>
+  }
+>
+```tsx
+import { ToastProvider, useToast } from "@/components/sections/toast";
+import { Button } from "@/components/sections/button";
+
+export default function ToastDemo() {
+  const { open } = useToast();
+  
+  return (
+    <Button 
+      variant="default"
+      onClick={() => 
+        open({
+          title: "Notificación",
+          description: "Este es un toast de ejemplo"
+        })
+      }
+    >
+      Mostrar notificación
+    </Button>
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+Toasts con diferentes variantes de estilo.
+
+<DemoTabs
+  preview={
+    <ToastWrapper>
+      <ToastVariantsDemo />
+    </ToastWrapper>
+  }
+>
+```tsx
+import { ToastProvider, useToast } from "@/components/sections/toast";
+import { Button } from "@/components/sections/button";
+
+export default function ToastVariantsDemo() {
+  const { open } = useToast();
+  
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        variant="default"
+        size="sm"
+        onClick={() => 
+          open({
+            title: "Default",
+            description: "Toast con estilo por defecto",
+            variant: "default"
+          })
+        }
+      >
+        Default
+      </Button>
+      
+      <Button
+        variant="primary"
+        size="sm"
+        onClick={() => 
+          open({
+            title: "Primary",
+            description: "Toast con estilo primario",
+            variant: "primary"
+          })
+        }
+      >
+        Primary
+      </Button>
+
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Secondary",
+            description: "Toast con estilo secundario",
+            variant: "secondary"
+          })
+        }
+      >
+        Primary
+      </Button>
+
+      <Button
+        variant="success"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Success",
+            description: "Operación completada correctamente",
+            variant: "success"
+          })
+        }
+      >
+        Success
+      </Button>
+
+      <Button
+        variant="warning"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Warning",
+            description: "Ten precaución con esta acción",
+            variant: "warning"
+          })
+        }
+      >
+        Warning
+      </Button>
+
+      <Button
+        variant="danger"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Danger",
+            description: "Error al procesar la información",
+            variant: "danger"
+          })
+        }
+      >
+        Danger
+      </Button>
+    </div>
+
+);
+}
+
+````
+</DemoTabs>
+
+### Posiciones
+
+Toasts que aparecen en diferentes posiciones de la pantalla.
+
+<DemoTabs
+  preview={
+    <div>
+      <ToastWrapper>
+        <ToastPositionsDemo />
+      </ToastWrapper>
+    </div>
+  }
+>
+```tsx
+import { ToastProvider, useToast } from "@/components/sections/toast";
+import { Button } from "@/components/sections/button";
+
+export default function ToastPositionsDemo() {
+  const { open } = useToast();
+
+  return (
+    <div className="grid grid-cols-3 gap-2">
+      <Button
+        variant="primary"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Superior izquierda",
+            description: "top-left",
+            position: "top-left",
+            variant: "primary"
+          })
+        }
+      >
+        Superior izquierda
+      </Button>
+
+      <Button
+        variant="primary"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Superior centro",
+            description: "top-center",
+            position: "top-center",
+            variant: "primary"
+          })
+        }
+      >
+        Superior centro
+      </Button>
+
+      <Button
+        variant="success"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Superior derecha",
+            description: "top-right",
+            position: "top-right",
+            variant: "success"
+          })
+        }
+      >
+        Superior derecha
+      </Button>
+
+      <Button
+        variant="warning"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Inferior izquierda",
+            description: "bottom-left",
+            position: "bottom-left",
+            variant: "warning"
+          })
+        }
+      >
+        Inferior izquierda
+      </Button>
+
+      <Button
+        variant="warning"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Inferior centro",
+            description: "bottom-center",
+            position: "bottom-center",
+            variant: "warning"
+          })
+        }
+      >
+        Inferior centro
+      </Button>
+
+      <Button
+        variant="danger"
+        size="sm"
+        onClick={() =>
+          open({
+            title: "Inferior derecha",
+            description: "bottom-right",
+            position: "bottom-right",
+            variant: "danger"
+          })
+        }
+      >
+        Inferior derecha
+      </Button>
+    </div>
+  );
+}
+````
+
+</DemoTabs>
+
+### Con iconos
+
+Toasts que incluyen iconos para mejorar la comunicación visual.
+
+<DemoTabs
+  preview={
+    <ToastWrapper>
+      <ToastIconsDemo />
+    </ToastWrapper>
+  }
+>
+```tsx
+import { ToastProvider, useToast } from "@/components/sections/toast";
+import { Button } from "@/components/sections/button";
+import { BellIcon, MessageSquareIcon, ShoppingCartIcon, StarIcon } from "lucide-react";
+
+export default function ToastIconsDemo() {
+  const { open } = useToast();
+  
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        variant="primary"
+        size="sm"
+        leftIcon={<BellIcon className="h-4 w-4" />}
+        onClick={() => 
+          open({
+            title: "Notificación",
+            description: "Nueva alerta del sistema",
+            variant: "primary",
+            icon: <BellIcon className="h-5 w-5" />
+          })
+        }
+      >
+        Notificación
+      </Button>
+      
+      <Button
+        variant="secondary"
+        size="sm"
+        leftIcon={<MessageSquareIcon className="h-4 w-4" />}
+        onClick={() => 
+          open({
+            title: "Mensaje recibido",
+            description: "Tienes un nuevo mensaje de María",
+            variant: "secondary",
+            icon: <MessageSquareIcon className="h-5 w-5" />
+          })
+        }
+      >
+        Mensaje
+      </Button>
+      
+      <Button
+        variant="success"
+        size="sm"
+        leftIcon={<ShoppingCartIcon className="h-4 w-4" />}
+        onClick={() => 
+          open({
+            title: "Pedido completado",
+            description: "Tu pedido #12345 ha sido procesado",
+            variant: "success",
+            icon: <ShoppingCartIcon className="h-5 w-5" />
+          })
+        }
+      >
+        Pedido
+      </Button>
+      
+      <Button
+        variant="warning"
+        size="sm"
+        leftIcon={<StarIcon className="h-4 w-4" />}
+        onClick={() => 
+          open({
+            title: "Producto favorito",
+            description: "Producto añadido a favoritos",
+            variant: "warning",
+            icon: <StarIcon className="h-5 w-5" />
+          })
+        }
+      >
+        Favorito
+      </Button>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Duración personalizada
+
+Toast con duración personalizada antes de desaparecer automáticamente.
+
+<DemoTabs
+  preview={
+    <ToastWrapper>
+      <ToastDurationDemo />
+    </ToastWrapper>
+  }
+>
+```tsx
+import { ToastProvider, useToast } from "@/components/sections/toast";
+import { Button } from "@/components/sections/button";
+
+export default function ToastDurationDemo() {
+  const { open } = useToast();
+  
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        variant="primary"
+        size="sm"
+        onClick={() => 
+          open({
+            title: "Desaparece rápido",
+            description: "Este toast desaparece en 2 segundos",
+            variant: "primary",
+            duration: 2000
+          })
+        }
+      >
+        2 segundos
+      </Button>
+      
+      <Button
+        variant="success"
+        size="sm"
+        onClick={() => 
+          open({
+            title: "Duración larga",
+            description: "Este toast permanece durante 10 segundos",
+            variant: "success",
+            duration: 10000
+          })
+        }
+      >
+        10 segundos
+      </Button>
+      
+      <Button
+        variant="warning"
+        size="sm"
+        onClick={() => 
+          open({
+            title: "No desaparece",
+            description: "Este toast no desaparece automáticamente",
+            variant: "warning",
+            duration: Infinity
+          })
+        }
+      >
+        Infinito
+      </Button>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Múltiples Toasts en cola
+
+El componente ahora admite mostrar múltiples toasts simultáneamente, organizados según su posición.
+
+<DemoTabs
+  preview={
+    <ToastWrapper>
+      <ToastMultipleDemo />
+    </ToastWrapper>
+  }
+>
+```tsx
+import { ToastProvider, useToast } from "@/components/sections/toast";
+import { Button } from "@/components/sections/button";
+
+export default function ToastMultipleDemo() {
+  const { open } = useToast();
+  
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        variant="primary"
+        onClick={() => {
+          // Mostrar varios toasts en secuencia
+          open({
+            title: "Primer Toast",
+            description: "Este es el primer toast",
+            position: "bottom-right",
+            variant: "primary"
+          });
+          
+          setTimeout(() => {
+            open({
+              title: "Segundo Toast",
+              description: "Este es el segundo toast",
+              position: "bottom-right",
+              variant: "success"
+            });
+          }, 500);
+          
+          setTimeout(() => {
+            open({
+              title: "Tercer Toast",
+              description: "Este es el tercer toast",
+              position: "bottom-right",
+              variant: "warning"
+            });
+          }, 1000);
+        }}
+      >
+        Mostrar varios toasts
+      </Button>
+      
+      <Button
+        variant="secondary"
+        onClick={() => {
+          // Mostrar toasts en diferentes posiciones
+          open({
+            title: "Superior izquierda",
+            description: "Posición top-left",
+            position: "top-left",
+            variant: "primary"
+          });
+          
+          open({
+            title: "Superior derecha",
+            description: "Posición top-right",
+            position: "top-right",
+            variant: "success"
+          });
+          
+          open({
+            title: "Inferior izquierda",
+            description: "Posición bottom-left",
+            position: "bottom-left",
+            variant: "warning"
+          });
+          
+          open({
+            title: "Inferior derecha",
+            description: "Posición bottom-right",
+            position: "bottom-right",
+            variant: "danger"
+          });
+        }}
+      >
+        Toasts en diferentes posiciones
+      </Button>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Usando botones para mostrar toasts
+
+Puedes usar el hook `useToast` dentro del `ToastProvider` para mostrar toasts desde cualquier parte de tu aplicación.
+
+```tsx
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
+
+export default function ToastWithButtons() {
+  return (
+    <ToastProvider>
+      <ToastButton />
+    </ToastProvider>
+  );
+}
+
+function ToastButton() {
+  const { open } = useToast();
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        variant="success"
+        onClick={() =>
+          open({
+            title: "Notificación",
+            description: "Operación completada correctamente",
+            variant: "success",
+          })
+        }
+      >
+        Mostrar notificación
+      </Button>
+
+      <Button
+        variant="danger"
+        onClick={() =>
+          open({
+            title: "Error",
+            description: "Ha ocurrido un error inesperado",
+            variant: "danger",
+          })
+        }
+      >
+        Mostrar error
+      </Button>
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop              | Tipo                                                                                              | Default          | Descripción                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
+| `open`            | `boolean`                                                                                         | -                | Estado controlado del toast                                                               |
+| `defaultOpen`     | `boolean`                                                                                         | `false`          | Estado inicial del toast si no es controlado                                              |
+| `onOpenChange`    | `(open: boolean) => void`                                                                         | -                | Función llamada cuando cambia el estado                                                   |
+| `title`           | `string`                                                                                          | -                | Título del toast                                                                          |
+| `description`     | `string`                                                                                          | -                | Descripción o mensaje del toast                                                           |
+| `variant`         | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"`                     | `"default"`      | Variante de estilo                                                                        |
+| `position`        | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right" \| "top-center" \| "bottom-center"` | `"bottom-right"` | Posición en la pantalla                                                                   |
+| `duration`        | `number`                                                                                          | `5000`           | Duración en ms antes de cerrarse automáticamente (use `Infinity` para que no desaparezca) |
+| `showCloseButton` | `boolean`                                                                                         | `true`           | Muestra un botón para cerrar el toast                                                     |
+| `className`       | `string`                                                                                          | -                | Clases adicionales para el contenedor                                                     |
+| `children`        | `React.ReactNode`                                                                                 | -                | Contenido personalizado del toast                                                         |
+| `icon`            | `React.ReactNode`                                                                                 | -                | Icono para mostrar junto al contenido                                                     |
