@@ -188,7 +188,7 @@ export default function ChangelogPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-white dark:bg-black">
       <Header />
 
       {/* Espaciador para header fijo */}
@@ -197,7 +197,7 @@ export default function ChangelogPage() {
       <main className="container mx-auto px-4 pt-8 pb-16">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white">
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
             Changelog
           </h1>
           <p className="text-xl text-gray-600 dark:text-white/80 max-w-3xl mx-auto">
