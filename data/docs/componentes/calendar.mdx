@@ -1,0 +1,243 @@
+---
+title: "Calendar"
+description: "Un componente de calendario interactivo con soporte para selección de fechas, diferentes estilos y calendarios internacionales."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install date-fns framer-motion @react-aria/i18n lucide-react
+
+# Instalar el componente
+npx @stofli/ui add calendar
+```
+
+## Uso
+
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function App() {
+  return (
+    <Calendar
+      onChange={(date) => console.log("Fecha seleccionada:", date)}
+    />
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Un calendario que muestra el mes actual y permite seleccionar fechas.
+
+<DemoTabs
+  preview={
+    <Calendar />
+  }
+>
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function CalendarDemo() {
+  return <Calendar />;
+}
+```
+</DemoTabs>
+
+### Con fecha mínima
+
+Usando `minValue` con la fecha actual, solo permite seleccionar fechas desde hoy en adelante.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-4">
+      <Calendar 
+        variant="primary"
+        minValue={new Date()} // Fecha actual como mínima
+      />
+    </div>
+  }
+>
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function CalendarMinDemo() {
+  return (
+    <Calendar 
+      variant="primary"
+      minValue={new Date()} // Solo permite seleccionar desde hoy en adelante
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con fecha máxima
+
+Usando `maxValue` con la fecha actual, solo permite seleccionar fechas hasta hoy.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-4">
+      <Calendar 
+        variant="primary"
+        maxValue={new Date()} // Fecha actual como máxima
+      />
+    </div>
+  }
+>
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function CalendarMaxDemo() {
+  return (
+    <Calendar 
+      variant="primary"
+      maxValue={new Date()} // Solo permite seleccionar hasta hoy
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+Seis estilos diferentes usando la prop `variant`: default, primary, secondary, success, warning y danger.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap justify-between gap-4">
+      <Calendar variant="default" />
+      <Calendar variant="primary" />
+      <Calendar variant="secondary" />
+      <Calendar variant="success" />
+      <Calendar variant="warning" />
+      <Calendar variant="danger" />
+    </div>
+  }
+>
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function CalendarVariantsDemo() {
+  return (
+    <div className="flex flex-wrap justify-between gap-4">
+      <Calendar variant="default" />
+      <Calendar variant="primary" />
+      <Calendar variant="secondary" />
+      <Calendar variant="success" />
+      <Calendar variant="warning" />
+      <Calendar variant="danger" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Calendarios Internacionales
+
+El componente soporta diferentes sistemas de calendario y localizaciones usando las props `calendar` y `locale`. La prop `calendar` permite especificar el sistema de calendario (por ejemplo: "chinese", "islamic-civil", "buddhist", "hebrew", etc.) y `locale` define el idioma y la región (por ejemplo: "zh-CN" para chino, "ar-SA" para árabe, "th-TH" para tailandés).
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap justify-between gap-4">
+      <Calendar calendar="chinese" locale="zh-CN" variant="primary" />
+      <Calendar calendar="islamic-civil" locale="ar-SA" variant="primary" />
+      <Calendar calendar="buddhist" locale="th-TH" variant="primary" />
+      <Calendar calendar="hebrew" locale="he-IL" variant="primary" />
+    </div>
+  }
+>
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function CalendarSystemsDemo() {
+  return (
+    <div className="flex flex-wrap justify-between gap-4">
+      <Calendar calendar="chinese" locale="zh-CN" variant="primary" />
+      <Calendar calendar="islamic-civil" locale="ar-SA" variant="primary" />
+      <Calendar calendar="buddhist" locale="th-TH" variant="primary" />
+      <Calendar calendar="hebrew" locale="he-IL" variant="primary" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Radios
+
+Cuatro opciones de redondeo usando la prop `radius`: none, sm, md y full.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap justify-between gap-4">
+      <Calendar radius="none" variant="primary" />
+      <Calendar radius="sm" variant="primary" />
+      <Calendar radius="md" variant="primary" />
+      <Calendar radius="full" variant="primary" />
+    </div>
+  }
+>
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function CalendarRadiusDemo() {
+  return (
+    <div className="flex flex-wrap justify-between gap-4">
+      <Calendar radius="none" variant="primary" />
+      <Calendar radius="sm" variant="primary" />
+      <Calendar radius="md" variant="primary" />
+      <Calendar radius="full" variant="primary" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Solo Lectura
+
+Usando `readOnly` y `value`, muestra un calendario no interactivo fijado en marzo de 2025.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-4">
+      <Calendar 
+        readOnly 
+        variant="primary"
+        value={new Date(2025, 2, 15)} // 15 de marzo de 2025
+      />
+    </div>
+  }
+>
+```tsx
+import { Calendar } from "@stofli/ui";
+
+export default function CalendarReadOnlyDemo() {
+  return (
+    <Calendar 
+      readOnly 
+      variant="primary"
+      value={new Date(2025, 2, 15)} // 15 de marzo de 2025
+    />
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop          | Tipo                                          | Default     | Descripción                                    |
+| ------------- | --------------------------------------------- | ----------- | ---------------------------------------------- |
+| `value`       | `Date`                                       | -           | Fecha seleccionada                             |
+| `onChange`    | `(date: Date) => void`                      | -           | Función llamada al seleccionar una fecha       |
+| `className`   | `string`                                     | -           | Clases adicionales                             |
+| `variant`     | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo |
+| `radius`      | `"none" \| "sm" \| "md" \| "full"`          | `"md"`      | Radio de las esquinas                         |
+| `readOnly`    | `boolean`                                    | `false`     | Modo solo lectura                             |
+| `minValue`    | `Date`                                       | -           | Fecha mínima seleccionable                    |
+| `maxValue`    | `Date`                                       | -           | Fecha máxima seleccionable                    |
+| `calendar`    | `"buddhist" \| "ethiopic" \| "ethioaa" \| "coptic" \| "hebrew" \| "indian" \| "islamic-civil" \| "islamic-tbla" \| "islamic-umalqura" \| "japanese" \| "persian" \| "roc" \| "gregory" \| "chinese"` | `"gregory"` | Sistema de calendario |
+| `locale`      | `string`                                     | `"es"`      | Código de idioma (ej: "es", "en", "zh-CN")    |
