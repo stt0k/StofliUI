@@ -29,7 +29,7 @@ const SidebarLink = ({ href, label, isActive, tag }: SidebarLinkProps) => {
             : ""
         }`}
       >
-        <span className="truncate">{truncateText(label)}</span>
+        <span className="truncate">{tag ? truncateText(label) : label}</span>
         {tag && <Tag text={tag} />}
       </Button>
     </Link>
