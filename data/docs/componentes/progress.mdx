@@ -1,0 +1,275 @@
+---
+title: "Progress"
+description: "Un componente de barra de progreso moderno con animaciones fluidas y diferentes variantes de estilo."
+---
+
+## Instalación
+
+```bash
+# Instalar dependencias necesarias
+npm install framer-motion
+
+# Instalar el componente
+npx @stofli/ui add progress
+```
+
+## Uso
+
+```tsx
+import { Progress } from "@stofli/ui";
+
+export default function App() {
+  return <Progress value={75} label="Progreso" showValue variant="primary" />;
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Una barra de progreso simple con diferentes valores.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Progress value={25} label="25% Completado" showValue />
+      <Progress value={50} label="50% Completado" showValue />
+      <Progress value={75} label="75% Completado" showValue />
+      <Progress value={100} label="100% Completado" showValue />
+    </div>
+  }
+>
+```tsx
+import { Progress } from "@stofli/ui";
+
+export default function ProgressDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Progress value={25} label="25% Completado" showValue />
+      <Progress value={50} label="50% Completado" showValue />
+      <Progress value={75} label="75% Completado" showValue />
+      <Progress value={100} label="100% Completado" showValue />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Tamaños
+
+Usando la prop `size`: sm, md y lg.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Progress size="sm" value={75} label="Pequeño" showValue variant="primary" />
+      <Progress size="md" value={75} label="Mediano" showValue variant="primary" />
+      <Progress size="lg" value={75} label="Grande" showValue variant="primary" />
+    </div>
+  }
+>
+```tsx
+import { Progress } from "@stofli/ui";
+
+export default function ProgressSizesDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Progress size="sm" value={75} label="Pequeño" showValue variant="primary" />
+      <Progress size="md" value={75} label="Mediano" showValue variant="primary" />
+      <Progress size="lg" value={75} label="Grande" showValue variant="primary" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Variantes
+
+Usando la prop `variant`: default, primary, secondary, success, warning y danger.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Progress variant="default" value={75} label="Default" showValue />
+      <Progress variant="primary" value={75} label="Primary" showValue />
+      <Progress variant="secondary" value={75} label="Secondary" showValue />
+      <Progress variant="success" value={75} label="Success" showValue />
+      <Progress variant="warning" value={75} label="Warning" showValue />
+      <Progress variant="danger" value={75} label="Danger" showValue />
+    </div>
+  }
+>
+```tsx
+import { Progress } from "@stofli/ui";
+
+export default function ProgressVariantsDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Progress variant="default" value={75} label="Default" showValue />
+      <Progress variant="primary" value={75} label="Primary" showValue />
+      <Progress variant="secondary" value={75} label="Secondary" showValue />
+      <Progress variant="success" value={75} label="Success" showValue />
+      <Progress variant="warning" value={75} label="Warning" showValue />
+      <Progress variant="danger" value={75} label="Danger" showValue />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Radios
+
+Usando la prop `radius`: none, sm, md y full.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Progress 
+        radius="none" 
+        value={75} 
+        label="Sin radio" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        radius="sm" 
+        value={75} 
+        label="Radio pequeño" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        radius="md" 
+        value={75} 
+        label="Radio mediano" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        radius="full" 
+        value={75} 
+        label="Radio completo" 
+        showValue 
+        variant="primary"
+      />
+    </div>
+  }
+>
+```tsx
+import { Progress } from "@stofli/ui";
+
+export default function ProgressRadiusDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Progress 
+        radius="none" 
+        value={75} 
+        label="Sin radio" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        radius="sm" 
+        value={75} 
+        label="Radio pequeño" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        radius="md" 
+        value={75} 
+        label="Radio mediano" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        radius="full" 
+        value={75} 
+        label="Radio completo" 
+        showValue 
+        variant="primary"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Con animación de rayas
+
+Usando la prop `striped` para añadir un patrón de rayas animado.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Progress 
+        striped 
+        value={75} 
+        label="Con rayas animadas" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        striped 
+        value={75} 
+        label="Success con rayas" 
+        showValue 
+        variant="success"
+      />
+      <Progress 
+        striped 
+        value={75} 
+        label="Warning con rayas" 
+        showValue 
+        variant="warning"
+      />
+    </div>
+  }
+>
+```tsx
+import { Progress } from "@stofli/ui";
+
+export default function ProgressStripedDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Progress 
+        striped 
+        value={75} 
+        label="Con rayas animadas" 
+        showValue 
+        variant="primary"
+      />
+      <Progress 
+        striped 
+        value={75} 
+        label="Success con rayas" 
+        showValue 
+        variant="success"
+      />
+      <Progress 
+        striped 
+        value={75} 
+        label="Warning con rayas" 
+        showValue 
+        variant="warning"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop        | Tipo                                                                          | Default     | Descripción                       |
+| ----------- | ----------------------------------------------------------------------------- | ----------- | --------------------------------- |
+| `value`     | `number`                                                                      | `0`         | Valor actual del progreso         |
+| `max`       | `number`                                                                      | `100`       | Valor máximo del progreso         |
+| `size`      | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño de la barra de progreso    |
+| `variant`   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                |
+| `showValue` | `boolean`                                                                     | `false`     | Muestra el porcentaje actual      |
+| `animate`   | `boolean`                                                                     | `true`      | Habilita la animación de progreso |
+| `label`     | `string`                                                                      | -           | Etiqueta descriptiva              |
+| `radius`    | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas             |
+| `striped`   | `boolean`                                                                     | `false`     | Añade un patrón de rayas animado  |
+| `className` | `string`                                                                      | -           | Clases adicionales                |
