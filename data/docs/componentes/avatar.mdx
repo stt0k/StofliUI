@@ -1,0 +1,221 @@
+---
+title: "Avatar"
+description: "Un componente de avatar que muestra una imagen de perfil o las iniciales como fallback, con diferentes tamaños, bordes y estados."
+---
+
+## Instalación
+
+```bash
+# Instalar el componente
+npx @stofli/ui add avatar
+```
+
+## Uso
+
+El componente Avatar puede mostrar una imagen, iniciales como fallback, y varios estados de usuario.
+
+```tsx
+import { Avatar } from "@stofli/ui";
+
+export default function App() {
+  return (
+    <Avatar
+      src="https://i.pravatar.cc/300?u=john"
+      alt="John Doe"
+      fallback="JD"
+    />
+  );
+}
+```
+
+## Ejemplos
+
+### Básico
+
+Muestra un avatar con imagen y otro usando la prop `fallback` para mostrar iniciales.
+
+<DemoTabs
+  preview={
+    <div className="flex gap-4">
+      <Avatar
+        src="https://i.pravatar.cc/300?u=maria"
+        alt="María García"
+      />
+      <Avatar
+        fallback="JD"
+        alt="John Doe"
+      />
+    </div>
+  }
+>
+```tsx
+import { Avatar } from "@stofli/ui";
+
+export default function AvatarDemo() {
+  return (
+    <div className="flex gap-4">
+      <Avatar
+        src="https://i.pravatar.cc/300?u=maria"
+        alt="María García"
+      />
+      <Avatar
+        fallback="JD"
+        alt="John Doe"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Tamaños
+
+Usando la prop `size`: sm, md, lg y xl.
+
+<DemoTabs
+  preview={
+    <div className="flex items-end gap-4">
+      <Avatar size="sm" src="https://i.pravatar.cc/300?u=small" alt="Small" fallback="S" />
+      <Avatar size="md" src="https://i.pravatar.cc/300?u=medium" alt="Medium" fallback="M" />
+      <Avatar size="lg" src="https://i.pravatar.cc/300?u=large" alt="Large" fallback="L" />
+      <Avatar size="xl" src="https://i.pravatar.cc/300?u=xlarge" alt="Extra Large" fallback="XL" />
+    </div>
+  }
+>
+```tsx
+import { Avatar } from "@stofli/ui";
+
+export default function AvatarSizesDemo() {
+  return (
+    <div className="flex items-end gap-4">
+      <Avatar size="sm" src="https://i.pravatar.cc/300?u=small" alt="Small" fallback="S" />
+      <Avatar size="md" src="https://i.pravatar.cc/300?u=medium" alt="Medium" fallback="M" />
+      <Avatar size="lg" src="https://i.pravatar.cc/300?u=large" alt="Large" fallback="L" />
+      <Avatar size="xl" src="https://i.pravatar.cc/300?u=xlarge" alt="Extra Large" fallback="XL" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Bordes y Radios
+
+Usando las props `border` y `radius` (none, sm, md, full) para personalizar los bordes.
+
+<DemoTabs
+  preview={
+    <div className="flex gap-4">
+      <Avatar
+        border
+        radius="none"
+        src="https://i.pravatar.cc/300?u=none"
+        alt="Sin radio"
+        fallback="N"
+      />
+      <Avatar
+        border
+        radius="sm"
+        src="https://i.pravatar.cc/300?u=sm"
+        alt="Radio pequeño"
+        fallback="S"
+      />
+      <Avatar
+        border
+        radius="md"
+        src="https://i.pravatar.cc/300?u=md"
+        alt="Radio medio"
+        fallback="M"
+      />
+      <Avatar
+        border
+        radius="full"
+        src="https://i.pravatar.cc/300?u=full"
+        alt="Radio completo"
+        fallback="F"
+      />
+    </div>
+  }
+>
+```tsx
+import { Avatar } from "@stofli/ui";
+
+export default function AvatarRadiusDemo() {
+  return (
+    <div className="flex gap-4">
+      <Avatar
+        border
+        radius="none"
+        src="https://i.pravatar.cc/300?u=none"
+        alt="Sin radio"
+        fallback="N"
+      />
+      <Avatar
+        border
+        radius="sm"
+        src="https://i.pravatar.cc/300?u=sm"
+        alt="Radio pequeño"
+        fallback="S"
+      />
+      <Avatar
+        border
+        radius="md"
+        src="https://i.pravatar.cc/300?u=md"
+        alt="Radio medio"
+        fallback="M"
+      />
+      <Avatar
+        border
+        radius="full"
+        src="https://i.pravatar.cc/300?u=full"
+        alt="Radio completo"
+        fallback="F"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Estados
+
+Usando la prop `status`: online, offline, away y busy.
+
+<DemoTabs
+  preview={
+    <div className="flex gap-4">
+      <Avatar status="online" src="https://i.pravatar.cc/300?u=online" alt="En línea" fallback="O" />
+      <Avatar status="offline" src="https://i.pravatar.cc/300?u=offline" alt="Desconectado" fallback="F" />
+      <Avatar status="away" src="https://i.pravatar.cc/300?u=away" alt="Ausente" fallback="A" />
+      <Avatar status="busy" src="https://i.pravatar.cc/300?u=busy" alt="Ocupado" fallback="B" />
+    </div>
+  }
+>
+```tsx
+import { Avatar } from "@stofli/ui";
+
+export default function AvatarStatusDemo() {
+  return (
+    <div className="flex gap-4">
+      <Avatar status="online" src="https://i.pravatar.cc/300?u=online" alt="En línea" fallback="O" />
+      <Avatar status="offline" src="https://i.pravatar.cc/300?u=offline" alt="Desconectado" fallback="F" />
+      <Avatar status="away" src="https://i.pravatar.cc/300?u=away" alt="Ausente" fallback="A" />
+      <Avatar status="busy" src="https://i.pravatar.cc/300?u=busy" alt="Ocupado" fallback="B" />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+## Props
+
+| Prop          | Tipo                                    | Default           | Descripción                                    |
+| ------------- | --------------------------------------- | ----------------- | ---------------------------------------------- |
+| `src`         | `string`                               | -                 | URL de la imagen del avatar                    |
+| `alt`         | `string`                               | `"Avatar"`        | Texto alternativo para la imagen               |
+| `fallback`    | `string`                               | -                 | Texto a mostrar cuando no hay imagen           |
+| `size`        | `"sm" \| "md" \| "lg" \| "xl"`        | `"md"`           | Tamaño del avatar                             |
+| `radius`      | `"none" \| "sm" \| "md" \| "full"`    | `"full"`         | Radio de borde del avatar                     |
+| `border`      | `boolean`                              | `false`          | Muestra un borde alrededor del avatar         |
+| `borderColor` | `string`                               | `"ring-zinc-200"` | Color del borde cuando border es true         |
+| `status`      | `"online" \| "offline" \| "away" \| "busy"` | -         | Muestra un indicador de estado                |
+| `className`   | `string`                               | -                 | Clases adicionales para personalización        |
