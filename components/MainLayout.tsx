@@ -33,7 +33,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
                 <div className="hidden text-sm xl:block">
                   <div className="sticky top-25 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
                     <div className="space-y-2">
-                      <p className="font-medium">On This Page</p>
+                      <p className="font-medium">En esta página</p>
                       <ul className="m-0 list-none">
                         {navItems.map((item, index) => (
                           <li key={index}>
