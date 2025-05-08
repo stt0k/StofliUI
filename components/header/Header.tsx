@@ -9,7 +9,8 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { GithubIcon, TwitterIcon, MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
+import { FaXTwitter, FaGithub } from "react-icons/fa6";
 import HeadLinks from "./HeadLinks";
 import { headerData } from "./HeaderData";
 import { SearchCommand } from "@/components/search/Search";
@@ -81,13 +82,19 @@ const Header = () => {
                 >
                   <Button
                     variant="ghost"
-                    className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer ${
+                    className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
                       isActive(link.href)
-                        ? "hover:text-cyan-500 text-cyan-600 dark:hover:text-zinc-50/80 dark:text-zinc-50"
+                        ? "hover:text-zinc-950/85 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
                         : ""
                     }`}
                   >
-                    {link.label}
+                    <span className="truncate">
+                      {link.tag
+                        ? link.label.length > 11
+                          ? link.label.substring(0, 11) + "..."
+                          : link.label
+                        : link.label}
+                    </span>
                     {link.tag && <Tag text={link.tag} />}
                   </Button>
                 </Link>
@@ -98,11 +105,11 @@ const Header = () => {
         <div className="flex items-center justify-between px-2 py-2">
           <div className="flex items-center space-x-4">
             <Button variant="ghost" size="icon" className="rounded-full">
-              <GithubIcon className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
+              <FaGithub className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
               <span className="sr-only">GitHub</span>
             </Button>
             <Button variant="ghost" size="icon" className="rounded-full">
-              <TwitterIcon className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
+              <FaXTwitter className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
               <span className="sr-only">Twitter</span>
             </Button>
           </div>
@@ -167,9 +174,8 @@ const Header = () => {
                 side="left"
                 className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
               >
-                <RemoveScroll>
-                  <SideBar />
-                </RemoveScroll>
+                <SideBar />
+
                 <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-400 disabled:pointer-events-none text-zinc-950 dark:text-white">
                   <XIcon className="h-4 w-4" />
                   <span className="sr-only">Close</span>
@@ -189,7 +195,7 @@ const Header = () => {
                     size="icon"
                     className="items-center cursor-pointer justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 dark:hover:bg-zinc-800 h-9 w-9 mr-2 hidden md:inline-flex hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
                   >
-                    <GithubIcon className="h-5 w-5" />
+                    <FaGithub className="h-5 w-5" />
                     <span className="sr-only">GitHub</span>
                   </Button>
 
@@ -198,7 +204,7 @@ const Header = () => {
                     size="icon"
                     className="items-center cursor-pointer justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 dark:hover:bg-zinc-800 h-9 w-9 mr-2 hidden md:inline-flex hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
                   >
-                    <TwitterIcon className="h-5 w-5" />
+                    <FaXTwitter className="h-5 w-5" />
                     <span className="sr-only">Twitter</span>
                   </Button>
 
