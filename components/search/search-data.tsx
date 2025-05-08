@@ -9,11 +9,15 @@ import {
 
 // Lista de Links
 export const links = [
-  { icon: File, label: "Docs", link: "/docs/introduction" },
-  { icon: Component, label: "Components", link: "/docs/components/accordion" },
-  { icon: PanelsTopLeft, label: "Examples", link: "/docs/examples" },
+  { icon: File, label: "Docs", link: "/docs/introduccion" },
+  {
+    icon: Component,
+    label: "Componentes",
+    link: "/docs/componentes/accordion",
+  },
+  { icon: PanelsTopLeft, label: "Ejemplos", link: "/docs/ejemplos" },
   { icon: ChartBar, label: "Changelog", link: "/docs/changelog" },
-  { icon: Palette, label: "Colors", link: "/docs/colors" },
+  { icon: Palette, label: "Colores", link: "/docs/colores" },
 ];
 
 // Lista de frameworks
@@ -70,19 +74,19 @@ export const frameworks = [
 
 // Lista de componentes
 export const components = [
-  { icon: Circle, label: "Accordion", link: "/docs/components/accordion" },
+  { icon: Circle, label: "Accordion", link: "/docs/componentes/accordion" },
   {
     icon: Circle,
     label: "Autocomplete",
-    link: "/docs/components/autocomplete",
+    link: "/docs/componentes/autocomplete",
   },
-  { icon: Circle, label: "Avatar", link: "/docs/components/avatar" },
-  { icon: Circle, label: "Button", link: "/docs/components/button" },
-  { icon: Circle, label: "Badge", link: "/docs/components/badge" },
-  { icon: Circle, label: "Calendar", link: "/docs/components/calendar" },
-  { icon: Circle, label: "Card", link: "/docs/components/card" },
-  { icon: Circle, label: "Checkbox", link: "/docs/components/checkbox" },
-  { icon: Circle, label: "Dropdown", link: "/docs/components/dropdown" },
-  { icon: Circle, label: "Input", link: "/docs/components/input" },
-  { icon: Circle, label: "Tabs", link: "/docs/components/tabs" },
+  { icon: Circle, label: "Avatar", link: "/docs/componentes/avatar" },
+  { icon: Circle, label: "Button", link: "/docs/componentes/button" },
+  { icon: Circle, label: "Badge", link: "/docs/componentes/badge" },
+  { icon: Circle, label: "Calendar", link: "/docs/componentes/calendar" },
+  { icon: Circle, label: "Card", link: "/docs/componentes/card" },
+  { icon: Circle, label: "Checkbox", link: "/docs/componentes/checkbox" },
+  { icon: Circle, label: "Dropdown", link: "/docs/componentes/dropdown" },
+  { icon: Circle, label: "Input", link: "/docs/componentes/input" },
+  { icon: Circle, label: "Tabs", link: "/docs/componentes/tabs" },
 ];
