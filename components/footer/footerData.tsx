@@ -1,32 +1,26 @@
-import { FaTwitter, FaLinkedin, FaDiscord, FaGithub } from "react-icons/fa";
+import { FaXTwitter, FaGithub } from "react-icons/fa6";
 
 export const socials = [
-  { icon: FaTwitter, name: "Twitter", href: "#" },
-  { icon: FaDiscord, name: "Discord", href: "#" },
-  { icon: FaLinkedin, name: "LinkedIn", href: "#" },
+  { icon: FaXTwitter, name: "Twitter", href: "#" },
   { icon: FaGithub, name: "Github", href: "#" },
 ];
 
 export const linksHeader = [
-  { name: "Docs", href: "#" },
-  { name: "Components", href: "#" },
-  { name: "Examples", href: "#" },
-  { name: "Charts", href: "#" },
-  { name: "Colors", href: "#" },
+  { name: "Docs", href: "/docs/introduccion" },
+  { name: "Componentes", href: "/docs/componentes/accordion" },
+  { name: "Ejemplos", href: "/docs/ejemplos" },
+  { name: "Changelog", href: "/docs/changelog" },
+  { name: "Colores", href: "/docs/colores" },
 ];
 
 export const linksDocs = [
-  { name: "Introduction", href: "#" },
-  { name: "Installation", href: "#" },
+  { name: "Introducción", href: "/docs/introduccion" },
+  { name: "Instalación", href: "/docs/instalacion" },
 ];
 
 export const linksFrameworks = [
   { name: "Next.js", href: "#" },
   { name: "Astro", href: "#" },
   { name: "Vite", href: "#" },
-  { name: "Laravel", href: "#" },
   { name: "React", href: "#" },
-  { name: "Angular", href: "#" },
-  { name: "Svelte", href: "#" },
-  { name: "Vue.js", href: "#" },
 ];
