@@ -205,6 +205,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           }`}
         >
           {label}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </span>
       )}
     </label>
