@@ -160,7 +160,7 @@ const Tabs: React.FC<TabsProps> = ({
   const radiusClasses = {
     none: "rounded-none",
     sm: "rounded-sm",
-    md: "rounded-md",
+    md: "rounded-lg",
     full: "rounded-full",
   };
 
