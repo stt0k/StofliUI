@@ -191,6 +191,7 @@ export default function Page() {
                           variant="default"
                           className="!bg-white !hover:bg-zinc-200 !text-black !font-medium !text-xs !rounded-md !px-3 !py-1.5 !flex !items-center"
                           leftIcon={<span>+</span>}
+                          rippleColor="#09090b"
                         >
                           Create
                         </Button>
