@@ -145,6 +145,7 @@ Los botones tienen un efecto de onda expansiva (ripple) que se activa al hacer c
     <div className="flex flex-wrap gap-2">
       <Button variant="primary">Con efecto ripple</Button>
       <Button variant="secondary" withRipple={false}>Sin efecto ripple</Button>
+      <Button variant="outline" rippleColor="#3498DB">Ripple personalizado</Button>
     </div>
   }
 >
@@ -156,6 +157,7 @@ export default function ButtonRippleDemo() {
     <div className="flex flex-wrap gap-2">
       <Button variant="primary">Con efecto ripple</Button>
       <Button variant="secondary" withRipple={false}>Sin efecto ripple</Button>
+      <Button variant="outline" rippleColor="#3498DB">Ripple personalizado</Button>
     </div>
   );
 }
@@ -333,18 +335,19 @@ export default function ButtonDisabledDemo() {
 
 ## Props
 
-| Prop        | Tipo                           | Default   | Descripción                                      |
-| ----------- | ------------------------------ | --------- | ------------------------------------------------ |
-| `variant`   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "outline" \| "ghost" \| "link"` | `"default"` | Variante visual del botón |
-| `size`      | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon"` | `"md"`    | Tamaño del botón                  |
-| `radius`    | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"md"` | Radio de las esquinas del botón |
-| `fullWidth` | `boolean`                       | `false`   | Si el botón ocupa todo el ancho disponible       |
-| `withRing`  | `boolean`                       | `false`   | Si el botón tiene un anillo decorativo           |
-| `withRipple`| `boolean`                       | `true`    | Activa el efecto de onda expansiva al hacer clic |
-| `isLoading` | `boolean`                       | `false`   | Muestra un indicador de carga                    |
-| `leftIcon`  | `ReactNode`                     | -         | Icono a mostrar a la izquierda del texto         |
-| `rightIcon` | `ReactNode`                     | -         | Icono a mostrar a la derecha del texto           |
-| `withArrow` | `boolean`                       | `false`   | Muestra una flecha animada a la derecha del texto|
-| `disabled`  | `boolean`                       | `false`   | Deshabilita el botón                             |
-| `children`  | `ReactNode`                     | -         | Contenido del botón                              |
-| `className` | `string`                        | -         | Clases adicionales para personalizar el botón    | 
+| Prop          | Tipo                                                                                                            | Default     | Descripción                                       |
+| ------------- | --------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
+| `variant`     | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "outline" \| "ghost" \| "link"` | `"default"` | Variante visual del botón                         |
+| `size`        | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon"`                                                                | `"md"`      | Tamaño del botón                                  |
+| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                                                      | `"md"`      | Radio de las esquinas del botón                   |
+| `fullWidth`   | `boolean`                                                                                                       | `false`     | Si el botón ocupa todo el ancho disponible        |
+| `withRing`    | `boolean`                                                                                                       | `false`     | Si el botón tiene un anillo decorativo            |
+| `withRipple`  | `boolean`                                                                                                       | `true`      | Activa el efecto de onda expansiva al hacer clic  |
+| `rippleColor` | `string`                                                                                                        | -           | Color personalizado para el efecto ripple         |
+| `isLoading`   | `boolean`                                                                                                       | `false`     | Muestra un indicador de carga                     |
+| `leftIcon`    | `ReactNode`                                                                                                     | -           | Icono a mostrar a la izquierda del texto          |
+| `rightIcon`   | `ReactNode`                                                                                                     | -           | Icono a mostrar a la derecha del texto            |
+| `withArrow`   | `boolean`                                                                                                       | `false`     | Muestra una flecha animada a la derecha del texto |
+| `disabled`    | `boolean`                                                                                                       | `false`     | Deshabilita el botón                              |
+| `children`    | `ReactNode`                                                                                                     | -           | Contenido del botón                               |
+| `className`   | `string`                                                                                                        | -           | Clases adicionales para personalizar el botón     |
