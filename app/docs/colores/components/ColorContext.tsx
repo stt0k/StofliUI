@@ -7,6 +7,7 @@ import React, {
   useCallback,
   useMemo,
   ReactNode,
+  useRef,
 } from "react";
 import { ColorInfo, ColorFormat, colors as allColors } from "./ColorData";
 
@@ -29,12 +30,41 @@ export const ColorProvider: React.FC<{ children: ReactNode }> = ({
   const [selectedFamily, setSelectedFamily] = useState<string | null>(null);
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
   const [activeFormat, setActiveFormat] = useState<ColorFormat>("hex");
+  const copyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isProcessingRef = useRef<boolean>(false);
 
   // Manejar la copia al portapapeles
   const handleCopy = useCallback((value: string) => {
+    // Prevenir múltiples clics rápidos
+    if (isProcessingRef.current) {
+      return;
+    }
+
+    isProcessingRef.current = true;
+
+    // Limpiar cualquier timeout anterior
+    if (copyTimeoutRef.current) {
+      clearTimeout(copyTimeoutRef.current);
+      copyTimeoutRef.current = null;
+    }
+
     navigator.clipboard.writeText(value);
     setCopiedColor(value);
-    setTimeout(() => setCopiedColor(null), 2000);
+
+    copyTimeoutRef.current = setTimeout(() => {
+      setCopiedColor(null);
+      isProcessingRef.current = false;
+      copyTimeoutRef.current = null;
+    }, 2000);
+  }, []);
+
+  // Limpiar el timeout al desmontar
+  React.useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+    };
   }, []);
 
   // Memoizar valores del contexto para evitar renderizados innecesarios
