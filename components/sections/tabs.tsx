@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export interface TabsProps {
@@ -49,22 +49,37 @@ const Tabs: React.FC<TabsProps> = ({
   // Referencia para el contenedor de pestañas
   const tabsContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // Actualizar la posición del indicador cuando cambia la pestaña activa o hover
-  useEffect(() => {
+  // Función para actualizar la posición del indicador
+  const updateIndicatorPosition = useCallback(() => {
     const tabIndex = hoverEffect && hoverTab !== null ? hoverTab : activeTab;
     if (tabsRef.current[tabIndex]) {
       const tabElement = tabsRef.current[tabIndex];
-      const container = scrollContainerRef.current;
 
-      if (container) {
-        // Calcular la posición relativa al contenedor visible
-        setIndicatorStyle({
-          left: tabElement.offsetLeft,
-          width: tabElement.offsetWidth,
-        });
-      }
+      setIndicatorStyle({
+        left: tabElement.offsetLeft,
+        width: tabElement.offsetWidth,
+      });
     }
   }, [activeTab, hoverTab, hoverEffect]);
+
+  // Actualizar la posición del indicador cuando cambia la pestaña activa o hover
+  useEffect(() => {
+    updateIndicatorPosition();
+  }, [updateIndicatorPosition]);
+
+  // Añadir listener para el resize de la ventana cuando fullWidth está activo
+  useEffect(() => {
+    if (fullWidth) {
+      const handleResize = () => {
+        updateIndicatorPosition();
+      };
+
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, [fullWidth, updateIndicatorPosition]);
 
   // Manejar el desplazamiento cuando cambia la pestaña activa
   useEffect(() => {
@@ -105,7 +120,7 @@ const Tabs: React.FC<TabsProps> = ({
 
   const variantClasses = {
     default:
-      "bg-transparent text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100",
+      "bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300",
     primary:
       "bg-transparent text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300",
     secondary:
@@ -119,7 +134,7 @@ const Tabs: React.FC<TabsProps> = ({
   };
 
   const activeVariantClasses = {
-    default: "text-zinc-900 dark:text-zinc-100",
+    default: "text-zinc-900 dark:text-white",
     primary: "text-blue-700 dark:text-blue-300",
     secondary: "text-purple-700 dark:text-purple-300",
     success: "text-green-700 dark:text-green-300",
@@ -158,7 +173,7 @@ const Tabs: React.FC<TabsProps> = ({
       {/* Contenedor de los tabs con ancho adaptativo */}
       <div className="w-full flex">
         <div
-          className={`relative p-1 bg-zinc-100/60 dark:bg-zinc-800/20 backdrop-blur-sm ${
+          className={`relative p-1 bg-zinc-100/60 dark:bg-black/80 backdrop-blur-sm border dark:border-zinc-800/40 ${
             radiusClasses[radius]
           } overflow-hidden ${fullWidth ? "w-full" : "inline-block"}`}
         >
@@ -179,7 +194,7 @@ const Tabs: React.FC<TabsProps> = ({
             >
               {/* Indicador de la pestaña activa/hover */}
               <motion.div
-                className={`absolute ${radiusClasses[radius]} z-0 ${indicatorBgClasses[variant]} shadow-sm`}
+                className={`absolute ${radiusClasses[radius]} z-0 ${indicatorBgClasses[variant]} dark:bg-zinc-900 shadow-sm dark:border dark:border-zinc-800/60`}
                 initial={false}
                 animate={{
                   left: indicatorStyle.left,
@@ -187,8 +202,11 @@ const Tabs: React.FC<TabsProps> = ({
                 }}
                 transition={{
                   type: "spring",
-                  stiffness: 300,
-                  damping: 26,
+                  stiffness: 220,
+                  damping: 34,
+                  mass: 1.4,
+                  restDelta: 0.001,
+                  restSpeed: 0.001,
                 }}
                 style={{
                   top: 0,
