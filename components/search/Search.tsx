@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/command";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Componentes
@@ -45,19 +44,31 @@ export function SearchCommand({ ...props }: DialogProps) {
   return (
     <>
       <Button
-        variant="outline"
+        variant="ghost"
         className={cn(
-          "relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64 bg-white dark:bg-black hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
+          "relative justify-center h-9 w-9 text-sm rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-950/90 dark:text-zinc-50 p-0"
         )}
         onClick={() => setOpen(true)}
         {...props}
       >
-        <Search className="mr-2 h-4 w-4" />
-        <span className="hidden lg:inline-flex">Buscar documentación...</span>
-        <span className="inline-flex lg:hidden">Buscar...</span>
-        <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-          <span className="text-xs">⌘</span>K
-        </kbd>
+        <div className="flex items-center justify-center w-full h-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-zinc-950 dark:text-white"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+        <span className="sr-only">Buscar</span>
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="overflow-hidden p-0">
