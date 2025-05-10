@@ -13,11 +13,11 @@ import { MenuIcon, XIcon } from "lucide-react";
 import { FaXTwitter, FaGithub } from "react-icons/fa6";
 import HeadLinks from "./HeadLinks";
 import { headerData } from "./HeaderData";
-import { SearchCommand } from "@/components/search/Search";
 import Tag from "@/components/Tags";
 import { ModeToggle } from "@/components/change-theme";
 import { sections } from "@/components/sidebar/sectionsData";
 import { RemoveScroll } from "react-remove-scroll";
+import { SearchCommand } from "@/components/search/Search";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -124,8 +124,8 @@ const Header = () => {
         <header
           className={`
             container 
-            bg-white/40 
-            dark:bg-black/40 
+            bg-white/20 
+            dark:bg-black/20 
             backdrop-blur-md 
             rounded-xl 
             border 
@@ -140,12 +140,47 @@ const Header = () => {
           `}
         >
           <div className="container flex h-16 items-center">
-            <div className="2xl:m-4 m-8 hidden md:flex md:flex-1">
-              <Link className="mr-8 flex items-center space-x-2" href="/">
+            {/* Menú hamburguesa para móvil - visible solo en móvil */}
+            <div className="md:hidden flex items-center">
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="mr-2 cursor-pointer px-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-950 dark:text-white"
+                  >
+                    <MenuIcon className="h-5 w-5" />
+                    <span className="sr-only">Toggle Menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side="left"
+                  className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
+                >
+                  <SideBar />
+
+                  <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-400 disabled:pointer-events-none text-zinc-950 dark:text-white">
+                    <XIcon className="h-4 w-4" />
+                    <span className="sr-only">Close</span>
+                  </SheetClose>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Logo a la izquierda - visible solo en desktop */}
+            <div className="hidden md:flex flex-shrink-0 basis-0 mr-4">
+              <Link className="flex items-center space-x-2" href="/">
                 <span className="font-bold text-black dark:text-white">
                   Stofli/UI
                 </span>
               </Link>
+            </div>
+
+            {/* Espacio flexible en móvil */}
+            <div className="flex md:hidden flex-1"></div>
+
+            {/* Enlaces en el centro - solo visible en desktop */}
+            <div className="hidden md:flex flex-grow basis-0 justify-center">
               <nav className="flex items-center space-x-8 text-base font-medium">
                 {headerData.map((data) => (
                   <HeadLinks
@@ -159,58 +194,27 @@ const Header = () => {
               </nav>
             </div>
 
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
+            {/* Área derecha - botones de búsqueda y tema */}
+            <div className="flex items-center justify-end space-x-2 flex-shrink-0 basis-0">
+              {/* Búsqueda - visible en ambos (desktop y móvil) */}
+              <div className="mr-1">
+                <SearchCommand />
+              </div>
+
+              {/* GitHub - visible solo en desktop */}
+              <div className="hidden md:flex items-center">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="mr-2 cursor-pointer px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden text-zinc-950 dark:text-white"
+                  className="rounded-md h-9 w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                 >
-                  <MenuIcon className="h-5 w-5" />
-                  <span className="sr-only">Toggle Menu</span>
+                  <FaGithub className="h-5 w-5 text-zinc-950 dark:text-white" />
+                  <span className="sr-only">GitHub</span>
                 </Button>
-              </SheetTrigger>
-              <SheetContent
-                side="left"
-                className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
-              >
-                <SideBar />
-
-                <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-400 disabled:pointer-events-none text-zinc-950 dark:text-white">
-                  <XIcon className="h-4 w-4" />
-                  <span className="sr-only">Close</span>
-                </SheetClose>
-              </SheetContent>
-            </Sheet>
-
-            <div className="flex flex-1 items-center justify-between space-x-4 md:justify-end">
-              <div className="flex flex-1 items-center justify-between space-x-4 md:justify-end">
-                <SearchCommand />
-                <div className="md:hidden flex items-center">
-                  <ModeToggle />
-                </div>
-                <div className="hidden md:flex items-center space-x-1">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="items-center cursor-pointer justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 dark:hover:bg-zinc-800 h-9 w-9 mr-2 hidden md:inline-flex hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
-                  >
-                    <FaGithub className="h-5 w-5" />
-                    <span className="sr-only">GitHub</span>
-                  </Button>
-
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="items-center cursor-pointer justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 dark:hover:bg-zinc-800 h-9 w-9 mr-2 hidden md:inline-flex hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
-                  >
-                    <FaXTwitter className="h-5 w-5" />
-                    <span className="sr-only">Twitter</span>
-                  </Button>
-
-                  <ModeToggle />
-                </div>
               </div>
+
+              {/* Toggle de tema - visible en ambos */}
+              <ModeToggle />
             </div>
           </div>
         </header>
