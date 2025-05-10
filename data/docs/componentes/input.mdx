@@ -38,14 +38,16 @@ Un input básico con diferentes variantes.
 <DemoTabs
   preview={
     <div className="flex flex-col gap-4">
-      <Input label="Nombre" placeholder="Introduce tu nombre" />
-      <Input label="Correo electrónico" placeholder="ejemplo@correo.com" />
+      <Input className="w-64" label="Nombre" placeholder="Introduce tu nombre" />
+      <Input className="w-64" label="Correo electrónico" placeholder="ejemplo@correo.com" />
       <Input 
+        className="w-64"
         label="Contraseña" 
         type="password" 
         placeholder="Introduce tu contraseña" 
       />
       <Input 
+        className="w-64"
         label="Input deshabilitado" 
         placeholder="No puedes modificar este campo" 
         disabled 
@@ -59,14 +61,16 @@ import { Input } from "@stofli/ui";
 export default function InputDemo() {
   return (
     <div className="flex flex-col gap-4">
-      <Input label="Nombre" placeholder="Introduce tu nombre" />
-      <Input label="Correo electrónico" placeholder="ejemplo@correo.com" />
+      <Input className="w-64" label="Nombre" placeholder="Introduce tu nombre" />
+      <Input className="w-64" label="Correo electrónico" placeholder="ejemplo@correo.com" />
       <Input 
+        className="w-64"
         label="Contraseña" 
         type="password" 
         placeholder="Introduce tu contraseña" 
       />
       <Input 
+        className="w-64"
         label="Input deshabilitado" 
         placeholder="No puedes modificar este campo" 
         disabled 
@@ -84,9 +88,9 @@ Usando la prop `size`: sm, md y lg.
 <DemoTabs
   preview={
     <div className="flex flex-col gap-4">
-      <Input size="sm" label="Pequeño" placeholder="Tamaño pequeño" />
-      <Input size="md" label="Mediano" placeholder="Tamaño mediano (por defecto)" />
-      <Input size="lg" label="Grande" placeholder="Tamaño grande" />
+      <Input className="w-64" size="sm" label="Pequeño" placeholder="Tamaño pequeño" />
+      <Input className="w-64" size="md" label="Mediano" placeholder="Tamaño mediano (por defecto)" />
+      <Input className="w-64" size="lg" label="Grande" placeholder="Tamaño grande" />
     </div>
   }
 >
@@ -96,9 +100,9 @@ import { Input } from "@stofli/ui";
 export default function InputSizesDemo() {
   return (
     <div className="flex flex-col gap-4">
-      <Input size="sm" label="Pequeño" placeholder="Tamaño pequeño" />
-      <Input size="md" label="Mediano" placeholder="Tamaño mediano (por defecto)" />
-      <Input size="lg" label="Grande" placeholder="Tamaño grande" />
+      <Input className="w-64" size="sm" label="Pequeño" placeholder="Tamaño pequeño" />
+      <Input className="w-64" size="md" label="Mediano" placeholder="Tamaño mediano (por defecto)" />
+      <Input className="w-64" size="lg" label="Grande" placeholder="Tamaño grande" />
     </div>
   );
 }
@@ -113,31 +117,37 @@ Usando la prop `variant`: default, primary, secondary, success, warning y danger
   preview={
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         variant="default" 
         label="Variante Default" 
         placeholder="Variante por defecto"
       />
       <Input 
+        className="w-64"
         variant="primary" 
         label="Variante Primary" 
         placeholder="Variante primaria"
       />
       <Input 
+        className="w-64"
         variant="secondary" 
         label="Variante Secondary" 
         placeholder="Variante secundaria"
       />
       <Input 
+        className="w-64"
         variant="success" 
         label="Variante Success" 
         placeholder="Variante éxito"
       />
       <Input 
+        className="w-64"
         variant="warning" 
         label="Variante Warning" 
         placeholder="Variante advertencia"
       />
       <Input 
+        className="w-64"
         variant="danger" 
         label="Variante Danger" 
         placeholder="Variante peligro"
@@ -152,31 +162,37 @@ export default function InputVariantsDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         variant="default" 
         label="Variante Default" 
         placeholder="Variante por defecto"
       />
       <Input 
+        className="w-64"
         variant="primary" 
         label="Variante Primary" 
         placeholder="Variante primaria"
       />
       <Input 
+        className="w-64"
         variant="secondary" 
         label="Variante Secondary" 
         placeholder="Variante secundaria"
       />
       <Input 
+        className="w-64"
         variant="success" 
         label="Variante Success" 
         placeholder="Variante éxito"
       />
       <Input 
+        className="w-64"
         variant="warning" 
         label="Variante Warning" 
         placeholder="Variante advertencia"
       />
       <Input 
+        className="w-64"
         variant="danger" 
         label="Variante Danger" 
         placeholder="Variante peligro"
@@ -195,12 +211,14 @@ Añade íconos al inicio o final del input para mejorar la experiencia visual.
   preview={
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         label="Correo electrónico" 
         placeholder="ejemplo@correo.com" 
         icon={<MailIcon />}
         iconPosition="left"
       />
       <Input 
+        className="w-64"
         label="Buscar" 
         placeholder="Buscar productos..." 
         icon={<SearchIcon />}
@@ -208,6 +226,7 @@ Añade íconos al inicio o final del input para mejorar la experiencia visual.
         variant="primary"
       />
       <Input 
+        className="w-64"
         label="Contraseña" 
         type="password"
         placeholder="Introduce tu contraseña" 
@@ -216,6 +235,7 @@ Añade íconos al inicio o final del input para mejorar la experiencia visual.
         variant="secondary"
       />
       <Input 
+        className="w-64"
         label="URL del sitio web" 
         placeholder="https://ejemplo.com" 
         icon={<LinkIcon />}
@@ -233,12 +253,14 @@ export default function InputWithIconDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         label="Correo electrónico" 
         placeholder="ejemplo@correo.com" 
         icon={<MailIcon />}
         iconPosition="left"
       />
       <Input 
+        className="w-64"
         label="Buscar" 
         placeholder="Buscar productos..." 
         icon={<SearchIcon />}
@@ -246,6 +268,7 @@ export default function InputWithIconDemo() {
         variant="primary"
       />
       <Input 
+        className="w-64"
         label="Contraseña" 
         type="password"
         placeholder="Introduce tu contraseña" 
@@ -254,6 +277,7 @@ export default function InputWithIconDemo() {
         variant="secondary"
       />
       <Input 
+        className="w-64"
         label="URL del sitio web" 
         placeholder="https://ejemplo.com" 
         icon={<LinkIcon />}
@@ -274,6 +298,7 @@ El componente Input incluye validación automática para tipos específicos como
   preview={
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         type="email"
         label="Correo electrónico" 
         placeholder="ejemplo@correo.com" 
@@ -282,6 +307,7 @@ El componente Input incluye validación automática para tipos específicos como
         successMessage="¡Correo válido!"
       />
       <Input 
+        className="w-64"
         type="url"
         label="URL del sitio web" 
         placeholder="https://ejemplo.com" 
@@ -289,6 +315,7 @@ El componente Input incluye validación automática para tipos específicos como
         successMessage="¡URL válida!"
       />
       <Input 
+        className="w-64"
         type="password"
         label="Contraseña" 
         placeholder="Mínimo 8 caracteres"
@@ -308,6 +335,7 @@ export default function InputValidationDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         type="email"
         label="Correo electrónico" 
         placeholder="ejemplo@correo.com" 
@@ -316,6 +344,7 @@ export default function InputValidationDemo() {
         successMessage="¡Correo válido!"
       />
       <Input 
+        className="w-64"
         type="url"
         label="URL del sitio web" 
         placeholder="https://ejemplo.com" 
@@ -323,6 +352,7 @@ export default function InputValidationDemo() {
         successMessage="¡URL válida!"
       />
       <Input 
+        className="w-64"
         type="password"
         label="Contraseña" 
         placeholder="Mínimo 8 caracteres"
@@ -345,6 +375,7 @@ Controla manualmente los estados de error y éxito con las props `error` y `succ
   preview={
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         label="Usuario válido" 
         placeholder="Nombre de usuario" 
         defaultValue="usuario123"
@@ -354,12 +385,14 @@ Controla manualmente los estados de error y éxito con las props `error` y `succ
         iconPosition="right"
       />
       <Input 
+        className="w-64"
         label="Correo electrónico" 
         placeholder="ejemplo@correo.com" 
         defaultValue="ghij"
         error="Introduce un correo electrónico válido"
-        icon={<XIcon />}
+        type="email"
         iconPosition="right"
+        successMessage="¡Correo válido!"
       />
     </div>
   }
@@ -372,6 +405,7 @@ export default function InputValidationStatesDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Input
+        className="w-64"
         label="Usuario válido"
         placeholder="Nombre de usuario"
         defaultValue="usuario123"
@@ -381,6 +415,7 @@ export default function InputValidationStatesDemo() {
         iconPosition="right"
       />
       <Input
+        className="w-64"
         label="Correo electrónico"
         placeholder="ejemplo@correo.com"
         defaultValue="ghij"
@@ -388,170 +423,6 @@ export default function InputValidationStatesDemo() {
         icon={<XIcon />}
         iconPosition="right"
       />
-    </div>
-  );
-}
-```
-</DemoTabs>
-
-### Placeholder animado
-
-Activa el efecto de placeholder flotante que se mueve suavemente cuando el campo está enfocado o tiene valor. Utiliza diferentes posiciones con la prop `placeholderPosition`.
-
-<DemoTabs
-  preview={
-    <div className="flex flex-col gap-6 w-full">
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Inside (por defecto)</p>
-        <Input 
-          placeholder="Nombre completo"
-          animatedPlaceholder
-          placeholderPosition="inside"
-        />
-      </div>
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside</p>
-        <Input 
-          placeholder="Email"
-          icon={<MailIcon />}
-          animatedPlaceholder
-          placeholderPosition="outside"
-        />
-      </div>
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-left</p>
-        <Input 
-          placeholder="Email"
-          icon={<MailIcon />}
-          animatedPlaceholder
-          placeholderPosition="outside-left"
-          variant="primary"
-        />
-      </div>
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-top</p>
-        <Input 
-          placeholder="Email"
-          icon={<MailIcon />}
-          animatedPlaceholder
-          placeholderPosition="outside-top"
-          variant="secondary"
-        />
-      </div>
-      <div className="grid grid-cols-4 gap-4 pt-4">
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Sin placeholder</p>
-          <Input />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Inside</p>
-          <Input 
-            placeholder="Email"
-            animatedPlaceholder
-          />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-left</p>
-          <Input 
-            placeholder="Email"
-            animatedPlaceholder
-            placeholderPosition="outside-left"
-          />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-top</p>
-          <Input 
-            placeholder="Email"
-            animatedPlaceholder
-            placeholderPosition="outside-top"
-          />
-        </div>
-      </div>
-    </div>
-  }
->
-```tsx
-import { Input } from "@stofli/ui";
-import { MailIcon } from "lucide-react";
-
-export default function AnimatedPlaceholderDemo() {
-  return (
-    <div className="flex flex-col gap-6 w-full">
-      {/* Inside (por defecto) */}
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Inside (por defecto)</p>
-        <Input 
-          placeholder="Nombre completo"
-          animatedPlaceholder
-          placeholderPosition="inside"
-        />
-      </div>
-      
-      {/* Outside */}
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside</p>
-        <Input 
-          placeholder="Email"
-          icon={<MailIcon />}
-          animatedPlaceholder
-          placeholderPosition="outside"
-        />
-      </div>
-      
-      {/* Outside-left */}
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-left</p>
-        <Input 
-          placeholder="Email"
-          icon={<MailIcon />}
-          animatedPlaceholder
-          placeholderPosition="outside-left"
-          variant="primary"
-        />
-      </div>
-      
-      {/* Outside-top */}
-      <div>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Outside-top</p>
-        <Input 
-          placeholder="Email"
-          icon={<MailIcon />}
-          animatedPlaceholder
-          placeholderPosition="outside-top"
-          variant="secondary"
-        />
-      </div>
-      
-      {/* Comparación rápida */}
-      <div className="grid grid-cols-4 gap-4 pt-4">
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Sin placeholder</p>
-          <Input />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Inside</p>
-          <Input 
-            placeholder="Email"
-            animatedPlaceholder
-          />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-left</p>
-          <Input 
-            placeholder="Email"
-            animatedPlaceholder
-            placeholderPosition="outside-left"
-          />
-        </div>
-        <div>
-          <p className="mb-2 text-xs text-center text-gray-500 dark:text-gray-400">Outside-top</p>
-          <Input 
-            placeholder="Email"
-            animatedPlaceholder
-            placeholderPosition="outside-top"
-          />
-        </div>
-      </div>
     </div>
   );
 }
@@ -566,12 +437,14 @@ Usa la prop `pattern` para validar el input con expresiones regulares personaliz
   preview={
     <div className="flex flex-col gap-4">
       <Input
+        className="w-64"
         label="Código postal (5 dígitos)"
         placeholder="Ej. 28001"
         pattern="^\d{5}$"
         successMessage="¡Código postal válido!"
       />
       <Input
+        className="w-64"
         label="Número de teléfono"
         placeholder="Ej. 600123456"
         pattern="^[6-9]\d{8}$"
@@ -587,12 +460,14 @@ export default function InputPatternDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Input
+        className="w-64"
         label="Código postal (5 dígitos)"
         placeholder="Ej. 28001"
         pattern="^\d{5}$"
         successMessage="¡Código postal válido!"
       />
       <Input
+        className="w-64"
         label="Número de teléfono"
         placeholder="Ej. 600123456"
         pattern="^[6-9]\d{8}$"
@@ -613,24 +488,28 @@ Usando la prop `radius`: none, sm, md y full.
   preview={
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         radius="none" 
         label="Sin radio" 
         placeholder="Esquinas rectas"
         variant="primary"
       />
       <Input 
+        className="w-64"
         radius="sm" 
         label="Radio pequeño" 
         placeholder="Esquinas ligeramente redondeadas"
         variant="primary"
       />
       <Input 
+        className="w-64"
         radius="md" 
         label="Radio mediano" 
         placeholder="Esquinas redondeadas (por defecto)"
         variant="primary"
       />
       <Input 
+        className="w-64"
         radius="full" 
         label="Radio completo" 
         placeholder="Esquinas totalmente redondeadas"
@@ -646,24 +525,28 @@ export default function InputRadiusDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         radius="none" 
         label="Sin radio" 
         placeholder="Esquinas rectas"
         variant="primary"
       />
       <Input 
+        className="w-64"
         radius="sm" 
         label="Radio pequeño" 
         placeholder="Esquinas ligeramente redondeadas"
         variant="primary"
       />
       <Input 
+        className="w-64"
         radius="md" 
         label="Radio mediano" 
         placeholder="Esquinas redondeadas (por defecto)"
         variant="primary"
       />
       <Input 
+        className="w-64"
         radius="full" 
         label="Radio completo" 
         placeholder="Esquinas totalmente redondeadas"
@@ -689,7 +572,7 @@ Utilizando la prop `fullWidth` para que el input ocupe todo el ancho disponible.
       />
       <Input 
         label="Input normal" 
-        placeholder="Este input tiene su ancho por defecto"
+        placeholder="Ancho por defecto"
       />
     </div>
   }
@@ -842,6 +725,7 @@ El componente Input soporta validación mediante reglas predefinidas en formato 
   preview={
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         label="Email (validación por tipo)" 
         type="email"
         placeholder="ejemplo@correo.com" 
@@ -849,24 +733,28 @@ El componente Input soporta validación mediante reglas predefinidas en formato 
         successMessage="¡Correo válido!"
       />
       <Input 
+        className="w-64"
         label="Email (validación por regla)" 
         placeholder="ejemplo@correo.com" 
         validate="email"
         successMessage="¡Correo válido!"
       />
       <Input 
+        className="w-64"
         label="URL" 
         placeholder="https://ejemplo.com" 
         validate="url"
         successMessage="¡URL válida!"
       />
       <Input 
+        className="w-64"
         label="Mínimo 8 caracteres" 
         placeholder="Al menos 8 caracteres" 
         validate="min:8"
         successMessage="¡Longitud correcta!"
       />
       <Input 
+        className="w-64"
         label="Mínimo 12 caracteres" 
         placeholder="Al menos 12 caracteres" 
         validate="min:12"
@@ -882,6 +770,7 @@ export default function InputValidationRulesDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Input 
+        className="w-64"
         label="Email (validación por tipo)" 
         type="email"
         placeholder="ejemplo@correo.com" 
@@ -889,24 +778,28 @@ export default function InputValidationRulesDemo() {
         successMessage="¡Correo válido!"
       />
       <Input 
+        className="w-64"
         label="Email (validación por regla)" 
         placeholder="ejemplo@correo.com" 
         validate="email"
         successMessage="¡Correo válido!"
       />
       <Input 
+        className="w-64"
         label="URL" 
         placeholder="https://ejemplo.com" 
         validate="url"
         successMessage="¡URL válida!"
       />
       <Input 
+        className="w-64"
         label="Mínimo 8 caracteres" 
         placeholder="Al menos 8 caracteres" 
         validate="min:8"
         successMessage="¡Longitud correcta!"
       />
       <Input 
+        className="w-64"
         label="Mínimo 12 caracteres" 
         placeholder="Al menos 12 caracteres" 
         validate="min:12"
@@ -920,33 +813,31 @@ export default function InputValidationRulesDemo() {
 
 ## Props
 
-| Prop                  | Tipo                                                                          | Default     | Descripción                                                                                                                                            |
-| --------------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `label`               | `string`                                                                      | -           | Etiqueta para el campo de entrada                                                                                                                      |
-| `placeholder`         | `string`                                                                      | `""`        | Texto de marcador de posición                                                                                                                          |
-| `type`                | `string`                                                                      | `"text"`    | Tipo de input (text, password, email, etc.)                                                                                                            |
-| `defaultValue`        | `string`                                                                      | `""`        | Valor por defecto (componente no controlado)                                                                                                           |
-| `value`               | `string`                                                                      | -           | Valor controlado del input                                                                                                                             |
-| `name`                | `string`                                                                      | -           | Nombre del campo para formularios                                                                                                                      |
-| `id`                  | `string`                                                                      | -           | ID del elemento input                                                                                                                                  |
-| `disabled`            | `boolean`                                                                     | `false`     | Deshabilita el input                                                                                                                                   |
-| `required`            | `boolean`                                                                     | `false`     | Marca el campo como requerido                                                                                                                          |
-| `error`               | `string`                                                                      | -           | Mensaje de error para mostrar                                                                                                                          |
-| `success`             | `boolean`                                                                     | `false`     | Indica si el campo tiene un valor válido                                                                                                               |
-| `pattern`             | `string`                                                                      | -           | Patrón de expresión regular para validación                                                                                                            |
-| `validate`            | `string \| ((value: string) => string \| undefined)`                          | -           | Regla de validación predefinida o función personalizada. Las reglas disponibles son: "email", "url", "min:N" donde N es el número mínimo de caracteres |
-| `successMessage`      | `string`                                                                      | -           | Mensaje a mostrar cuando el input es válido                                                                                                            |
-| `animatedPlaceholder` | `boolean`                                                                     | `false`     | Activa el efecto de placeholder flotante que se mueve suavemente                                                                                       |
-| `placeholderPosition` | `"inside" \| "outside" \| "outside-left" \| "outside-top"`                    | `"inside"`  | Posición del placeholder animado cuando está enfocado o tiene valor                                                                                    |
-| `icon`                | `ReactNode`                                                                   | -           | Ícono para mostrar junto al input                                                                                                                      |
-| `iconPosition`        | `"left" \| "right"`                                                           | `"left"`    | Posición del ícono                                                                                                                                     |
-| `variant`             | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                                                                                                                                     |
-| `size`                | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del input                                                                                                                                       |
-| `radius`              | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                                                                                                                                  |
-| `fullWidth`           | `boolean`                                                                     | `false`     | Hace que el input ocupe todo el ancho disponible                                                                                                       |
-| `className`           | `string`                                                                      | -           | Clases adicionales para el contenedor                                                                                                                  |
-| `inputClassName`      | `string`                                                                      | -           | Clases adicionales para el elemento input                                                                                                              |
-| `labelClassName`      | `string`                                                                      | -           | Clases adicionales para la etiqueta                                                                                                                    |
-| `onChange`            | `(e: React.ChangeEvent<HTMLInputElement>) => void`                            | -           | Función llamada al cambiar el valor                                                                                                                    |
-| `onFocus`             | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al enfocar el input                                                                                                                    |
-| `onBlur`              | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al perder el foco                                                                                                                      |
+| Prop             | Tipo                                                                          | Default     | Descripción                                                                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `label`          | `string`                                                                      | -           | Etiqueta para el campo de entrada                                                                                                                      |
+| `placeholder`    | `string`                                                                      | `""`        | Texto de marcador de posición                                                                                                                          |
+| `type`           | `string`                                                                      | `"text"`    | Tipo de input (text, password, email, etc.)                                                                                                            |
+| `defaultValue`   | `string`                                                                      | `""`        | Valor por defecto (componente no controlado)                                                                                                           |
+| `value`          | `string`                                                                      | -           | Valor controlado del input                                                                                                                             |
+| `name`           | `string`                                                                      | -           | Nombre del campo para formularios                                                                                                                      |
+| `id`             | `string`                                                                      | -           | ID del elemento input                                                                                                                                  |
+| `disabled`       | `boolean`                                                                     | `false`     | Deshabilita el input                                                                                                                                   |
+| `required`       | `boolean`                                                                     | `false`     | Marca el campo como requerido                                                                                                                          |
+| `error`          | `string`                                                                      | -           | Mensaje de error para mostrar                                                                                                                          |
+| `success`        | `boolean`                                                                     | `false`     | Indica si el campo tiene un valor válido                                                                                                               |
+| `pattern`        | `string`                                                                      | -           | Patrón de expresión regular para validación                                                                                                            |
+| `validate`       | `string \| ((value: string) => string \| undefined)`                          | -           | Regla de validación predefinida o función personalizada. Las reglas disponibles son: "email", "url", "min:N" donde N es el número mínimo de caracteres |
+| `successMessage` | `string`                                                                      | -           | Mensaje a mostrar cuando el input es válido                                                                                                            |
+| `icon`           | `ReactNode`                                                                   | -           | Ícono para mostrar junto al input                                                                                                                      |
+| `iconPosition`   | `"left" \| "right"`                                                           | `"left"`    | Posición del ícono                                                                                                                                     |
+| `variant`        | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                                                                                                                                     |
+| `size`           | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del input                                                                                                                                       |
+| `radius`         | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                                                                                                                                  |
+| `fullWidth`      | `boolean`                                                                     | `false`     | Hace que el input ocupe todo el ancho disponible                                                                                                       |
+| `className`      | `string`                                                                      | -           | Clases adicionales para el contenedor                                                                                                                  |
+| `inputClassName` | `string`                                                                      | -           | Clases adicionales para el elemento input                                                                                                              |
+| `labelClassName` | `string`                                                                      | -           | Clases adicionales para la etiqueta                                                                                                                    |
+| `onChange`       | `(e: React.ChangeEvent<HTMLInputElement>) => void`                            | -           | Función llamada al cambiar el valor                                                                                                                    |
+| `onFocus`        | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al enfocar el input                                                                                                                    |
+| `onBlur`         | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al perder el foco                                                                                                                      |
