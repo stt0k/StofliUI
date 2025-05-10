@@ -109,11 +109,18 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const checkboxVariants = {
     checked: {
-      scale: [1, 1.2, 1],
-      transition: { duration: 0.3, ease: "easeOut" },
+      scale: [1, 1.1, 1],
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1],
+      },
     },
     unchecked: {
       scale: 1,
+      transition: {
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1],
+      },
     },
   };
 
@@ -121,12 +128,18 @@ const Checkbox: React.FC<CheckboxProps> = ({
     checked: {
       pathLength: 1,
       opacity: 1,
-      transition: { duration: 0.3, ease: "easeOut" },
+      transition: {
+        pathLength: { duration: 0.2, ease: "easeOut" },
+        opacity: { duration: 0.15, ease: "easeOut" },
+      },
     },
     unchecked: {
       pathLength: 0,
       opacity: 0,
-      transition: { duration: 0.3, ease: "easeIn" },
+      transition: {
+        pathLength: { duration: 0.2, ease: "easeOut", delay: 0.05 },
+        opacity: { duration: 0.2, ease: "easeOut" },
+      },
     },
   };
 
