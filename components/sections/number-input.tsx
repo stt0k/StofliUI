@@ -570,7 +570,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
           className={`block mb-1 font-medium ${sizeClasses[size].label} ${variantClasses[variant].text}`}
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
 
