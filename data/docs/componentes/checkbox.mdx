@@ -32,7 +32,7 @@ export default function App() {
 
 ### Básico
 
-Muestra tres estados del checkbox: normal, marcado y deshabilitado.
+Muestra cuatro estados del checkbox: normal, marcado, deshabilitado y requerido.
 
 <DemoTabs
   preview={
@@ -40,6 +40,7 @@ Muestra tres estados del checkbox: normal, marcado y deshabilitado.
       <Checkbox label="Checkbox básico" />
       <Checkbox label="Checkbox marcado por defecto" defaultChecked />
       <Checkbox label="Checkbox deshabilitado" disabled />
+      <Checkbox label="Checkbox requerido" required />
     </div>
   }
 >
@@ -52,6 +53,7 @@ export default function CheckboxDemo() {
       <Checkbox label="Checkbox básico" />
       <Checkbox label="Checkbox marcado por defecto" defaultChecked />
       <Checkbox label="Checkbox deshabilitado" disabled />
+      <Checkbox label="Checkbox requerido" required />
     </div>
   );
 }
@@ -192,17 +194,17 @@ export default function CheckboxRadiusDemo() {
 
 ## Props
 
-| Prop             | Tipo                                          | Default     | Descripción                                     |
-| --------------- | --------------------------------------------- | ----------- | ----------------------------------------------- |
-| `checked`       | `boolean`                  | -           | Estado controlado del checkbox                  |
-| `defaultChecked`| `boolean`                  | `false`     | Estado inicial del checkbox                     |
-| `disabled`      | `boolean`                  | `false`     | Deshabilita el checkbox                        |
-| `required`      | `boolean`                  | `false`     | Marca el checkbox como requerido               |
-| `label`         | `string`                   | -           | Texto de la etiqueta                           |
-| `name`          | `string`                   | -           | Nombre del campo para formularios              |
-| `value`         | `string`                   | -           | Valor del checkbox                             |
-| `size`          | `"sm" \| "md" \| "lg"`    | `"md"`      | Tamaño del checkbox                            |
-| `variant`       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo |
-| `radius`        | `"none" \| "sm" \| "md" \| "full"`   | `"md"`      | Radio de las esquinas                          |
-| `className`     | `string`                   | -           | Clases adicionales                             |
-| `onChange`      | `(checked: boolean) => void`| -          | Función llamada al cambiar el estado           |
+| Prop             | Tipo                                                                          | Default     | Descripción                          |
+| ---------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------ |
+| `checked`        | `boolean`                                                                     | -           | Estado controlado del checkbox       |
+| `defaultChecked` | `boolean`                                                                     | `false`     | Estado inicial del checkbox          |
+| `disabled`       | `boolean`                                                                     | `false`     | Deshabilita el checkbox              |
+| `required`       | `boolean`                                                                     | `false`     | Marca el checkbox como requerido     |
+| `label`          | `string`                                                                      | -           | Texto de la etiqueta                 |
+| `name`           | `string`                                                                      | -           | Nombre del campo para formularios    |
+| `value`          | `string`                                                                      | -           | Valor del checkbox                   |
+| `size`           | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del checkbox                  |
+| `variant`        | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                   |
+| `radius`         | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                |
+| `className`      | `string`                                                                      | -           | Clases adicionales                   |
+| `onChange`       | `(checked: boolean) => void`                                                  | -           | Función llamada al cambiar el estado |
