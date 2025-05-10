@@ -20,13 +20,11 @@ export const headerData = [
   {
     title: "Ejemplos",
     link: "/docs/ejemplos",
-    hidden: true,
     relatedPaths: ["/docs/ejemplos"],
   },
   {
     title: "Changelog",
     link: "/docs/changelog",
-    hidden: true,
     relatedPaths: ["/docs/changelog"],
   },
   {
