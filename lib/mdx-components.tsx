@@ -1,5 +1,4 @@
 import type { MDXComponents } from "mdx/types";
-import ButtonHome from "@/components/home/ButtonHome";
 import CardSpotlight from "@/components/CardSpotlight";
 import dynamic from "next/dynamic";
 import CodeBlock from "@/components/mdx/CodeBlock";
@@ -370,7 +369,6 @@ const components: MDXComponents = {
   hr: () => <hr className="my-8 dark:border-zinc-700 border-zinc-200" />,
 
   // Componentes del servidor
-  ButtonHome,
   CardSpotlight,
   CodeBlock,
 
