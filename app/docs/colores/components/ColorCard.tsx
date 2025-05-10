@@ -1,5 +1,6 @@
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { Copy, Check } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface ColorCardProps {
   shade: {
@@ -16,38 +17,18 @@ interface ColorCardProps {
 
 const ColorCard: React.FC<ColorCardProps> = memo(
   ({ shade, format, copiedColor, onCopy }) => {
+    const [showCopiedOverlay, setShowCopiedOverlay] = useState(false);
+
+    // Sincronizar el estado local con el estado del contexto
+    useEffect(() => {
+      const isCopied = copiedColor === shade[format];
+      setShowCopiedOverlay(isCopied);
+    }, [copiedColor, shade, format]);
+
     const handleClick = (e: React.MouseEvent) => {
       e.stopPropagation();
       onCopy(shade[format]);
     };
-
-    React.useEffect(() => {
-      // Agregar animaciones globales si no existen
-      if (!document.getElementById("color-card-animations")) {
-        const styleSheet = document.createElement("style");
-        styleSheet.id = "color-card-animations";
-        styleSheet.innerHTML = `
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          
-          @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-          }
-          
-          .animate-fadeIn {
-            animation: fadeIn 0.5s ease-in-out;
-          }
-          
-          .animate-scaleIn {
-            animation: scaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-          }
-        `;
-        document.head.appendChild(styleSheet);
-      }
-    }, []);
 
     return (
       <div className="relative group overflow-hidden rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
@@ -69,11 +50,33 @@ const ColorCard: React.FC<ColorCardProps> = memo(
               className="p-1 md:p-1.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors"
               aria-label="Copiar"
             >
-              {copiedColor === shade[format] ? (
-                <Check className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-500" />
-              ) : (
-                <Copy className="w-3 h-3 md:w-3.5 md:h-3.5 text-gray-500 group-hover:text-gray-700 dark:text-zinc-400 dark:group-hover:text-zinc-100" />
-              )}
+              <div className="relative w-3.5 h-3.5">
+                <AnimatePresence initial={false} mode="sync">
+                  {copiedColor === shade[format] ? (
+                    <motion.div
+                      key="check"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute inset-0 flex items-center justify-center text-green-500"
+                    >
+                      <Check className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="copy"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute inset-0 flex items-center justify-center text-gray-500 group-hover:text-gray-700 dark:text-zinc-400 dark:group-hover:text-zinc-100"
+                    >
+                      <Copy className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </button>
           </div>
           <div
@@ -86,13 +89,27 @@ const ColorCard: React.FC<ColorCardProps> = memo(
         </div>
 
         {/* Indicador de copiado */}
-        {copiedColor === shade[format] && (
-          <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/10 transition-all duration-500 ease-in-out pointer-events-none rounded-lg overflow-hidden animate-fadeIn">
-            <div className="bg-white/80 dark:bg-white/20 backdrop-blur-md border border-white/50 dark:border-white/30 text-gray-800 dark:text-white text-xs md:text-sm font-medium px-2 py-1 md:px-3 md:py-1.5 rounded-lg shadow-lg animate-scaleIn">
-              ¡Copiado!
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {showCopiedOverlay && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 flex items-center justify-center backdrop-blur-sm bg-black/10 pointer-events-none rounded-lg overflow-hidden"
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="bg-white/80 dark:bg-white/20 backdrop-blur-md border border-white/50 dark:border-white/30 text-gray-800 dark:text-white text-xs md:text-sm font-medium px-2 py-1 md:px-3 md:py-1.5 rounded-lg shadow-lg"
+              >
+                ¡Copiado!
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
