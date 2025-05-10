@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export interface InputProps {
   label?: string;
@@ -36,8 +36,6 @@ export interface InputProps {
   pattern?: string;
   validate?: string | ((value: string) => string | undefined);
   successMessage?: string;
-  animatedPlaceholder?: boolean;
-  placeholderPosition?: "inside" | "outside" | "outside-left" | "outside-top";
 }
 
 const Input: React.FC<InputProps> = ({
@@ -67,8 +65,6 @@ const Input: React.FC<InputProps> = ({
   pattern,
   validate,
   successMessage,
-  animatedPlaceholder = false,
-  placeholderPosition = "inside",
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(defaultValue);
@@ -82,10 +78,6 @@ const Input: React.FC<InputProps> = ({
   // Manejamos el caso de componente controlado o no controlado
   const isControlled = value !== undefined;
   const currentValue = isControlled ? value : inputValue;
-
-  // Verificamos si el campo tiene valor para la animación del placeholder
-  const hasValue = currentValue?.length > 0;
-  const showAnimatedPlaceholder = animatedPlaceholder && placeholder;
 
   useEffect(() => {
     // Actualizar el error de validación externo
@@ -288,11 +280,11 @@ const Input: React.FC<InputProps> = ({
   };
 
   // Clases para el placeholder animado
-  const placeholderSizeClasses = {
-    sm: "text-xs",
-    md: "text-sm",
-    lg: "text-base",
-  };
+  // const placeholderSizeClasses = {
+  //   sm: "text-xs",
+  //   md: "text-sm",
+  //   lg: "text-base",
+  // };
 
   const variantClasses = {
     default: {
@@ -381,7 +373,7 @@ const Input: React.FC<InputProps> = ({
           } ${labelClassName}`}
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
 
@@ -433,7 +425,6 @@ const Input: React.FC<InputProps> = ({
                 ? "opacity-60 cursor-not-allowed"
                 : "focus:outline-none focus:ring-0 transition-all duration-200"
             }
-            ${showAnimatedPlaceholder ? "placeholder:text-transparent" : ""}
             ${inputClassName}
           `}
           placeholder={placeholder}
@@ -473,122 +464,6 @@ const Input: React.FC<InputProps> = ({
               className: `${iconSizeClasses[size]}`,
             })}
           </div>
-        )}
-
-        {/* Placeholder animado con posiciones personalizadas */}
-        {showAnimatedPlaceholder && (
-          <AnimatePresence>
-            <motion.div
-              className={`pointer-events-none absolute text-zinc-500 dark:text-zinc-400 ${placeholderSizeClasses[size]}`}
-              initial={false}
-              animate={{
-                // Posicionamiento vertical según la posición
-                top:
-                  placeholderPosition === "outside-top" &&
-                  (isFocused || hasValue)
-                    ? "-22px"
-                    : "50%",
-
-                // Transformación Y
-                y:
-                  placeholderPosition === "outside-top" &&
-                  (isFocused || hasValue)
-                    ? 0
-                    : "-50%",
-
-                // Posicionamiento horizontal
-                left:
-                  placeholderPosition === "outside-left"
-                    ? isFocused || hasValue
-                      ? "-10px"
-                      : icon && iconPosition === "left"
-                      ? size === "sm"
-                        ? "28px"
-                        : size === "md"
-                        ? "35px"
-                        : "40px"
-                      : size === "sm"
-                      ? "12px"
-                      : size === "md"
-                      ? "16px"
-                      : "20px"
-                    : placeholderPosition === "outside-top" &&
-                      (isFocused || hasValue)
-                    ? "0px"
-                    : placeholderPosition === "outside"
-                    ? isFocused || hasValue
-                      ? "calc(100% + 10px)"
-                      : icon && iconPosition === "left"
-                      ? size === "sm"
-                        ? "28px"
-                        : size === "md"
-                        ? "35px"
-                        : "40px"
-                      : size === "sm"
-                      ? "12px"
-                      : size === "md"
-                      ? "16px"
-                      : "20px"
-                    : isFocused || hasValue
-                    ? "10px"
-                    : icon && iconPosition === "left"
-                    ? size === "sm"
-                      ? "28px"
-                      : size === "md"
-                      ? "35px"
-                      : "40px"
-                    : size === "sm"
-                    ? "12px"
-                    : size === "md"
-                    ? "16px"
-                    : "20px",
-
-                // Transformación
-                scale: isFocused || hasValue ? 0.9 : 1,
-
-                // Transformaciones horizontales adicionales
-                x:
-                  placeholderPosition === "outside-left" &&
-                  (isFocused || hasValue)
-                    ? "-100%"
-                    : 0,
-
-                // Color
-                color: isFocused
-                  ? variant === "default"
-                    ? "rgb(113, 113, 122)"
-                    : variant === "primary"
-                    ? "rgb(59, 130, 246)"
-                    : variant === "secondary"
-                    ? "rgb(168, 85, 247)"
-                    : variant === "success"
-                    ? "rgb(34, 197, 94)"
-                    : variant === "warning"
-                    ? "rgb(245, 158, 11)"
-                    : "rgb(239, 68, 68)"
-                  : "rgb(113, 113, 122)",
-
-                // Sin fondo
-                backgroundColor: "transparent",
-                padding: 0,
-
-                // Posición z para asegurar que esté por encima de los bordes en outside-top
-                zIndex:
-                  placeholderPosition === "outside-top" &&
-                  (isFocused || hasValue)
-                    ? 10
-                    : 0,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 120, // Menos stiffness para movimiento más suave
-                damping: 24, // Mayor damping para reducir rebotes
-                mass: 0.6, // Masa más baja para una animación más fluida
-              }}
-            >
-              {placeholder}
-            </motion.div>
-          </AnimatePresence>
         )}
       </div>
 
