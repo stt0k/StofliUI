@@ -354,6 +354,84 @@ export default function TabsSizesDemo() {
 ```
 </DemoTabs>
 
+### Radios
+
+Usando la prop `radius`: none, sm, md y full.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-6">
+      <Tabs
+        radius="none"
+        tabs={[
+          { label: "Sin radio", content: <p>Tabs con esquinas cuadradas</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+      <Tabs
+        radius="sm"
+        tabs={[
+          { label: "Radio pequeño", content: <p>Tabs con radio pequeño</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+      <Tabs
+        radius="md"
+        tabs={[
+          { label: "Radio mediano", content: <p>Tabs con radio mediano</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+      <Tabs
+        radius="full"
+        tabs={[
+          { label: "Radio completo", content: <p>Tabs con radio completo</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+    </div>
+  }
+>
+```tsx
+import { Tabs } from "@stofli/ui";
+
+export default function TabsRadiusDemo() {
+  return (
+    <div className="flex flex-col gap-6">
+      <Tabs
+        radius="none"
+        tabs={[
+          { label: "Sin radio", content: <p>Tabs con esquinas cuadradas</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+      <Tabs
+        radius="sm"
+        tabs={[
+          { label: "Radio pequeño", content: <p>Tabs con radio pequeño</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+      <Tabs
+        radius="md"
+        tabs={[
+          { label: "Radio mediano", content: <p>Tabs con radio mediano</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+      <Tabs
+        radius="full"
+        tabs={[
+          { label: "Radio completo", content: <p>Tabs con radio completo</p> },
+          { label: "Tab 2", content: <p>Contenido 2</p> }
+        ]}
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
 ### Anchura completa
 
 Usando la prop `fullWidth` para expandir las pestañas al ancho completo del contenedor.
