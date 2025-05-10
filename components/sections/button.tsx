@@ -25,6 +25,7 @@ export interface ButtonProps
   rightIcon?: React.ReactNode;
   withArrow?: boolean;
   withRipple?: boolean;
+  rippleColor?: string;
   className?: string;
 }
 
@@ -50,6 +51,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       rightIcon,
       withArrow = false,
       withRipple = true,
+      rippleColor,
       disabled,
       onClick,
       ...props
@@ -219,26 +221,33 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ripples.map((ripple) => (
               <motion.span
                 key={ripple.id}
-                className={`absolute rounded-full pointer-events-none ${
-                  variant === "outline" ||
-                  variant === "ghost" ||
-                  variant === "link"
-                    ? "bg-zinc-800 dark:bg-zinc-200 opacity-15"
-                    : "bg-white dark:bg-zinc-200 opacity-35"
-                }`}
+                className={
+                  !rippleColor
+                    ? `absolute rounded-full pointer-events-none ${
+                        variant === "outline" ||
+                        variant === "ghost" ||
+                        variant === "link"
+                          ? "bg-zinc-500 dark:bg-zinc-200 opacity-15"
+                          : "bg-white dark:bg-zinc-200 opacity-35"
+                      }`
+                    : "absolute rounded-full pointer-events-none"
+                }
                 style={{
                   left: ripple.x - ripple.size / 2,
                   top: ripple.y - ripple.size / 2,
                   width: ripple.size,
                   height: ripple.size,
+                  backgroundColor: rippleColor,
+                  opacity: rippleColor ? 0.25 : undefined,
                 }}
                 initial={{
-                  opacity:
-                    variant === "outline" ||
-                    variant === "ghost" ||
-                    variant === "link"
-                      ? 0.15
-                      : 0.35,
+                  opacity: rippleColor
+                    ? 0.25
+                    : variant === "outline" ||
+                      variant === "ghost" ||
+                      variant === "link"
+                    ? 0.25
+                    : 0.35,
                   scale: 0,
                   zIndex: 1,
                 }}
