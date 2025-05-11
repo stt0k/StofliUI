@@ -19,9 +19,7 @@ npx @stofli/ui add pagination
 import { Pagination } from "@stofli/ui";
 
 export default function App() {
-  return (
-    <Pagination totalPages={10} currentPage={1} onPageChange={(page) => {}} />
-  );
+  return <Pagination totalPages={10} currentPage={1} />;
 }
 ```
 
@@ -46,7 +44,6 @@ export default function PaginationDemo() {
     <Pagination
       totalPages={10}
       currentPage={1}
-      onPageChange={(page) => {}}
     />
   );
 }
@@ -131,11 +128,7 @@ import { Pagination } from "@stofli/ui";
 
 export default function PaginationWithEdgesDemo() {
   return (
-    <Pagination 
-      totalPages={10} 
-      withEdges 
-      onPageChange={(page) => {}}
-    />
+    <Pagination totalPages={10} withEdges />
   );
 }
 ```
@@ -157,37 +150,148 @@ import { Pagination } from "@stofli/ui";
 
 export default function PaginationWithTextDemo() {
   return (
-    <Pagination 
-      totalPages={10} 
-      withText 
-      onPageChange={(page) => {}}
-    />
+    <Pagination totalPages={10} withText />
   );
 }
 ```
 </DemoTabs>
 
-### Solo con flechas de navegación
+### Con texto personalizado en los botones
 
-Configurado con `withNumbers={false}` para mostrar solo los botones de navegación sin números de página.
+Puedes personalizar el texto que aparece en los botones de navegación usando la propiedad `customText`.
 
 <DemoTabs
   preview={
     <div className="w-full flex justify-center">
-      <Pagination totalPages={10} withNumbers={false} />
+      <Pagination 
+        totalPages={10} 
+        withText 
+        withEdges
+        customText={{
+          previous: "Atrás",
+          next: "Adelante",
+          first: "Inicio",
+          last: "Final"
+        }}
+      />
     </div>
   }
 >
 ```tsx
 import { Pagination } from "@stofli/ui";
 
-export default function PaginationArrowsOnlyDemo() {
+export default function PaginationCustomTextDemo() {
   return (
     <Pagination 
       totalPages={10} 
-      withNumbers={false} 
-      onPageChange={(page) => {}}
+      withText 
+      withEdges
+      customText={{
+        previous: "Atrás",
+        next: "Adelante",
+        first: "Inicio",
+        last: "Final"
+      }}
     />
+  );
+}
+```
+</DemoTabs>
+
+### Mostrar solo botón siguiente o anterior
+
+Usando las propiedades `showPrevious` y `showNext`, puedes controlar qué botones de navegación se muestran. Esto es útil para la primera o última página.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4 w-full">
+      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+        <Pagination 
+          totalPages={10} 
+          withNumbers={false}
+          fullWidth 
+          withText
+          showPrevious={false}
+          showNext={true}
+          customText={{ next: "Siguiente página" }}
+        />
+      </div>
+      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+        <Pagination 
+          totalPages={10} 
+          withNumbers={false}
+          fullWidth 
+          withText
+          showPrevious={true}
+          showNext={false}
+          customText={{ previous: "Página anterior" }}
+        />
+      </div>
+    </div>
+  }
+>
+```tsx
+import { Pagination } from "@stofli/ui";
+
+export default function PaginationSingleButtonDemo() {
+  return (
+    <div className="flex flex-col gap-4 w-full">
+      {/* Solo botón siguiente (útil para primera página) */}
+      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+        <Pagination 
+          totalPages={10} 
+          withNumbers={false}
+          fullWidth 
+          withText
+          showPrevious={false}
+          showNext={true}
+          customText={{ next: "Siguiente página" }}
+        />
+      </div>
+      
+      {/* Solo botón anterior (útil para última página) */}
+      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+        <Pagination 
+          totalPages={10} 
+          withNumbers={false}
+          fullWidth 
+          withText
+          showPrevious={true}
+          showNext={false}
+          customText={{ previous: "Página anterior" }}
+        />
+      </div>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Ancho completo
+
+Usando `fullWidth={true}`, el componente ocupará todo el ancho disponible de su contenedor y aplicará un diseño con espacio entre los botones (justify-between).
+
+<DemoTabs
+  preview={
+    <div className="w-full border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+      <Pagination 
+        totalPages={10} 
+        fullWidth 
+      />
+    </div>
+  }
+>
+```tsx
+import { Pagination } from "@stofli/ui";
+
+export default function PaginationFullWidthDemo() {
+  return (
+    <div className="w-full border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+      <Pagination 
+        totalPages={10} 
+        fullWidth 
+      />
+    </div>
   );
 }
 ```
@@ -212,7 +316,6 @@ export default function PaginationDisabledDemo() {
     <Pagination 
       totalPages={10} 
       disabled 
-      onPageChange={(page) => {}}
     />
   );
 }
@@ -221,16 +324,20 @@ export default function PaginationDisabledDemo() {
 
 ## Props
 
-| Prop            | Tipo                                                                          | Default     | Descripción                                          |
-| --------------- | ----------------------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
-| `totalPages`    | `number`                                                                      | -           | Número total de páginas (requerido)                  |
-| `currentPage`   | `number`                                                                      | `1`         | Página actual                                        |
-| `onPageChange`  | `(page: number) => void`                                                      | -           | Función que se ejecuta al cambiar de página          |
-| `siblingsCount` | `number`                                                                      | `1`         | Número de páginas adyacentes a mostrar               |
-| `variant`       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de color del componente                     |
-| `size`          | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del componente                                |
-| `withNumbers`   | `boolean`                                                                     | `true`      | Mostrar números de página                            |
-| `withEdges`     | `boolean`                                                                     | `false`     | Mostrar botones para ir a la primera y última página |
-| `withText`      | `boolean`                                                                     | `false`     | Mostrar texto en los botones de navegación           |
-| `disabled`      | `boolean`                                                                     | `false`     | Deshabilitar el componente                           |
-| `className`     | `string`                                                                      | -           | Clases adicionales para el componente                |
+| Prop            | Tipo                                                                          | Default                                                                         | Descripción                                             |
+| --------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `totalPages`    | `number`                                                                      | -                                                                               | Número total de páginas (requerido)                     |
+| `currentPage`   | `number`                                                                      | `1`                                                                             | Página actual                                           |
+| `onPageChange`  | `(page: number) => void`                                                      | -                                                                               | Función que se ejecuta al cambiar de página             |
+| `siblingsCount` | `number`                                                                      | `1`                                                                             | Número de páginas adyacentes a mostrar                  |
+| `variant`       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`                                                                     | Variante de color del componente                        |
+| `size`          | `"sm" \| "md" \| "lg"`                                                        | `"md"`                                                                          | Tamaño del componente                                   |
+| `withNumbers`   | `boolean`                                                                     | `true`                                                                          | Mostrar números de página                               |
+| `withEdges`     | `boolean`                                                                     | `false`                                                                         | Mostrar botones para ir a la primera y última página    |
+| `withText`      | `boolean`                                                                     | `false`                                                                         | Mostrar texto en los botones de navegación              |
+| `disabled`      | `boolean`                                                                     | `false`                                                                         | Deshabilitar el componente                              |
+| `className`     | `string`                                                                      | -                                                                               | Clases adicionales para el componente                   |
+| `fullWidth`     | `boolean`                                                                     | `false`                                                                         | Ocupar todo el ancho disponible y aplicar space-between |
+| `customText`    | `object`                                                                      | `{ previous: "Anterior", next: "Siguiente", first: "Primera", last: "Última" }` | Personalizar el texto de los botones de navegación      |
+| `showPrevious`  | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia atrás              |
+| `showNext`      | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia adelante           |
