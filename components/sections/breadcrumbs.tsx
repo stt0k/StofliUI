@@ -8,6 +8,7 @@ export interface BreadcrumbItem {
   label: string;
   href?: string;
   icon?: React.ReactNode;
+  className?: string;
 }
 
 export interface BreadcrumbsProps {
@@ -94,7 +95,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             {clickable ? (
               <Link
                 href="/"
-                className={`flex items-center hover:opacity-80 transition-opacity ${variantClasses[variant]}`}
+                className={`flex items-center ${variantClasses[variant]}`}
               >
                 <Home
                   className={`h-4 w-4 ${
@@ -144,7 +145,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             )}
             {index === items.length - 1 ? (
               <span
-                className={`${currentClasses[variant]} flex items-center`}
+                className={`${currentClasses[variant]} flex items-center ${
+                  item.className || ""
+                }`}
                 aria-current="page"
               >
                 {item.icon && (
@@ -157,7 +160,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             ) : clickable && item.href ? (
               <Link
                 href={item.href}
-                className={`flex items-center hover:opacity-80 transition-opacity ${variantClasses[variant]}`}
+                className={`flex items-center ${variantClasses[variant]} ${
+                  item.className || ""
+                }`}
               >
                 {item.icon && (
                   <span className="inline-flex items-center mr-1">
@@ -168,7 +173,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
               </Link>
             ) : (
               <span
-                className={`flex items-center ${nonCurrentClasses[variant]}`}
+                className={`flex items-center ${nonCurrentClasses[variant]} ${
+                  item.className || ""
+                }`}
               >
                 {item.icon && (
                   <span className="inline-flex items-center mr-1">
