@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 import Header from "@/components/header/Header";
 import FooterDocs from "@/components/footer/FooterDocs";
+import Pagination from "@/components/sections/pagination";
+import { useRouter, usePathname } from "next/navigation";
 
 interface NavItem {
   title: string;
@@ -15,8 +17,146 @@ interface MainLayoutProps {
   navItems?: NavItem[];
 }
 
+// Secciones principales y frameworks en orden predefinido
+const mainPages = [
+  { name: "introducción", path: "/docs/introduccion", section: "main" },
+  { name: "instalación", path: "/docs/instalacion", section: "main" },
+];
+
+const frameworkPages = [
+  { name: "next.js", path: "/docs/frameworks/nextjs", section: "frameworks" },
+  { name: "astro", path: "/docs/frameworks/astro", section: "frameworks" },
+  { name: "vite", path: "/docs/frameworks/vite", section: "frameworks" },
+  { name: "react", path: "/docs/frameworks/react", section: "frameworks" },
+];
+
+// Componentes (se ordenarán alfabéticamente)
+const componentPages = [
+  {
+    name: "accordion",
+    path: "/docs/componentes/accordion",
+    section: "componentes",
+  },
+  {
+    name: "autocomplete",
+    path: "/docs/componentes/autocomplete",
+    section: "componentes",
+  },
+  { name: "avatar", path: "/docs/componentes/avatar", section: "componentes" },
+  { name: "badge", path: "/docs/componentes/badge", section: "componentes" },
+  {
+    name: "breadcrumbs",
+    path: "/docs/componentes/breadcrumbs",
+    section: "componentes",
+  },
+  { name: "button", path: "/docs/componentes/button", section: "componentes" },
+  {
+    name: "calendar",
+    path: "/docs/componentes/calendar",
+    section: "componentes",
+  },
+  { name: "card", path: "/docs/componentes/card", section: "componentes" },
+  {
+    name: "checkbox",
+    path: "/docs/componentes/checkbox",
+    section: "componentes",
+  },
+  {
+    name: "circular-progress",
+    path: "/docs/componentes/circular-progress",
+    section: "componentes",
+  },
+  {
+    name: "date-picker",
+    path: "/docs/componentes/date-picker",
+    section: "componentes",
+  },
+  {
+    name: "dropdown",
+    path: "/docs/componentes/dropdown",
+    section: "componentes",
+  },
+  { name: "input", path: "/docs/componentes/input", section: "componentes" },
+  {
+    name: "number-input",
+    path: "/docs/componentes/number-input",
+    section: "componentes",
+  },
+  {
+    name: "pagination",
+    path: "/docs/componentes/pagination",
+    section: "componentes",
+  },
+  {
+    name: "progress",
+    path: "/docs/componentes/progress",
+    section: "componentes",
+  },
+  {
+    name: "spinner",
+    path: "/docs/componentes/spinner",
+    section: "componentes",
+  },
+  { name: "switch", path: "/docs/componentes/switch", section: "componentes" },
+  { name: "tabs", path: "/docs/componentes/tabs", section: "componentes" },
+  { name: "toast", path: "/docs/componentes/toast", section: "componentes" },
+  {
+    name: "tooltip",
+    path: "/docs/componentes/tooltip",
+    section: "componentes",
+  },
+].sort((a, b) => a.name.localeCompare(b.name));
+
+// Crear estructura unificada de todas las páginas para la navegación
+const allPages = [...mainPages, ...frameworkPages, ...componentPages];
+
 const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
   const hasNavItems = navItems.length > 0;
+  const router = useRouter();
+  const pathname = usePathname();
+  const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
+  const totalPages = allPages.length;
+
+  useEffect(() => {
+    // Encontrar el índice de la página actual en nuestra lista unificada
+    const currentIndex = allPages.findIndex(
+      (page) => pathname === page.path || pathname.endsWith(page.name)
+    );
+    setCurrentPageIndex(currentIndex !== -1 ? currentIndex + 1 : 0);
+  }, [pathname]);
+
+  const handlePageChange = (page: number) => {
+    if (page > 0 && page <= totalPages) {
+      const targetPage = allPages[page - 1];
+      router.push(targetPage.path);
+    }
+  };
+
+  // Obtener títulos para los botones de navegación
+  const getPrevNextTitles = () => {
+    const prevIndex = currentPageIndex - 2; // -2 porque currentPageIndex empieza en 1
+    const nextIndex = currentPageIndex;
+
+    const prevTitle = prevIndex >= 0 ? allPages[prevIndex].name : "";
+    const nextTitle = nextIndex < totalPages ? allPages[nextIndex].name : "";
+
+    // Capitalizar primera letra y reemplazar guiones por espacios
+    const formatTitle = (title: string) => {
+      if (!title) return "";
+      return title
+        .replace(/-/g, " ")
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    };
+
+    return {
+      previous: formatTitle(prevTitle),
+      next: formatTitle(nextTitle),
+    };
+  };
+
+  const { previous, next } = getPrevNextTitles();
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
@@ -28,6 +168,29 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
             <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
               <div className="mx-auto w-full min-w-0 min-h-[calc(100vh-12rem)]">
                 {children} {/* Aquí va el contenido dinámico que pasas */}
+                {/* Paginación unificada para todas las secciones */}
+                {currentPageIndex > 0 && (
+                  <div className="mt-20 pb-8 px-2 ms-6">
+                    <Pagination
+                      totalPages={totalPages}
+                      currentPage={currentPageIndex}
+                      onPageChange={handlePageChange}
+                      variant="default"
+                      withNumbers={false}
+                      withText={true}
+                      withEdges={false}
+                      size="md"
+                      siblingsCount={1}
+                      fullWidth={true}
+                      customText={{
+                        previous: previous ? `${previous}` : "Página anterior",
+                        next: next ? `${next}` : "Página siguiente",
+                      }}
+                      showPrevious={currentPageIndex > 1}
+                      showNext={currentPageIndex < totalPages}
+                    />
+                  </div>
+                )}
               </div>
               {hasNavItems && (
                 <div className="hidden text-sm xl:block">
