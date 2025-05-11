@@ -22,6 +22,15 @@ export interface PaginationProps {
   withText?: boolean;
   disabled?: boolean;
   className?: string;
+  fullWidth?: boolean;
+  customText?: {
+    previous?: string;
+    next?: string;
+    first?: string;
+    last?: string;
+  };
+  showPrevious?: boolean;
+  showNext?: boolean;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -36,6 +45,15 @@ const Pagination: React.FC<PaginationProps> = ({
   withText = false,
   disabled = false,
   className = "",
+  fullWidth = false,
+  customText = {
+    previous: "Anterior",
+    next: "Siguiente",
+    first: "Primera",
+    last: "Última",
+  },
+  showPrevious = true,
+  showNext = true,
 }) => {
   const [page, setPage] = useState(currentPage);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
@@ -67,17 +85,17 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const variantClasses = {
     default:
-      "bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 active:bg-zinc-100 dark:active:bg-zinc-700",
+      "bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:bg-zinc-300 dark:active:bg-zinc-600 transition-colors duration-150",
     primary:
-      "bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 active:bg-blue-100 dark:active:bg-blue-800/50",
+      "bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-800/60 active:bg-blue-200 dark:active:bg-blue-700 transition-colors duration-150",
     secondary:
-      "bg-white dark:bg-zinc-900 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800 hover:bg-purple-50 dark:hover:bg-purple-900/30 active:bg-purple-100 dark:active:bg-purple-800/50",
+      "bg-white dark:bg-zinc-900 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800 hover:bg-purple-100 dark:hover:bg-purple-800/60 active:bg-purple-200 dark:active:bg-purple-700 transition-colors duration-150",
     success:
-      "bg-white dark:bg-zinc-900 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/30 active:bg-green-100 dark:active:bg-green-800/50",
+      "bg-white dark:bg-zinc-900 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-800/60 active:bg-green-200 dark:active:bg-green-700 transition-colors duration-150",
     warning:
-      "bg-white dark:bg-zinc-900 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800 hover:bg-amber-50 dark:hover:bg-amber-900/30 active:bg-amber-100 dark:active:bg-amber-800/50",
+      "bg-white dark:bg-zinc-900 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-800/60 active:bg-amber-200 dark:active:bg-amber-700 transition-colors duration-150",
     danger:
-      "bg-white dark:bg-zinc-900 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/30 active:bg-red-100 dark:active:bg-red-800/50",
+      "bg-white dark:bg-zinc-900 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-800/60 active:bg-red-200 dark:active:bg-red-700 transition-colors duration-150",
   };
 
   // Color de fondo para el indicador basado en la variante activa
@@ -221,13 +239,30 @@ const Pagination: React.FC<PaginationProps> = ({
     });
   };
 
+  // Verifica si hay contenido para mostrar
+  const hasContent = withNumbers || showPrevious || showNext;
+
+  // Determinar si se debe aplicar el espacio entre elementos
+  // Solo aplicar justify-between si ambos botones de navegación están visibles
+  const justifyClass = fullWidth
+    ? showPrevious && showNext
+      ? "justify-between"
+      : showPrevious
+      ? "justify-start"
+      : "justify-end"
+    : "justify-center";
+
+  if (!hasContent) return null;
+
   return (
     <nav
       role="navigation"
       aria-label="Pagination Navigation"
-      className={`flex flex-wrap items-center justify-center gap-1 ${className}`}
+      className={`flex ${
+        fullWidth ? "w-full" : ""
+      } ${justifyClass} flex-wrap items-center gap-1 ${className}`}
     >
-      {withEdges && (
+      {withEdges && showPrevious && (
         <button
           type="button"
           disabled={page === 1 || disabled}
@@ -238,25 +273,27 @@ const Pagination: React.FC<PaginationProps> = ({
           <span className="flex items-center">
             <ChevronLeft size={iconSizes[size]} />
             <ChevronLeft size={iconSizes[size]} className="-ml-3" />
-            {withText && <span className="mx-1">Primera</span>}
+            {withText && <span className="mx-1">{customText.first}</span>}
           </span>
         </button>
       )}
 
-      <button
-        type="button"
-        disabled={page === 1 || disabled}
-        className={`${buttonClasses} ${sizeClasses[size]} ${
-          variantClasses[variant]
-        } ${withText ? "px-2" : ""}`}
-        onClick={() => handlePageChange(page - 1)}
-        aria-label="Página anterior"
-      >
-        <span className="flex items-center">
-          <ChevronLeft size={iconSizes[size]} />
-          {withText && <span className="ml-1">Anterior</span>}
-        </span>
-      </button>
+      {showPrevious && (
+        <button
+          type="button"
+          disabled={page === 1 || disabled}
+          className={`${buttonClasses} ${sizeClasses[size]} ${
+            variantClasses[variant]
+          } ${withText ? "px-2" : ""}`}
+          onClick={() => handlePageChange(page - 1)}
+          aria-label="Página anterior"
+        >
+          <span className="flex items-center">
+            <ChevronLeft size={iconSizes[size]} />
+            {withText && <span className="ml-1">{customText.previous}</span>}
+          </span>
+        </button>
+      )}
 
       {withNumbers && (
         <div className="relative flex flex-wrap items-center gap-1">
@@ -280,22 +317,24 @@ const Pagination: React.FC<PaginationProps> = ({
         </div>
       )}
 
-      <button
-        type="button"
-        disabled={page === totalPages || disabled}
-        className={`${buttonClasses} ${sizeClasses[size]} ${
-          variantClasses[variant]
-        } ${withText ? "px-2" : ""}`}
-        onClick={() => handlePageChange(page + 1)}
-        aria-label="Página siguiente"
-      >
-        <span className="flex items-center">
-          {withText && <span className="mr-1">Siguiente</span>}
-          <ChevronRight size={iconSizes[size]} />
-        </span>
-      </button>
+      {showNext && (
+        <button
+          type="button"
+          disabled={page === totalPages || disabled}
+          className={`${buttonClasses} ${sizeClasses[size]} ${
+            variantClasses[variant]
+          } ${withText ? "px-2" : ""}`}
+          onClick={() => handlePageChange(page + 1)}
+          aria-label="Página siguiente"
+        >
+          <span className="flex items-center">
+            {withText && <span className="mr-1">{customText.next}</span>}
+            <ChevronRight size={iconSizes[size]} />
+          </span>
+        </button>
+      )}
 
-      {withEdges && (
+      {withEdges && showNext && (
         <button
           type="button"
           disabled={page === totalPages || disabled}
@@ -304,7 +343,7 @@ const Pagination: React.FC<PaginationProps> = ({
           aria-label="Última página"
         >
           <span className="flex items-center">
-            {withText && <span className="mx-1">Última</span>}
+            {withText && <span className="mx-1">{customText.last}</span>}
             <ChevronRight size={iconSizes[size]} />
             <ChevronRight size={iconSizes[size]} className="-ml-3" />
           </span>
