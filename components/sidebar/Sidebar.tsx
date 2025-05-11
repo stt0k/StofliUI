@@ -8,6 +8,19 @@ const Sidebar = () => {
   const sidebarRef = useRef<HTMLDivElement>(null);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
 
+  // Ordenar alfabéticamente los enlaces de la sección "Componentes"
+  const processedSections = sections.map((section) => {
+    if (section.title === "Componentes") {
+      return {
+        ...section,
+        links: [...section.links].sort((a, b) =>
+          a.label.localeCompare(b.label)
+        ),
+      };
+    }
+    return section;
+  });
+
   // Restaurar la posición de desplazamiento cuando cambia la ruta
   useEffect(() => {
     if (sidebarRef.current) {
@@ -44,7 +57,7 @@ const Sidebar = () => {
       >
         <div className="pl-8 pr-6">
           <div className="space-y-3">
-            {sections.map((section) => (
+            {processedSections.map((section) => (
               <SidebarSection
                 key={section.title}
                 title={section.title}
