@@ -3,12 +3,18 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 interface AccordionItemProps {
   title: string;
   children: React.ReactNode;
   isOpen: boolean;
   onClick: () => void;
+  className?: string;
+  buttonClassName?: string;
+  titleClassName?: string;
+  contentClassName?: string;
+  iconClassName?: string;
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = ({
@@ -16,20 +22,41 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   children,
   isOpen,
   onClick,
+  className = "",
+  buttonClassName = "",
+  titleClassName = "",
+  contentClassName = "",
+  iconClassName = "",
 }) => {
   return (
-    <div className="border-b border-zinc-200 dark:border-zinc-800 p-3 last:border-0">
+    <div
+      className={twMerge(
+        "border-b border-zinc-200 dark:border-zinc-800 p-3 last:border-0",
+        className
+      )}
+    >
       <button
-        className="flex w-full items-center justify-between py-4 text-left"
+        className={twMerge(
+          "flex w-full items-center justify-between py-4 text-left",
+          buttonClassName
+        )}
         onClick={onClick}
       >
-        <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+        <span
+          className={twMerge(
+            "text-sm font-medium text-zinc-900 dark:text-zinc-100",
+            titleClassName
+          )}
+        >
           {title}
         </span>
         <ChevronDown
-          className={`h-5 w-5 text-zinc-500 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={twMerge(
+            `h-5 w-5 text-zinc-500 transition-transform duration-200 ${
+              isOpen ? "rotate-180" : ""
+            }`,
+            iconClassName
+          )}
         />
       </button>
       <AnimatePresence initial={false}>
@@ -41,7 +68,12 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="pb-4 text-sm text-zinc-600 dark:text-zinc-400">
+            <div
+              className={twMerge(
+                "pb-4 text-sm text-zinc-600 dark:text-zinc-400",
+                contentClassName
+              )}
+            >
               {children}
             </div>
           </motion.div>
@@ -58,12 +90,24 @@ export interface AccordionProps {
   }[];
   defaultOpen?: number;
   allowMultiple?: boolean;
+  className?: string;
+  itemClassName?: string;
+  buttonClassName?: string;
+  titleClassName?: string;
+  contentClassName?: string;
+  iconClassName?: string;
 }
 
 const Accordion: React.FC<AccordionProps> = ({
   items,
   defaultOpen = -1,
   allowMultiple = false,
+  className = "",
+  itemClassName = "",
+  buttonClassName = "",
+  titleClassName = "",
+  contentClassName = "",
+  iconClassName = "",
 }) => {
   const [openIndexes, setOpenIndexes] = React.useState<number[]>(
     defaultOpen >= 0 ? [defaultOpen] : []
@@ -82,13 +126,23 @@ const Accordion: React.FC<AccordionProps> = ({
   };
 
   return (
-    <div className="divide-y divide-zinc-200 dark:divide-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-800">
+    <div
+      className={twMerge(
+        "divide-y divide-zinc-200 dark:divide-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-800",
+        className
+      )}
+    >
       {items.map((item, index) => (
         <AccordionItem
           key={index}
           title={item.title}
           isOpen={openIndexes.includes(index)}
           onClick={() => handleClick(index)}
+          className={itemClassName}
+          buttonClassName={buttonClassName}
+          titleClassName={titleClassName}
+          contentClassName={contentClassName}
+          iconClassName={iconClassName}
         >
           {item.content}
         </AccordionItem>
