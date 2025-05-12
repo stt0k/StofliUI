@@ -42,7 +42,7 @@ function ColorsPageContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-base md:text-xl text-gray-600 dark:text-zinc-400 max-w-3xl mb-6 md:mb-8"
+                className="text-base md:text-xl text-gray-600 dark:text-zinc-400 max-w-3xl mb-6 md:mb-8 leading-relaxed"
               >
                 Explora la paleta completa de colores de Tailwind CSS en
                 diferentes formatos: HEX, RGB, HSL y OKLCH. Estos colores han
