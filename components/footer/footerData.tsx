@@ -10,6 +10,7 @@ export const linksHeader = [
   { name: "Componentes", href: "/docs/componentes/accordion" },
   { name: "Ejemplos", href: "/docs/ejemplos" },
   { name: "Changelog", href: "/docs/changelog" },
+  { name: "Pricing", href: "/docs/pricing" },
   { name: "Colores", href: "/docs/colores" },
 ];
 
