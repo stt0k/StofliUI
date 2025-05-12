@@ -4,7 +4,7 @@ import { socials, linksHeader, linksDocs, linksFrameworks } from "./footerData";
 const Footer = () => {
   return (
     <footer
-      className="bg-white dark:bg-black mt-44 text-white py-8 z-50"
+      className="bg-zinc-50 dark:bg-black mt-44 text-white py-8 z-50"
       role="contentinfo"
     >
       <div className="container mx-auto flex flex-col items-center">
