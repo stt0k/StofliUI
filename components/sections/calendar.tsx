@@ -4,6 +4,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { I18nProvider, useLocale } from "@react-aria/i18n";
+import { twMerge } from "tailwind-merge";
 import {
   startOfMonth,
   endOfMonth,
@@ -34,6 +35,16 @@ export interface CalendarProps {
   value?: Date;
   onChange?: (date: Date) => void;
   className?: string;
+  headerClassName?: string;
+  weekdaysClassName?: string;
+  weekdayClassName?: string;
+  daysContainerClassName?: string;
+  dayClassName?: string;
+  selectedDayClassName?: string;
+  disabledDayClassName?: string;
+  calendarTitleClassName?: string;
+  monthTitleClassName?: string;
+  navigationButtonClassName?: string;
   variant?:
     | "default"
     | "primary"
@@ -53,6 +64,16 @@ const CalendarContent: React.FC<CalendarProps> = ({
   value,
   onChange,
   className = "",
+  headerClassName = "",
+  weekdaysClassName = "",
+  weekdayClassName = "",
+  daysContainerClassName = "",
+  dayClassName = "",
+  selectedDayClassName = "",
+  disabledDayClassName = "",
+  calendarTitleClassName = "",
+  monthTitleClassName = "",
+  navigationButtonClassName = "",
   variant = "default",
   radius = "md",
   readOnly = false,
@@ -112,22 +133,22 @@ const CalendarContent: React.FC<CalendarProps> = ({
 
   const variantClasses = {
     default: `bg-zinc-100 dark:bg-zinc-800 ${
-      !readOnly && "hover:bg-zinc-200 dark:hover:bg-zinc-700"
+      !readOnly && "hover:bg-zinc-300 dark:hover:bg-zinc-600"
     }`,
     primary: `bg-blue-100 dark:bg-blue-900/30 ${
-      !readOnly && "hover:bg-blue-200 dark:hover:bg-blue-800/40"
+      !readOnly && "hover:bg-blue-300 dark:hover:bg-blue-700"
     }`,
     secondary: `bg-purple-100 dark:bg-purple-900/30 ${
-      !readOnly && "hover:bg-purple-200 dark:hover:bg-purple-800/40"
+      !readOnly && "hover:bg-purple-300 dark:hover:bg-purple-700"
     }`,
     success: `bg-green-100 dark:bg-green-900/30 ${
-      !readOnly && "hover:bg-green-200 dark:hover:bg-green-800/40"
+      !readOnly && "hover:bg-green-300 dark:hover:bg-green-700"
     }`,
     warning: `bg-amber-100 dark:bg-amber-900/30 ${
-      !readOnly && "hover:bg-amber-200 dark:hover:bg-amber-800/40"
+      !readOnly && "hover:bg-amber-300 dark:hover:bg-amber-700"
     }`,
     danger: `bg-red-100 dark:bg-red-900/30 ${
-      !readOnly && "hover:bg-red-200 dark:hover:bg-red-800/40"
+      !readOnly && "hover:bg-red-300 dark:hover:bg-red-700"
     }`,
   };
 
@@ -146,13 +167,6 @@ const CalendarContent: React.FC<CalendarProps> = ({
     md: "rounded",
     full: "rounded-lg",
   };
-
-  const buttonClasses = `
-    aspect-square flex items-center justify-center text-sm
-    transition-colors duration-200
-    ${!readOnly && "hover:scale-110 active:scale-95"}
-    ${radiusClasses[radius]}
-  `;
 
   // Obtener el nombre del calendario para mostrar en el título
   const getCalendarName = () => {
@@ -208,38 +222,67 @@ const CalendarContent: React.FC<CalendarProps> = ({
 
   return (
     <div
-      className={`w-full max-w-sm p-4 ${radiusClasses[radius]} bg-white dark:bg-zinc-900 shadow-lg ${className}`}
+      className={twMerge(
+        `w-full max-w-sm p-4 ${radiusClasses[radius]} bg-white dark:bg-zinc-900 shadow-lg`,
+        className
+      )}
     >
       {calendarName && (
-        <div className="text-sm text-center mb-2 text-zinc-500 dark:text-zinc-400">
+        <div
+          className={twMerge(
+            "text-sm text-center mb-2 text-zinc-500 dark:text-zinc-400",
+            calendarTitleClassName
+          )}
+        >
           Calendario {calendarName}
         </div>
       )}
-      <div className="flex items-center justify-between mb-4">
+      <div
+        className={twMerge(
+          "flex items-center justify-between mb-4",
+          headerClassName
+        )}
+      >
         <motion.button
           whileTap={!readOnly ? { scale: 0.95 } : undefined}
           onClick={prevMonth}
-          className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full"
+          className={twMerge(
+            "p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full",
+            navigationButtonClassName
+          )}
         >
           <ChevronLeft className="w-5 h-5" />
         </motion.button>
-        <h2 className="text-lg font-semibold capitalize">
+        <h2
+          className={twMerge(
+            "text-lg font-semibold capitalize",
+            monthTitleClassName
+          )}
+        >
           {formatDate(currentMonth, "MMMM yyyy")}
         </h2>
         <motion.button
           whileTap={!readOnly ? { scale: 0.95 } : undefined}
           onClick={nextMonth}
-          className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full"
+          className={twMerge(
+            "p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full",
+            navigationButtonClassName
+          )}
         >
           <ChevronRight className="w-5 h-5" />
         </motion.button>
       </div>
 
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      <div
+        className={twMerge("grid grid-cols-7 gap-1 mb-2", weekdaysClassName)}
+      >
         {weekDays.map((day) => (
           <div
             key={day}
-            className="text-center text-sm font-medium text-zinc-500 dark:text-zinc-400"
+            className={twMerge(
+              "text-center text-sm font-medium text-zinc-500 dark:text-zinc-400",
+              weekdayClassName
+            )}
           >
             {day}
           </div>
@@ -252,38 +295,53 @@ const CalendarContent: React.FC<CalendarProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="grid grid-cols-7 gap-1"
+          className={twMerge("grid grid-cols-7 gap-1", daysContainerClassName)}
         >
           {days.map((day) => {
             const isSelected = selectedDate && isSameDay(day, selectedDate);
             const isCurrentMonth = isSameMonth(day, currentMonth);
             const isDisabled = isDateDisabled(day);
 
+            // Simple button class without animation effects
+            const baseClasses = `
+              aspect-square flex items-center justify-center text-sm
+              ${radiusClasses[radius]}
+              ${!isDisabled && !readOnly ? "cursor-pointer" : "cursor-default"}
+              transition-colors duration-200
+              ${
+                isSelected
+                  ? ""
+                  : !isDisabled && !readOnly
+                  ? "hover:text-black dark:hover:text-white"
+                  : ""
+              }
+            `;
+
+            const combinedDayClassName = twMerge(
+              baseClasses,
+              dayClassName,
+              isSelected
+                ? twMerge(selectedVariantClasses[variant], selectedDayClassName)
+                : isCurrentMonth
+                ? isDisabled
+                  ? twMerge(
+                      "bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-zinc-600 cursor-not-allowed",
+                      disabledDayClassName
+                    )
+                  : variantClasses[variant]
+                : "text-zinc-300 dark:text-zinc-600"
+            );
+
             return (
               <div
                 key={day.toString()}
-                className={`
-                  ${buttonClasses}
-                  ${
-                    isSelected
-                      ? selectedVariantClasses[variant]
-                      : isCurrentMonth
-                      ? isDisabled
-                        ? "bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-zinc-600 cursor-not-allowed"
-                        : variantClasses[variant]
-                      : "text-zinc-300 dark:text-zinc-600"
-                  }
-                  ${
-                    !isDisabled && !readOnly
-                      ? "cursor-pointer"
-                      : "cursor-default"
-                  }
-                `}
+                className={combinedDayClassName}
                 {...(!readOnly &&
                   !isDisabled && {
                     onClick: () => handleDateSelect(day),
                     role: "button",
                     tabIndex: 0,
+                    "data-selected": isSelected ? "true" : "false",
                   })}
               >
                 {formatDate(day, "d")}
