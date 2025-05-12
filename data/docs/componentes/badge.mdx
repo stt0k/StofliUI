@@ -19,11 +19,7 @@ npx @stofli/ui add badge
 import { Badge } from "@stofli/ui";
 
 export default function App() {
-  return (
-    <Badge>
-      Nuevo
-    </Badge>
-  );
+  return <Badge>Nuevo</Badge>;
 }
 ```
 
@@ -411,16 +407,82 @@ export default function BadgeWithIconsDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del badge usando las propiedades de className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-2">
+      <Badge 
+        className="bg-gradient-to-r from-indigo-500 to-purple-500 shadow-md"
+        contentClassName="font-bold"
+      >
+        Gradiente
+      </Badge>
+      <Badge 
+        withDot 
+        dotClassName="bg-yellow-300 animate-pulse h-3 w-3"
+        className="bg-zinc-800 text-white"
+      >
+        Animado
+      </Badge>
+      <Badge 
+        icon={<BellIcon className="w-3 h-3" />}
+        iconClassName="text-red-500 animate-bounce"
+        className="bg-white border border-zinc-300 text-zinc-800 hover:bg-zinc-800 hover:text-white transition-colors"
+      >
+        Icono custom
+      </Badge>
+    </div>
+  }
+>
+```tsx
+import { Badge } from "@stofli/ui";
+import { BellIcon } from "lucide-react";
+
+export default function BadgeCustomClassesDemo() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Badge 
+        className="bg-gradient-to-r from-indigo-500 to-purple-500 shadow-md"
+        contentClassName="font-bold"
+      >
+        Gradiente
+      </Badge>
+      <Badge 
+        withDot 
+        dotClassName="bg-yellow-300 animate-pulse h-3 w-3"
+        className="bg-zinc-800 text-white"
+      >
+        Animado
+      </Badge>
+      <Badge 
+        icon={<BellIcon className="w-3 h-3" />}
+        iconClassName="text-red-500 animate-bounce"
+        className="bg-white border border-zinc-300 text-zinc-800 hover:bg-zinc-800 hover:text-white transition-colors"
+      >
+        Icono custom
+      </Badge>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop          | Tipo                                          | Default     | Descripción                                    |
-| ------------- | --------------------------------------------- | ----------- | ---------------------------------------------- |
-| `variant`     | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "outline"` | `"default"` | Variante de estilo |
-| `size`        | `"sm" \| "md" \| "lg"`                       | `"md"`      | Tamaño del badge                              |
-| `radius`      | `"none" \| "sm" \| "md" \| "full"`          | `"full"`    | Radio de las esquinas                         |
-| `withDot`     | `boolean`                                    | `false`     | Muestra un punto indicador                     |
-| `dotColor`    | `string`                                     | -           | Color personalizado para el punto              |
-| `icon`        | `ReactNode`                                  | -           | Icono a mostrar                               |
-| `onClick`     | `() => void`                                | -           | Función llamada al hacer clic                  |
-| `dismissible` | `boolean`                                    | `false`     | Permite que el badge sea eliminado            |
-| `className`   | `string`                                     | -           | Clases adicionales                            | 
+| Prop               | Tipo                                                                                       | Default     | Descripción                                  |
+| ------------------ | ------------------------------------------------------------------------------------------ | ----------- | -------------------------------------------- |
+| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "outline"` | `"default"` | Variante de estilo                           |
+| `size`             | `"sm" \| "md" \| "lg"`                                                                     | `"md"`      | Tamaño del badge                             |
+| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                                         | `"full"`    | Radio de las esquinas                        |
+| `withDot`          | `boolean`                                                                                  | `false`     | Muestra un punto indicador                   |
+| `dotColor`         | `string`                                                                                   | -           | Color personalizado para el punto            |
+| `icon`             | `ReactNode`                                                                                | -           | Icono a mostrar                              |
+| `onClick`          | `() => void`                                                                               | -           | Función llamada al hacer clic                |
+| `dismissible`      | `boolean`                                                                                  | `false`     | Permite que el badge sea eliminado           |
+| `className`        | `string`                                                                                   | -           | Clases adicionales para el badge completo    |
+| `dotClassName`     | `string`                                                                                   | -           | Clases adicionales para el punto indicador   |
+| `iconClassName`    | `string`                                                                                   | -           | Clases adicionales para el icono             |
+| `contentClassName` | `string`                                                                                   | -           | Clases adicionales para el contenido textual |
