@@ -333,21 +333,67 @@ export default function ButtonDisabledDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Personaliza cualquier parte del botón usando las propiedades de className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <div className="flex">
+      <Button 
+        variant="default"
+        className="rounded-full bg-black text-white dark:bg-white dark:text-black hover:bg-black/80 dark:hover:bg-white/80  px-6 group"
+        withArrow
+        arrowClassName="text-white dark:text-black transition-transform duration-300 group-hover:translate-x-1"
+        rippleClassName="bg-blue-400/30 dark:bg-purple-600/60"
+      >
+        Continuar
+      </Button>
+    </div>
+  }
+>
+```tsx
+import { Button } from "@stofli/ui";
+
+export default function ButtonCustomClassesDemo() {
+  return (
+    <div className="flex">
+      <Button 
+        variant="default"
+        className="rounded-full bg-black text-white dark:bg-white dark:text-black hover:bg-black/80 dark:hover:bg-white/80  px-6 group"
+        withArrow
+        arrowClassName="text-white dark:text-black transition-transform duration-300 group-hover:translate-x-1"
+        rippleClassName="bg-blue-400/30 dark:bg-purple-600/60"
+      >
+        Continuar
+      </Button>
+    </div>
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop          | Tipo                                                                                                            | Default     | Descripción                                       |
-| ------------- | --------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| `variant`     | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "outline" \| "ghost" \| "link"` | `"default"` | Variante visual del botón                         |
-| `size`        | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon"`                                                                | `"md"`      | Tamaño del botón                                  |
-| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                                                      | `"md"`      | Radio de las esquinas del botón                   |
-| `fullWidth`   | `boolean`                                                                                                       | `false`     | Si el botón ocupa todo el ancho disponible        |
-| `withRing`    | `boolean`                                                                                                       | `false`     | Si el botón tiene un anillo decorativo            |
-| `withRipple`  | `boolean`                                                                                                       | `true`      | Activa el efecto de onda expansiva al hacer clic  |
-| `rippleColor` | `string`                                                                                                        | -           | Color personalizado para el efecto ripple         |
-| `isLoading`   | `boolean`                                                                                                       | `false`     | Muestra un indicador de carga                     |
-| `leftIcon`    | `ReactNode`                                                                                                     | -           | Icono a mostrar a la izquierda del texto          |
-| `rightIcon`   | `ReactNode`                                                                                                     | -           | Icono a mostrar a la derecha del texto            |
-| `withArrow`   | `boolean`                                                                                                       | `false`     | Muestra una flecha animada a la derecha del texto |
-| `disabled`    | `boolean`                                                                                                       | `false`     | Deshabilita el botón                              |
-| `children`    | `ReactNode`                                                                                                     | -           | Contenido del botón                               |
-| `className`   | `string`                                                                                                        | -           | Clases adicionales para personalizar el botón     |
+| Prop                 | Tipo                                                                                                            | Default     | Descripción                                       |
+| -------------------- | --------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
+| `variant`            | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "outline" \| "ghost" \| "link"` | `"default"` | Variante visual del botón                         |
+| `size`               | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "icon"`                                                                | `"md"`      | Tamaño del botón                                  |
+| `radius`             | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                                                      | `"md"`      | Radio de las esquinas del botón                   |
+| `fullWidth`          | `boolean`                                                                                                       | `false`     | Si el botón ocupa todo el ancho disponible        |
+| `withRing`           | `boolean`                                                                                                       | `false`     | Si el botón tiene un anillo decorativo            |
+| `withRipple`         | `boolean`                                                                                                       | `true`      | Activa el efecto de onda expansiva al hacer clic  |
+| `rippleColor`        | `string`                                                                                                        | -           | Color personalizado para el efecto ripple         |
+| `isLoading`          | `boolean`                                                                                                       | `false`     | Muestra un indicador de carga                     |
+| `leftIcon`           | `ReactNode`                                                                                                     | -           | Icono a mostrar a la izquierda del texto          |
+| `rightIcon`          | `ReactNode`                                                                                                     | -           | Icono a mostrar a la derecha del texto            |
+| `withArrow`          | `boolean`                                                                                                       | `false`     | Muestra una flecha animada a la derecha del texto |
+| `disabled`           | `boolean`                                                                                                       | `false`     | Deshabilita el botón                              |
+| `children`           | `ReactNode`                                                                                                     | -           | Contenido del botón                               |
+| `className`          | `string`                                                                                                        | -           | Clases adicionales para personalizar el botón     |
+| `rippleClassName`    | `string`                                                                                                        | -           | Clases para el efecto ripple                      |
+| `loaderClassName`    | `string`                                                                                                        | -           | Clases para el indicador de carga                 |
+| `leftIconClassName`  | `string`                                                                                                        | -           | Clases para el icono izquierdo                    |
+| `rightIconClassName` | `string`                                                                                                        | -           | Clases para el icono derecho                      |
+| `contentClassName`   | `string`                                                                                                        | -           | Clases para el contenido del botón                |
+| `arrowClassName`     | `string`                                                                                                        | -           | Clases para la flecha                             |
