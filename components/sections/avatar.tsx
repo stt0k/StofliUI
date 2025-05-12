@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 
 export interface AvatarProps {
   src?: string;
@@ -13,6 +14,9 @@ export interface AvatarProps {
   borderColor?: string;
   status?: "online" | "offline" | "away" | "busy";
   className?: string;
+  imageClassName?: string;
+  fallbackClassName?: string;
+  statusClassName?: string;
 }
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -25,6 +29,9 @@ const Avatar: React.FC<AvatarProps> = ({
   borderColor = "border-zinc-200 dark:border-zinc-800",
   status,
   className = "",
+  imageClassName = "",
+  fallbackClassName = "",
+  statusClassName = "",
 }) => {
   const [imageError, setImageError] = React.useState(!src);
 
@@ -59,13 +66,13 @@ const Avatar: React.FC<AvatarProps> = ({
     busy: ["bg-red-500"],
   };
 
-  const classes = [
-    ...baseClasses,
-    ...sizeClasses[size],
-    ...radiusClasses[radius],
+  const classes = twMerge(
+    baseClasses.join(" "),
+    sizeClasses[size].join(" "),
+    radiusClasses[radius].join(" "),
     border && `border-2 ${borderColor}`,
-    className,
-  ].filter(Boolean).join(" ");
+    className
+  );
 
   const handleImageError = () => setImageError(true);
 
@@ -77,24 +84,32 @@ const Avatar: React.FC<AvatarProps> = ({
             src={src}
             alt={alt}
             fill
-            className="object-cover"
+            className={twMerge("object-cover", imageClassName)}
             onError={handleImageError}
           />
         ) : (
-          <span className="font-medium text-zinc-500 dark:text-zinc-400">
+          <span
+            className={twMerge(
+              "font-medium text-zinc-500 dark:text-zinc-400",
+              fallbackClassName
+            )}
+          >
             {fallback || alt.charAt(0).toUpperCase()}
           </span>
         )}
       </div>
       {status && (
         <span
-          className={`absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full border-2 border-white dark:border-zinc-900 ${
-            statusColors[status]
-          }`}
+          className={twMerge(
+            `absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full border-2 border-white dark:border-zinc-900 ${statusColors[
+              status
+            ].join(" ")}`,
+            statusClassName
+          )}
         />
       )}
     </div>
   );
 };
 
-export default Avatar; 
+export default Avatar;
