@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 export interface BreadcrumbItem {
   label: string;
@@ -16,6 +17,12 @@ export interface BreadcrumbsProps {
   separator?: React.ReactNode;
   homeIcon?: boolean;
   className?: string;
+  olClassName?: string;
+  itemClassName?: string;
+  separatorClassName?: string;
+  homeIconClassName?: string;
+  currentItemClassName?: string;
+  linkClassName?: string;
   clickable?: boolean;
   variant?:
     | "default"
@@ -32,6 +39,12 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   separator = <ChevronRight className="h-4 w-4" />,
   homeIcon = false,
   className = "",
+  olClassName = "",
+  itemClassName = "",
+  separatorClassName = "",
+  homeIconClassName = "",
+  currentItemClassName = "",
+  linkClassName = "",
   clickable = false,
   variant = "default",
   size = "md",
@@ -86,31 +99,41 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   return (
     <nav
-      className={`flex items-center ${sizeClasses[size]} ${className}`}
+      className={twMerge(`flex items-center ${sizeClasses[size]}`, className)}
       aria-label="Breadcrumbs"
     >
-      <ol className="flex items-center flex-wrap">
+      <ol className={twMerge("flex items-center flex-wrap", olClassName)}>
         {homeIcon && (
-          <li className="flex items-center">
+          <li className={twMerge("flex items-center", itemClassName)}>
             {clickable ? (
               <Link
                 href="/"
-                className={`flex items-center ${variantClasses[variant]}`}
+                className={twMerge(
+                  `flex items-center ${variantClasses[variant]}`,
+                  linkClassName,
+                  homeIconClassName
+                )}
               >
                 <Home
-                  className={`h-4 w-4 ${
-                    sizeClasses[size] === "text-xs"
-                      ? "h-3 w-3"
-                      : sizeClasses[size] === "text-base"
-                      ? "h-5 w-5"
-                      : ""
-                  }`}
+                  className={twMerge(
+                    `h-4 w-4 ${
+                      sizeClasses[size] === "text-xs"
+                        ? "h-3 w-3"
+                        : sizeClasses[size] === "text-base"
+                        ? "h-5 w-5"
+                        : ""
+                    }`,
+                    homeIconClassName
+                  )}
                 />
                 <span className="sr-only">Inicio</span>
               </Link>
             ) : (
               <span
-                className={`flex items-center ${nonCurrentClasses[variant]}`}
+                className={twMerge(
+                  `flex items-center ${nonCurrentClasses[variant]}`,
+                  homeIconClassName
+                )}
               >
                 <Home
                   className={`h-4 w-4 ${
@@ -125,7 +148,10 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
               </span>
             )}
             <div
-              className={`flex items-center justify-center w-8 ${separatorClasses[variant]}`}
+              className={twMerge(
+                `flex items-center justify-center w-8 ${separatorClasses[variant]}`,
+                separatorClassName
+              )}
               aria-hidden="true"
             >
               {separator}
@@ -134,10 +160,16 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         )}
 
         {items.map((item, index) => (
-          <li key={index} className="flex items-center">
+          <li
+            key={index}
+            className={twMerge("flex items-center", itemClassName)}
+          >
             {index > 0 && (
               <div
-                className={`flex items-center justify-center w-8 ${separatorClasses[variant]}`}
+                className={twMerge(
+                  `flex items-center justify-center w-8 ${separatorClasses[variant]}`,
+                  separatorClassName
+                )}
                 aria-hidden="true"
               >
                 {separator}
@@ -145,9 +177,11 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             )}
             {index === items.length - 1 ? (
               <span
-                className={`${currentClasses[variant]} flex items-center ${
+                className={twMerge(
+                  `${currentClasses[variant]} flex items-center`,
+                  currentItemClassName,
                   item.className || ""
-                }`}
+                )}
                 aria-current="page"
               >
                 {item.icon && (
@@ -160,9 +194,11 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             ) : clickable && item.href ? (
               <Link
                 href={item.href}
-                className={`flex items-center ${variantClasses[variant]} ${
+                className={twMerge(
+                  `flex items-center ${variantClasses[variant]}`,
+                  linkClassName,
                   item.className || ""
-                }`}
+                )}
               >
                 {item.icon && (
                   <span className="inline-flex items-center mr-1">
@@ -173,9 +209,10 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
               </Link>
             ) : (
               <span
-                className={`flex items-center ${nonCurrentClasses[variant]} ${
+                className={twMerge(
+                  `flex items-center ${nonCurrentClasses[variant]}`,
                   item.className || ""
-                }`}
+                )}
               >
                 {item.icon && (
                   <span className="inline-flex items-center mr-1">
