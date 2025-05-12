@@ -7,7 +7,7 @@ description: "Un componente de progreso circular con animaciones suaves y difere
 
 ```bash
 # Instalar dependencias necesarias
-npm install framer-motion
+npm install framer-motion tailwind-merge
 
 # Instalar el componente
 npx @stofli/ui add circular-progress
@@ -31,7 +31,7 @@ Un progreso circular simple con diferentes valores.
 
 <DemoTabs
   preview={
-    <div className="flex flex-wrap gap-8 items-center justify-start">
+    <div className="flex flex-wrap gap-8 items-center justify-center">
       <CircularProgress value={25} showValue />
       <CircularProgress value={50} showValue />
       <CircularProgress value={75} showValue />
@@ -44,7 +44,7 @@ import { CircularProgress } from "@stofli/ui";
 
 export default function CircularProgressDemo() {
   return (
-    <div className="flex flex-wrap gap-8 items-center justify-start">
+    <div className="flex flex-wrap gap-8 items-center justify-center">
       <CircularProgress value={25} showValue />
       <CircularProgress value={50} showValue />
       <CircularProgress value={75} showValue />
@@ -61,7 +61,7 @@ Usando la prop `size`: sm, md y lg.
 
 <DemoTabs
   preview={
-    <div className="flex flex-wrap gap-8 items-center justify-start ps-2">
+    <div className="flex flex-wrap gap-8 items-center justify-center">
       <CircularProgress size="sm" value={75} variant="primary" />
       <CircularProgress size="md" value={75} variant="primary" />
       <CircularProgress size="lg" value={75} variant="primary" />
@@ -73,7 +73,7 @@ import { CircularProgress } from "@stofli/ui";
 
 export default function CircularProgressSizesDemo() {
   return (
-    <div className="flex flex-wrap gap-8 items-center justify-start ps-2">
+    <div className="flex flex-wrap gap-8 items-center justify-center">
       <CircularProgress size="sm" value={75} variant="primary" />
       <CircularProgress size="md" value={75} variant="primary" />
       <CircularProgress size="lg" value={75} variant="primary" />
@@ -89,7 +89,7 @@ Usando la prop `variant`: default, primary, secondary, success, warning y danger
 
 <DemoTabs
   preview={
-    <div className="flex flex-wrap gap-8 items-center justify-start ">
+    <div className="flex flex-wrap gap-8 items-center justify-center">
       <CircularProgress variant="default" value={75} showValue />
       <CircularProgress variant="primary" value={75} showValue />
       <CircularProgress variant="secondary" value={75} showValue />
@@ -104,7 +104,7 @@ import { CircularProgress } from "@stofli/ui";
 
 export default function CircularProgressVariantsDemo() {
   return (
-    <div className="flex flex-wrap gap-8 items-center justify-start">
+    <div className="flex flex-wrap gap-8 items-center justify-center">
       <CircularProgress variant="default" value={75} showValue />
       <CircularProgress variant="primary" value={75} showValue />
       <CircularProgress variant="secondary" value={75} showValue />
@@ -123,7 +123,7 @@ Usando la prop `label` y `labelPosition` para mostrar etiquetas arriba o abajo.
 
 <DemoTabs
   preview={
-    <div className="flex flex-wrap gap-12 items-center justify-start ps-4 pb-6">
+    <div className="flex flex-wrap gap-12 items-center justify-center pb-6">
       <CircularProgress 
         value={75} 
         label="Subiendo..." 
@@ -153,7 +153,7 @@ import { CircularProgress } from "@stofli/ui";
 
 export default function CircularProgressLabelsDemo() {
   return (
-    <div className="flex flex-wrap gap-12 items-center justify-start ps-4 pb-6">
+    <div className="flex flex-wrap gap-12 items-center justify-center pb-6">
       <CircularProgress 
         value={75} 
         label="Subiendo..." 
@@ -187,7 +187,7 @@ Usando la prop `thickness` para ajustar el grosor del círculo.
 
 <DemoTabs
   preview={
-    <div className="flex flex-wrap gap-8 items-center justify-start ps-2 pt-6">
+    <div className="flex flex-wrap gap-8 items-center justify-center pt-6">
       <CircularProgress 
         thickness={2} 
         value={75} 
@@ -217,7 +217,7 @@ import { CircularProgress } from "@stofli/ui";
 
 export default function CircularProgressThicknessDemo() {
   return (
-    <div className="flex flex-wrap gap-8 items-center justify-start ps-2 pt-6">
+    <div className="flex flex-wrap gap-8 items-center justify-center pt-6">
       <CircularProgress 
         thickness={2} 
         value={75} 
@@ -251,7 +251,7 @@ Ejemplos de diferentes estados de carga usando `spin` y etiquetas.
 
 <DemoTabs
   preview={
-    <div className="flex flex-wrap gap-8 items-center justify-start ps-2 pb-6">
+    <div className="flex flex-wrap gap-8 items-center justify-center pb-6">
       <CircularProgress 
         value={75} 
         label="Progreso" 
@@ -274,7 +274,7 @@ import { CircularProgress } from "@stofli/ui";
 
 export default function CircularProgressLoadingDemo() {
   return (
-    <div className="flex flex-wrap gap-8 items-center justify-start ps-2 pb-6">
+    <div className="flex flex-wrap gap-8 items-center justify-center pb-6">
       <CircularProgress 
         value={75} 
         label="Progreso" 
@@ -295,18 +295,70 @@ export default function CircularProgressLoadingDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Personaliza cualquier parte del progreso circular usando las propiedades de className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <div className="flex justify-center w-full pb-6">
+      <CircularProgress 
+        value={85}
+        showValue
+        thickness={4}
+        size="lg"
+        className="shadow-lg shadow-blue-200 dark:shadow-blue-900/30 p-1 rounded-full"
+        circleClassName="stroke-blue-600 dark:stroke-blue-400"
+        bgCircleClassName="stroke-blue-100 dark:stroke-blue-950"
+        valueClassName="text-blue-700 dark:text-blue-300 font-bold"
+        label="Personalizado"
+        labelPosition="bottom"
+        labelClassName="text-blue-700 dark:text-blue-300 font-bold"
+      />
+    </div>
+  }
+>
+```tsx
+import { CircularProgress } from "@stofli/ui";
+
+export default function CircularProgressCustomClassesDemo() {
+  return (
+    <div className="flex justify-center w-full pb-6">
+      <CircularProgress 
+        value={85}
+        showValue
+        thickness={4}
+        size="lg"
+        className="shadow-lg shadow-blue-200 dark:shadow-blue-900/30 p-1 rounded-full"
+        circleClassName="stroke-blue-600 dark:stroke-blue-400"
+        bgCircleClassName="stroke-blue-100 dark:stroke-blue-950"
+        valueClassName="text-blue-700 dark:text-blue-300 font-bold"
+        label="Personalizado"
+        labelPosition="bottom"
+        labelClassName="text-blue-700 dark:text-blue-300 font-bold"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop            | Tipo                                                                          | Default     | Descripción                       |
-| --------------- | ----------------------------------------------------------------------------- | ----------- | --------------------------------- |
-| `value`         | `number`                                                                      | `0`         | Valor actual del progreso         |
-| `max`           | `number`                                                                      | `100`       | Valor máximo del progreso         |
-| `size`          | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del círculo de progreso    |
-| `variant`       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                |
-| `showValue`     | `boolean`                                                                     | `false`     | Muestra el porcentaje actual      |
-| `thickness`     | `number`                                                                      | `3`         | Grosor del círculo de progreso    |
-| `label`         | `string`                                                                      | -           | Etiqueta descriptiva              |
-| `labelPosition` | `"top" \| "bottom"`                                                           | `"top"`     | Posición de la etiqueta           |
-| `animate`       | `boolean`                                                                     | `true`      | Habilita la animación de progreso |
-| `spin`          | `boolean`                                                                     | `false`     | Añade animación de rotación       |
-| `className`     | `string`                                                                      | -           | Clases adicionales                |
+| Prop                | Tipo                                                                          | Default     | Descripción                         |
+| ------------------- | ----------------------------------------------------------------------------- | ----------- | ----------------------------------- |
+| `value`             | `number`                                                                      | `0`         | Valor actual del progreso           |
+| `max`               | `number`                                                                      | `100`       | Valor máximo del progreso           |
+| `size`              | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del círculo de progreso      |
+| `variant`           | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                  |
+| `showValue`         | `boolean`                                                                     | `false`     | Muestra el porcentaje actual        |
+| `thickness`         | `number`                                                                      | `3`         | Grosor del círculo de progreso      |
+| `label`             | `string`                                                                      | -           | Etiqueta descriptiva                |
+| `labelPosition`     | `"top" \| "bottom"`                                                           | `"top"`     | Posición de la etiqueta             |
+| `animate`           | `boolean`                                                                     | `true`      | Habilita la animación de progreso   |
+| `spin`              | `boolean`                                                                     | `false`     | Añade animación de rotación         |
+| `className`         | `string`                                                                      | -           | Clases para el contenedor principal |
+| `circleClassName`   | `string`                                                                      | -           | Clases para el círculo de progreso  |
+| `bgCircleClassName` | `string`                                                                      | -           | Clases para el círculo de fondo     |
+| `valueClassName`    | `string`                                                                      | -           | Clases para el texto del valor      |
+| `labelClassName`    | `string`                                                                      | -           | Clases para la etiqueta             |
