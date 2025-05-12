@@ -197,10 +197,10 @@ export default function ChangelogPage() {
       <main className="container mx-auto px-4 pt-8 pb-16">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
             Changelog
           </h1>
-          <p className="text-xl text-gray-600 dark:text-white/80 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-gray-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed">
             Sigue la evolución de stofli/ui, descubre las novedades mejoras y
             características que hemos ido incorporando a nuestra biblioteca de
             componentes.
