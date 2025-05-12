@@ -4,6 +4,7 @@ import {
   PanelsTopLeft,
   ChartBar,
   Palette,
+  DollarSign,
   Circle,
 } from "lucide-react";
 
@@ -17,6 +18,7 @@ export const links = [
   },
   { icon: PanelsTopLeft, label: "Ejemplos", link: "/docs/ejemplos" },
   { icon: ChartBar, label: "Changelog", link: "/docs/changelog" },
+  { icon: DollarSign, label: "Pricing", link: "/docs/pricing" },
   { icon: Palette, label: "Colores", link: "/docs/colores" },
 ];
 
