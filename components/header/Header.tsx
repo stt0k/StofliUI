@@ -58,65 +58,182 @@ const Header = () => {
   const isActive = (href: string) => pathname === href;
 
   // Sidebar para móvil
-  const SideBar = () => (
-    <div className="h-full py-6 px-4 overflow-y-auto">
-      <div className="space-y-4">
-        <div className="w-fit">
-          <Link href="/">
-            <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">
-              Stofli/UI
-            </h2>
-          </Link>
-        </div>
-        {sections.map((section) => (
-          <div key={section.title} className="py-1">
+  const SideBar = () => {
+    const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+
+    const toggleSubmenu = (title: string) => {
+      setOpenSubmenu(openSubmenu === title ? null : title);
+    };
+
+    return (
+      <div className="h-full py-6 px-4 overflow-y-auto">
+        <div className="space-y-4">
+          <div className="w-fit">
+            <Link href="/">
+              <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">
+                Stofli/UI
+              </h2>
+            </Link>
+          </div>
+
+          {/* Elementos del header en móvil */}
+          <div className="py-2">
             <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
-              {section.title}
+              Navegación
             </h2>
-            <div className="space-y-1 dark:text-zinc-50/60 text-zinc-950/60">
-              {section.links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMobileMenu}
-                >
-                  <Button
-                    variant="ghost"
-                    className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
-                      isActive(link.href)
-                        ? "hover:text-zinc-950/85 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
-                        : ""
-                    }`}
-                  >
-                    <span className="truncate">
-                      {link.tag
-                        ? link.label.length > 11
-                          ? link.label.substring(0, 11) + "..."
-                          : link.label
-                        : link.label}
-                    </span>
-                    {link.tag && <Tag text={link.tag} />}
-                  </Button>
-                </Link>
+            <div className="space-y-1">
+              {headerData.map((data) => (
+                <div key={data.title} className="w-full">
+                  {data.submenu ? (
+                    <div className="w-full">
+                      <button
+                        onClick={() => toggleSubmenu(data.title)}
+                        className={`w-full flex items-center justify-between p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm ${
+                          isLinkActive(data)
+                            ? "text-cyan-600 dark:text-cyan-500"
+                            : "text-zinc-900 dark:text-zinc-100"
+                        }`}
+                      >
+                        <span>{data.title}</span>
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={`transform transition-transform ${
+                            openSubmenu === data.title ? "rotate-180" : ""
+                          }`}
+                        >
+                          <path
+                            d="M6 8.5L2 4.5H10L6 8.5Z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </button>
+
+                      {openSubmenu === data.title && (
+                        <div className="pl-4 mt-1 border-l border-zinc-200 dark:border-zinc-800 space-y-1">
+                          {data.submenu.groups &&
+                            data.submenu.groups.map(
+                              (
+                                group: {
+                                  title?: string;
+                                  items: { title: string; href: string }[];
+                                },
+                                groupIndex: number
+                              ) => (
+                                <div key={groupIndex} className="py-1">
+                                  {group.title && (
+                                    <h3 className="px-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                                      {group.title}
+                                    </h3>
+                                  )}
+                                  {group.items.map((item, itemIndex) => (
+                                    <Link
+                                      key={itemIndex}
+                                      href={item.href}
+                                      onClick={closeMobileMenu}
+                                      className="block p-2 rounded-md text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm"
+                                    >
+                                      {item.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )
+                            )}
+
+                          {data.submenu.links && (
+                            <div className="space-y-1">
+                              {data.submenu.links.map(
+                                (
+                                  item: { title: string; href: string },
+                                  index: number
+                                ) => (
+                                  <Link
+                                    key={index}
+                                    href={item.href}
+                                    onClick={closeMobileMenu}
+                                    className="block p-2 rounded-md text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                )
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      href={data.link}
+                      onClick={closeMobileMenu}
+                      className={`block p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm ${
+                        isLinkActive(data)
+                          ? "text-cyan-600 dark:text-cyan-500"
+                          : "text-zinc-900 dark:text-zinc-100"
+                      }`}
+                    >
+                      {data.title}
+                    </Link>
+                  )}
+                </div>
               ))}
             </div>
           </div>
-        ))}
-        <div className="flex items-center justify-between px-2 py-2">
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <FaGithub className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
-              <span className="sr-only">GitHub</span>
-            </Button>
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <FaXTwitter className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
-              <span className="sr-only">Twitter</span>
-            </Button>
+
+          {/* Secciones del sidebar original */}
+          {sections.map((section) => (
+            <div key={section.title} className="py-1">
+              <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
+                {section.title}
+              </h2>
+              <div className="space-y-1 dark:text-zinc-50/60 text-zinc-950/60">
+                {section.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={closeMobileMenu}
+                  >
+                    <Button
+                      variant="ghost"
+                      className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
+                        isActive(link.href)
+                          ? "hover:text-zinc-950/85 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
+                          : ""
+                      }`}
+                    >
+                      <span className="truncate">
+                        {link.tag
+                          ? link.label.length > 11
+                            ? link.label.substring(0, 11) + "..."
+                            : link.label
+                          : link.label}
+                      </span>
+                      {link.tag && <Tag text={link.tag} />}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div className="flex items-center justify-between px-2 py-2">
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <FaGithub className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
+                <span className="sr-only">GitHub</span>
+              </Button>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <FaXTwitter className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
+                <span className="sr-only">Twitter</span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="fixed top-6 left-0 right-0 z-50">
@@ -181,7 +298,7 @@ const Header = () => {
 
             {/* Enlaces en el centro - solo visible en desktop */}
             <div className="hidden md:flex flex-grow basis-0 justify-center">
-              <nav className="flex items-center space-x-8 text-base font-medium">
+              <nav className="flex items-center space-x-10 text-base font-medium">
                 {headerData.map((data) => (
                   <HeadLinks
                     key={data.title}
@@ -189,6 +306,7 @@ const Header = () => {
                     title={data.title}
                     isActive={isLinkActive(data)}
                     hidden={data.hidden ? true : false}
+                    submenu={data.submenu}
                   />
                 ))}
               </nav>
