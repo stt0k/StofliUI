@@ -375,16 +375,74 @@ export default function AutocompleteVariantsDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del componente usando las propiedades de className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <Autocomplete
+      title="Personalización con Tailwind"
+      className="max-w-md"
+      containerClassName="border-indigo-300 bg-indigo-50 dark:bg-indigo-950 dark:border-indigo-800"
+      titleClassName="text-indigo-800 dark:text-indigo-300 font-bold"
+      inputClassName="text-indigo-700 dark:text-indigo-300 placeholder-indigo-400"
+      dropdownClassName="border-indigo-300 dark:border-indigo-700 shadow-lg shadow-indigo-100 dark:shadow-none"
+      iconClassName="text-indigo-500 hover:text-indigo-700"
+      options={[
+        { value: "react", label: "React" },
+        { value: "vue", label: "Vue" },
+        { value: "angular", label: "Angular" },
+        { value: "svelte", label: "Svelte" },
+        { value: "solid", label: "Solid" },
+      ]}
+      placeholder="Selecciona un framework..."
+    />
+  }
+>
+```tsx
+import { Autocomplete } from "@stofli/ui";
+
+export default function AutocompleteCustomClassesDemo() {
+  return (
+    <Autocomplete
+      title="Personalización con Tailwind"
+      className="max-w-md"
+      containerClassName="border-indigo-300 bg-indigo-50 dark:bg-indigo-950 dark:border-indigo-800"
+      titleClassName="text-indigo-800 dark:text-indigo-300 font-bold"
+      inputClassName="text-indigo-700 dark:text-indigo-300 placeholder-indigo-400"
+      dropdownClassName="border-indigo-300 dark:border-indigo-700 shadow-lg shadow-indigo-100 dark:shadow-none"
+      iconClassName="text-indigo-500 hover:text-indigo-700"
+      options={[
+        { value: "react", label: "React" },
+        { value: "vue", label: "Vue" },
+        { value: "angular", label: "Angular" },
+        { value: "svelte", label: "Svelte" },
+        { value: "solid", label: "Solid" },
+      ]}
+      placeholder="Selecciona un framework..."
+    />
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop | Tipo | Default | Descripción |
-| --- | --- | --- | --- |
-| `options` | `Array<{ value: string, label: string, group?: string, disabled?: boolean }>` | `[]` | Las opciones disponibles en el dropdown. Cada opción puede ser deshabilitada individualmente con la propiedad `disabled: true` |
-| `value` | `string` | - | El valor seleccionado actualmente |
-| `onChange` | `(value: string) => void` | - | Función llamada cuando cambia la selección |
-| `placeholder` | `string` | `"Selecciona una opción..."` | Texto mostrado cuando no hay selección |
-| `title` | `string` | - | Título que se muestra sobre el campo |
-| `required` | `boolean` | `false` | Indica si el campo es obligatorio, mostrando un asterisco rojo junto al título |
-| `variant` | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de color del componente |
-| `className` | `string` | `""` | Clases adicionales para el componente |
-| `disabled` | `boolean` | `false` | Desactiva el componente | 
+| Prop                    | Tipo                                                                          | Default                      | Descripción                                   |
+| ----------------------- | ----------------------------------------------------------------------------- | ---------------------------- | --------------------------------------------- |
+| `options`               | `AutocompleteOption[]`                                                        | `[]`                         | Opciones disponibles para seleccionar         |
+| `value`                 | `string`                                                                      | -                            | Valor seleccionado (control externo)          |
+| `onChange`              | `(value: string) => void`                                                     | -                            | Función llamada al cambiar la selección       |
+| `placeholder`           | `string`                                                                      | `"Selecciona una opción..."` | Placeholder del input cuando no hay selección |
+| `title`                 | `string`                                                                      | -                            | Título descriptivo sobre el campo             |
+| `required`              | `boolean`                                                                     | `false`                      | Indica si el campo es requerido               |
+| `className`             | `string`                                                                      | -                            | Clases adicionales para el componente         |
+| `containerClassName`    | `string`                                                                      | -                            | Clases para el contenedor principal           |
+| `inputClassName`        | `string`                                                                      | -                            | Clases para el input                          |
+| `dropdownClassName`     | `string`                                                                      | -                            | Clases para el menú desplegable               |
+| `itemClassName`         | `string`                                                                      | -                            | Clases para los elementos de la lista         |
+| `iconClassName`         | `string`                                                                      | -                            | Clases para los iconos                        |
+| `sectionTitleClassName` | `string`                                                                      | -                            | Clases para los títulos de sección            |
+| `disabled`              | `boolean`                                                                     | `false`                      | Deshabilita el componente completo            |
+| `variant`               | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`                  | Variante de estilo                            |
