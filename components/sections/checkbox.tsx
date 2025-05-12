@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { twMerge } from "tailwind-merge";
 
 export interface CheckboxProps {
   checked?: boolean;
@@ -20,6 +21,9 @@ export interface CheckboxProps {
     | "warning"
     | "danger";
   className?: string;
+  wrapperClassName?: string;
+  checkboxClassName?: string;
+  labelClassName?: string;
   onChange?: (checked: boolean) => void;
   radius?: "none" | "sm" | "md" | "full";
 }
@@ -35,6 +39,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
   size = "md",
   variant = "default",
   className = "",
+  wrapperClassName = "",
+  checkboxClassName = "",
+  labelClassName = "",
   onChange,
   radius = "md",
 }) => {
@@ -143,12 +150,38 @@ const Checkbox: React.FC<CheckboxProps> = ({
     },
   };
 
+  const wrapperClasses = twMerge(
+    "inline-flex items-center",
+    disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+    wrapperClassName
+  );
+
+  const checkboxClasses = twMerge(
+    sizeClasses[size],
+    "border-2",
+    radiusClasses[radius],
+    "flex items-center justify-center",
+    isChecked ? checkedClasses[variant] : variantClasses[variant],
+    checkboxClassName
+  );
+
+  const labelClasses = twMerge(
+    "ml-2",
+    labelSizeClasses[size],
+    disabled
+      ? "text-zinc-400 dark:text-zinc-600"
+      : "text-zinc-900 dark:text-zinc-100",
+    labelClassName
+  );
+
+  const svgClasses = twMerge(
+    "w-[80%] h-[80%]",
+    variant === "default" ? "text-white dark:text-zinc-200" : "text-white",
+    className
+  );
+
   return (
-    <label
-      className={`inline-flex items-center ${
-        disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-      }`}
-    >
+    <label className={wrapperClasses}>
       <div className="relative">
         <input
           type="checkbox"
@@ -161,27 +194,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
           onChange={handleChange}
         />
         <motion.div
-          className={`
-            ${sizeClasses[size]}
-            border-2 
-            ${radiusClasses[radius]}
-            flex items-center justify-center
-            ${isChecked ? checkedClasses[variant] : variantClasses[variant]}
-            ${className}
-          `}
+          className={checkboxClasses}
           variants={checkboxVariants}
           initial="unchecked"
           animate={isChecked ? "checked" : "unchecked"}
           whileTap={!disabled ? { scale: 0.95 } : undefined}
         >
-          <motion.svg
-            className={`w-[80%] h-[80%] ${
-              variant === "default"
-                ? "text-white dark:text-zinc-200"
-                : "text-white"
-            }`}
-            viewBox="0 0 24 24"
-          >
+          <motion.svg className={svgClasses} viewBox="0 0 24 24">
             <motion.path
               fill="none"
               stroke="currentColor"
@@ -197,13 +216,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         </motion.div>
       </div>
       {label && (
-        <span
-          className={`ml-2 ${labelSizeClasses[size]} ${
-            disabled
-              ? "text-zinc-400 dark:text-zinc-600"
-              : "text-zinc-900 dark:text-zinc-100"
-          }`}
-        >
+        <span className={labelClasses}>
           {label}
           {required && <span className="text-red-500 ml-0.5">*</span>}
         </span>
