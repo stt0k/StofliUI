@@ -430,29 +430,47 @@ export default function BreadcrumbsIconsDemo() {
 ```
 </DemoTabs>
 
-### Con navegación
+### Con clases personalizadas
 
-Usando la prop `clickable` para crear breadcrumbs que funcionen como enlaces de navegación.
+Puedes personalizar cualquier parte de los breadcrumbs usando las propiedades de className con clases de Tailwind CSS.
 
 <DemoTabs
   preview={
-    <div className="flex flex-wrap gap-8 items-center justify-start">
+    <div className="flex flex-col gap-4">
       <Breadcrumbs
         homeIcon
-        clickable
-        variant="default"
+        className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-950 p-3 rounded-lg"
+        separatorClassName="text-purple-500 dark:text-purple-400"
+        currentItemClassName="text-purple-800 dark:text-purple-300 font-bold"
+        homeIconClassName="text-blue-700 dark:text-blue-400"
         items={[
           { 
-            label: "Accordion", 
-            href: "/docs/componentes/accordion"
+            label: "Diseño", 
+            className: "italic"
           },
           { 
-            label: "Input", 
-            href: "/docs/componentes/input"
+            label: "Navegación", 
+            className: "text-blue-600 dark:text-blue-400"
           },
           { 
             label: "Breadcrumbs", 
-            href: "/docs/componentes/breadcrumbs"
+          },
+        ]}
+      />
+      <Breadcrumbs
+        homeIcon
+        linkClassName="hover:bg-green-100 dark:hover:bg-green-900 px-2 py-1 rounded transition-colors"
+        separatorClassName="text-green-600 dark:text-green-400"
+        currentItemClassName="bg-green-200 dark:bg-green-800 px-2 py-1 rounded font-bold"
+        items={[
+          { 
+            label: "Dashboard"
+          },
+          { 
+            label: "Informes"
+          },
+          { 
+            label: "Estadísticas"
           },
         ]}
       />
@@ -462,27 +480,47 @@ Usando la prop `clickable` para crear breadcrumbs que funcionen como enlaces de 
 ```tsx
 import { Breadcrumbs } from "@stofli/ui";
 
-export default function BreadcrumbsNavigationDemo() {
+export default function BreadcrumbsCustomClassesDemo() {
   return (
-    <Breadcrumbs
-      homeIcon
-      clickable
-      variant="default"
-      items={[
-        { 
-          label: "Accordion", 
-          href: "/docs/componentes/accordion"
-        },
-        { 
-          label: "Input", 
-          href: "/docs/componentes/input"
-        },
-        { 
-          label: "Breadcrumbs", 
-          href: "/docs/componentes/breadcrumbs"
-        },
-      ]}
-    />
+    <div className="flex flex-col gap-4">
+      <Breadcrumbs
+        homeIcon
+        className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-950 p-3 rounded-lg"
+        separatorClassName="text-purple-500 dark:text-purple-400"
+        currentItemClassName="text-purple-800 dark:text-purple-300 font-bold"
+        homeIconClassName="text-blue-700 dark:text-blue-400"
+        items={[
+          { 
+            label: "Diseño", 
+            className: "italic"
+          },
+          { 
+            label: "Navegación", 
+            className: "text-blue-600 dark:text-blue-400"
+          },
+          { 
+            label: "Breadcrumbs", 
+          },
+        ]}
+      />
+      <Breadcrumbs
+        homeIcon
+        linkClassName="hover:bg-green-100 dark:hover:bg-green-900 px-2 py-1 rounded transition-colors"
+        separatorClassName="text-green-600 dark:text-green-400"
+        currentItemClassName="bg-green-200 dark:bg-green-800 px-2 py-1 rounded font-bold"
+        items={[
+          { 
+            label: "Dashboard"
+          },
+          { 
+            label: "Informes"
+          },
+          { 
+            label: "Estadísticas"
+          },
+        ]}
+      />
+    </div>
   );
 }
 ```
@@ -490,12 +528,18 @@ export default function BreadcrumbsNavigationDemo() {
 
 ## Props
 
-| Prop        | Tipo                                                                          | Default            | Descripción                             |
-| ----------- | ----------------------------------------------------------------------------- | ------------------ | --------------------------------------- |
-| `items`     | `{ label: string; href?: string; icon?: React.ReactNode }[]`                  | `[]`               | Elementos de la ruta de navegación      |
-| `separator` | `React.ReactNode`                                                             | `<ChevronRight />` | Icono o texto separador entre elementos |
-| `homeIcon`  | `boolean`                                                                     | `false`            | Muestra un icono de inicio al principio |
-| `clickable` | `boolean`                                                                     | `false`            | Determina si los items son enlaces      |
-| `variant`   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`        | Variante de estilo                      |
-| `size`      | `"sm" \| "md" \| "lg"`                                                        | `"md"`             | Tamaño del componente                   |
-| `className` | `string`                                                                      | -                  | Clases adicionales para el componente   |
+| Prop                   | Tipo                                                                             | Default            | Descripción                                |
+| ---------------------- | -------------------------------------------------------------------------------- | ------------------ | ------------------------------------------ |
+| `items`                | `{ label: string; href?: string; icon?: React.ReactNode; className?: string }[]` | `[]`               | Elementos de la ruta de navegación         |
+| `separator`            | `React.ReactNode`                                                                | `<ChevronRight />` | Icono o texto separador entre elementos    |
+| `homeIcon`             | `boolean`                                                                        | `false`            | Muestra un icono de inicio al principio    |
+| `clickable`            | `boolean`                                                                        | `false`            | Determina si los items son enlaces         |
+| `variant`              | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"`    | `"default"`        | Variante de estilo                         |
+| `size`                 | `"sm" \| "md" \| "lg"`                                                           | `"md"`             | Tamaño del componente                      |
+| `className`            | `string`                                                                         | -                  | Clases adicionales para el componente nav  |
+| `olClassName`          | `string`                                                                         | -                  | Clases adicionales para la lista ol        |
+| `itemClassName`        | `string`                                                                         | -                  | Clases adicionales para los items li       |
+| `separatorClassName`   | `string`                                                                         | -                  | Clases adicionales para los separadores    |
+| `homeIconClassName`    | `string`                                                                         | -                  | Clases adicionales para el icono de inicio |
+| `currentItemClassName` | `string`                                                                         | -                  | Clases adicionales para el item actual     |
+| `linkClassName`        | `string`                                                                         | -                  | Clases adicionales para los enlaces        |
