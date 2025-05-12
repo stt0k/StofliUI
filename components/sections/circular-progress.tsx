@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { twMerge } from "tailwind-merge";
 
 export interface CircularProgressProps {
   value?: number;
@@ -19,6 +20,10 @@ export interface CircularProgressProps {
   label?: string;
   labelPosition?: "top" | "bottom";
   className?: string;
+  circleClassName?: string;
+  bgCircleClassName?: string;
+  valueClassName?: string;
+  labelClassName?: string;
   animate?: boolean;
   spin?: boolean;
   formatOptions?: Intl.NumberFormatOptions;
@@ -35,6 +40,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   label,
   labelPosition = "top",
   className = "",
+  circleClassName = "",
+  bgCircleClassName = "",
+  valueClassName = "",
+  labelClassName = "",
   animate = true,
   spin = false,
   formatOptions = { style: "percent", maximumFractionDigits: 0 },
@@ -96,9 +105,12 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
   const labelElement = label && (
     <span
-      className={`absolute ${labelPosition === "top" ? "-top-6" : "-bottom-6"} 
+      className={twMerge(
+        `absolute ${labelPosition === "top" ? "-top-6" : "-bottom-6"} 
         left-1/2 -translate-x-1/2 ${labelSize} font-medium 
-        dark:text-zinc-400 text-zinc-600 whitespace-nowrap`}
+        dark:text-zinc-400 text-zinc-600 whitespace-nowrap`,
+        labelClassName
+      )}
     >
       {label}
     </span>
@@ -106,7 +118,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
   return (
     <div
-      className={`relative inline-flex items-center justify-center ${sizeClasses[size]} ${className}`}
+      className={twMerge(
+        `relative inline-flex items-center justify-center ${sizeClasses[size]}`,
+        className
+      )}
       role="progressbar"
       aria-valuemin={0}
       aria-valuemax={max}
@@ -124,7 +139,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         {spin ? (
           <>
             <circle
-              className={`${bgVariantClasses[variant]} transition-colors`}
+              className={twMerge(
+                `${bgVariantClasses[variant]} transition-colors`,
+                bgCircleClassName
+              )}
               cx={center}
               cy={center}
               r={radius}
@@ -132,7 +150,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
               strokeWidth={thickness}
             />
             <circle
-              className={`${variantClasses[variant]} transition-colors`}
+              className={twMerge(
+                `${variantClasses[variant]} transition-colors`,
+                circleClassName
+              )}
               cx={center}
               cy={center}
               r={radius}
@@ -147,7 +168,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         ) : (
           <>
             <circle
-              className={`${bgVariantClasses[variant]} transition-colors`}
+              className={twMerge(
+                `${bgVariantClasses[variant]} transition-colors`,
+                bgCircleClassName
+              )}
               cx={center}
               cy={center}
               r={radius}
@@ -155,7 +179,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
               strokeWidth={thickness}
             />
             <motion.circle
-              className={`${variantClasses[variant]} transition-colors`}
+              className={twMerge(
+                `${variantClasses[variant]} transition-colors`,
+                circleClassName
+              )}
               cx={center}
               cy={center}
               r={radius}
@@ -182,7 +209,10 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       {showValue && (
         <div className="absolute inset-0 flex items-center justify-center">
           <span
-            className={`${fontSize} font-medium dark:text-zinc-300 text-zinc-700`}
+            className={twMerge(
+              `${fontSize} font-medium dark:text-zinc-300 text-zinc-700`,
+              valueClassName
+            )}
           >
             {formattedValue}
           </span>
