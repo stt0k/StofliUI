@@ -133,6 +133,7 @@ export const headerData = [
     title: "Ejemplos",
     link: "/docs/ejemplos",
     relatedPaths: ["/docs/ejemplos"],
+    hidden: true,
     submenu: {
       columns: [
         {
@@ -188,7 +189,7 @@ export const headerData = [
   },
   {
     title: "Pricing",
-    link: "/pricing",
+    link: "/docs/pricing",
     relatedPaths: ["/pricing"],
   },
   {
