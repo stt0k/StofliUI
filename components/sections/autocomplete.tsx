@@ -3,6 +3,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronsUpDown, X } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 export interface AutocompleteOption {
   value: string;
@@ -19,6 +20,12 @@ interface AutocompleteProps {
   title?: string;
   required?: boolean;
   className?: string;
+  containerClassName?: string;
+  inputClassName?: string;
+  dropdownClassName?: string;
+  itemClassName?: string;
+  iconClassName?: string;
+  sectionTitleClassName?: string;
   disabled?: boolean;
   variant?:
     | "default"
@@ -32,21 +39,31 @@ interface AutocompleteProps {
 interface AutocompleteSectionProps {
   title: string;
   children: React.ReactNode;
+  className?: string;
+  titleClassName?: string;
 }
 
 interface AutocompleteItemProps {
   option: AutocompleteOption;
   isSelected: boolean;
   onSelect: () => void;
+  className?: string;
 }
 
 export const AutocompleteSection: React.FC<AutocompleteSectionProps> = ({
   title,
   children,
+  className = "",
+  titleClassName = "",
 }) => {
   return (
-    <div className="py-2">
-      <div className="px-3 py-1.5 text-sm font-medium text-zinc-400 dark:text-zinc-500">
+    <div className={twMerge("py-2", className)}>
+      <div
+        className={twMerge(
+          "px-3 py-1.5 text-sm font-medium text-zinc-400 dark:text-zinc-500",
+          titleClassName
+        )}
+      >
         {title}
       </div>
       {children}
@@ -58,6 +75,7 @@ export const AutocompleteItem: React.FC<AutocompleteItemProps> = ({
   option,
   isSelected,
   onSelect,
+  className = "",
 }) => {
   // Solo log para opciones seleccionadas para reducir ruido en consola
   if (isSelected && !option.disabled) {
@@ -89,7 +107,10 @@ export const AutocompleteItem: React.FC<AutocompleteItemProps> = ({
       initial={{ opacity: 0, y: -5 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 5 }}
-      className={`flex items-center justify-between px-3 py-2 text-sm transition-colors ${getItemClasses()}`}
+      className={twMerge(
+        `flex items-center justify-between px-3 py-2 text-sm transition-colors ${getItemClasses()}`,
+        className
+      )}
       onClick={handleClick}
     >
       <span>{option.label}</span>
@@ -108,6 +129,12 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   title,
   required = false,
   className = "",
+  containerClassName = "",
+  inputClassName = "",
+  dropdownClassName = "",
+  itemClassName = "",
+  iconClassName = "",
+  sectionTitleClassName = "",
   disabled = false,
   variant = "default",
 }) => {
@@ -376,16 +403,27 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   };
 
   return (
-    <div ref={containerRef} className={`relative w-full max-w-sm ${className}`}>
+    <div
+      ref={containerRef}
+      className={twMerge(`relative w-full max-w-sm`, className)}
+    >
       <div
-        className={`relative flex flex-col group
+        className={twMerge(
+          `relative flex flex-col group
           ${getVariantClasses()}
           ${getStateClasses()}
-          ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+          ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`,
+          containerClassName
+        )}
       >
         {title && (
           <div className="px-3 pt-1.5 pb-0">
-            <span className={`text-xs font-medium ${getTitleColorClasses()}`}>
+            <span
+              className={twMerge(
+                `text-xs font-medium ${getTitleColorClasses()}`,
+                sectionTitleClassName
+              )}
+            >
               {title}
               {required && <span className="text-red-500 ml-0.5">*</span>}
             </span>
@@ -394,10 +432,13 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         <input
           ref={inputRef}
           type="text"
-          className={`w-full px-3 pr-20 ${
-            title ? "pt-0 pb-1.5" : "py-2"
-          } bg-transparent text-sm text-zinc-900 dark:text-zinc-100 
-            placeholder-zinc-500 dark:placeholder-zinc-400 outline-none disabled:cursor-not-allowed`}
+          className={twMerge(
+            `w-full px-3 pr-20 ${
+              title ? "pt-0 pb-1.5" : "py-2"
+            } bg-transparent text-sm text-zinc-900 dark:text-zinc-100 
+            placeholder-zinc-500 dark:placeholder-zinc-400 outline-none disabled:cursor-not-allowed`,
+            inputClassName
+          )}
           placeholder={placeholder}
           value={query}
           onChange={handleInputChange}
@@ -412,17 +453,20 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               <button
                 type="button"
                 onClick={handleClear}
-                className={`h-4 w-4 text-${
-                  variant === "default" ? "zinc" : variant
-                }-400 hover:text-${
-                  variant === "default" ? "zinc" : variant
-                }-600 
+                className={twMerge(
+                  `h-4 w-4 text-${
+                    variant === "default" ? "zinc" : variant
+                  }-400 hover:text-${
+                    variant === "default" ? "zinc" : variant
+                  }-600 
                   dark:text-${
                     variant === "default" ? "zinc" : variant
                   }-500 dark:hover:text-${
-                  variant === "default" ? "zinc" : variant
-                }-300 
-                  opacity-0 group-hover:opacity-100 transition-opacity`}
+                    variant === "default" ? "zinc" : variant
+                  }-300 
+                  opacity-0 group-hover:opacity-100 transition-opacity`,
+                  iconClassName
+                )}
                 disabled={disabled}
                 aria-label="Limpiar selección"
               >
@@ -432,15 +476,18 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           </div>
           <button
             type="button"
-            className={`flex items-center justify-center w-8 h-full 
+            className={twMerge(
+              `flex items-center justify-center w-8 h-full 
               text-${variant === "default" ? "zinc" : variant}-500 dark:text-${
-              variant === "default" ? "zinc" : variant
-            }-400 transition-colors
+                variant === "default" ? "zinc" : variant
+              }-400 transition-colors
               hover:text-${
                 variant === "default" ? "zinc" : variant
               }-700 dark:hover:text-${
-              variant === "default" ? "zinc" : variant
-            }-300`}
+                variant === "default" ? "zinc" : variant
+              }-300`,
+              iconClassName
+            )}
             onClick={toggleDropdown}
             disabled={disabled}
             aria-label="Mostrar opciones"
@@ -457,21 +504,28 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className={`absolute z-50 w-full mt-1 bg-white dark:bg-zinc-900 
+            className={twMerge(
+              `absolute z-50 w-full mt-1 bg-white dark:bg-zinc-900 
               rounded-lg shadow-lg overflow-hidden max-h-60
-              border border-zinc-200 dark:border-zinc-800`}
+              border border-zinc-200 dark:border-zinc-800`,
+              dropdownClassName
+            )}
           >
             <div className="overflow-y-auto max-h-60 hide-scrollbar">
               {Object.entries(groupedOptions).map(([group, groupOptions]) => (
                 <React.Fragment key={group}>
                   {group !== "default" && (
-                    <AutocompleteSection title={group}>
+                    <AutocompleteSection
+                      title={group}
+                      titleClassName={sectionTitleClassName}
+                    >
                       {groupOptions.map((option) => (
                         <AutocompleteItem
                           key={option.value}
                           option={option}
                           isSelected={option.value === (value || internalValue)}
                           onSelect={() => handleSelect(option)}
+                          className={itemClassName}
                         />
                       ))}
                     </AutocompleteSection>
@@ -483,6 +537,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
                         option={option}
                         isSelected={option.value === (value || internalValue)}
                         onSelect={() => handleSelect(option)}
+                        className={itemClassName}
                       />
                     ))}
                 </React.Fragment>
