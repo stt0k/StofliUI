@@ -2,17 +2,20 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-
-const classNames = (...classes: (string | undefined)[]) => {
-  return classes.filter(Boolean).join(" ");
-};
+import { twMerge } from "tailwind-merge";
 
 export interface CardProps {
   title?: string;
   description?: string;
   children?: React.ReactNode;
   className?: string;
-  variant?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
   radius?: "none" | "sm" | "md" | "full";
   hover?: "none" | "lift" | "glow" | "scale";
   animation?: "none" | "fade" | "slide" | "bounce";
@@ -25,6 +28,8 @@ export interface CardProps {
   titleClassName?: string;
   descriptionClassName?: string;
   imageClassName?: string;
+  headerClassName?: string;
+  footerClassName?: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -45,14 +50,22 @@ const Card: React.FC<CardProps> = ({
   titleClassName = "",
   descriptionClassName = "",
   imageClassName = "",
+  headerClassName = "",
+  footerClassName = "",
 }) => {
   const variantClasses = {
-    default: "bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800",
-    primary: "bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800",
-    secondary: "bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800",
-    success: "bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800",
-    warning: "bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800",
-    danger: "bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800",
+    default:
+      "bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800",
+    primary:
+      "bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800",
+    secondary:
+      "bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800",
+    success:
+      "bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800",
+    warning:
+      "bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800",
+    danger:
+      "bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800",
   };
 
   const radiusClasses = {
@@ -88,7 +101,7 @@ const Card: React.FC<CardProps> = ({
     },
   };
 
-  const cardClasses = classNames(
+  const cardClasses = twMerge(
     "relative overflow-hidden",
     variantClasses[variant],
     radiusClasses[radius],
@@ -97,25 +110,29 @@ const Card: React.FC<CardProps> = ({
     className
   );
 
-  const contentClasses = classNames(
-    "p-4",
-    contentClassName
-  );
+  const contentClasses = twMerge("p-4", contentClassName);
 
-  const titleClasses = classNames(
+  const titleClasses = twMerge(
     "text-lg font-semibold mb-2 dark:text-zinc-100",
     titleClassName
   );
 
-  const descriptionClasses = classNames(
+  const descriptionClasses = twMerge(
     "text-zinc-600 dark:text-zinc-400 mb-4",
     descriptionClassName
   );
 
-  const imageContainerClasses = classNames(
+  const imageContainerClasses = twMerge(
     "w-full overflow-hidden",
     radiusClasses[radius],
     imageClassName
+  );
+
+  const headerClasses = twMerge("p-4", headerClassName);
+
+  const footerClasses = twMerge(
+    "p-4 border-t border-zinc-200 dark:border-zinc-800 mt-auto",
+    footerClassName
   );
 
   return (
@@ -125,12 +142,8 @@ const Card: React.FC<CardProps> = ({
       whileHover={interactive ? { scale: 1.02 } : undefined}
       whileTap={interactive ? { scale: 0.98 } : undefined}
     >
-      {header && (
-        <div className="p-4">
-          {header}
-        </div>
-      )}
-      
+      {header && <div className={headerClasses}>{header}</div>}
+
       {image && (
         <div className={imageContainerClasses}>
           <motion.img
@@ -146,7 +159,7 @@ const Card: React.FC<CardProps> = ({
 
       <div className={contentClasses}>
         {title && (
-          <motion.h3 
+          <motion.h3
             className={titleClasses}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -155,9 +168,9 @@ const Card: React.FC<CardProps> = ({
             {title}
           </motion.h3>
         )}
-        
+
         {description && (
-          <motion.p 
+          <motion.p
             className={descriptionClasses}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -170,13 +183,9 @@ const Card: React.FC<CardProps> = ({
         {children}
       </div>
 
-      {footer && (
-        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 mt-auto">
-          {footer}
-        </div>
-      )}
+      {footer && <div className={footerClasses}>{footer}</div>}
     </motion.div>
   );
 };
 
-export default Card; 
+export default Card;
