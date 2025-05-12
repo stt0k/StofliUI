@@ -206,16 +206,77 @@ export default function AvatarStatusDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del avatar usando las propiedades de className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <div className="flex gap-4">
+      <Avatar
+        src="https://i.pravatar.cc/300?u=custom1"
+        alt="Avatar personalizado"
+        className="bg-purple-100 dark:bg-purple-950"
+        imageClassName="grayscale hover:grayscale-0 transition-all duration-300"
+        fallback="A"
+        status="online"
+        statusClassName="bg-indigo-500 h-3 w-3"
+        border
+        borderColor="border-purple-300 dark:border-purple-800"
+      />
+      <Avatar
+        fallback="BT"
+        fallbackClassName="text-amber-700 dark:text-amber-300 font-bold"
+        className="bg-amber-100 dark:bg-amber-950"
+        border
+        borderColor="border-amber-300 dark:border-amber-800"
+      />
+    </div>
+  }
+>
+```tsx
+import { Avatar } from "@stofli/ui";
+
+export default function AvatarCustomClassesDemo() {
+  return (
+    <div className="flex gap-4">
+      <Avatar
+        src="https://i.pravatar.cc/300?u=custom1"
+        alt="Avatar personalizado"
+        className="bg-purple-100 dark:bg-purple-950"
+        imageClassName="grayscale hover:grayscale-0 transition-all duration-300"
+        fallback="A"
+        status="online"
+        statusClassName="bg-indigo-500 h-3 w-3"
+        border
+        borderColor="border-purple-300 dark:border-purple-800"
+      />
+      <Avatar
+        fallback="BT"
+        fallbackClassName="text-amber-700 dark:text-amber-300 font-bold"
+        className="bg-amber-100 dark:bg-amber-950"
+        border
+        borderColor="border-amber-300 dark:border-amber-800"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop          | Tipo                                    | Default           | Descripción                                    |
-| ------------- | --------------------------------------- | ----------------- | ---------------------------------------------- |
-| `src`         | `string`                               | -                 | URL de la imagen del avatar                    |
-| `alt`         | `string`                               | `"Avatar"`        | Texto alternativo para la imagen               |
-| `fallback`    | `string`                               | -                 | Texto a mostrar cuando no hay imagen           |
-| `size`        | `"sm" \| "md" \| "lg" \| "xl"`        | `"md"`           | Tamaño del avatar                             |
-| `radius`      | `"none" \| "sm" \| "md" \| "full"`    | `"full"`         | Radio de borde del avatar                     |
-| `border`      | `boolean`                              | `false`          | Muestra un borde alrededor del avatar         |
-| `borderColor` | `string`                               | `"ring-zinc-200"` | Color del borde cuando border es true         |
-| `status`      | `"online" \| "offline" \| "away" \| "busy"` | -         | Muestra un indicador de estado                |
-| `className`   | `string`                               | -                 | Clases adicionales para personalización        |
+| Prop                | Tipo                                        | Default           | Descripción                                     |
+| ------------------- | ------------------------------------------- | ----------------- | ----------------------------------------------- |
+| `src`               | `string`                                    | -                 | URL de la imagen del avatar                     |
+| `alt`               | `string`                                    | `"Avatar"`        | Texto alternativo para la imagen                |
+| `fallback`          | `string`                                    | -                 | Texto a mostrar cuando no hay imagen            |
+| `size`              | `"sm" \| "md" \| "lg" \| "xl"`              | `"md"`            | Tamaño del avatar                               |
+| `radius`            | `"none" \| "sm" \| "md" \| "full"`          | `"full"`          | Radio de borde del avatar                       |
+| `border`            | `boolean`                                   | `false`           | Muestra un borde alrededor del avatar           |
+| `borderColor`       | `string`                                    | `"ring-zinc-200"` | Color del borde cuando border es true           |
+| `status`            | `"online" \| "offline" \| "away" \| "busy"` | -                 | Muestra un indicador de estado                  |
+| `className`         | `string`                                    | -                 | Clases adicionales para el contenedor principal |
+| `imageClassName`    | `string`                                    | -                 | Clases adicionales para la imagen               |
+| `fallbackClassName` | `string`                                    | -                 | Clases adicionales para el texto de fallback    |
+| `statusClassName`   | `string`                                    | -                 | Clases adicionales para el indicador de estado  |
