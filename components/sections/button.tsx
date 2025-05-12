@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, ArrowRight } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onDrag"> {
@@ -27,6 +28,12 @@ export interface ButtonProps
   withRipple?: boolean;
   rippleColor?: string;
   className?: string;
+  rippleClassName?: string;
+  loaderClassName?: string;
+  leftIconClassName?: string;
+  rightIconClassName?: string;
+  contentClassName?: string;
+  arrowClassName?: string;
 }
 
 interface RippleEffect {
@@ -52,6 +59,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       withArrow = false,
       withRipple = true,
       rippleColor,
+      rippleClassName = "",
+      loaderClassName = "",
+      leftIconClassName = "",
+      rightIconClassName = "",
+      contentClassName = "",
+      arrowClassName = "",
       disabled,
       onClick,
       ...props
@@ -161,7 +174,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     // Construir la clase CSS combinada
-    const buttonClasses = `
+    const buttonClasses = twMerge(
+      `
       inline-flex items-center justify-center font-medium transition-colors duration-200
       ${variant !== "link" && variant !== "ghost" ? "active:shadow-inner" : ""}
       focus:outline-none focus:ring-0 ${
@@ -180,8 +194,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           : ""
       }
       relative overflow-hidden
-      ${className}
-    `;
+    `,
+      className
+    );
 
     // Esta función maneja la referencia de manera segura
     const handleRef = (node: HTMLButtonElement | null) => {
@@ -201,6 +216,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       Object.entries(props).filter(([key]) => !key.startsWith("onDrag"))
     );
 
+    // Estilos predeterminados para ripple
+    const defaultRippleClasses = !rippleColor
+      ? `absolute rounded-full pointer-events-none ${
+          variant === "outline" || variant === "ghost" || variant === "link"
+            ? "bg-zinc-500 dark:bg-zinc-200 opacity-15"
+            : "bg-white dark:bg-zinc-200 opacity-35"
+        }`
+      : "absolute rounded-full pointer-events-none";
+
     return (
       <motion.button
         ref={handleRef}
@@ -208,7 +232,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         whileTap={
           isDisabled || variant === "link" || variant === "ghost"
             ? undefined
-            : { scale: 0.97, boxShadow: "inset 0 0 5px rgba(0, 0, 0, 0.2)" }
+            : { scale: 0.97 }
         }
         transition={{ duration: 0.08 }}
         disabled={isDisabled}
@@ -221,17 +245,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ripples.map((ripple) => (
               <motion.span
                 key={ripple.id}
-                className={
-                  !rippleColor
-                    ? `absolute rounded-full pointer-events-none ${
-                        variant === "outline" ||
-                        variant === "ghost" ||
-                        variant === "link"
-                          ? "bg-zinc-500 dark:bg-zinc-200 opacity-15"
-                          : "bg-white dark:bg-zinc-200 opacity-35"
-                      }`
-                    : "absolute rounded-full pointer-events-none"
-                }
+                className={twMerge(defaultRippleClasses, rippleClassName)}
                 style={{
                   left: ripple.x - ripple.size / 2,
                   top: ripple.y - ripple.size / 2,
@@ -258,21 +272,30 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ))}
         </AnimatePresence>
 
-        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {isLoading && (
+          <Loader2
+            className={twMerge("mr-2 h-4 w-4 animate-spin", loaderClassName)}
+          />
+        )}
 
         {!isLoading && leftIcon && (
-          <span className="mr-2 relative z-10">{leftIcon}</span>
+          <span className={twMerge("mr-2 relative z-10", leftIconClassName)}>
+            {leftIcon}
+          </span>
         )}
 
         <span
-          className={`${withArrow || rightIcon ? "mr-1" : ""} z-10 relative`}
+          className={twMerge(
+            `${withArrow || rightIcon ? "mr-1" : ""} z-10 relative`,
+            contentClassName
+          )}
         >
           {children}
         </span>
 
         {!isLoading && withArrow && (
           <motion.span
-            className="ml-1 relative z-10"
+            className={twMerge("ml-1 relative z-10", arrowClassName)}
             initial={{ x: 0 }}
             whileHover={{ x: 3 }}
             transition={{ duration: 0.2 }}
@@ -282,7 +305,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
 
         {!isLoading && rightIcon && !withArrow && (
-          <span className="ml-2 relative z-10">{rightIcon}</span>
+          <span className={twMerge("ml-2 relative z-10", rightIconClassName)}>
+            {rightIcon}
+          </span>
         )}
       </motion.button>
     );
