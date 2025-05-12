@@ -23,6 +23,9 @@ import Avatar from "@/components/sections/avatar";
 import dynamic from "next/dynamic";
 import GovSection from "@/components/home/GovSection";
 import BentoSection from "@/components/home/BentoSection";
+import ScrollProgressSection from "@/components/home/ScrollProgressSection";
+import ProjectSection from "@/components/home/ProjectSection";
+import Image from "next/image";
 
 // Importar los componentes de Recharts de forma dinámica para evitar problemas de SSR
 const RechartsComponents = dynamic(
@@ -39,13 +42,13 @@ const RechartsComponents = dynamic(
 
 export default function Page() {
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-black text-white w-full overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-zinc-50 dark:bg-black text-white w-full overflow-x-hidden">
       <Header />
 
       {/* Hero Section con el dashboard moderno */}
       <main className="flex-grow pt-40 pb-20 relative">
         {/* Fondo con grid más grande y con márgenes */}
-        <div className="absolute inset-0 bg-white dark:bg-black">
+        <div className="absolute inset-0 bg-zinc-50 dark:bg-black">
           {/* Efecto de ruido solo dentro del círculo */}
           <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_75%)]">
             <div
@@ -66,10 +69,10 @@ export default function Page() {
           <div className="absolute inset-0 bg-transparent dark:bg-black opacity-0 dark:opacity-100 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,transparent_70%,#000_90%)]"></div>
 
           {/* Overlay adicional en la parte superior */}
-          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white dark:from-black to-transparent z-10"></div>
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-zinc-50 dark:from-black to-transparent z-10"></div>
 
           {/* Overlay adicional en la parte inferior */}
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white dark:from-black to-transparent z-10"></div>
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-zinc-50 dark:from-black to-transparent z-10"></div>
         </div>
 
         <div className="container mx-auto px-4 z-20 relative">
@@ -78,10 +81,22 @@ export default function Page() {
             {/* Tag más moderno */}
             <a
               href="/portal"
-              className="inline-flex items-center px-3 py-1.5 mb-8 text-xs font-medium bg-transparent rounded-full border border-zinc-800/50 transition-all duration-300 relative group"
+              className="inline-flex items-center px-3 py-1.5 mb-8 text-xs font-medium bg-white/80 dark:bg-transparent backdrop-blur-sm rounded-full border border-zinc-300/80 dark:border-zinc-700/50 transition-all duration-300 relative group shadow-sm hover:shadow-md"
             >
               <span
-                className="font-semibold"
+                className="font-semibold dark:hidden"
+                style={{
+                  background:
+                    "linear-gradient(90deg, rgb(99, 102, 241) 0.41%, rgb(168, 85, 247) 40.68%, rgb(236, 72, 153) 64.12%, rgb(239, 68, 68) 97.82%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                New Stofli UI Portal
+              </span>
+              <span
+                className="font-semibold hidden dark:inline"
                 style={{
                   background:
                     "linear-gradient(90deg, rgb(179, 174, 245) 0.41%, rgb(215, 203, 231) 40.68%, rgb(229, 200, 200) 64.12%, rgb(234, 168, 121) 97.82%)",
@@ -92,8 +107,8 @@ export default function Page() {
               >
                 New Stofli UI Portal
               </span>
-              <ArrowRight className="w-3 h-3 ml-1.5 inline text-white" />
-              <div className="absolute inset-0 rounded-full transition-all duration-300 group-hover:shadow-[0_0_10px_1px_rgba(179,174,245,0.5),0_0_15px_2px_rgba(234,168,121,0.3)] group-hover:border-white/20"></div>
+              <ArrowRight className="w-3 h-3 ml-1.5 inline text-black dark:text-white" />
+              <div className="absolute inset-0 rounded-full transition-all duration-300 group-hover:shadow-[0_0_10px_1px_rgba(179,174,245,0.5),0_0_15px_2px_rgba(234,168,121,0.3)] group-hover:border-indigo-200 dark:group-hover:border-white/20"></div>
             </a>
 
             <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-700 dark:from-white dark:to-zinc-300">
@@ -116,7 +131,7 @@ export default function Page() {
               </a>
               <a
                 href="/demo"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg bg-transparent border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition-all duration-300 relative group"
+                className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg bg-transparent border border-zinc-400/50 dark:border-white/20 text-zinc-800 dark:text-white backdrop-blur-sm hover:bg-zinc-100/50 dark:hover:bg-white/10 transition-all duration-300 relative group"
               >
                 Solicita una Demo
                 <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#B3AEF5]/20 via-[#E5C8C8]/20 to-[#EAA879]/20 blur-md -z-10"></div>
@@ -128,8 +143,23 @@ export default function Page() {
               {/* Efecto glass mejorado estilo macOS */}
               <div className="absolute -inset-5 bg-gray-100/60 dark:bg-zinc-800/30 rounded-3xl border border-gray-400/50 dark:border-white/10 shadow-xl"></div>
 
-              {/* Contenido del dashboard */}
-              <div className="relative rounded-xl overflow-hidden bg-black border border-zinc-800/40 dark:border-zinc-800/40 shadow-xl">
+              {/* Dashboard Mobile (solo visible en dispositivos móviles) */}
+              <div className="md:hidden relative rounded-xl overflow-hidden bg-black border border-zinc-800/40 dark:border-zinc-800/40 shadow-xl">
+                <div className="aspect-[16/9] sm:aspect-[16/8]">
+                  <Image
+                    src="/dashboard-mobile.png"
+                    alt="Dashboard móvil"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    style={{ objectPosition: "50% 0%" }}
+                  />
+                </div>
+              </div>
+
+              {/* Contenido del dashboard (solo visible en pantallas medianas y grandes) */}
+              <div className="hidden md:block relative rounded-xl overflow-hidden bg-black border border-zinc-800/40 dark:border-zinc-800/40 shadow-xl">
                 {/* Vista de escritorio - componentes reales */}
                 {/* Dashboard interior */}
                 <div className="flex">
@@ -326,7 +356,7 @@ export default function Page() {
                                 size="sm"
                                 variant="default"
                                 className="min-w-0"
-                                buttonClassName="!bg-black/80 !border-zinc-800/60"
+                                buttonClassName="!bg-black/80 !border-zinc-800/60 !text-zinc-400"
                                 width="90px"
                               />
                             </div>
@@ -341,7 +371,7 @@ export default function Page() {
                         {/* Gráficos inferiores */}
                         <div className="grid grid-cols-2 gap-5">
                           {/* Gráfico circular */}
-                          <div className="bg-black border border-zinc-800/40 rounded-md p-3 h-[calc(129%)]">
+                          <div className="bg-black border border-zinc-800/40 rounded-md p-3 h-[calc(121%)]">
                             <div className="flex justify-between items-center mb-3">
                               <h3 className="text-sm font-semibold text-white">
                                 Battles participation
@@ -453,7 +483,7 @@ export default function Page() {
                           </div>
 
                           {/* Gráfico de barras */}
-                          <div className="bg-black border border-zinc-800/40 rounded-md p-3 h-[calc(129%)]">
+                          <div className="bg-black border border-zinc-800/40 rounded-md p-3 h-[calc(121%)]">
                             <div className="flex justify-between items-center mb-3">
                               <h3 className="text-sm font-semibold text-white">
                                 Gaming time
@@ -469,7 +499,7 @@ export default function Page() {
                                 size="sm"
                                 variant="default"
                                 className="min-w-0"
-                                buttonClassName="!bg-black/80 !border-zinc-800/60"
+                                buttonClassName="!bg-black/80 !border-zinc-800/60 !text-zinc-400"
                                 width="90px"
                               />
                             </div>
@@ -637,6 +667,12 @@ export default function Page() {
       </main>
       {/* Sección inspirada en la imagen */}
       <GovSection />
+
+      {/* Sección de proyectos inspirada en la imagen proporcionada */}
+      <ProjectSection />
+
+      {/* Sección con barra de progreso de scroll */}
+      <ScrollProgressSection />
 
       {/* Sección de bento grid */}
       <BentoSection />
