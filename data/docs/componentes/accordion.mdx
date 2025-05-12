@@ -26,11 +26,13 @@ export default function App() {
       items={[
         {
           title: "¿Qué es un Accordion?",
-          content: "Un accordion es un componente que permite mostrar y ocultar contenido...",
+          content:
+            "Un accordion es un componente que permite mostrar y ocultar contenido...",
         },
         {
           title: "¿Cuándo debería usarlo?",
-          content: "Los accordions son útiles cuando necesitas presentar mucha información...",
+          content:
+            "Los accordions son útiles cuando necesitas presentar mucha información...",
         },
       ]}
     />
@@ -178,14 +180,64 @@ export default function AccordionDefaultOpenDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del acordeón usando las propiedades de className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <Accordion
+      className="border-blue-300 bg-blue-50 dark:bg-blue-950 dark:border-blue-800"
+      titleClassName="text-blue-800 dark:text-blue-300 font-bold"
+      iconClassName="text-blue-500"
+      items={[
+        {
+          title: "Acordeón personalizado",
+          content: "Este acordeón tiene estilos personalizados usando las propiedades de className.",
+        },
+        {
+          title: "Fácil de personalizar",
+          content: "Puedes aplicar clases de Tailwind personalizadas a cada parte del componente.",
+        },
+      ]}
+    />
+  }
+>
+```tsx
+import { Accordion } from "@stofli/ui";
+
+export default function AccordionCustomClassesDemo() {
+  return (
+    <Accordion
+      className="border-blue-300 bg-blue-50 dark:bg-blue-950 dark:border-blue-800"
+      titleClassName="text-blue-800 dark:text-blue-300 font-bold"
+      iconClassName="text-blue-500"
+      items={[
+        {
+          title: "Acordeón personalizado",
+          content: "Este acordeón tiene estilos personalizados usando las propiedades de className.",
+        },
+        {
+          title: "Fácil de personalizar",
+          content: "Puedes aplicar clases de Tailwind personalizadas a cada parte del componente.",
+        },
+      ]}
+    />
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop          | Tipo                                          | Default     | Descripción                                    |
-| ------------- | --------------------------------------------- | ----------- | ---------------------------------------------- |
-| `type`        | `"single" \| "multiple"`                     | `"single"`  | Tipo de acordeón                              |
-| `defaultValue`| `string \| string[]`                         | -           | Valor inicial del acordeón                     |
-| `value`       | `string \| string[]`                         | -           | Valor controlado del acordeón                  |
-| `onValueChange`| `(value: string \| string[]) => void`       | -           | Función llamada al cambiar el valor           |
-| `className`   | `string`                                     | -           | Clases adicionales                             |
-| `variant`     | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo |
-| `radius`      | `"none" \| "sm" \| "md" \| "full"`          | `"md"`      | Radio de las esquinas                         |
+| Prop               | Tipo                                      | Default | Descripción                                           |
+| ------------------ | ----------------------------------------- | ------- | ----------------------------------------------------- |
+| `items`            | `{ title: string, content: ReactNode }[]` | -       | Array de elementos con título y contenido             |
+| `defaultOpen`      | `number`                                  | `-1`    | Índice del item abierto por defecto (-1 para ninguno) |
+| `allowMultiple`    | `boolean`                                 | `false` | Permite abrir múltiples secciones a la vez            |
+| `className`        | `string`                                  | -       | Clases para el contenedor principal                   |
+| `itemClassName`    | `string`                                  | -       | Clases para cada elemento del acordeón                |
+| `buttonClassName`  | `string`                                  | -       | Clases para los botones del acordeón                  |
+| `titleClassName`   | `string`                                  | -       | Clases para los títulos del acordeón                  |
+| `contentClassName` | `string`                                  | -       | Clases para el contenido del acordeón                 |
+| `iconClassName`    | `string`                                  | -       | Clases para los iconos del acordeón                   |
