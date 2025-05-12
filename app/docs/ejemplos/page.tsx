@@ -83,13 +83,12 @@ export default function ExamplesPage() {
       <main className="container mx-auto px-4 pb-12">
         {/* Hero section centrado */}
         <div className="text-center mb-20">
-          <h1 className="scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl mb-4">
+          <h1 className="scroll-m-20 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
             Building blocks for <br /> StofliUI interfaces
           </h1>
-          <p className="text-xl text-gray-600 dark:text-zinc-400 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-gray-600 dark:text-zinc-400 leading-relaxed max-w-3xl mx-auto">
             Explora diferentes componentes y patrones de UI construidos con
-            StofliUI. Copia y pega en tus aplicaciones. Funciona con cualquier
-            framework de React.
+            StofliUI.
           </p>
 
           <div className="flex gap-4 mt-6 justify-center">
