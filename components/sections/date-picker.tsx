@@ -6,12 +6,22 @@ import { ChevronDown, X, Calendar as CalendarIcon } from "lucide-react";
 import { format, isValid, parse } from "date-fns";
 import { es } from "date-fns/locale";
 import CalendarComponent from "./calendar";
+import { twMerge } from "tailwind-merge";
 
 export interface DatePickerProps {
   value?: Date;
   onChange?: (date: Date | null) => void;
   placeholder?: string;
   className?: string;
+  containerClassName?: string;
+  inputContainerClassName?: string;
+  inputClassName?: string;
+  labelClassName?: string;
+  errorClassName?: string;
+  calendarIconClassName?: string;
+  clearIconClassName?: string;
+  arrowIconClassName?: string;
+  calendarClassName?: string;
   variant?:
     | "default"
     | "primary"
@@ -53,6 +63,15 @@ const DatePicker: React.FC<DatePickerProps> = ({
   onChange,
   placeholder = "Seleccionar fecha",
   className = "",
+  containerClassName = "",
+  inputContainerClassName = "",
+  inputClassName = "",
+  labelClassName = "",
+  errorClassName = "",
+  calendarIconClassName = "",
+  clearIconClassName = "",
+  arrowIconClassName = "",
+  calendarClassName = "",
   variant = "default",
   size = "md",
   radius = "md",
@@ -225,14 +244,17 @@ const DatePicker: React.FC<DatePickerProps> = ({
   };
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className={twMerge(`w-full`, className)}>
       {label && (
         <label
-          className={`block text-sm font-medium mb-1 ${
-            errorMessage
-              ? "text-red-500 dark:text-red-400"
-              : "text-zinc-700 dark:text-zinc-300"
-          }`}
+          className={twMerge(
+            `block text-sm font-medium mb-1 ${
+              errorMessage
+                ? "text-red-500 dark:text-red-400"
+                : "text-zinc-700 dark:text-zinc-300"
+            }`,
+            labelClassName
+          )}
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
@@ -241,12 +263,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       <div
         ref={datepickerRef}
-        className={`relative w-full ${
-          disabled ? "opacity-50 cursor-not-allowed" : ""
-        }`}
+        className={twMerge(
+          `relative w-full ${disabled ? "opacity-50 cursor-not-allowed" : ""}`,
+          containerClassName
+        )}
       >
         <div
-          className={`
+          className={twMerge(
+            `
             flex items-center border bg-white dark:bg-zinc-900 overflow-hidden
             ${sizeClasses[size]} 
             ${radiusClasses[radius]} 
@@ -265,16 +289,23 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 : ""
             }
             transition-all duration-200
-          `}
+          `,
+            inputContainerClassName
+          )}
         >
           <div
-            className={`flex-grow flex items-center pl-3 cursor-pointer ${
-              !disabled && !readOnly ? "cursor-pointer" : "cursor-default"
-            }`}
+            className={twMerge(
+              `flex-grow flex items-center pl-3 cursor-pointer ${
+                !disabled && !readOnly ? "cursor-pointer" : "cursor-default"
+              }`
+            )}
             onClick={toggleCalendar}
           >
             <CalendarIcon
-              className={`${iconSizes[size]} ${iconColorClasses[variant]} mr-2`}
+              className={twMerge(
+                `${iconSizes[size]} ${iconColorClasses[variant]} mr-2 flex-shrink-0`,
+                calendarIconClassName
+              )}
             />
             <input
               ref={inputRef}
@@ -287,45 +318,55 @@ const DatePicker: React.FC<DatePickerProps> = ({
               onKeyDown={handleKeyDown}
               disabled={disabled}
               readOnly={readOnly}
-              className={`
-                w-full bg-transparent border-none focus:ring-0 focus:outline-none
-                ${disabled || readOnly ? "cursor-not-allowed" : ""}
-              `}
+              className={twMerge(
+                `w-full bg-transparent border-none focus:ring-0 focus:outline-none cursor-pointer
+                ${disabled || readOnly ? "cursor-not-allowed" : ""}`,
+                inputClassName
+              )}
               aria-invalid={!!errorMessage}
               aria-describedby={errorMessage ? `${label}-error` : undefined}
             />
           </div>
 
-          <div className="flex items-center pr-3">
-            {clearable && selectedDate && !disabled && !readOnly && (
+          <div className="flex items-center pr-3 flex-shrink-0 ml-auto gap-2">
+            {clearable && !disabled && !readOnly && (
               <button
                 type="button"
                 onClick={handleClear}
-                className={`h-4 w-4 mr-2 text-${
-                  variant === "default" ? "zinc" : variant
-                }-400 hover:text-${
-                  variant === "default" ? "zinc" : variant
-                }-600 
-                dark:text-${
-                  variant === "default" ? "zinc" : variant
-                }-500 dark:hover:text-${
-                  variant === "default" ? "zinc" : variant
-                }-300 
-                opacity-70 hover:opacity-100 transition-opacity`}
+                className={twMerge(
+                  `h-4 w-4 text-zinc-400 hover:text-zinc-600 
+                  dark:text-zinc-500 dark:hover:text-zinc-300 
+                  opacity-70 hover:opacity-100 transition-opacity flex-shrink-0
+                  ${!selectedDate ? "invisible" : ""}`,
+                  clearIconClassName
+                )}
                 aria-label="Limpiar fecha"
               >
                 <X size={16} />
               </button>
             )}
 
-            <ChevronDown
-              className={`
-                ${iconSizes[size]} ${iconColorClasses[variant]} 
-                transition-transform duration-300 
-                ${isOpen ? "transform rotate-180" : ""}
-                ${disabled || readOnly ? "opacity-50" : ""}
-              `}
-            />
+            {!disabled && !readOnly && (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleCalendar();
+                }}
+                className="flex-shrink-0 cursor-pointer"
+              >
+                <ChevronDown
+                  className={twMerge(
+                    `
+                      ${iconSizes[size]} ${iconColorClasses[variant]} 
+                      transition-transform duration-300 
+                      ${isOpen ? "transform rotate-180" : ""}
+                      flex-shrink-0
+                    `,
+                    arrowIconClassName
+                  )}
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -352,6 +393,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 maxValue={maxValue}
                 calendar={calendar}
                 locale={locale}
+                className={calendarClassName}
               />
             </motion.div>
           )}
@@ -362,7 +404,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
       {errorMessage && (
         <p
           id={`${label}-error`}
-          className="mt-1 text-sm text-red-500 dark:text-red-400"
+          className={twMerge(
+            "mt-1 text-sm text-red-500 dark:text-red-400",
+            errorClassName
+          )}
         >
           {errorMessage}
         </p>
