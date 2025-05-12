@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Check } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 export interface DropdownItem {
   label: React.ReactNode;
@@ -38,7 +39,6 @@ export interface DropdownProps {
   value?: string | string[];
   width?: string;
   activeColor?: string;
-  checkColor?: string;
   showArrow?: boolean;
   multiSelect?: boolean;
   avatarSize?: "xs" | "sm" | "md" | "lg";
@@ -46,6 +46,13 @@ export interface DropdownProps {
   avatarAlt?: string;
   selectable?: boolean;
   avatarOnly?: boolean;
+  arrowIconClassName?: string;
+  dropdownClassName?: string;
+  listClassName?: string;
+  itemContentClassName?: string;
+  itemLabelClassName?: string;
+  itemIconClassName?: string;
+  checkIconClassName?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -67,7 +74,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   value: controlledValue,
   width,
   activeColor,
-  checkColor,
   showArrow = true,
   multiSelect = false,
   avatarSize = "md",
@@ -75,6 +81,13 @@ const Dropdown: React.FC<DropdownProps> = ({
   avatarAlt = "Avatar",
   selectable = true,
   avatarOnly = false,
+  arrowIconClassName,
+  dropdownClassName,
+  listClassName,
+  itemContentClassName,
+  itemLabelClassName,
+  itemIconClassName,
+  checkIconClassName,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState<DropdownItem[]>(() => {
@@ -346,24 +359,51 @@ const Dropdown: React.FC<DropdownProps> = ({
       danger: "bg-red-400 dark:bg-red-800 text-white",
     };
 
-    return `
-      text-sm rounded mx-1.5 my-0.5
-      ${
-        isSelected && selectable
-          ? activeColor
-            ? ""
-            : selectedClasses[variant]
-          : "text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white"
+    // Primero aplicamos las clases base
+    const sizeTextClass = "text-sm";
+    const baseClasses = "rounded mx-1.5 my-0.5 transition-colors duration-200";
+    const sizeClasses = avatarOnly ? "py-2 px-3" : "py-2 px-3";
+
+    // Luego aplicamos las clases para el estado no seleccionado
+    const nonSelectedClasses =
+      "text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white";
+
+    // Luego aplicamos las clases para el estado habilitado/deshabilitado
+    const disabledClasses =
+      "opacity-50 cursor-not-allowed pointer-events-none !text-zinc-400/70 dark:!text-zinc-600";
+    const enabledClasses =
+      "cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800";
+
+    // Finalmente, aplicamos las clases de selección con la máxima prioridad
+    let activeClasses = "";
+    if (isSelected && selectable) {
+      if (activeColor) {
+        if (
+          activeColor.startsWith("#") ||
+          activeColor.startsWith("rgb") ||
+          activeColor.startsWith("hsl")
+        ) {
+          // No aplicamos clases en este caso, se aplicará via style
+          activeClasses = "";
+        } else {
+          // Si es una clase de Tailwind, la aplicamos con la mayor prioridad
+          activeClasses = activeColor;
+        }
+      } else {
+        activeClasses = selectedClasses[variant];
       }
-      ${
-        isDisabled
-          ? "opacity-50 cursor-not-allowed pointer-events-none !text-zinc-400/70 dark:!text-zinc-600"
-          : "cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800"
-      }
-      transition-colors duration-200
-      ${avatarOnly ? "py-2 px-3" : "py-2 px-3"}
-      ${itemClassName}
-    `;
+    }
+
+    return twMerge(
+      sizeTextClass,
+      baseClasses,
+      sizeClasses,
+      !isSelected && nonSelectedClasses,
+      isDisabled ? disabledClasses : enabledClasses,
+      itemClassName,
+      // Las clases de activeColor se aplican al final para tener mayor prioridad
+      activeClasses
+    );
   };
 
   // Define check colors based on variant
@@ -382,7 +422,10 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     return (
       <div
-        className={`${avatarSizeClasses[avatarSize]} rounded-full overflow-hidden flex-shrink-0`}
+        className={twMerge(
+          avatarSizeClasses[avatarSize],
+          "rounded-full overflow-hidden flex-shrink-0"
+        )}
       >
         <img
           src={src}
@@ -451,32 +494,34 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className={`relative ${
-        fullWidth && !avatarOnly ? "w-full" : "inline-block"
-      } ${className}`}
+      className={twMerge(
+        "relative",
+        fullWidth && !avatarOnly ? "w-full" : "inline-block",
+        className
+      )}
     >
       <button
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={`
-          ${
-            avatarOnly
-              ? `flex items-center justify-center ${avatarOnlyButtonSizeClasses[adjustedSize]} ${avatarOnlySizeClasses[adjustedSize]}`
-              : `flex items-center justify-between w-full ${buttonSizeClasses[adjustedSize]} ${sizeClasses[adjustedSize]}`
-          }
-          ${radiusClasses[avatarOnly ? "full" : radius]} ${
-          variantClasses[variant]
-        }
-          ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
-          transition-colors duration-200
-          ${buttonClassName}
-        `}
+        className={twMerge(
+          avatarOnly
+            ? `flex items-center justify-center ${avatarOnlyButtonSizeClasses[adjustedSize]} ${avatarOnlySizeClasses[adjustedSize]}`
+            : `flex items-center justify-between w-full ${buttonSizeClasses[adjustedSize]} ${sizeClasses[adjustedSize]}`,
+          radiusClasses[avatarOnly ? "full" : radius],
+          variantClasses[variant],
+          disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+          "transition-colors duration-200",
+          buttonClassName
+        )}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
         <span
-          className={`flex items-center gap-2 ${avatarOnly ? "" : "truncate"}`}
+          className={twMerge(
+            "flex items-center gap-2",
+            avatarOnly ? "" : "truncate"
+          )}
         >
           {buttonAvatarSrc && renderAvatar(buttonAvatarSrc, buttonAvatarAlt)}
           {icon && !avatarOnly && <span className="flex-shrink-0">{icon}</span>}
@@ -485,9 +530,11 @@ const Dropdown: React.FC<DropdownProps> = ({
 
         {showArrow && !avatarOnly && (
           <ChevronDown
-            className={`ml-2 h-4 w-4 flex-shrink-0 transition-transform duration-200 ${
-              isOpen ? "rotate-180" : ""
-            }`}
+            className={twMerge(
+              "ml-2 h-4 w-4 flex-shrink-0 transition-transform duration-200",
+              isOpen ? "rotate-180" : "",
+              arrowIconClassName
+            )}
           />
         )}
       </button>
@@ -499,7 +546,13 @@ const Dropdown: React.FC<DropdownProps> = ({
             animate={{ opacity: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, ...placementAnimation[placement] }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className={`absolute z-50 min-w-[8rem] ${placementStyles[placement]} ${radiusClasses[radius]} border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1 shadow-lg`}
+            className={twMerge(
+              "absolute z-50 min-w-[8rem]",
+              placementStyles[placement],
+              radiusClasses[radius],
+              "border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1 shadow-lg",
+              dropdownClassName
+            )}
             style={dropdownWidthStyle}
           >
             <motion.ul
@@ -508,7 +561,10 @@ const Dropdown: React.FC<DropdownProps> = ({
               transition={{ duration: 0.1, delay: 0.05 }}
               role="listbox"
               tabIndex={-1}
-              className="overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              className={twMerge(
+                "overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+                listClassName
+              )}
               style={{ maxHeight: getMaxHeight() }}
             >
               {items.map((item, index) => {
@@ -531,16 +587,37 @@ const Dropdown: React.FC<DropdownProps> = ({
                     )}
                     style={
                       isSelected && activeColor && selectable
-                        ? { background: activeColor, color: "white" }
+                        ? activeColor.startsWith("#") ||
+                          activeColor.startsWith("rgb") ||
+                          activeColor.startsWith("hsl")
+                          ? { background: activeColor, color: "white" }
+                          : {} // Si es una clase de Tailwind, ya está aplicada en className
                         : {}
                     }
                   >
-                    <div className="flex items-center w-full justify-between">
-                      <div className="flex items-center gap-2">
+                    <div
+                      className={twMerge(
+                        "flex items-center w-full justify-between",
+                        itemContentClassName
+                      )}
+                    >
+                      <div
+                        className={twMerge(
+                          "flex items-center gap-2",
+                          itemLabelClassName
+                        )}
+                      >
                         {item.avatarSrc &&
                           renderAvatar(item.avatarSrc, item.avatarAlt)}
                         {item.icon && (
-                          <span className="flex-shrink-0">{item.icon}</span>
+                          <span
+                            className={twMerge(
+                              "flex-shrink-0",
+                              itemIconClassName
+                            )}
+                          >
+                            {item.icon}
+                          </span>
                         )}
                         {item.label}
                       </div>
@@ -551,10 +628,11 @@ const Dropdown: React.FC<DropdownProps> = ({
                           <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
-                            className={`flex-shrink-0 ${
-                              checkColor ? "" : checkVariantColors[variant]
-                            }`}
-                            style={checkColor ? { color: checkColor } : {}}
+                            className={twMerge(
+                              "flex-shrink-0",
+                              checkVariantColors[variant],
+                              checkIconClassName
+                            )}
                           >
                             <Check size={16} />
                           </motion.div>
