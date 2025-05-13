@@ -7,10 +7,21 @@ description: "Un componente de barra de progreso moderno con animaciones fluidas
 
 ```bash
 # Instalar dependencias necesarias
-npm install framer-motion
+npm install framer-motion clsx tailwind-merge
 
 # Instalar el componente
 npx @stofli/ui add progress
+```
+
+Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
+
+```tsx
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 ```
 
 ## Uso
@@ -259,17 +270,55 @@ export default function ProgressStripedDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del componente usando la propiedad `className` con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+      <Progress 
+        value={75} 
+        label="Barra personalizada" 
+        showValue 
+        variant="primary"
+        className="bg-blue-100 dark:bg-blue-950/30 p-1 rounded-xl shadow-sm border border-blue-200 dark:border-blue-800"
+        size="lg"
+      />
+  }
+>
+```tsx
+import { Progress } from "@stofli/ui";
+
+export default function ProgressCustomClassDemo() {
+  return (
+      <Progress 
+        value={75} 
+        label="Barra personalizada" 
+        showValue 
+        variant="primary"
+        className="bg-blue-100 dark:bg-blue-950/30 p-1 rounded-xl shadow-sm border border-blue-200 dark:border-blue-800"
+        size="lg"
+      />
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop        | Tipo                                                                          | Default     | Descripción                       |
-| ----------- | ----------------------------------------------------------------------------- | ----------- | --------------------------------- |
-| `value`     | `number`                                                                      | `0`         | Valor actual del progreso         |
-| `max`       | `number`                                                                      | `100`       | Valor máximo del progreso         |
-| `size`      | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño de la barra de progreso    |
-| `variant`   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                |
-| `showValue` | `boolean`                                                                     | `false`     | Muestra el porcentaje actual      |
-| `animate`   | `boolean`                                                                     | `true`      | Habilita la animación de progreso |
-| `label`     | `string`                                                                      | -           | Etiqueta descriptiva              |
-| `radius`    | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas             |
-| `striped`   | `boolean`                                                                     | `false`     | Añade un patrón de rayas animado  |
-| `className` | `string`                                                                      | -           | Clases adicionales                |
+| Prop                   | Tipo                                                                          | Default     | Descripción                                  |
+| ---------------------- | ----------------------------------------------------------------------------- | ----------- | -------------------------------------------- |
+| `value`                | `number`                                                                      | `0`         | Valor actual del progreso                    |
+| `max`                  | `number`                                                                      | `100`       | Valor máximo del progreso                    |
+| `size`                 | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño de la barra de progreso               |
+| `variant`              | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                           |
+| `showValue`            | `boolean`                                                                     | `false`     | Muestra el porcentaje actual                 |
+| `animate`              | `boolean`                                                                     | `true`      | Habilita la animación de progreso            |
+| `label`                | `string`                                                                      | -           | Etiqueta descriptiva                         |
+| `radius`               | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                        |
+| `striped`              | `boolean`                                                                     | `false`     | Añade un patrón de rayas animado             |
+| `className`            | `string`                                                                      | -           | Clases adicionales para el track de progreso |
+| `containerClassName`   | `string`                                                                      | -           | Clases para el contenedor principal          |
+| `labelClassName`       | `string`                                                                      | -           | Clases para la etiqueta de progreso          |
+| `valueClassName`       | `string`                                                                      | -           | Clases para el valor de porcentaje           |
+| `progressBarClassName` | `string`                                                                      | -           | Clases para la barra de progreso activa      |
