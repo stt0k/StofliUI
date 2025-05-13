@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 export interface CheckboxProps {
   checked?: boolean;
@@ -150,13 +150,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
     },
   };
 
-  const wrapperClasses = twMerge(
+  const wrapperClasses = cn(
     "inline-flex items-center",
     disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
     wrapperClassName
   );
 
-  const checkboxClasses = twMerge(
+  const checkboxClasses = cn(
     sizeClasses[size],
     "border-2",
     radiusClasses[radius],
@@ -165,7 +165,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     checkboxClassName
   );
 
-  const labelClasses = twMerge(
+  const labelClasses = cn(
     "ml-2",
     labelSizeClasses[size],
     disabled
@@ -174,7 +174,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     labelClassName
   );
 
-  const svgClasses = twMerge(
+  const svgClasses = cn(
     "w-[80%] h-[80%]",
     variant === "default" ? "text-white dark:text-zinc-200" : "text-white",
     className
