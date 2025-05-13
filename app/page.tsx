@@ -650,7 +650,7 @@ export default function Page() {
                           <Button
                             size="xs"
                             variant="outline"
-                            className="!border !border-zinc-800/60"
+                            className="border border-zinc-600 text-white hover:bg-zinc-800"
                             rightIcon={<ChevronRight className="w-3 h-3" />}
                           >
                             Ver
