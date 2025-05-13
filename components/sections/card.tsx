@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 export interface CardProps {
   title?: string;
@@ -101,36 +101,36 @@ const Card: React.FC<CardProps> = ({
     },
   };
 
-  const cardClasses = twMerge(
+  const cardClasses = cn(
     "relative overflow-hidden",
     variantClasses[variant],
     radiusClasses[radius],
     hoverClasses[hover],
-    interactive ? "cursor-pointer" : "",
+    interactive && "cursor-pointer",
     className
   );
 
-  const contentClasses = twMerge("p-4", contentClassName);
+  const contentClasses = cn("p-4", contentClassName);
 
-  const titleClasses = twMerge(
+  const titleClasses = cn(
     "text-lg font-semibold mb-2 dark:text-zinc-100",
     titleClassName
   );
 
-  const descriptionClasses = twMerge(
+  const descriptionClasses = cn(
     "text-zinc-600 dark:text-zinc-400 mb-4",
     descriptionClassName
   );
 
-  const imageContainerClasses = twMerge(
+  const imageContainerClasses = cn(
     "w-full overflow-hidden",
     radiusClasses[radius],
     imageClassName
   );
 
-  const headerClasses = twMerge("p-4", headerClassName);
+  const headerClasses = cn("p-4", headerClassName);
 
-  const footerClasses = twMerge(
+  const footerClasses = cn(
     "p-4 border-t border-zinc-200 dark:border-zinc-800 mt-auto",
     footerClassName
   );
