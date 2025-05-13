@@ -9,8 +9,23 @@ description: "Un componente de entrada de texto moderno con efectos de foco y m�
 # Instalar dependencias necesarias
 npm install framer-motion
 
+# Instalar la utilidad cn
+# Si no tienes ya configurado @/lib/utils con la función cn
+npm install clsx tailwind-merge
+
 # Instalar el componente
 npx @stofli/ui add input
+```
+
+Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
+
+```tsx
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 ```
 
 ## Uso
@@ -404,24 +419,25 @@ import { CheckIcon, XIcon } from "lucide-react";
 export default function InputValidationStatesDemo() {
   return (
     <div className="flex flex-col gap-4">
-      <Input
+      <Input 
         className="w-64"
-        label="Usuario válido"
-        placeholder="Nombre de usuario"
+        label="Usuario válido" 
+        placeholder="Nombre de usuario" 
         defaultValue="usuario123"
         success={true}
         successMessage="¡Usuario disponible!"
         icon={<CheckIcon />}
         iconPosition="right"
       />
-      <Input
+      <Input 
         className="w-64"
-        label="Correo electrónico"
-        placeholder="ejemplo@correo.com"
+        label="Correo electrónico" 
+        placeholder="ejemplo@correo.com" 
         defaultValue="ghij"
         error="Introduce un correo electrónico válido"
-        icon={<XIcon />}
+        type="email"
         iconPosition="right"
+        successMessage="¡Correo válido!"
       />
     </div>
   );
@@ -804,6 +820,45 @@ export default function InputValidationRulesDemo() {
         placeholder="Al menos 12 caracteres" 
         validate="min:12"
         successMessage="¡Longitud correcta!"
+      />
+    </div>
+  );
+}
+```
+</DemoTabs>
+
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del componente usando las propiedades de className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-col gap-4">
+      <Input 
+        className="max-w-md"
+        variant="secondary"
+        label="Estilo personalizado con shadow" 
+        labelClassName="text-purple-700 dark:text-purple-300 font-medium"
+        inputClassName="shadow-md focus:shadow-purple-200 dark:focus:shadow-purple-900"
+        placeholder="Efecto de sombra en estado de focus"
+      />
+    </div>
+  }
+>
+```tsx
+import { Input } from "@stofli/ui";
+import { SearchIcon } from "lucide-react";
+
+export default function InputCustomClassesDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Input 
+        className="max-w-md"
+        variant="secondary"
+        label="Estilo personalizado con shadow" 
+        labelClassName="text-purple-700 dark:text-purple-300 font-medium"
+        inputClassName="shadow-md focus:shadow-purple-200 dark:focus:shadow-purple-900"
+        placeholder="Efecto de sombra en estado de focus"
       />
     </div>
   );
