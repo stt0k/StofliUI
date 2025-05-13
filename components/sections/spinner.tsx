@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export interface SpinnerProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
@@ -16,6 +17,9 @@ export interface SpinnerProps {
   label?: string;
   labelPosition?: "left" | "right" | "top" | "bottom";
   className?: string;
+  containerClassName?: string;
+  spinnerClassName?: string;
+  labelClassName?: string;
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
@@ -26,6 +30,9 @@ const Spinner: React.FC<SpinnerProps> = ({
   label,
   labelPosition = "right",
   className = "",
+  containerClassName = "",
+  spinnerClassName = "",
+  labelClassName = "",
 }) => {
   // Tamaños para spinner tipo border
   const sizeClasses = {
@@ -500,55 +507,99 @@ const Spinner: React.FC<SpinnerProps> = ({
       case "border":
         return (
           <div
-            className={`inline-block rounded-full ${sizeClasses[size]} ${borderSizeClasses[size]} ${speedClasses[speed]} ${variantBorderClasses[variant]}`}
+            className={cn(
+              "inline-block rounded-full",
+              sizeClasses[size],
+              borderSizeClasses[size],
+              speedClasses[speed],
+              variantBorderClasses[variant],
+              spinnerClassName
+            )}
             role="status"
           />
         );
       case "dots":
         return (
-          <div className="flex space-x-1" role="status">
+          <div className={cn("flex space-x-1", spinnerClassName)} role="status">
             <style>{dotKeyframes}</style>
             <div
-              className={`${dotsSizeClasses[size]} rounded-full animate-dot-1 ${variantDotsClasses[variant]}`}
+              className={cn(
+                dotsSizeClasses[size],
+                "rounded-full animate-dot-1",
+                variantDotsClasses[variant]
+              )}
             ></div>
             <div
-              className={`${dotsSizeClasses[size]} rounded-full animate-dot-2 ${variantDotsClasses[variant]}`}
+              className={cn(
+                dotsSizeClasses[size],
+                "rounded-full animate-dot-2",
+                variantDotsClasses[variant]
+              )}
             ></div>
             <div
-              className={`${dotsSizeClasses[size]} rounded-full animate-dot-3 ${variantDotsClasses[variant]}`}
+              className={cn(
+                dotsSizeClasses[size],
+                "rounded-full animate-dot-3",
+                variantDotsClasses[variant]
+              )}
             ></div>
           </div>
         );
       case "grow":
         return (
-          <div role="status">
+          <div className={cn(spinnerClassName)} role="status">
             <style>{dotKeyframes}</style>
             <div
-              className={`${growSizeClasses[size]} rounded-full animate-grow ${variantGrowClasses[variant]}`}
+              className={cn(
+                growSizeClasses[size],
+                "rounded-full animate-grow",
+                variantGrowClasses[variant]
+              )}
             ></div>
           </div>
         );
       case "wave":
         return (
-          <div className="flex space-x-1 items-end" role="status">
+          <div
+            className={cn("flex space-x-1 items-end", spinnerClassName)}
+            role="status"
+          >
             <style>{dotKeyframes}</style>
             <div
-              className={`${waveSizeClasses[size]} rounded-full ${waveSpeedClasses[speed].first} ${variantDotsClasses[variant]}`}
+              className={cn(
+                waveSizeClasses[size],
+                "rounded-full",
+                waveSpeedClasses[speed].first,
+                variantDotsClasses[variant]
+              )}
             ></div>
             <div
-              className={`${waveSizeClasses[size]} rounded-full ${waveSpeedClasses[speed].second} ${variantDotsClasses[variant]}`}
+              className={cn(
+                waveSizeClasses[size],
+                "rounded-full",
+                waveSpeedClasses[speed].second,
+                variantDotsClasses[variant]
+              )}
             ></div>
             <div
-              className={`${waveSizeClasses[size]} rounded-full ${waveSpeedClasses[speed].third} ${variantDotsClasses[variant]}`}
+              className={cn(
+                waveSizeClasses[size],
+                "rounded-full",
+                waveSpeedClasses[speed].third,
+                variantDotsClasses[variant]
+              )}
             ></div>
           </div>
         );
       case "lines":
         return (
-          <div role="status">
+          <div className={cn(spinnerClassName)} role="status">
             <style>{dotKeyframes}</style>
             <svg
-              className={`${linesSizeClasses[size]} ${variantLinesClasses[variant]}`}
+              className={cn(
+                linesSizeClasses[size],
+                variantLinesClasses[variant]
+              )}
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -687,28 +738,41 @@ const Spinner: React.FC<SpinnerProps> = ({
   const spinnerElement = renderSpinner();
 
   if (!label) {
-    return <div className={className}>{spinnerElement}</div>;
+    return <div className={cn(className)}>{spinnerElement}</div>;
   }
 
   return (
     <div
-      className={`inline-flex items-center justify-center ${
+      className={cn(
+        "inline-flex items-center justify-center",
         labelPosition === "top" || labelPosition === "bottom"
           ? "flex-col"
-          : "flex-row"
-      } ${className}`}
+          : "flex-row",
+        className,
+        containerClassName
+      )}
       role="status"
     >
       {labelPosition === "top" && (
         <span
-          className={`${labelClasses[variant]} ${labelSizeClasses[size]} ${labelSpacingClasses[labelPosition]}`}
+          className={cn(
+            labelClasses[variant],
+            labelSizeClasses[size],
+            labelSpacingClasses[labelPosition],
+            labelClassName
+          )}
         >
           {label}
         </span>
       )}
       {labelPosition === "left" && (
         <span
-          className={`${labelClasses[variant]} ${labelSizeClasses[size]} ${labelSpacingClasses[labelPosition]}`}
+          className={cn(
+            labelClasses[variant],
+            labelSizeClasses[size],
+            labelSpacingClasses[labelPosition],
+            labelClassName
+          )}
         >
           {label}
         </span>
@@ -716,14 +780,24 @@ const Spinner: React.FC<SpinnerProps> = ({
       {spinnerElement}
       {labelPosition === "right" && (
         <span
-          className={`${labelClasses[variant]} ${labelSizeClasses[size]} ${labelSpacingClasses[labelPosition]}`}
+          className={cn(
+            labelClasses[variant],
+            labelSizeClasses[size],
+            labelSpacingClasses[labelPosition],
+            labelClassName
+          )}
         >
           {label}
         </span>
       )}
       {labelPosition === "bottom" && (
         <span
-          className={`${labelClasses[variant]} ${labelSizeClasses[size]} ${labelSpacingClasses[labelPosition]}`}
+          className={cn(
+            labelClasses[variant],
+            labelSizeClasses[size],
+            labelSpacingClasses[labelPosition],
+            labelClassName
+          )}
         >
           {label}
         </span>
