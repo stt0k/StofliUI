@@ -7,15 +7,26 @@ description: "Un componente para entrada de valores numéricos con controles de 
 
 ```bash
 # Instalar dependencias necesarias
-npm install framer-motion lucide-react
+npm install framer-motion lucide-react clsx tailwind-merge
 
 # Instalar el componente
 npx @stofli/ui add number-input
 ```
 
+Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
+
+```tsx
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
 ## Uso Básico
 
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function App() {
@@ -34,7 +45,7 @@ export default function App() {
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputDemo() {
@@ -59,7 +70,7 @@ El componente NumberInput ofrece distintas variantes para adaptarse a diferentes
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputVariantsDemo() {
@@ -90,7 +101,7 @@ Puedes elegir entre diferentes tamaños para el input numérico.
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputSizesDemo() {
@@ -139,7 +150,7 @@ Puedes personalizar el radio de los bordes del input para adaptarlo a tu diseño
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputRadiusDemo() {
@@ -187,7 +198,7 @@ Puedes elegir diferentes posiciones para los controles de incremento/decremento.
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputControlsPositionDemo() {
@@ -213,7 +224,7 @@ El componente ofrece diferentes estilos de layout para los controles.
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputControlsLayoutDemo() {
@@ -239,7 +250,7 @@ Puedes elegir entre diferentes estilos de iconos para los controles.
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputIconSetsDemo() {
@@ -267,7 +278,7 @@ El componente incluye diferentes estilos de animación cuando el valor cambia.
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputAnimationsDemo() {
@@ -300,7 +311,7 @@ Puedes establecer valores mínimos y máximos, así como el paso de incremento/d
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputLimitsDemo() {
@@ -335,7 +346,7 @@ export default function NumberInputLimitsDemo() {
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputDisabledDemo() {
@@ -372,7 +383,7 @@ Muestra un mensaje de error cuando se cumple una condición, en este caso, cuand
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 import { useState } from "react";
 
@@ -404,327 +415,49 @@ export default function NumberInputErrorDemo() {
     </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
 export default function NumberInputFullWidthDemo() {
-  return (
-    <NumberInput 
-      label="Cantidad" 
-      defaultValue={5} 
-      fullWidth 
-    />
-  );
+  return <NumberInput label="Cantidad" defaultValue={5} fullWidth />;
 }
 ```
 </DemoTabs>
 
-### Componente controlado
+### Con clases personalizadas
 
-Ejemplo de uso con un componente controlado donde se puede obtener el valor en tiempo real.
-
-<DemoTabs
-  preview={
-    <div className="flex flex-col gap-4 pt-8">
-      <div className="flex flex-col gap-2">
-        <NumberInputControlledDemo />
-      </div>
-    </div>
-  }
->
-```jsx
-import { NumberInput } from "@stofli/ui";
-import { useState } from "react";
-
-export default function NumberInputControlledDemo() {
-  const [value, setValue] = useState(10);
-  
-  return (
-    <>
-      <NumberInput 
-        label="Valor controlado" 
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-      />
-      <p className="text-sm mt-2">Valor actual: <span className="font-semibold">{value}</span></p>
-    </>
-  );
-}
-```
-</DemoTabs>
-
-### Ejemplos con formato
-
-Ejemplos de NumberInput con diferentes formatos incorporados directamente en el componente.
+Puedes personalizar cualquier parte del componente usando las propiedades de className con clases de Tailwind CSS.
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
       <NumberInput 
-        label="Porcentaje" 
-        defaultValue={25} 
-        min={0}
-        max={100}
-        format="percentage"
-        formatOptions={{ position: "suffix" }}
+        className="max-w-md"
+        label="Input numérico personalizado" 
+        inputClassName="border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 placeholder-indigo-400"
         variant="primary"
-      />
-      <NumberInput 
-        label="Precio (€)" 
-        defaultValue={99.95} 
+        defaultValue={5}
         min={0}
-        step={0.01}
-        format="currency"
-        formatOptions={{ symbol: "€", position: "suffix" }}
-        variant="success"
+        max={10}
       />
-      <NumberInput 
-        label="Valor con signo" 
-        defaultValue={42} 
-        format="signed"
-        variant="secondary"
-      />
-    </div>
   }
 >
-```jsx
+```tsx
 import { NumberInput } from "@stofli/ui";
 
-export default function NumberInputFormatsDemo() {
+export default function NumberInputCustomClassDemo() {
   return (
-    <div className="flex flex-col gap-4">
       <NumberInput 
-        label="Porcentaje" 
-        defaultValue={25} 
+        className="max-w-md"
+        label="Input numérico personalizado" 
+        inputClassName="border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 placeholder-indigo-400"
+        variant="primary"
+        defaultValue={5}
         min={0}
-        max={100}
-        format="percentage"
-        formatOptions={{ position: "suffix" }}
-        variant="primary"
+        max={10}
       />
-      <NumberInput 
-        label="Precio (€)" 
-        defaultValue={99.95} 
-        min={0}
-        step={0.01}
-        format="currency"
-        formatOptions={{ symbol: "€", position: "suffix" }}
-        variant="success"
-      />
-      <NumberInput 
-        label="Valor con signo" 
-        defaultValue={42} 
-        format="signed"
-        variant="secondary"
-      />
-    </div>
-  );
-}
-```
-</DemoTabs>
-
-### Valores mínimos y máximos
-
-Ejemplos de uso con valores mínimos y máximos configurados.
-
-<DemoTabs
-  preview={
-    <div className="flex flex-col gap-4 pt-8">
-      <NumberInput
-        label="Rango limitado (0-100)"
-        defaultValue={50}
-        min={0}
-        max={100}
-        variant="primary"
-      />
-    </div>
-  }
->
-```jsx
-import { NumberInput } from "@stofli/ui";
-
-export default function NumberInputMinMaxDemo() {
-  return (
-    <div className="flex flex-col gap-4">
-      <NumberInput
-        label="Rango limitado (0-100)"
-        defaultValue={50}
-        min={0}
-        max={100}
-        variant="primary"
-      />
-    </div>
-  );
-}
-```
-</DemoTabs>
-
-### Con placeholders
-
-Los placeholders ayudan a los usuarios a entender qué tipo de información deben ingresar en el campo.
-
-<DemoTabs
-  preview={
-    <div className="flex flex-col gap-4 pt-8">
-      <NumberInput 
-        label="Edad"
-        placeholder="Ingresa tu edad" 
-        variant="primary"
-      />
-      <NumberInput 
-        label="Temperatura"
-        placeholder="Ej: 25.5" 
-        variant="warning"
-      />
-      <NumberInput 
-        label="Precio (€)"
-        placeholder="0.00" 
-        format="currency"
-        formatOptions={{ symbol: "€", position: "suffix" }}
-        variant="success"
-      />
-      <NumberInput 
-        placeholder="Sin etiqueta, solo placeholder" 
-        variant="secondary"
-      />
-    </div>
-  }
->
-```jsx
-import { NumberInput } from "@stofli/ui";
-
-export default function NumberInputPlaceholderDemo() {
-  return (
-    <div className="flex flex-col gap-4">
-      <NumberInput 
-        label="Edad"
-        placeholder="Ingresa tu edad" 
-        variant="primary"
-      />
-      <NumberInput 
-        label="Temperatura"
-        placeholder="Ej: 25.5" 
-        variant="warning"
-      />
-      <NumberInput 
-        label="Precio (€)"
-        placeholder="0.00" 
-        format="currency"
-        formatOptions={{ symbol: "€", position: "suffix" }}
-        variant="success"
-      />
-      <NumberInput 
-        placeholder="Sin etiqueta, solo placeholder" 
-        variant="secondary"
-      />
-    </div>
-  );
-}
-```
-</DemoTabs>
-
-### Sin botones de control
-
-Puedes ocultar los botones de incremento/decremento para obtener un input numérico más sencillo.
-
-<DemoTabs
-  preview={
-    <div className="flex flex-col gap-4 pt-8">
-      <NumberInput 
-        label="Input numérico simple" 
-        placeholder="Sin botones" 
-        showControls={false}
-        variant="primary"
-      />
-    </div>
-  }
->
-```jsx
-import { NumberInput } from "@stofli/ui";
-
-export default function NumberInputNoControlsDemo() {
-  return (
-    <NumberInput 
-      label="Input numérico simple" 
-      placeholder="Sin botones" 
-      showControls={false}
-      variant="primary"
-    />
-  );
-}
-```
-</DemoTabs>
-
-### Campos requeridos
-
-Usa la propiedad `required` para marcar un campo como obligatorio, lo que añadirá un asterisco al label.
-
-<DemoTabs
-  preview={
-    <div className="flex flex-col gap-4 pt-8">
-      <NumberInput 
-        label="Campo obligatorio" 
-        required
-        variant="primary"
-      />
-      <NumberInput 
-        label="Campo opcional"
-        variant="primary"
-      />
-    </div>
-  }
->
-```jsx
-import { NumberInput } from "@stofli/ui";
-
-export default function NumberInputRequiredDemo() {
-  return (
-    <div className="flex flex-col gap-4">
-      <NumberInput 
-        label="Campo obligatorio" 
-        required
-        variant="primary"
-      />
-      <NumberInput 
-        label="Campo opcional"
-        variant="primary"
-      />
-    </div>
   );
 }
 ```
 </DemoTabs>
 
 ## Props
-
-| Prop               | Tipo                                                                          | Valor por defecto | Descripción                                           |
-| ------------------ | ----------------------------------------------------------------------------- | ----------------- | ----------------------------------------------------- |
-| `value`            | `number`                                                                      | -                 | Valor controlado del input numérico                   |
-| `defaultValue`     | `number`                                                                      | `0`               | Valor inicial no controlado                           |
-| `min`              | `number`                                                                      | -                 | Valor mínimo permitido                                |
-| `max`              | `number`                                                                      | -                 | Valor máximo permitido                                |
-| `step`             | `number`                                                                      | `1`               | Incremento por cada pulsación en los controles        |
-| `disabled`         | `boolean`                                                                     | `false`           | Deshabilita el input                                  |
-| `readonly`         | `boolean`                                                                     | `false`           | Modo solo lectura                                     |
-| `label`            | `string`                                                                      | -                 | Etiqueta descriptiva para el input                    |
-| `placeholder`      | `string`                                                                      | -                 | Texto de marcador de posición                         |
-| `error`            | `string`                                                                      | -                 | Mensaje de error a mostrar                            |
-| `size`             | `"sm" \| "md" \| "lg"`                                                        | `"md"`            | Tamaño del componente                                 |
-| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`       | Variante de estilo                                    |
-| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`            | Radio de las esquinas                                 |
-| `fullWidth`        | `boolean`                                                                     | `false`           | Ocupa el 100% del ancho disponible                    |
-| `className`        | `string`                                                                      | -                 | Clases CSS personalizadas para el contenedor          |
-| `inputClassName`   | `string`                                                                      | -                 | Clases CSS personalizadas para el input               |
-| `controlsLayout`   | `"default" \| "compact" \| "split"`                                           | `"default"`       | Diseño de los controles                               |
-| `controlsPosition` | `"right" \| "both"`                                                           | `"right"`         | Posición de los controles                             |
-| `showControls`     | `boolean`                                                                     | `true`            | Muestra u oculta los controles                        |
-| `iconSet`          | `"chevron" \| "plusminus"`                                                    | `"chevron"`       | Conjunto de iconos a utilizar                         |
-| `required`         | `boolean`                                                                     | `false`           | Marca el campo como obligatorio                       |
-| `name`             | `string`                                                                      | -                 | Nombre del campo (para formularios)                   |
-| `id`               | `string`                                                                      | -                 | ID único del elemento                                 |
-| `animationStyle`   | `"slide" \| "pulse" \| "scale" \| "bounce"`                                   | `"slide"`         | Estilo de animación al cambiar valor                  |
-| `format`           | `"default" \| "percentage" \| "currency" \| "signed"`                         | `"default"`       | Formato de visualización del valor                    |
-| `formatOptions`    | `{ symbol?: string; position?: "prefix" \| "suffix" }`                        | `{}`              | Opciones adicionales para el formato seleccionado     |
-| `onChange`         | `(value: number) => void`                                                     | -                 | Función que se ejecuta al cambiar el valor            |
-| `onFocus`          | `(e: React.FocusEvent) => void`                                               | -                 | Función que se ejecuta cuando el input recibe el foco |
-| `onBlur`           | `(e: React.FocusEvent) => void`                                               | -                 | Función que se ejecuta cuando el input pierde el foco |
