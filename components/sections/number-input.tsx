@@ -28,6 +28,11 @@ export interface NumberInputProps {
   fullWidth?: boolean;
   className?: string;
   inputClassName?: string;
+  labelClassName?: string;
+  errorClassName?: string;
+  controlsClassName?: string;
+  controlButtonClassName?: string;
+  inputContainerClassName?: string;
   controlsLayout?: "default" | "compact" | "split";
   controlsPosition?: "right" | "both";
   showControls?: boolean;
@@ -63,6 +68,11 @@ const NumberInput: React.FC<NumberInputProps> = ({
   fullWidth = false,
   className = "",
   inputClassName = "",
+  labelClassName = "",
+  errorClassName = "",
+  controlsClassName = "",
+  controlButtonClassName = "",
+  inputContainerClassName = "",
   controlsLayout = "default",
   controlsPosition = "right",
   showControls = true,
@@ -509,7 +519,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
           // No cambiar el tamaño del botón en el layout compacto
           sizeClasses[size].button,
           iconSet === "plusminus" ? "rounded-full" : "rounded-md",
-          "shadow-sm hover:shadow"
+          "shadow-sm hover:shadow",
+          controlButtonClassName
         )}
         aria-label={direction === "up" ? "Aumentar valor" : "Disminuir valor"}
       >
@@ -523,7 +534,12 @@ const NumberInput: React.FC<NumberInputProps> = ({
       (controlsPosition === "right" || controlsPosition === "both")
     ) {
       return (
-        <div className="absolute right-0 top-0 bottom-0 flex flex-col justify-center gap-1 mr-1 py-1.5">
+        <div
+          className={cn(
+            "absolute right-0 top-0 bottom-0 flex flex-col justify-center gap-1 mr-1 py-1.5",
+            controlsClassName
+          )}
+        >
           {controlButton("up")}
           {controlButton("down")}
         </div>
@@ -533,7 +549,12 @@ const NumberInput: React.FC<NumberInputProps> = ({
     // Controles en la derecha (default)
     if (controlsPosition === "right") {
       return (
-        <div className="absolute right-0 inset-y-0 flex items-center gap-1 pr-1 my-1.5">
+        <div
+          className={cn(
+            "absolute right-0 inset-y-0 flex items-center gap-1 pr-1 my-1.5",
+            controlsClassName
+          )}
+        >
           {controlButton("down")}
           {controlButton("up")}
         </div>
@@ -544,10 +565,20 @@ const NumberInput: React.FC<NumberInputProps> = ({
     if (controlsPosition === "both") {
       return (
         <>
-          <div className="absolute left-0 inset-y-0 flex items-center pl-1 my-1.5">
+          <div
+            className={cn(
+              "absolute left-0 inset-y-0 flex items-center pl-1 my-1.5",
+              controlsClassName
+            )}
+          >
             {controlButton("down")}
           </div>
-          <div className="absolute right-0 inset-y-0 flex items-center pr-1 my-1.5">
+          <div
+            className={cn(
+              "absolute right-0 inset-y-0 flex items-center pr-1 my-1.5",
+              controlsClassName
+            )}
+          >
             {controlButton("up")}
           </div>
         </>
@@ -565,7 +596,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
           className={cn(
             "block mb-1 font-medium",
             sizeClasses[size].label,
-            variantClasses[variant].text
+            variantClasses[variant].text,
+            labelClassName
           )}
         >
           {label}
@@ -573,7 +605,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
         </label>
       )}
 
-      <div className="relative">
+      <div className={cn("relative", inputContainerClassName)}>
         <motion.div
           animate={animationActive ? getAnimation() : {}}
           className="relative"
@@ -628,7 +660,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
-            className="text-red-500 text-xs mt-1"
+            className={cn("text-red-500 text-xs mt-1", errorClassName)}
           >
             {error}
           </motion.div>
