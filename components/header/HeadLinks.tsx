@@ -60,11 +60,17 @@ const HeadLinks = ({
   const [isHovered, setIsHovered] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const linkRef = useRef<HTMLDivElement>(null);
+  const submenuRef = useRef<HTMLDivElement>(null);
+  const [submenuPosition, setSubmenuPosition] = useState({
+    x: -50,
+    align: "center",
+  });
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
+    calculateSubmenuPosition();
     setIsHovered(true);
   };
 
@@ -74,13 +80,54 @@ const HeadLinks = ({
     }, 100);
   };
 
+  // Calcula la posición adecuada para el submenu
+  const calculateSubmenuPosition = () => {
+    if (linkRef.current) {
+      const linkRect = linkRef.current.getBoundingClientRect();
+      const windowWidth = window.innerWidth;
+      const linkCenterX = linkRect.left + linkRect.width / 2;
+
+      // Ajustes personalizados por título
+      if (title === "Docs") {
+        // Si el centro del link está cerca del borde izquierdo pero es Docs
+        if (linkCenterX < 150) {
+          setSubmenuPosition({ x: 0, align: "left" });
+        } else {
+          // Para Docs, posicionamos ligeramente más a la izquierda
+          setSubmenuPosition({ x: -50, align: "custom-docs" });
+        }
+      } else if (title === "Componentes") {
+        // Para Componentes siempre usamos la posición personalizada
+        setSubmenuPosition({ x: 0, align: "custom-componentes" });
+      } else {
+        // Para otros elementos, usamos la lógica general
+        if (linkCenterX < 250) {
+          setSubmenuPosition({ x: 0, align: "left" });
+        } else if (windowWidth - linkCenterX < 250) {
+          setSubmenuPosition({ x: -100, align: "right" });
+        } else {
+          setSubmenuPosition({ x: -50, align: "center" });
+        }
+      }
+    }
+  };
+
+  // Recalcular posición al cambiar el tamaño de la ventana
   useEffect(() => {
+    const handleResize = () => {
+      if (isHovered) {
+        calculateSubmenuPosition();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
     return () => {
+      window.removeEventListener("resize", handleResize);
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, []);
+  }, [isHovered]);
 
   const getIconComponent = (title: string): LucideIcon => {
     const lowerTitle = title.toLowerCase();
@@ -129,6 +176,23 @@ const HeadLinks = ({
     headerText: "text-black dark:text-white font-semibold",
   };
 
+  // Determina la clase de posición para el submenu
+  const getSubmenuPositionClass = () => {
+    switch (submenuPosition.align) {
+      case "right":
+        return "right-0";
+      case "left":
+        return "left-0";
+      case "custom-docs":
+        return "left-0 -ml-31";
+      case "custom-componentes":
+        return "left-0 -ml-56";
+      case "center":
+      default:
+        return "left-1/2 transform -translate-x-1/2";
+    }
+  };
+
   return (
     <div
       ref={linkRef}
@@ -169,7 +233,8 @@ const HeadLinks = ({
 
       {submenu && isHovered && (
         <div
-          className="absolute top-full left-1/2 transform -translate-x-1/2 z-50 w-screen max-w-3xl pt-3"
+          ref={submenuRef}
+          className={`absolute top-full z-50 w-screen max-w-3xl pt-3 ${getSubmenuPositionClass()}`}
           onMouseEnter={() => {
             if (timeoutRef.current) {
               clearTimeout(timeoutRef.current);
