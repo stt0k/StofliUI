@@ -236,56 +236,24 @@ export default function AccordionCustomClassesDemo() {
         iconClassName="text-gray-400 dark:text-[#5e5e76] ml-auto"
         items={[
           {
-            title: (
-              <span className="flex items-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-[#2df9a6] mr-2.5 animate-pulse"></div>
-                Donec ac odio tempor orci dapibus ultrices?
-              </span>
-            ),
-            content: (
-              <div className="space-y-3">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                  lectus arcu bibendum at varius vel pharetra vel turpis nunc
-                  eget.
-                </p>
-              </div>
-            ),
+            title: <span className="flex items-center"><div className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-[#2df9a6] mr-2.5 animate-pulse"></div>Donec ac odio tempor orci dapibus ultrices?</span>,
+            content: <div className="space-y-3">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget.</p>
+            </div>,
           },
           {
-            title: (
-              <span className="flex items-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-[#3b82f6] mr-2.5 animate-pulse"></div>
-                Ut lectus arcu bibendum at varius vel pharetra vel?
-              </span>
-            ),
-            content: (
-              <div className="space-y-2">
-                <p>
-                  Duis aute irure dolor in reprehenderit in voluptate velit
-                  esse cillum dolore eu fugiat nulla pariatur.
-                </p>
-              </div>
-            ),
+            title: <span className="flex items-center"><div className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-[#3b82f6] mr-2.5 animate-pulse"></div>Ut lectus arcu bibendum at varius vel pharetra vel?</span>,
+            content: <div className="space-y-2">
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            </div>,
           },
           {
-            title: (
-              <span className="flex items-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-violet-500 dark:bg-[#8b5cf6] mr-2.5 animate-pulse"></div>
-                Enim sed faucibus turpis in eu mi bibendum?
-              </span>
-            ),
-            content: (
-              <div>
-                <div className="p-4 rounded-lg bg-gray-50 dark:bg-[#0f0f19] border border-gray-100 dark:border-[#1c1c34]">
-                  <p className="text-gray-600 dark:text-[#b4b4d0]">
-                    Bibendum at varius vel pharetra vel. Convallis aenean et
-                    tortor at risus viverra adipiscing. Est pellentesque elit
-                    ullamcorper dignissim cras.
-                  </p>
-                </div>
+            title: <span className="flex items-center"><div className="w-1.5 h-1.5 rounded-full bg-violet-500 dark:bg-[#8b5cf6] mr-2.5 animate-pulse"></div>Enim sed faucibus turpis in eu mi bibendum?</span>,
+            content: <div>
+              <div className="p-4 rounded-lg bg-gray-50 dark:bg-[#0f0f19] border border-gray-200 dark:border-[#1c1c34]">
+                <p className="text-gray-600 dark:text-[#b4b4d0]">Bibendum at varius vel pharetra vel. Convallis aenean et tortor at risus viverra adipiscing. Est pellentesque elit ullamcorper dignissim cras.</p>
               </div>
-            ),
+            </div>,
           },
         ]}
         defaultOpen={2}
