@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export interface ProgressProps {
   value?: number;
@@ -18,6 +19,10 @@ export interface ProgressProps {
   animate?: boolean;
   label?: string;
   className?: string;
+  containerClassName?: string;
+  labelClassName?: string;
+  valueClassName?: string;
+  progressBarClassName?: string;
   radius?: "none" | "sm" | "md" | "full";
   striped?: boolean;
 }
@@ -31,6 +36,10 @@ const Progress: React.FC<ProgressProps> = ({
   animate = true,
   label,
   className = "",
+  containerClassName = "",
+  labelClassName = "",
+  valueClassName = "",
+  progressBarClassName = "",
   radius = "md",
   striped = false,
 }) => {
@@ -74,19 +83,27 @@ const Progress: React.FC<ProgressProps> = ({
     : {};
 
   return (
-    <div className="w-full">
+    <div className={cn("w-full", containerClassName)}>
       {(label || showValue) && (
         <div className="flex justify-between items-center mb-1">
           {label && (
             <span
-              className={`${labelSizeClasses[size]} font-medium dark:text-zinc-200 text-zinc-800`}
+              className={cn(
+                labelSizeClasses[size],
+                "font-medium dark:text-zinc-200 text-zinc-800",
+                labelClassName
+              )}
             >
               {label}
             </span>
           )}
           {showValue && (
             <span
-              className={`${labelSizeClasses[size]} dark:text-zinc-400 text-zinc-600`}
+              className={cn(
+                labelSizeClasses[size],
+                "dark:text-zinc-400 text-zinc-600",
+                valueClassName
+              )}
             >
               {percentage.toFixed(0)}%
             </span>
@@ -94,10 +111,20 @@ const Progress: React.FC<ProgressProps> = ({
         </div>
       )}
       <div
-        className={`w-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden ${radiusClasses[radius]} ${sizeClasses[size]} ${className}`}
+        className={cn(
+          "w-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden",
+          radiusClasses[radius],
+          sizeClasses[size],
+          className
+        )}
       >
         <motion.div
-          className={`h-full ${variantClasses[variant]} ${radiusClasses[radius]}`}
+          className={cn(
+            "h-full",
+            variantClasses[variant],
+            radiusClasses[radius],
+            progressBarClassName
+          )}
           initial={animate ? { width: 0 } : { width: `${percentage}%` }}
           animate={{ width: `${percentage}%` }}
           transition={{
