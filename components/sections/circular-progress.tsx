@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 export interface CircularProgressProps {
   value?: number;
@@ -105,10 +105,12 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
   const labelElement = label && (
     <span
-      className={twMerge(
-        `absolute ${labelPosition === "top" ? "-top-6" : "-bottom-6"} 
-        left-1/2 -translate-x-1/2 ${labelSize} font-medium 
-        dark:text-zinc-400 text-zinc-600 whitespace-nowrap`,
+      className={cn(
+        "absolute",
+        labelPosition === "top" ? "-top-6" : "-bottom-6",
+        "left-1/2 -translate-x-1/2",
+        labelSize,
+        "font-medium dark:text-zinc-400 text-zinc-600 whitespace-nowrap",
         labelClassName
       )}
     >
@@ -118,8 +120,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
   return (
     <div
-      className={twMerge(
-        `relative inline-flex items-center justify-center ${sizeClasses[size]}`,
+      className={cn(
+        "relative inline-flex items-center justify-center",
+        sizeClasses[size],
         className
       )}
       role="progressbar"
@@ -139,8 +142,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         {spin ? (
           <>
             <circle
-              className={twMerge(
-                `${bgVariantClasses[variant]} transition-colors`,
+              className={cn(
+                bgVariantClasses[variant],
+                "transition-colors",
                 bgCircleClassName
               )}
               cx={center}
@@ -150,8 +154,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
               strokeWidth={thickness}
             />
             <circle
-              className={twMerge(
-                `${variantClasses[variant]} transition-colors`,
+              className={cn(
+                variantClasses[variant],
+                "transition-colors",
                 circleClassName
               )}
               cx={center}
@@ -168,8 +173,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         ) : (
           <>
             <circle
-              className={twMerge(
-                `${bgVariantClasses[variant]} transition-colors`,
+              className={cn(
+                bgVariantClasses[variant],
+                "transition-colors",
                 bgCircleClassName
               )}
               cx={center}
@@ -179,8 +185,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
               strokeWidth={thickness}
             />
             <motion.circle
-              className={twMerge(
-                `${variantClasses[variant]} transition-colors`,
+              className={cn(
+                variantClasses[variant],
+                "transition-colors",
                 circleClassName
               )}
               cx={center}
@@ -209,8 +216,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       {showValue && (
         <div className="absolute inset-0 flex items-center justify-center">
           <span
-            className={twMerge(
-              `${fontSize} font-medium dark:text-zinc-300 text-zinc-700`,
+            className={cn(
+              fontSize,
+              "font-medium dark:text-zinc-300 text-zinc-700",
               valueClassName
             )}
           >
