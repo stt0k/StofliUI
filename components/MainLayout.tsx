@@ -119,9 +119,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
 
   useEffect(() => {
     // Encontrar el índice de la página actual en nuestra lista unificada
-    const currentIndex = allPages.findIndex(
-      (page) => pathname === page.path || pathname.endsWith(page.name)
-    );
+    const currentIndex = allPages.findIndex((page) => {
+      // Coincidencia exacta con la ruta
+      if (pathname === page.path) {
+        return true;
+      }
+
+      // Verificar si termina con el nombre pero con una coincidencia más precisa
+      // Asegurarse que sea el final del pathname o precedido por una barra
+      const pageNameAtEnd = new RegExp(`/(${page.name})$`);
+      return pageNameAtEnd.test(pathname);
+    });
+
     setCurrentPageIndex(currentIndex !== -1 ? currentIndex + 1 : 0);
   }, [pathname]);
 
