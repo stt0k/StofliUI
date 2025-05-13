@@ -833,7 +833,6 @@ Puedes personalizar cualquier parte del componente usando las propiedades de cla
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4">
       <Input 
         className="max-w-md"
         variant="secondary"
@@ -842,7 +841,6 @@ Puedes personalizar cualquier parte del componente usando las propiedades de cla
         inputClassName="shadow-md focus:shadow-purple-200 dark:focus:shadow-purple-900"
         placeholder="Efecto de sombra en estado de focus"
       />
-    </div>
   }
 >
 ```tsx
@@ -851,7 +849,6 @@ import { SearchIcon } from "lucide-react";
 
 export default function InputCustomClassesDemo() {
   return (
-    <div className="flex flex-col gap-4">
       <Input 
         className="max-w-md"
         variant="secondary"
@@ -860,7 +857,6 @@ export default function InputCustomClassesDemo() {
         inputClassName="shadow-md focus:shadow-purple-200 dark:focus:shadow-purple-900"
         placeholder="Efecto de sombra en estado de focus"
       />
-    </div>
   );
 }
 ```
