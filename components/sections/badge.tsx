@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
   "inline-flex items-center justify-center text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-900",
@@ -98,7 +98,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className={twMerge(
+        className={cn(
           badgeVariants({ variant, size, radius, withDot }),
           className
         )}
@@ -107,18 +107,17 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
       >
         {withDot && (
           <div
-            className={twMerge(
-              `w-2 h-2 rounded-full mr-1.5 ${
-                dotColor ||
+            className={cn(
+              "w-2 h-2 rounded-full mr-1.5",
+              dotColor ||
                 (variant === "outline"
                   ? "bg-zinc-500 dark:bg-zinc-400"
-                  : "bg-white dark:bg-white")
-              }`,
+                  : "bg-white dark:bg-white"),
               dotClassName
             )}
           />
         )}
-        {icon && <span className={twMerge("mr-1", iconClassName)}>{icon}</span>}
+        {icon && <span className={cn("mr-1", iconClassName)}>{icon}</span>}
         <span className={contentClassName}>{children}</span>
       </motion.div>
     );
