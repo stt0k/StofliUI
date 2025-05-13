@@ -7,10 +7,21 @@ description: "Un componente de paginación para navegar a través de contenido d
 
 ```bash
 # Instalar dependencias necesarias
-npm install framer-motion lucide-react
+npm install framer-motion lucide-react clsx tailwind-merge
 
 # Instalar el componente
 npx @stofli/ui add pagination
+```
+
+Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
+
+```tsx
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 ```
 
 ## Uso
@@ -316,6 +327,36 @@ export default function PaginationDisabledDemo() {
     <Pagination 
       totalPages={10} 
       disabled 
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del componente usando la propiedad `className` con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <div className="w-full flex justify-center">
+      <Pagination 
+        totalPages={10} 
+        className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg shadow-sm border border-blue-200 dark:border-blue-800" 
+        variant="primary"
+      />
+    </div>
+  }
+>
+```tsx
+import { Pagination } from "@stofli/ui";
+
+export default function PaginationCustomClassDemo() {
+  return (
+    <Pagination 
+      totalPages={10} 
+      className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg shadow-sm border border-blue-200 dark:border-blue-800" 
+      variant="primary"
     />
   );
 }
