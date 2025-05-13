@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp, ChevronDown, Plus, Minus } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface NumberInputProps {
   value?: number;
@@ -499,23 +500,17 @@ const NumberInput: React.FC<NumberInputProps> = ({
             currentValue !== undefined &&
             currentValue <= min)
         }
-        className={`
-          flex items-center justify-center border 
-          ${variantClasses[variant].button}
-          transition-all duration-200
-          focus:outline-none
-          hover:scale-105 active:scale-95
-          active:${variantClasses[variant].active}
-          disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100
-          ${
-            // No cambiar el tamaño del botón en el layout compacto
-            controlsLayout === "compact"
-              ? sizeClasses[size].button
-              : sizeClasses[size].button
-          }
-          ${iconSet === "plusminus" ? "rounded-full" : "rounded-md"}
-          shadow-sm hover:shadow
-        `}
+        className={cn(
+          "flex items-center justify-center border transition-all duration-200",
+          variantClasses[variant].button,
+          "focus:outline-none hover:scale-105 active:scale-95",
+          `active:${variantClasses[variant].active}`,
+          "disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100",
+          // No cambiar el tamaño del botón en el layout compacto
+          sizeClasses[size].button,
+          iconSet === "plusminus" ? "rounded-full" : "rounded-md",
+          "shadow-sm hover:shadow"
+        )}
         aria-label={direction === "up" ? "Aumentar valor" : "Disminuir valor"}
       >
         {renderIcon(direction)}
@@ -563,11 +558,15 @@ const NumberInput: React.FC<NumberInputProps> = ({
   };
 
   return (
-    <div className={`${fullWidth ? "w-full" : "inline-block"} ${className}`}>
+    <div className={cn(fullWidth ? "w-full" : "inline-block", className)}>
       {label && (
         <label
           htmlFor={uniqueId}
-          className={`block mb-1 font-medium ${sizeClasses[size].label} ${variantClasses[variant].text}`}
+          className={cn(
+            "block mb-1 font-medium",
+            sizeClasses[size].label,
+            variantClasses[variant].text
+          )}
         >
           {label}
           {required && <span className="text-red-500 ml-0.5">*</span>}
@@ -600,23 +599,21 @@ const NumberInput: React.FC<NumberInputProps> = ({
             name={name}
             placeholder={placeholder}
             required={required}
-            className={`
-              block border px-3 w-full 
-              ${paddingClass}
-              ${sizeClasses[size].input}
-              ${radiusClasses[radius]}
-              ${
-                error
-                  ? variantClasses[variant].error
-                  : variantClasses[variant].input
-              }
-              transition-all duration-200
-              ${disabled ? "opacity-60 cursor-not-allowed" : ""}
-              ${readonly ? "opacity-80 cursor-default" : ""}
-              ${isFocused ? `ring ${variantClasses[variant].focus}` : ""}
-              focus:outline-none
-              ${inputClassName}
-            `}
+            className={cn(
+              "block border px-3 w-full",
+              paddingClass,
+              sizeClasses[size].input,
+              radiusClasses[radius],
+              error
+                ? variantClasses[variant].error
+                : variantClasses[variant].input,
+              "transition-all duration-200",
+              disabled && "opacity-60 cursor-not-allowed",
+              readonly && "opacity-80 cursor-default",
+              isFocused && `ring ${variantClasses[variant].focus}`,
+              "focus:outline-none",
+              inputClassName
+            )}
             aria-invalid={!!error}
             aria-labelledby={label ? uniqueId : undefined}
           />
