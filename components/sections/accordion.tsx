@@ -3,7 +3,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 interface AccordionItemProps {
   title: string;
@@ -30,20 +30,20 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
   return (
     <div
-      className={twMerge(
+      className={cn(
         "border-b border-zinc-200 dark:border-zinc-800 p-3 last:border-0",
         className
       )}
     >
       <button
-        className={twMerge(
+        className={cn(
           "flex w-full items-center justify-between py-4 text-left",
           buttonClassName
         )}
         onClick={onClick}
       >
         <span
-          className={twMerge(
+          className={cn(
             "text-sm font-medium text-zinc-900 dark:text-zinc-100",
             titleClassName
           )}
@@ -51,10 +51,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           {title}
         </span>
         <ChevronDown
-          className={twMerge(
-            `h-5 w-5 text-zinc-500 transition-transform duration-200 ${
-              isOpen ? "rotate-180" : ""
-            }`,
+          className={cn(
+            "h-5 w-5 text-zinc-500 transition-transform duration-200",
+            isOpen && "rotate-180",
             iconClassName
           )}
         />
@@ -69,7 +68,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
             className="overflow-hidden"
           >
             <div
-              className={twMerge(
+              className={cn(
                 "pb-4 text-sm text-zinc-600 dark:text-zinc-400",
                 contentClassName
               )}
@@ -127,7 +126,7 @@ const Accordion: React.FC<AccordionProps> = ({
 
   return (
     <div
-      className={twMerge(
+      className={cn(
         "divide-y divide-zinc-200 dark:divide-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-800",
         className
       )}
