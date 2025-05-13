@@ -335,15 +335,20 @@ export default function PaginationDisabledDemo() {
 
 ### Con clases personalizadas
 
-Puedes personalizar cualquier parte del componente usando la propiedad `className` con clases de Tailwind CSS.
+Puedes personalizar cualquier parte del componente usando la propiedad `className` general o las propiedades específicas de classNames con clases de Tailwind CSS.
 
 <DemoTabs
   preview={
     <div className="w-full flex justify-center">
       <Pagination 
-        totalPages={10} 
+        totalPages={10}
         className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg shadow-sm border border-blue-200 dark:border-blue-800" 
         variant="primary"
+        navButtonClassName="bg-blue-100 dark:bg-blue-900/40 border-blue-300 dark:border-blue-700 rounded-lg hover:shadow-md transition-all duration-300"
+        activePageClassName="ring-4 ring-blue-200 dark:ring-blue-800/50 font-bold"
+        pageButtonClassName="rounded-lg hover:scale-110 transition-transform duration-200"
+        indicatorClassName="shadow-md"
+        numbersContainerClassName="gap-2"
       />
     </div>
   }
@@ -357,6 +362,11 @@ export default function PaginationCustomClassDemo() {
       totalPages={10} 
       className="bg-blue-50 dark:bg-blue-950/20 p-3 rounded-lg shadow-sm border border-blue-200 dark:border-blue-800" 
       variant="primary"
+      navButtonClassName="bg-blue-100 dark:bg-blue-900/40 border-blue-300 dark:border-blue-700 rounded-lg hover:shadow-md transition-all duration-300"
+      activePageClassName="ring-4 ring-blue-200 dark:ring-blue-800/50 font-bold"
+      pageButtonClassName="rounded-lg hover:scale-110 transition-transform duration-200"
+      indicatorClassName="shadow-md"
+      numbersContainerClassName="gap-2"
     />
   );
 }
@@ -365,20 +375,26 @@ export default function PaginationCustomClassDemo() {
 
 ## Props
 
-| Prop            | Tipo                                                                          | Default                                                                         | Descripción                                             |
-| --------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| `totalPages`    | `number`                                                                      | -                                                                               | Número total de páginas (requerido)                     |
-| `currentPage`   | `number`                                                                      | `1`                                                                             | Página actual                                           |
-| `onPageChange`  | `(page: number) => void`                                                      | -                                                                               | Función que se ejecuta al cambiar de página             |
-| `siblingsCount` | `number`                                                                      | `1`                                                                             | Número de páginas adyacentes a mostrar                  |
-| `variant`       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`                                                                     | Variante de color del componente                        |
-| `size`          | `"sm" \| "md" \| "lg"`                                                        | `"md"`                                                                          | Tamaño del componente                                   |
-| `withNumbers`   | `boolean`                                                                     | `true`                                                                          | Mostrar números de página                               |
-| `withEdges`     | `boolean`                                                                     | `false`                                                                         | Mostrar botones para ir a la primera y última página    |
-| `withText`      | `boolean`                                                                     | `false`                                                                         | Mostrar texto en los botones de navegación              |
-| `disabled`      | `boolean`                                                                     | `false`                                                                         | Deshabilitar el componente                              |
-| `className`     | `string`                                                                      | -                                                                               | Clases adicionales para el componente                   |
-| `fullWidth`     | `boolean`                                                                     | `false`                                                                         | Ocupar todo el ancho disponible y aplicar space-between |
-| `customText`    | `object`                                                                      | `{ previous: "Anterior", next: "Siguiente", first: "Primera", last: "Última" }` | Personalizar el texto de los botones de navegación      |
-| `showPrevious`  | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia atrás              |
-| `showNext`      | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia adelante           |
+| Prop                        | Tipo                                                                          | Default                                                                         | Descripción                                             |
+| --------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `totalPages`                | `number`                                                                      | -                                                                               | Número total de páginas (requerido)                     |
+| `currentPage`               | `number`                                                                      | `1`                                                                             | Página actual                                           |
+| `onPageChange`              | `(page: number) => void`                                                      | -                                                                               | Función que se ejecuta al cambiar de página             |
+| `siblingsCount`             | `number`                                                                      | `1`                                                                             | Número de páginas adyacentes a mostrar                  |
+| `variant`                   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`                                                                     | Variante de color del componente                        |
+| `size`                      | `"sm" \| "md" \| "lg"`                                                        | `"md"`                                                                          | Tamaño del componente                                   |
+| `withNumbers`               | `boolean`                                                                     | `true`                                                                          | Mostrar números de página                               |
+| `withEdges`                 | `boolean`                                                                     | `false`                                                                         | Mostrar botones para ir a la primera y última página    |
+| `withText`                  | `boolean`                                                                     | `false`                                                                         | Mostrar texto en los botones de navegación              |
+| `disabled`                  | `boolean`                                                                     | `false`                                                                         | Deshabilitar el componente                              |
+| `className`                 | `string`                                                                      | -                                                                               | Clases adicionales para el componente principal         |
+| `fullWidth`                 | `boolean`                                                                     | `false`                                                                         | Ocupar todo el ancho disponible y aplicar space-between |
+| `customText`                | `object`                                                                      | `{ previous: "Anterior", next: "Siguiente", first: "Primera", last: "Última" }` | Personalizar el texto de los botones de navegación      |
+| `showPrevious`              | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia atrás              |
+| `showNext`                  | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia adelante           |
+| `navButtonClassName`        | `string`                                                                      | -                                                                               | Clases para los botones de navegación                   |
+| `activePageClassName`       | `string`                                                                      | -                                                                               | Clases para la página activa seleccionada               |
+| `pageButtonClassName`       | `string`                                                                      | -                                                                               | Clases para los botones de página                       |
+| `ellipsisClassName`         | `string`                                                                      | -                                                                               | Clases para los elementos de elipsis                    |
+| `indicatorClassName`        | `string`                                                                      | -                                                                               | Clases para el indicador animado                        |
+| `numbersContainerClassName` | `string`                                                                      | -                                                                               | Clases para el contenedor de números de página          |
