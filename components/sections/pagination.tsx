@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface PaginationProps {
   totalPages: number;
@@ -134,12 +135,8 @@ const Pagination: React.FC<PaginationProps> = ({
     lg: "h-11 min-w-11",
   };
 
-  const buttonClasses = `
-    flex items-center justify-center 
-    border rounded-md transition-colors duration-200
-    focus:outline-none
-    disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
-  `;
+  const buttonClasses =
+    "flex items-center justify-center border rounded-md transition-colors duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
 
   const iconSizes = {
     sm: 14,
@@ -204,7 +201,10 @@ const Pagination: React.FC<PaginationProps> = ({
         return (
           <div
             key={`ellipsis-${index}`}
-            className={`${sizeClasses[size]} px-1 flex items-center justify-center`}
+            className={cn(
+              sizeClasses[size],
+              "px-1 flex items-center justify-center"
+            )}
           >
             <MoreHorizontal size={iconSizes[size]} />
           </div>
@@ -223,14 +223,15 @@ const Pagination: React.FC<PaginationProps> = ({
           type="button"
           disabled={disabled}
           onClick={() => handlePageChange(numericItem)}
-          className={`${buttonClasses} ${sizeClasses[size]} px-3 relative
-            ${
-              isActive
-                ? `${activeTextClasses[variant]} font-semibold z-20`
-                : variantClasses[variant]
-            }
-            ${isActive ? "border-transparent bg-transparent" : ""}
-          `}
+          className={cn(
+            buttonClasses,
+            sizeClasses[size],
+            "px-3 relative",
+            isActive
+              ? cn(activeTextClasses[variant], "font-semibold z-20")
+              : variantClasses[variant],
+            isActive && "border-transparent bg-transparent"
+          )}
           aria-current={isActive ? "page" : undefined}
         >
           {item}
@@ -258,15 +259,23 @@ const Pagination: React.FC<PaginationProps> = ({
     <nav
       role="navigation"
       aria-label="Pagination Navigation"
-      className={`flex ${
-        fullWidth ? "w-full" : ""
-      } ${justifyClass} flex-wrap items-center gap-1 ${className}`}
+      className={cn(
+        "flex items-center gap-1 flex-wrap",
+        fullWidth && "w-full",
+        justifyClass,
+        className
+      )}
     >
       {withEdges && showPrevious && (
         <button
           type="button"
           disabled={page === 1 || disabled}
-          className={`${buttonClasses} ${sizeClasses[size]} ${variantClasses[variant]} gap-1`}
+          className={cn(
+            buttonClasses,
+            sizeClasses[size],
+            variantClasses[variant],
+            "gap-1"
+          )}
           onClick={() => handlePageChange(1)}
           aria-label="Primera página"
         >
@@ -282,9 +291,12 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           type="button"
           disabled={page === 1 || disabled}
-          className={`${buttonClasses} ${sizeClasses[size]} ${
-            variantClasses[variant]
-          } ${withText ? "px-2" : ""}`}
+          className={cn(
+            buttonClasses,
+            sizeClasses[size],
+            variantClasses[variant],
+            withText && "px-2"
+          )}
           onClick={() => handlePageChange(page - 1)}
           aria-label="Página anterior"
         >
@@ -299,7 +311,11 @@ const Pagination: React.FC<PaginationProps> = ({
         <div className="relative flex flex-wrap items-center gap-1">
           {/* Indicador animado que se mueve ENCIMA de los botones */}
           <motion.div
-            className={`absolute rounded-md border ${indicatorBgClasses[variant]} shadow-sm ${indicatorBorderClasses[variant]} z-10`}
+            className={cn(
+              "absolute rounded-md border shadow-sm z-10",
+              indicatorBgClasses[variant],
+              indicatorBorderClasses[variant]
+            )}
             initial={false}
             animate={{
               left: indicatorStyle.left,
@@ -321,9 +337,12 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           type="button"
           disabled={page === totalPages || disabled}
-          className={`${buttonClasses} ${sizeClasses[size]} ${
-            variantClasses[variant]
-          } ${withText ? "px-2" : ""}`}
+          className={cn(
+            buttonClasses,
+            sizeClasses[size],
+            variantClasses[variant],
+            withText && "px-2"
+          )}
           onClick={() => handlePageChange(page + 1)}
           aria-label="Página siguiente"
         >
@@ -338,7 +357,12 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           type="button"
           disabled={page === totalPages || disabled}
-          className={`${buttonClasses} ${sizeClasses[size]} ${variantClasses[variant]} gap-1`}
+          className={cn(
+            buttonClasses,
+            sizeClasses[size],
+            variantClasses[variant],
+            "gap-1"
+          )}
           onClick={() => handlePageChange(totalPages)}
           aria-label="Última página"
         >
