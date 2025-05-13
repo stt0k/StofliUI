@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Check } from "lucide-react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 export interface DropdownItem {
   label: React.ReactNode;
@@ -394,7 +394,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       }
     }
 
-    return twMerge(
+    return cn(
       sizeTextClass,
       baseClasses,
       sizeClasses,
@@ -422,7 +422,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     return (
       <div
-        className={twMerge(
+        className={cn(
           avatarSizeClasses[avatarSize],
           "rounded-full overflow-hidden flex-shrink-0"
         )}
@@ -494,7 +494,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className={twMerge(
+      className={cn(
         "relative",
         fullWidth && !avatarOnly ? "w-full" : "inline-block",
         className
@@ -504,7 +504,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setIsOpen(!isOpen)}
-        className={twMerge(
+        className={cn(
           avatarOnly
             ? `flex items-center justify-center ${avatarOnlyButtonSizeClasses[adjustedSize]} ${avatarOnlySizeClasses[adjustedSize]}`
             : `flex items-center justify-between w-full ${buttonSizeClasses[adjustedSize]} ${sizeClasses[adjustedSize]}`,
@@ -518,7 +518,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         aria-expanded={isOpen}
       >
         <span
-          className={twMerge(
+          className={cn(
             "flex items-center gap-2",
             avatarOnly ? "" : "truncate"
           )}
@@ -530,7 +530,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
         {showArrow && !avatarOnly && (
           <ChevronDown
-            className={twMerge(
+            className={cn(
               "ml-2 h-4 w-4 flex-shrink-0 transition-transform duration-200",
               isOpen ? "rotate-180" : "",
               arrowIconClassName
@@ -546,7 +546,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             animate={{ opacity: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, ...placementAnimation[placement] }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className={twMerge(
+            className={cn(
               "absolute z-50 min-w-[8rem]",
               placementStyles[placement],
               radiusClasses[radius],
@@ -561,7 +561,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               transition={{ duration: 0.1, delay: 0.05 }}
               role="listbox"
               tabIndex={-1}
-              className={twMerge(
+              className={cn(
                 "overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
                 listClassName
               )}
@@ -596,13 +596,13 @@ const Dropdown: React.FC<DropdownProps> = ({
                     }
                   >
                     <div
-                      className={twMerge(
+                      className={cn(
                         "flex items-center w-full justify-between",
                         itemContentClassName
                       )}
                     >
                       <div
-                        className={twMerge(
+                        className={cn(
                           "flex items-center gap-2",
                           itemLabelClassName
                         )}
@@ -611,10 +611,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                           renderAvatar(item.avatarSrc, item.avatarAlt)}
                         {item.icon && (
                           <span
-                            className={twMerge(
-                              "flex-shrink-0",
-                              itemIconClassName
-                            )}
+                            className={cn("flex-shrink-0", itemIconClassName)}
                           >
                             {item.icon}
                           </span>
@@ -628,7 +625,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                           <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
-                            className={twMerge(
+                            className={cn(
                               "flex-shrink-0",
                               checkVariantColors[variant],
                               checkIconClassName
