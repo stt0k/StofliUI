@@ -32,6 +32,12 @@ export interface PaginationProps {
   };
   showPrevious?: boolean;
   showNext?: boolean;
+  navButtonClassName?: string;
+  activePageClassName?: string;
+  pageButtonClassName?: string;
+  ellipsisClassName?: string;
+  indicatorClassName?: string;
+  numbersContainerClassName?: string;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -55,6 +61,12 @@ const Pagination: React.FC<PaginationProps> = ({
   },
   showPrevious = true,
   showNext = true,
+  navButtonClassName,
+  activePageClassName,
+  pageButtonClassName,
+  ellipsisClassName,
+  indicatorClassName,
+  numbersContainerClassName,
 }) => {
   const [page, setPage] = useState(currentPage);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
@@ -203,7 +215,8 @@ const Pagination: React.FC<PaginationProps> = ({
             key={`ellipsis-${index}`}
             className={cn(
               sizeClasses[size],
-              "px-1 flex items-center justify-center"
+              "px-1 flex items-center justify-center",
+              ellipsisClassName
             )}
           >
             <MoreHorizontal size={iconSizes[size]} />
@@ -228,9 +241,14 @@ const Pagination: React.FC<PaginationProps> = ({
             sizeClasses[size],
             "px-3 relative",
             isActive
-              ? cn(activeTextClasses[variant], "font-semibold z-20")
+              ? cn(
+                  activeTextClasses[variant],
+                  "font-semibold z-20",
+                  activePageClassName
+                )
               : variantClasses[variant],
-            isActive && "border-transparent bg-transparent"
+            isActive && "border-transparent bg-transparent",
+            pageButtonClassName
           )}
           aria-current={isActive ? "page" : undefined}
         >
@@ -274,7 +292,8 @@ const Pagination: React.FC<PaginationProps> = ({
             buttonClasses,
             sizeClasses[size],
             variantClasses[variant],
-            "gap-1"
+            "gap-1",
+            navButtonClassName
           )}
           onClick={() => handlePageChange(1)}
           aria-label="Primera página"
@@ -295,7 +314,8 @@ const Pagination: React.FC<PaginationProps> = ({
             buttonClasses,
             sizeClasses[size],
             variantClasses[variant],
-            withText && "px-2"
+            withText && "px-2",
+            navButtonClassName
           )}
           onClick={() => handlePageChange(page - 1)}
           aria-label="Página anterior"
@@ -308,13 +328,19 @@ const Pagination: React.FC<PaginationProps> = ({
       )}
 
       {withNumbers && (
-        <div className="relative flex flex-wrap items-center gap-1">
+        <div
+          className={cn(
+            "relative flex flex-wrap items-center gap-1",
+            numbersContainerClassName
+          )}
+        >
           {/* Indicador animado que se mueve ENCIMA de los botones */}
           <motion.div
             className={cn(
               "absolute rounded-md border shadow-sm z-10",
               indicatorBgClasses[variant],
-              indicatorBorderClasses[variant]
+              indicatorBorderClasses[variant],
+              indicatorClassName
             )}
             initial={false}
             animate={{
@@ -341,7 +367,8 @@ const Pagination: React.FC<PaginationProps> = ({
             buttonClasses,
             sizeClasses[size],
             variantClasses[variant],
-            withText && "px-2"
+            withText && "px-2",
+            navButtonClassName
           )}
           onClick={() => handlePageChange(page + 1)}
           aria-label="Página siguiente"
@@ -361,7 +388,8 @@ const Pagination: React.FC<PaginationProps> = ({
             buttonClasses,
             sizeClasses[size],
             variantClasses[variant],
-            "gap-1"
+            "gap-1",
+            navButtonClassName
           )}
           onClick={() => handlePageChange(totalPages)}
           aria-label="Última página"
