@@ -4,7 +4,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { I18nProvider, useLocale } from "@react-aria/i18n";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 import {
   startOfMonth,
   endOfMonth,
@@ -222,14 +222,15 @@ const CalendarContent: React.FC<CalendarProps> = ({
 
   return (
     <div
-      className={twMerge(
-        `w-full max-w-sm p-4 ${radiusClasses[radius]} bg-white dark:bg-zinc-900 shadow-lg`,
+      className={cn(
+        "w-full max-w-sm p-4 bg-white dark:bg-zinc-900 shadow-lg",
+        radiusClasses[radius],
         className
       )}
     >
       {calendarName && (
         <div
-          className={twMerge(
+          className={cn(
             "text-sm text-center mb-2 text-zinc-500 dark:text-zinc-400",
             calendarTitleClassName
           )}
@@ -238,7 +239,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
         </div>
       )}
       <div
-        className={twMerge(
+        className={cn(
           "flex items-center justify-between mb-4",
           headerClassName
         )}
@@ -246,7 +247,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
         <motion.button
           whileTap={!readOnly ? { scale: 0.95 } : undefined}
           onClick={prevMonth}
-          className={twMerge(
+          className={cn(
             "p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full",
             navigationButtonClassName
           )}
@@ -254,7 +255,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
           <ChevronLeft className="w-5 h-5" />
         </motion.button>
         <h2
-          className={twMerge(
+          className={cn(
             "text-lg font-semibold capitalize",
             monthTitleClassName
           )}
@@ -264,7 +265,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
         <motion.button
           whileTap={!readOnly ? { scale: 0.95 } : undefined}
           onClick={nextMonth}
-          className={twMerge(
+          className={cn(
             "p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full",
             navigationButtonClassName
           )}
@@ -273,13 +274,11 @@ const CalendarContent: React.FC<CalendarProps> = ({
         </motion.button>
       </div>
 
-      <div
-        className={twMerge("grid grid-cols-7 gap-1 mb-2", weekdaysClassName)}
-      >
+      <div className={cn("grid grid-cols-7 gap-1 mb-2", weekdaysClassName)}>
         {weekDays.map((day) => (
           <div
             key={day}
-            className={twMerge(
+            className={cn(
               "text-center text-sm font-medium text-zinc-500 dark:text-zinc-400",
               weekdayClassName
             )}
@@ -295,36 +294,34 @@ const CalendarContent: React.FC<CalendarProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className={twMerge("grid grid-cols-7 gap-1", daysContainerClassName)}
+          className={cn("grid grid-cols-7 gap-1", daysContainerClassName)}
         >
           {days.map((day) => {
             const isSelected = selectedDate && isSameDay(day, selectedDate);
             const isCurrentMonth = isSameMonth(day, currentMonth);
             const isDisabled = isDateDisabled(day);
 
-            // Simple button class without animation effects
-            const baseClasses = `
-              aspect-square flex items-center justify-center text-sm
-              ${radiusClasses[radius]}
-              ${!isDisabled && !readOnly ? "cursor-pointer" : "cursor-default"}
-              transition-colors duration-200
-              ${
-                isSelected
-                  ? ""
-                  : !isDisabled && !readOnly
-                  ? "hover:text-black dark:hover:text-white"
-                  : ""
-              }
-            `;
+            // Base classes for the day
+            const baseClasses = cn(
+              "aspect-square flex items-center justify-center text-sm",
+              radiusClasses[radius],
+              !isDisabled && !readOnly ? "cursor-pointer" : "cursor-default",
+              "transition-colors duration-200",
+              !isSelected &&
+                !isDisabled &&
+                !readOnly &&
+                "hover:text-black dark:hover:text-white"
+            );
 
-            const combinedDayClassName = twMerge(
+            // Determine the final className based on state
+            const combinedDayClassName = cn(
               baseClasses,
               dayClassName,
               isSelected
-                ? twMerge(selectedVariantClasses[variant], selectedDayClassName)
+                ? cn(selectedVariantClasses[variant], selectedDayClassName)
                 : isCurrentMonth
                 ? isDisabled
-                  ? twMerge(
+                  ? cn(
                       "bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-zinc-600 cursor-not-allowed",
                       disabledDayClassName
                     )
