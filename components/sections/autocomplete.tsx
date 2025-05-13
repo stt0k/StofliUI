@@ -3,7 +3,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronsUpDown, X } from "lucide-react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 export interface AutocompleteOption {
   value: string;
@@ -57,9 +57,9 @@ export const AutocompleteSection: React.FC<AutocompleteSectionProps> = ({
   titleClassName = "",
 }) => {
   return (
-    <div className={twMerge("py-2", className)}>
+    <div className={cn("py-2", className)}>
       <div
-        className={twMerge(
+        className={cn(
           "px-3 py-1.5 text-sm font-medium text-zinc-400 dark:text-zinc-500",
           titleClassName
         )}
@@ -107,8 +107,9 @@ export const AutocompleteItem: React.FC<AutocompleteItemProps> = ({
       initial={{ opacity: 0, y: -5 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 5 }}
-      className={twMerge(
-        `flex items-center justify-between px-3 py-2 text-sm transition-colors ${getItemClasses()}`,
+      className={cn(
+        "flex items-center justify-between px-3 py-2 text-sm transition-colors",
+        getItemClasses(),
         className
       )}
       onClick={handleClick}
@@ -405,21 +406,22 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   return (
     <div
       ref={containerRef}
-      className={twMerge(`relative w-full max-w-sm`, className)}
+      className={cn(`relative w-full max-w-sm`, className)}
     >
       <div
-        className={twMerge(
-          `relative flex flex-col group
-          ${getVariantClasses()}
-          ${getStateClasses()}
-          ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`,
+        className={cn(
+          `relative flex flex-col group`,
+          getVariantClasses(),
+          getStateClasses(),
+          disabled && "opacity-50 cursor-not-allowed",
+          !disabled && "cursor-pointer",
           containerClassName
         )}
       >
         {title && (
           <div className="px-3 pt-1.5 pb-0">
             <span
-              className={twMerge(
+              className={cn(
                 `text-xs font-medium ${getTitleColorClasses()}`,
                 sectionTitleClassName
               )}
@@ -432,10 +434,10 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         <input
           ref={inputRef}
           type="text"
-          className={twMerge(
-            `w-full px-3 pr-20 ${
-              title ? "pt-0 pb-1.5" : "py-2"
-            } bg-transparent text-sm text-zinc-900 dark:text-zinc-100 
+          className={cn(
+            `w-full px-3 pr-20`,
+            title ? "pt-0 pb-1.5" : "py-2",
+            `bg-transparent text-sm text-zinc-900 dark:text-zinc-100 
             placeholder-zinc-500 dark:placeholder-zinc-400 outline-none disabled:cursor-not-allowed`,
             inputClassName
           )}
@@ -453,7 +455,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               <button
                 type="button"
                 onClick={handleClear}
-                className={twMerge(
+                className={cn(
                   `h-4 w-4 text-${
                     variant === "default" ? "zinc" : variant
                   }-400 hover:text-${
@@ -476,12 +478,12 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           </div>
           <button
             type="button"
-            className={twMerge(
-              `flex items-center justify-center w-8 h-full 
-              text-${variant === "default" ? "zinc" : variant}-500 dark:text-${
+            className={cn(
+              `flex items-center justify-center w-8 h-full`,
+              `text-${variant === "default" ? "zinc" : variant}-500 dark:text-${
                 variant === "default" ? "zinc" : variant
-              }-400 transition-colors
-              hover:text-${
+              }-400 transition-colors`,
+              `hover:text-${
                 variant === "default" ? "zinc" : variant
               }-700 dark:hover:text-${
                 variant === "default" ? "zinc" : variant
@@ -504,7 +506,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className={twMerge(
+            className={cn(
               `absolute z-50 w-full mt-1 bg-white dark:bg-zinc-900 
               rounded-lg shadow-lg overflow-hidden max-h-60
               border border-zinc-200 dark:border-zinc-800`,
