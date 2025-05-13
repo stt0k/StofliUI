@@ -838,14 +838,13 @@ Puedes personalizar cualquier parte del componente usando las propiedades de cla
         variant="secondary"
         label="Estilo personalizado con shadow" 
         labelClassName="text-purple-700 dark:text-purple-300 font-medium"
-        inputClassName="shadow-md focus:shadow-purple-200 dark:focus:shadow-purple-900"
-        placeholder="Efecto de sombra en estado de focus"
+        inputClassName="shadow-md focus:shadow-purple-400 dark:focus:shadow-purple-900"
+        placeholder="Sombra en estado focus"
       />
   }
 >
 ```tsx
 import { Input } from "@stofli/ui";
-import { SearchIcon } from "lucide-react";
 
 export default function InputCustomClassesDemo() {
   return (
@@ -854,8 +853,8 @@ export default function InputCustomClassesDemo() {
         variant="secondary"
         label="Estilo personalizado con shadow" 
         labelClassName="text-purple-700 dark:text-purple-300 font-medium"
-        inputClassName="shadow-md focus:shadow-purple-200 dark:focus:shadow-purple-900"
-        placeholder="Efecto de sombra en estado de focus"
+        inputClassName="shadow-md focus:shadow-purple-400 dark:focus:shadow-purple-900"
+        placeholder="Sombra en estado focus"
       />
   );
 }
