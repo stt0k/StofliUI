@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, ArrowRight } from "lucide-react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onDrag"> {
@@ -174,27 +174,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     // Construir la clase CSS combinada
-    const buttonClasses = twMerge(
-      `
-      inline-flex items-center justify-center font-medium transition-colors duration-200
-      ${variant !== "link" && variant !== "ghost" ? "active:shadow-inner" : ""}
-      focus:outline-none focus:ring-0 ${
-        variant !== "link" && variant !== "ghost"
-          ? "focus-visible:ring-2 focus-visible:ring-offset-2"
-          : ""
-      }
-      disabled:opacity-50 disabled:pointer-events-none
-      ${variantStyles[variant]}
-      ${sizeStyles[size]}
-      ${radiusStyles[radius]}
-      ${fullWidth ? "w-full" : ""}
-      ${
-        withRing && variant !== "link" && variant !== "ghost"
-          ? "ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10"
-          : ""
-      }
-      relative overflow-hidden
-    `,
+    const buttonClasses = cn(
+      "inline-flex items-center justify-center font-medium transition-colors duration-200",
+      variant !== "link" && variant !== "ghost" && "active:shadow-inner",
+      "focus:outline-none focus:ring-0",
+      variant !== "link" &&
+        variant !== "ghost" &&
+        "focus-visible:ring-2 focus-visible:ring-offset-2",
+      "disabled:opacity-50 disabled:pointer-events-none",
+      variantStyles[variant],
+      sizeStyles[size],
+      radiusStyles[radius],
+      fullWidth && "w-full",
+      withRing &&
+        variant !== "link" &&
+        variant !== "ghost" &&
+        "ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10",
+      "relative overflow-hidden",
       className
     );
 
@@ -217,13 +213,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     // Estilos predeterminados para ripple
-    const defaultRippleClasses = !rippleColor
-      ? `absolute rounded-full pointer-events-none ${
-          variant === "outline" || variant === "ghost" || variant === "link"
-            ? "bg-zinc-500 dark:bg-zinc-200 opacity-15"
-            : "bg-white dark:bg-zinc-200 opacity-35"
-        }`
-      : "absolute rounded-full pointer-events-none";
+    const defaultRippleClasses = cn(
+      "absolute rounded-full pointer-events-none",
+      !rippleColor &&
+        (variant === "outline" || variant === "ghost" || variant === "link"
+          ? "bg-zinc-500 dark:bg-zinc-200 opacity-15"
+          : "bg-white dark:bg-zinc-200 opacity-35")
+    );
 
     return (
       <motion.button
@@ -245,7 +241,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ripples.map((ripple) => (
               <motion.span
                 key={ripple.id}
-                className={twMerge(defaultRippleClasses, rippleClassName)}
+                className={cn(defaultRippleClasses, rippleClassName)}
                 style={{
                   left: ripple.x - ripple.size / 2,
                   top: ripple.y - ripple.size / 2,
@@ -274,19 +270,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         {isLoading && (
           <Loader2
-            className={twMerge("mr-2 h-4 w-4 animate-spin", loaderClassName)}
+            className={cn("mr-2 h-4 w-4 animate-spin", loaderClassName)}
           />
         )}
 
         {!isLoading && leftIcon && (
-          <span className={twMerge("mr-2 relative z-10", leftIconClassName)}>
+          <span className={cn("mr-2 relative z-10", leftIconClassName)}>
             {leftIcon}
           </span>
         )}
 
         <span
-          className={twMerge(
-            `${withArrow || rightIcon ? "mr-1" : ""} z-10 relative`,
+          className={cn(
+            "relative z-10",
+            (withArrow || rightIcon) && "mr-1",
             contentClassName
           )}
         >
@@ -295,7 +292,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         {!isLoading && withArrow && (
           <motion.span
-            className={twMerge("ml-1 relative z-10", arrowClassName)}
+            className={cn("ml-1 relative z-10", arrowClassName)}
             initial={{ x: 0 }}
             whileHover={{ x: 3 }}
             transition={{ duration: 0.2 }}
@@ -305,7 +302,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
 
         {!isLoading && rightIcon && !withArrow && (
-          <span className={twMerge("ml-2 relative z-10", rightIconClassName)}>
+          <span className={cn("ml-2 relative z-10", rightIconClassName)}>
             {rightIcon}
           </span>
         )}
