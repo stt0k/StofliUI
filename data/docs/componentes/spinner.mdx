@@ -226,14 +226,51 @@ export default function SpinnerCombinationsDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del componente usando la propiedad className con clases de Tailwind CSS.
+
+<DemoTabs
+  preview={
+      <Spinner 
+        type="border" 
+        variant="success"
+        className="p-4 bg-green-50 dark:bg-green-950/30 rounded-lg shadow-md border border-green-200 dark:border-green-800"
+        spinnerClassName="opacity-90"
+        label="Cargando..." 
+        labelClassName="font-semibold text-green-800 dark:text-green-300"
+      />
+  }
+>
+```tsx
+import { Spinner } from "@stofli/ui";
+
+export default function SpinnerCustomClassDemo() {
+  return (
+    <Spinner 
+        type="border" 
+        variant="success"
+        className="p-4 bg-green-50 dark:bg-green-950/30 rounded-lg shadow-md border border-green-200 dark:border-green-800"
+        spinnerClassName="opacity-90"
+        label="Cargando..." 
+        labelClassName="font-semibold text-green-800 dark:text-green-300"
+      />
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop            | Tipo                                                                          | Default     | Descripción                            |
-| --------------- | ----------------------------------------------------------------------------- | ----------- | -------------------------------------- |
-| `size`          | `"xs" \| "sm" \| "md" \| "lg" \| "xl"`                                        | `"md"`      | Tamaño del spinner                     |
-| `variant`       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de color del spinner          |
-| `speed`         | `"slow" \| "normal" \| "fast"`                                                | `"normal"`  | Velocidad de la animación              |
-| `type`          | `"border" \| "dots" \| "grow" \| "wave" \| "lines"`                           | `"border"`  | Tipo de animación del spinner          |
-| `label`         | `string`                                                                      | -           | Texto descriptivo para el spinner      |
-| `labelPosition` | `"left" \| "right" \| "top" \| "bottom"`                                      | `"right"`   | Posición del texto respecto al spinner |
-| `className`     | `string`                                                                      | -           | Clases adicionales para el componente  |
+| Prop                 | Tipo                                                                          | Default     | Descripción                            |
+| -------------------- | ----------------------------------------------------------------------------- | ----------- | -------------------------------------- |
+| `size`               | `"xs" \| "sm" \| "md" \| "lg" \| "xl"`                                        | `"md"`      | Tamaño del spinner                     |
+| `variant`            | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de color del spinner          |
+| `speed`              | `"slow" \| "normal" \| "fast"`                                                | `"normal"`  | Velocidad de la animación              |
+| `type`               | `"border" \| "dots" \| "grow" \| "wave" \| "lines"`                           | `"border"`  | Tipo de animación del spinner          |
+| `label`              | `string`                                                                      | -           | Texto descriptivo para el spinner      |
+| `labelPosition`      | `"left" \| "right" \| "top" \| "bottom"`                                      | `"right"`   | Posición del texto respecto al spinner |
+| `className`          | `string`                                                                      | -           | Clases adicionales para el componente  |
+| `containerClassName` | `string`                                                                      | -           | Clases para el contenedor principal    |
+| `spinnerClassName`   | `string`                                                                      | -           | Clases para el elemento spinner        |
+| `labelClassName`     | `string`                                                                      | -           | Clases para el texto de la etiqueta    |
