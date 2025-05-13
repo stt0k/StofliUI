@@ -426,13 +426,14 @@ export default function NumberInputFullWidthDemo() {
 
 ### Con clases personalizadas
 
-Puedes personalizar cualquier parte del componente usando las propiedades de className con clases de Tailwind CSS.
+Puedes personalizar cada parte del componente usando las propiedades de className específicas para darle un aspecto único con Tailwind CSS.
 
 <DemoTabs
   preview={
       <NumberInput 
         className="max-w-md"
-        label="Input numérico personalizado" 
+        label="Personalizado" 
+        labelClassName="text-blue-700 dark:text-blue-300 font-bold uppercase tracking-wider text-xs"
         inputClassName="border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 placeholder-indigo-400"
         variant="primary"
         defaultValue={5}
@@ -448,7 +449,8 @@ export default function NumberInputCustomClassDemo() {
   return (
       <NumberInput 
         className="max-w-md"
-        label="Input numérico personalizado" 
+        label="Personalizado" 
+        labelClassName="text-blue-700 dark:text-blue-300 font-bold uppercase tracking-wider text-xs"
         inputClassName="border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 placeholder-indigo-400"
         variant="primary"
         defaultValue={5}
@@ -461,3 +463,40 @@ export default function NumberInputCustomClassDemo() {
 </DemoTabs>
 
 ## Props
+
+| Prop                      | Tipo                                                                          | Valor por defecto | Descripción                                               |
+| ------------------------- | ----------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------- |
+| `value`                   | `number`                                                                      | -                 | Valor controlado del input numérico                       |
+| `defaultValue`            | `number`                                                                      | -                 | Valor inicial no controlado                               |
+| `min`                     | `number`                                                                      | -                 | Valor mínimo permitido                                    |
+| `max`                     | `number`                                                                      | -                 | Valor máximo permitido                                    |
+| `step`                    | `number`                                                                      | `1`               | Incremento por cada pulsación en los controles            |
+| `disabled`                | `boolean`                                                                     | `false`           | Deshabilita el input                                      |
+| `readonly`                | `boolean`                                                                     | `false`           | Modo solo lectura                                         |
+| `label`                   | `string`                                                                      | -                 | Etiqueta descriptiva para el input                        |
+| `placeholder`             | `string`                                                                      | -                 | Texto de marcador de posición                             |
+| `error`                   | `string`                                                                      | -                 | Mensaje de error a mostrar                                |
+| `size`                    | `"sm" \| "md" \| "lg"`                                                        | `"md"`            | Tamaño del componente                                     |
+| `variant`                 | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`       | Variante de estilo                                        |
+| `radius`                  | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`            | Radio de las esquinas                                     |
+| `fullWidth`               | `boolean`                                                                     | `false`           | Ocupa el 100% del ancho disponible                        |
+| `className`               | `string`                                                                      | -                 | Clases CSS personalizadas para el contenedor              |
+| `inputClassName`          | `string`                                                                      | -                 | Clases CSS personalizadas para el input                   |
+| `labelClassName`          | `string`                                                                      | -                 | Clases CSS personalizadas para la etiqueta                |
+| `errorClassName`          | `string`                                                                      | -                 | Clases CSS personalizadas para el mensaje de error        |
+| `controlsClassName`       | `string`                                                                      | -                 | Clases CSS personalizadas para el contenedor de controles |
+| `controlButtonClassName`  | `string`                                                                      | -                 | Clases CSS personalizadas para los botones de control     |
+| `inputContainerClassName` | `string`                                                                      | -                 | Clases CSS personalizadas para el contenedor del input    |
+| `controlsLayout`          | `"default" \| "compact" \| "split"`                                           | `"default"`       | Diseño de los controles                                   |
+| `controlsPosition`        | `"right" \| "both"`                                                           | `"right"`         | Posición de los controles                                 |
+| `showControls`            | `boolean`                                                                     | `true`            | Muestra u oculta los controles                            |
+| `iconSet`                 | `"chevron" \| "plusminus"`                                                    | `"chevron"`       | Conjunto de iconos a utilizar                             |
+| `required`                | `boolean`                                                                     | `false`           | Marca el campo como obligatorio                           |
+| `name`                    | `string`                                                                      | -                 | Nombre del campo (para formularios)                       |
+| `id`                      | `string`                                                                      | -                 | ID único del elemento                                     |
+| `animationStyle`          | `"slide" \| "pulse" \| "scale" \| "bounce"`                                   | `"slide"`         | Estilo de animación al cambiar valor                      |
+| `format`                  | `"default" \| "percentage" \| "currency" \| "signed"`                         | `"default"`       | Formato de visualización del valor                        |
+| `formatOptions`           | `{ symbol?: string; position?: "prefix" \| "suffix" }`                        | `{}`              | Opciones adicionales para el formato seleccionado         |
+| `onChange`                | `(value: number) => void`                                                     | -                 | Función que se ejecuta al cambiar el valor                |
+| `onFocus`                 | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -                 | Función que se ejecuta cuando el input recibe el foco     |
+| `onBlur`                  | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -                 | Función que se ejecuta cuando el input pierde el foco     |
