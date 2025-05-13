@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 export interface AvatarProps {
   src?: string;
@@ -66,7 +66,7 @@ const Avatar: React.FC<AvatarProps> = ({
     busy: ["bg-red-500"],
   };
 
-  const classes = twMerge(
+  const classes = cn(
     baseClasses.join(" "),
     sizeClasses[size].join(" "),
     radiusClasses[radius].join(" "),
@@ -84,12 +84,12 @@ const Avatar: React.FC<AvatarProps> = ({
             src={src}
             alt={alt}
             fill
-            className={twMerge("object-cover", imageClassName)}
+            className={cn("object-cover", imageClassName)}
             onError={handleImageError}
           />
         ) : (
           <span
-            className={twMerge(
+            className={cn(
               "font-medium text-zinc-500 dark:text-zinc-400",
               fallbackClassName
             )}
@@ -100,10 +100,9 @@ const Avatar: React.FC<AvatarProps> = ({
       </div>
       {status && (
         <span
-          className={twMerge(
-            `absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full border-2 border-white dark:border-zinc-900 ${statusColors[
-              status
-            ].join(" ")}`,
+          className={cn(
+            "absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full border-2 border-white dark:border-zinc-900",
+            statusColors[status].join(" "),
             statusClassName
           )}
         />
