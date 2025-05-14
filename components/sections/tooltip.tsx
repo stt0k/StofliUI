@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export interface TooltipProps {
   children: React.ReactNode;
@@ -18,6 +19,9 @@ export interface TooltipProps {
   maxWidth?: string;
   showArrow?: boolean;
   className?: string;
+  tooltipClassName?: string;
+  contentClassName?: string;
+  arrowClassName?: string;
   radius?: "none" | "sm" | "md" | "full";
 }
 
@@ -30,6 +34,9 @@ const Tooltip: React.FC<TooltipProps> = ({
   maxWidth = "200px",
   showArrow = false,
   className = "",
+  tooltipClassName = "",
+  contentClassName = "",
+  arrowClassName = "",
   radius = "md",
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -213,7 +220,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   return (
     <div
       ref={triggerRef}
-      className="inline-block"
+      className={cn("inline-block", className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleMouseEnter}
@@ -225,25 +232,22 @@ const Tooltip: React.FC<TooltipProps> = ({
         {isVisible && (
           <motion.div
             ref={tooltipRef}
-            className={`
-              fixed z-50 px-3 py-2 text-sm 
-              ${radiusClasses[radius]} 
-              ${variantClasses[variant]} 
-              ${showArrow ? arrowVariantClasses[variant] : ""} 
-              ${className} 
-              shadow-lg pointer-events-none
-              ${
-                showArrow
-                  ? `
+            className={cn(
+              "fixed z-50 px-3 py-2 text-sm shadow-lg pointer-events-none",
+              radiusClasses[radius],
+              variantClasses[variant],
+              showArrow && arrowVariantClasses[variant],
+              showArrow &&
+                `
                 after:absolute 
                 after:w-2 after:h-2 
                 after:bg-inherit 
                 after:border-[1px]
                 ${getArrowPosition()}
-              `
-                  : ""
-              }
-            `}
+                ${arrowClassName}
+              `,
+              tooltipClassName
+            )}
             style={{
               left: tooltipPosition.left,
               top: tooltipPosition.top,
@@ -255,7 +259,7 @@ const Tooltip: React.FC<TooltipProps> = ({
             variants={variants}
             custom={position}
           >
-            {content}
+            <div className={cn("", contentClassName)}>{content}</div>
           </motion.div>
         )}
       </AnimatePresence>
