@@ -31,7 +31,6 @@ import Image from "next/image";
 const RechartsComponents = dynamic(
   () => import("@/components/charts/LineChartComponent"),
   {
-    ssr: false,
     loading: () => (
       <div className="h-44 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/80 rounded-md p-3 flex items-center justify-center">
         <p className="text-zinc-400 text-sm">Cargando gráfico...</p>
