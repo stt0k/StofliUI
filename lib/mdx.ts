@@ -6,6 +6,17 @@ import { notFound } from "next/navigation";
 import rehypePrism from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
 import { components } from "./mdx-components";
+import {
+  UserIcon,
+  MessageSquareIcon,
+  SettingsIcon,
+  HomeIcon,
+  BarChartIcon,
+  LineChartIcon,
+  PieChartIcon,
+  FileTextIcon,
+  FileIcon,
+} from "lucide-react";
 
 const root = process.cwd();
 const DOCS_DIRECTORY = path.join(root, "data", "docs");
@@ -58,7 +69,18 @@ export const getFileBySlug = async ({
 
     const { content, frontmatter } = await compileMDX({
       source: mdxSource,
-      components,
+      components: {
+        ...components,
+        UserIcon,
+        MessageSquareIcon,
+        SettingsIcon,
+        HomeIcon,
+        BarChartIcon,
+        LineChartIcon,
+        PieChartIcon,
+        FileTextIcon,
+        FileIcon,
+      },
       options: {
         parseFrontmatter: true,
         mdxOptions: {
@@ -127,7 +149,18 @@ export async function getPostBySlug(slug: string) {
 
     const mdx = await compileMDX({
       source: content,
-      components,
+      components: {
+        ...components,
+        UserIcon,
+        MessageSquareIcon,
+        SettingsIcon,
+        HomeIcon,
+        BarChartIcon,
+        LineChartIcon,
+        PieChartIcon,
+        FileTextIcon,
+        FileIcon,
+      },
       options: {
         parseFrontmatter: true,
         mdxOptions: {
