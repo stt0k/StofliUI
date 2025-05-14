@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export interface ToastProps {
   id?: string;
@@ -30,6 +31,13 @@ export interface ToastProps {
   className?: string;
   children?: React.ReactNode;
   icon?: React.ReactNode;
+  containerClassName?: string;
+  toastClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
+  iconContainerClassName?: string;
+  contentClassName?: string;
+  closeButtonClassName?: string;
 }
 
 const Toast: React.FC<ToastProps> = ({
@@ -45,6 +53,13 @@ const Toast: React.FC<ToastProps> = ({
   className = "",
   children,
   icon,
+  containerClassName = "",
+  toastClassName = "",
+  titleClassName = "",
+  descriptionClassName = "",
+  iconContainerClassName = "",
+  contentClassName = "",
+  closeButtonClassName = "",
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const [isMounted, setIsMounted] = useState(false);
@@ -124,28 +139,41 @@ const Toast: React.FC<ToastProps> = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className={`max-w-sm ${className}`}
+          className={containerClassName || cn("max-w-sm", className)}
           initial="hidden"
           animate="visible"
           exit="exit"
           variants={variants}
         >
           <div
-            className={`rounded-lg border px-4 py-3 shadow-lg ${variantClasses[variant]}`}
+            className={cn(
+              "rounded-lg border px-4 py-3 shadow-lg",
+              toastClassName ? toastClassName : variantClasses[variant]
+            )}
           >
-            <div className="flex items-start gap-3">
-              {icon && <div className="shrink-0 mt-0.5">{icon}</div>}
-              <div className="flex-1 mr-2">
-                {title && <h4 className="font-medium mb-1">{title}</h4>}
+            <div className={cn("flex items-start gap-3")}>
+              {icon && (
+                <div className={iconContainerClassName || "shrink-0 mt-0.5"}>
+                  {icon}
+                </div>
+              )}
+              <div className={contentClassName || "flex-1 mr-2"}>
+                {title && (
+                  <h4 className={titleClassName || "font-medium mb-1"}>
+                    {title}
+                  </h4>
+                )}
                 {description && (
-                  <p className="text-sm opacity-90">{description}</p>
+                  <p className={descriptionClassName || "text-sm opacity-90"}>
+                    {description}
+                  </p>
                 )}
                 {children}
               </div>
               {showCloseButton && (
                 <button
                   onClick={handleClose}
-                  className="shrink-0 opacity-70 hover:opacity-100 transition-opacity"
+                  className={closeButtonClassName || "shrink-0 opacity-70 hover:opacity-100 transition-opacity"}
                   aria-label="Cerrar"
                 >
                   <X className="h-4 w-4" />
@@ -175,9 +203,10 @@ const ToastContext = React.createContext<ToastContextType | undefined>(
   undefined
 );
 
-export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const ToastProvider: React.FC<{
+  children: React.ReactNode;
+  containerClassName?: string;
+}> = ({ children, containerClassName }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const showToast = (
@@ -235,9 +264,11 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         return (
           <div
             key={position}
-            className={`fixed z-50 flex flex-col gap-2 ${
-              positionClasses[position as keyof typeof positionClasses]
-            }`}
+            className={cn(
+              "fixed z-50 flex flex-col gap-2",
+              positionClasses[position as keyof typeof positionClasses],
+              containerClassName
+            )}
             style={{
               maxHeight: "100vh",
               overflow: "hidden",
