@@ -385,16 +385,180 @@ export default function TooltipRichContentDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del componente usando las propiedades de clases personalizadas con Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-4 justify-center">
+      <Tooltip
+        content={
+          <div className="flex items-center gap-2 p-1">
+            <CheckIcon className="h-4 w-4 text-green-500" />
+            <span>Tarea completada</span>
+          </div>
+        }
+        tooltipClassName="bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-800 shadow-lg rounded-lg"
+        position="top"
+        showArrow
+        arrowClassName="!bg-white dark:!bg-zinc-900 !border-zinc-100 dark:!border-zinc-800"
+      >
+        <Button 
+          variant="success" 
+          className="rounded-full h-9 w-9 flex items-center justify-center p-0"
+        >
+          <CheckIcon className="h-5 w-5" />
+        </Button>
+      </Tooltip>
+
+      <Tooltip
+        content={
+          <div className="p-1">
+            <div className="font-bold mb-1">Notificaciones</div>
+            <div className="text-xs opacity-80">Tienes 3 mensajes sin leer</div>
+          </div>
+        }
+        tooltipClassName="bg-gradient-to-b from-blue-700 to-blue-900 text-white border-none shadow-xl rounded-lg"
+        position="bottom"
+        showArrow
+        arrowClassName="!bg-blue-900 !border-none"
+      >
+        <Button
+          variant="primary"
+          className="rounded-full h-9 w-9 flex items-center justify-center p-0"
+        >
+          <BellIcon className="h-5 w-5" />
+        </Button>
+      </Tooltip>
+
+      <Tooltip
+        content={
+          <div className="flex items-start gap-3 p-1 w-48">
+            <div className="h-8 w-8 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-sm">
+              <UserIcon className="h-4 w-4" />
+            </div>
+            <div>
+              <div className="font-bold text-sm">María Rodríguez</div>
+              <div className="text-xs text-zinc-600 dark:text-zinc-400">maria@example.com</div>
+            </div>
+            <div className="ml-auto">
+              <SettingsIcon className="h-4 w-4 opacity-70" />
+            </div>
+          </div>
+        }
+        tooltipClassName="bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-2xl rounded-xl p-0"
+        position="right"
+        maxWidth="250px"
+      >
+        <Button
+          variant="default"
+          className="rounded-full h-9 w-9 flex items-center justify-center p-0"
+        >
+          <UserIcon className="h-5 w-5" />
+        </Button>
+      </Tooltip>
+    </div>
+
+}
+
+>
+
+```tsx
+import { Tooltip, Button } from "@stofli/ui";
+import { CheckIcon, BellIcon, UserIcon, SettingsIcon } from "lucide-react";
+
+export default function TooltipModernDemo() {
+  return (
+    <div className="flex flex-wrap gap-4 justify-center">
+      <Tooltip
+        content={
+          <div className="flex items-center gap-2 p-1">
+            <CheckIcon className="h-4 w-4 text-green-500" />
+            <span>Tarea completada</span>
+          </div>
+        }
+        tooltipClassName="bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-800 shadow-lg rounded-lg"
+        position="top"
+        showArrow
+        arrowClassName="!bg-white dark:!bg-zinc-900 !border-zinc-100 dark:!border-zinc-800"
+      >
+        <Button
+          variant="success"
+          className="rounded-full h-9 w-9 flex items-center justify-center p-0"
+        >
+          <CheckIcon className="h-5 w-5" />
+        </Button>
+      </Tooltip>
+
+      <Tooltip
+        content={
+          <div className="p-1">
+            <div className="font-bold mb-1">Notificaciones</div>
+            <div className="text-xs opacity-80">Tienes 3 mensajes sin leer</div>
+          </div>
+        }
+        tooltipClassName="bg-gradient-to-b from-blue-700 to-blue-900 text-white border-none shadow-xl rounded-lg"
+        position="bottom"
+        showArrow
+        arrowClassName="!bg-blue-900 !border-none"
+      >
+        <Button
+          variant="primary"
+          className="rounded-full h-9 w-9 flex items-center justify-center p-0"
+        >
+          <BellIcon className="h-5 w-5" />
+        </Button>
+      </Tooltip>
+
+      <Tooltip
+        content={
+          <div className="flex items-start gap-3 p-1 w-48">
+            <div className="h-8 w-8 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-sm">
+              <UserIcon className="h-4 w-4" />
+            </div>
+            <div>
+              <div className="font-bold text-sm">María Rodríguez</div>
+              <div className="text-xs text-zinc-600 dark:text-zinc-400">
+                maria@example.com
+              </div>
+            </div>
+            <div className="ml-auto">
+              <SettingsIcon className="h-4 w-4 opacity-70" />
+            </div>
+          </div>
+        }
+        tooltipClassName="bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-2xl rounded-xl p-0"
+        position="right"
+        maxWidth="250px"
+      >
+        <Button
+          variant="default"
+          className="rounded-full h-9 w-9 flex items-center justify-center p-0"
+        >
+          <UserIcon className="h-5 w-5" />
+        </Button>
+      </Tooltip>
+    </div>
+  );
+}
+```
+
+</DemoTabs>
+
 ## Props
 
-| Prop        | Tipo                                                                          | Default     | Descripción                               |
-| ----------- | ----------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
-| `children`  | `React.ReactNode`                                                             | -           | Elemento al que se adjunta el tooltip     |
-| `content`   | `React.ReactNode`                                                             | -           | Contenido a mostrar en el tooltip         |
-| `position`  | `"top" \| "right" \| "bottom" \| "left"`                                      | `"top"`     | Posición del tooltip respecto al elemento |
-| `variant`   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                        |
-| `delay`     | `number`                                                                      | `300`       | Retraso antes de mostrar el tooltip (ms)  |
-| `maxWidth`  | `string`                                                                      | `"200px"`   | Ancho máximo del tooltip                  |
-| `showArrow` | `boolean`                                                                     | `false`     | Mostrar o no la flecha del tooltip        |
-| `className` | `string`                                                                      | `""`        | Clases adicionales para el tooltip        |
-| `radius`    | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de los bordes                       |
+| Prop               | Tipo                                                                          | Default     | Descripción                                      |
+| ------------------ | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------ |
+| `children`         | `React.ReactNode`                                                             | -           | Elemento al que se adjunta el tooltip            |
+| `content`          | `React.ReactNode`                                                             | -           | Contenido a mostrar en el tooltip                |
+| `position`         | `"top" \| "right" \| "bottom" \| "left"`                                      | `"top"`     | Posición del tooltip respecto al elemento        |
+| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                               |
+| `delay`            | `number`                                                                      | `300`       | Retraso antes de mostrar el tooltip (ms)         |
+| `maxWidth`         | `string`                                                                      | `"200px"`   | Ancho máximo del tooltip                         |
+| `showArrow`        | `boolean`                                                                     | `false`     | Mostrar o no la flecha del tooltip               |
+| `className`        | `string`                                                                      | `""`        | Clases adicionales para el contenedor principal  |
+| `tooltipClassName` | `string`                                                                      | `""`        | Clases adicionales para el tooltip               |
+| `contentClassName` | `string`                                                                      | `""`        | Clases adicionales para el contenido del tooltip |
+| `arrowClassName`   | `string`                                                                      | `""`        | Clases adicionales para la flecha del tooltip    |
+| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de los bordes                              |
