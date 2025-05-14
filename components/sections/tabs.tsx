@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export interface TabsProps {
   tabs: {
@@ -24,6 +25,14 @@ export interface TabsProps {
   tabClassName?: string;
   contentClassName?: string;
   hoverEffect?: boolean;
+  containerClassName?: string;
+  tabsContainerClassName?: string;
+  scrollContainerClassName?: string;
+  indicatorClassName?: string;
+  activeTabClassName?: string;
+  tabIconClassName?: string;
+  tabLabelClassName?: string;
+  contentContainerClassName?: string;
 }
 
 const Tabs: React.FC<TabsProps> = ({
@@ -37,6 +46,14 @@ const Tabs: React.FC<TabsProps> = ({
   tabClassName = "",
   contentClassName = "",
   hoverEffect = false,
+  containerClassName = "",
+  tabsContainerClassName = "",
+  scrollContainerClassName = "",
+  indicatorClassName = "",
+  activeTabClassName = "",
+  tabIconClassName = "",
+  tabLabelClassName = "",
+  contentContainerClassName = "",
 }) => {
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [hoverTab, setHoverTab] = useState<number | null>(null);
@@ -169,18 +186,25 @@ const Tabs: React.FC<TabsProps> = ({
   };
 
   return (
-    <div className={`${className} flex flex-col w-full`}>
+    <div className={cn("flex flex-col w-full", className, containerClassName)}>
       {/* Contenedor de los tabs con ancho adaptativo */}
       <div className="w-full flex">
         <div
-          className={`relative p-1 bg-zinc-100/60 dark:bg-black/80 backdrop-blur-sm border dark:border-zinc-800/40 ${
-            radiusClasses[radius]
-          } overflow-hidden ${fullWidth ? "w-full" : "inline-block"}`}
+          className={cn(
+            "relative p-1 bg-zinc-100/60 dark:bg-black/80 backdrop-blur-sm border dark:border-zinc-800/40",
+            radiusClasses[radius],
+            "overflow-hidden",
+            fullWidth ? "w-full" : "inline-block",
+            tabsContainerClassName
+          )}
         >
           {/* Contenedor con scroll horizontal */}
           <div
             ref={scrollContainerRef}
-            className="overflow-x-auto scrollbar-hide"
+            className={cn(
+              "overflow-x-auto scrollbar-hide",
+              scrollContainerClassName
+            )}
             style={{
               WebkitOverflowScrolling: "touch",
               msOverflowStyle: "none",
@@ -190,11 +214,22 @@ const Tabs: React.FC<TabsProps> = ({
             {/* Contenedor para las pestañas */}
             <div
               ref={tabsContainerRef}
-              className={`flex ${fullWidth ? "w-full" : "min-w-max"} relative`}
+              className={cn(
+                "flex",
+                fullWidth ? "w-full" : "min-w-max",
+                "relative"
+              )}
             >
               {/* Indicador de la pestaña activa/hover */}
               <motion.div
-                className={`absolute ${radiusClasses[radius]} z-0 ${indicatorBgClasses[variant]} dark:bg-zinc-900 shadow-sm dark:border dark:border-zinc-800/60`}
+                className={cn(
+                  "absolute",
+                  radiusClasses[radius],
+                  "z-0",
+                  indicatorBgClasses[variant],
+                  "dark:bg-zinc-900 shadow-sm dark:border dark:border-zinc-800/60",
+                  indicatorClassName
+                )}
                 initial={false}
                 animate={{
                   left: indicatorStyle.left,
@@ -216,36 +251,54 @@ const Tabs: React.FC<TabsProps> = ({
               />
 
               {/* Pestañas */}
-              {tabs.map((tab, index) => (
-                <button
-                  key={index}
-                  ref={(el) => {
-                    tabsRef.current[index] = el;
-                  }}
-                  onClick={() => handleTabClick(index)}
-                  onMouseEnter={() => hoverEffect && setHoverTab(index)}
-                  onMouseLeave={() => hoverEffect && setHoverTab(null)}
-                  className={`
-                    relative z-10 font-medium whitespace-nowrap flex-shrink-0
-                    ${sizeClasses[size]}
-                    ${fullWidth ? "flex-1" : ""}
-                    ${radiusClasses[radius]}
-                    ${
-                      activeTab === index
-                        ? activeVariantClasses[variant]
-                        : variantClasses[variant]
-                    }
-                    transition-colors duration-200
-                    flex items-center justify-center gap-2
-                    ${tabClassName}
-                  `}
-                >
-                  {tab.icon && (
-                    <span className="flex-shrink-0">{tab.icon}</span>
-                  )}
-                  <span className="truncate">{tab.label}</span>
-                </button>
-              ))}
+              {tabs.map((tab, index) => {
+                const isActive = activeTab === index;
+                // Crear clase base para las pestañas
+                const baseTabClasses = cn(
+                  "relative z-10 font-medium whitespace-nowrap flex-shrink-0",
+                  sizeClasses[size],
+                  fullWidth ? "flex-1" : "",
+                  radiusClasses[radius],
+                  "transition-colors duration-200",
+                  "flex items-center justify-center gap-2"
+                );
+
+                // Se aplican clases específicas para estado inactivo/activo
+                const variantStateClasses = isActive
+                  ? activeVariantClasses[variant]
+                  : variantClasses[variant];
+
+                // Se aplican clases personalizadas según el estado de la pestaña
+                const customStateClasses = isActive
+                  ? activeTabClassName
+                  : tabClassName;
+
+                return (
+                  <button
+                    key={index}
+                    ref={(el) => {
+                      tabsRef.current[index] = el;
+                    }}
+                    onClick={() => handleTabClick(index)}
+                    onMouseEnter={() => hoverEffect && setHoverTab(index)}
+                    onMouseLeave={() => hoverEffect && setHoverTab(null)}
+                    className={cn(
+                      baseTabClasses,
+                      variantStateClasses,
+                      customStateClasses
+                    )}
+                  >
+                    {tab.icon && (
+                      <span className={cn("flex-shrink-0", tabIconClassName)}>
+                        {tab.icon}
+                      </span>
+                    )}
+                    <span className={cn("truncate", tabLabelClassName)}>
+                      {tab.label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -253,7 +306,11 @@ const Tabs: React.FC<TabsProps> = ({
 
       {/* Contenido de las pestañas separado completamente */}
       <div
-        className={`mt-4 relative w-full overflow-hidden ${contentClassName}`}
+        className={cn(
+          "mt-4 relative w-full overflow-hidden",
+          contentClassName,
+          contentContainerClassName
+        )}
       >
         <AnimatePresence mode="wait">
           {tabs.map(
