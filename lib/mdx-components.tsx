@@ -33,68 +33,83 @@ import {
 
 // Importaciones dinámicas
 const Accordion = dynamic(() => import("@/components/sections/accordion"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const DemoTabs = dynamic(() => import("@/components/ui/demo-tabs"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Avatar = dynamic(() => import("@/components/sections/avatar"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Checkbox = dynamic(() => import("@/components/sections/checkbox"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Calendar = dynamic(() => import("@/components/sections/calendar"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Badge = dynamic(() => import("@/components/sections/badge"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Card = dynamic(() => import("@/components/sections/card"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Button = dynamic(() => import("@/components/sections/button"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Autocomplete = dynamic(
   () => import("@/components/sections/autocomplete"),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
 
 const Tabs = dynamic(() => import("@/components/sections/tabs"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Tooltip = dynamic(() => import("@/components/sections/tooltip"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Dropdown = dynamic(() => import("@/components/sections/dropdown"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Progress = dynamic(() => import("@/components/sections/progress"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const CircularProgress = dynamic(
   () => import("@/components/sections/circular-progress"),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
 
 const Input = dynamic(() => import("@/components/sections/input"), {
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
@@ -104,6 +119,7 @@ const ToastWrapper = dynamic(
       default: mod.ToastWrapper,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -114,6 +130,7 @@ const ToastDemo = dynamic(
       default: mod.ToastDemo,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -124,6 +141,7 @@ const ToastVariantsDemo = dynamic(
       default: mod.ToastVariantsDemo,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -134,6 +152,7 @@ const ToastPositionsDemo = dynamic(
       default: mod.ToastPositionsDemo,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -144,6 +163,7 @@ const ToastIconsDemo = dynamic(
       default: mod.ToastIconsDemo,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -154,6 +174,7 @@ const ToastDurationDemo = dynamic(
       default: mod.ToastDurationDemo,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -164,6 +185,7 @@ const ToastMultipleDemo = dynamic(
       default: mod.ToastMultipleDemo,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -175,36 +197,37 @@ const ToastCustomDemo = dynamic(
       default: mod.ToastCustomDemo,
     })),
   {
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
 
 const Breadcrumbs = dynamic(() => import("@/components/sections/breadcrumbs"), {
-  
+  ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 // Spinner
 const Spinner = dynamic(() => import("@/components/sections/spinner"), {
-  
+  ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
 // Pagination
 const Pagination = dynamic(() => import("@/components/sections/pagination"), {
-  
+  ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
 // DatePicker
 const DatePicker = dynamic(() => import("@/components/sections/date-picker"), {
-  
+  ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
 // Switch
 const Switch = dynamic(() => import("@/components/sections/switch"), {
-  
+  ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
@@ -212,7 +235,7 @@ const Switch = dynamic(() => import("@/components/sections/switch"), {
 const NumberInput = dynamic(
   () => import("@/components/sections/number-input"),
   {
-    
+    ssr: false,
     loading: () => <p>Cargando...</p>,
   }
 );
@@ -224,7 +247,7 @@ const SwitchControlledDemo = dynamic(
       default: mod.SwitchControlledDemo,
     })),
   {
-    
+    ssr: false,
     loading: () => <p>Cargando...</p>,
   }
 );
@@ -236,7 +259,7 @@ const NumberInputControlledDemo = dynamic(
       default: mod.NumberInputControlledDemo,
     })),
   {
-    
+    ssr: false,
     loading: () => <p>Cargando...</p>,
   }
 );
@@ -247,7 +270,7 @@ const NumberInputPercentageDemo = dynamic(
       default: mod.NumberInputPercentageDemo,
     })),
   {
-    
+    ssr: false,
     loading: () => <p>Cargando...</p>,
   }
 );
@@ -258,7 +281,7 @@ const NumberInputCurrencyDemo = dynamic(
       default: mod.NumberInputCurrencyDemo,
     })),
   {
-    
+    ssr: false,
     loading: () => <p>Cargando...</p>,
   }
 );
@@ -269,7 +292,7 @@ const NumberInputSignedDemo = dynamic(
       default: mod.NumberInputSignedDemo,
     })),
   {
-    
+    ssr: false,
     loading: () => <p>Cargando...</p>,
   }
 );
@@ -281,7 +304,7 @@ const TabsCustomClassDemo = dynamic(
       (mod) => mod.TabsCustomClassDemo
     ),
   {
-    
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
@@ -290,7 +313,7 @@ const ModernTabsDemo = dynamic(
   () =>
     import("@/components/docs/tabs-wrapper").then((mod) => mod.ModernTabsDemo),
   {
-    
+    ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
