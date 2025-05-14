@@ -11,8 +11,18 @@ import {
 } from "lucide-react";
 
 // Proveedor de toast mejorado que mantiene una lista de toasts
-export function ToastWrapper({ children }: { children: ReactNode }) {
-  return <ToastProvider>{children}</ToastProvider>;
+export function ToastWrapper({
+  children,
+  containerClassName,
+}: {
+  children: ReactNode;
+  containerClassName?: string;
+}) {
+  return (
+    <ToastProvider containerClassName={containerClassName}>
+      {children}
+    </ToastProvider>
+  );
 }
 
 export function ToastDemo() {
@@ -31,6 +41,84 @@ export function ToastDemo() {
     >
       Mostrar notificación
     </Button>
+  );
+}
+
+export function ToastCustomDemo() {
+  const { open } = useToast();
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        onClick={() =>
+          open({
+            title: "Actualización completada",
+            description: "El sistema se ha actualizado correctamente",
+            variant: "default",
+            icon: <BellIcon className="h-5 w-5" />,
+            containerClassName: "max-w-md",
+            toastClassName:
+              "bg-white border border-zinc-300 text-zinc-900 rounded-xl shadow-lg px-4 py-3 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100",
+            titleClassName: "font-semibold text-base text-zinc-900 dark:text-white",
+            descriptionClassName: "text-zinc-600 dark:text-zinc-400",
+            iconContainerClassName:
+              "bg-blue-100 p-2 rounded-full text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+            closeButtonClassName:
+              "hover:bg-zinc-100 p-1 rounded-full opacity-100 dark:hover:bg-zinc-800",
+          })
+        }
+        variant="default"
+        size="sm"
+      >
+        Modo Claro/Oscuro
+      </Button>
+
+      <Button
+        onClick={() =>
+          open({
+            title: "¡Éxito!",
+            description: "Tu archivo ha sido guardado en la nube",
+            variant: "default",
+            icon: <ShoppingCartIcon className="h-5 w-5" />,
+            containerClassName: "max-w-md",
+            toastClassName:
+              "bg-gradient-to-r from-green-500 to-emerald-600 text-white border-none shadow-lg rounded-xl px-4 py-3",
+            titleClassName: "font-bold text-white",
+            descriptionClassName: "text-white/90",
+            iconContainerClassName: "bg-white/20 p-2 rounded-full text-white",
+            closeButtonClassName:
+              "hover:bg-white/20 p-1 rounded-full text-white opacity-100",
+          })
+        }
+        variant="success"
+        size="sm"
+      >
+        Estilo Degradado
+      </Button>
+
+      <Button
+        onClick={() =>
+          open({
+            title: "Nueva característica",
+            description: "Descubre las nuevas funcionalidades disponibles",
+            variant: "default",
+            icon: <StarIcon className="h-5 w-5" />,
+            containerClassName: "max-w-md",
+            toastClassName:
+              "bg-black text-white border border-zinc-800 shadow-lg rounded-2xl px-4 py-3",
+            titleClassName: "font-semibold text-white",
+            descriptionClassName: "text-zinc-400",
+            iconContainerClassName: "bg-yellow-500 p-2 rounded-full text-black",
+            closeButtonClassName:
+              "hover:bg-zinc-800 p-1 rounded-full text-white",
+          })
+        }
+        variant="warning"
+        size="sm"
+      >
+        Estilo Oscuro
+      </Button>
+    </div>
   );
 }
 
