@@ -63,40 +63,62 @@ const Tabs: React.FC<TabsProps> = ({
     left: 0,
     width: 0,
   });
+  // State para almacenar las dimensiones de cada pestaña
+  const [tabDimensions, setTabDimensions] = useState<{ width: number; left: number }[]>([]);
   // Referencia para el contenedor de pestañas
   const tabsContainerRef = useRef<HTMLDivElement | null>(null);
+
+  // Función para actualizar las dimensiones de todas las pestañas
+  const updateTabDimensions = useCallback(() => {
+    if (tabsRef.current.length > 0) {
+      const dimensions = tabsRef.current.map(tabEl => {
+        if (tabEl) {
+          return {
+            width: tabEl.offsetWidth,
+            left: tabEl.offsetLeft
+          };
+        }
+        return { width: 0, left: 0 };
+      });
+      setTabDimensions(dimensions);
+    }
+  }, []);
 
   // Función para actualizar la posición del indicador
   const updateIndicatorPosition = useCallback(() => {
     const tabIndex = hoverEffect && hoverTab !== null ? hoverTab : activeTab;
-    if (tabsRef.current[tabIndex]) {
-      const tabElement = tabsRef.current[tabIndex];
-
+    if (tabDimensions.length > tabIndex) {
       setIndicatorStyle({
-        left: tabElement.offsetLeft,
-        width: tabElement.offsetWidth,
+        left: tabDimensions[tabIndex].left,
+        width: tabDimensions[tabIndex].width,
       });
     }
-  }, [activeTab, hoverTab, hoverEffect]);
+  }, [activeTab, hoverTab, hoverEffect, tabDimensions]);
 
-  // Actualizar la posición del indicador cuando cambia la pestaña activa o hover
+  // Actualizar dimensiones de las pestañas cuando el componente se monta
   useEffect(() => {
-    updateIndicatorPosition();
-  }, [updateIndicatorPosition]);
+    // Pequeño retraso para asegurar que el DOM está completamente renderizado
+    const timer = setTimeout(() => {
+      updateTabDimensions();
+    }, 50);
+    return () => clearTimeout(timer);
+  }, []);
 
-  // Añadir listener para el resize de la ventana cuando fullWidth está activo
+  // Actualizar la posición del indicador cuando cambian las dimensiones o la pestaña activa
   useEffect(() => {
-    if (fullWidth) {
-      const handleResize = () => {
-        updateIndicatorPosition();
-      };
-
-      window.addEventListener("resize", handleResize);
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
+    if (tabDimensions.length > 0) {
+      updateIndicatorPosition();
     }
-  }, [fullWidth, updateIndicatorPosition]);
+  }, [updateIndicatorPosition, tabDimensions]);
+
+  // Actualizar dimensiones cuando se cambia de pestaña o hay resize
+  useEffect(() => {
+    updateTabDimensions();
+    window.addEventListener("resize", updateTabDimensions);
+    return () => {
+      window.removeEventListener("resize", updateTabDimensions);
+    };
+  }, [updateTabDimensions, tabs.length]);
 
   // Manejar el desplazamiento cuando cambia la pestaña activa
   useEffect(() => {
@@ -253,9 +275,12 @@ const Tabs: React.FC<TabsProps> = ({
               {/* Pestañas */}
               {tabs.map((tab, index) => {
                 const isActive = activeTab === index;
+                // Usar un ancho estable basado en el estado tabDimensions
+                const stableWidth = tabDimensions[index]?.width || 'auto';
+                
                 // Crear clase base para las pestañas
                 const baseTabClasses = cn(
-                  "relative z-10 font-medium whitespace-nowrap flex-shrink-0",
+                  "relative z-10 font-medium whitespace-nowrap",
                   sizeClasses[size],
                   fullWidth ? "flex-1" : "",
                   radiusClasses[radius],
@@ -270,7 +295,7 @@ const Tabs: React.FC<TabsProps> = ({
 
                 // Se aplican clases personalizadas según el estado de la pestaña
                 const customStateClasses = isActive
-                  ? activeTabClassName
+                  ? cn(tabClassName, activeTabClassName)
                   : tabClassName;
 
                 return (
@@ -287,6 +312,11 @@ const Tabs: React.FC<TabsProps> = ({
                       variantStateClasses,
                       customStateClasses
                     )}
+                    style={{
+                      // El ancho se mantiene estable incluso al cambiar de estado activo
+                      // Solo aplicamos un ancho mínimo si tenemos dimensiones calculadas
+                      minWidth: typeof stableWidth === 'number' ? `${stableWidth}px` : undefined,
+                    }}
                   >
                     {tab.icon && (
                       <span className={cn("flex-shrink-0", tabIconClassName)}>
