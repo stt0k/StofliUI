@@ -466,17 +466,223 @@ export default function TabsFullWidthDemo() {
 ```
 </DemoTabs>
 
+### Con clases personalizadas
+
+Puedes personalizar cualquier parte del componente usando las propiedades de clases personalizadas con Tailwind CSS.
+
+<DemoTabs
+  preview={
+    <Tabs
+      tabs={[
+        {
+          label: "Dashboard",
+          icon: <HomeIcon className="h-4 w-4" />,
+          content: <p className="text-zinc-700 dark:text-zinc-300">Panel principal de control</p>
+        },
+        {
+          label: "Analytics",
+          icon: <BarChartIcon className="h-4 w-4" />,
+          content: <p className="text-zinc-700 dark:text-zinc-300">Estadísticas y análisis</p>
+        },
+        {
+          label: "Settings",
+          icon: <SettingsIcon className="h-4 w-4" />,
+          content: <p className="text-zinc-700 dark:text-zinc-300">Configuración de la aplicación</p>
+        }
+      ]}
+      tabsContainerClassName="bg-white dark:bg-zinc-900 shadow-lg shadow-zinc-200 dark:shadow-zinc-800 border-none p-1.5"
+      indicatorClassName="bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-400 dark:to-indigo-400 border-none shadow-md"
+      tabClassName="px-5 py-2.5 font-medium"
+      activeTabClassName="text-white"
+      tabIconClassName="text-current"
+      contentContainerClassName="bg-white/50 dark:bg-zinc-900/50 p-5 rounded-lg mt-5 border border-zinc-200 dark:border-zinc-800"
+    />
+  }
+>
+```tsx
+import { Tabs } from "@stofli/ui";
+import { HomeIcon, BarChartIcon, SettingsIcon } from "lucide-react";
+
+export default function TabsCustomClassDemo() {
+  return (
+    <Tabs
+      tabs={[
+        {
+          label: "Dashboard",
+          icon: <HomeIcon className="h-4 w-4" />,
+          content: <p className="text-zinc-700 dark:text-zinc-300">Panel principal de control</p>
+        },
+        {
+          label: "Analytics",
+          icon: <BarChartIcon className="h-4 w-4" />,
+          content: <p className="text-zinc-700 dark:text-zinc-300">Estadísticas y análisis</p>
+        },
+        {
+          label: "Settings",
+          icon: <SettingsIcon className="h-4 w-4" />,
+          content: <p className="text-zinc-700 dark:text-zinc-300">Configuración de la aplicación</p>
+        }
+      ]}
+      tabsContainerClassName="bg-white dark:bg-zinc-900 shadow-lg shadow-zinc-200 dark:shadow-zinc-800 border-none p-1.5"
+      indicatorClassName="bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-400 dark:to-indigo-400 border-none shadow-md"
+      tabClassName="px-5 py-2.5 font-medium"
+      activeTabClassName="text-white"
+      tabIconClassName="text-current"
+      contentContainerClassName="bg-white/50 dark:bg-zinc-900/50 p-5 rounded-lg mt-5 border border-zinc-200 dark:border-zinc-800"
+    />
+  );
+}
+```
+</DemoTabs>
+
+### Diseño moderno de pestañas
+
+Un ejemplo de diseño de pestañas con estilo moderno y minimalista.
+
+<DemoTabs
+  preview={
+    <Tabs
+      tabs={[
+        {
+          label: "Visión general",
+          icon: <LineChartIcon className="h-4 w-4" />,
+          content: <div className="mt-2">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
+                <h3 className="text-sm font-semibold mb-1">Total de usuarios</h3>
+                <p className="text-2xl font-bold">12,493</p>
+              </div>
+              <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
+                <h3 className="text-sm font-semibold mb-1">Nuevos hoy</h3>
+                <p className="text-2xl font-bold">249</p>
+              </div>
+              <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
+                <h3 className="text-sm font-semibold mb-1">Activos</h3>
+                <p className="text-2xl font-bold">8,751</p>
+              </div>
+            </div>
+          </div>
+        },
+        {
+          label: "Insights",
+          icon: <PieChartIcon className="h-4 w-4" />,
+          content: <div className="mt-2 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-sm font-semibold mb-3">Análisis de comportamiento</h3>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">Los datos de análisis estarán disponibles pronto.</p>
+          </div>
+        },
+        {
+          label: "Reportes",
+          icon: <FileTextIcon className="h-4 w-4" />,
+          content: <div className="mt-2 p-4  rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-sm font-semibold mb-3">Documentos recientes</h3>
+            <ul className="space-y-2">
+              <li className="text-sm flex items-center text-zinc-600 dark:text-zinc-400">
+                <FileIcon className="h-3 w-3 mr-2" /> Reporte mensual.pdf
+              </li>
+              <li className="text-sm flex items-center text-zinc-600 dark:text-zinc-400">
+                <FileIcon className="h-3 w-3 mr-2" /> Análisis Q3.xlsx
+              </li>
+            </ul>
+          </div>
+        }
+      ]}
+      containerClassName="max-w-3xl mx-auto"
+      tabsContainerClassName="bg-gray-100/50 dark:bg-zinc-900/50 backdrop-blur-sm border-zinc-200 dark:border-zinc-800/50 p-1"
+      indicatorClassName="bg-white dark:bg-zinc-800 border-none shadow-md"
+      tabClassName="text-zinc-500 dark:text-zinc-400 font-medium"
+      activeTabClassName="text-zinc-900 dark:text-white"
+      tabIconClassName="opacity-70 group-hover:opacity-100 transition-opacity"
+      tabLabelClassName="group-hover:text-zinc-900 dark:group-hover:text-white transition-colors"
+      contentContainerClassName="mt-2"
+    />
+  }
+>
+```tsx
+import { Tabs } from "@stofli/ui";
+import { LineChartIcon, PieChartIcon, FileTextIcon, FileIcon } from "lucide-react";
+
+export default function ModernTabsDemo() {
+  return (
+    <Tabs
+      tabs={[
+        {
+          label: "Visión general",
+          icon: <LineChartIcon className="h-4 w-4" />,
+          content: <div className="mt-2">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
+                <h3 className="text-sm font-semibold mb-1">Total de usuarios</h3>
+                <p className="text-2xl font-bold">12,493</p>
+              </div>
+              <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
+                <h3 className="text-sm font-semibold mb-1">Nuevos hoy</h3>
+                <p className="text-2xl font-bold">249</p>
+              </div>
+              <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
+                <h3 className="text-sm font-semibold mb-1">Activos</h3>
+                <p className="text-2xl font-bold">8,751</p>
+              </div>
+            </div>
+          </div>
+        },
+        {
+          label: "Insights",
+          icon: <PieChartIcon className="h-4 w-4" />,
+          content: <div className="mt-2 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-sm font-semibold mb-3">Análisis de comportamiento</h3>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">Los datos de análisis estarán disponibles pronto.</p>
+          </div>
+        },
+        {
+          label: "Reportes",
+          icon: <FileTextIcon className="h-4 w-4" />,
+          content: <div className="mt-2 p-4  rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-sm font-semibold mb-3">Documentos recientes</h3>
+            <ul className="space-y-2">
+              <li className="text-sm flex items-center text-zinc-600 dark:text-zinc-400">
+                <FileIcon className="h-3 w-3 mr-2" /> Reporte mensual.pdf
+              </li>
+              <li className="text-sm flex items-center text-zinc-600 dark:text-zinc-400">
+                <FileIcon className="h-3 w-3 mr-2" /> Análisis Q3.xlsx
+              </li>
+            </ul>
+          </div>
+        }
+      ]}
+      containerClassName="max-w-3xl mx-auto"
+      tabsContainerClassName="bg-gray-100/50 dark:bg-zinc-900/50 backdrop-blur-sm border-zinc-200 dark:border-zinc-800/50 p-1"
+      indicatorClassName="bg-white dark:bg-zinc-800 border-none shadow-md"
+      tabClassName="text-zinc-500 dark:text-zinc-400 font-medium"
+      activeTabClassName="text-zinc-900 dark:text-white"
+      tabIconClassName="opacity-70 group-hover:opacity-100 transition-opacity"
+      tabLabelClassName="group-hover:text-zinc-900 dark:group-hover:text-white transition-colors"
+      contentContainerClassName="mt-2"
+    />
+  );
+}
+```
+</DemoTabs>
+
 ## Props
 
-| Prop               | Tipo                                                                          | Default     | Descripción                                     |
-| ------------------ | ----------------------------------------------------------------------------- | ----------- | ----------------------------------------------- |
-| `tabs`             | `Array<{ label: string, content: ReactNode, icon?: ReactNode }>`              | -           | Lista de pestañas con su contenido              |
-| `defaultTab`       | `number`                                                                      | `0`         | Índice de la pestaña activa por defecto         |
-| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                              |
-| `size`             | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño de las pestañas                          |
-| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                           |
-| `fullWidth`        | `boolean`                                                                     | `false`     | Si las pestañas ocupan todo el ancho disponible |
-| `hoverEffect`      | `boolean`                                                                     | `false`     | Activa el efecto de hover en las pestañas       |
-| `className`        | `string`                                                                      | -           | Clases adicionales para el contenedor           |
-| `tabClassName`     | `string`                                                                      | -           | Clases adicionales para cada pestaña            |
-| `contentClassName` | `string`                                                                      | -           | Clases adicionales para el contenido            |
+| Prop                        | Tipo                                                                          | Default     | Descripción                                         |
+| --------------------------- | ----------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| `tabs`                      | `Array<{ label: string, content: ReactNode, icon?: ReactNode }>`              | -           | Lista de pestañas con su contenido                  |
+| `defaultTab`                | `number`                                                                      | `0`         | Índice de la pestaña activa por defecto             |
+| `variant`                   | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                                  |
+| `size`                      | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño de las pestañas                              |
+| `radius`                    | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                               |
+| `fullWidth`                 | `boolean`                                                                     | `false`     | Si las pestañas ocupan todo el ancho disponible     |
+| `hoverEffect`               | `boolean`                                                                     | `false`     | Activa el efecto de hover en las pestañas           |
+| `className`                 | `string`                                                                      | -           | Clases adicionales para el contenedor principal     |
+| `tabClassName`              | `string`                                                                      | -           | Clases adicionales para cada pestaña                |
+| `contentClassName`          | `string`                                                                      | -           | Clases adicionales para el contenido                |
+| `containerClassName`        | `string`                                                                      | -           | Clases para personalizar el contenedor principal    |
+| `tabsContainerClassName`    | `string`                                                                      | -           | Clases para el contenedor de las pestañas           |
+| `scrollContainerClassName`  | `string`                                                                      | -           | Clases para el contenedor de scroll horizontal      |
+| `indicatorClassName`        | `string`                                                                      | -           | Clases para el indicador de pestaña activa          |
+| `activeTabClassName`        | `string`                                                                      | -           | Clases adicionales para la pestaña activa           |
+| `tabIconClassName`          | `string`                                                                      | -           | Clases para los iconos de las pestañas              |
+| `tabLabelClassName`         | `string`                                                                      | -           | Clases para las etiquetas de texto de las pestañas  |
+| `contentContainerClassName` | `string`                                                                      | -           | Clases para el contenedor del contenido de pestañas |
