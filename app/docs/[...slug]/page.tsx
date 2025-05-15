@@ -3,6 +3,7 @@ import { allDocs } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer2/hooks';
 import ContentComponent from '@/components/ContentComponent';
 import MainLayout from '@/components/MainLayout';
+import { notFound } from 'next/navigation';
 
 interface DocPageProps {
   params: {
@@ -49,25 +50,8 @@ export default function DocPage({ params }: DocPageProps) {
   const components = useMDXComponents();
 
   if (!doc?.body.code) {
-    return (
-      <MainLayout>
-        <div className="py-8 mx-auto max-w-3xl">
-          <h1 className="text-2xl font-bold mb-4">Documento no encontrado</h1>
-          <p className="mb-4">No pudimos encontrar el documento: <code>{slugPath}</code></p>
-          <h2 className="text-xl font-bold mt-6 mb-2">Documentos disponibles ({allDocs.length}):</h2>
-          <ul className="list-disc pl-6">
-            {allDocs.map(d => (
-              <li key={d._raw.flattenedPath} className="mb-2">
-                <div><strong>Path:</strong> <code>{d._raw.flattenedPath}</code></div>
-                <div><strong>URL:</strong> <code>{d.url}</code></div>
-                <div><strong>Directory:</strong> <code>{d.directory}</code></div>
-                <div><strong>Segment:</strong> <code>{d.segment}</code></div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </MainLayout>
-    );
+    // Redireccionar a la página 404 personalizada
+    notFound();
   }
 
   const Content = getMDXComponent(doc.body.code);
