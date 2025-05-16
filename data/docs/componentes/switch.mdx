@@ -4,7 +4,9 @@ description: >-
   Un componente de interruptor elegante y animado para alternar entre dos estados.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion
 npx @stofli/ui add switch
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Switch } from "@stofli/ui";
@@ -29,9 +34,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un switch básico con animaciones fluidas para alternar entre estados.
 
@@ -50,8 +59,10 @@ export default function SwitchDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con etiqueta
+    <div className="mt-6">
+      <HeadingAnchor id="con-etiqueta" level={3} >Con etiqueta</HeadingAnchor>
 
 El switch puede incluir una etiqueta descriptiva a la izquierda o derecha.
 
@@ -78,8 +89,10 @@ export default function SwitchLabelDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El switch está disponible en diferentes variantes de color.
 
@@ -114,8 +127,10 @@ export default function SwitchVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 El switch está disponible en tres tamaños: sm, md y lg.
 
@@ -144,8 +159,10 @@ export default function SwitchSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con iconos
+    <div className="mt-6">
+      <HeadingAnchor id="con-iconos" level={3} >Con iconos</HeadingAnchor>
 
 El switch puede mostrar iconos dentro del círculo para indicar el estado actual.
 
@@ -183,8 +200,10 @@ export default function SwitchIconsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Requerido
+    <div className="mt-6">
+      <HeadingAnchor id="requerido" level={3} >Requerido</HeadingAnchor>
 
 El switch puede marcarse como requerido, mostrando un asterisco junto a la etiqueta.
 
@@ -211,8 +230,10 @@ export default function SwitchRequiredDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Deshabilitado
+    <div className="mt-6">
+      <HeadingAnchor id="deshabilitado" level={3} >Deshabilitado</HeadingAnchor>
 
 Un switch deshabilitado que no permite interacción.
 
@@ -239,8 +260,10 @@ export default function SwitchDisabledDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Controlado
+    <div className="mt-6">
+      <HeadingAnchor id="controlado" level={3} >Controlado</HeadingAnchor>
 
 Un ejemplo de cómo usar el switch de forma controlada.
 
@@ -276,8 +299,10 @@ export default function SwitchControlledDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando las propiedades de clases personalizadas con Tailwind CSS.
 
@@ -308,8 +333,11 @@ export default function SwitchCustomClassDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                       | Tipo                                                                          | Default     | Descripción                                                      |
 | -------------------------- | ----------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------- |
@@ -334,3 +362,27 @@ export default function SwitchCustomClassDemo() {
 | `iconClassName`            | `string`                                                                      | -           | Clases adicionales para el icono del switch                      |
 | `icon`                     | `boolean`                                                                     | `false`     | Muestra un icono dentro del círculo                              |
 | `iconType`                 | `"check" \| "cross" \| "none"`                                                | `"check"`   | Tipo de icono a mostrar                                          |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Con etiqueta", href: "#con-etiqueta" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Con iconos", href: "#con-iconos" },
+      { title: "Requerido", href: "#requerido" },
+      { title: "Deshabilitado", href: "#deshabilitado" },
+      { title: "Controlado", href: "#controlado" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
