@@ -4,7 +4,9 @@ description: >-
   Un componente de acordeón que permite mostrar y ocultar contenido de manera interactiva.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion lucide-react
 npx @stofli/ui add accordion
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 El componente Accordion acepta un array de items con título y contenido, y opcionalmente puede configurarse para permitir múltiples secciones abiertas.
 
@@ -41,9 +46,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un acordeón simple que muestra una lista de preguntas frecuentes.
 
@@ -84,8 +93,10 @@ export default function AccordionDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con múltiples secciones abiertas
+    <div className="mt-6">
+      <HeadingAnchor id="multiples-secciones" level={3} >Con múltiples secciones abiertas</HeadingAnchor>
 
 Usando `allowMultiple={true}`, permite expandir varias secciones al mismo tiempo.
 
@@ -136,8 +147,10 @@ export default function AccordionMultipleDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con panel abierto por defecto
+    <div className="mt-6">
+      <HeadingAnchor id="panel-abierto" level={3} >Con panel abierto por defecto</HeadingAnchor>
 
 Usando `defaultOpen={0}`, muestra el primer panel expandido al cargar el componente.
 
@@ -180,8 +193,10 @@ export default function AccordionDefaultOpenDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del acordeón usando las propiedades de className con clases de Tailwind CSS.
 
@@ -263,10 +278,12 @@ export default function AccordionCustomClassesDemo() {
   );
 }
 ```
-
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop               | Tipo                                      | Default | Descripción                                           |
 | ------------------ | ----------------------------------------- | ------- | ----------------------------------------------------- |
@@ -279,3 +296,25 @@ export default function AccordionCustomClassesDemo() {
 | `titleClassName`   | `string`                                  | -       | Clases para los títulos del acordeón                  |
 | `contentClassName` | `string`                                  | -       | Clases para el contenido del acordeón                 |
 | `iconClassName`    | `string`                                  | -       | Clases para los iconos del acordeón                   |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      {
+        title: "Con múltiples secciones abiertas",
+        href: "#multiples-secciones",
+      },
+      { title: "Con panel abierto por defecto", href: "#panel-abierto" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
