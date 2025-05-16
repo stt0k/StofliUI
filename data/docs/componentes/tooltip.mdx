@@ -4,7 +4,9 @@ description: >-
   Un componente para mostrar información adicional al pasar el ratón sobre un elemento.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion
 npx @stofli/ui add tooltip
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Tooltip, Button } from "@stofli/ui";
@@ -28,9 +33,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un tooltip básico con posición arriba (por defecto).
 
@@ -55,8 +64,10 @@ export default function TooltipDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con flecha indicadora
+    <div className="mt-6">
+      <HeadingAnchor id="con-flecha" level={3} >Con flecha indicadora</HeadingAnchor>
 
 Puedes añadir una flecha que apunte al elemento usando la prop `showArrow`.
 
@@ -133,8 +144,10 @@ export default function TooltipArrowDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Posiciones
+    <div className="mt-6">
+      <HeadingAnchor id="posiciones" level={3} >Posiciones</HeadingAnchor>
 
 El tooltip puede posicionarse en cuatro direcciones diferentes usando la prop `position`.
 
@@ -195,8 +208,10 @@ export default function TooltipPositionsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El tooltip soporta diferentes variantes de estilo usando la prop `variant`.
 
@@ -253,8 +268,10 @@ export default function TooltipVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Radios
+    <div className="mt-6">
+      <HeadingAnchor id="radios" level={3} >Radios</HeadingAnchor>
 
 Personaliza los bordes redondeados usando la prop `radius`.
 
@@ -299,8 +316,10 @@ export default function TooltipRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Retraso personalizado
+    <div className="mt-6">
+      <HeadingAnchor id="retraso-personalizado" level={3} >Retraso personalizado</HeadingAnchor>
 
 Puedes personalizar el retraso de aparición del tooltip.
 
@@ -333,8 +352,10 @@ export default function TooltipDelayDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Contenido enriquecido
+    <div className="mt-6">
+      <HeadingAnchor id="contenido-enriquecido" level={3} >Contenido enriquecido</HeadingAnchor>
 
 Puedes incluir contenido HTML más complejo dentro del tooltip.
 
@@ -385,8 +406,10 @@ export default function TooltipRichContentDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando las propiedades de clases personalizadas con Tailwind CSS.
 
@@ -546,8 +569,11 @@ export default function TooltipModernDemo() {
 ```
 
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop               | Tipo                                                                          | Default     | Descripción                                      |
 | ------------------ | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------ |
@@ -563,3 +589,26 @@ export default function TooltipModernDemo() {
 | `contentClassName` | `string`                                                                      | `""`        | Clases adicionales para el contenido del tooltip |
 | `arrowClassName`   | `string`                                                                      | `""`        | Clases adicionales para la flecha del tooltip    |
 | `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de los bordes                              |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Con flecha indicadora", href: "#con-flecha" },
+      { title: "Posiciones", href: "#posiciones" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Radios", href: "#radios" },
+      { title: "Retraso personalizado", href: "#retraso-personalizado" },
+      { title: "Contenido enriquecido", href: "#contenido-enriquecido" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
