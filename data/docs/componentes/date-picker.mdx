@@ -4,7 +4,9 @@ description: >-
   Un componente de selección de fechas interactivo con calendario emergente y múltiples opciones de personalización.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install date-fns framer-motion @react-aria/i18n lucide-react tailwind-merge
 npx @stofli/ui add date-picker
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { DatePicker } from "@stofli/ui";
@@ -26,9 +31,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un selector de fechas básico que muestra un campo de entrada con un calendario emergente.
 
@@ -49,8 +58,10 @@ export default function DatePickerDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con Etiqueta y Requerido
+    <div className="mt-6">
+      <HeadingAnchor id="con-etiqueta-y-requerido" level={3} >Con Etiqueta y Requerido</HeadingAnchor>
 
 Usando las props `label` y `required` para mostrar una etiqueta descriptiva e indicar que el campo es obligatorio.
 
@@ -81,8 +92,10 @@ export default function DatePickerLabelDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con Mensaje de Error
+    <div className="mt-6">
+      <HeadingAnchor id="con-mensaje-de-error" level={3} >Con Mensaje de Error</HeadingAnchor>
 
 Usando la prop `errorMessage` para mostrar un mensaje de error debajo del campo.
 
@@ -113,8 +126,10 @@ export default function DatePickerErrorDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 Seis estilos diferentes usando la prop `variant`: default, primary, secondary, success, warning y danger.
 
@@ -149,8 +164,10 @@ export default function DatePickerVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Tres tamaños disponibles usando la prop `size`: sm, md, y lg.
 
@@ -179,8 +196,10 @@ export default function DatePickerSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Radios
+    <div className="mt-6">
+      <HeadingAnchor id="radios" level={3} >Radios</HeadingAnchor>
 
 Cuatro opciones de redondeo usando la prop `radius`: none, sm, md y full.
 
@@ -211,8 +230,10 @@ export default function DatePickerRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Deshabilitado
+    <div className="mt-6">
+      <HeadingAnchor id="deshabilitado" level={3} >Deshabilitado</HeadingAnchor>
 
 Usando `disabled={true}` para mostrar un campo deshabilitado que no permite interacción.
 
@@ -243,8 +264,10 @@ export default function DatePickerDisabledDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Solo lectura
+    <div className="mt-6">
+      <HeadingAnchor id="solo-lectura" level={3} >Solo lectura</HeadingAnchor>
 
 Usando `readOnly={true}` para mostrar un campo de solo lectura que no permite modificación.
 
@@ -275,8 +298,10 @@ export default function DatePickerReadOnlyDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con fecha mínima
+    <div className="mt-6">
+      <HeadingAnchor id="con-fecha-minima" level={3} >Con fecha mínima</HeadingAnchor>
 
 Usando la prop `minValue` para limitar la selección de fechas a partir de una fecha específica.
 
@@ -305,8 +330,10 @@ export default function DatePickerMinDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con fecha máxima
+    <div className="mt-6">
+      <HeadingAnchor id="con-fecha-maxima" level={3} >Con fecha máxima</HeadingAnchor>
 
 Usando la prop `maxValue` para limitar la selección de fechas hasta una fecha específica.
 
@@ -335,8 +362,10 @@ export default function DatePickerMaxDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Formato personalizado
+    <div className="mt-6">
+      <HeadingAnchor id="formato-personalizado" level={3} >Formato personalizado</HeadingAnchor>
 
 Usando la prop `format` para personalizar el formato de visualización de la fecha.
 
@@ -387,8 +416,10 @@ export default function DatePickerFormatDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Calendarios Internacionales
+    <div className="mt-6">
+      <HeadingAnchor id="calendarios-internacionales" level={3} >Calendarios Internacionales</HeadingAnchor>
 
 Utilizando las props `calendar` y `locale` para mostrar diferentes sistemas de calendario y localizaciones.
 
@@ -441,8 +472,10 @@ export default function DatePickerCalendarSystemsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Personaliza cualquier parte del DatePicker usando las propiedades de className con clases de Tailwind CSS.
 
@@ -491,8 +524,11 @@ export default function DatePickerCustomClassesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                      | Tipo                                                                                                                                                                                                 | Default             | Descripción                                |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------ |
@@ -523,3 +559,34 @@ export default function DatePickerCustomClassesDemo() {
 | `required`                | `boolean`                                                                                                                                                                                            | `false`             | Indica si el campo es obligatorio          |
 | `calendar`                | `"buddhist" \| "ethiopic" \| "ethioaa" \| "coptic" \| "hebrew" \| "indian" \| "islamic-civil" \| "islamic-tbla" \| "islamic-umalqura" \| "japanese" \| "persian" \| "roc" \| "gregory" \| "chinese"` | `"gregory"`         | Sistema de calendario                      |
 | `locale`                  | `string`                                                                                                                                                                                             | `"es"`              | Código de idioma (ej: "es", "en", "zh-CN") |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Con Etiqueta y Requerido", href: "#con-etiqueta-y-requerido" },
+      { title: "Con Mensaje de Error", href: "#con-mensaje-de-error" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Radios", href: "#radios" },
+      { title: "Deshabilitado", href: "#deshabilitado" },
+      { title: "Solo lectura", href: "#solo-lectura" },
+      { title: "Con fecha mínima", href: "#con-fecha-minima" },
+      { title: "Con fecha máxima", href: "#con-fecha-maxima" },
+      { title: "Formato personalizado", href: "#formato-personalizado" },
+      {
+        title: "Calendarios Internacionales",
+        href: "#calendarios-internacionales",
+      },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
