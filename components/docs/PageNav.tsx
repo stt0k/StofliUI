@@ -15,6 +15,10 @@ export default function PageNav({ links }: PageNavProps) {
   const [activeId, setActiveId] = useState<string>("");
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialScrollDoneRef = useRef<boolean>(false);
+  const clickedIdRef = useRef<string | null>(null);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastScrollPosRef = useRef<number>(0);
+  const isUserScrollingRef = useRef<boolean>(false);
 
   // Función para normalizar los hashes (algunos pueden tener # y otros no)
   const normalizeHash = useCallback((hash: string): string => {
@@ -23,6 +27,11 @@ export default function PageNav({ links }: PageNavProps) {
 
   // Función para verificar todos los encabezados y encontrar el visible
   const findVisibleHeadings = useCallback(() => {
+    // Si se acaba de hacer clic en un ID y no es scroll manual, dar prioridad a ese ID
+    if (clickedIdRef.current && !isUserScrollingRef.current) {
+      return null;
+    }
+
     try {
       // Obtener todos los encabezados con ID y elementos específicos que sabemos que nos interesan
       const targetIds = links
@@ -150,6 +159,29 @@ export default function PageNav({ links }: PageNavProps) {
 
   // Función para actualizar el ID activo basado en el scroll
   const updateActiveIdFromScroll = useCallback(() => {
+    // Detectar si es scroll manual comparando con la posición anterior
+    const currentScrollPos = window.scrollY;
+    const scrollDiff = Math.abs(currentScrollPos - lastScrollPosRef.current);
+    
+    // Si el usuario está scrolleando manualmente (diferencia significativa en poco tiempo)
+    if (scrollDiff > 5) {
+      isUserScrollingRef.current = true;
+      
+      // Si estaba bloqueado por un clic, desbloquearlo inmediatamente
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
+        clickedIdRef.current = null;
+      }
+    }
+    
+    // Actualizar posición de scroll para la próxima comparación
+    lastScrollPosRef.current = currentScrollPos;
+    
+    // Si se acaba de hacer clic en un ID y no es scroll manual, dar prioridad a ese ID
+    if (clickedIdRef.current && !isUserScrollingRef.current) {
+      return;
+    }
+    
     const activeHeading = findVisibleHeadings();
 
     if (activeHeading && "id" in activeHeading && activeHeading.id) {
@@ -177,6 +209,9 @@ export default function PageNav({ links }: PageNavProps) {
     if (hash.includes("radix-:") || hash.includes("-content-code")) return;
     
     initialScrollDoneRef.current = true;
+    
+    // Establecer el hash como ID activo
+    setActiveId(normalizeHash(hash));
     
     // Normalizar el hash para la búsqueda
     const targetId = hash.startsWith("#") ? hash.substring(1) : hash;
@@ -211,7 +246,19 @@ export default function PageNav({ links }: PageNavProps) {
         });
       }
     }, 500);
-  }, []);
+  }, [normalizeHash]);
+
+  // Función para manejar cambios en el hash de la URL
+  const handleHashChange = useCallback(() => {
+    const hash = window.location.hash || "";
+    if (!hash) return;
+    
+    // Ignorar hashes de Radix UI
+    if (hash.includes("radix-:") || hash.includes("-content-code")) return;
+    
+    // Establecer el hash como ID activo
+    setActiveId(normalizeHash(hash));
+  }, [normalizeHash]);
 
   // Manejar el evento de scroll
   const handleScroll = useCallback(() => {
@@ -246,6 +293,25 @@ export default function PageNav({ links }: PageNavProps) {
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       e.preventDefault();
       const normalizedHref = normalizeHash(href);
+      
+      // Resetear la bandera de scroll manual
+      isUserScrollingRef.current = false;
+      
+      // Actualizar inmediatamente el ID activo
+      setActiveId(normalizedHref);
+      
+      // Establecer el ID clickeado como activo (para el scroll automático inicial)
+      clickedIdRef.current = normalizedHref;
+      
+      // Limpiar el timeout anterior si existe
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
+      }
+      
+      // Solo bloquear brevemente para permitir que el scroll automático llegue a su destino
+      clickTimeoutRef.current = setTimeout(() => {
+        clickedIdRef.current = null;
+      }, 800); // Tiempo suficiente para que el scroll automático inicial llegue a su destino
 
       // Buscar el elemento por ID (sin el #)
       const targetId = normalizedHref.substring(1);
@@ -302,19 +368,25 @@ export default function PageNav({ links }: PageNavProps) {
 
     // Configurar eventos
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("hashchange", handleHashChange);
     
     // Limpieza
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hashchange", handleHashChange);
       clearInterval(intervalId);
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
+      }
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
       }
     };
   }, [
     handleInitialScroll,
     updateActiveIdFromScroll,
-    handleScroll
+    handleScroll,
+    handleHashChange
   ]);
 
   // Renderizar un enlace de navegación
