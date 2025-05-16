@@ -4,7 +4,9 @@ description: >-
   Un componente de progreso circular con animaciones suaves y diferentes variantes de estilo.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion tailwind-merge
 npx @stofli/ui add circular-progress
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { CircularProgress } from "@stofli/ui";
@@ -24,9 +29,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un progreso circular simple con diferentes valores.
 
@@ -55,8 +64,10 @@ export default function CircularProgressDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Usando la prop `size`: sm, md y lg.
 
@@ -83,8 +94,10 @@ export default function CircularProgressSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 Usando la prop `variant`: default, primary, secondary, success, warning y danger.
 
@@ -117,8 +130,10 @@ export default function CircularProgressVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con etiquetas
+    <div className="mt-6">
+      <HeadingAnchor id="con-etiquetas" level={3} >Con etiquetas</HeadingAnchor>
 
 Usando la prop `label` y `labelPosition` para mostrar etiquetas arriba o abajo.
 
@@ -181,8 +196,10 @@ export default function CircularProgressLabelsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Grosor
+    <div className="mt-6">
+      <HeadingAnchor id="grosor" level={3} >Grosor</HeadingAnchor>
 
 Usando la prop `thickness` para ajustar el grosor del círculo.
 
@@ -245,8 +262,10 @@ export default function CircularProgressThicknessDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Estados de carga
+    <div className="mt-6">
+      <HeadingAnchor id="estados-de-carga" level={3} >Estados de carga</HeadingAnchor>
 
 Ejemplos de diferentes estados de carga usando `spin` y etiquetas.
 
@@ -295,8 +314,10 @@ export default function CircularProgressLoadingDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Personaliza cualquier parte del progreso circular usando las propiedades de className con clases de Tailwind CSS.
 
@@ -343,8 +364,11 @@ export default function CircularProgressCustomClassesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                | Tipo                                                                          | Default     | Descripción                         |
 | ------------------- | ----------------------------------------------------------------------------- | ----------- | ----------------------------------- |
@@ -363,3 +387,25 @@ export default function CircularProgressCustomClassesDemo() {
 | `bgCircleClassName` | `string`                                                                      | -           | Clases para el círculo de fondo     |
 | `valueClassName`    | `string`                                                                      | -           | Clases para el texto del valor      |
 | `labelClassName`    | `string`                                                                      | -           | Clases para la etiqueta             |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Con etiquetas", href: "#con-etiquetas" },
+      { title: "Grosor", href: "#grosor" },
+      { title: "Estados de carga", href: "#estados-de-carga" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
