@@ -13,93 +13,13 @@ interface PageNavProps {
 
 export default function PageNav({ links }: PageNavProps) {
   const [activeId, setActiveId] = useState<string>("");
-  const lastClickedRef = useRef<string | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const initialScrollDoneRef = useRef<boolean>(false);
 
   // Función para normalizar los hashes (algunos pueden tener # y otros no)
   const normalizeHash = useCallback((hash: string): string => {
     return hash.startsWith("#") ? hash : `#${hash}`;
   }, []);
-
-  // Función para verificar si estamos en la URL correcta
-  const updateActiveIdFromHash = useCallback(() => {
-    const hash = window.location.hash || "";
-    if (hash) {
-      // Ignorar hashes de Radix UI
-      if (hash.includes("radix-:") || hash.includes("-content-code")) {
-        if (lastClickedRef.current) {
-          // Si tenemos un último hash válido, usarlo en lugar del hash de Radix
-          setActiveId(lastClickedRef.current);
-          return;
-        }
-      }
-
-      const normalizedHash = normalizeHash(hash);
-      setActiveId(normalizedHash);
-    } else {
-      // Si no hay hash, establecer el primer enlace como activo
-      if (links.length > 0) {
-        setActiveId(links[0].href);
-      }
-    }
-  }, [links, normalizeHash]);
-
-  // Función para actualizar manualmente el ID activo
-  const forceUpdateActiveId = useCallback(
-    (id: string) => {
-      const normalizedId = normalizeHash(id);
-      setActiveId(normalizedId);
-      // Guardar el último ID válido para referencias futuras
-      lastClickedRef.current = normalizedId;
-    },
-    [normalizeHash]
-  );
-
-  // Función para verificar si un enlace o sus hijos están activos
-  const isLinkActive = useCallback(
-    (link: NavLink): boolean => {
-      const normalizedHref = normalizeHash(link.href);
-      const normalizedActiveId = normalizeHash(activeId);
-
-      // Comparación directa
-      if (normalizedHref === normalizedActiveId) {
-        return true;
-      }
-
-      // Verificar si activeId es un hash de Radix pero contiene el ID que buscamos
-      const hrefWithoutHash = link.href.replace("#", "");
-      if (normalizedActiveId.includes(hrefWithoutHash)) {
-        return true;
-      }
-
-      // Verificar si es un enlace hijo activo
-      if (link.children) {
-        return link.children.some((child) => isLinkActive(child));
-      }
-
-      return false;
-    },
-    [activeId, normalizeHash]
-  );
-
-  // Función para forzar una actualización del estado después del clic
-  const forceLinkActive = useCallback(
-    (href: string) => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      // Actualizar inmediatamente para la respuesta visual
-      forceUpdateActiveId(href);
-
-      // Y programar otra actualización para asegurarnos de que persista
-      timeoutRef.current = setTimeout(() => {
-        forceUpdateActiveId(href);
-      }, 300);
-    },
-    [forceUpdateActiveId]
-  );
 
   // Función para verificar todos los encabezados y encontrar el visible
   const findVisibleHeadings = useCallback(() => {
@@ -230,109 +150,102 @@ export default function PageNav({ links }: PageNavProps) {
 
   // Función para actualizar el ID activo basado en el scroll
   const updateActiveIdFromScroll = useCallback(() => {
-    // Evitar verificaciones demasiado frecuentes
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
+    const activeHeading = findVisibleHeadings();
 
-    scrollTimeoutRef.current = setTimeout(() => {
-      const activeHeading = findVisibleHeadings();
-
-      if (activeHeading && "id" in activeHeading && activeHeading.id) {
-        // Ignorar IDs de Radix
-        if (
-          activeHeading.id.includes("radix-:") ||
-          activeHeading.id.includes("-content-code")
-        ) {
-          return;
-        }
-
-        const newActiveId = normalizeHash(activeHeading.id);
-        const currentNormalizedId = normalizeHash(activeId);
-
-        if (newActiveId !== currentNormalizedId) {
-          forceUpdateActiveId(newActiveId);
-
-          // Actualizar la URL sin recargar la página (solo si es diferente)
-          if (normalizeHash(window.location.hash) !== newActiveId) {
-            history.replaceState(null, "", newActiveId);
-          }
-        }
-      }
-    }, 100); // Pequeño retraso para limitar la frecuencia de las actualizaciones
-  }, [activeId, findVisibleHeadings, forceUpdateActiveId, normalizeHash]);
-
-  useEffect(() => {
-    // Actualizar el enlace activo basado en el hash de la URL
-    updateActiveIdFromHash();
-
-    // Manejador de cambio de hash
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-
-      // Si el hash es de Radix pero tenemos un último hash válido, usarlo
+    if (activeHeading && "id" in activeHeading && activeHeading.id) {
+      // Ignorar IDs de Radix
       if (
-        (hash.includes("radix-:") || hash.includes("-content-code")) &&
-        lastClickedRef.current
+        activeHeading.id.includes("radix-:") ||
+        activeHeading.id.includes("-content-code")
       ) {
-        // No actualizar el activeId, mantener el último valor válido
-        // Opcionalmente, reemplazar el hash de Radix en la URL
-        history.replaceState(null, "", lastClickedRef.current);
-      } else {
-        updateActiveIdFromHash();
+        return;
       }
-    };
 
-    // Verificar visibilidad al cargar
-    setTimeout(updateActiveIdFromScroll, 500);
+      const newActiveId = normalizeHash(activeHeading.id);
+      setActiveId(newActiveId);
+    }
+  }, [findVisibleHeadings, normalizeHash]);
 
-    // También verificar periódicamente (útil para contenido que se carga dinámicamente)
-    const intervalId = setInterval(updateActiveIdFromScroll, 2000);
+  // Función para manejar el scroll inicial cuando se carga con un hash
+  const handleInitialScroll = useCallback(() => {
+    if (initialScrollDoneRef.current) return;
+    
+    const hash = window.location.hash || "";
+    if (!hash) return;
+    
+    // Ignorar hashes de Radix UI
+    if (hash.includes("radix-:") || hash.includes("-content-code")) return;
+    
+    initialScrollDoneRef.current = true;
+    
+    // Normalizar el hash para la búsqueda
+    const targetId = hash.startsWith("#") ? hash.substring(1) : hash;
+    
+    // Asegurarse de que todos los iframes y las imágenes se hayan cargado antes de intentar scrollear
+    setTimeout(() => {
+      let targetElement = document.getElementById(targetId);
+      
+      // Si no encontramos el elemento, intentamos buscar con selectores alternativos
+      if (!targetElement) {
+        // Buscar por atributo name
+        targetElement = document.querySelector(`[name="${targetId}"]`);
+        
+        if (!targetElement) {
+          // Buscar cualquier elemento que contenga el ID
+          const allElements = document.querySelectorAll("*[id]");
+          Array.from(allElements).some((el) => {
+            if (el.id.includes(targetId) && !el.id.includes("radix-:") && !el.id.includes("-content-code")) {
+              targetElement = el as HTMLElement;
+              return true;
+            }
+            return false;
+          });
+        }
+      }
+      
+      if (targetElement) {
+        // Scroll al elemento con un pequeño offset para mejor visualización
+        window.scrollTo({
+          top: targetElement.getBoundingClientRect().top + window.pageYOffset - 100,
+          behavior: "instant"
+        });
+      }
+    }, 500);
+  }, []);
 
-    // Manejar el evento de scroll con throttling
-    const handleScroll = () => {
+  // Manejar el evento de scroll
+  const handleScroll = useCallback(() => {
+    requestAnimationFrame(() => {
       updateActiveIdFromScroll();
-    };
+    });
+  }, [updateActiveIdFromScroll]);
 
-    // Configurar eventos
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("hashchange", handleHashChange);
-    window.addEventListener("DOMContentLoaded", updateActiveIdFromScroll);
-    window.addEventListener("load", updateActiveIdFromScroll);
+  // Verificar si un enlace o sus hijos están activos
+  const isLinkActive = useCallback(
+    (link: NavLink): boolean => {
+      const normalizedHref = normalizeHash(link.href);
+      const normalizedActiveId = normalizeHash(activeId);
 
-    // Limpieza
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("hashchange", handleHashChange);
-      window.removeEventListener("DOMContentLoaded", updateActiveIdFromScroll);
-      window.removeEventListener("load", updateActiveIdFromScroll);
-      clearInterval(intervalId);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+      // Comparación directa
+      if (normalizedHref === normalizedActiveId) {
+        return true;
       }
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+
+      // Verificar si es un enlace hijo activo
+      if (link.children) {
+        return link.children.some((child) => isLinkActive(child));
       }
-    };
-  }, [
-    links,
-    updateActiveIdFromHash,
-    updateActiveIdFromScroll,
-    forceUpdateActiveId,
-    activeId,
-  ]);
+
+      return false;
+    },
+    [activeId, normalizeHash]
+  );
 
   // Manejador de clic en enlaces
   const handleLinkClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       e.preventDefault();
       const normalizedHref = normalizeHash(href);
-
-      // Guardar el href que el usuario intentó visitar
-      lastClickedRef.current = normalizedHref;
-
-      // Forzar actualización del estado (con persistencia)
-      forceLinkActive(normalizedHref);
 
       // Buscar el elemento por ID (sin el #)
       const targetId = normalizedHref.substring(1);
@@ -359,7 +272,7 @@ export default function PageNav({ links }: PageNavProps) {
       }
 
       if (targetElement) {
-        // Actualizar URL y hacer scroll al elemento
+        // Actualizar URL pero sin afectar la actualización por scroll
         history.pushState(null, "", normalizedHref);
         targetElement.scrollIntoView({ behavior: "smooth" });
       } else {
@@ -369,8 +282,40 @@ export default function PageNav({ links }: PageNavProps) {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     },
-    [normalizeHash, forceLinkActive]
+    [normalizeHash]
   );
+
+  // Configurar eventos y efectos
+  useEffect(() => {
+    // Verificar primero si hay un hash en la URL y manejarlo
+    if (window.location.hash) {
+      handleInitialScroll();
+    }
+    
+    // Iniciar con un scan para establecer el enlace activo inicial
+    updateActiveIdFromScroll();
+    
+    // Verificar periódicamente (útil para contenido que se carga dinámicamente)
+    const intervalId = setInterval(() => {
+      updateActiveIdFromScroll();
+    }, 2000);
+
+    // Configurar eventos
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    // Limpieza
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInterval(intervalId);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [
+    handleInitialScroll,
+    updateActiveIdFromScroll,
+    handleScroll
+  ]);
 
   // Renderizar un enlace de navegación
   const renderNavLink = useCallback(
@@ -378,18 +323,21 @@ export default function PageNav({ links }: PageNavProps) {
       const isActive = isLinkActive(link);
       const normalizedHref = normalizeHash(link.href);
       const normalizedActiveId = normalizeHash(activeId);
-      const isCurrentActive =
-        normalizedHref === normalizedActiveId ||
-        lastClickedRef.current === normalizedHref;
+      const isCurrentActive = normalizedHref === normalizedActiveId;
 
       const hasChildren = link.children && link.children.length > 0;
+      
+      // Solo mostrar el punto para enlaces de nivel secundario o superior
+      const showDot = depth > 0 && isCurrentActive;
 
       return (
-        <li key={link.href} className={`${depth > 0 ? "ml-5" : ""}`}>
+        <li key={link.href}>
           <a
             href={link.href}
             onClick={(e) => handleLinkClick(e, link.href)}
             className={`text-sm block py-[3px] transition-opacity ${
+              depth > 0 ? "pl-4" : ""
+            } ${
               isCurrentActive
                 ? "font-medium text-black dark:text-white"
                 : isActive
@@ -398,7 +346,7 @@ export default function PageNav({ links }: PageNavProps) {
             }`}
             data-active={isCurrentActive ? "true" : "false"}
           >
-            {isCurrentActive && (
+            {showDot && (
               <span className="inline-block w-[3px] h-[3px] bg-black dark:bg-white rounded-full mr-2 align-middle" />
             )}
             {link.title}
@@ -416,15 +364,13 @@ export default function PageNav({ links }: PageNavProps) {
   );
 
   return (
-    <div className="hidden lg:block fixed top-[9.5rem] right-[20rem] w-48 z-20">
-      <div className="py-2 max-h-[calc(100vh-120px)] overflow-y-auto">
-        <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
-          En esta página
-        </h3>
-        <ul className="space-y-[2px]">
-          {links.map((link) => renderNavLink(link))}
-        </ul>
-      </div>
+    <div className="hidden xl:block fixed top-[9.5rem] w-48 z-20 py-2 max-h-[calc(100vh-120px)] overflow-y-auto">
+      <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
+        En esta página
+      </h3>
+      <ul className="space-y-[2px]">
+        {links.map((link) => renderNavLink(link))}
+      </ul>
     </div>
   );
 }
