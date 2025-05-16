@@ -5,7 +5,7 @@ export const headerData = [
     relatedPaths: [
       "/docs/introduccion",
       "/docs/instalacion",
-      "/docs/frameworks*", // Comodín para futuras frameworks
+      "/docs/frameworks*",
     ],
     submenu: {
       columns: [
@@ -63,9 +63,7 @@ export const headerData = [
   {
     title: "Componentes",
     link: "/docs/componentes/accordion",
-    relatedPaths: [
-      "/docs/componentes*", // Comodín para cualquier ruta de componentes
-    ],
+    relatedPaths: ["/docs/componentes*"],
     submenu: {
       columns: [
         {
@@ -105,11 +103,6 @@ export const headerData = [
               title: "Input",
               description: "Campos de texto",
               href: "/docs/componentes/input",
-            },
-            {
-              title: "Dropdown",
-              description: "Menús desplegables",
-              href: "/docs/componentes/dropdown",
             },
           ],
         },
