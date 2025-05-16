@@ -4,7 +4,9 @@ description: >-
   Un componente de menú desplegable con animaciones y múltiples opciones de personalización.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion lucide-react
 npx @stofli/ui add dropdown
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Dropdown } from "@stofli/ui";
@@ -33,9 +38,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un dropdown básico con varias opciones.
 
@@ -72,8 +81,10 @@ export default function DropdownDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con íconos
+    <div className="mt-6">
+      <HeadingAnchor id="con-iconos" level={3} >Con íconos</HeadingAnchor>
 
 Añade íconos a las opciones del dropdown para hacerlas más visuales.
 
@@ -141,8 +152,10 @@ export default function DropdownWithIconsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 Diferentes variantes de estilo para el dropdown.
 
@@ -228,8 +241,10 @@ export default function DropdownVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 El dropdown está disponible en 4 tamaños: pequeño, mediano, grande y extra grande.
 
@@ -314,8 +329,10 @@ export default function DropdownSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Sin flecha
+    <div className="mt-6">
+      <HeadingAnchor id="sin-flecha" level={3} >Sin flecha</HeadingAnchor>
 
 Puedes ocultar la flecha del dropdown con la prop `showArrow`.
 
@@ -370,8 +387,10 @@ export default function DropdownNoArrowDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Selección múltiple
+    <div className="mt-6">
+      <HeadingAnchor id="seleccion-multiple" level={3} >Selección múltiple</HeadingAnchor>
 
 Permite seleccionar varias opciones al mismo tiempo con la prop `multiSelect`.
 
@@ -410,8 +429,10 @@ export default function DropdownMultiSelectDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### No seleccionable
+    <div className="mt-6">
+      <HeadingAnchor id="no-seleccionable" level={3} >No seleccionable</HeadingAnchor>
 
 Puedes crear un dropdown que solo muestre opciones pero no permita seleccionarlas, útil para menús de navegación.
 
@@ -449,8 +470,10 @@ export default function DropdownNonSelectableDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con avatar
+    <div className="mt-6">
+      <HeadingAnchor id="con-avatar" level={3} >Con avatar</HeadingAnchor>
 
 Usa avatares en el dropdown y en sus opciones.
 
@@ -515,8 +538,10 @@ export default function DropdownWithAvatarDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños de avatar
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos-de-avatar" level={3} >Tamaños de avatar</HeadingAnchor>
 
 Puedes usar diferentes tamaños de avatar con la prop `avatarSize`.
 
@@ -679,8 +704,10 @@ export default function DropdownAvatarSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Solo avatar
+    <div className="mt-6">
+      <HeadingAnchor id="solo-avatar" level={3} >Solo avatar</HeadingAnchor>
 
 Puedes mostrar solo un avatar como botón del dropdown usando `avatarOnly={true}`. Ideal para menús de usuario compactos.
 
@@ -761,8 +788,10 @@ export default function AvatarOnlyDropdownDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Colocación del menú
+    <div className="mt-6">
+      <HeadingAnchor id="colocacion-del-menu" level={3} >Colocación del menú</HeadingAnchor>
 
 Puedes controlar dónde aparece el menú desplegable con la prop `placement`.
 
@@ -832,8 +861,10 @@ export default function DropdownPlacementDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con valor por defecto
+    <div className="mt-6">
+      <HeadingAnchor id="con-valor-por-defecto" level={3} >Con valor por defecto</HeadingAnchor>
 
 Puedes definir un valor seleccionado por defecto.
 
@@ -866,8 +897,10 @@ export default function DropdownDefaultValueDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Ancho específico
+    <div className="mt-6">
+      <HeadingAnchor id="ancho-especifico" level={3} >Ancho específico</HeadingAnchor>
 
 Puedes definir un ancho fijo para el dropdown usando la prop `width`.
 
@@ -920,8 +953,10 @@ export default function DropdownFixedWidthDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Ancho completo
+    <div className="mt-6">
+      <HeadingAnchor id="ancho-completo" level={3} >Ancho completo</HeadingAnchor>
 
 Usando la prop `fullWidth` para que el dropdown ocupe todo el ancho disponible.
 
@@ -956,8 +991,10 @@ export default function DropdownFullWidthDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con opciones deshabilitadas
+    <div className="mt-6">
+      <HeadingAnchor id="con-opciones-deshabilitadas" level={3} >Con opciones deshabilitadas</HeadingAnchor>
 
 Puedes deshabilitar opciones específicas del dropdown.
 
@@ -992,8 +1029,10 @@ export default function DropdownDisabledOptionsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Combinando avatarOnly con opciones con avatares
+    <div className="mt-6">
+      <HeadingAnchor id="combinando-avataronly-con-opciones-con-avatares" level={3} >Combinando avatarOnly con opciones con avatares</HeadingAnchor>
 
 El modo `avatarOnly` también funciona perfectamente con opciones que tienen avatares. Cuando selecciones una opción con avatar, ese avatar se mostrará en el botón principal automáticamente.
 
@@ -1058,117 +1097,165 @@ export default function AvatarOnlyWithAvatarItemsDemo() {
 ```
 </DemoTabs>
 
-- Con `avatarOnly={true}`, cuando selecciones un usuario, su avatar aparecerá en el botón dropdown
-- El tamaño del dropdown se ajusta automáticamente según el tamaño del avatar
-- El menú desplegable tiene un ancho mínimo para evitar que los elementos queden cortados
-- Todos los elementos mantienen un estilo coherente y funcional
-
-### Con clases personalizadas
-
-Puedes personalizar cualquier parte del dropdown usando las propiedades de className con clases de Tailwind CSS.
-
-<DemoTabs
-  preview={
-    <div className="flex justify-center">
-      <Dropdown
-        className="max-w-md"
-        buttonClassName="bg-blue-50 border-blue-300 text-blue-700 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-300"
-        itemClassName="hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-700 dark:text-blue-300"
-        arrowIconClassName="text-blue-500"
-        dropdownClassName="border-blue-200 dark:border-blue-800 shadow-blue-100/30 dark:shadow-blue-900/30"
-        listClassName="px-0.5"
-        itemContentClassName="py-0.5"
-        itemLabelClassName="font-medium"
-        itemIconClassName="text-cyan-500"
-        checkIconClassName="text-blue-700 dark:text-blue-300"
-        placeholder="Dropdown personalizado"
-        activeColor="bg-zinc-200/80 dark:bg-zinc-800"
-        items={[
-          { label: "Primera opción", value: "1" },
-          { label: "Segunda opción", value: "2" },
-          { label: "Tercera opción", value: "3" },
-          { label: "Cuarta opción", value: "4" },
-          { label: "Quinta opción", value: "5" },
-        ]}
-      />
+<ul className="leading-relaxed dark:text-zinc-400 text-zinc-600">
+  <li>Con `avatarOnly={true}`, cuando selecciones un usuario, su avatar aparecerá en el botón dropdown</li>
+  <li>El tamaño del dropdown se ajusta automáticamente según el tamaño del avatar</li>
+  <li>El menú desplegable tiene un ancho mínimo para evitar que los elementos queden cortados</li>
+  <li>Todos los elementos mantienen un estilo coherente y funcional</li>
+</ul>
     </div>
-  }
->
-```tsx
-import { Dropdown } from "@stofli/ui";
 
-export default function DropdownCustomClassesDemo() {
-  return (
-    <Dropdown
-        className="max-w-md"
-        buttonClassName="bg-blue-50 border-blue-300 text-blue-700 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-300"
-        itemClassName="hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-700 dark:text-blue-300"
-        arrowIconClassName="text-blue-500"
-        dropdownClassName="border-blue-200 dark:border-blue-800 shadow-blue-100/30 dark:shadow-blue-900/30"
-        listClassName="px-0.5"
-        itemContentClassName="py-0.5"
-        itemLabelClassName="font-medium"
-        itemIconClassName="text-cyan-500"
-        checkIconClassName="text-blue-700 dark:text-blue-300"
-        placeholder="Dropdown personalizado"
-        activeColor="bg-zinc-200/80 dark:bg-zinc-800"
-        items={[
-          { label: "Primera opción", value: "1" },
-          { label: "Segunda opción", value: "2" },
-          { label: "Tercera opción", value: "3" },
-          { label: "Cuarta opción", value: "4" },
-          { label: "Quinta opción", value: "5" },
-      ]}
-    />
-  );
-}
-```
-</DemoTabs>
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >
+        Con clases personalizadas
+      </HeadingAnchor>
 
-## Props
+      Puedes personalizar cualquier parte del dropdown usando las propiedades de className con clases de Tailwind CSS.
 
-| Prop                   | Tipo                                                                          | Default          | Descripción                                                                                                                                                                                     |
-| ---------------------- | ----------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `items`                | `Array<DropdownItem>`                                                         | -                | Lista de elementos del dropdown                                                                                                                                                                 |
-| `placeholder`          | `string`                                                                      | "Seleccionar..." | Texto a mostrar cuando no hay selección                                                                                                                                                         |
-| `variant`              | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`      | Variante de estilo                                                                                                                                                                              |
-| `size`                 | `"sm" \| "md" \| "lg" \| "xl"`                                                | `"md"`           | Tamaño del dropdown                                                                                                                                                                             |
-| `radius`               | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`           | Radio de las esquinas                                                                                                                                                                           |
-| `disabled`             | `boolean`                                                                     | `false`          | Deshabilita todo el dropdown                                                                                                                                                                    |
-| `fullWidth`            | `boolean`                                                                     | `false`          | Hace que el dropdown ocupe todo el ancho disponible                                                                                                                                             |
-| `width`                | `string`                                                                      | -                | Define un ancho específico (ej: "200px", "15rem")                                                                                                                                               |
-| `placement`            | `"bottom" \| "top" \| "left" \| "right"`                                      | `"bottom"`       | Posición del menú desplegable                                                                                                                                                                   |
-| `onChange`             | `(value: string \| string[]) => void`                                         | -                | Función llamada al seleccionar una opción                                                                                                                                                       |
-| `icon`                 | `ReactNode`                                                                   | -                | Ícono a mostrar al inicio del dropdown                                                                                                                                                          |
-| `showSelectedIcon`     | `boolean`                                                                     | `true`           | Muestra el ícono de selección en la opción elegida                                                                                                                                              |
-| `defaultValue`         | `string \| string[]`                                                          | -                | Valor seleccionado por defecto                                                                                                                                                                  |
-| `value`                | `string \| string[]`                                                          | -                | Valor controlado del dropdown                                                                                                                                                                   |
-| `className`            | `string`                                                                      | -                | Clases adicionales para el contenedor                                                                                                                                                           |
-| `buttonClassName`      | `string`                                                                      | -                | Clases adicionales para el botón principal                                                                                                                                                      |
-| `itemClassName`        | `string`                                                                      | -                | Clases adicionales para los elementos de la lista                                                                                                                                               |
-| `arrowIconClassName`   | `string`                                                                      | -                | Clases adicionales para el icono de flecha                                                                                                                                                      |
-| `dropdownClassName`    | `string`                                                                      | -                | Clases adicionales para el menú desplegable                                                                                                                                                     |
-| `listClassName`        | `string`                                                                      | -                | Clases adicionales para la lista de opciones                                                                                                                                                    |
-| `itemContentClassName` | `string`                                                                      | -                | Clases adicionales para el contenedor de cada opción                                                                                                                                            |
-| `itemLabelClassName`   | `string`                                                                      | -                | Clases adicionales para el contenedor de la etiqueta de cada opción                                                                                                                             |
-| `itemIconClassName`    | `string`                                                                      | -                | Clases adicionales para los iconos de cada opción                                                                                                                                               |
-| `checkIconClassName`   | `string`                                                                      | -                | Clases adicionales para el icono de verificación                                                                                                                                                |
-| `activeColor`          | `string`                                                                      | -                | Color para elementos seleccionados (hex: "#f1f5f9" o clases Tailwind: "bg-slate-100 text-white"). Las clases Tailwind en esta propiedad tienen prioridad sobre otras clases como itemClassName. |
-| `showArrow`            | `boolean`                                                                     | `true`           | Muestra u oculta la flecha del dropdown                                                                                                                                                         |
-| `multiSelect`          | `boolean`                                                                     | `false`          | Permite seleccionar múltiples opciones                                                                                                                                                          |
-| `avatarSize`           | `"xs" \| "sm" \| "md" \| "lg"`                                                | `"md"`           | Tamaño de los avatares                                                                                                                                                                          |
-| `avatarSrc`            | `string`                                                                      | -                | URL de la imagen para el avatar del dropdown                                                                                                                                                    |
-| `avatarAlt`            | `string`                                                                      | "Avatar"         | Texto alternativo para el avatar                                                                                                                                                                |
-| `selectable`           | `boolean`                                                                     | `true`           | Si es `false`, el dropdown muestra hover en las opciones pero no permite seleccionarlas.                                                                                                        |
-| `avatarOnly`           | `boolean`                                                                     | `false`          | Si es `true`, muestra solo el avatar como botón, sin texto ni placeholder.                                                                                                                      |
+      <DemoTabs
+        preview={
+          <div className="flex justify-center">
+            <Dropdown
+              className="max-w-md"
+              buttonClassName="bg-blue-50 border-blue-300 text-blue-700 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-300"
+              itemClassName="hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-700 dark:text-blue-300"
+              arrowIconClassName="text-blue-500"
+              dropdownClassName="border-blue-200 dark:border-blue-800 shadow-blue-100/30 dark:shadow-blue-900/30"
+              listClassName="px-0.5"
+              itemContentClassName="py-0.5"
+              itemLabelClassName="font-medium"
+              itemIconClassName="text-cyan-500"
+              checkIconClassName="text-blue-700 dark:text-blue-300"
+              placeholder="Dropdown personalizado"
+              activeColor="bg-zinc-200/80 dark:bg-zinc-800"
+              items={[
+                { label: "Primera opción", value: "1" },
+                { label: "Segunda opción", value: "2" },
+                { label: "Tercera opción", value: "3" },
+                { label: "Cuarta opción", value: "4" },
+                { label: "Quinta opción", value: "5" },
+              ]}
+            />
+          </div>
+        }
+      >
+      ```tsx
+      import { Dropdown } from "@stofli/ui";
 
-### DropdownItem
+      export default function DropdownCustomClassesDemo() {
+        return (
+          <Dropdown
+              className="max-w-md"
+              buttonClassName="bg-blue-50 border-blue-300 text-blue-700 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-300"
+              itemClassName="hover:bg-blue-100 dark:hover:bg-blue-900/40 text-blue-700 dark:text-blue-300"
+              arrowIconClassName="text-blue-500"
+              dropdownClassName="border-blue-200 dark:border-blue-800 shadow-blue-100/30 dark:shadow-blue-900/30"
+              listClassName="px-0.5"
+              itemContentClassName="py-0.5"
+              itemLabelClassName="font-medium"
+              itemIconClassName="text-cyan-500"
+              checkIconClassName="text-blue-700 dark:text-blue-300"
+              placeholder="Dropdown personalizado"
+              activeColor="bg-zinc-200/80 dark:bg-zinc-800"
+              items={[
+                { label: "Primera opción", value: "1" },
+                { label: "Segunda opción", value: "2" },
+                { label: "Tercera opción", value: "3" },
+                { label: "Cuarta opción", value: "4" },
+                { label: "Quinta opción", value: "5" },
+            ]}
+          />
+        );
+      }
+      ```
+      </DemoTabs>
+    </div>
 
-| Propiedad   | Tipo        | Descripción                      |
-| ----------- | ----------- | -------------------------------- |
-| `label`     | `ReactNode` | Contenido visible de la opción   |
-| `value`     | `string`    | Valor de la opción               |
-| `icon`      | `ReactNode` | Ícono opcional para la opción    |
-| `disabled`  | `boolean`   | Si la opción está deshabilitada  |
-| `avatarSrc` | `string`    | URL de la imagen para el avatar  |
-| `avatarAlt` | `string`    | Texto alternativo para el avatar |
+  </div>
+
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
+
+    | Prop                   | Tipo                                                                          | Default          | Descripción                                                                                                                                                                                     |
+    | ---------------------- | ----------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `items`                | `Array<DropdownItem>`                                                         | -                | Lista de elementos del dropdown                                                                                                                                                                 |
+    | `placeholder`          | `string`                                                                      | "Seleccionar..." | Texto a mostrar cuando no hay selección                                                                                                                                                         |
+    | `variant`              | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`      | Variante de estilo                                                                                                                                                                              |
+    | `size`                 | `"sm" \| "md" \| "lg" \| "xl"`                                                | `"md"`           | Tamaño del dropdown                                                                                                                                                                             |
+    | `radius`               | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`           | Radio de las esquinas                                                                                                                                                                           |
+    | `disabled`             | `boolean`                                                                     | `false`          | Deshabilita todo el dropdown                                                                                                                                                                    |
+    | `fullWidth`            | `boolean`                                                                     | `false`          | Hace que el dropdown ocupe todo el ancho disponible                                                                                                                                             |
+    | `width`                | `string`                                                                      | -                | Define un ancho específico (ej: "200px", "15rem")                                                                                                                                               |
+    | `placement`            | `"bottom" \| "top" \| "left" \| "right"`                                      | `"bottom"`       | Posición del menú desplegable                                                                                                                                                                   |
+    | `onChange`             | `(value: string \| string[]) => void`                                         | -                | Función llamada al seleccionar una opción                                                                                                                                                       |
+    | `icon`                 | `ReactNode`                                                                   | -                | Ícono a mostrar al inicio del dropdown                                                                                                                                                          |
+    | `showSelectedIcon`     | `boolean`                                                                     | `true`           | Muestra el ícono de selección en la opción elegida                                                                                                                                              |
+    | `defaultValue`         | `string \| string[]`                                                          | -                | Valor seleccionado por defecto                                                                                                                                                                  |
+    | `value`                | `string \| string[]`                                                          | -                | Valor controlado del dropdown                                                                                                                                                                   |
+    | `className`            | `string`                                                                      | -                | Clases adicionales para el contenedor                                                                                                                                                           |
+    | `buttonClassName`      | `string`                                                                      | -                | Clases adicionales para el botón principal                                                                                                                                                      |
+    | `itemClassName`        | `string`                                                                      | -                | Clases adicionales para los elementos de la lista                                                                                                                                               |
+    | `arrowIconClassName`   | `string`                                                                      | -                | Clases adicionales para el icono de flecha                                                                                                                                                      |
+    | `dropdownClassName`    | `string`                                                                      | -                | Clases adicionales para el menú desplegable                                                                                                                                                     |
+    | `listClassName`        | `string`                                                                      | -                | Clases adicionales para la lista de opciones                                                                                                                                                    |
+    | `itemContentClassName` | `string`                                                                      | -                | Clases adicionales para el contenedor de cada opción                                                                                                                                            |
+    | `itemLabelClassName`   | `string`                                                                      | -                | Clases adicionales para el contenedor de la etiqueta de cada opción                                                                                                                             |
+    | `itemIconClassName`    | `string`                                                                      | -                | Clases adicionales para los iconos de cada opción                                                                                                                                               |
+    | `checkIconClassName`   | `string`                                                                      | -                | Clases adicionales para el icono de verificación                                                                                                                                                |
+    | `activeColor`          | `string`                                                                      | -                | Color para elementos seleccionados (hex: "#f1f5f9" o clases Tailwind: "bg-slate-100 text-white"). Las clases Tailwind en esta propiedad tienen prioridad sobre otras clases como itemClassName. |
+    | `showArrow`            | `boolean`                                                                     | `true`           | Muestra u oculta la flecha del dropdown                                                                                                                                                         |
+    | `multiSelect`          | `boolean`                                                                     | `false`          | Permite seleccionar múltiples opciones                                                                                                                                                          |
+    | `avatarSize`           | `"xs" \| "sm" \| "md" \| "lg"`                                                | `"md"`           | Tamaño de los avatares                                                                                                                                                                          |
+    | `avatarSrc`            | `string`                                                                      | -                | URL de la imagen para el avatar del dropdown                                                                                                                                                    |
+    | `avatarAlt`            | `string`                                                                      | "Avatar"         | Texto alternativo para el avatar                                                                                                                                                                |
+    | `selectable`           | `boolean`                                                                     | `true`           | Si es `false`, el dropdown muestra hover en las opciones pero no permite seleccionarlas.                                                                                                        |
+    | `avatarOnly`           | `boolean`                                                                     | `false`          | Si es `true`, muestra solo el avatar como botón, sin texto ni placeholder.                                                                                                                      |
+
+    ### DropdownItem
+
+    | Propiedad   | Tipo        | Descripción                      |
+    | ----------- | ----------- | -------------------------------- |
+    | `label`     | `ReactNode` | Contenido visible de la opción   |
+    | `value`     | `string`    | Valor de la opción               |
+    | `icon`      | `ReactNode` | Ícono opcional para la opción    |
+    | `disabled`  | `boolean`   | Si la opción está deshabilitada  |
+    | `avatarSrc` | `string`    | URL de la imagen para el avatar  |
+    | `avatarAlt` | `string`    | Texto alternativo para el avatar |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Con íconos", href: "#con-iconos" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Sin flecha", href: "#sin-flecha" },
+      { title: "Selección múltiple", href: "#seleccion-multiple" },
+      { title: "No seleccionable", href: "#no-seleccionable" },
+      { title: "Con avatar", href: "#con-avatar" },
+      { title: "Tamaños de avatar", href: "#tamanos-de-avatar" },
+      { title: "Solo avatar", href: "#solo-avatar" },
+      { title: "Colocación del menú", href: "#colocacion-del-menu" },
+      { title: "Con valor por defecto", href: "#con-valor-por-defecto" },
+      { title: "Ancho específico", href: "#ancho-especifico" },
+      { title: "Ancho completo", href: "#ancho-completo" },
+      {
+        title: "Con opciones deshabilitadas",
+        href: "#con-opciones-deshabilitadas",
+      },
+      {
+        title: "Combinando avatarOnly con opciones con avatares",
+        href: "#combinando-avataronly-con-opciones-con-avatares",
+      },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
