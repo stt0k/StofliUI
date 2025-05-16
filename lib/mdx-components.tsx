@@ -32,6 +32,26 @@ import {
 } from "lucide-react";
 
 // Importaciones dinámicas
+const HeadingAnchor = dynamic(() => import("@/components/docs/HeadingAnchor"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+const HeadingLink = dynamic(() => import("@/components/docs/HeadingLink"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+const PageNav = dynamic(() => import("@/components/docs/PageNav"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+const BentoGrid = dynamic(() => import("@/components/BentoGrid"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
 const Accordion = dynamic(() => import("@/components/sections/accordion"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
@@ -190,7 +210,6 @@ const ToastMultipleDemo = dynamic(
   }
 );
 
-
 const ToastCustomDemo = dynamic(
   () =>
     import("@/components/docs/toast-wrapper").then((mod) => ({
@@ -328,7 +347,8 @@ const components: MDXComponents = {
     />
   ),
   h2: (props) => (
-    <h2
+    <HeadingLink
+      as="h2"
       className="mt-6 mb-3 text-3xl font-bold tracking-tight dark:text-zinc-100 text-zinc-900"
       {...props}
     />
@@ -412,6 +432,10 @@ const components: MDXComponents = {
   CodeBlock,
 
   // Componentes del cliente
+  HeadingAnchor,
+  HeadingLink,
+  PageNav,
+  BentoGrid,
   Accordion,
   DemoTabs,
   Avatar,
