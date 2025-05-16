@@ -4,7 +4,9 @@ description: >-
   Un componente para entrada de valores numéricos con controles de incremento/decremento y animaciones.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -25,7 +27,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-## Uso Básico
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso Básico</HeadingAnchor>
 
 ```tsx
 import { NumberInput } from "@stofli/ui";
@@ -35,9 +40,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 <DemoTabs
   preview={
@@ -54,8 +63,10 @@ export default function NumberInputDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El componente NumberInput ofrece distintas variantes para adaptarse a diferentes contextos visuales.
 
@@ -88,8 +99,10 @@ export default function NumberInputVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Puedes elegir entre diferentes tamaños para el input numérico.
 
@@ -116,8 +129,10 @@ export default function NumberInputSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Radios de borde
+    <div className="mt-6">
+      <HeadingAnchor id="radios-de-borde" level={3} >Radios de borde</HeadingAnchor>
 
 Puedes personalizar el radio de los bordes del input para adaptarlo a tu diseño.
 
@@ -186,8 +201,10 @@ export default function NumberInputRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Posición de los controles
+    <div className="mt-6">
+      <HeadingAnchor id="posicion-controles" level={3} >Posición de los controles</HeadingAnchor>
 
 Puedes elegir diferentes posiciones para los controles de incremento/decremento.
 
@@ -212,8 +229,10 @@ export default function NumberInputControlsPositionDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Layout de controles
+    <div className="mt-6">
+      <HeadingAnchor id="layout-controles" level={3} >Layout de controles</HeadingAnchor>
 
 El componente ofrece diferentes estilos de layout para los controles.
 
@@ -238,8 +257,10 @@ export default function NumberInputControlsLayoutDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Conjunto de iconos
+    <div className="mt-6">
+      <HeadingAnchor id="conjunto-iconos" level={3} >Conjunto de iconos</HeadingAnchor>
 
 Puedes elegir entre diferentes estilos de iconos para los controles.
 
@@ -264,8 +285,10 @@ export default function NumberInputIconSetsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Estilos de animación
+    <div className="mt-6">
+      <HeadingAnchor id="estilos-animacion" level={3} >Estilos de animación</HeadingAnchor>
 
 El componente incluye diferentes estilos de animación cuando el valor cambia.
 
@@ -294,8 +317,10 @@ export default function NumberInputAnimationsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con límites y paso
+    <div className="mt-6">
+      <HeadingAnchor id="limites-paso" level={3} >Con límites y paso</HeadingAnchor>
 
 Puedes establecer valores mínimos y máximos, así como el paso de incremento/decremento.
 
@@ -328,8 +353,10 @@ export default function NumberInputLimitsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Deshabilitado y solo lectura
+    <div className="mt-6">
+      <HeadingAnchor id="deshabilitado-solo-lectura" level={3} >Deshabilitado y solo lectura</HeadingAnchor>
 
 <DemoTabs
   preview={
@@ -368,8 +395,10 @@ export default function NumberInputDisabledDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con mensaje de error
+    <div className="mt-6">
+      <HeadingAnchor id="mensaje-error" level={3} >Con mensaje de error</HeadingAnchor>
 
 Muestra un mensaje de error cuando se cumple una condición, en este caso, cuando el valor es negativo.
 
@@ -402,8 +431,10 @@ export default function NumberInputErrorDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Ancho completo
+    <div className="mt-6">
+      <HeadingAnchor id="ancho-completo" level={3} >Ancho completo</HeadingAnchor>
 
 <DemoTabs
   preview={
@@ -424,8 +455,10 @@ export default function NumberInputFullWidthDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cada parte del componente usando las propiedades de className específicas para darle un aspecto único con Tailwind CSS.
 
@@ -462,8 +495,11 @@ export default function NumberInputCustomClassDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                      | Tipo                                                                          | Valor por defecto | Descripción                                               |
 | ------------------------- | ----------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------- |
@@ -501,3 +537,34 @@ export default function NumberInputCustomClassDemo() {
 | `onChange`                | `(value: number) => void`                                                     | -                 | Función que se ejecuta al cambiar el valor                |
 | `onFocus`                 | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -                 | Función que se ejecuta cuando el input recibe el foco     |
 | `onBlur`                  | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -                 | Función que se ejecuta cuando el input pierde el foco     |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso Básico", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Radios de borde", href: "#radios-de-borde" },
+      { title: "Posición de los controles", href: "#posicion-controles" },
+      { title: "Layout de controles", href: "#layout-controles" },
+      { title: "Conjunto de iconos", href: "#conjunto-iconos" },
+      { title: "Estilos de animación", href: "#estilos-animacion" },
+      { title: "Con límites y paso", href: "#limites-paso" },
+      {
+        title: "Deshabilitado y solo lectura",
+        href: "#deshabilitado-solo-lectura",
+      },
+      { title: "Con mensaje de error", href: "#mensaje-error" },
+      { title: "Ancho completo", href: "#ancho-completo" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
