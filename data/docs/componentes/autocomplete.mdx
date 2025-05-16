@@ -4,7 +4,9 @@ description: >-
   Un componente de autocompletado inteligente con soporte para grupos, animaciones y diseño optimizado.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion lucide-react
 npx @stofli/ui add autocomplete
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 El componente Autocomplete proporciona una experiencia de búsqueda y selección intuitiva con animaciones fluidas.
 
@@ -35,9 +40,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un autocompletado simple con opciones básicas.
 
@@ -74,8 +83,10 @@ export default function AutocompleteDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con grupos
+    <div className="mt-6">
+      <HeadingAnchor id="con-grupos" level={3} >Con grupos</HeadingAnchor>
 
 Organiza las opciones en grupos para una mejor navegación.
 
@@ -114,8 +125,10 @@ export default function AutocompleteGroupsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Deshabilitado
+    <div className="mt-6">
+      <HeadingAnchor id="deshabilitado" level={3} >Deshabilitado</HeadingAnchor>
 
 Estado deshabilitado del componente.
 
@@ -150,8 +163,10 @@ export default function AutocompleteDisabledDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con título
+    <div className="mt-6">
+      <HeadingAnchor id="con-titulo" level={3} >Con título</HeadingAnchor>
 
 El componente puede mostrar un título descriptivo sobre el campo de entrada.
 
@@ -190,8 +205,10 @@ export default function AutocompleteWithTitleDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Campo requerido
+    <div className="mt-6">
+      <HeadingAnchor id="campo-requerido" level={3} >Campo requerido</HeadingAnchor>
 
 Puedes indicar que un campo es obligatorio usando la prop `required`, que mostrará un asterisco rojo.
 
@@ -228,8 +245,10 @@ export default function AutocompleteRequiredDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con opciones deshabilitadas
+    <div className="mt-6">
+      <HeadingAnchor id="opciones-deshabilitadas" level={3} >Con opciones deshabilitadas</HeadingAnchor>
 
 Es posible deshabilitar opciones específicas usando la propiedad `disabled` en las opciones individuales.
 
@@ -272,8 +291,10 @@ export default function AutocompleteDisabledOptionsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El componente admite diferentes variantes de color para adaptarse a diferentes contextos.
 
@@ -375,8 +396,10 @@ export default function AutocompleteVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando las propiedades de className con clases de Tailwind CSS.
 
@@ -427,8 +450,11 @@ export default function AutocompleteCustomClassesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                    | Tipo                                                                          | Default                      | Descripción                                   |
 | ----------------------- | ----------------------------------------------------------------------------- | ---------------------------- | --------------------------------------------- |
@@ -447,3 +473,29 @@ export default function AutocompleteCustomClassesDemo() {
 | `sectionTitleClassName` | `string`                                                                      | -                            | Clases para los títulos de sección            |
 | `disabled`              | `boolean`                                                                     | `false`                      | Deshabilita el componente completo            |
 | `variant`               | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"`                  | Variante de estilo                            |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Con grupos", href: "#con-grupos" },
+      { title: "Deshabilitado", href: "#deshabilitado" },
+      { title: "Con título", href: "#con-titulo" },
+      { title: "Campo requerido", href: "#campo-requerido" },
+      {
+        title: "Con opciones deshabilitadas",
+        href: "#opciones-deshabilitadas",
+      },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
