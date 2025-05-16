@@ -4,7 +4,9 @@ description: >-
   Un componente de pestañas con animaciones suaves y opciones de personalización.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion
 npx @stofli/ui add tabs
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Tabs } from "@stofli/ui";
@@ -37,9 +42,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Muestra un componente de pestañas básico.
 
@@ -88,8 +97,10 @@ export default function TabsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con íconos
+    <div className="mt-6">
+      <HeadingAnchor id="con-iconos" level={3} >Con íconos</HeadingAnchor>
 
 Añade íconos a las pestañas.
 
@@ -145,8 +156,10 @@ export default function TabsWithIconsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con efecto hover
+    <div className="mt-6">
+      <HeadingAnchor id="con-efecto-hover" level={3} >Con efecto hover</HeadingAnchor>
 
 Usando `hoverEffect={true}` para mostrar una animación al pasar el ratón por encima de las pestañas.
 
@@ -205,8 +218,10 @@ export default function TabsHoverEffectDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 Usando la prop `variant`: default, primary, secondary, success, warning y danger.
 
@@ -290,8 +305,10 @@ export default function TabsVariantsDemo() {
 ```
 
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Usando la prop `size`: sm, md y lg.
 
@@ -354,8 +371,10 @@ export default function TabsSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Radios
+    <div className="mt-6">
+      <HeadingAnchor id="radios" level={3} >Radios</HeadingAnchor>
 
 Usando la prop `radius`: none, sm, md y full.
 
@@ -432,8 +451,10 @@ export default function TabsRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Anchura completa
+    <div className="mt-6">
+      <HeadingAnchor id="anchura-completa" level={3} >Anchura completa</HeadingAnchor>
 
 Usando la prop `fullWidth` para expandir las pestañas al ancho completo del contenedor.
 
@@ -466,8 +487,10 @@ export default function TabsFullWidthDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando las propiedades de clases personalizadas con Tailwind CSS.
 
@@ -535,8 +558,10 @@ export default function TabsCustomClassDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Diseño moderno de pestañas
+    <div className="mt-6">
+      <HeadingAnchor id="diseno-moderno" level={3} >Diseño moderno de pestañas</HeadingAnchor>
 
 Un ejemplo de diseño de pestañas con estilo moderno y minimalista.
 
@@ -664,8 +689,11 @@ export default function ModernTabsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                        | Tipo                                                                          | Default     | Descripción                                         |
 | --------------------------- | ----------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
@@ -687,3 +715,27 @@ export default function ModernTabsDemo() {
 | `tabIconClassName`          | `string`                                                                      | -           | Clases para los iconos de las pestañas              |
 | `tabLabelClassName`         | `string`                                                                      | -           | Clases para las etiquetas de texto de las pestañas  |
 | `contentContainerClassName` | `string`                                                                      | -           | Clases para el contenedor del contenido de pestañas |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Con íconos", href: "#con-iconos" },
+      { title: "Con efecto hover", href: "#con-efecto-hover" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Radios", href: "#radios" },
+      { title: "Anchura completa", href: "#anchura-completa" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+      { title: "Diseño moderno de pestañas", href: "#diseno-moderno" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
