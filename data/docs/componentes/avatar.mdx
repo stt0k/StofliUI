@@ -4,14 +4,19 @@ description: >-
   Un componente de avatar que muestra una imagen de perfil o las iniciales como fallback, con diferentes tamaños, bordes y estados.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar el componente
 npx @stofli/ui add avatar
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 El componente Avatar puede mostrar una imagen, iniciales como fallback, y varios estados de usuario.
 
@@ -29,9 +34,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Muestra un avatar con imagen y otro usando la prop `fallback` para mostrar iniciales.
 
@@ -68,8 +77,10 @@ export default function AvatarDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Usando la prop `size`: sm, md, lg y xl.
 
@@ -98,8 +109,10 @@ export default function AvatarSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Bordes y Radios
+    <div className="mt-6">
+      <HeadingAnchor id="bordes-radios" level={3} >Bordes y Radios</HeadingAnchor>
 
 Usando las props `border` y `radius` (none, sm, md, full) para personalizar los bordes.
 
@@ -176,8 +189,10 @@ export default function AvatarRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Estados
+    <div className="mt-6">
+      <HeadingAnchor id="estados" level={3} >Estados</HeadingAnchor>
 
 Usando la prop `status`: online, offline, away y busy.
 
@@ -206,8 +221,10 @@ export default function AvatarStatusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del avatar usando las propiedades de className con clases de Tailwind CSS.
 
@@ -264,8 +281,11 @@ export default function AvatarCustomClassesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                | Tipo                                        | Default           | Descripción                                     |
 | ------------------- | ------------------------------------------- | ----------------- | ----------------------------------------------- |
@@ -281,3 +301,23 @@ export default function AvatarCustomClassesDemo() {
 | `imageClassName`    | `string`                                    | -                 | Clases adicionales para la imagen               |
 | `fallbackClassName` | `string`                                    | -                 | Clases adicionales para el texto de fallback    |
 | `statusClassName`   | `string`                                    | -                 | Clases adicionales para el indicador de estado  |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Bordes y Radios", href: "#bordes-radios" },
+      { title: "Estados", href: "#estados" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
