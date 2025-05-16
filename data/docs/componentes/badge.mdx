@@ -4,7 +4,9 @@ description: >-
   Un componente de insignia versátil con diferentes estilos, tamaños y características interactivas.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion class-variance-authority
 npx @stofli/ui add badge
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Badge } from "@stofli/ui";
@@ -24,9 +29,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Muestra diferentes variantes del badge.
 
@@ -61,8 +70,10 @@ export default function BadgeDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Usando la prop `size`: sm, md y lg.
 
@@ -89,8 +100,10 @@ export default function BadgeSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con punto indicador
+    <div className="mt-6">
+      <HeadingAnchor id="con-punto-indicador" level={3} >Con punto indicador</HeadingAnchor>
 
 Usando `withDot` y opcionalmente `dotColor` para personalizar el color del punto.
 
@@ -119,8 +132,10 @@ export default function BadgeWithDotDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con icono
+    <div className="mt-6">
+      <HeadingAnchor id="con-icono" level={3} >Con icono</HeadingAnchor>
 
 Usando la prop `icon` para agregar un icono al badge.
 
@@ -160,8 +175,10 @@ export default function BadgeWithIconDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Descartable
+    <div className="mt-6">
+      <HeadingAnchor id="descartable" level={3} >Descartable</HeadingAnchor>
 
 Usando `dismissible` para permitir que el badge pueda ser eliminado.
 
@@ -188,8 +205,10 @@ export default function BadgeDismissibleDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Radios
+    <div className="mt-6">
+      <HeadingAnchor id="radios" level={3} >Radios</HeadingAnchor>
 
 Usando la prop `radius`: none, sm, md y full.
 
@@ -218,8 +237,10 @@ export default function BadgeRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con Avatar
+    <div className="mt-6">
+      <HeadingAnchor id="con-avatar" level={3} >Con Avatar</HeadingAnchor>
 
 Combinando el Badge con el componente Avatar para notificaciones o estados de usuario.
 
@@ -324,8 +345,10 @@ export default function BadgeWithAvatarDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con iconos
+    <div className="mt-6">
+      <HeadingAnchor id="con-iconos" level={3} >Con iconos</HeadingAnchor>
 
 Combinando el Badge con iconos para mostrar notificaciones o estados.
 
@@ -407,8 +430,10 @@ export default function BadgeWithIconsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del badge usando las propiedades de className con clases de Tailwind CSS.
 
@@ -470,8 +495,11 @@ export default function BadgeCustomClassesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop               | Tipo                                                                                       | Default     | Descripción                                  |
 | ------------------ | ------------------------------------------------------------------------------------------ | ----------- | -------------------------------------------- |
@@ -487,3 +515,27 @@ export default function BadgeCustomClassesDemo() {
 | `dotClassName`     | `string`                                                                                   | -           | Clases adicionales para el punto indicador   |
 | `iconClassName`    | `string`                                                                                   | -           | Clases adicionales para el icono             |
 | `contentClassName` | `string`                                                                                   | -           | Clases adicionales para el contenido textual |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Con punto indicador", href: "#con-punto-indicador" },
+      { title: "Con icono", href: "#con-icono" },
+      { title: "Descartable", href: "#descartable" },
+      { title: "Radios", href: "#radios" },
+      { title: "Con Avatar", href: "#con-avatar" },
+      { title: "Con iconos", href: "#con-iconos" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
