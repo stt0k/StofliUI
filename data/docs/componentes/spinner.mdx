@@ -4,14 +4,19 @@ description: >-
   Un componente de spinner para indicar estados de carga con diferentes estilos y animaciones.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar el componente
 npx @stofli/ui add spinner
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Spinner } from "@stofli/ui";
@@ -21,9 +26,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 El spinner básico que se muestra como un indicador de carga.
 
@@ -42,8 +51,10 @@ export default function SpinnerDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 El spinner está disponible en varios tamaños: xs, sm, md, lg y xl.
 
@@ -74,8 +85,10 @@ export default function SpinnerSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El spinner está disponible en diferentes variantes de color.
 
@@ -108,8 +121,10 @@ export default function SpinnerVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tipos
+    <div className="mt-6">
+      <HeadingAnchor id="tipos" level={3} >Tipos</HeadingAnchor>
 
 El spinner está disponible en cinco tipos diferentes: border, dots, grow, wave y lines.
 
@@ -140,8 +155,10 @@ export default function SpinnerTypesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Velocidades
+    <div className="mt-6">
+      <HeadingAnchor id="velocidades" level={3} >Velocidades</HeadingAnchor>
 
 El spinner se puede configurar con diferentes velocidades de animación.
 
@@ -168,8 +185,10 @@ export default function SpinnerSpeedsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con etiqueta
+    <div className="mt-6">
+      <HeadingAnchor id="con-etiqueta" level={3} >Con etiqueta</HeadingAnchor>
 
 El spinner puede incluir una etiqueta de texto en diferentes posiciones.
 
@@ -198,8 +217,10 @@ export default function SpinnerWithLabelDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Combinaciones
+    <div className="mt-6">
+      <HeadingAnchor id="combinaciones" level={3} >Combinaciones</HeadingAnchor>
 
 Puedes combinar diferentes propiedades para personalizar el spinner según tus necesidades.
 
@@ -226,8 +247,10 @@ export default function SpinnerCombinationsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando la propiedad className con clases de Tailwind CSS.
 
@@ -260,8 +283,11 @@ export default function SpinnerCustomClassDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                 | Tipo                                                                          | Default     | Descripción                            |
 | -------------------- | ----------------------------------------------------------------------------- | ----------- | -------------------------------------- |
@@ -275,3 +301,26 @@ export default function SpinnerCustomClassDemo() {
 | `containerClassName` | `string`                                                                      | -           | Clases para el contenedor principal    |
 | `spinnerClassName`   | `string`                                                                      | -           | Clases para el elemento spinner        |
 | `labelClassName`     | `string`                                                                      | -           | Clases para el texto de la etiqueta    |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tipos", href: "#tipos" },
+      { title: "Velocidades", href: "#velocidades" },
+      { title: "Con etiqueta", href: "#con-etiqueta" },
+      { title: "Combinaciones", href: "#combinaciones" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
