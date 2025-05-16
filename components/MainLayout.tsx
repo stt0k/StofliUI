@@ -6,6 +6,7 @@ import Header from "@/components/header/Header";
 import FooterDocs from "@/components/footer/FooterDocs";
 import Pagination from "@/components/sections/pagination";
 import { useRouter, usePathname } from "next/navigation";
+import PageNav from "@/components/docs/PageNav";
 
 interface NavItem {
   title: string;
@@ -15,6 +16,7 @@ interface NavItem {
 interface MainLayoutProps {
   children: React.ReactNode;
   navItems?: NavItem[];
+  toc?: NavItem[];
 }
 
 // Secciones principales y frameworks en orden predefinido
@@ -110,8 +112,13 @@ const componentPages = [
 // Crear estructura unificada de todas las páginas para la navegación
 const allPages = [...mainPages, ...frameworkPages, ...componentPages];
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
-  const hasNavItems = navItems.length > 0;
+const MainLayout: React.FC<MainLayoutProps> = ({
+  children,
+  navItems = [],
+  toc = [],
+}) => {
+  const hasNavItems = navItems.length > 0 || toc.length > 0;
+  const itemsToDisplay = toc.length > 0 ? toc : navItems;
   const router = useRouter();
   const pathname = usePathname();
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
@@ -204,21 +211,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, navItems = [] }) => {
               {hasNavItems && (
                 <div className="hidden text-sm xl:block">
                   <div className="sticky top-25 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
-                    <div className="space-y-2">
-                      <p className="font-medium">En esta página</p>
-                      <ul className="m-0 list-none">
-                        {navItems.map((item, index) => (
-                          <li key={index}>
-                            <a
-                              className="inline-block py-1 text-zinc-500 no-underline transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50"
-                              href={item.href}
-                            >
-                              {item.title}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <PageNav links={itemsToDisplay} />
                   </div>
                 </div>
               )}
