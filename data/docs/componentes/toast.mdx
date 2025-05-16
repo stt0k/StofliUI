@@ -4,7 +4,9 @@ description: >-
   Un componente de notificaciones toast moderno con animaciones fluidas, múltiples posiciones y variantes de estilo.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -15,7 +17,10 @@ npx @stofli/ui add toast
 npx @stofli/ui add button
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Toast, ToastProvider, useToast } from "@stofli/ui";
@@ -62,9 +67,13 @@ function ToastButton() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un toast simple con título y descripción.
 
@@ -98,8 +107,10 @@ export default function ToastDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 Toasts con diferentes variantes de estilo.
 
@@ -207,10 +218,12 @@ export default function ToastVariantsDemo() {
 );
 }
 
-```
+````
 </DemoTabs>
+    </div>
 
-### Posiciones
+    <div className="mt-6">
+      <HeadingAnchor id="posiciones" level={3} >Posiciones</HeadingAnchor>
 
 Toasts que aparecen en diferentes posiciones de la pantalla.
 
@@ -324,11 +337,13 @@ export default function ToastPositionsDemo() {
     </div>
   );
 }
-```
+````
 
 </DemoTabs>
+    </div>
 
-### Con iconos
+    <div className="mt-6">
+      <HeadingAnchor id="con-iconos" level={3} >Con iconos</HeadingAnchor>
 
 Toasts que incluyen iconos para mejorar la comunicación visual.
 
@@ -417,10 +432,12 @@ Notificación
 );
 }
 
-```
+````
 </DemoTabs>
+    </div>
 
-### Duración personalizada
+    <div className="mt-6">
+      <HeadingAnchor id="duracion-personalizada" level={3} >Duración personalizada</HeadingAnchor>
 
 Toast con duración personalizada antes de desaparecer automáticamente.
 
@@ -487,11 +504,13 @@ export default function ToastDurationDemo() {
     </div>
   );
 }
-```
+````
 
 </DemoTabs>
+    </div>
 
-### Múltiples Toasts en cola
+    <div className="mt-6">
+      <HeadingAnchor id="multiples-toasts" level={3} >Múltiples Toasts en cola</HeadingAnchor>
 
 El componente ahora admite mostrar múltiples toasts simultáneamente, organizados según su posición.
 
@@ -585,10 +604,12 @@ variant: "primary"
 );
 }
 
-```
+````
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando las propiedades de clases personalizadas con Tailwind CSS. Cuando proporcionas clases personalizadas, estas tienen prioridad sobre los estilos predeterminados.
 
@@ -681,10 +702,13 @@ export default function ToastCustomDemo() {
     </div>
   );
 }
-```
-</DemoTabs>
+````
 
-### Usando botones para mostrar toasts
+</DemoTabs>
+    </div>
+
+    <div className="mt-6">
+      <HeadingAnchor id="usando-botones" level={3} >Usando botones para mostrar toasts</HeadingAnchor>
 
 Puedes usar el hook `useToast` dentro del `ToastProvider` para mostrar toasts desde cualquier parte de tu aplicación.
 
@@ -735,7 +759,12 @@ function ToastButton() {
 }
 ```
 
-## Props
+    </div>
+
+  </div>
+
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                     | Tipo                                                                                              | Default          | Descripción                                                                               |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
@@ -759,4 +788,25 @@ function ToastButton() {
 | `contentClassName`       | `string`                                                                                          | -                | Clases para el contenedor del contenido principal                                         |
 | `closeButtonClassName`   | `string`                                                                                          | -                | Clases para el botón de cerrar                                                            |
 
+  </div>
+</div>
 
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Posiciones", href: "#posiciones" },
+      { title: "Con iconos", href: "#con-iconos" },
+      { title: "Duración personalizada", href: "#duracion-personalizada" },
+      { title: "Múltiples Toasts en cola", href: "#multiples-toasts" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+      { title: "Usando botones para mostrar toasts", href: "#usando-botones" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
