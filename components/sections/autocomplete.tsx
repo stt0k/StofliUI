@@ -513,7 +513,15 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               dropdownClassName
             )}
           >
-            <div className="overflow-y-auto max-h-60 hide-scrollbar">
+            <div 
+              className={cn(
+                "overflow-y-auto max-h-60",
+                "scrollbar-none", // Clase Tailwind para ocultar scrollbar
+                "no-scrollbar", // Clase personalizada de respaldo
+                // Estilos inline para navegadores que no soporten las clases anteriores
+                "overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              )}
+            >
               {Object.entries(groupedOptions).map(([group, groupOptions]) => (
                 <React.Fragment key={group}>
                   {group !== "default" && (
