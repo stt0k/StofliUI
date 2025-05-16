@@ -4,7 +4,9 @@ description: >-
   Un componente de paginación para navegar a través de contenido dividido en páginas.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -25,7 +27,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Pagination } from "@stofli/ui";
@@ -35,9 +40,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un componente de paginación básico con números de página y flechas de navegación.
 
@@ -61,8 +70,10 @@ export default function PaginationDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El componente de paginación está disponible en diferentes variantes de color.
 
@@ -95,8 +106,10 @@ export default function PaginationVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 El componente de paginación está disponible en tres tamaños: sm, md y lg.
 
@@ -123,8 +136,10 @@ export default function PaginationSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con botones de primera y última página
+    <div className="mt-6">
+      <HeadingAnchor id="con-botones-primera-ultima" level={3} >Con botones de primera y última página</HeadingAnchor>
 
 Usando `withEdges={true}`, muestra botones adicionales para ir a la primera y última página.
 
@@ -145,8 +160,10 @@ export default function PaginationWithEdgesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con texto en los botones
+    <div className="mt-6">
+      <HeadingAnchor id="con-texto-botones" level={3} >Con texto en los botones</HeadingAnchor>
 
 Usando `withText={true}`, añade texto descriptivo a los botones de navegación.
 
@@ -167,8 +184,10 @@ export default function PaginationWithTextDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con texto personalizado en los botones
+    <div className="mt-6">
+      <HeadingAnchor id="texto-personalizado-botones" level={3} >Con texto personalizado en los botones</HeadingAnchor>
 
 Puedes personalizar el texto que aparece en los botones de navegación usando la propiedad `customText`.
 
@@ -209,8 +228,10 @@ export default function PaginationCustomTextDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Mostrar solo botón siguiente o anterior
+    <div className="mt-6">
+      <HeadingAnchor id="solo-boton-siguiente-anterior" level={3} >Mostrar solo botón siguiente o anterior</HeadingAnchor>
 
 Usando las propiedades `showPrevious` y `showNext`, puedes controlar qué botones de navegación se muestran. Esto es útil para la primera o última página.
 
@@ -278,8 +299,10 @@ export default function PaginationSingleButtonDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Ancho completo
+    <div className="mt-6">
+      <HeadingAnchor id="ancho-completo" level={3} >Ancho completo</HeadingAnchor>
 
 Usando `fullWidth={true}`, el componente ocupará todo el ancho disponible de su contenedor y aplicará un diseño con espacio entre los botones (justify-between).
 
@@ -308,8 +331,10 @@ export default function PaginationFullWidthDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Deshabilitado
+    <div className="mt-6">
+      <HeadingAnchor id="deshabilitado" level={3} >Deshabilitado</HeadingAnchor>
 
 Un componente de paginación deshabilitado que no permite interacción.
 
@@ -333,8 +358,10 @@ export default function PaginationDisabledDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando la propiedad `className` general o las propiedades específicas de classNames con clases de Tailwind CSS.
 
@@ -373,8 +400,11 @@ export default function PaginationCustomClassDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                        | Tipo                                                                          | Default                                                                         | Descripción                                             |
 | --------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------- |
@@ -399,3 +429,37 @@ export default function PaginationCustomClassDemo() {
 | `ellipsisClassName`         | `string`                                                                      | -                                                                               | Clases para los elementos de elipsis                    |
 | `indicatorClassName`        | `string`                                                                      | -                                                                               | Clases para el indicador animado                        |
 | `numbersContainerClassName` | `string`                                                                      | -                                                                               | Clases para el contenedor de números de página          |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tamaños", href: "#tamanos" },
+      {
+        title: "Con botones de primera y última página",
+        href: "#con-botones-primera-ultima",
+      },
+      { title: "Con texto en los botones", href: "#con-texto-botones" },
+      {
+        title: "Con texto personalizado en los botones",
+        href: "#texto-personalizado-botones",
+      },
+      {
+        title: "Mostrar solo botón siguiente o anterior",
+        href: "#solo-boton-siguiente-anterior",
+      },
+      { title: "Ancho completo", href: "#ancho-completo" },
+      { title: "Deshabilitado", href: "#deshabilitado" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
