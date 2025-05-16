@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
   BookOpen,
   PanelLeft,
@@ -81,7 +81,7 @@ const HeadLinks = ({
   };
 
   // Calcula la posición adecuada para el submenu
-  const calculateSubmenuPosition = () => {
+  const calculateSubmenuPosition = useCallback(() => {
     if (linkRef.current) {
       const linkRect = linkRef.current.getBoundingClientRect();
       const windowWidth = window.innerWidth;
@@ -110,7 +110,7 @@ const HeadLinks = ({
         }
       }
     }
-  };
+  }, [title, linkRef]);
 
   // Recalcular posición al cambiar el tamaño de la ventana
   useEffect(() => {
@@ -127,7 +127,7 @@ const HeadLinks = ({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [isHovered]);
+  }, [isHovered, calculateSubmenuPosition]);
 
   const getIconComponent = (title: string): LucideIcon => {
     const lowerTitle = title.toLowerCase();
@@ -252,39 +252,33 @@ const HeadLinks = ({
                 <div className="grid grid-cols-1 gap-4">
                   {/* Sección superior tipo bento */}
                   <div className="grid grid-cols-2 gap-4">
-                    {/* Bloque de Introducción */}
+                    {/* Bloque de Primeros pasos */}
                     <div className="bg-gray-50 dark:bg-zinc-950/20 rounded-xl p-4 border border-gray-200 dark:border-zinc-800/50">
                       <h3 className="text-gray-800 dark:text-zinc-200 font-semibold text-sm mb-3 flex items-center">
                         <BookOpen className="h-4 w-4 mr-2 text-gray-500 dark:text-zinc-400" />
-                        Introducción
+                        Primeros pasos
                       </h3>
                       <div className="space-y-2">
                         <Link
-                          href="/docs/introduccion/bienvenida"
+                          href="/docs/introduccion"
                           className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
-                          <span>Bienvenida</span>
+                          <span>Introducción</span>
                         </Link>
                         <Link
-                          href="/docs/introduccion/primeros-pasos"
+                          href="/docs/instalacion"
                           className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
-                          <span>Primeros pasos</span>
-                        </Link>
-                        <Link
-                          href="/docs/introduccion/conceptos"
-                          className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
-                        >
-                          <span>Conceptos clave</span>
+                          <span>Instalación</span>
                         </Link>
                       </div>
                     </div>
 
-                    {/* Bloque de Instalación */}
+                    {/* Bloque de Frameworks */}
                     <div className="bg-gray-50 dark:bg-zinc-950/20 rounded-xl p-4 border border-gray-200 dark:border-zinc-800/50">
                       <h3 className="text-gray-800 dark:text-zinc-200 font-semibold text-sm mb-3 flex items-center">
                         <Code className="h-4 w-4 mr-2 text-gray-500 dark:text-zinc-400" />
-                        Instalación
+                        Frameworks
                       </h3>
                       <div className="space-y-2">
                         <Link
