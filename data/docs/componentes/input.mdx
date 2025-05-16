@@ -4,7 +4,9 @@ description: >-
   Un componente de entrada de texto moderno con efectos de foco y múltiples variantes de estilo.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -29,7 +31,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Input } from "@stofli/ui";
@@ -45,9 +50,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un input básico con diferentes variantes.
 
@@ -96,8 +105,10 @@ export default function InputDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Usando la prop `size`: sm, md y lg.
 
@@ -124,8 +135,10 @@ export default function InputSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Variantes
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 Usando la prop `variant`: default, primary, secondary, success, warning y danger.
 
@@ -218,8 +231,10 @@ export default function InputVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con Íconos
+    <div className="mt-6">
+      <HeadingAnchor id="con-iconos" level={3} >Con Íconos</HeadingAnchor>
 
 Añade íconos al inicio o final del input para mejorar la experiencia visual.
 
@@ -305,8 +320,10 @@ export default function InputWithIconDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Validación integrada
+    <div className="mt-6">
+      <HeadingAnchor id="validacion-integrada" level={3} >Validación integrada</HeadingAnchor>
 
 El componente Input incluye validación automática para tipos específicos como email y url, además de mostrar mensajes de error y éxito.
 
@@ -382,8 +399,10 @@ export default function InputValidationDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Estados de validación
+    <div className="mt-6">
+      <HeadingAnchor id="estados-de-validacion" level={3} >Estados de validación</HeadingAnchor>
 
 Controla manualmente los estados de error y éxito con las props `error` y `success`.
 
@@ -445,8 +464,10 @@ export default function InputValidationStatesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Validación con patrones
+    <div className="mt-6">
+      <HeadingAnchor id="validacion-con-patrones" level={3} >Validación con patrones</HeadingAnchor>
 
 Usa la prop `pattern` para validar el input con expresiones regulares personalizadas.
 
@@ -494,10 +515,11 @@ export default function InputPatternDemo() {
   );
 }
 ```
-
 </DemoTabs>
+    </div>
 
-### Radios
+    <div className="mt-6">
+      <HeadingAnchor id="radios" level={3} >Radios</HeadingAnchor>
 
 Usando la prop `radius`: none, sm, md y full.
 
@@ -574,8 +596,10 @@ export default function InputRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Ancho completo
+    <div className="mt-6">
+      <HeadingAnchor id="ancho-completo" level={3} >Ancho completo</HeadingAnchor>
 
 Utilizando la prop `fullWidth` para que el input ocupe todo el ancho disponible.
 
@@ -614,8 +638,10 @@ export default function InputFullWidthDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Formulario de contacto
+    <div className="mt-6">
+      <HeadingAnchor id="formulario-de-contacto" level={3} >Formulario de contacto</HeadingAnchor>
 
 Ejemplo de un formulario de contacto con validación integrada.
 
@@ -733,8 +759,10 @@ export default function ContactFormDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Reglas de validación
+    <div className="mt-6">
+      <HeadingAnchor id="reglas-de-validacion" level={3} >Reglas de validación</HeadingAnchor>
 
 El componente Input soporta validación mediante reglas predefinidas en formato de cadena de texto, lo que evita problemas de serialización en componentes cliente.
 
@@ -827,8 +855,10 @@ export default function InputValidationRulesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Puedes personalizar cualquier parte del componente usando las propiedades de className con clases de Tailwind CSS.
 
@@ -861,8 +891,11 @@ export default function InputCustomClassesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop             | Tipo                                                                          | Default     | Descripción                                                                                                                                            |
 | ---------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -892,3 +925,30 @@ export default function InputCustomClassesDemo() {
 | `onChange`       | `(e: React.ChangeEvent<HTMLInputElement>) => void`                            | -           | Función llamada al cambiar el valor                                                                                                                    |
 | `onFocus`        | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al enfocar el input                                                                                                                    |
 | `onBlur`         | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al perder el foco                                                                                                                      |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Variantes", href: "#variantes" },
+      { title: "Con Íconos", href: "#con-iconos" },
+      { title: "Validación integrada", href: "#validacion-integrada" },
+      { title: "Estados de validación", href: "#estados-de-validacion" },
+      { title: "Validación con patrones", href: "#validacion-con-patrones" },
+      { title: "Radios", href: "#radios" },
+      { title: "Ancho completo", href: "#ancho-completo" },
+      { title: "Formulario de contacto", href: "#formulario-de-contacto" },
+      { title: "Reglas de validación", href: "#reglas-de-validacion" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
