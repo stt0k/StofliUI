@@ -4,7 +4,9 @@ description: >-
   Un componente de tarjeta interactivo con soporte para animaciones, imágenes y diferentes estilos.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion
 npx @stofli/ui add card
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Card } from "@stofli/ui";
@@ -29,9 +34,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Básico
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Una tarjeta simple con título y descripción.
 
@@ -56,8 +65,10 @@ export default function CardDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con Imagen
+    <div className="mt-6">
+      <HeadingAnchor id="con-imagen" level={3} >Con Imagen</HeadingAnchor>
 
 Tarjeta con una imagen en la parte superior que se anima al pasar el cursor.
 
@@ -84,8 +95,10 @@ export default function CardImageDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con GIF
+    <div className="mt-6">
+      <HeadingAnchor id="con-gif" level={3} >Con GIF</HeadingAnchor>
 
 Tarjeta con imagen de fondo que cambia a un GIF al pasar el cursor.
 
@@ -130,8 +143,10 @@ export default function CardAnimationDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Card de Autor
+    <div className="mt-6">
+      <HeadingAnchor id="card-de-autor" level={3} >Card de Autor</HeadingAnchor>
 
 Card con avatar del autor e información adicional, ideal para blogs y artículos.
 
@@ -200,8 +215,10 @@ export default function CardAuthorDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con Cabecera y Pie
+    <div className="mt-6">
+      <HeadingAnchor id="con-cabecera-y-pie" level={3} >Con Cabecera y Pie</HeadingAnchor>
 
 Tarjeta con contenido en la cabecera y pie, usando un diseño monocromático que se adapta a ambos temas.
 
@@ -256,8 +273,10 @@ export default function CardHeaderFooterDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Crea una tarjeta de producto con opciones de compra personalizada usando Tailwind CSS y componentes de la biblioteca.
 
@@ -433,8 +452,11 @@ export default function CardProductDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                   | Tipo                                                                          | Default     | Descripción                             |
 | ---------------------- | ----------------------------------------------------------------------------- | ----------- | --------------------------------------- |
@@ -455,3 +477,24 @@ export default function CardProductDemo() {
 | `footer`               | `React.ReactNode`                                                             | -           | Contenido del pie                       |
 | `image`                | `string`                                                                      | -           | URL de la imagen                        |
 | `loading`              | `"eager" \| "lazy"`                                                           | `"lazy"`    | Estrategia de carga de imagen           |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Básico", href: "#basico" },
+      { title: "Con Imagen", href: "#con-imagen" },
+      { title: "Con GIF", href: "#con-gif" },
+      { title: "Card de Autor", href: "#card-de-autor" },
+      { title: "Con Cabecera y Pie", href: "#con-cabecera-y-pie" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
