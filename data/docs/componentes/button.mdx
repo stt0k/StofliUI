@@ -4,7 +4,9 @@ description: >-
   Un componente de botón con varias variantes y tamaños, incluyendo estados de carga y estilos diferentes.
 ---
 
-## Instalación
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
 
 ```bash
 # Instalar dependencias necesarias
@@ -14,7 +16,10 @@ npm install framer-motion lucide-react
 npx @stofli/ui add button
 ```
 
-## Uso
+  </div>
+
+  <div>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
 ```tsx
 import { Button } from "@stofli/ui";
@@ -28,9 +33,13 @@ export default function App() {
 }
 ```
 
-## Ejemplos
+  </div>
 
-### Variantes
+  <div>
+    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
+
+    <div className="mt-4">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El botón tiene varias variantes que puedes usar para diferentes contextos.
 
@@ -69,8 +78,10 @@ export default function ButtonVariantsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Tamaños
+    <div className="mt-6">
+      <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
 
 Personaliza el tamaño del botón según tus necesidades.
 
@@ -104,8 +115,10 @@ export default function ButtonSizesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Radios
+    <div className="mt-6">
+      <HeadingAnchor id="radios" level={3} >Radios</HeadingAnchor>
 
 Personaliza el radio de las esquinas del botón.
 
@@ -136,8 +149,10 @@ export default function ButtonRadiusDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Efecto Ripple
+    <div className="mt-6">
+      <HeadingAnchor id="efecto-ripple" level={3} >Efecto Ripple</HeadingAnchor>
 
 Los botones tienen un efecto de onda expansiva (ripple) que se activa al hacer clic.
 
@@ -164,8 +179,10 @@ export default function ButtonRippleDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Efecto de Clic
+    <div className="mt-6">
+      <HeadingAnchor id="efecto-clic" level={3} >Efecto de Clic</HeadingAnchor>
 
 Los botones tienen un sutil efecto de escala al hacer clic, creando una sensación táctil de presión.
 
@@ -190,8 +207,10 @@ export default function ButtonClickEffectDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con iconos
+    <div className="mt-6">
+      <HeadingAnchor id="con-iconos" level={3} >Con iconos</HeadingAnchor>
 
 Añade iconos a los botones para mejorar la experiencia visual.
 
@@ -231,8 +250,10 @@ export default function ButtonWithIconsDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Estados de Carga
+    <div className="mt-6">
+      <HeadingAnchor id="estados-carga" level={3} >Estados de Carga</HeadingAnchor>
 
 Muestra un estado de carga en el botón.
 
@@ -265,8 +286,10 @@ export default function ButtonLoadingDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Ancho completo
+    <div className="mt-6">
+      <HeadingAnchor id="ancho-completo" level={3} >Ancho completo</HeadingAnchor>
 
 Botones que ocupan todo el ancho disponible.
 
@@ -299,8 +322,10 @@ export default function ButtonFullWidthDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Deshabilitado
+    <div className="mt-6">
+      <HeadingAnchor id="deshabilitado" level={3} >Deshabilitado</HeadingAnchor>
 
 Muestra un estado deshabilitado para los botones.
 
@@ -333,8 +358,10 @@ export default function ButtonDisabledDemo() {
 }
 ```
 </DemoTabs>
+    </div>
 
-### Con clases personalizadas
+    <div className="mt-6">
+      <HeadingAnchor id="clases-personalizadas" level={3} >Con clases personalizadas</HeadingAnchor>
 
 Personaliza cualquier parte del botón usando las propiedades de className con clases de Tailwind CSS.
 
@@ -373,8 +400,11 @@ export default function ButtonCustomClassesDemo() {
 }
 ```
 </DemoTabs>
+    </div>
+  </div>
 
-## Props
+  <div>
+    <HeadingAnchor id="props">Props</HeadingAnchor>
 
 | Prop                 | Tipo                                                                                                            | Default     | Descripción                                       |
 | -------------------- | --------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
@@ -398,3 +428,28 @@ export default function ButtonCustomClassesDemo() {
 | `rightIconClassName` | `string`                                                                                                        | -           | Clases para el icono derecho                      |
 | `contentClassName`   | `string`                                                                                                        | -           | Clases para el contenido del botón                |
 | `arrowClassName`     | `string`                                                                                                        | -           | Clases para la flecha                             |
+
+  </div>
+</div>
+
+export const toc = [
+  { title: "Instalación", href: "#instalacion" },
+  { title: "Uso", href: "#uso" },
+  {
+    title: "Ejemplos",
+    href: "#ejemplos",
+    children: [
+      { title: "Variantes", href: "#variantes" },
+      { title: "Tamaños", href: "#tamanos" },
+      { title: "Radios", href: "#radios" },
+      { title: "Efecto Ripple", href: "#efecto-ripple" },
+      { title: "Efecto de Clic", href: "#efecto-clic" },
+      { title: "Con iconos", href: "#con-iconos" },
+      { title: "Estados de Carga", href: "#estados-carga" },
+      { title: "Ancho completo", href: "#ancho-completo" },
+      { title: "Deshabilitado", href: "#deshabilitado" },
+      { title: "Con clases personalizadas", href: "#clases-personalizadas" },
+    ],
+  },
+  { title: "Props", href: "#props" },
+];
