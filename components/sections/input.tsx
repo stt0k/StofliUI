@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface InputProps {
   label?: string;
@@ -76,9 +76,15 @@ const Input: React.FC<InputProps> = ({
   const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Manejamos el caso de componente controlado o no controlado
+  // Determinar si el input es controlado o no controlado - esto no debe cambiar durante el ciclo de vida
   const isControlled = value !== undefined;
-  const currentValue = isControlled ? value : inputValue;
+
+  // Efecto para sincronizar defaultValue con inputValue en componentes no controlados
+  useEffect(() => {
+    if (!isControlled) {
+      setInputValue(defaultValue);
+    }
+  }, [defaultValue, isControlled]);
 
   // Rastreamos si el error vino de una prop externa
   const [errorIsExternal, setErrorIsExternal] = useState(error !== undefined);
@@ -107,7 +113,7 @@ const Input: React.FC<InputProps> = ({
     // Si hay reglas de validación y hay un valor inicial, validarlo
     if (
       hasValidationRules &&
-      currentValue &&
+      inputValue &&
       !touched &&
       !validationError &&
       !isValid
@@ -115,17 +121,9 @@ const Input: React.FC<InputProps> = ({
       // Establecer touched para que la validación funcione
       setTouched(true);
       // Validar el valor inicial
-      validateInput(currentValue);
+      validateInput(inputValue);
     }
-  }, [
-    pattern,
-    validate,
-    type,
-    currentValue,
-    touched,
-    validationError,
-    isValid,
-  ]);
+  }, [pattern, validate, type, inputValue, touched, validationError, isValid]);
 
   useEffect(() => {
     // No realizamos validación automática si:
@@ -139,17 +137,9 @@ const Input: React.FC<InputProps> = ({
       (!errorIsExternal || (errorIsExternal && hasValidationRules));
 
     if (shouldValidate) {
-      validateInput(currentValue);
+      validateInput(inputValue);
     }
-  }, [
-    currentValue,
-    touched,
-    success,
-    errorIsExternal,
-    pattern,
-    validate,
-    type,
-  ]);
+  }, [inputValue, touched, success, errorIsExternal, pattern, validate, type]);
 
   // Función para procesar reglas de validación comunes basadas en cadenas
   const processStringValidation = (
@@ -461,9 +451,11 @@ const Input: React.FC<InputProps> = ({
     borderClass = variantClasses[variant].focused;
   }
 
-  // Transformamos el id del input
+  // Transformamos el id del input - usamos una clave estable en lugar de Math.random()
   const inputId =
-    id || name || `input-${Math.random().toString(36).substring(2, 9)}`;
+    id ||
+    name ||
+    `input-${label?.replace(/\s+/g, "-").toLowerCase() || "field"}`;
 
   return (
     <div
@@ -543,8 +535,7 @@ const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           required={required}
-          value={currentValue}
-          defaultValue={!isControlled ? defaultValue : undefined}
+          {...(isControlled ? { value: value } : { value: inputValue })}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
