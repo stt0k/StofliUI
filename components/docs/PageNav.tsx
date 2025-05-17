@@ -182,18 +182,18 @@ export default function PageNav({ links }: PageNavProps) {
       return;
     }
     
-    const activeHeading = findVisibleHeadings();
+      const activeHeading = findVisibleHeadings();
 
-    if (activeHeading && "id" in activeHeading && activeHeading.id) {
-      // Ignorar IDs de Radix
-      if (
-        activeHeading.id.includes("radix-:") ||
-        activeHeading.id.includes("-content-code")
-      ) {
-        return;
-      }
+      if (activeHeading && "id" in activeHeading && activeHeading.id) {
+        // Ignorar IDs de Radix
+        if (
+          activeHeading.id.includes("radix-:") ||
+          activeHeading.id.includes("-content-code")
+        ) {
+          return;
+        }
 
-      const newActiveId = normalizeHash(activeHeading.id);
+        const newActiveId = normalizeHash(activeHeading.id);
       setActiveId(newActiveId);
     }
   }, [findVisibleHeadings, normalizeHash]);
@@ -215,11 +215,11 @@ export default function PageNav({ links }: PageNavProps) {
     
     // Normalizar el hash para la búsqueda
     const targetId = hash.startsWith("#") ? hash.substring(1) : hash;
-    
+
     // Asegurarse de que todos los iframes y las imágenes se hayan cargado antes de intentar scrollear
     setTimeout(() => {
       let targetElement = document.getElementById(targetId);
-      
+
       // Si no encontramos el elemento, intentamos buscar con selectores alternativos
       if (!targetElement) {
         // Buscar por atributo name
@@ -235,7 +235,7 @@ export default function PageNav({ links }: PageNavProps) {
             }
             return false;
           });
-        }
+      }
       }
       
       if (targetElement) {
@@ -293,7 +293,7 @@ export default function PageNav({ links }: PageNavProps) {
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       e.preventDefault();
       const normalizedHref = normalizeHash(href);
-      
+
       // Resetear la bandera de scroll manual
       isUserScrollingRef.current = false;
       
@@ -302,7 +302,7 @@ export default function PageNav({ links }: PageNavProps) {
       
       // Establecer el ID clickeado como activo (para el scroll automático inicial)
       clickedIdRef.current = normalizedHref;
-      
+
       // Limpiar el timeout anterior si existe
       if (clickTimeoutRef.current) {
         clearTimeout(clickTimeoutRef.current);
@@ -437,12 +437,12 @@ export default function PageNav({ links }: PageNavProps) {
 
   return (
     <div className="hidden xl:block fixed top-[9.5rem] w-48 z-20 py-2 max-h-[calc(100vh-120px)] overflow-y-auto">
-      <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
-        En esta página
-      </h3>
-      <ul className="space-y-[2px]">
-        {links.map((link) => renderNavLink(link))}
-      </ul>
+        <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
+          En esta página
+        </h3>
+        <ul className="space-y-[2px]">
+          {links.map((link) => renderNavLink(link))}
+        </ul>
     </div>
   );
 }
