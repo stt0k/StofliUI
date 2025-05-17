@@ -1,0 +1,172 @@
+{
+  "name": "stofli-ui",
+  "version": "0.1.11",
+  "type": "module",
+  "description": "Biblioteca moderna de componentes UI para React con Tailwind CSS",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.esm.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./accordion": {
+      "require": "./dist/components/accordion/index.js",
+      "import": "./dist/components/accordion/index.esm.js",
+      "types": "./dist/types/components/accordion/index.d.ts"
+    },
+    "./autocomplete": {
+      "require": "./dist/components/autocomplete/index.js",
+      "import": "./dist/components/autocomplete/index.esm.js",
+      "types": "./dist/types/components/autocomplete/index.d.ts"
+    },
+    "./avatar": {
+      "require": "./dist/components/avatar/index.js",
+      "import": "./dist/components/avatar/index.esm.js",
+      "types": "./dist/types/components/avatar/index.d.ts"
+    },
+    "./badge": {
+      "require": "./dist/components/badge/index.js",
+      "import": "./dist/components/badge/index.esm.js",
+      "types": "./dist/types/components/badge/index.d.ts"
+    },
+    "./breadcrumbs": {
+      "require": "./dist/components/breadcrumbs/index.js",
+      "import": "./dist/components/breadcrumbs/index.esm.js",
+      "types": "./dist/types/components/breadcrumbs/index.d.ts"
+    },
+    "./button": {
+      "require": "./dist/components/button/index.js",
+      "import": "./dist/components/button/index.esm.js",
+      "types": "./dist/types/components/button/index.d.ts"
+    },
+    "./calendar": {
+      "require": "./dist/components/calendar/index.js",
+      "import": "./dist/components/calendar/index.esm.js",
+      "types": "./dist/types/components/calendar/index.d.ts"
+    },
+    "./card": {
+      "require": "./dist/components/card/index.js",
+      "import": "./dist/components/card/index.esm.js",
+      "types": "./dist/types/components/card/index.d.ts"
+    },
+    "./checkbox": {
+      "require": "./dist/components/checkbox/index.js",
+      "import": "./dist/components/checkbox/index.esm.js",
+      "types": "./dist/types/components/checkbox/index.d.ts"
+    },
+    "./circular-progress": {
+      "require": "./dist/components/circular-progress/index.js",
+      "import": "./dist/components/circular-progress/index.esm.js",
+      "types": "./dist/types/components/circular-progress/index.d.ts"
+    },
+    "./date-picker": {
+      "require": "./dist/components/date-picker/index.js",
+      "import": "./dist/components/date-picker/index.esm.js",
+      "types": "./dist/types/components/date-picker/index.d.ts"
+    },
+    "./dropdown": {
+      "require": "./dist/components/dropdown/index.js",
+      "import": "./dist/components/dropdown/index.esm.js",
+      "types": "./dist/types/components/dropdown/index.d.ts"
+    },
+    "./input": {
+      "require": "./dist/components/input/index.js",
+      "import": "./dist/components/input/index.esm.js",
+      "types": "./dist/types/components/input/index.d.ts"
+    },
+    "./number-input": {
+      "require": "./dist/components/number-input/index.js",
+      "import": "./dist/components/number-input/index.esm.js",
+      "types": "./dist/types/components/number-input/index.d.ts"
+    },
+    "./pagination": {
+      "require": "./dist/components/pagination/index.js",
+      "import": "./dist/components/pagination/index.esm.js",
+      "types": "./dist/types/components/pagination/index.d.ts"
+    },
+    "./progress": {
+      "require": "./dist/components/progress/index.js",
+      "import": "./dist/components/progress/index.esm.js",
+      "types": "./dist/types/components/progress/index.d.ts"
+    },
+    "./spinner": {
+      "require": "./dist/components/spinner/index.js",
+      "import": "./dist/components/spinner/index.esm.js",
+      "types": "./dist/types/components/spinner/index.d.ts"
+    },
+    "./switch": {
+      "require": "./dist/components/switch/index.js",
+      "import": "./dist/components/switch/index.esm.js",
+      "types": "./dist/types/components/switch/index.d.ts"
+    },
+    "./tabs": {
+      "require": "./dist/components/tabs/index.js",
+      "import": "./dist/components/tabs/index.esm.js",
+      "types": "./dist/types/components/tabs/index.d.ts"
+    },
+    "./toast": {
+      "require": "./dist/components/toast/index.js",
+      "import": "./dist/components/toast/index.esm.js",
+      "types": "./dist/types/components/toast/index.d.ts"
+    },
+    "./tooltip": {
+      "require": "./dist/components/tooltip/index.js",
+      "import": "./dist/components/tooltip/index.esm.js",
+      "types": "./dist/types/components/tooltip/index.d.ts"
+    },
+    "./lib": {
+      "require": "./dist/lib/index.js",
+      "import": "./dist/lib/index.esm.js",
+      "types": "./dist/types/lib/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build",
+    "dev": "rollup -c -w"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0",
+    "tailwindcss": ">=3.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.9.4",
+    "lucide-react": "^0.438.0",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "react": "^18",
+    "react-dom": "^18",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-preserve-use-client": "^3.0.1",
+    "typescript": "^5"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "stofli",
+    "tailwind",
+    "design-system"
+  ],
+  "author": "Stofli-UI",
+  "license": "MIT"
+}
