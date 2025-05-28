@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronsUpDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -77,11 +77,6 @@ export const AutocompleteItem: React.FC<AutocompleteItemProps> = ({
   onSelect,
   className = "",
 }) => {
-  // Solo log para opciones seleccionadas para reducir ruido en consola
-  if (isSelected && !option.disabled) {
-    console.log(`Opción "${option.label}" seleccionada`);
-  }
-
   // Determinar las clases según el estado
   const getItemClasses = () => {
     if (option.disabled) {
@@ -179,10 +174,32 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     danger: "ring-red-500/30",
   };
 
+  // Agregar estado para el índice actualmente enfocado
+  const [focusedIndex, setFocusedIndex] = useState<number>(-1);
+
+  // Función auxiliar para encontrar la siguiente opción habilitada
+  const findNextEnabledOption = (currentIndex: number, direction: 'next' | 'prev', options: AutocompleteOption[]): number => {
+    let nextIndex = currentIndex;
+    const increment = direction === 'next' ? 1 : -1;
+
+    while (true) {
+      nextIndex += increment;
+      
+      // Verificar límites
+      if (nextIndex < 0 || nextIndex >= options.length) {
+        return currentIndex;
+      }
+
+      // Si encontramos una opción habilitada, la retornamos
+      if (!options[nextIndex].disabled) {
+        return nextIndex;
+      }
+    }
+  };
+
   // Sincronizar valor externo con interno
   useEffect(() => {
     setInternalValue(value);
-    console.log("Valor externo actualizado:", value);
   }, [value]);
 
   // Manejar clics fuera del componente
@@ -222,10 +239,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   useEffect(() => {
     if (selectedOption) {
       setQuery(selectedOption.label);
-      console.log(
-        "Query actualizado con la opción seleccionada:",
-        selectedOption.label
-      );
     }
   }, [selectedOption]);
 
@@ -238,9 +251,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       !selectedOption.label.toLowerCase().startsWith(query.toLowerCase()) &&
       !query.toLowerCase().startsWith(selectedOption.label.toLowerCase())
     ) {
-      console.log(
-        "Búsqueda completamente diferente, preparando nueva selección"
-      );
       // No limpiamos inmediatamente para no perder el estado en caso de regreso
     }
   }, [query, selectedOption]);
@@ -254,8 +264,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 
     // Siempre abrimos el menú al escribir
     setIsOpen(true);
-
-    console.log("Input cambiado:", newQuery);
   };
 
   const toggleDropdown = () => {
@@ -279,18 +287,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       inputRef.current.focus();
     }
   }, [isOpen]);
-
-  // Función de debug para verificar el estado
-  useEffect(() => {
-    // Log solo cuando cambian valores importantes
-    if (isOpen || value !== undefined || selectedOption) {
-      console.log("Estado:", {
-        value: value?.substring(0, 15),
-        option: selectedOption?.label,
-        isOpen,
-      });
-    }
-  }, [value, selectedOption, isOpen]);
 
   const filteredOptions = options.filter((option) => {
     // Si hay texto de búsqueda, filtramos por ese texto
@@ -330,8 +326,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         return;
       }
 
-      console.log("Opción seleccionada:", option.label, option.value);
-
       // Primero actualizar el query para que no haya cambios visuales bruscos
       setQuery(option.label);
       setIsSearching(false); // Ya no estamos buscando al seleccionar
@@ -359,7 +353,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       setIsSearching(false); // Reseteamos el estado de búsqueda
       setIsOpen(false);
       inputRef.current?.focus();
-      console.log("Selección limpiada");
     },
     [onChange]
   );
@@ -403,10 +396,111 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     return colors[variant];
   };
 
+  // Generar IDs únicos para los elementos
+  const uniqueIdBase = useId();
+  const inputId = `autocomplete-${uniqueIdBase.replace(/:/g, "")}`;
+  const listboxId = `listbox-${uniqueIdBase.replace(/:/g, "")}`;
+
+  // Manejar navegación por teclado
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const filteredOptionsArray = Object.values(groupedOptions).flat();
+
+    if (!isOpen && (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      setIsOpen(true);
+      
+      // Si abrimos con flecha abajo, focalizamos la primera opción no deshabilitada
+      if (e.key === "ArrowDown") {
+        const firstEnabledIndex = filteredOptionsArray.findIndex(opt => !opt.disabled);
+        setFocusedIndex(firstEnabledIndex >= 0 ? firstEnabledIndex : -1);
+      }
+      return;
+    }
+
+    if (isOpen) {
+      switch (e.key) {
+        case "Escape":
+          e.preventDefault();
+          setIsOpen(false);
+          setFocusedIndex(-1);
+          break;
+
+        case "ArrowDown":
+          e.preventDefault();
+          setFocusedIndex(current => {
+            // Si no hay opción focada, empezar por la primera habilitada
+            if (current === -1) {
+              const firstEnabledIndex = filteredOptionsArray.findIndex(opt => !opt.disabled);
+              return firstEnabledIndex >= 0 ? firstEnabledIndex : -1;
+            }
+            // Encontrar la siguiente opción habilitada
+            return findNextEnabledOption(current, 'next', filteredOptionsArray);
+          });
+          break;
+
+        case "ArrowUp":
+          e.preventDefault();
+          setFocusedIndex(current => {
+            if (current === -1) {
+              // Si no hay opción focada, empezar por la última habilitada
+              const lastEnabledIndex = filteredOptionsArray.length - 1;
+              return lastEnabledIndex >= 0 ? lastEnabledIndex : -1;
+            }
+            // Encontrar la opción habilitada anterior
+            return findNextEnabledOption(current, 'prev', filteredOptionsArray);
+          });
+          break;
+
+        case "Enter":
+          e.preventDefault();
+          if (focusedIndex >= 0 && focusedIndex < filteredOptionsArray.length) {
+            const selectedOption = filteredOptionsArray[focusedIndex];
+            if (!selectedOption.disabled) {
+              handleSelect(selectedOption);
+              setFocusedIndex(-1);
+              setIsOpen(false);
+            }
+          }
+          break;
+
+        case "Tab":
+          setIsOpen(false);
+          setFocusedIndex(-1);
+          break;
+      }
+    }
+  };
+
+  // Modificar el renderizado de las opciones para incluir el estado de foco
+  const renderOption = (option: AutocompleteOption, index: number) => (
+    <div
+      key={option.value}
+      role="option"
+      id={`option-${option.value}`}
+      aria-selected={option.value === (value || internalValue)}
+      aria-disabled={option.disabled}
+    >
+      <AutocompleteItem
+        option={option}
+        isSelected={option.value === (value || internalValue)}
+        onSelect={() => handleSelect(option)}
+        className={cn(
+          itemClassName,
+          focusedIndex === index && !option.disabled && "bg-zinc-100 dark:bg-zinc-800"
+        )}
+      />
+    </div>
+  );
+
   return (
     <div
       ref={containerRef}
       className={cn(`relative w-full max-w-sm`, className)}
+      role="combobox"
+      aria-expanded={isOpen}
+      aria-haspopup="listbox"
+      aria-controls={listboxId}
+      aria-owns={listboxId}
     >
       <div
         className={cn(
@@ -420,20 +514,22 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       >
         {title && (
           <div className="px-3 pt-1.5 pb-0">
-            <span
+            <label
+              htmlFor={inputId}
               className={cn(
                 `text-xs font-medium ${getTitleColorClasses()}`,
                 sectionTitleClassName
               )}
             >
               {title}
-              {required && <span className="text-red-500 ml-0.5">*</span>}
-            </span>
+              {required && <span className="text-red-500 ml-0.5" aria-label="requerido">*</span>}
+            </label>
           </div>
         )}
         <input
           ref={inputRef}
           type="text"
+          id={inputId}
           className={cn(
             `w-full px-3 pr-20`,
             title ? "pt-0 pb-1.5" : "py-2",
@@ -445,9 +541,14 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           value={query}
           onChange={handleInputChange}
           onFocus={() => setIsOpen(true)}
+          onKeyDown={handleKeyDown}
           disabled={disabled}
-          aria-label={title}
-          id={title ? title.toLowerCase().replace(/\s+/g, "-") : undefined}
+          role="textbox"
+          aria-autocomplete="list"
+          aria-controls={listboxId}
+          aria-activedescendant={selectedOption ? `option-${selectedOption.value}` : undefined}
+          aria-required={required}
+          aria-disabled={disabled}
         />
         <div className="absolute right-0 flex items-center h-full">
           <div className="w-6 h-full flex items-center justify-center">
@@ -472,7 +573,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
                 disabled={disabled}
                 aria-label="Limpiar selección"
               >
-                <X size={16} />
+                <X size={16} aria-hidden="true" />
               </button>
             )}
           </div>
@@ -492,9 +593,10 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
             )}
             onClick={toggleDropdown}
             disabled={disabled}
-            aria-label="Mostrar opciones"
+            aria-label={isOpen ? "Cerrar lista de opciones" : "Abrir lista de opciones"}
+            aria-expanded={isOpen}
           >
-            <ChevronsUpDown className="h-4 w-4" />
+            <ChevronsUpDown className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -512,13 +614,15 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               border border-zinc-200 dark:border-zinc-800`,
               dropdownClassName
             )}
+            role="listbox"
+            id={listboxId}
+            aria-label="Lista de opciones"
           >
             <div 
               className={cn(
                 "overflow-y-auto max-h-60",
-                "scrollbar-none", // Clase Tailwind para ocultar scrollbar
-                "no-scrollbar", // Clase personalizada de respaldo
-                // Estilos inline para navegadores que no soporten las clases anteriores
+                "scrollbar-none",
+                "no-scrollbar",
                 "overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               )}
             >
@@ -529,31 +633,18 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
                       title={group}
                       titleClassName={sectionTitleClassName}
                     >
-                      {groupOptions.map((option) => (
-                        <AutocompleteItem
-                          key={option.value}
-                          option={option}
-                          isSelected={option.value === (value || internalValue)}
-                          onSelect={() => handleSelect(option)}
-                          className={itemClassName}
-                        />
-                      ))}
+                      {groupOptions.map((option, index) => renderOption(option, index))}
                     </AutocompleteSection>
                   )}
                   {group === "default" &&
-                    groupOptions.map((option) => (
-                      <AutocompleteItem
-                        key={option.value}
-                        option={option}
-                        isSelected={option.value === (value || internalValue)}
-                        onSelect={() => handleSelect(option)}
-                        className={itemClassName}
-                      />
-                    ))}
+                    groupOptions.map((option, index) => renderOption(option, index))}
                 </React.Fragment>
               ))}
               {filteredOptions.length === 0 && (
-                <div className="px-3 py-2 text-sm text-zinc-500 dark:text-zinc-400">
+                <div 
+                  className="px-3 py-2 text-sm text-zinc-500 dark:text-zinc-400"
+                  role="alert"
+                >
                   No se encontraron resultados
                 </div>
               )}
