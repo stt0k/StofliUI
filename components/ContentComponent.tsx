@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Breadcrumbs, { BreadcrumbItem } from "./sections/breadcrumbs";
+import Breadcrumbs, { BreadcrumbItem } from "./sections/Breadcrumbs";
 
 interface ContentComponentProps {
   title: string;
@@ -12,7 +12,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
   title,
   description,
 }) => {
-  // Configurar las migas de pan según la ruta
+  // Configurar según la ruta
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Docs", href: "/docs/introduccion" },
   ];
