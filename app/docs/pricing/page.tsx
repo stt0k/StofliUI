@@ -31,7 +31,7 @@ export default function PricingPage() {
               </p>
 
               <div className="mt-5 mb-4">
-                <span className="text-5xl font-bold">$0</span>
+                <span className="text-5xl font-bold">€ 0</span>
                 <span className="text-gray-500 dark:text-gray-400 ml-1 block text-sm">
                   por mes
                 </span>
@@ -92,7 +92,7 @@ export default function PricingPage() {
               </p>
 
               <div className="mt-5 mb-4">
-                <span className="text-5xl font-bold">$4995</span>
+                <span className="text-5xl font-bold">€ 149</span>
                 <span className="text-gray-500 dark:text-gray-400 ml-1 block text-sm">
                   /mes
                 </span>
@@ -169,7 +169,7 @@ export default function PricingPage() {
               </p>
 
               <div className="mt-5 mb-4">
-                <span className="text-5xl font-bold">$6995</span>
+                <span className="text-5xl font-bold">€ 499</span>
                 <span className="text-gray-500 dark:text-gray-400 ml-1 block text-sm">
                   /mes
                 </span>
@@ -258,7 +258,7 @@ export default function PricingPage() {
               </p>
 
               <div className="mt-5 mb-4">
-                <span className="text-5xl font-bold">$9995</span>
+                <span className="text-5xl font-bold">€ 1299</span>
                 <span className="text-gray-500 dark:text-gray-400 ml-1 block text-sm">
                   /mes
                 </span>
@@ -362,25 +362,25 @@ export default function PricingPage() {
                   <th className="p-6 text-center border-r border-gray-200 dark:border-zinc-900">
                     <div className="font-bold">Gratis</div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
-                      $0/mes
+                      € 0/mes
                     </div>
                   </th>
                   <th className="p-6 text-center border-r border-gray-200 dark:border-zinc-900">
                     <div className="font-bold">Componentes Pro</div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
-                      $4995/mes
+                      € 149/mes
                     </div>
                   </th>
                   <th className="p-6 text-center border-r border-gray-200 dark:border-zinc-900">
                     <div className="font-bold">Páginas</div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
-                      $6995/mes
+                      € 499/mes
                     </div>
                   </th>
                   <th className="p-6 text-center border-r border-gray-200 dark:border-zinc-900">
                     <div className="font-bold">Aplicaciones Web</div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
-                      $9995/mes
+                      € 1299/mes
                     </div>
                   </th>
                 </tr>
