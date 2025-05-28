@@ -25,138 +25,6 @@ export default function PageNav({ links }: PageNavProps) {
     return hash.startsWith("#") ? hash : `#${hash}`;
   }, []);
 
-  // Función para verificar todos los encabezados y encontrar el visible
-  const findVisibleHeadings = useCallback(() => {
-    // Si se acaba de hacer clic en un ID y no es scroll manual, dar prioridad a ese ID
-    if (clickedIdRef.current && !isUserScrollingRef.current) {
-      return null;
-    }
-
-    try {
-      // Obtener todos los encabezados con ID y elementos específicos que sabemos que nos interesan
-      const targetIds = links
-        .map((link) => link.href.replace("#", ""))
-        .concat(
-          ...links.flatMap((link) =>
-            link.children
-              ? link.children.map((child) => child.href.replace("#", ""))
-              : []
-          )
-        );
-
-      // Crear selectores para IDs exactos
-      const exactSelectors = targetIds.map((id) => `[id='${id}']`).join(", ");
-
-      // Selectores de respaldo
-      const fallbackSelectors = [
-        "h1[id]",
-        "h2[id]",
-        "h3[id]",
-        "h4[id]",
-        "h5[id]",
-        "h6[id]",
-        "div[id]",
-        "[role=heading][id]",
-      ].join(", ");
-
-      // Combinar selectores
-      const combinedSelector = exactSelectors
-        ? `${exactSelectors}, ${fallbackSelectors}`
-        : fallbackSelectors;
-
-      // Buscar elementos con estos selectores
-      const headings = Array.from(
-        document.querySelectorAll(combinedSelector)
-      ).filter((el) => {
-        // Filtrar los IDs que parecen ser de Radix UI u otros IDs dinámicos
-        const id = el.id;
-        return (
-          !id.includes("radix-:") &&
-          !id.includes("-content-code") &&
-          !id.includes(":")
-        );
-      });
-
-      // Si aún no encontramos encabezados, buscar todos los elementos con ID
-      if (headings.length === 0) {
-        const allWithIds = Array.from(
-          document.querySelectorAll("*[id]")
-        ).filter((el) => {
-          const id = el.id;
-          return (
-            !id.includes("radix-:") &&
-            !id.includes("-content-code") &&
-            !id.includes(":")
-          );
-        });
-
-        headings.push(...allWithIds);
-      }
-
-      if (headings.length === 0) return null;
-
-      // Ordenar encabezados por posición vertical
-      headings.sort((a, b) => {
-        const rectA = a.getBoundingClientRect();
-        const rectB = b.getBoundingClientRect();
-        return rectA.top - rectB.top;
-      });
-
-      // Umbrales ajustados para mejor detección
-      const topOffset = 100; // Umbral superior más pequeño para ser más sensible
-      const bottomOffset = -100; // Umbral inferior para elementos que ya pasaron
-
-      // Buscar el primer encabezado visible (dentro del umbral)
-      let activeHeading = null;
-
-      // Primero intentar encontrar un encabezado dentro del umbral ideal
-      for (const heading of Array.from(headings)) {
-        const rect = heading.getBoundingClientRect();
-        if (rect.top >= 0 && rect.top <= topOffset) {
-          activeHeading = heading;
-          break;
-        }
-      }
-
-      // Si no encontramos uno en el umbral ideal, buscar el último encabezado que haya pasado
-      if (!activeHeading) {
-        for (let i = headings.length - 1; i >= 0; i--) {
-          const rect = headings[i].getBoundingClientRect();
-          if (rect.top <= 0 && rect.top >= bottomOffset) {
-            activeHeading = headings[i];
-            break;
-          }
-        }
-      }
-
-      // Como último recurso, usar el primer encabezado que está por encima de la vista
-      if (!activeHeading) {
-        let closestAbove = null;
-        let closestAboveDistance = -Infinity;
-
-        for (const heading of Array.from(headings)) {
-          const rect = heading.getBoundingClientRect();
-          if (rect.top <= 0 && rect.top > closestAboveDistance) {
-            closestAbove = heading;
-            closestAboveDistance = rect.top;
-          }
-        }
-
-        if (closestAbove) {
-          activeHeading = closestAbove;
-        } else {
-          // Si no hay encabezados por encima, usar el primero
-          activeHeading = headings[0];
-        }
-      }
-
-      return activeHeading;
-    } catch (error) {
-      console.error("Error finding visible headings:", error);
-      return null;
-    }
-  }, [links]);
-
   // Función para actualizar el ID activo basado en el scroll
   const updateActiveIdFromScroll = useCallback(() => {
     // Detectar si es scroll manual comparando con la posición anterior
@@ -182,21 +50,107 @@ export default function PageNav({ links }: PageNavProps) {
       return;
     }
     
-      const activeHeading = findVisibleHeadings();
-
-      if (activeHeading && "id" in activeHeading && activeHeading.id) {
-        // Ignorar IDs de Radix
-        if (
-          activeHeading.id.includes("radix-:") ||
-          activeHeading.id.includes("-content-code")
-        ) {
-          return;
+    // Obtener todos los IDs válidos de los enlaces en el TOC
+    const validIds = new Set<string>();
+    const extractIds = (navLinks: NavLink[]) => {
+      navLinks.forEach(link => {
+        if (link.href && link.href.startsWith('#')) {
+          validIds.add(link.href.substring(1));
         }
-
-        const newActiveId = normalizeHash(activeHeading.id);
+        if (link.children && link.children.length > 0) {
+          extractIds(link.children);
+        }
+      });
+    };
+    extractIds(links);
+    
+    // Buscar encabezados que coincidan con los IDs en el TOC
+    const headings: HTMLElement[] = [];
+    validIds.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        headings.push(element);
+      }
+    });
+    
+    if (headings.length === 0) return;
+    
+    // Ordenar encabezados por posición vertical
+    headings.sort((a, b) => {
+      const rectA = a.getBoundingClientRect();
+      const rectB = b.getBoundingClientRect();
+      return rectA.top - rectB.top;
+    });
+    
+    // Umbrales ajustados para mejor detección
+    const topOffset = 100; // Umbral superior más pequeño para ser más sensible
+    const bottomOffset = -100; // Umbral inferior para elementos que ya pasaron
+    
+    // Buscar el primer encabezado visible (dentro del umbral)
+    let activeHeading: HTMLElement | null = null;
+    
+    // Primero intentar encontrar un encabezado dentro del umbral ideal
+    for (const heading of headings) {
+      const rect = heading.getBoundingClientRect();
+      if (rect.top >= 0 && rect.top <= topOffset) {
+        activeHeading = heading;
+        break;
+      }
+    }
+    
+    // Si no encontramos uno en el umbral ideal, buscar el último encabezado que haya pasado
+    if (!activeHeading) {
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const rect = headings[i].getBoundingClientRect();
+        if (rect.top <= 0 && rect.top >= bottomOffset) {
+          activeHeading = headings[i];
+          break;
+        }
+      }
+    }
+    
+    // Como último recurso, usar el primer encabezado que está por encima de la vista
+    if (!activeHeading) {
+      let closestAbove: HTMLElement | null = null;
+      let closestAboveDistance = -Infinity;
+      
+      for (const heading of headings) {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top <= 0 && rect.top > closestAboveDistance) {
+          closestAbove = heading;
+          closestAboveDistance = rect.top;
+        }
+      }
+      
+      if (closestAbove) {
+        activeHeading = closestAbove;
+      } else {
+        // Si no hay encabezados por encima, usar el primero
+        activeHeading = headings[0];
+      }
+    }
+    
+    if (activeHeading && activeHeading.id) {
+      const newActiveId = normalizeHash(activeHeading.id);
       setActiveId(newActiveId);
     }
-  }, [findVisibleHeadings, normalizeHash]);
+  }, [links, normalizeHash]);
+
+  // Función para verificar si un ID está en el TOC
+  const isValidTocId = useCallback((navLinks: NavLink[], id: string): boolean => {
+    for (const link of navLinks) {
+      const linkId = link.href.startsWith('#') ? link.href.substring(1) : link.href;
+      if (linkId === id) {
+        return true;
+      }
+      if (link.children && link.children.length > 0) {
+        if (isValidTocId(link.children, id)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }, []);
 
   // Función para manejar el scroll inicial cuando se carga con un hash
   const handleInitialScroll = useCallback(() => {
@@ -205,38 +159,21 @@ export default function PageNav({ links }: PageNavProps) {
     const hash = window.location.hash || "";
     if (!hash) return;
     
-    // Ignorar hashes de Radix UI
-    if (hash.includes("radix-:") || hash.includes("-content-code")) return;
+    // Normalizar el hash
+    const normalizedHash = normalizeHash(hash);
+    const hashId = normalizedHash.substring(1); // Quitar el # inicial
+    
+    // Solo procesar si es un ID válido del TOC
+    if (!isValidTocId(links, hashId)) return;
     
     initialScrollDoneRef.current = true;
     
     // Establecer el hash como ID activo
-    setActiveId(normalizeHash(hash));
+    setActiveId(normalizedHash);
     
-    // Normalizar el hash para la búsqueda
-    const targetId = hash.startsWith("#") ? hash.substring(1) : hash;
-
     // Asegurarse de que todos los iframes y las imágenes se hayan cargado antes de intentar scrollear
     setTimeout(() => {
-      let targetElement = document.getElementById(targetId);
-
-      // Si no encontramos el elemento, intentamos buscar con selectores alternativos
-      if (!targetElement) {
-        // Buscar por atributo name
-        targetElement = document.querySelector(`[name="${targetId}"]`);
-        
-        if (!targetElement) {
-          // Buscar cualquier elemento que contenga el ID
-          const allElements = document.querySelectorAll("*[id]");
-          Array.from(allElements).some((el) => {
-            if (el.id.includes(targetId) && !el.id.includes("radix-:") && !el.id.includes("-content-code")) {
-              targetElement = el as HTMLElement;
-              return true;
-            }
-            return false;
-          });
-      }
-      }
+      const targetElement = document.getElementById(hashId);
       
       if (targetElement) {
         // Scroll al elemento con un pequeño offset para mejor visualización
@@ -246,19 +183,22 @@ export default function PageNav({ links }: PageNavProps) {
         });
       }
     }, 500);
-  }, [normalizeHash]);
+  }, [normalizeHash, links, isValidTocId]);
 
   // Función para manejar cambios en el hash de la URL
   const handleHashChange = useCallback(() => {
     const hash = window.location.hash || "";
     if (!hash) return;
     
-    // Ignorar hashes de Radix UI
-    if (hash.includes("radix-:") || hash.includes("-content-code")) return;
+    // Normalizar el hash
+    const normalizedHash = normalizeHash(hash);
+    const hashId = normalizedHash.substring(1); // Quitar el # inicial
     
-    // Establecer el hash como ID activo
-    setActiveId(normalizeHash(hash));
-  }, [normalizeHash]);
+    // Solo actualizar el ID activo si es un ID válido del TOC
+    if (isValidTocId(links, hashId)) {
+      setActiveId(normalizedHash);
+    }
+  }, [normalizeHash, links, isValidTocId]);
 
   // Manejar el evento de scroll
   const handleScroll = useCallback(() => {
@@ -353,6 +293,10 @@ export default function PageNav({ links }: PageNavProps) {
 
   // Configurar eventos y efectos
   useEffect(() => {
+    // Guardar referencias a los timeouts actuales
+    const scrollTimeoutRefValue = scrollTimeoutRef.current;
+    const clickTimeoutRefValue = clickTimeoutRef.current;
+    
     // Verificar primero si hay un hash en la URL y manejarlo
     if (window.location.hash) {
       handleInitialScroll();
@@ -375,11 +319,12 @@ export default function PageNav({ links }: PageNavProps) {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("hashchange", handleHashChange);
       clearInterval(intervalId);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+      
+      if (scrollTimeoutRefValue) {
+        clearTimeout(scrollTimeoutRefValue);
       }
-      if (clickTimeoutRef.current) {
-        clearTimeout(clickTimeoutRef.current);
+      if (clickTimeoutRefValue) {
+        clearTimeout(clickTimeoutRefValue);
       }
     };
   }, [
@@ -436,7 +381,7 @@ export default function PageNav({ links }: PageNavProps) {
   );
 
   return (
-    <div className="hidden xl:block fixed top-[9.5rem] w-48 z-20 py-2 max-h-[calc(100vh-120px)] overflow-y-auto">
+    <div className="hidden xl:block fixed top-[8.5rem] w-48 z-20 py-2 max-h-[calc(100vh-120px)] overflow-y-auto">
         <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
           En esta página
         </h3>
