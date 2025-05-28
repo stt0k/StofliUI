@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Switch from "@/components/sections/switch";
+import Switch from "@/components/sections/Switch";
 
 export function SwitchControlledDemo() {
   const [isChecked, setIsChecked] = useState(false);
