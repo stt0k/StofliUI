@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +33,8 @@ export interface TabsProps {
   tabIconClassName?: string;
   tabLabelClassName?: string;
   contentContainerClassName?: string;
+  ariaLabel?: string;
+  id?: string;
 }
 
 const Tabs: React.FC<TabsProps> = ({
@@ -54,6 +56,8 @@ const Tabs: React.FC<TabsProps> = ({
   tabIconClassName = "",
   tabLabelClassName = "",
   contentContainerClassName = "",
+  ariaLabel = "Pestañas",
+  id,
 }) => {
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [hoverTab, setHoverTab] = useState<number | null>(null);
@@ -67,6 +71,14 @@ const Tabs: React.FC<TabsProps> = ({
   const [tabDimensions, setTabDimensions] = useState<{ width: number; left: number }[]>([]);
   // Referencia para el contenedor de pestañas
   const tabsContainerRef = useRef<HTMLDivElement | null>(null);
+  
+  // Generar un ID estable basado en props
+  const baseId = useMemo(() => {
+    if (id) return id;
+    // Usar una cadena estable basada en las etiquetas de las pestañas
+    const tabsSignature = tabs.map(tab => tab.label).join('_');
+    return `tabs-${tabsSignature.replace(/\s+/g, '-').toLowerCase()}`;
+  }, [id, tabs]);
 
   // Función para actualizar las dimensiones de todas las pestañas
   const updateTabDimensions = useCallback(() => {
@@ -156,6 +168,36 @@ const Tabs: React.FC<TabsProps> = ({
       }
     }
   }, [activeTab]);
+  
+  // Manejar la navegación con teclado
+  const handleKeyDown = useCallback((e: React.KeyboardEvent, index: number) => {
+    const tabCount = tabs.length;
+    let nextTab = index;
+    
+    switch (e.key) {
+      case 'ArrowRight':
+        e.preventDefault();
+        nextTab = (index + 1) % tabCount;
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        nextTab = (index - 1 + tabCount) % tabCount;
+        break;
+      case 'Home':
+        e.preventDefault();
+        nextTab = 0;
+        break;
+      case 'End':
+        e.preventDefault();
+        nextTab = tabCount - 1;
+        break;
+      default:
+        return;
+    }
+    
+    setActiveTab(nextTab);
+    tabsRef.current[nextTab]?.focus();
+  }, [tabs.length]);
 
   const variantClasses = {
     default:
@@ -198,13 +240,25 @@ const Tabs: React.FC<TabsProps> = ({
 
   const radiusClasses = {
     none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded-lg",
+    sm: "rounded-[0.25rem]",
+    md: "rounded-[0.375rem]",
     full: "rounded-full",
+  };
+  
+  // Clases para el estado de foco según variante
+  const focusClasses = {
+    default: "focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    primary: "focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    secondary: "focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    success: "focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    warning: "focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    danger: "focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
   };
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
+    // Dar foco al tab seleccionado para soporte de teclado
+    tabsRef.current[index]?.focus();
   };
 
   return (
@@ -241,6 +295,9 @@ const Tabs: React.FC<TabsProps> = ({
                 fullWidth ? "w-full" : "min-w-max",
                 "relative"
               )}
+              role="tablist"
+              aria-orientation="horizontal"
+              aria-label={ariaLabel}
             >
               {/* Indicador de la pestaña activa/hover */}
               <motion.div
@@ -270,6 +327,7 @@ const Tabs: React.FC<TabsProps> = ({
                   bottom: 0,
                   height: "100%",
                 }}
+                aria-hidden="true"
               />
 
               {/* Pestañas */}
@@ -278,6 +336,10 @@ const Tabs: React.FC<TabsProps> = ({
                 // Usar un ancho estable basado en el estado tabDimensions
                 const stableWidth = tabDimensions[index]?.width || 'auto';
                 
+                // ID único para el tab y su panel
+                const tabId = `${baseId}-tab-${index}`;
+                const panelId = `${baseId}-panel-${index}`;
+                
                 // Crear clase base para las pestañas
                 const baseTabClasses = cn(
                   "relative z-10 font-medium whitespace-nowrap",
@@ -285,7 +347,9 @@ const Tabs: React.FC<TabsProps> = ({
                   fullWidth ? "flex-1" : "",
                   radiusClasses[radius],
                   "transition-colors duration-200",
-                  "flex items-center justify-center gap-2"
+                  "flex items-center justify-center gap-2",
+                  focusClasses[variant],
+                  "outline-none"
                 );
 
                 // Se aplican clases específicas para estado inactivo/activo
@@ -304,7 +368,13 @@ const Tabs: React.FC<TabsProps> = ({
                     ref={(el) => {
                       tabsRef.current[index] = el;
                     }}
+                    id={tabId}
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={panelId}
+                    tabIndex={isActive ? 0 : -1}
                     onClick={() => handleTabClick(index)}
+                    onKeyDown={(e) => handleKeyDown(e, index)}
                     onMouseEnter={() => hoverEffect && setHoverTab(index)}
                     onMouseLeave={() => hoverEffect && setHoverTab(null)}
                     className={cn(
@@ -319,7 +389,10 @@ const Tabs: React.FC<TabsProps> = ({
                     }}
                   >
                     {tab.icon && (
-                      <span className={cn("flex-shrink-0", tabIconClassName)}>
+                      <span 
+                        className={cn("flex-shrink-0", tabIconClassName)}
+                        aria-hidden="true"
+                      >
                         {tab.icon}
                       </span>
                     )}
@@ -348,6 +421,10 @@ const Tabs: React.FC<TabsProps> = ({
               activeTab === index && (
                 <motion.div
                   key={index}
+                  id={`${baseId}-panel-${index}`}
+                  role="tabpanel"
+                  aria-labelledby={`${baseId}-tab-${index}`}
+                  tabIndex={0}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -355,7 +432,7 @@ const Tabs: React.FC<TabsProps> = ({
                     duration: 0.25,
                     ease: "easeInOut",
                   }}
-                  className="w-full"
+                  className="w-full outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400 rounded-md"
                 >
                   {tab.content}
                 </motion.div>
