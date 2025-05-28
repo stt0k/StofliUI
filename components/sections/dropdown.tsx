@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,7 @@ export interface DropdownItem {
   disabled?: boolean;
   avatarSrc?: string;
   avatarAlt?: string;
+  description?: string;
 }
 
 export interface DropdownProps {
@@ -53,6 +54,12 @@ export interface DropdownProps {
   itemLabelClassName?: string;
   itemIconClassName?: string;
   checkIconClassName?: string;
+  id?: string;
+  label?: string;
+  required?: boolean;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+  errorMessage?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -88,7 +95,21 @@ const Dropdown: React.FC<DropdownProps> = ({
   itemLabelClassName,
   itemIconClassName,
   checkIconClassName,
+  id,
+  label,
+  required = false,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  errorMessage,
 }) => {
+  const uniqueIdBase = useId();
+  const uniqueId = id || `dropdown-${uniqueIdBase.replace(/:/g, "")}`;
+  const componentId = uniqueId;
+  const buttonId = `${componentId}-button`;
+  const listboxId = `${componentId}-listbox`;
+  const labelId = `${componentId}-label`;
+  const errorId = `${componentId}-error`;
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState<DropdownItem[]>(() => {
     if (!defaultValue) return [];
@@ -104,7 +125,9 @@ const Dropdown: React.FC<DropdownProps> = ({
     return item ? [item] : [];
   });
 
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const [dropdownWidth, setDropdownWidth] = useState<number | null>(null);
 
   // Determine if component is controlled or uncontrolled
@@ -135,6 +158,73 @@ const Dropdown: React.FC<DropdownProps> = ({
       }
     }
   }, [controlledValue, items, isControlled]);
+
+  // Manejar navegación por teclado
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (disabled) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        if (!isOpen) {
+          setIsOpen(true);
+          setActiveIndex(0);
+        } else {
+          setActiveIndex((prev) => (prev + 1) % items.length);
+        }
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        if (!isOpen) {
+          setIsOpen(true);
+          setActiveIndex(items.length - 1);
+        } else {
+          setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
+        }
+        break;
+      case "Enter":
+      case " ":
+        e.preventDefault();
+        if (isOpen && activeIndex >= 0) {
+          handleItemClick(items[activeIndex]);
+        } else {
+          setIsOpen(true);
+        }
+        break;
+      case "Escape":
+        e.preventDefault();
+        setIsOpen(false);
+        break;
+      case "Tab":
+        setIsOpen(false);
+        break;
+      case "Home":
+        if (isOpen) {
+          e.preventDefault();
+          setActiveIndex(0);
+        }
+        break;
+      case "End":
+        if (isOpen) {
+          e.preventDefault();
+          setActiveIndex(items.length - 1);
+        }
+        break;
+    }
+  };
+
+  // Efecto para manejar el scroll al ítem activo
+  useEffect(() => {
+    if (isOpen && activeIndex >= 0 && listRef.current) {
+      const activeItem = listRef.current.children[activeIndex] as HTMLElement;
+      if (activeItem) {
+        activeItem.scrollIntoView({
+          block: "nearest",
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [activeIndex, isOpen]);
 
   // Handle click outside to close dropdown
   useEffect(() => {
@@ -171,7 +261,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   const handleItemClick = (item: DropdownItem) => {
     if (item.disabled) return;
 
-    // Solo ejecutar la lógica de selección si selectable es true
     if (selectable) {
       if (!isControlled) {
         if (multiSelect) {
@@ -206,12 +295,23 @@ const Dropdown: React.FC<DropdownProps> = ({
           onChange(item.value);
         }
       }
+
+      // Anunciar selección para lectores de pantalla
+      announceSelection(item);
     }
 
-    // Cerrar el dropdown al hacer clic en una opción, independientemente de si es seleccionable o no
-    // Solo mantenemos abierto en caso de multiSelect y selectable
     if (!(multiSelect && selectable)) {
       setIsOpen(false);
+    }
+  };
+
+  const announceSelection = (item: DropdownItem) => {
+    const liveRegion = document.getElementById(`${componentId}-live`);
+    if (liveRegion) {
+      const message = multiSelect
+        ? `${item.label} ${currentValues.includes(item.value) ? "deseleccionado" : "seleccionado"}`
+        : `${item.label} seleccionado`;
+      liveRegion.textContent = message;
     }
   };
 
@@ -253,8 +353,8 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const radiusClasses = {
     none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded-md",
+    sm: "rounded-[0.25rem]",
+    md: "rounded-[0.375rem]",
     full: "rounded-full",
   };
 
@@ -350,6 +450,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   // Determine list item classes
   const getItemClasses = (isSelected: boolean, isDisabled: boolean) => {
+    // Clases para elementos seleccionados sin usar !important
     const selectedClasses = {
       default: "bg-zinc-400 dark:bg-zinc-800 text-zinc-50 dark:text-zinc-200",
       primary: "bg-blue-400 dark:bg-blue-800 text-white",
@@ -359,51 +460,68 @@ const Dropdown: React.FC<DropdownProps> = ({
       danger: "bg-red-400 dark:bg-red-800 text-white",
     };
 
+    // Clases para hover en elementos seleccionados
+    const selectedHoverClasses = {
+      default: "hover:bg-zinc-500 dark:hover:bg-zinc-700",
+      primary: "hover:bg-blue-500 dark:hover:bg-blue-700",
+      secondary: "hover:bg-purple-500 dark:hover:bg-purple-700",
+      success: "hover:bg-green-500 dark:hover:bg-green-700",
+      warning: "hover:bg-amber-500 dark:hover:bg-amber-700",
+      danger: "hover:bg-red-500 dark:hover:bg-red-700",
+    };
+
     // Primero aplicamos las clases base
     const sizeTextClass = "text-sm";
     const baseClasses = "rounded mx-1.5 my-0.5 transition-colors duration-200";
     const sizeClasses = avatarOnly ? "py-2 px-3" : "py-2 px-3";
 
-    // Luego aplicamos las clases para el estado no seleccionado
-    const nonSelectedClasses =
-      "text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white";
+    // Construir las clases finales
+    const classes = [
+      sizeTextClass,
+      baseClasses,
+      sizeClasses
+    ];
 
-    // Luego aplicamos las clases para el estado habilitado/deshabilitado
-    const disabledClasses =
-      "opacity-50 cursor-not-allowed pointer-events-none !text-zinc-400/70 dark:!text-zinc-600";
-    const enabledClasses =
-      "cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800";
-
-    // Finalmente, aplicamos las clases de selección con la máxima prioridad
-    let activeClasses = "";
-    if (isSelected && selectable) {
-      if (activeColor) {
-        if (
-          activeColor.startsWith("#") ||
-          activeColor.startsWith("rgb") ||
-          activeColor.startsWith("hsl")
-        ) {
-          // No aplicamos clases en este caso, se aplicará via style
-          activeClasses = "";
+    // Aplicar clases según el estado
+    if (isDisabled) {
+      classes.push("opacity-50 cursor-not-allowed pointer-events-none text-zinc-400/70 dark:text-zinc-600");
+    } else {
+      classes.push("cursor-pointer");
+      
+      // Aplicar clases según si está seleccionado o no
+      if (isSelected && selectable) {
+        if (activeColor) {
+          if (
+            activeColor.startsWith("#") ||
+            activeColor.startsWith("rgb") ||
+            activeColor.startsWith("hsl")
+          ) {
+            // No aplicamos clases en este caso, se aplicará via style
+          } else {
+            // Si es una clase de Tailwind, la aplicamos
+            classes.push(activeColor);
+            // Y también añadimos el hover correspondiente
+            classes.push(selectedHoverClasses[variant]);
+          }
         } else {
-          // Si es una clase de Tailwind, la aplicamos con la mayor prioridad
-          activeClasses = activeColor;
+          // Aplicar clases de selección y hover para elementos seleccionados
+          classes.push(selectedClasses[variant]);
+          classes.push(selectedHoverClasses[variant]);
         }
       } else {
-        activeClasses = selectedClasses[variant];
+        // Clases para elementos no seleccionados
+        classes.push("text-zinc-700 dark:text-zinc-300");
+        classes.push("hover:text-zinc-900 dark:hover:text-white");
+        classes.push("hover:bg-zinc-200 dark:hover:bg-zinc-800");
       }
     }
 
-    return cn(
-      sizeTextClass,
-      baseClasses,
-      sizeClasses,
-      !isSelected && nonSelectedClasses,
-      isDisabled ? disabledClasses : enabledClasses,
-      itemClassName,
-      // Las clases de activeColor se aplican al final para tener mayor prioridad
-      activeClasses
-    );
+    // Añadir clases personalizadas al final
+    if (itemClassName) {
+      classes.push(itemClassName);
+    }
+
+    return cn(...classes);
   };
 
   // Define check colors based on variant
@@ -414,26 +532,6 @@ const Dropdown: React.FC<DropdownProps> = ({
     success: "text-white",
     warning: "text-white",
     danger: "text-white",
-  };
-
-  // Función para renderizar avatares
-  const renderAvatar = (src?: string, alt?: string) => {
-    if (!src) return null;
-
-    return (
-      <div
-        className={cn(
-          avatarSizeClasses[avatarSize],
-          "rounded-full overflow-hidden flex-shrink-0"
-        )}
-      >
-        <img
-          src={src}
-          alt={alt || "Avatar"}
-          className="h-full w-full object-cover"
-        />
-      </div>
-    );
   };
 
   // Renderizar contenido seleccionado
@@ -492,18 +590,49 @@ const Dropdown: React.FC<DropdownProps> = ({
       : avatarAlt;
 
   return (
+    <div className={cn("w-full", className)}>
+      {/* Región live para anuncios de accesibilidad */}
+      <div
+        id={`${componentId}-live`}
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+      />
+
+      {label && (
+        <label
+          id={labelId}
+          htmlFor={buttonId}
+          className={cn(
+            "block text-sm font-medium mb-1",
+            errorMessage
+              ? "text-red-500 dark:text-red-400"
+              : "text-zinc-700 dark:text-zinc-300"
+          )}
+        >
+          {label}
+          {required && (
+            <>
+              <span aria-hidden="true" className="text-red-500 ml-1">*</span>
+              <span className="sr-only">(requerido)</span>
+            </>
+          )}
+        </label>
+      )}
+
     <div
       ref={dropdownRef}
       className={cn(
         "relative",
-        fullWidth && !avatarOnly ? "w-full" : "inline-block",
-        className
+          fullWidth && !avatarOnly ? "w-full" : "inline-block"
       )}
     >
       <button
+          id={buttonId}
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setIsOpen(!isOpen)}
+          onKeyDown={handleKeyDown}
         className={cn(
           avatarOnly
             ? `flex items-center justify-center ${avatarOnlyButtonSizeClasses[adjustedSize]} ${avatarOnlySizeClasses[adjustedSize]}`
@@ -511,20 +640,43 @@ const Dropdown: React.FC<DropdownProps> = ({
           radiusClasses[avatarOnly ? "full" : radius],
           variantClasses[variant],
           disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+            errorMessage && "border-red-500 dark:border-red-400",
           "transition-colors duration-200",
           buttonClassName
         )}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+          aria-labelledby={label ? labelId : undefined}
+          aria-label={!label ? (ariaLabel || "Selector desplegable") : undefined}
+          aria-describedby={cn(
+            errorMessage ? errorId : null,
+            ariaDescribedby
+          )}
+          aria-invalid={!!errorMessage}
+          aria-required={required}
       >
         <span
+            id={`${componentId}-value`}
           className={cn(
             "flex items-center gap-2",
             avatarOnly ? "" : "truncate"
           )}
         >
-          {buttonAvatarSrc && renderAvatar(buttonAvatarSrc, buttonAvatarAlt)}
-          {icon && !avatarOnly && <span className="flex-shrink-0">{icon}</span>}
+            {buttonAvatarSrc && (
+              <img
+                src={buttonAvatarSrc}
+                alt={buttonAvatarAlt}
+                className={cn(
+                  avatarSizeClasses[avatarSize],
+                  "rounded-full"
+                )}
+              />
+            )}
+            {icon && !avatarOnly && (
+              <span className="flex-shrink-0" aria-hidden="true">
+                {icon}
+              </span>
+            )}
           {!avatarOnly && renderSelectedContent()}
         </span>
 
@@ -535,6 +687,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               isOpen ? "rotate-180" : "",
               arrowIconClassName
             )}
+              aria-hidden="true"
           />
         )}
       </button>
@@ -542,10 +695,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, ...placementAnimation[placement] }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, ...placementAnimation[placement] }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
+              role="presentation"
             className={cn(
               "absolute z-50 min-w-[8rem]",
               placementStyles[placement],
@@ -554,46 +704,58 @@ const Dropdown: React.FC<DropdownProps> = ({
               dropdownClassName
             )}
             style={dropdownWidthStyle}
+              initial={{ opacity: 0, ...placementAnimation[placement] }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, ...placementAnimation[placement] }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
           >
             <motion.ul
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.1, delay: 0.05 }}
+                ref={listRef}
+                id={listboxId}
               role="listbox"
-              tabIndex={-1}
+                aria-multiselectable={multiSelect}
+                aria-labelledby={buttonId}
               className={cn(
                 "overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
                 listClassName
               )}
               style={{ maxHeight: getMaxHeight() }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.1, delay: 0.05 }}
             >
               {items.map((item, index) => {
                 const isSelected = currentValues.includes(item.value);
+                  const isHighlighted = index === activeIndex;
 
                 return (
                   <motion.li
                     key={index}
-                    onClick={() => !item.disabled && handleItemClick(item)}
                     role="option"
                     aria-selected={isSelected}
                     aria-disabled={item.disabled}
-                    tabIndex={item.disabled ? -1 : 0}
+                      aria-label={typeof item.label === 'string' ? item.label : undefined}
+                      aria-describedby={item.description ? `${componentId}-desc-${index}` : undefined}
+                      tabIndex={-1}
+                      onClick={() => !item.disabled && handleItemClick(item)}
+                      onMouseEnter={() => setActiveIndex(index)}
+                      onMouseLeave={() => setActiveIndex(-1)}
+                      className={cn(
+                        getItemClasses(isSelected, Boolean(item.disabled)),
+                        // Aplicar clases de resaltado específicas según estado y variante
+                        isHighlighted && !item.disabled && !isSelected && "bg-zinc-100 dark:bg-zinc-800",
+                        isHighlighted && !item.disabled && isSelected && {
+                          "default": "bg-zinc-500 dark:bg-zinc-700",
+                          "primary": "bg-blue-500 dark:bg-blue-700",
+                          "secondary": "bg-purple-500 dark:bg-purple-700",
+                          "success": "bg-green-500 dark:bg-green-700",
+                          "warning": "bg-amber-500 dark:bg-amber-700",
+                          "danger": "bg-red-500 dark:bg-red-700"
+                        }[variant]
+                      )}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.15, delay: index * 0.03 }}
-                    className={getItemClasses(
-                      isSelected,
-                      Boolean(item.disabled)
-                    )}
-                    style={
-                      isSelected && activeColor && selectable
-                        ? activeColor.startsWith("#") ||
-                          activeColor.startsWith("rgb") ||
-                          activeColor.startsWith("hsl")
-                          ? { background: activeColor, color: "white" }
-                          : {} // Si es una clase de Tailwind, ya está aplicada en className
-                        : {}
-                    }
                   >
                     <div
                       className={cn(
@@ -607,11 +769,20 @@ const Dropdown: React.FC<DropdownProps> = ({
                           itemLabelClassName
                         )}
                       >
-                        {item.avatarSrc &&
-                          renderAvatar(item.avatarSrc, item.avatarAlt)}
+                          {item.avatarSrc && (
+                            <img
+                              src={item.avatarSrc}
+                              alt={item.avatarAlt || ""}
+                              className={cn(
+                                avatarSizeClasses[avatarSize],
+                                "rounded-full"
+                              )}
+                            />
+                          )}
                         {item.icon && (
                           <span
                             className={cn("flex-shrink-0", itemIconClassName)}
+                              aria-hidden="true"
                           >
                             {item.icon}
                           </span>
@@ -630,11 +801,20 @@ const Dropdown: React.FC<DropdownProps> = ({
                               checkVariantColors[variant],
                               checkIconClassName
                             )}
+                              aria-hidden="true"
                           >
                             <Check size={16} />
                           </motion.div>
                         )}
                     </div>
+                      {item.description && (
+                        <div
+                          id={`${componentId}-desc-${index}`}
+                          className="text-sm text-zinc-500 dark:text-zinc-400 mt-1"
+                        >
+                          {item.description}
+                        </div>
+                      )}
                   </motion.li>
                 );
               })}
@@ -642,6 +822,19 @@ const Dropdown: React.FC<DropdownProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
+
+      {errorMessage && (
+        <p
+          id={errorId}
+          className={cn(
+            "mt-1 text-sm text-red-500 dark:text-red-400"
+          )}
+          role="alert"
+        >
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 };
