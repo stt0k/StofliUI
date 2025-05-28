@@ -1,6 +1,6 @@
 "use client";
 
-import Tabs from "@/components/sections/tabs";
+import Tabs from "@/components/sections/Tabs";
 import {
   HomeIcon,
   BarChartIcon,
