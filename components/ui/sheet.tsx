@@ -64,6 +64,12 @@ const SheetContent = React.forwardRef<
       className={cn(sheetVariants({ side }), className)}
       {...props}
     >
+      <SheetPrimitive.Title className="sr-only">
+        Panel lateral
+      </SheetPrimitive.Title>
+      <SheetPrimitive.Description className="sr-only">
+        Contenido del panel lateral
+      </SheetPrimitive.Description>
       <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70  transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 disabled:pointer-events-none data-[state=open]:bg-zinc-100 data-[state=open]:text-zinc-500 dark:data-[state=open]:bg-zinc-800 dark:data-[state=open]:text-zinc-400 dark:text-white">
         <Cross2Icon className="h-4 w-4" />
         <span className="sr-only">Close</span>
