@@ -10,6 +10,7 @@ export interface BreadcrumbItem {
   href?: string;
   icon?: React.ReactNode;
   className?: string;
+  ariaLabel?: string;
 }
 
 export interface BreadcrumbsProps {
@@ -32,6 +33,9 @@ export interface BreadcrumbsProps {
     | "warning"
     | "danger";
   size?: "sm" | "md" | "lg";
+  navAriaLabel?: string;
+  homeAriaLabel?: string;
+  separatorAriaLabel?: string;
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
@@ -48,6 +52,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   clickable = false,
   variant = "default",
   size = "md",
+  navAriaLabel = "Navegación de Breadcrumbs",
+  homeAriaLabel = "Ir a la página de inicio",
+  separatorAriaLabel = "Separador",
 }) => {
   const variantClasses = {
     default:
@@ -100,11 +107,18 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   return (
     <nav
       className={cn(`flex items-center ${sizeClasses[size]}`, className)}
-      aria-label="Breadcrumbs"
+      aria-label={navAriaLabel}
     >
-      <ol className={cn("flex items-center flex-wrap", olClassName)}>
+      <ol
+        className={cn("flex items-center flex-wrap", olClassName)}
+        role="list"
+        aria-label={navAriaLabel}
+      >
         {homeIcon && (
-          <li className={cn("flex items-center", itemClassName)}>
+          <li 
+            className={cn("flex items-center", itemClassName)}
+            role="listitem"
+          >
             {clickable ? (
               <Link
                 href="/"
@@ -113,6 +127,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   linkClassName,
                   homeIconClassName
                 )}
+                aria-label={homeAriaLabel}
               >
                 <Home
                   className={cn(
@@ -124,6 +139,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                       : "",
                     homeIconClassName
                   )}
+                  aria-hidden="true"
                 />
                 <span className="sr-only">Inicio</span>
               </Link>
@@ -133,6 +149,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   `flex items-center ${nonCurrentClasses[variant]}`,
                   homeIconClassName
                 )}
+                role="text"
+                aria-label={homeAriaLabel}
               >
                 <Home
                   className={cn(
@@ -143,6 +161,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                       ? "h-5 w-5"
                       : ""
                   )}
+                  aria-hidden="true"
                 />
                 <span className="sr-only">Inicio</span>
               </span>
@@ -153,7 +172,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 separatorClasses[variant],
                 separatorClassName
               )}
+              role="presentation"
               aria-hidden="true"
+              aria-label={separatorAriaLabel}
             >
               {separator}
             </div>
@@ -161,7 +182,11 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         )}
 
         {items.map((item, index) => (
-          <li key={index} className={cn("flex items-center", itemClassName)}>
+          <li 
+            key={index} 
+            className={cn("flex items-center", itemClassName)}
+            role="listitem"
+          >
             {index > 0 && (
               <div
                 className={cn(
@@ -169,7 +194,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   separatorClasses[variant],
                   separatorClassName
                 )}
+                role="presentation"
                 aria-hidden="true"
+                aria-label={separatorAriaLabel}
               >
                 {separator}
               </div>
@@ -183,9 +210,14 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   item.className
                 )}
                 aria-current="page"
+                role="text"
+                aria-label={item.ariaLabel || `Página actual: ${item.label}`}
               >
                 {item.icon && (
-                  <span className="inline-flex items-center mr-1">
+                  <span 
+                    className="inline-flex items-center mr-1"
+                    aria-hidden="true"
+                  >
                     {item.icon}
                   </span>
                 )}
@@ -200,9 +232,13 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   linkClassName,
                   item.className
                 )}
+                aria-label={item.ariaLabel || `Ir a ${item.label}`}
               >
                 {item.icon && (
-                  <span className="inline-flex items-center mr-1">
+                  <span 
+                    className="inline-flex items-center mr-1"
+                    aria-hidden="true"
+                  >
                     {item.icon}
                   </span>
                 )}
@@ -215,9 +251,14 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   nonCurrentClasses[variant],
                   item.className
                 )}
+                role="text"
+                aria-label={item.ariaLabel || item.label}
               >
                 {item.icon && (
-                  <span className="inline-flex items-center mr-1">
+                  <span 
+                    className="inline-flex items-center mr-1"
+                    aria-hidden="true"
+                  >
                     {item.icon}
                   </span>
                 )}
