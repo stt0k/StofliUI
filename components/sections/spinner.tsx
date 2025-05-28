@@ -20,6 +20,8 @@ export interface SpinnerProps {
   containerClassName?: string;
   spinnerClassName?: string;
   labelClassName?: string;
+  ariaLabel?: string;
+  ariaLive?: "off" | "polite" | "assertive";
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
@@ -33,6 +35,8 @@ const Spinner: React.FC<SpinnerProps> = ({
   containerClassName = "",
   spinnerClassName = "",
   labelClassName = "",
+  ariaLabel,
+  ariaLive = "polite",
 }) => {
   // Tamaños para spinner tipo border
   const sizeClasses = {
@@ -516,11 +520,16 @@ const Spinner: React.FC<SpinnerProps> = ({
               spinnerClassName
             )}
             role="status"
+            aria-busy="true"
           />
         );
       case "dots":
         return (
-          <div className={cn("flex space-x-1", spinnerClassName)} role="status">
+          <div 
+            className={cn("flex space-x-1", spinnerClassName)} 
+            role="status"
+            aria-busy="true"
+          >
             <style>{dotKeyframes}</style>
             <div
               className={cn(
@@ -528,6 +537,7 @@ const Spinner: React.FC<SpinnerProps> = ({
                 "rounded-full animate-dot-1",
                 variantDotsClasses[variant]
               )}
+              aria-hidden="true"
             ></div>
             <div
               className={cn(
@@ -535,6 +545,7 @@ const Spinner: React.FC<SpinnerProps> = ({
                 "rounded-full animate-dot-2",
                 variantDotsClasses[variant]
               )}
+              aria-hidden="true"
             ></div>
             <div
               className={cn(
@@ -542,12 +553,17 @@ const Spinner: React.FC<SpinnerProps> = ({
                 "rounded-full animate-dot-3",
                 variantDotsClasses[variant]
               )}
+              aria-hidden="true"
             ></div>
           </div>
         );
       case "grow":
         return (
-          <div className={cn(spinnerClassName)} role="status">
+          <div 
+            className={cn(spinnerClassName)} 
+            role="status"
+            aria-busy="true"
+          >
             <style>{dotKeyframes}</style>
             <div
               className={cn(
@@ -555,6 +571,7 @@ const Spinner: React.FC<SpinnerProps> = ({
                 "rounded-full animate-grow",
                 variantGrowClasses[variant]
               )}
+              aria-hidden="true"
             ></div>
           </div>
         );
@@ -563,6 +580,7 @@ const Spinner: React.FC<SpinnerProps> = ({
           <div
             className={cn("flex space-x-1 items-end", spinnerClassName)}
             role="status"
+            aria-busy="true"
           >
             <style>{dotKeyframes}</style>
             <div
@@ -572,6 +590,7 @@ const Spinner: React.FC<SpinnerProps> = ({
                 waveSpeedClasses[speed].first,
                 variantDotsClasses[variant]
               )}
+              aria-hidden="true"
             ></div>
             <div
               className={cn(
@@ -580,6 +599,7 @@ const Spinner: React.FC<SpinnerProps> = ({
                 waveSpeedClasses[speed].second,
                 variantDotsClasses[variant]
               )}
+              aria-hidden="true"
             ></div>
             <div
               className={cn(
@@ -588,12 +608,17 @@ const Spinner: React.FC<SpinnerProps> = ({
                 waveSpeedClasses[speed].third,
                 variantDotsClasses[variant]
               )}
+              aria-hidden="true"
             ></div>
           </div>
         );
       case "lines":
         return (
-          <div className={cn(spinnerClassName)} role="status">
+          <div 
+            className={cn(spinnerClassName)} 
+            role="status"
+            aria-busy="true"
+          >
             <style>{dotKeyframes}</style>
             <svg
               className={cn(
@@ -603,6 +628,8 @@ const Spinner: React.FC<SpinnerProps> = ({
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              role="img"
             >
               {/* Este (0°) */}
               <line
@@ -738,7 +765,15 @@ const Spinner: React.FC<SpinnerProps> = ({
   const spinnerElement = renderSpinner();
 
   if (!label) {
-    return <div className={cn(className)}>{spinnerElement}</div>;
+    return (
+      <div 
+        className={cn(className)}
+        aria-live={ariaLive}
+      >
+        {spinnerElement}
+        <span className="sr-only">{ariaLabel || "Cargando"}</span>
+      </div>
+    );
   }
 
   return (
@@ -752,6 +787,8 @@ const Spinner: React.FC<SpinnerProps> = ({
         containerClassName
       )}
       role="status"
+      aria-live={ariaLive}
+      aria-busy="true"
     >
       {labelPosition === "top" && (
         <span
@@ -761,6 +798,7 @@ const Spinner: React.FC<SpinnerProps> = ({
             labelSpacingClasses[labelPosition],
             labelClassName
           )}
+          id="spinner-label"
         >
           {label}
         </span>
@@ -773,6 +811,7 @@ const Spinner: React.FC<SpinnerProps> = ({
             labelSpacingClasses[labelPosition],
             labelClassName
           )}
+          id="spinner-label"
         >
           {label}
         </span>
@@ -786,6 +825,7 @@ const Spinner: React.FC<SpinnerProps> = ({
             labelSpacingClasses[labelPosition],
             labelClassName
           )}
+          id="spinner-label"
         >
           {label}
         </span>
@@ -798,11 +838,12 @@ const Spinner: React.FC<SpinnerProps> = ({
             labelSpacingClasses[labelPosition],
             labelClassName
           )}
+          id="spinner-label"
         >
           {label}
         </span>
       )}
-      <span className="sr-only">Cargando...</span>
+      <span className="sr-only">{ariaLabel || "Cargando"}</span>
     </div>
   );
 };
