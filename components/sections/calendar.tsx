@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { I18nProvider, useLocale } from "@react-aria/i18n";
@@ -13,7 +13,9 @@ import {
   isSameDay,
   addMonths,
   subMonths,
+  format,
 } from "date-fns";
+import { es } from "date-fns/locale";
 
 type CalendarSystem =
   | "buddhist"
@@ -93,6 +95,9 @@ const CalendarContent: React.FC<CalendarProps> = ({
     readOnly ? new Date() : value
   );
 
+  const uniqueIdBase = useId();
+  const calendarId = `calendar-${uniqueIdBase.replace(/:/g, "")}`;
+
   // Función para formatear fechas según el calendario seleccionado
   const formatDate = (date: Date, formatStr: string) => {
     if (formatStr === "MMMM yyyy") {
@@ -107,6 +112,11 @@ const CalendarContent: React.FC<CalendarProps> = ({
       calendar: calendar,
       day: "numeric",
     }).format(date);
+  };
+
+  // Función para obtener texto descriptivo de la fecha
+  const getDateDescription = (date: Date) => {
+    return format(date, "EEEE d 'de' MMMM 'de' yyyy", { locale: es });
   };
 
   const days = eachDayOfInterval({
@@ -162,9 +172,9 @@ const CalendarContent: React.FC<CalendarProps> = ({
   };
 
   const radiusClasses = {
-    none: "",
-    sm: "rounded-sm",
-    md: "rounded",
+    none: "rounded-none",
+    sm: "rounded-[0.25rem]",
+    md: "rounded-[0.375rem]",
     full: "rounded-lg",
   };
 
@@ -227,6 +237,9 @@ const CalendarContent: React.FC<CalendarProps> = ({
         radiusClasses[radius],
         className
       )}
+      role="application"
+      aria-label="Calendario"
+      id={calendarId}
     >
       {calendarName && (
         <div
@@ -234,6 +247,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
             "text-sm text-center mb-2 text-zinc-500 dark:text-zinc-400",
             calendarTitleClassName
           )}
+          id={`${calendarId}-title`}
         >
           Calendario {calendarName}
         </div>
@@ -243,6 +257,8 @@ const CalendarContent: React.FC<CalendarProps> = ({
           "flex items-center justify-between mb-4",
           headerClassName
         )}
+        role="group"
+        aria-label="Navegación del calendario"
       >
         <motion.button
           whileTap={!readOnly ? { scale: 0.95 } : undefined}
@@ -251,14 +267,18 @@ const CalendarContent: React.FC<CalendarProps> = ({
             "p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full",
             navigationButtonClassName
           )}
+          aria-label="Mes anterior"
+          disabled={minValue && currentMonth <= minValue}
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-5 h-5" aria-hidden="true" />
         </motion.button>
         <h2
           className={cn(
             "text-lg font-semibold capitalize",
             monthTitleClassName
           )}
+          id={`${calendarId}-current-month`}
+          aria-live="polite"
         >
           {formatDate(currentMonth, "MMMM yyyy")}
         </h2>
@@ -269,12 +289,18 @@ const CalendarContent: React.FC<CalendarProps> = ({
             "p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full",
             navigationButtonClassName
           )}
+          aria-label="Mes siguiente"
+          disabled={maxValue && currentMonth >= maxValue}
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-5 h-5" aria-hidden="true" />
         </motion.button>
       </div>
 
-      <div className={cn("grid grid-cols-7 gap-1 mb-2", weekdaysClassName)}>
+      <div 
+        className={cn("grid grid-cols-7 gap-1 mb-2", weekdaysClassName)}
+        role="row"
+        aria-label="Días de la semana"
+      >
         {weekDays.map((day) => (
           <div
             key={day}
@@ -282,6 +308,8 @@ const CalendarContent: React.FC<CalendarProps> = ({
               "text-center text-sm font-medium text-zinc-500 dark:text-zinc-400",
               weekdayClassName
             )}
+            role="columnheader"
+            aria-label={day}
           >
             {day}
           </div>
@@ -295,13 +323,15 @@ const CalendarContent: React.FC<CalendarProps> = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           className={cn("grid grid-cols-7 gap-1", daysContainerClassName)}
+          role="grid"
+          aria-labelledby={`${calendarId}-current-month`}
         >
-          {days.map((day) => {
+          {days.map((day, index) => {
             const isSelected = selectedDate && isSameDay(day, selectedDate);
             const isCurrentMonth = isSameMonth(day, currentMonth);
             const isDisabled = isDateDisabled(day);
+            const dayId = `${calendarId}-day-${index}`;
 
-            // Base classes for the day
             const baseClasses = cn(
               "aspect-square flex items-center justify-center text-sm",
               radiusClasses[radius],
@@ -313,7 +343,6 @@ const CalendarContent: React.FC<CalendarProps> = ({
                 "hover:text-black dark:hover:text-white"
             );
 
-            // Determine the final className based on state
             const combinedDayClassName = cn(
               baseClasses,
               dayClassName,
@@ -332,13 +361,23 @@ const CalendarContent: React.FC<CalendarProps> = ({
             return (
               <div
                 key={day.toString()}
+                id={dayId}
                 className={combinedDayClassName}
+                role="gridcell"
+                aria-selected={isSelected}
+                aria-disabled={isDisabled}
+                aria-label={getDateDescription(day)}
                 {...(!readOnly &&
                   !isDisabled && {
                     onClick: () => handleDateSelect(day),
+                    onKeyDown: (e: React.KeyboardEvent) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleDateSelect(day);
+                      }
+                    },
                     role: "button",
-                    tabIndex: 0,
-                    "data-selected": isSelected ? "true" : "false",
+                    tabIndex: isSelected ? 0 : -1,
                   })}
               >
                 {formatDate(day, "d")}
