@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import {  cn  } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface AvatarProps {
   src?: string;
@@ -17,6 +17,13 @@ export interface AvatarProps {
   imageClassName?: string;
   fallbackClassName?: string;
   statusClassName?: string;
+  ariaLabel?: string;
+  statusLabel?: {
+    online?: string;
+    offline?: string;
+    away?: string;
+    busy?: string;
+  };
 }
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -32,6 +39,13 @@ const Avatar: React.FC<AvatarProps> = ({
   imageClassName = "",
   fallbackClassName = "",
   statusClassName = "",
+  ariaLabel,
+  statusLabel = {
+    online: "En línea",
+    offline: "Desconectado",
+    away: "Ausente",
+    busy: "Ocupado"
+  }
 }) => {
   const [imageError, setImageError] = React.useState(!src);
 
@@ -53,9 +67,9 @@ const Avatar: React.FC<AvatarProps> = ({
   };
 
   const radiusClasses = {
-    none: [],
-    sm: ["rounded"],
-    md: ["rounded-md"],
+    none: ["rounded-none"],
+    sm: ["rounded-[0.25rem]"],
+    md: ["rounded-[0.375rem]"],
     full: ["rounded-full"],
   };
 
@@ -76,9 +90,29 @@ const Avatar: React.FC<AvatarProps> = ({
 
   const handleImageError = () => setImageError(true);
 
+  const getAriaLabel = () => {
+    const parts = [];
+    if (ariaLabel) {
+      parts.push(ariaLabel);
+    } else {
+      parts.push(alt || fallback || "Avatar");
+    }
+    if (status && statusLabel[status]) {
+      parts.push(statusLabel[status]);
+    }
+    return parts.join(", ");
+  };
+
   return (
-    <div className="relative inline-block">
-      <div className={classes}>
+    <div 
+      className="relative inline-block"
+      role="img"
+      aria-label={getAriaLabel()}
+    >
+      <div 
+        className={classes}
+        aria-hidden="true"
+      >
         {!imageError && src ? (
           <Image
             src={src}
@@ -86,6 +120,8 @@ const Avatar: React.FC<AvatarProps> = ({
             fill
             className={cn("object-cover", imageClassName)}
             onError={handleImageError}
+            role="presentation"
+            aria-hidden="true"
           />
         ) : (
           <span
@@ -93,6 +129,7 @@ const Avatar: React.FC<AvatarProps> = ({
               "font-medium text-zinc-500 dark:text-zinc-400",
               fallbackClassName
             )}
+            aria-hidden="true"
           >
             {fallback || alt.charAt(0).toUpperCase()}
           </span>
@@ -105,6 +142,9 @@ const Avatar: React.FC<AvatarProps> = ({
             statusColors[status].join(" "),
             statusClassName
           )}
+          role="status"
+          aria-label={statusLabel[status]}
+          aria-hidden="true"
         />
       )}
     </div>
