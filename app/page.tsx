@@ -16,10 +16,10 @@ import {
   Users,
 } from "lucide-react";
 import React from "react";
-import Tabs from "@/components/sections/tabs";
-import Button from "@/components/sections/button";
-import Dropdown from "@/components/sections/dropdown";
-import Avatar from "@/components/sections/avatar";
+import Tabs from "@/components/sections/Tabs";
+import Button from "@/components/sections/Button";
+import Dropdown from "@/components/sections/Dropdown";
+import Avatar from "@/components/sections/Avatar";
 import dynamic from "next/dynamic";
 import GovSection from "@/components/home/GovSection";
 import BentoSection from "@/components/home/BentoSection";
