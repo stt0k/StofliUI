@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import NumberInput from "@/components/sections/number-input";
+import NumberInput from "@/components/sections/Number-input";
 
 // Componente controlado con visualización del valor actual
 export function NumberInputControlledDemo() {
