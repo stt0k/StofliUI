@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +23,7 @@ export interface TooltipProps {
   contentClassName?: string;
   arrowClassName?: string;
   radius?: "none" | "sm" | "md" | "full";
+  id?: string;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -38,15 +39,22 @@ const Tooltip: React.FC<TooltipProps> = ({
   contentClassName = "",
   arrowClassName = "",
   radius = "md",
+  id,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [mouseDown, setMouseDown] = useState(false);
+  
+  const uniqueIdBase = useId();
+  const tooltipId = id || `tooltip-${uniqueIdBase.replace(/:/g, "")}`;
 
   // Calcular posición
-  const calculatePosition = () => {
+  const calculatePosition = useCallback(() => {
     if (!triggerRef.current || !tooltipRef.current) return;
 
     const triggerRect = triggerRef.current.getBoundingClientRect();
@@ -91,24 +99,59 @@ const Tooltip: React.FC<TooltipProps> = ({
     }
 
     setTooltipPosition({ top, left });
-  };
+  }, [position, showArrow]);
 
-  const handleMouseEnter = () => {
+  // Función para mostrar y ocultar tooltip
+  const showTooltip = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
     timeoutRef.current = setTimeout(() => {
       setIsVisible(true);
-      setTimeout(() => calculatePosition(), 0);
     }, delay);
-  };
+  }, [delay]);
 
-  const handleMouseLeave = () => {
+  const hideTooltip = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     setIsVisible(false);
+  }, []);
+
+  // Actualizar visibilidad basada en hover y focus (pero no cuando hacemos clic)
+  useEffect(() => {
+    // Solo mostrar si tenemos hover o focus (pero no mouseDown que indica click)
+    if ((isHovered || (isFocused && !mouseDown))) {
+      showTooltip();
+    } else {
+      hideTooltip();
+    }
+  }, [isHovered, isFocused, mouseDown, showTooltip, hideTooltip]);
+
+  // Manejadores de eventos
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+  
+  // Para soporte de teclado (WCAG)
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => {
+    setIsFocused(false);
+    setMouseDown(false);
+  };
+  
+  // Detectar clicks para ocultar el tooltip
+  const handleMouseDown = () => setMouseDown(true);
+  const handleMouseUp = () => {
+    // Pequeño retraso antes de restaurar para asegurar que el tooltip se oculta en click
+    setTimeout(() => setMouseDown(false), 300);
+  };
+  
+  // Manejar escape para cerrar el tooltip (accesibilidad)
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape' && isVisible) {
+      hideTooltip();
+    }
   };
 
   useEffect(() => {
@@ -129,13 +172,13 @@ const Tooltip: React.FC<TooltipProps> = ({
       window.removeEventListener("scroll", handleScroll, true);
       window.removeEventListener("resize", handleResize);
     };
-  }, [isVisible]);
+  }, [isVisible, calculatePosition]);
 
   useEffect(() => {
     if (isVisible) {
       requestAnimationFrame(() => calculatePosition());
     }
-  }, [isVisible]);
+  }, [isVisible, calculatePosition]);
 
   const variantClasses = {
     default: "bg-zinc-800 text-zinc-100 dark:bg-zinc-700",
@@ -157,11 +200,12 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const radiusClasses = {
     none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded",
-    full: "rounded-lg",
+    sm: "rounded-[0.25rem]",
+    md: "rounded-[0.375rem]",
+    full: "rounded-full",
   };
 
+  // Animaciones adaptadas para prefers-reduced-motion
   const variants = {
     hidden: (position: string) => {
       switch (position) {
@@ -217,21 +261,40 @@ const Tooltip: React.FC<TooltipProps> = ({
     }
   };
 
+  // Determinar si el children es un elemento que puede recibir propiedades
+  const childrenWithProps = React.Children.map(children, (child) => {
+    // Verificar si es un elemento válido de React para pasar props
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        // Agregar o fusionar atributos aria
+        "aria-describedby": isVisible ? tooltipId : undefined,
+        // Preservar otros props que pueda tener el elemento
+        ...child.props,
+      });
+    }
+    return child;
+  });
+
   return (
     <div
       ref={triggerRef}
       className={cn("inline-block", className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onFocus={handleMouseEnter}
-      onBlur={handleMouseLeave}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onKeyDown={handleKeyDown}
     >
-      {children}
+      {childrenWithProps}
 
       <AnimatePresence>
         {isVisible && (
           <motion.div
+            id={tooltipId}
             ref={tooltipRef}
+            role="tooltip"
             className={cn(
               "fixed z-50 px-3 py-2 text-sm shadow-lg pointer-events-none",
               radiusClasses[radius],
