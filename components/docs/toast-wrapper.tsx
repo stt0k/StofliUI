@@ -1,7 +1,7 @@
 "use client";
 
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import Button from "@/components/sections/button";
+import { ToastProvider, useToast } from "@/components/sections/Toast";
+import Button from "@/components/sections/Button";
 import { ReactNode } from "react";
 import {
   BellIcon,
