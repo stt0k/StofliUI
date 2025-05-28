@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +26,10 @@ export interface CheckboxProps {
   labelClassName?: string;
   onChange?: (checked: boolean) => void;
   radius?: "none" | "sm" | "md" | "full";
+  id?: string;
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  errorMessage?: string;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -44,7 +48,16 @@ const Checkbox: React.FC<CheckboxProps> = ({
   labelClassName = "",
   onChange,
   radius = "md",
+  id,
+  ariaLabel,
+  ariaDescribedBy,
+  errorMessage,
 }) => {
+  const uniqueIdBase = useId();
+  const uniqueId = `checkbox-${uniqueIdBase.replace(/:/g, "")}`;
+  const checkboxId = id || uniqueId;
+  const errorId = `${checkboxId}-error`;
+
   const [isChecked, setIsChecked] = React.useState(
     checked === undefined ? defaultChecked : checked
   );
@@ -62,6 +75,23 @@ const Checkbox: React.FC<CheckboxProps> = ({
         setIsChecked(newChecked);
       }
       onChange?.(newChecked);
+    }
+  };
+
+  const handleClick = () => {
+    if (!disabled) {
+      const newChecked = !isChecked;
+      if (checked === undefined) {
+        setIsChecked(newChecked);
+      }
+      onChange?.(newChecked);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      handleClick();
     }
   };
 
@@ -109,8 +139,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const radiusClasses = {
     none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded",
+    sm: "rounded-[0.25rem]",
+    md: "rounded-[0.375rem]",
     full: "rounded-full",
   };
 
@@ -152,7 +182,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const wrapperClasses = cn(
     "inline-flex items-center",
-    disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+    !disabled && "cursor-pointer",
     wrapperClassName
   );
 
@@ -161,7 +191,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
     "border-2",
     radiusClasses[radius],
     "flex items-center justify-center",
+    "focus-visible:ring-2 focus-visible:ring-offset-2",
     isChecked ? checkedClasses[variant] : variantClasses[variant],
+    disabled && "cursor-not-allowed opacity-50",
+    errorMessage && "border-red-500 dark:border-red-400",
     checkboxClassName
   );
 
@@ -181,10 +214,23 @@ const Checkbox: React.FC<CheckboxProps> = ({
   );
 
   return (
-    <label className={wrapperClasses}>
-      <div className="relative">
+    <div 
+      className={wrapperClasses}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role="checkbox"
+      aria-checked={isChecked}
+      tabIndex={disabled ? -1 : 0}
+      aria-disabled={disabled}
+      aria-required={required}
+      aria-label={ariaLabel || label}
+      aria-describedby={cn(errorMessage ? errorId : null, ariaDescribedBy)}
+      aria-invalid={!!errorMessage}
+    >
+      <div className="relative" role="presentation">
         <input
           type="checkbox"
+          id={checkboxId}
           className="sr-only"
           checked={isChecked}
           disabled={disabled}
@@ -192,6 +238,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           name={name}
           value={value}
           onChange={handleChange}
+          tabIndex={-1}
         />
         <motion.div
           className={checkboxClasses}
@@ -199,8 +246,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
           initial="unchecked"
           animate={isChecked ? "checked" : "unchecked"}
           whileTap={!disabled ? { scale: 0.95 } : undefined}
+          role="presentation"
         >
-          <motion.svg className={svgClasses} viewBox="0 0 24 24">
+          <motion.svg 
+            className={svgClasses} 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
             <motion.path
               fill="none"
               stroke="currentColor"
@@ -216,12 +268,37 @@ const Checkbox: React.FC<CheckboxProps> = ({
         </motion.div>
       </div>
       {label && (
-        <span className={labelClasses}>
+        <label 
+          htmlFor={checkboxId}
+          className={labelClasses}
+          onClick={(e) => e.stopPropagation()}
+        >
           {label}
-          {required && <span className="text-red-500 ml-0.5">*</span>}
+          {required && (
+            <span 
+              className="text-red-500 ml-0.5" 
+              aria-hidden="true"
+            >
+              *
+            </span>
+          )}
+          {required && (
+            <span className="sr-only">
+              (requerido)
         </span>
       )}
     </label>
+      )}
+      {errorMessage && (
+        <div
+          id={errorId}
+          role="alert"
+          className="text-red-500 dark:text-red-400 text-sm mt-1"
+        >
+          {errorMessage}
+        </div>
+      )}
+    </div>
   );
 };
 
