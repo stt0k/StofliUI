@@ -13,7 +13,7 @@ import {
   BarChart,
   Users,
 } from "lucide-react";
-import Button from "@/components/sections/button";
+import Button from "@/components/sections/Button";
 
 const BentoSection = () => {
   return (
