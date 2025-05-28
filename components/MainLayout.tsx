@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 import Header from "@/components/header/Header";
 import FooterDocs from "@/components/footer/FooterDocs";
-import Pagination from "@/components/sections/pagination";
+import Pagination from "@/components/sections/Pagination";
 import { useRouter, usePathname } from "next/navigation";
 import PageNav from "@/components/docs/PageNav";
 
