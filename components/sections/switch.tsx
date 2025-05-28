@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useId } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +32,9 @@ export interface SwitchProps {
   id?: string;
   icon?: boolean;
   iconType?: "check" | "cross" | "none";
+  ariaLabel?: string;
+  description?: string;
+  descriptionId?: string;
 }
 
 const Switch: React.FC<SwitchProps> = ({
@@ -56,9 +59,14 @@ const Switch: React.FC<SwitchProps> = ({
   id,
   icon = false,
   iconType = "check",
+  ariaLabel,
+  description,
+  descriptionId,
 }) => {
   const [isChecked, setIsChecked] = useState(checked);
-  const uniqueId = id || `switch-${Math.random().toString(36).substring(2, 9)}`;
+  const uniqueIdBase = useId();
+  const uniqueId = id || `switch-${uniqueIdBase.replace(/:/g, "")}`;
+  const uniqueDescriptionId = descriptionId || (description ? `desc-${uniqueId}` : undefined);
 
   // Sincronizar con el prop checked
   useEffect(() => {
@@ -222,7 +230,23 @@ const Switch: React.FC<SwitchProps> = ({
     );
   };
 
-  // Determinar las clases para el wrapper base y personalizado según el estado
+  // Añadir clases para el estado de foco visible
+  const focusClasses = {
+    sm: "focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    md: "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    lg: "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+  };
+
+  const focusRingColors = {
+    default: "focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400",
+    primary: "focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400",
+    secondary: "focus-visible:ring-purple-500 dark:focus-visible:ring-purple-400",
+    success: "focus-visible:ring-green-500 dark:focus-visible:ring-green-400",
+    warning: "focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400",
+    danger: "focus-visible:ring-red-500 dark:focus-visible:ring-red-400",
+  };
+
+  // Modificar getWrapperClasses para incluir clases de foco
   const getWrapperClasses = () => {
     // Clases base compartidas
     const baseClasses = [
@@ -348,17 +372,29 @@ const Switch: React.FC<SwitchProps> = ({
       >
         <input
           type="checkbox"
+          role="switch"
           id={uniqueId}
           name={name}
-          className="sr-only"
+          className={cn(
+            "sr-only peer",
+            focusClasses[size],
+            focusRingColors[variant]
+          )}
           checked={isChecked}
           onChange={handleChange}
           disabled={disabled}
           required={required}
           aria-checked={isChecked}
+          aria-label={!label ? ariaLabel : undefined}
+          aria-labelledby={label ? uniqueId : undefined}
+          aria-describedby={uniqueDescriptionId}
         />
 
-        <div className={getWrapperClasses()} onClick={handleChange}>
+        <div 
+          className={getWrapperClasses()} 
+          onClick={handleChange}
+          aria-hidden="true"
+        >
           {/* Fondo animado que se desplaza (solo visible si no hay clases personalizadas para el wrapper) */}
           {!activeWrapperClassName && !inactiveWrapperClassName && (
             <motion.div
@@ -374,6 +410,7 @@ const Switch: React.FC<SwitchProps> = ({
                 duration: 0.3,
                 ease: [0.4, 0.0, 0.2, 1],
               }}
+              aria-hidden="true"
             />
           )}
 
@@ -388,11 +425,18 @@ const Switch: React.FC<SwitchProps> = ({
               duration: 0.3,
               ease: [0.4, 0.0, 0.2, 1],
             }}
+            aria-hidden="true"
           >
             {renderIcon()}
           </motion.div>
         </div>
       </div>
+      
+      {description && (
+        <div id={uniqueDescriptionId} className="sr-only">
+          {description}
+        </div>
+      )}
     </div>
   );
 };
