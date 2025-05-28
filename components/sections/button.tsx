@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -34,6 +34,8 @@ export interface ButtonProps
   rightIconClassName?: string;
   contentClassName?: string;
   arrowClassName?: string;
+  loadingText?: string;
+  ariaLabel?: string;
 }
 
 interface RippleEffect {
@@ -67,6 +69,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       arrowClassName = "",
       disabled,
       onClick,
+      loadingText = "Cargando...",
+      ariaLabel,
+      type = "button",
       ...props
     },
     ref
@@ -81,6 +86,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Determinar si el botón está deshabilitado
     const isDisabled = disabled || isLoading;
+
+    const uniqueIdBase = useId();
+    const loaderId = `loader-${uniqueIdBase.replace(/:/g, "")}`;
+
+    // Determinar el aria-label basado en las props
+    const getAriaLabel = () => {
+      if (isLoading) {
+        return loadingText;
+      }
+      if (ariaLabel) {
+        return ariaLabel;
+      }
+      if (typeof children === 'string') {
+        return children;
+      }
+      return undefined;
+    };
 
     // Eliminar ripples completados
     useEffect(() => {
@@ -167,8 +189,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Estilos por radio
     const radiusStyles = {
       none: "rounded-none",
-      sm: "rounded-sm",
-      md: "rounded-md",
+      sm: "rounded-[0.25rem]",
+      md: "rounded-[0.375rem]",
       lg: "rounded-lg",
       full: size === "icon" ? "rounded-full" : "rounded-xl",
     };
@@ -181,7 +203,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant !== "link" &&
         variant !== "ghost" &&
         "focus-visible:ring-2 focus-visible:ring-offset-2",
-      "disabled:opacity-50 disabled:pointer-events-none",
+      "disabled:opacity-50 disabled:cursor-not-allowed",
       variantStyles[variant],
       sizeStyles[size],
       radiusStyles[radius],
@@ -191,6 +213,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         variant !== "ghost" &&
         "ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10",
       "relative overflow-hidden",
+      withArrow && "group",
       className
     );
 
@@ -233,6 +256,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         transition={{ duration: 0.08 }}
         disabled={isDisabled}
         onClick={handleClick}
+        type={type}
+        role="button"
+        aria-disabled={isDisabled}
+        aria-label={getAriaLabel()}
+        aria-busy={isLoading}
+        aria-live={isLoading ? "polite" : undefined}
         {...cleanedProps}
       >
         {/* Efectos de ripple con AnimatePresence para mejor gestión */}
@@ -264,18 +293,28 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 animate={{ opacity: 0, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.75, ease: "easeOut" }}
+                aria-hidden="true"
               />
             ))}
         </AnimatePresence>
 
         {isLoading && (
-          <Loader2
-            className={cn("mr-2 h-4 w-4 animate-spin", loaderClassName)}
-          />
+          <>
+            <Loader2
+              className={cn("mr-2 h-4 w-4 animate-spin", loaderClassName)}
+              aria-hidden="true"
+            />
+            <span className="sr-only" role="status" id={loaderId}>
+              {loadingText}
+            </span>
+          </>
         )}
 
         {!isLoading && leftIcon && (
-          <span className={cn("mr-2 relative z-10", leftIconClassName)}>
+          <span 
+            className={cn("mr-2 relative z-10", leftIconClassName)}
+            aria-hidden="true"
+          >
             {leftIcon}
           </span>
         )}
@@ -291,18 +330,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </span>
 
         {!isLoading && withArrow && (
-          <motion.span
-            className={cn("ml-1 relative z-10", arrowClassName)}
-            initial={{ x: 0 }}
-            whileHover={{ x: 3 }}
-            transition={{ duration: 0.2 }}
+          <span
+            className={cn(
+              "ml-1 relative z-10 transition-transform duration-200 group-hover:translate-x-1", 
+              arrowClassName
+            )}
+            aria-hidden="true"
           >
             <ArrowRight className="h-4 w-4" />
-          </motion.span>
+          </span>
         )}
 
         {!isLoading && rightIcon && !withArrow && (
-          <span className={cn("ml-2 relative z-10", rightIconClassName)}>
+          <span 
+            className={cn("ml-2 relative z-10", rightIconClassName)}
+            aria-hidden="true"
+          >
             {rightIcon}
           </span>
         )}
