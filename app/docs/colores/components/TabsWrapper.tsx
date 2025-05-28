@@ -1,7 +1,7 @@
 "use client";
 
 import React, { memo, useState, useEffect } from "react";
-import Tabs from "@/components/sections/tabs";
+import Tabs from "@/components/sections/Tabs";
 
 interface TabsWrapperProps {
   tabs: {
