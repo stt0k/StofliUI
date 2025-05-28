@@ -52,7 +52,7 @@ const BentoGrid = dynamic(() => import("@/components/BentoGrid"), {
   loading: () => <div>Cargando...</div>,
 });
 
-const Accordion = dynamic(() => import("@/components/sections/accordion"), {
+const Accordion = dynamic(() => import("@/components/sections/Accordion"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
@@ -62,73 +62,73 @@ const DemoTabs = dynamic(() => import("@/components/ui/demo-tabs"), {
   loading: () => <div>Cargando...</div>,
 });
 
-const Avatar = dynamic(() => import("@/components/sections/avatar"), {
+const Avatar = dynamic(() => import("@/components/sections/Avatar"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Checkbox = dynamic(() => import("@/components/sections/checkbox"), {
+const Checkbox = dynamic(() => import("@/components/sections/Checkbox"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Calendar = dynamic(() => import("@/components/sections/calendar"), {
+const Calendar = dynamic(() => import("@/components/sections/Calendar"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Badge = dynamic(() => import("@/components/sections/badge"), {
+const Badge = dynamic(() => import("@/components/sections/Badge"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Card = dynamic(() => import("@/components/sections/card"), {
+const Card = dynamic(() => import("@/components/sections/Card"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Button = dynamic(() => import("@/components/sections/button"), {
+const Button = dynamic(() => import("@/components/sections/Button"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const Autocomplete = dynamic(
-  () => import("@/components/sections/autocomplete"),
+  () => import("@/components/sections/Autocomplete"),
   {
     ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
 
-const Tabs = dynamic(() => import("@/components/sections/tabs"), {
+const Tabs = dynamic(() => import("@/components/sections/Tabs"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Tooltip = dynamic(() => import("@/components/sections/tooltip"), {
+const Tooltip = dynamic(() => import("@/components/sections/Tooltip"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Dropdown = dynamic(() => import("@/components/sections/dropdown"), {
+const Dropdown = dynamic(() => import("@/components/sections/Dropdown"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
-const Progress = dynamic(() => import("@/components/sections/progress"), {
+const Progress = dynamic(() => import("@/components/sections/Progress"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 const CircularProgress = dynamic(
-  () => import("@/components/sections/circular-progress"),
+  () => import("@/components/sections/Circular-progress"),
   {
     ssr: false,
     loading: () => <div>Cargando...</div>,
   }
 );
 
-const Input = dynamic(() => import("@/components/sections/input"), {
+const Input = dynamic(() => import("@/components/sections/Input"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
@@ -221,38 +221,38 @@ const ToastCustomDemo = dynamic(
   }
 );
 
-const Breadcrumbs = dynamic(() => import("@/components/sections/breadcrumbs"), {
+const Breadcrumbs = dynamic(() => import("@/components/sections/Breadcrumbs"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
 });
 
 // Spinner
-const Spinner = dynamic(() => import("@/components/sections/spinner"), {
+const Spinner = dynamic(() => import("@/components/sections/Spinner"), {
   ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
 // Pagination
-const Pagination = dynamic(() => import("@/components/sections/pagination"), {
+const Pagination = dynamic(() => import("@/components/sections/Pagination"), {
   ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
 // DatePicker
-const DatePicker = dynamic(() => import("@/components/sections/date-picker"), {
+const DatePicker = dynamic(() => import("@/components/sections/Date-picker"), {
   ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
 // Switch
-const Switch = dynamic(() => import("@/components/sections/switch"), {
+const Switch = dynamic(() => import("@/components/sections/Switch"), {
   ssr: false,
   loading: () => <p>Cargando...</p>,
 });
 
 // NumberInput
 const NumberInput = dynamic(
-  () => import("@/components/sections/number-input"),
+  () => import("@/components/sections/Number-input"),
   {
     ssr: false,
     loading: () => <p>Cargando...</p>,
