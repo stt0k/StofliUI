@@ -378,6 +378,11 @@ Usando la prop `format` para personalizar el formato de visualización de la fec
           value={new Date(2024, 3, 15)}
         />
         <DatePicker 
+          label="Formato personalizado (MM/dd/yyyy)" 
+          format="MM/dd/yyyy"
+          value={new Date(2024, 3, 15)}
+        />
+        <DatePicker 
           label="Formato personalizado (yyyy-MM-dd)" 
           format="yyyy-MM-dd"
           value={new Date(2024, 3, 15)}
@@ -396,21 +401,28 @@ import { DatePicker } from "@stofli/ui";
 
 export default function DatePickerFormatDemo() {
   return (
-    <div className="max-w-md mx-auto flex flex-col gap-4">
-      <DatePicker 
-        label="Formato por defecto (dd/MM/yyyy)" 
-        value={new Date(2024, 3, 15)}
-      />
-      <DatePicker 
-        label="Formato personalizado (yyyy-MM-dd)" 
-        format="yyyy-MM-dd"
-        value={new Date(2024, 3, 15)}
-      />
-      <DatePicker 
-        label="Formato con nombre del mes (dd 'de' MMMM 'de' yyyy)" 
-        format="dd 'de' MMMM 'de' yyyy"
-        value={new Date(2024, 3, 15)}
-      />
+    <div className="flex justify-center w-full">
+      <div className="max-w-md mx-auto flex flex-col gap-4">
+        <DatePicker 
+          label="Formato por defecto (dd/MM/yyyy)" 
+          value={new Date(2024, 3, 15)}
+        />
+        <DatePicker 
+          label="Formato personalizado (MM/dd/yyyy)" 
+          format="MM/dd/yyyy"
+          value={new Date(2024, 3, 15)}
+        />
+        <DatePicker 
+          label="Formato personalizado (yyyy-MM-dd)" 
+          format="yyyy-MM-dd"
+          value={new Date(2024, 3, 15)}
+        />
+        <DatePicker 
+          label="Formato con nombre del mes (dd 'de' MMMM 'de' yyyy)" 
+          format="dd 'de' MMMM 'de' yyyy"
+          value={new Date(2024, 3, 15)}
+        />
+      </div>
     </div>
   );
 }
