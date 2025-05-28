@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import { motion } from "framer-motion";
-import {  cn  } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface CircularProgressProps {
   value?: number;
@@ -28,6 +28,9 @@ export interface CircularProgressProps {
   spin?: boolean;
   formatOptions?: Intl.NumberFormatOptions;
   "aria-label"?: string;
+  "aria-describedby"?: string;
+  "aria-valuetext"?: string;
+  indeterminate?: boolean;
 }
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
@@ -48,8 +51,15 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   spin = false,
   formatOptions = { style: "percent", maximumFractionDigits: 0 },
   "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  "aria-valuetext": ariaValuetext,
+  indeterminate = false,
 }) => {
   const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+  const uniqueIdBase = useId();
+  const progressId = `circular-progress-${uniqueIdBase.replace(/:/g, "")}`;
+  const labelId = `${progressId}-label`;
+  const valueId = `${progressId}-value`;
 
   // Ajustamos el radio según el tamaño para mantener proporciones perfectas
   const sizes = {
@@ -105,18 +115,27 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
   const labelElement = label && (
     <span
+      id={labelId}
       className={cn(
         "absolute",
         labelPosition === "top" ? "-top-6" : "-bottom-6",
         "left-1/2 -translate-x-1/2",
         labelSize,
         "font-medium dark:text-zinc-400 text-zinc-600 whitespace-nowrap",
+        "min-contrast-[4.5]", // Asegura contraste mínimo WCAG AA
         labelClassName
       )}
     >
       {label}
     </span>
   );
+
+  // Texto descriptivo para lectores de pantalla
+  const getAriaValueText = () => {
+    if (ariaValuetext) return ariaValuetext;
+    if (indeterminate) return "Cargando...";
+    return `${formattedValue} completado`;
+  };
 
   return (
     <div
@@ -128,18 +147,23 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       role="progressbar"
       aria-valuemin={0}
       aria-valuemax={max}
-      aria-valuenow={value}
+      aria-valuenow={indeterminate ? undefined : value}
+      aria-valuetext={getAriaValueText()}
       aria-label={ariaLabel || label}
+      aria-labelledby={label ? labelId : undefined}
+      aria-describedby={cn(showValue ? valueId : null, ariaDescribedby)}
+      id={progressId}
     >
       {labelPosition === "top" && labelElement}
       <motion.svg
         className="w-full h-full"
         viewBox={`0 0 ${box} ${box}`}
         style={{ transform: "rotate(-90deg)" }}
-        animate={spin ? "animate" : undefined}
+        animate={spin || indeterminate ? "animate" : undefined}
         variants={spinVariants}
+        aria-hidden="true"
       >
-        {spin ? (
+        {(spin || indeterminate) ? (
           <>
             <circle
               className={cn(
@@ -214,11 +238,16 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         )}
       </motion.svg>
       {showValue && (
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div 
+          className="absolute inset-0 flex items-center justify-center"
+          id={valueId}
+          aria-hidden="true"
+        >
           <span
             className={cn(
               fontSize,
               "font-medium dark:text-zinc-300 text-zinc-700",
+              "min-contrast-[4.5]", // Asegura contraste mínimo WCAG AA
               valueClassName
             )}
           >
