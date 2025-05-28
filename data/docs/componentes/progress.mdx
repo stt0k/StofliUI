@@ -144,86 +144,6 @@ export default function ProgressVariantsDemo() {
     </div>
 
     <div className="mt-6">
-      <HeadingAnchor id="radios" level={3} >Radios</HeadingAnchor>
-
-Usando la prop `radius`: none, sm, md y full.
-
-<DemoTabs
-  preview={
-    <div className="flex flex-col gap-4">
-      <Progress 
-        radius="none" 
-        value={75} 
-        label="Sin radio" 
-        showValue 
-        variant="primary"
-      />
-      <Progress 
-        radius="sm" 
-        value={75} 
-        label="Radio pequeño" 
-        showValue 
-        variant="primary"
-      />
-      <Progress 
-        radius="md" 
-        value={75} 
-        label="Radio mediano" 
-        showValue 
-        variant="primary"
-      />
-      <Progress 
-        radius="full" 
-        value={75} 
-        label="Radio completo" 
-        showValue 
-        variant="primary"
-      />
-    </div>
-  }
->
-```tsx
-import { Progress } from "@stofli/ui";
-
-export default function ProgressRadiusDemo() {
-  return (
-    <div className="flex flex-col gap-4">
-      <Progress 
-        radius="none" 
-        value={75} 
-        label="Sin radio" 
-        showValue 
-        variant="primary"
-      />
-      <Progress 
-        radius="sm" 
-        value={75} 
-        label="Radio pequeño" 
-        showValue 
-        variant="primary"
-      />
-      <Progress 
-        radius="md" 
-        value={75} 
-        label="Radio mediano" 
-        showValue 
-        variant="primary"
-      />
-      <Progress 
-        radius="full" 
-        value={75} 
-        label="Radio completo" 
-        showValue 
-        variant="primary"
-      />
-    </div>
-  );
-}
-```
-</DemoTabs>
-    </div>
-
-    <div className="mt-6">
       <HeadingAnchor id="animacion-rayas" level={3} >Con animación de rayas</HeadingAnchor>
 
 Usando la prop `striped` para añadir un patrón de rayas animado.
@@ -359,7 +279,6 @@ export const toc = [
       { title: "Básico", href: "#basico" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Variantes", href: "#variantes" },
-      { title: "Radios", href: "#radios" },
       { title: "Con animación de rayas", href: "#animacion-rayas" },
       { title: "Con clases personalizadas", href: "#clases-personalizadas" },
     ],
