@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp, ChevronDown, Plus, Minus } from "lucide-react";
-import {  cn  } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface NumberInputProps {
   value?: number;
@@ -49,6 +49,14 @@ export interface NumberInputProps {
   onChange?: (value: number) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  // Propiedades adicionales para accesibilidad
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+  description?: string;
+  errorId?: string;
+  descriptionId?: string;
+  hideLabel?: boolean;
+  autoComplete?: string;
 }
 
 const NumberInput: React.FC<NumberInputProps> = ({
@@ -86,6 +94,13 @@ const NumberInput: React.FC<NumberInputProps> = ({
   onChange,
   onFocus,
   onBlur,
+  "aria-label": ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  description,
+  errorId: customErrorId,
+  descriptionId: customDescriptionId,
+  hideLabel = false,
+  autoComplete,
 }) => {
   // Estado para el valor del input (controlado vs no controlado)
   const [inputValue, setInputValue] = useState<number | undefined>(
@@ -96,12 +111,17 @@ const NumberInput: React.FC<NumberInputProps> = ({
     "up" | "down" | null
   >(null);
   const [animationActive, setAnimationActive] = useState(false);
+  const [announcement, setAnnouncement] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const isControlled = value !== undefined;
   const currentValue = isControlled ? value : inputValue;
 
-  const uniqueId =
-    id || `number-input-${Math.random().toString(36).substring(2, 9)}`;
+  const uniqueIdBase = useId();
+  const inputId = id || `number-input-${uniqueIdBase.replace(/:/g, "")}`;
+  const labelId = `${inputId}-label`;
+  const errorMessageId = customErrorId || `${inputId}-error`;
+  const descriptionMessageId = customDescriptionId || `${inputId}-description`;
+  const liveRegionId = `${inputId}-live`;
 
   // Sincronizar con el prop value
   useEffect(() => {
@@ -109,6 +129,19 @@ const NumberInput: React.FC<NumberInputProps> = ({
       setInputValue(value);
     }
   }, [isControlled, value]);
+
+  // Limpiar anuncios después de ser leídos
+  useEffect(() => {
+    if (announcement) {
+      const timer = setTimeout(() => setAnnouncement(""), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [announcement]);
+
+  // Función para anunciar cambios
+  const announceChange = (message: string) => {
+    setAnnouncement(message);
+  };
 
   // Función para incrementar el valor
   const increment = () => {
@@ -122,7 +155,12 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
     const newValue =
       (currentValue !== undefined ? currentValue : startValue) + step;
-    if (max !== undefined && newValue > max) return;
+    
+    // Si está en el límite máximo, anunciar
+    if (max !== undefined && newValue > max) {
+      announceChange(`Valor máximo alcanzado: ${max}`);
+      return;
+    }
 
     updateValue(newValue, "up");
   };
@@ -139,7 +177,12 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
     const newValue =
       (currentValue !== undefined ? currentValue : startValue) - step;
-    if (min !== undefined && newValue < min) return;
+    
+    // Si está en el límite mínimo, anunciar
+    if (min !== undefined && newValue < min) {
+      announceChange(`Valor mínimo alcanzado: ${min}`);
+      return;
+    }
 
     updateValue(newValue, "down");
   };
@@ -154,6 +197,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
       setInputValue(validatedValue);
       onChange?.(validatedValue);
     }
+
+    // Anunciar el cambio para lectores de pantalla
+    announceChange(`Valor cambiado a ${validatedValue}`);
 
     setLastChangeDirection(direction);
     triggerAnimation();
@@ -286,6 +332,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
       if (validatedValue !== inputValue && !isControlled) {
         onChange?.(validatedValue);
+        announceChange(`Valor corregido a ${validatedValue}`);
       }
     }
 
@@ -296,6 +343,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
   // Manejar el evento focus
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);
+    if (description) {
+      announceChange(description);
+    }
     onFocus?.(e);
   };
 
@@ -303,13 +353,59 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (disabled || readonly) return;
 
-    if (e.key === "ArrowUp") {
+    switch (e.key) {
+      case "ArrowUp":
       e.preventDefault();
       increment();
-    } else if (e.key === "ArrowDown") {
+        break;
+      case "ArrowDown":
       e.preventDefault();
       decrement();
+        break;
+      case "Home":
+        if (min !== undefined) {
+          e.preventDefault();
+          const newValue = min;
+          updateValue(newValue, "down");
+        }
+        break;
+      case "End":
+        if (max !== undefined) {
+          e.preventDefault();
+          const newValue = max;
+          updateValue(newValue, "up");
+        }
+        break;
+      case "PageUp":
+        e.preventDefault();
+        const bigStepUp = step * 10;
+        const newValueUp = currentValue !== undefined ? currentValue + bigStepUp : bigStepUp;
+        if (max === undefined || newValueUp <= max) {
+          updateValue(newValueUp, "up");
+        } else {
+          updateValue(max, "up");
+        }
+        break;
+      case "PageDown":
+        e.preventDefault();
+        const bigStepDown = step * 10;
+        const newValueDown = currentValue !== undefined ? currentValue - bigStepDown : -bigStepDown;
+        if (min === undefined || newValueDown >= min) {
+          updateValue(newValueDown, "down");
+        } else {
+          updateValue(min, "down");
+        }
+        break;
     }
+  };
+
+  // Determinar las descripciones accesibles
+  const getAriaDescribedby = () => {
+    const ids = [];
+    if (description) ids.push(descriptionMessageId);
+    if (error) ids.push(errorMessageId);
+    if (ariaDescribedby) ids.push(ariaDescribedby);
+    return ids.length > 0 ? ids.join(" ") : undefined;
   };
 
   // Animaciones según el tipo seleccionado
@@ -351,9 +447,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
       input: "h-8 text-xs",
       button: "w-6 h-6",
       icon: 12,
-      paddingControls: "pr-12",
-      paddingBoth: "px-12",
-      paddingSides: "px-8",
+      paddingControls: "pr-10",
+      paddingBoth: "px-10",
+      paddingSides: "px-7",
       label: "text-xs",
     },
     md: {
@@ -366,14 +462,26 @@ const NumberInput: React.FC<NumberInputProps> = ({
       label: "text-sm",
     },
     lg: {
-      input: "h-12 text-base",
-      button: "w-10 h-10",
+      input: "h-12 text-base min-h-[48px]", // Altura mínima para WCAG
+      button: "w-10 h-10 min-h-[40px]", // Altura mínima para WCAG
       icon: 16,
       paddingControls: "pr-20",
       paddingBoth: "px-20",
       paddingSides: "px-12",
       label: "text-base",
     },
+  };
+
+  // Garantizar alturas mínimas para todos los tamaños
+  sizeClasses.sm.input += " min-h-[32px]";
+  sizeClasses.sm.button += " min-h-[20px]";
+  sizeClasses.md.input += " min-h-[40px]";
+  sizeClasses.md.button += " min-h-[32px]";
+
+  // Clases para los estilos de validación (independientes de la variante)
+  const validationClasses = {
+    error: "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500 ring-1 ring-red-500/20 dark:ring-red-500/20",
+    errorFocused: "border-red-700 dark:border-red-400 focus:border-red-700 dark:focus:border-red-400 ring-1 ring-red-700/30 dark:ring-red-400/30",
   };
 
   // Clases para los estilos de variantes
@@ -385,8 +493,6 @@ const NumberInput: React.FC<NumberInputProps> = ({
         "bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border-zinc-300 dark:border-zinc-700",
       active: "bg-zinc-200 dark:bg-zinc-700",
       text: "text-zinc-700 dark:text-zinc-300",
-      error:
-        "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500",
       focus:
         "ring-zinc-500/30 dark:ring-zinc-400/30 border-zinc-500 dark:border-zinc-400",
     },
@@ -397,8 +503,6 @@ const NumberInput: React.FC<NumberInputProps> = ({
         "bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-800/50 text-blue-600 dark:text-blue-300 border-blue-300 dark:border-blue-700",
       active: "bg-blue-100 dark:bg-blue-800/50",
       text: "text-blue-700 dark:text-blue-300",
-      error:
-        "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500",
       focus:
         "ring-blue-500/30 dark:ring-blue-400/30 border-blue-500 dark:border-blue-400",
     },
@@ -409,8 +513,6 @@ const NumberInput: React.FC<NumberInputProps> = ({
         "bg-purple-50 dark:bg-purple-900/30 hover:bg-purple-100 dark:hover:bg-purple-800/50 text-purple-600 dark:text-purple-300 border-purple-300 dark:border-purple-700",
       active: "bg-purple-100 dark:bg-purple-800/50",
       text: "text-purple-700 dark:text-purple-300",
-      error:
-        "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500",
       focus:
         "ring-purple-500/30 dark:ring-purple-400/30 border-purple-500 dark:border-purple-400",
     },
@@ -421,8 +523,6 @@ const NumberInput: React.FC<NumberInputProps> = ({
         "bg-green-50 dark:bg-green-900/30 hover:bg-green-100 dark:hover:bg-green-800/50 text-green-600 dark:text-green-300 border-green-300 dark:border-green-700",
       active: "bg-green-100 dark:bg-green-800/50",
       text: "text-green-700 dark:text-green-300",
-      error:
-        "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500",
       focus:
         "ring-green-500/30 dark:ring-green-400/30 border-green-500 dark:border-green-400",
     },
@@ -433,8 +533,6 @@ const NumberInput: React.FC<NumberInputProps> = ({
         "bg-amber-50 dark:bg-amber-900/30 hover:bg-amber-100 dark:hover:bg-amber-800/50 text-amber-600 dark:text-amber-300 border-amber-300 dark:border-amber-700",
       active: "bg-amber-100 dark:bg-amber-800/50",
       text: "text-amber-700 dark:text-amber-300",
-      error:
-        "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500",
       focus:
         "ring-amber-500/30 dark:ring-amber-400/30 border-amber-500 dark:border-amber-400",
     },
@@ -445,8 +543,6 @@ const NumberInput: React.FC<NumberInputProps> = ({
         "bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-800/50 text-red-600 dark:text-red-300 border-red-300 dark:border-red-700",
       active: "bg-red-100 dark:bg-red-800/50",
       text: "text-red-700 dark:text-red-300",
-      error:
-        "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500",
       focus:
         "ring-red-500/30 dark:ring-red-400/30 border-red-500 dark:border-red-400",
     },
@@ -455,9 +551,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
   // Clases para los diferentes radios de borde
   const radiusClasses = {
     none: "rounded-none",
-    sm: "rounded",
-    md: "rounded-md",
-    full: "rounded-xl",
+    sm: "rounded-[0.25rem]",
+    md: "rounded-[0.375rem]",
+    full: "rounded-full",
   };
 
   // Determinar las clases para los controles según la posición
@@ -477,15 +573,15 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const renderIcon = (direction: "up" | "down") => {
     if (iconSet === "chevron") {
       return direction === "up" ? (
-        <ChevronUp size={sizeClasses[size].icon} className="stroke-[2.5px]" />
+        <ChevronUp size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
       ) : (
-        <ChevronDown size={sizeClasses[size].icon} className="stroke-[2.5px]" />
+        <ChevronDown size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
       );
     } else {
       return direction === "up" ? (
-        <Plus size={sizeClasses[size].icon} className="stroke-[2.5px]" />
+        <Plus size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
       ) : (
-        <Minus size={sizeClasses[size].icon} className="stroke-[2.5px]" />
+        <Minus size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
       );
     }
   };
@@ -494,39 +590,52 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const renderControls = () => {
     if (!showControls) return null;
 
-    const controlButton = (direction: "up" | "down") => (
-      <button
-        type="button"
-        onClick={direction === "up" ? increment : decrement}
-        disabled={
-          disabled ||
-          readonly ||
-          (direction === "up" &&
-            max !== undefined &&
-            currentValue !== undefined &&
-            currentValue >= max) ||
-          (direction === "down" &&
-            min !== undefined &&
-            currentValue !== undefined &&
-            currentValue <= min)
-        }
-        className={cn(
-          "flex items-center justify-center border transition-all duration-200",
-          variantClasses[variant].button,
-          "focus:outline-none hover:scale-105 active:scale-95",
-          `active:${variantClasses[variant].active}`,
-          "disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100",
-          // No cambiar el tamaño del botón en el layout compacto
-          sizeClasses[size].button,
-          iconSet === "plusminus" ? "rounded-full" : "rounded-md",
-          "shadow-sm hover:shadow",
-          controlButtonClassName
-        )}
-        aria-label={direction === "up" ? "Aumentar valor" : "Disminuir valor"}
-      >
-        {renderIcon(direction)}
-      </button>
-    );
+    const isAtMax = max !== undefined && currentValue !== undefined && currentValue >= max;
+    const isAtMin = min !== undefined && currentValue !== undefined && currentValue <= min;
+
+    const controlButton = (direction: "up" | "down") => {
+      // Ajustar el tamaño del botón para el layout compacto
+      const buttonSizeClass = controlsLayout === "compact" ? 
+        {
+          sm: "w-5 h-3",
+          md: "w-8 h-5",
+          lg: "w-10 h-6"
+        }[size] : 
+        sizeClasses[size].button;
+        
+      return (
+        <button
+          type="button"
+          onClick={direction === "up" ? increment : decrement}
+          disabled={
+            disabled ||
+            readonly ||
+            (direction === "up" && isAtMax) ||
+            (direction === "down" && isAtMin)
+          }
+          className={cn(
+            "flex items-center justify-center border",
+            variantClasses[variant].button,
+            "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
+            "hover:scale-105 active:scale-95 transition-transform duration-200",
+            `active:${variantClasses[variant].active}`,
+            "disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100",
+            buttonSizeClass,
+            iconSet === "plusminus" ? "rounded-full" : "rounded-md",
+            "shadow-sm",
+            controlButtonClassName
+          )}
+          aria-label={direction === "up" ? 
+            `Aumentar valor${isAtMax ? " (valor máximo alcanzado)" : ""}` : 
+            `Disminuir valor${isAtMin ? " (valor mínimo alcanzado)" : ""}`}
+          aria-controls={inputId}
+          aria-disabled={direction === "up" ? isAtMax : isAtMin}
+          tabIndex={0}
+        >
+          {renderIcon(direction)}
+        </button>
+      );
+    };
 
     // Controles en un layout compacto (apilados)
     if (
@@ -536,9 +645,12 @@ const NumberInput: React.FC<NumberInputProps> = ({
       return (
         <div
           className={cn(
-            "absolute right-0 top-0 bottom-0 flex flex-col justify-center gap-1 mr-1 py-1.5",
+            "absolute right-0 top-0 bottom-0 flex flex-col justify-center",
+            size === "sm" ? "gap-0.5 mr-0.5 py-0.5" : "gap-0.5 mr-1 py-1",
             controlsClassName
           )}
+          role="group"
+          aria-label="Controles de entrada numérica"
         >
           {controlButton("up")}
           {controlButton("down")}
@@ -554,6 +666,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
             "absolute right-0 inset-y-0 flex items-center gap-1 pr-1 my-1.5",
             controlsClassName
           )}
+          role="group"
+          aria-label="Controles de entrada numérica"
         >
           {controlButton("down")}
           {controlButton("up")}
@@ -570,6 +684,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
               "absolute left-0 inset-y-0 flex items-center pl-1 my-1.5",
               controlsClassName
             )}
+            role="group"
+            aria-label="Decrementar valor"
           >
             {controlButton("down")}
           </div>
@@ -578,6 +694,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
               "absolute right-0 inset-y-0 flex items-center pr-1 my-1.5",
               controlsClassName
             )}
+            role="group"
+            aria-label="Incrementar valor"
           >
             {controlButton("up")}
           </div>
@@ -590,19 +708,48 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
   return (
     <div className={cn(fullWidth ? "w-full" : "inline-block", className)}>
+      {/* Región live para anuncios de accesibilidad */}
+      <div
+        id={liveRegionId}
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {announcement}
+      </div>
+
+      {/* Label visible o escondido */}
       {label && (
         <label
-          htmlFor={uniqueId}
+          id={labelId}
+          htmlFor={inputId}
           className={cn(
-            "block mb-1 font-medium",
+            hideLabel ? "sr-only" : "block mb-1 font-medium",
             sizeClasses[size].label,
             variantClasses[variant].text,
+            error ? "text-red-600 dark:text-red-400" : "",
             labelClassName
           )}
         >
           {label}
-          {required && <span className="text-red-500 ml-0.5">*</span>}
+          {required && (
+            <>
+              <span aria-hidden="true" className="text-red-500 ml-0.5">*</span>
+              <span className="sr-only">(requerido)</span>
+            </>
+          )}
         </label>
+      )}
+
+      {/* Descripción del campo si existe */}
+      {description && (
+        <div
+          id={descriptionMessageId}
+          className="text-sm text-zinc-500 dark:text-zinc-400 mb-1"
+        >
+          {description}
+        </div>
       )}
 
       <div className={cn("relative", inputContainerClassName)}>
@@ -612,7 +759,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
         >
           <input
             ref={inputRef}
-            id={uniqueId}
+            id={inputId}
             type="text"
             inputMode="numeric"
             value={
@@ -631,23 +778,39 @@ const NumberInput: React.FC<NumberInputProps> = ({
             name={name}
             placeholder={placeholder}
             required={required}
+            autoComplete={autoComplete}
             className={cn(
               "block border px-3 w-full",
               paddingClass,
               sizeClasses[size].input,
               radiusClasses[radius],
               error
-                ? variantClasses[variant].error
+                ? validationClasses.error
                 : variantClasses[variant].input,
               "transition-all duration-200",
               disabled && "opacity-60 cursor-not-allowed",
               readonly && "opacity-80 cursor-default",
               isFocused && `ring ${variantClasses[variant].focus}`,
-              "focus:outline-none",
+              "focus:outline-none focus-visible:ring focus-visible:ring-offset-0",
               inputClassName
             )}
+            role="spinbutton"
+            aria-valuemin={min}
+            aria-valuemax={max}
+            aria-valuenow={currentValue}
+            aria-valuetext={
+              currentValue !== undefined
+                ? format !== "default"
+                  ? formatValue(currentValue)
+                  : currentValue.toString()
+                : undefined
+            }
             aria-invalid={!!error}
-            aria-labelledby={label ? uniqueId : undefined}
+            aria-required={required}
+            aria-label={hideLabel ? ariaLabel || label : undefined}
+            aria-labelledby={!hideLabel ? labelId : undefined}
+            aria-describedby={getAriaDescribedby()}
+            aria-disabled={disabled}
           />
         </motion.div>
 
@@ -657,6 +820,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
       {error && (
         <AnimatePresence>
           <motion.div
+            id={errorMessageId}
+            role="alert"
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
