@@ -3,7 +3,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import {  cn  } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 interface AccordionItemProps {
   title: string;
@@ -15,6 +15,7 @@ interface AccordionItemProps {
   titleClassName?: string;
   contentClassName?: string;
   iconClassName?: string;
+  id: string;
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = ({
@@ -27,7 +28,11 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   titleClassName = "",
   contentClassName = "",
   iconClassName = "",
+  id,
 }) => {
+  const headingId = `accordion-header-${id}`;
+  const contentId = `accordion-content-${id}`;
+
   return (
     <div
       className={cn(
@@ -35,29 +40,36 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         className
       )}
     >
-      <button
-        className={cn(
-          "flex w-full items-center justify-between py-4 text-left",
-          buttonClassName
-        )}
-        onClick={onClick}
-      >
-        <span
+      <h3>
+        <button
           className={cn(
-            "text-sm font-medium text-zinc-900 dark:text-zinc-100",
-            titleClassName
+            "flex w-full items-center justify-between py-4 text-left",
+            buttonClassName
           )}
+          onClick={onClick}
+          aria-expanded={isOpen}
+          aria-controls={contentId}
+          id={headingId}
+          type="button"
         >
-          {title}
-        </span>
-        <ChevronDown
-          className={cn(
-            "h-5 w-5 text-zinc-500 transition-transform duration-200",
-            isOpen && "rotate-180",
-            iconClassName
-          )}
-        />
-      </button>
+          <span
+            className={cn(
+              "text-sm font-medium text-zinc-900 dark:text-zinc-100",
+              titleClassName
+            )}
+          >
+            {title}
+          </span>
+          <ChevronDown
+            className={cn(
+              "h-5 w-5 text-zinc-500 transition-transform duration-200",
+              isOpen && "rotate-180",
+              iconClassName
+            )}
+            aria-hidden="true"
+          />
+        </button>
+      </h3>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
@@ -66,6 +78,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
+            role="region"
+            aria-labelledby={headingId}
+            id={contentId}
           >
             <div
               className={cn(
@@ -130,10 +145,12 @@ const Accordion: React.FC<AccordionProps> = ({
         "divide-y divide-zinc-200 dark:divide-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-800",
         className
       )}
+      role="presentation"
     >
       {items.map((item, index) => (
         <AccordionItem
           key={index}
+          id={`accordion-${index}`}
           title={item.title}
           isOpen={openIndexes.includes(index)}
           onClick={() => handleClick(index)}
