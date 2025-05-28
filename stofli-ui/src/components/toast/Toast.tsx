@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback, useId, useContext } from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import {  cn  } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface ToastProps {
   id?: string;
@@ -38,6 +38,8 @@ export interface ToastProps {
   iconContainerClassName?: string;
   contentClassName?: string;
   closeButtonClassName?: string;
+  role?: "status" | "alert";
+  important?: boolean;
 }
 
 const Toast: React.FC<ToastProps> = ({
@@ -60,9 +62,18 @@ const Toast: React.FC<ToastProps> = ({
   iconContainerClassName = "",
   contentClassName = "",
   closeButtonClassName = "",
+  role = "status",
+  important = false,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const [isMounted, setIsMounted] = useState(false);
+  const toastRef = useRef<HTMLDivElement>(null);
+
+  // Memoizar la función handleClose para evitar recreaciones
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+    onOpenChange?.(false);
+  }, [onOpenChange]);
 
   // Sincronizar estado controlado y no controlado
   useEffect(() => {
@@ -76,35 +87,66 @@ const Toast: React.FC<ToastProps> = ({
     return () => setIsMounted(false);
   }, []);
 
-  // Auto-cerrar después de duración
+  // Auto-cerrar después de duración, solo si el toast no tiene foco
   useEffect(() => {
     if (!isOpen || duration === Number.POSITIVE_INFINITY) return;
 
-    const timer = setTimeout(() => {
+    let timer: NodeJS.Timeout;
+    
+    const startTimer = () => {
+      timer = setTimeout(() => {
+        handleClose();
+      }, duration);
+    };
+
+    // Iniciar temporizador
+    startTimer();
+
+    // Pausar el temporizador cuando el toast tiene foco o el mouse está encima
+    const handleFocus = () => clearTimeout(timer);
+    const handleBlur = () => startTimer();
+    const handleMouseEnter = () => clearTimeout(timer);
+    const handleMouseLeave = () => startTimer();
+
+    const toastElement = toastRef.current;
+    if (toastElement) {
+      toastElement.addEventListener('focus', handleFocus, true);
+      toastElement.addEventListener('blur', handleBlur, true);
+      toastElement.addEventListener('mouseenter', handleMouseEnter);
+      toastElement.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (toastElement) {
+        toastElement.removeEventListener('focus', handleFocus, true);
+        toastElement.removeEventListener('blur', handleBlur, true);
+        toastElement.removeEventListener('mouseenter', handleMouseEnter);
+        toastElement.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, [isOpen, duration, handleClose]);
+
+  // Manejo de teclado para el toast
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
       handleClose();
-    }, duration);
-
-    return () => clearTimeout(timer);
-  }, [isOpen, duration]);
-
-  const handleClose = () => {
-    setIsOpen(false);
-    onOpenChange?.(false);
-  };
+    }
+  }, [handleClose]);
 
   const variantClasses = {
     default:
-      "bg-gradient-to-r from-zinc-300/90 to-zinc-400/90 dark:from-zinc-800/90 dark:to-zinc-700/90 text-zinc-800 dark:text-zinc-100 border border-zinc-400/30 dark:border-zinc-600/30 backdrop-blur-sm shadow-sm",
+      "bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-800/90 dark:to-zinc-700/90 text-zinc-800 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-700/50 backdrop-blur-sm shadow-sm",
     primary:
-      "bg-gradient-to-r from-blue-400/90 to-blue-500/90 dark:from-blue-900/90 dark:to-blue-800/90 text-white dark:text-blue-50 border border-blue-500/30 dark:border-blue-700/30 backdrop-blur-sm shadow-sm",
+      "bg-gradient-to-r from-blue-400 to-blue-500 dark:from-blue-800/90 dark:to-blue-700/90 text-white dark:text-blue-50 border border-blue-400 dark:border-blue-700/50 backdrop-blur-sm shadow-sm",
     secondary:
-      "bg-gradient-to-r from-purple-400/90 to-purple-500/90 dark:from-purple-900/90 dark:to-purple-800/90 text-white dark:text-purple-50 border border-purple-500/30 dark:border-purple-700/30 backdrop-blur-sm shadow-sm",
+      "bg-gradient-to-r from-purple-400 to-purple-500 dark:from-purple-800/90 dark:to-purple-700/90 text-white dark:text-purple-50 border border-purple-400 dark:border-purple-700/50 backdrop-blur-sm shadow-sm",
     success:
-      "bg-gradient-to-r from-green-400/90 to-green-500/90 dark:from-green-900/90 dark:to-green-800/90 text-white dark:text-green-50 border border-green-500/30 dark:border-green-700/30 backdrop-blur-sm shadow-sm",
+      "bg-gradient-to-r from-green-400 to-green-500 dark:from-green-800/90 dark:to-green-700/90 text-white dark:text-green-50 border border-green-400 dark:border-green-700/50 backdrop-blur-sm shadow-sm",
     warning:
-      "bg-gradient-to-r from-amber-400/90 to-amber-500/90 dark:from-amber-900/90 dark:to-amber-800/90 text-white dark:text-amber-50 border border-amber-500/30 dark:border-amber-700/30 backdrop-blur-sm shadow-sm",
+      "bg-gradient-to-r from-amber-400 to-amber-500 dark:from-amber-800/90 dark:to-amber-700/90 text-white dark:text-amber-50 border border-amber-400 dark:border-amber-700/50 backdrop-blur-sm shadow-sm",
     danger:
-      "bg-gradient-to-r from-red-400/90 to-red-500/90 dark:from-red-900/90 dark:to-red-800/90 text-white dark:text-red-50 border border-red-500/30 dark:border-red-700/30 backdrop-blur-sm shadow-sm",
+      "bg-gradient-to-r from-red-400 to-red-500 dark:from-red-800/90 dark:to-red-700/90 text-white dark:text-red-50 border border-red-400 dark:border-red-700/50 backdrop-blur-sm shadow-sm",
   };
 
   const variants = {
@@ -133,6 +175,24 @@ const Toast: React.FC<ToastProps> = ({
     },
   };
 
+  // Determinar título para lectores de pantalla basado en variante
+  const getAriaTitle = () => {
+    const baseTitle = title || "";
+    const variantName = {
+      "default": "",
+      "primary": "Información: ",
+      "secondary": "Nota: ",
+      "success": "Éxito: ",
+      "warning": "Advertencia: ",
+      "danger": "Error: "
+    };
+    
+    return `${variantName[variant]}${baseTitle}`;
+  };
+
+  // Dividir las clases por tipo
+  const baseClasses = "rounded-lg border px-4 py-3 shadow-lg";
+
   if (!isMounted) return null;
 
   return (
@@ -144,27 +204,36 @@ const Toast: React.FC<ToastProps> = ({
           animate="visible"
           exit="exit"
           variants={variants}
+          ref={toastRef}
+          tabIndex={0}
+          role={role}
+          aria-atomic="true"
+          aria-live={important ? "assertive" : "polite"}
+          aria-label={getAriaTitle()}
+          onKeyDown={handleKeyDown}
         >
           <div
             className={cn(
-              "rounded-lg border px-4 py-3 shadow-lg",
-              toastClassName ? toastClassName : variantClasses[variant]
+              baseClasses,
+              // Si hay toastClassName, no aplicar estilos de variante
+              toastClassName ? "" : variantClasses[variant],
+              toastClassName
             )}
           >
             <div className={cn("flex items-start gap-3")}>
               {icon && (
-                <div className={iconContainerClassName || "shrink-0 mt-0.5"}>
+                <div className={cn("shrink-0 mt-0.5", iconContainerClassName)} aria-hidden="true">
                   {icon}
                 </div>
               )}
-              <div className={contentClassName || "flex-1 mr-2"}>
+              <div className={cn("flex-1 mr-2", contentClassName)}>
                 {title && (
-                  <h4 className={titleClassName || "font-medium mb-1"}>
+                  <h4 className={cn("font-medium mb-1", titleClassName)}>
                     {title}
                   </h4>
                 )}
                 {description && (
-                  <p className={descriptionClassName || "text-sm opacity-90"}>
+                  <p className={cn("text-sm opacity-90", descriptionClassName)}>
                     {description}
                   </p>
                 )}
@@ -173,7 +242,14 @@ const Toast: React.FC<ToastProps> = ({
               {showCloseButton && (
                 <button
                   onClick={handleClose}
-                  className={closeButtonClassName || "shrink-0 opacity-70 hover:opacity-100 transition-opacity"}
+                  className={cn(
+                    "shrink-0 opacity-70 hover:opacity-100 transition-opacity p-1 rounded-full",
+                    "hover:bg-white/20",
+                    "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+                    "dark:focus-visible:ring-offset-zinc-900 focus-visible:ring-zinc-500",
+                    "dark:focus-visible:ring-zinc-400 outline-none",
+                    closeButtonClassName
+                  )}
                   aria-label="Cerrar"
                 >
                   <X className="h-4 w-4" />
@@ -208,17 +284,27 @@ export const ToastProvider: React.FC<{
   containerClassName?: string;
 }> = ({ children, containerClassName }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
+  const toastIdBase = useId();
 
   const showToast = (
     props: Omit<ToastProps, "open" | "defaultOpen" | "onOpenChange" | "id">
   ) => {
-    const id = Math.random().toString(36).substring(2, 9);
-    setToasts((prev) => [...prev, { ...props, id, open: true }]);
+    const uniqueId = `toast-${toastIdBase}-${toasts.length}`;
+    
+    // Determinar automáticamente el role basado en la variante
+    let role: "status" | "alert" = props.role || "status";
+    if (!props.role) {
+      if (props.variant === "danger" || props.variant === "warning") {
+        role = "alert";
+      }
+    }
+    
+    setToasts((prev) => [...prev, { ...props, id: uniqueId, open: true, role }]);
 
     if (props.duration !== Number.POSITIVE_INFINITY) {
       const duration = props.duration || 5000;
       setTimeout(() => {
-        closeToast(id);
+        closeToast(uniqueId);
       }, duration);
     }
   };
@@ -249,6 +335,20 @@ export const ToastProvider: React.FC<{
     "top-center": "top-4 left-1/2 -translate-x-1/2",
     "bottom-center": "bottom-4 left-1/2 -translate-x-1/2",
   };
+
+  // Asegurar que los toasts no bloqueen el contenido WCAG 2.1 SC 2.2.1
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && toasts.length > 0) {
+        // Cerrar el último toast
+        const lastToastId = toasts[toasts.length - 1].id;
+        closeToast(lastToastId);
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [toasts]);
 
   return (
     <ToastContext.Provider value={{ open: showToast, close: closeToast }}>
@@ -297,7 +397,7 @@ export const ToastProvider: React.FC<{
 };
 
 export const useToast = () => {
-  const context = React.useContext(ToastContext);
+  const context = useContext(ToastContext);
   if (context === undefined) {
     throw new Error("useToast debe usarse dentro de un ToastProvider");
   }
