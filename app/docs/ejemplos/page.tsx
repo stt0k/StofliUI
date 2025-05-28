@@ -22,13 +22,13 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/FooterDocs";
 
 // Importación de componentes de section
-import Button from "@/components/sections/button";
-import Checkbox from "@/components/sections/checkbox";
-import Badge from "@/components/sections/badge";
-import Tabs from "@/components/sections/tabs";
-import Card from "@/components/sections/card";
-import Accordion from "@/components/sections/accordion";
-import Dropdown from "@/components/sections/dropdown";
+import Button from "@/components/sections/Button";
+import Checkbox from "@/components/sections/Checkbox";
+import Badge from "@/components/sections/Badge";
+import Tabs from "@/components/sections/Tabs";
+import Card from "@/components/sections/Card";
+import Accordion from "@/components/sections/Accordion";
+import Dropdown from "@/components/sections/Dropdown";
 
 export default function ExamplesPage() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -939,6 +939,9 @@ function ExampleSection({
 
 // Componente para el contenido de la pestaña Overview
 function OverviewTabContent() {
+  // Valores predeterminados para las alturas de las barras
+  const barHeights = [45, 65, 35, 80, 55, 70, 60, 40, 75, 50, 90, 65];
+  
   return (
     <div className="p-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -991,11 +994,11 @@ function OverviewTabContent() {
           Rendimiento reciente
         </h3>
         <div className="h-40 flex items-end space-x-2">
-          {Array.from({ length: 12 }).map((_, i) => (
+          {barHeights.map((height, i) => (
             <div
               key={i}
               className="bg-gradient-to-t from-blue-600 to-blue-400 rounded-t w-full"
-              style={{ height: `${Math.random() * 80 + 20}%` }}
+              style={{ height: `${height}%` }}
             />
           ))}
         </div>
