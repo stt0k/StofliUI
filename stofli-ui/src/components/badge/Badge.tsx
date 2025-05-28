@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cva, type VariantProps } from "class-variance-authority";
-import {  cn  } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
   "inline-flex items-center justify-center text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-900",
@@ -32,8 +32,8 @@ const badgeVariants = cva(
       },
       radius: {
         none: "rounded-none",
-        sm: "rounded-sm",
-        md: "rounded",
+        sm: "rounded-[0.25rem]",
+        md: "rounded-[0.375rem]",
         full: "rounded-full",
       },
       withDot: {
@@ -60,6 +60,9 @@ export interface BadgeProps extends VariantProps<typeof badgeVariants> {
   icon?: React.ReactNode;
   onClick?: () => void;
   dismissible?: boolean;
+  ariaLabel?: string;
+  dotAriaLabel?: string;
+  dismissAriaLabel?: string;
 }
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
@@ -78,6 +81,9 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
       icon,
       onClick,
       dismissible = false,
+      ariaLabel,
+      dotAriaLabel = "Indicador de estado",
+      dismissAriaLabel = "Eliminar badge",
     },
     ref
   ) => {
@@ -85,12 +91,38 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
 
     if (!isVisible) return null;
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent<HTMLElement>) => {
       if (dismissible) {
+        e.preventDefault();
         setIsVisible(false);
       }
       onClick?.();
     };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleClick(e as unknown as React.MouseEvent<HTMLElement>);
+      }
+    };
+
+    const getAriaAttributes = () => {
+      if (dismissible || onClick) {
+        return {
+          role: "button",
+          tabIndex: 0,
+          "aria-label": ariaLabel || (typeof children === "string" ? children : undefined),
+          "aria-pressed": undefined,
+          onKeyDown: handleKeyDown,
+        };
+      }
+      return {
+        role: "status",
+        "aria-label": ariaLabel,
+      };
+    };
+
+    const ariaAttributes = getAriaAttributes();
 
     return (
       <motion.div
@@ -100,10 +132,11 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         exit={{ scale: 0.9, opacity: 0 }}
         className={cn(
           badgeVariants({ variant, size, radius, withDot }),
-          className
+          className,
+          (dismissible || onClick) && "cursor-pointer"
         )}
         onClick={onClick || dismissible ? handleClick : undefined}
-        style={{ cursor: onClick || dismissible ? "pointer" : "default" }}
+        {...ariaAttributes}
       >
         {withDot && (
           <div
@@ -115,10 +148,30 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
                   : "bg-white dark:bg-white"),
               dotClassName
             )}
+            role="presentation"
+            aria-label={dotAriaLabel}
+            aria-hidden="true"
           />
         )}
-        {icon && <span className={cn("mr-1", iconClassName)}>{icon}</span>}
+        {icon && (
+          <span 
+            className={cn("mr-1", iconClassName)}
+            role="presentation"
+            aria-hidden="true"
+          >
+            {icon}
+          </span>
+        )}
         <span className={contentClassName}>{children}</span>
+        {dismissible && (
+          <span
+            className="sr-only"
+            role="alert"
+            aria-live="polite"
+          >
+            {dismissAriaLabel}
+          </span>
+        )}
       </motion.div>
     );
   }
