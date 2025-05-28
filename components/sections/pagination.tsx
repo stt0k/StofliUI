@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useId } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,9 @@ export interface PaginationProps {
     next?: string;
     first?: string;
     last?: string;
+    pageLabel?: string;
+    navigationLabel?: string;
+    statusText?: string;
   };
   showPrevious?: boolean;
   showNext?: boolean;
@@ -38,6 +41,8 @@ export interface PaginationProps {
   ellipsisClassName?: string;
   indicatorClassName?: string;
   numbersContainerClassName?: string;
+  id?: string;
+  "aria-label"?: string;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -58,6 +63,9 @@ const Pagination: React.FC<PaginationProps> = ({
     next: "Siguiente",
     first: "Primera",
     last: "Última",
+    pageLabel: "Página",
+    navigationLabel: "Paginación",
+    statusText: "Página {current} de {total}",
   },
   showPrevious = true,
   showNext = true,
@@ -67,6 +75,8 @@ const Pagination: React.FC<PaginationProps> = ({
   ellipsisClassName,
   indicatorClassName,
   numbersContainerClassName,
+  id,
+  "aria-label": ariaLabel,
 }) => {
   const [page, setPage] = useState(currentPage);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
@@ -76,10 +86,34 @@ const Pagination: React.FC<PaginationProps> = ({
     top: 0,
     height: 0,
   });
+  const [announcement, setAnnouncement] = useState<string>("");
+  const navRef = useRef<HTMLElement>(null);
+  const uniqueIdBase = useId();
+  const uniqueId = `pagination-${uniqueIdBase.replace(/:/g, "")}`;
+  const instanceId = id || uniqueId;
+  const liveRegionId = `${instanceId}-live`;
+  const paginationLabel = ariaLabel || customText.navigationLabel || "Paginación";
 
   useEffect(() => {
     setPage(currentPage);
   }, [currentPage]);
+
+  // Limpiar anuncios después de ser leídos
+  useEffect(() => {
+    if (announcement) {
+      const timer = setTimeout(() => setAnnouncement(""), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [announcement]);
+
+  // Anunciar cambio de página
+  const announcePageChange = (newPage: number) => {
+    const statusText = customText.statusText || "Página {current} de {total}";
+    const message = statusText
+      .replace("{current}", newPage.toString())
+      .replace("{total}", totalPages.toString());
+    setAnnouncement(message);
+  };
 
   // Actualizar la posición del indicador cuando cambia la página activa
   useEffect(() => {
@@ -95,6 +129,44 @@ const Pagination: React.FC<PaginationProps> = ({
       }
     }
   }, [page, withNumbers]);
+
+  // Manejar navegación por teclado
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (disabled) return;
+
+    switch (e.key) {
+      case "ArrowRight":
+        e.preventDefault();
+        if (page < totalPages) {
+          handlePageChange(page + 1);
+        }
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        if (page > 1) {
+          handlePageChange(page - 1);
+        }
+        break;
+      case "Home":
+        e.preventDefault();
+        handlePageChange(1);
+        break;
+      case "End":
+        e.preventDefault();
+        handlePageChange(totalPages);
+        break;
+      case "PageUp":
+        e.preventDefault();
+        const prevPage = Math.max(1, page - 5);
+        handlePageChange(prevPage);
+        break;
+      case "PageDown":
+        e.preventDefault();
+        const nextPage = Math.min(totalPages, page + 5);
+        handlePageChange(nextPage);
+        break;
+    }
+  };
 
   const variantClasses = {
     default:
@@ -142,13 +214,13 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   const sizeClasses = {
-    sm: "h-7 min-w-7 text-xs",
-    md: "h-9 min-w-9 text-sm",
-    lg: "h-11 min-w-11",
+    sm: "h-7 min-w-7 min-h-[28px] text-xs",
+    md: "h-9 min-w-9 min-h-[36px] text-sm",
+    lg: "h-11 min-w-11 min-h-[44px]",
   };
 
   const buttonClasses =
-    "flex items-center justify-center border rounded-md transition-colors duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
+    "flex items-center justify-center border rounded-md transition-colors duration-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
 
   const iconSizes = {
     sm: 14,
@@ -162,6 +234,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
     setPage(newPage);
     onPageChange?.(newPage);
+    announcePageChange(newPage);
   };
 
   const renderPageButtons = () => {
@@ -218,6 +291,7 @@ const Pagination: React.FC<PaginationProps> = ({
               "px-1 flex items-center justify-center",
               ellipsisClassName
             )}
+            aria-hidden="true"
           >
             <MoreHorizontal size={iconSizes[size]} />
           </div>
@@ -226,6 +300,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
       const isActive = page === item;
       const numericItem = item as number;
+      const pageLabel = customText.pageLabel || "Página";
 
       return (
         <button
@@ -251,6 +326,8 @@ const Pagination: React.FC<PaginationProps> = ({
             pageButtonClassName
           )}
           aria-current={isActive ? "page" : undefined}
+          aria-label={`${pageLabel} ${numericItem}${isActive ? " (página actual)" : ""}`}
+          tabIndex={0}
         >
           {item}
         </button>
@@ -273,17 +350,41 @@ const Pagination: React.FC<PaginationProps> = ({
 
   if (!hasContent) return null;
 
+  const statusText = customText.statusText || "Página {current} de {total}";
+  const currentStatusText = statusText
+    .replace("{current}", page.toString())
+    .replace("{total}", totalPages.toString());
+
   return (
     <nav
+      ref={navRef}
+      id={instanceId}
       role="navigation"
-      aria-label="Pagination Navigation"
+      aria-label={paginationLabel}
       className={cn(
         "flex items-center gap-1 flex-wrap",
         fullWidth && "w-full",
         justifyClass,
         className
       )}
+      onKeyDown={handleKeyDown}
     >
+      {/* Región live para anuncios de accesibilidad */}
+      <div
+        id={liveRegionId}
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {announcement}
+      </div>
+
+      {/* Estado actual visible solo para lectores de pantalla */}
+      <div className="sr-only" aria-live="polite">
+        {currentStatusText}
+      </div>
+
       {withEdges && showPrevious && (
         <button
           type="button"
@@ -297,10 +398,11 @@ const Pagination: React.FC<PaginationProps> = ({
           )}
           onClick={() => handlePageChange(1)}
           aria-label="Primera página"
+          tabIndex={0}
         >
           <span className="flex items-center">
-            <ChevronLeft size={iconSizes[size]} />
-            <ChevronLeft size={iconSizes[size]} className="-ml-3" />
+            <ChevronLeft size={iconSizes[size]} aria-hidden="true" />
+            <ChevronLeft size={iconSizes[size]} className="-ml-3" aria-hidden="true" />
             {withText && <span className="mx-1">{customText.first}</span>}
           </span>
         </button>
@@ -319,9 +421,10 @@ const Pagination: React.FC<PaginationProps> = ({
           )}
           onClick={() => handlePageChange(page - 1)}
           aria-label="Página anterior"
+          tabIndex={0}
         >
           <span className="flex items-center">
-            <ChevronLeft size={iconSizes[size]} />
+            <ChevronLeft size={iconSizes[size]} aria-hidden="true" />
             {withText && <span className="ml-1">{customText.previous}</span>}
           </span>
         </button>
@@ -333,6 +436,8 @@ const Pagination: React.FC<PaginationProps> = ({
             "relative flex flex-wrap items-center gap-1",
             numbersContainerClassName
           )}
+          role="group"
+          aria-label="Páginas"
         >
           {/* Indicador animado que se mueve ENCIMA de los botones */}
           <motion.div
@@ -354,6 +459,7 @@ const Pagination: React.FC<PaginationProps> = ({
               stiffness: 400,
               damping: 30,
             }}
+            aria-hidden="true"
           />
           {renderPageButtons()}
         </div>
@@ -372,10 +478,11 @@ const Pagination: React.FC<PaginationProps> = ({
           )}
           onClick={() => handlePageChange(page + 1)}
           aria-label="Página siguiente"
+          tabIndex={0}
         >
           <span className="flex items-center">
             {withText && <span className="mr-1">{customText.next}</span>}
-            <ChevronRight size={iconSizes[size]} />
+            <ChevronRight size={iconSizes[size]} aria-hidden="true" />
           </span>
         </button>
       )}
@@ -393,11 +500,12 @@ const Pagination: React.FC<PaginationProps> = ({
           )}
           onClick={() => handlePageChange(totalPages)}
           aria-label="Última página"
+          tabIndex={0}
         >
           <span className="flex items-center">
             {withText && <span className="mx-1">{customText.last}</span>}
-            <ChevronRight size={iconSizes[size]} />
-            <ChevronRight size={iconSizes[size]} className="-ml-3" />
+            <ChevronRight size={iconSizes[size]} aria-hidden="true" />
+            <ChevronRight size={iconSizes[size]} className="-ml-3" aria-hidden="true" />
           </span>
         </button>
       )}
