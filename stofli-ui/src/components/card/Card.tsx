@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import { motion } from "framer-motion";
-import {  cn  } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface CardProps {
   title?: string;
@@ -30,6 +30,11 @@ export interface CardProps {
   imageClassName?: string;
   headerClassName?: string;
   footerClassName?: string;
+  ariaLabel?: string;
+  imageAlt?: string;
+  onClick?: () => void;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
+  role?: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -52,7 +57,25 @@ const Card: React.FC<CardProps> = ({
   imageClassName = "",
   headerClassName = "",
   footerClassName = "",
+  ariaLabel,
+  imageAlt,
+  onClick,
+  onKeyDown,
+  role = "article",
 }) => {
+  const uniqueIdBase = useId();
+  const cardId = `card-${uniqueIdBase.replace(/:/g, "")}`;
+  const titleId = `${cardId}-title`;
+  const descriptionId = `${cardId}-description`;
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (interactive && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick?.();
+    }
+    onKeyDown?.(e);
+  };
+
   const variantClasses = {
     default:
       "bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800",
@@ -69,10 +92,10 @@ const Card: React.FC<CardProps> = ({
   };
 
   const radiusClasses = {
-    none: "",
-    sm: "rounded-sm",
-    md: "rounded-lg",
-    full: "rounded-2xl",
+    none: "rounded-none",
+    sm: "rounded-[0.25rem]",
+    md: "rounded-[0.375rem]",
+    full: "rounded-full",
   };
 
   const hoverClasses = {
@@ -106,7 +129,13 @@ const Card: React.FC<CardProps> = ({
     variantClasses[variant],
     radiusClasses[radius],
     hoverClasses[hover],
-    interactive && "cursor-pointer",
+    interactive && "cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2",
+    interactive && variant === "default" && "focus:ring-zinc-500",
+    interactive && variant === "primary" && "focus:ring-blue-500",
+    interactive && variant === "secondary" && "focus:ring-purple-500",
+    interactive && variant === "success" && "focus:ring-green-500",
+    interactive && variant === "warning" && "focus:ring-amber-500",
+    interactive && variant === "danger" && "focus:ring-red-500",
     className
   );
 
@@ -141,14 +170,33 @@ const Card: React.FC<CardProps> = ({
       {...animationVariants[animation]}
       whileHover={interactive ? { scale: 1.02 } : undefined}
       whileTap={interactive ? { scale: 0.98 } : undefined}
+      role={role}
+      aria-label={ariaLabel}
+      aria-labelledby={title ? titleId : undefined}
+      aria-describedby={description ? descriptionId : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      onClick={interactive ? onClick : undefined}
+      onKeyDown={interactive ? handleKeyDown : undefined}
+      id={cardId}
     >
-      {header && <div className={headerClasses}>{header}</div>}
+      {header && (
+        <div 
+          className={headerClasses}
+          role="presentation"
+        >
+          {header}
+        </div>
+      )}
 
       {image && (
-        <div className={imageContainerClasses}>
+        <div 
+          className={imageContainerClasses}
+          role="img"
+          aria-label={imageAlt || title || "Imagen de la tarjeta"}
+        >
           <motion.img
             src={image}
-            alt={title || "Card image"}
+            alt={imageAlt || title || "Imagen de la tarjeta"}
             loading={loading}
             className="w-full h-48 object-cover"
             whileHover={{ scale: 1.05 }}
@@ -157,13 +205,18 @@ const Card: React.FC<CardProps> = ({
         </div>
       )}
 
-      <div className={contentClasses}>
+      <div 
+        className={contentClasses}
+        role="region"
+        aria-label="Contenido principal"
+      >
         {title && (
           <motion.h3
             className={titleClasses}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
+            id={titleId}
           >
             {title}
           </motion.h3>
@@ -175,6 +228,7 @@ const Card: React.FC<CardProps> = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
+            id={descriptionId}
           >
             {description}
           </motion.p>
@@ -183,9 +237,18 @@ const Card: React.FC<CardProps> = ({
         {children}
       </div>
 
-      {footer && <div className={footerClasses}>{footer}</div>}
+      {footer && (
+        <div 
+          className={footerClasses}
+          role="contentinfo"
+        >
+          {footer}
+        </div>
+      )}
     </motion.div>
   );
 };
+
+Card.displayName = "Card";
 
 export default Card;
