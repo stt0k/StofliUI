@@ -167,4 +167,4 @@ const Accordion: React.FC<AccordionProps> = ({
   );
 };
 
-export default Accordion;
+export default Accordion; 
