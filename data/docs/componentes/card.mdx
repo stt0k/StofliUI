@@ -6,41 +6,16 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion
-
-# Instalar el componente
-npx @stofli/ui add card
+import { Card } from "@stofli/ui";
 ```
 
   </div>
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-```tsx
-import { Card } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Card
-      title="Mi Tarjeta"
-      description="Una tarjeta con animaciones y estilos modernos."
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Una tarjeta simple con título y descripción.
 
@@ -65,7 +40,6 @@ export default function CardDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="con-imagen" level={3} >Con Imagen</HeadingAnchor>
@@ -473,22 +447,27 @@ export default function CardProductDemo() {
 | `variant`              | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                      |
 | `radius`               | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                   |
 | `hover`                | `"none" \| "lift" \| "glow" \| "scale"`                                       | `"none"`    | Efecto al pasar el cursor               |
+| `animation`            | `"none" \| "fade" \| "slide" \| "bounce"`                                     | `"none"`    | Animación al montar el componente       |
+| `interactive`          | `boolean`                                                                     | `false`     | Habilita interacción con la tarjeta     |
 | `header`               | `React.ReactNode`                                                             | -           | Contenido de la cabecera                |
 | `footer`               | `React.ReactNode`                                                             | -           | Contenido del pie                       |
 | `image`                | `string`                                                                      | -           | URL de la imagen                        |
 | `loading`              | `"eager" \| "lazy"`                                                           | `"lazy"`    | Estrategia de carga de imagen           |
+| `ariaLabel`            | `string`                                                                      | -           | Etiqueta ARIA para la tarjeta           |
+| `imageAlt`             | `string`                                                                      | -           | Texto alternativo para la imagen        |
+| `onClick`              | `() => void`                                                                  | -           | Función llamada al hacer clic           |
+| `onKeyDown`            | `(e: React.KeyboardEvent) => void`                                            | -           | Función para eventos de teclado         |
+| `role`                 | `string`                                                                      | `"article"` | Rol ARIA para la tarjeta                |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con Imagen", href: "#con-imagen" },
       { title: "Con GIF", href: "#con-gif" },
       { title: "Card de Autor", href: "#card-de-autor" },
