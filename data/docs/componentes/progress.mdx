@@ -6,47 +6,18 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion clsx tailwind-merge
-
-# Instalar el componente
-npx @stofli/ui add progress
+import { Progress } from "@stofli/ui
 ```
 
-Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
-
-```tsx
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-```
 
   </div>
+
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-```tsx
-import { Progress } from "@stofli/ui";
-
-export default function App() {
-  return <Progress value={75} label="Progreso" showValue variant="primary" />;
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Una barra de progreso simple con diferentes valores.
 
@@ -75,7 +46,6 @@ export default function ProgressDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
@@ -260,6 +230,13 @@ export default function ProgressCustomClassDemo() {
 | `label`                | `string`                                                                      | -           | Etiqueta descriptiva                         |
 | `radius`               | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                        |
 | `striped`              | `boolean`                                                                     | `false`     | Añade un patrón de rayas animado             |
+| `indeterminate`        | `boolean`                                                                     | `false`     | Muestra una barra de progreso indeterminada  |
+| `description`          | `string`                                                                      | -           | Descripción accesible adicional              |
+| `aria-label`           | `string`                                                                      | -           | Etiqueta ARIA personalizada                  |
+| `aria-labelledby`      | `string`                                                                      | -           | ID del elemento que etiqueta este componente |
+| `aria-describedby`     | `string`                                                                      | -           | ID del elemento que describe este componente |
+| `id`                   | `string`                                                                      | -           | ID personalizado para el componente          |
+| `valueText`            | `string`                                                                      | -           | Texto personalizado para el valor ARIA       |
 | `className`            | `string`                                                                      | -           | Clases adicionales para el track de progreso |
 | `containerClassName`   | `string`                                                                      | -           | Clases para el contenedor principal          |
 | `labelClassName`       | `string`                                                                      | -           | Clases para la etiqueta de progreso          |
@@ -270,13 +247,11 @@ export default function ProgressCustomClassDemo() {
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Variantes", href: "#variantes" },
       { title: "Con animación de rayas", href: "#animacion-rayas" },
