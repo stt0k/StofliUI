@@ -6,47 +6,18 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion lucide-react clsx tailwind-merge
-
-# Instalar el componente
-npx @stofli/ui add pagination
-```
-
-Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
-
-```tsx
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { Pagination } from "@stofli/ui
 ```
 
   </div>
+
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { Pagination } from "@stofli/ui";
-
-export default function App() {
-  return <Pagination totalPages={10} currentPage={1} />;
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un componente de paginación básico con números de página y flechas de navegación.
 
@@ -70,7 +41,6 @@ export default function PaginationDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
@@ -238,7 +208,7 @@ Usando las propiedades `showPrevious` y `showNext`, puedes controlar qué botone
 <DemoTabs
   preview={
     <div className="flex flex-col gap-4 w-full">
-      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+      <div>
         <Pagination 
           totalPages={10} 
           withNumbers={false}
@@ -249,7 +219,7 @@ Usando las propiedades `showPrevious` y `showNext`, puedes controlar qué botone
           customText={{ next: "Siguiente página" }}
         />
       </div>
-      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+      <div>
         <Pagination 
           totalPages={10} 
           withNumbers={false}
@@ -270,7 +240,7 @@ export default function PaginationSingleButtonDemo() {
   return (
     <div className="flex flex-col gap-4 w-full">
       {/* Solo botón siguiente (útil para primera página) */}
-      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+      <div>
         <Pagination 
           totalPages={10} 
           withNumbers={false}
@@ -283,7 +253,7 @@ export default function PaginationSingleButtonDemo() {
       </div>
       
       {/* Solo botón anterior (útil para última página) */}
-      <div className="border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+      <div>
         <Pagination 
           totalPages={10} 
           withNumbers={false}
@@ -308,7 +278,7 @@ Usando `fullWidth={true}`, el componente ocupará todo el ancho disponible de su
 
 <DemoTabs
   preview={
-    <div className="w-full border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+    <div>
       <Pagination 
         totalPages={10} 
         fullWidth 
@@ -321,7 +291,7 @@ import { Pagination } from "@stofli/ui";
 
 export default function PaginationFullWidthDemo() {
   return (
-    <div className="w-full border border-dashed border-zinc-300 dark:border-zinc-700 p-4">
+    <div>
       <Pagination 
         totalPages={10} 
         fullWidth 
@@ -420,7 +390,7 @@ export default function PaginationCustomClassDemo() {
 | `disabled`                  | `boolean`                                                                     | `false`                                                                         | Deshabilitar el componente                              |
 | `className`                 | `string`                                                                      | -                                                                               | Clases adicionales para el componente principal         |
 | `fullWidth`                 | `boolean`                                                                     | `false`                                                                         | Ocupar todo el ancho disponible y aplicar space-between |
-| `customText`                | `object`                                                                      | `{ previous: "Anterior", next: "Siguiente", first: "Primera", last: "Última" }` | Personalizar el texto de los botones de navegación      |
+| `customText`                | `object`                                                                      | `{ previous: "Anterior", next: "Siguiente", first: "Primera", last: "Última", pageLabel: "Página", navigationLabel: "Paginación", statusText: "Página {current} de {total}" }` | Personalizar el texto de los botones de navegación      |
 | `showPrevious`              | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia atrás              |
 | `showNext`                  | `boolean`                                                                     | `true`                                                                          | Mostrar el botón de navegación hacia adelante           |
 | `navButtonClassName`        | `string`                                                                      | -                                                                               | Clases para los botones de navegación                   |
@@ -429,18 +399,18 @@ export default function PaginationCustomClassDemo() {
 | `ellipsisClassName`         | `string`                                                                      | -                                                                               | Clases para los elementos de elipsis                    |
 | `indicatorClassName`        | `string`                                                                      | -                                                                               | Clases para el indicador animado                        |
 | `numbersContainerClassName` | `string`                                                                      | -                                                                               | Clases para el contenedor de números de página          |
+| `id`                        | `string`                                                                      | -                                                                               | ID personalizado para el componente                     |
+| `aria-label`                | `string`                                                                      | -                                                                               | Etiqueta ARIA personalizada para el componente          |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Variantes", href: "#variantes" },
       { title: "Tamaños", href: "#tamanos" },
       {
