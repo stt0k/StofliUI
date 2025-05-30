@@ -6,47 +6,16 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion lucide-react
-
-# Instalar el componente
-npx @stofli/ui add autocomplete
+import { Autocomplete } from "@stofli/ui";
 ```
 
   </div>
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-El componente Autocomplete proporciona una experiencia de búsqueda y selección intuitiva con animaciones fluidas.
-
-```tsx
-import { Autocomplete } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Autocomplete
-      options={[
-        { value: "react", label: "React" },
-        { value: "vue", label: "Vue" },
-        { value: "angular", label: "Angular" },
-      ]}
-      placeholder="Selecciona un framework..."
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un autocompletado simple con opciones básicas.
 
@@ -83,7 +52,6 @@ export default function AutocompleteDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="con-grupos" level={3} >Con grupos</HeadingAnchor>
@@ -478,13 +446,11 @@ export default function AutocompleteCustomClassesDemo() {
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con grupos", href: "#con-grupos" },
       { title: "Deshabilitado", href: "#deshabilitado" },
       { title: "Con título", href: "#con-titulo" },
