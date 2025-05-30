@@ -6,40 +6,18 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion
-
-# Instalar el componente
-npx @stofli/ui add tooltip
+import { Tooltip } from "@stofli/ui";
 ```
 
   </div>
+
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { Tooltip, Button } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Tooltip content="Esta es información adicional sobre el botón">
-      <Button>Pasa el ratón sobre mí</Button>
-    </Tooltip>
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un tooltip básico con posición arriba (por defecto).
 
@@ -64,7 +42,6 @@ export default function TooltipDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="con-flecha" level={3} >Con flecha indicadora</HeadingAnchor>
@@ -589,18 +566,17 @@ export default function TooltipModernDemo() {
 | `contentClassName` | `string`                                                                      | `""`        | Clases adicionales para el contenido del tooltip |
 | `arrowClassName`   | `string`                                                                      | `""`        | Clases adicionales para la flecha del tooltip    |
 | `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de los bordes                              |
+| `id`               | `string`                                                                      | -           | ID personalizado para el tooltip                 |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con flecha indicadora", href: "#con-flecha" },
       { title: "Posiciones", href: "#posiciones" },
       { title: "Variantes", href: "#variantes" },
