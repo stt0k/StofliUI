@@ -6,45 +6,16 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion lucide-react
-
-# Instalar el componente
-npx @stofli/ui add dropdown
+import { Dropdown } from "@stofli/ui";
 ```
 
   </div>
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-```tsx
-import { Dropdown } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Dropdown
-      items={[
-        { label: "Opción 1", value: "1" },
-        { label: "Opción 2", value: "2" },
-        { label: "Opción 3", value: "3" },
-      ]}
-      onChange={(value) => console.log("Valor seleccionado:", value)}
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un dropdown básico con varias opciones.
 
@@ -81,7 +52,6 @@ export default function DropdownDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="con-iconos" level={3} >Con íconos</HeadingAnchor>
@@ -713,8 +683,9 @@ Puedes mostrar solo un avatar como botón del dropdown usando `avatarOnly={true}
 
 <DemoTabs
   preview={
-    <div className="flex items-center gap-8">
+    <div className="flex items-center">
       <Dropdown
+        className="flex basis-0"
         avatarOnly
         avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
         avatarSize="md"
@@ -725,6 +696,7 @@ Puedes mostrar solo un avatar como botón del dropdown usando `avatarOnly={true}
         ]}
       />
       <Dropdown
+        className="flex flex-grow justify-center basis-0"
         avatarOnly
         avatarSrc="https://randomuser.me/api/portraits/women/44.jpg"
         avatarSize="lg"
@@ -735,6 +707,7 @@ Puedes mostrar solo un avatar como botón del dropdown usando `avatarOnly={true}
         ]}
       />
       <Dropdown
+        className="flex justify-end basis-0"
         avatarOnly
         avatarSrc="https://randomuser.me/api/portraits/men/85.jpg"
         avatarSize="sm"
@@ -752,8 +725,9 @@ import { Dropdown } from "@stofli/ui";
 
 export default function AvatarOnlyDropdownDemo() {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center">
       <Dropdown
+        className="flex basis-0"
         avatarOnly
         avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
         avatarSize="md"
@@ -764,6 +738,7 @@ export default function AvatarOnlyDropdownDemo() {
         ]}
       />
       <Dropdown
+        className="flex flex-grow justify-center basis-0"
         avatarOnly
         avatarSrc="https://randomuser.me/api/portraits/women/44.jpg"
         avatarSize="lg"
@@ -774,6 +749,7 @@ export default function AvatarOnlyDropdownDemo() {
         ]}
       />
       <Dropdown
+        className="flex justify-end basis-0"
         avatarOnly
         avatarSrc="https://randomuser.me/api/portraits/men/85.jpg"
         avatarSize="sm"
@@ -1208,6 +1184,12 @@ export default function AvatarOnlyWithAvatarItemsDemo() {
     | `avatarAlt`            | `string`                                                                      | "Avatar"         | Texto alternativo para el avatar                                                                                                                                                                |
     | `selectable`           | `boolean`                                                                     | `true`           | Si es `false`, el dropdown muestra hover en las opciones pero no permite seleccionarlas.                                                                                                        |
     | `avatarOnly`           | `boolean`                                                                     | `false`          | Si es `true`, muestra solo el avatar como botón, sin texto ni placeholder.                                                                                                                      |
+    | `id`                   | `string`                                                                      | -                | ID personalizado para el componente                                                                                                                                                             |
+    | `label`                | `string`                                                                      | -                | Etiqueta descriptiva para el dropdown                                                                                                                                                           |
+    | `required`             | `boolean`                                                                     | `false`          | Indica si el campo es obligatorio                                                                                                                                                               |
+    | `aria-label`           | `string`                                                                      | -                | Etiqueta ARIA personalizada                                                                                                                                                                     |
+    | `aria-describedby`     | `string`                                                                      | -                | ID del elemento que describe el dropdown                                                                                                                                                        |
+    | `errorMessage`         | `string`                                                                      | -                | Mensaje de error a mostrar                                                                                                                                                                      |
 
     ### DropdownItem
 
@@ -1224,13 +1206,11 @@ export default function AvatarOnlyWithAvatarItemsDemo() {
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con íconos", href: "#con-iconos" },
       { title: "Variantes", href: "#variantes" },
       { title: "Tamaños", href: "#tamanos" },
