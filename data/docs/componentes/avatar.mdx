@@ -6,11 +6,10 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar el componente
-npx @stofli/ui add avatar
+import { Avatar } from "@stofli/ui";
 ```
 
   </div>
@@ -18,31 +17,7 @@ npx @stofli/ui add avatar
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-El componente Avatar puede mostrar una imagen, iniciales como fallback, y varios estados de usuario.
-
-```tsx
-import { Avatar } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Avatar
-      src="https://i.pravatar.cc/300?u=john"
-      alt="John Doe"
-      fallback="JD"
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
-
-Muestra un avatar con imagen y otro usando la prop `fallback` para mostrar iniciales.
+Un avatar con imagen y otro usando la prop `fallback` para mostrar iniciales.
 
 <DemoTabs
   preview={
@@ -77,7 +52,6 @@ export default function AvatarDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
@@ -295,24 +269,24 @@ export default function AvatarCustomClassesDemo() {
 | `size`              | `"sm" \| "md" \| "lg" \| "xl"`              | `"md"`            | Tamaño del avatar                               |
 | `radius`            | `"none" \| "sm" \| "md" \| "full"`          | `"full"`          | Radio de borde del avatar                       |
 | `border`            | `boolean`                                   | `false`           | Muestra un borde alrededor del avatar           |
-| `borderColor`       | `string`                                    | `"ring-zinc-200"` | Color del borde cuando border es true           |
+| `borderColor`       | `string`                                    | `"border-zinc-200 dark:border-zinc-800"` | Color del borde cuando border es true           |
 | `status`            | `"online" \| "offline" \| "away" \| "busy"` | -                 | Muestra un indicador de estado                  |
 | `className`         | `string`                                    | -                 | Clases adicionales para el contenedor principal |
 | `imageClassName`    | `string`                                    | -                 | Clases adicionales para la imagen               |
 | `fallbackClassName` | `string`                                    | -                 | Clases adicionales para el texto de fallback    |
 | `statusClassName`   | `string`                                    | -                 | Clases adicionales para el indicador de estado  |
+| `ariaLabel`         | `string`                                    | -                 | Etiqueta ARIA personalizada para el avatar      |
+| `statusLabel`       | `{ online?: string; offline?: string; away?: string; busy?: string; }` | `{ online: "En línea", offline: "Desconectado", away: "Ausente", busy: "Ocupado" }` | Etiquetas ARIA para los diferentes estados      |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Bordes y Radios", href: "#bordes-radios" },
       { title: "Estados", href: "#estados" },
