@@ -6,49 +6,18 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion
-
-# Instalar el componente
-npx @stofli/ui add tabs
+import { Tabs } from "@stofli/ui"
 ```
 
   </div>
+
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { Tabs } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Tabs
-      tabs={[
-        {
-          label: "Pestaña 1",
-          content: <p>Contenido de la pestaña 1</p>,
-        },
-        {
-          label: "Pestaña 2",
-          content: <p>Contenido de la pestaña 2</p>,
-        },
-      ]}
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Muestra un componente de pestañas básico.
 
@@ -97,7 +66,6 @@ export default function TabsDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="con-iconos" level={3} >Con íconos</HeadingAnchor>
@@ -704,6 +672,8 @@ export default function ModernTabsDemo() {
 | `radius`                    | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                               |
 | `fullWidth`                 | `boolean`                                                                     | `false`     | Si las pestañas ocupan todo el ancho disponible     |
 | `hoverEffect`               | `boolean`                                                                     | `false`     | Activa el efecto de hover en las pestañas           |
+| `ariaLabel`                 | `string`                                                                      | `"Pestañas"`| Etiqueta ARIA para el componente                    |
+| `id`                        | `string`                                                                      | -           | ID personalizado para el componente                 |
 | `className`                 | `string`                                                                      | -           | Clases adicionales para el contenedor principal     |
 | `tabClassName`              | `string`                                                                      | -           | Clases adicionales para cada pestaña                |
 | `contentClassName`          | `string`                                                                      | -           | Clases adicionales para el contenido                |
@@ -720,13 +690,11 @@ export default function ModernTabsDemo() {
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con íconos", href: "#con-iconos" },
       { title: "Con efecto hover", href: "#con-efecto-hover" },
       { title: "Variantes", href: "#variantes" },
