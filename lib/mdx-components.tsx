@@ -47,6 +47,17 @@ const PageNav = dynamic(() => import("@/components/docs/PageNav"), {
   loading: () => <div>Cargando...</div>,
 });
 
+// Importar componentes Steps y Step
+const Steps = dynamic(() => import("../components/docs/Steps"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+const Step = dynamic(() => import("../components/docs/Step"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
 const BentoGrid = dynamic(() => import("@/components/BentoGrid"), {
   ssr: false,
   loading: () => <div>Cargando...</div>,
@@ -435,6 +446,8 @@ const components: MDXComponents = {
   HeadingAnchor,
   HeadingLink,
   PageNav,
+  Steps,
+  Step,
   BentoGrid,
   Accordion,
   DemoTabs,
