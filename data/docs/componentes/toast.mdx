@@ -6,74 +6,18 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion lucide-react
-
-# Instalar los componentes
-npx @stofli/ui add toast
-npx @stofli/ui add button
+import { ToastProvider, useToast } from "@stofli/ui"
 ```
 
   </div>
+
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { Toast, ToastProvider, useToast } from "@stofli/ui";
-import { Button } from "@stofli/ui";
-
-// Usando el componente directamente
-export function ToastExample() {
-  return (
-    <Toast
-      defaultOpen
-      title="Notificación"
-      description="Este es un toast de ejemplo"
-      variant="success"
-    />
-  );
-}
-
-// Usando el hook useToast para mostrar toasts desde cualquier lugar
-export function ToastWithProvider() {
-  return (
-    <ToastProvider>
-      <ToastButton />
-    </ToastProvider>
-  );
-}
-
-function ToastButton() {
-  const { open } = useToast();
-
-  return (
-    <Button
-      variant="success"
-      onClick={() =>
-        open({
-          title: "Guardado",
-          description: "Tu información se ha guardado correctamente",
-          variant: "success",
-        })
-      }
-    >
-      Mostrar Toast
-    </Button>
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un toast simple con título y descripción.
 
@@ -85,10 +29,18 @@ Un toast simple con título y descripción.
   }
 >
 ```tsx
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import { Button } from "@/components/sections/button";
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
 
 export default function ToastDemo() {
+  return (
+    <ToastProvider>
+      <ToastContent />
+    </ToastProvider>
+  );
+}
+
+function ToastContent() {
   const { open } = useToast();
   
   return (
@@ -107,7 +59,6 @@ export default function ToastDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
@@ -122,10 +73,18 @@ Toasts con diferentes variantes de estilo.
   }
 >
 ```tsx
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import { Button } from "@/components/sections/button";
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
 
 export default function ToastVariantsDemo() {
+  return (
+    <ToastProvider>
+      <VariantsContent />
+    </ToastProvider>
+  );
+}
+
+function VariantsContent() {
   const { open } = useToast();
   
   return (
@@ -214,11 +173,9 @@ export default function ToastVariantsDemo() {
         Danger
       </Button>
     </div>
-
-);
+  );
 }
-
-````
+```
 </DemoTabs>
     </div>
 
@@ -237,10 +194,18 @@ Toasts que aparecen en diferentes posiciones de la pantalla.
   }
 >
 ```tsx
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import { Button } from "@/components/sections/button";
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
 
 export default function ToastPositionsDemo() {
+  return (
+    <ToastProvider>
+      <PositionsContent />
+    </ToastProvider>
+  );
+}
+
+function PositionsContent() {
   const { open } = useToast();
 
   return (
@@ -337,7 +302,7 @@ export default function ToastPositionsDemo() {
     </div>
   );
 }
-````
+```
 
 </DemoTabs>
     </div>
@@ -355,30 +320,38 @@ Toasts que incluyen iconos para mejorar la comunicación visual.
   }
 >
 ```tsx
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import { Button } from "@/components/sections/button";
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
 import { BellIcon, MessageSquareIcon, ShoppingCartIcon, StarIcon } from "lucide-react";
 
 export default function ToastIconsDemo() {
+  return (
+    <ToastProvider>
+      <IconsContent />
+    </ToastProvider>
+  );
+}
+
+function IconsContent() {
   const { open } = useToast();
 
-return (
-
-<div className="flex flex-wrap gap-2">
-<Button
-variant="primary"
-size="sm"
-leftIcon={<BellIcon className="h-4 w-4" />}
-onClick={() =>
-open({
-title: "Notificación",
-description: "Nueva alerta del sistema",
-variant: "primary",
-icon: <BellIcon className="h-5 w-5" />
-})
-} >
-Notificación
-</Button>
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        variant="primary"
+        size="sm"
+        leftIcon={<BellIcon className="h-4 w-4" />}
+        onClick={() =>
+          open({
+            title: "Notificación",
+            description: "Nueva alerta del sistema",
+            variant: "primary",
+            icon: <BellIcon className="h-5 w-5" />
+          })
+        }
+      >
+        Notificación
+      </Button>
 
       <Button
         variant="secondary"
@@ -428,11 +401,9 @@ Notificación
         Favorito
       </Button>
     </div>
-
-);
+  );
 }
-
-````
+```
 </DemoTabs>
     </div>
 
@@ -449,10 +420,18 @@ Toast con duración personalizada antes de desaparecer automáticamente.
   }
 >
 ```tsx
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import { Button } from "@/components/sections/button";
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
 
 export default function ToastDurationDemo() {
+  return (
+    <ToastProvider>
+      <DurationContent />
+    </ToastProvider>
+  );
+}
+
+function DurationContent() {
   const { open } = useToast();
 
   return (
@@ -504,7 +483,7 @@ export default function ToastDurationDemo() {
     </div>
   );
 }
-````
+```
 
 </DemoTabs>
     </div>
@@ -522,25 +501,32 @@ El componente ahora admite mostrar múltiples toasts simultáneamente, organizad
   }
 >
 ```tsx
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import { Button } from "@/components/sections/button";
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
 
 export default function ToastMultipleDemo() {
+  return (
+    <ToastProvider>
+      <MultipleContent />
+    </ToastProvider>
+  );
+}
+
+function MultipleContent() {
   const { open } = useToast();
 
-return (
-
-<div className="flex flex-wrap gap-2">
-<Button
-variant="primary"
-onClick={() => {
-// Mostrar varios toasts en secuencia
-open({
-title: "Primer Toast",
-description: "Este es el primer toast",
-position: "bottom-right",
-variant: "primary"
-});
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        variant="primary"
+        onClick={() => {
+          // Mostrar varios toasts en secuencia
+          open({
+            title: "Primer Toast",
+            description: "Este es el primer toast",
+            position: "bottom-right",
+            variant: "primary"
+          });
 
           setTimeout(() => {
             open({
@@ -600,11 +586,10 @@ variant: "primary"
         Toasts en diferentes posiciones
       </Button>
     </div>
-
-);
+  );
 }
+```
 
-````
 </DemoTabs>
     </div>
 
@@ -621,11 +606,19 @@ Puedes personalizar cualquier parte del componente usando las propiedades de cla
   }
 >
 ```tsx
-import { ToastProvider, useToast } from "@/components/sections/toast";
-import { Button } from "@/components/sections/button";
+import { ToastProvider, useToast } from "@stofli/ui";
+import { Button } from "@stofli/ui";
 import { BellIcon, ShoppingCartIcon, StarIcon } from "lucide-react";
 
 export default function ToastCustomDemo() {
+  return (
+    <ToastProvider>
+      <CustomContent />
+    </ToastProvider>
+  );
+}
+
+function CustomContent() {
   const { open } = useToast();
 
   return (
@@ -702,7 +695,7 @@ export default function ToastCustomDemo() {
     </div>
   );
 }
-````
+```
 
 </DemoTabs>
     </div>
@@ -768,6 +761,7 @@ function ToastButton() {
 
 | Prop                     | Tipo                                                                                              | Default          | Descripción                                                                               |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
+| `id`                     | `string`                                                                                          | -                | ID único para el toast                                                                     |
 | `open`                   | `boolean`                                                                                         | -                | Estado controlado del toast                                                               |
 | `defaultOpen`            | `boolean`                                                                                         | `false`          | Estado inicial del toast si no es controlado                                              |
 | `onOpenChange`           | `(open: boolean) => void`                                                                         | -                | Función llamada cuando cambia el estado                                                   |
@@ -787,18 +781,18 @@ function ToastButton() {
 | `iconContainerClassName` | `string`                                                                                          | -                | Clases para el contenedor del icono                                                       |
 | `contentClassName`       | `string`                                                                                          | -                | Clases para el contenedor del contenido principal                                         |
 | `closeButtonClassName`   | `string`                                                                                          | -                | Clases para el botón de cerrar                                                            |
+| `role`                   | `"status" \| "alert"`                                                                             | `"status"`       | Rol ARIA para accesibilidad                                                               |
+| `important`              | `boolean`                                                                                         | `false`          | Si es true, usa aria-live="assertive" para anuncios importantes                           |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Variantes", href: "#variantes" },
       { title: "Posiciones", href: "#posiciones" },
       { title: "Con iconos", href: "#con-iconos" },
