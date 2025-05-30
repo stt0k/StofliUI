@@ -6,14 +6,10 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion lucide-react
-
-# Instalar el componente
-npx @stofli/ui add button
+import { Button } from "@stofli/ui";
 ```
 
   </div>
@@ -21,24 +17,27 @@ npx @stofli/ui add button
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
+El componente Button se utiliza para acciones interactivas y navegación.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-2">
+      <Button>Botón</Button>
+    </div>
+  }
+>
 ```tsx
 import { Button } from "@stofli/ui";
 
-export default function App() {
+export default function ButtonDemo() {
   return (
-    <Button variant="primary" size="md">
-      Botón primario
-    </Button>
+    <Button>Botón</Button>
   );
 }
 ```
+</DemoTabs>
 
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
+    <div className="mt-6">
       <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 El botón tiene varias variantes que puedes usar para diferentes contextos.
@@ -428,16 +427,17 @@ export default function ButtonCustomClassesDemo() {
 | `rightIconClassName` | `string`                                                                                                        | -           | Clases para el icono derecho                      |
 | `contentClassName`   | `string`                                                                                                        | -           | Clases para el contenido del botón                |
 | `arrowClassName`     | `string`                                                                                                        | -           | Clases para la flecha                             |
+| `loadingText`        | `string`                                                                                                        | `"Cargando..."` | Texto a mostrar en estado de carga                |
+| `ariaLabel`          | `string`                                                                                                        | -           | Etiqueta ARIA personalizada para el botón         |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
       { title: "Variantes", href: "#variantes" },
       { title: "Tamaños", href: "#tamanos" },
