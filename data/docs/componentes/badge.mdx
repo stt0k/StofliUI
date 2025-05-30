@@ -6,14 +6,10 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion class-variance-authority
-
-# Instalar el componente
-npx @stofli/ui add badge
+import { Badge } from "@stofli/ui";
 ```
 
   </div>
@@ -21,21 +17,28 @@ npx @stofli/ui add badge
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
+El componente Badge se utiliza para mostrar etiquetas, estados o contadores.
+
+<DemoTabs
+  preview={
+    <div className="flex flex-wrap gap-2">
+      <Badge>Etiqueta</Badge>
+    </div>
+  }
+>
 ```tsx
 import { Badge } from "@stofli/ui";
 
-export default function App() {
-  return <Badge>Nuevo</Badge>;
+export default function BadgeDemo() {
+  return (
+    <Badge>Etiqueta</Badge>
+  );
 }
 ```
+</DemoTabs>
 
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
+    <div className="mt-6">
+      <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
 
 Muestra diferentes variantes del badge.
 
@@ -55,7 +58,7 @@ Muestra diferentes variantes del badge.
 ```tsx
 import { Badge } from "@stofli/ui";
 
-export default function BadgeDemo() {
+export default function BadgeVariantsDemo() {
   return (
     <div className="flex flex-wrap gap-2">
       <Badge>Default</Badge>
@@ -515,18 +518,21 @@ export default function BadgeCustomClassesDemo() {
 | `dotClassName`     | `string`                                                                                   | -           | Clases adicionales para el punto indicador   |
 | `iconClassName`    | `string`                                                                                   | -           | Clases adicionales para el icono             |
 | `contentClassName` | `string`                                                                                   | -           | Clases adicionales para el contenido textual |
+| `ariaLabel`        | `string`                                                                                   | -           | Etiqueta ARIA personalizada para el badge    |
+| `dotAriaLabel`     | `string`                                                                                   | `"Indicador de estado"` | Etiqueta ARIA para el punto indicador        |
+| `dismissAriaLabel` | `string`                                                                                   | `"Eliminar badge"` | Etiqueta ARIA para la acción de eliminar     |
+| `id`               | `string`                                                                                   | -           | ID personalizado para el badge               |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
+      { title: "Variantes", href: "#variantes" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Con punto indicador", href: "#con-punto-indicador" },
       { title: "Con icono", href: "#con-icono" },
