@@ -20,7 +20,7 @@ const HeadingAnchor: React.FC<HeadingAnchorProps> = ({
   // Classes specific to heading level
   const levelClasses = {
     1: "mt-8 mb-4 text-4xl",
-    2: "mt-8 text-2xl",
+    2: "mt-8 text-[1.675rem]",
     3: "mt-6 text-xl",
     4: "mt-4 text-lg",
     5: "mt-4 text-base",
