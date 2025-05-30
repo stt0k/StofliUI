@@ -6,59 +6,20 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion
-
-# Instalar la utilidad cn
-# Si no tienes ya configurado @/lib/utils con la función cn
-npm install clsx tailwind-merge
-
-# Instalar el componente
-npx @stofli/ui add input
-```
-
-Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
-
-```tsx
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { Input } from "@stofli/ui"
 ```
 
   </div>
+
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { Input } from "@stofli/ui";
 
-export default function App() {
-  return (
-    <Input
-      label="Correo electrónico"
-      placeholder="ejemplo@correo.com"
-      onChange={(e) => console.log("Valor:", e.target.value)}
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
-
-Un input básico con diferentes variantes.
+Ejemplos básicos para diferentes usos.
 
 <DemoTabs
   preview={
@@ -105,7 +66,6 @@ export default function InputDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
@@ -925,18 +885,24 @@ export default function InputCustomClassesDemo() {
 | `onChange`       | `(e: React.ChangeEvent<HTMLInputElement>) => void`                            | -           | Función llamada al cambiar el valor                                                                                                                    |
 | `onFocus`        | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al enfocar el input                                                                                                                    |
 | `onBlur`         | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al perder el foco                                                                                                                      |
+| `aria-label`     | `string`                                                                      | -           | Etiqueta ARIA personalizada                                                                                                                            |
+| `aria-describedby` | `string`                                                                    | -           | ID del elemento que describe el input                                                                                                                  |
+| `description`    | `string`                                                                      | -           | Texto descriptivo para el input                                                                                                                        |
+| `errorId`        | `string`                                                                      | -           | ID personalizado para el mensaje de error                                                                                                              |
+| `descriptionId`  | `string`                                                                      | -           | ID personalizado para la descripción                                                                                                                   |
+| `hideLabel`      | `boolean`                                                                     | `false`     | Oculta visualmente la etiqueta pero la mantiene accesible para lectores de pantalla                                                                    |
+| `autoComplete`   | `string`                                                                      | -           | Valor para el atributo autoComplete del input                                                                                                          |
+| `readOnly`       | `boolean`                                                                     | `false`     | Establece el input en modo solo lectura                                                                                                                |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Variantes", href: "#variantes" },
       { title: "Con Íconos", href: "#con-iconos" },
