@@ -1,7 +1,107 @@
 ---
     title: 'Next.js'
-    description: 'Start with Next.js'
+    description: 'Guía para instalar y usar StofliUI en proyectos Next.js'
 ---
+
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="requisitos">Requisitos</HeadingAnchor>
+
+<ul className="pl-5 list-disc space-y-2 mt-4 text-zinc-900 dark:text-zinc-100">
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">React</span> 17 o superior</span>
+  </li>
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Tailwind CSS</span> 3 o superior</span>
+  </li>
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Next.js</span> 13 o superior</span>
+  </li>
+</ul>
+
+  </div>
+
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+
+<Steps className="mt-2">
+  <Step title="Crear un proyecto Next.js" stepNumber={1}>
+    Si aún no tienes un proyecto Next.js, puedes crear uno nuevo:
+
+```bash
+npx create-next-app@latest mi-proyecto-stofli
+cd mi-proyecto-stofli
+```
+
+Asegúrate de seleccionar Tailwind CSS cuando se te pregunte durante la configuración.
+  </Step>
+
+  <Step title="Instalar StofliUI" stepNumber={2}>
+    Instala StofliUI:
+
+```bash
+npm install stofli-ui
+```
+  </Step>
+
+  <Step title="Configurar Tailwind CSS" stepNumber={3}>
+    Asegúrate de que tu archivo `tailwind.config.js` esté configurado correctamente:
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'class', 
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Si estás usando Tailwind CSS v4 sin `tailwind.config.js`, debes incluir lo siguiente en tu archivo `globals.css` (ajusta la ruta según tu estructura de proyecto):
+
+```css
+@import 'tailwindcss';
+
+@source '../node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}';
+```
+  </Step>
+
+  <Step title="Usar componentes de StofliUI" stepNumber={4}>
+    Importa los componentes que necesites desde `stofli-ui`:
+
+```tsx
+// app/page.tsx
+'use client';
+
+import { Button } from "@stofli/ui";
+
+export default function Page() {
+  return (
+    <Button>Botón</Button>
+  );
+}
+```
+
+Ten en cuenta que muchos componentes de StofliUI utilizan hooks y eventos, por lo que necesitarás usar la directiva `'use client'` en los archivos donde los importes.
+  </Step>
+
+</Steps>
+
+  </div>
+
+</div>
+
+export const toc = [
+  { title: "Requisitos", href: "#requisitos" },
+  { title: "Instalación", href: "#instalacion" },
+];
 
 
 
