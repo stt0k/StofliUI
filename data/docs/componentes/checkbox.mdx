@@ -6,36 +6,16 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion
-
-# Instalar el componente
-npx @stofli/ui add checkbox
+import { Checkbox } from "@stofli/ui";
 ```
 
   </div>
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-```tsx
-import { Checkbox } from "@stofli/ui";
-
-export default function App() {
-  return <Checkbox label="Acepto los términos y condiciones" />;
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Muestra cuatro estados del checkbox: normal, marcado, deshabilitado y requerido.
 
@@ -64,7 +44,6 @@ export default function CheckboxDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
@@ -291,18 +270,20 @@ export default function CustomCheckboxDemo() {
 | `checkboxClassName` | `string`                                                                      | -           | Clases para el elemento checkbox     |
 | `labelClassName`    | `string`                                                                      | -           | Clases para la etiqueta              |
 | `onChange`          | `(checked: boolean) => void`                                                  | -           | Función llamada al cambiar el estado |
+| `id`                | `string`                                                                      | -           | ID personalizado para el checkbox    |
+| `ariaLabel`         | `string`                                                                      | -           | Etiqueta ARIA personalizada          |
+| `ariaDescribedBy`   | `string`                                                                      | -           | ID del elemento que describe el checkbox |
+| `errorMessage`      | `string`                                                                      | -           | Mensaje de error a mostrar           |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Variantes", href: "#variantes" },
       { title: "Radios", href: "#radios" },
