@@ -6,33 +6,18 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar el componente
-npx @stofli/ui add spinner
+import { Spinner } from "@stofli/ui"
 ```
 
   </div>
+
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { Spinner } from "@stofli/ui";
-
-export default function App() {
-  return <Spinner />;
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 El spinner básico que se muestra como un indicador de carga.
 
@@ -51,7 +36,6 @@ export default function SpinnerDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
@@ -297,6 +281,8 @@ export default function SpinnerCustomClassDemo() {
 | `type`               | `"border" \| "dots" \| "grow" \| "wave" \| "lines"`                           | `"border"`  | Tipo de animación del spinner          |
 | `label`              | `string`                                                                      | -           | Texto descriptivo para el spinner      |
 | `labelPosition`      | `"left" \| "right" \| "top" \| "bottom"`                                      | `"right"`   | Posición del texto respecto al spinner |
+| `ariaLabel`          | `string`                                                                      | -           | Etiqueta ARIA personalizada            |
+| `ariaLive`           | `"off" \| "polite" \| "assertive"`                                            | `"polite"`  | Prioridad de anuncios de accesibilidad |
 | `className`          | `string`                                                                      | -           | Clases adicionales para el componente  |
 | `containerClassName` | `string`                                                                      | -           | Clases para el contenedor principal    |
 | `spinnerClassName`   | `string`                                                                      | -           | Clases para el elemento spinner        |
@@ -306,13 +292,11 @@ export default function SpinnerCustomClassDemo() {
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Variantes", href: "#variantes" },
       { title: "Tipos", href: "#tipos" },
