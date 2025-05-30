@@ -6,44 +6,16 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install lucide-react
-
-# Instalar el componente
-npx @stofli/ui add breadcrumbs
+import { Breadcrumbs } from "@stofli/ui";
 ```
 
   </div>
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-```tsx
-import { Breadcrumbs } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Breadcrumbs
-      items={[
-        { label: "Inicio" },
-        { label: "Componentes" },
-        { label: "Breadcrumbs" },
-      ]}
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un ejemplo básico de breadcrumbs con múltiples niveles.
 
@@ -76,7 +48,6 @@ export default function BreadcrumbsDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="con-icono-inicio" level={3} >Con icono de inicio</HeadingAnchor>
@@ -555,7 +526,7 @@ export default function BreadcrumbsCustomClassesDemo() {
 
 | Prop                   | Tipo                                                                             | Default            | Descripción                                |
 | ---------------------- | -------------------------------------------------------------------------------- | ------------------ | ------------------------------------------ |
-| `items`                | `{ label: string; href?: string; icon?: React.ReactNode; className?: string }[]` | `[]`               | Elementos de la ruta de navegación         |
+| `items`                | `{ label: string; href?: string; icon?: React.ReactNode; className?: string; ariaLabel?: string }[]` | `[]`               | Elementos de la ruta de navegación         |
 | `separator`            | `React.ReactNode`                                                                | `<ChevronRight />` | Icono o texto separador entre elementos    |
 | `homeIcon`             | `boolean`                                                                        | `false`            | Muestra un icono de inicio al principio    |
 | `clickable`            | `boolean`                                                                        | `false`            | Determina si los items son enlaces         |
@@ -568,18 +539,19 @@ export default function BreadcrumbsCustomClassesDemo() {
 | `homeIconClassName`    | `string`                                                                         | -                  | Clases adicionales para el icono de inicio |
 | `currentItemClassName` | `string`                                                                         | -                  | Clases adicionales para el item actual     |
 | `linkClassName`        | `string`                                                                         | -                  | Clases adicionales para los enlaces        |
+| `navAriaLabel`         | `string`                                                                         | `"Navegación de Breadcrumbs"` | Etiqueta ARIA para el elemento nav        |
+| `homeAriaLabel`        | `string`                                                                         | `"Ir a la página de inicio"` | Etiqueta ARIA para el icono de inicio     |
+| `separatorAriaLabel`   | `string`                                                                         | `"Separador"`      | Etiqueta ARIA para los separadores         |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con icono de inicio", href: "#con-icono-inicio" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Variantes", href: "#variantes" },
