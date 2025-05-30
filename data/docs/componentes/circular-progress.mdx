@@ -6,36 +6,16 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion tailwind-merge
-
-# Instalar el componente
-npx @stofli/ui add circular-progress
+import { CircularProgress } from "@stofli/ui";
 ```
 
   </div>
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-```tsx
-import { CircularProgress } from "@stofli/ui";
-
-export default function App() {
-  return <CircularProgress value={75} label="Progreso" showValue />;
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un progreso circular simple con diferentes valores.
 
@@ -64,7 +44,6 @@ export default function CircularProgressDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="tamanos" level={3} >Tamaños</HeadingAnchor>
@@ -387,18 +366,21 @@ export default function CircularProgressCustomClassesDemo() {
 | `bgCircleClassName` | `string`                                                                      | -           | Clases para el círculo de fondo     |
 | `valueClassName`    | `string`                                                                      | -           | Clases para el texto del valor      |
 | `labelClassName`    | `string`                                                                      | -           | Clases para la etiqueta             |
+| `formatOptions`     | `Intl.NumberFormatOptions`                                                    | `{ style: "percent", maximumFractionDigits: 0 }` | Opciones para formatear el valor |
+| `aria-label`        | `string`                                                                      | -           | Etiqueta ARIA personalizada         |
+| `aria-describedby`  | `string`                                                                      | -           | ID del elemento que describe el progreso |
+| `aria-valuetext`    | `string`                                                                      | -           | Texto descriptivo del valor para lectores de pantalla |
+| `indeterminate`     | `boolean`                                                                     | `false`     | Muestra un estado de carga indeterminado |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Variantes", href: "#variantes" },
       { title: "Con etiquetas", href: "#con-etiquetas" },
