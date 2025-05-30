@@ -6,14 +6,10 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install date-fns framer-motion @react-aria/i18n lucide-react
-
-# Instalar el componente
-npx @stofli/ui add calendar
+import { Calendar } from "@stofli/ui";
 ```
 
   </div>
@@ -21,31 +17,11 @@ npx @stofli/ui add calendar
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { Calendar } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Calendar onChange={(date) => console.log("Fecha seleccionada:", date)} />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
-
 Un calendario que muestra el mes actual y permite seleccionar fechas.
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
     <Calendar />
-    </div>
   }
 >
 ```tsx
@@ -56,7 +32,6 @@ export default function CalendarDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="fecha-minima" level={3} >Con fecha mínima</HeadingAnchor>
@@ -65,12 +40,10 @@ Usando `minValue` con la fecha actual, solo permite seleccionar fechas desde hoy
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <Calendar 
-        variant="primary"
-        minValue={new Date()} // Fecha actual como mínima
-      />
-    </div>
+    <Calendar 
+      variant="primary"
+      minValue={new Date()} // Fecha actual como mínima
+    />
   }
 >
 ```tsx
@@ -95,12 +68,10 @@ Usando `maxValue` con la fecha actual, solo permite seleccionar fechas hasta hoy
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <Calendar 
-        variant="primary"
-        maxValue={new Date()} // Fecha actual como máxima
-      />
-    </div>
+    <Calendar 
+      variant="primary"
+      maxValue={new Date()} // Fecha actual como máxima
+    />
   }
 >
 ```tsx
@@ -225,13 +196,11 @@ Usando `readOnly` y `value`, muestra un calendario no interactivo fijado en marz
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <Calendar 
-        readOnly 
-        variant="primary"
-        value={new Date(2025, 2, 15)} // 15 de marzo de 2025
-      />
-    </div>
+    <Calendar 
+      readOnly 
+      variant="primary"
+      value={new Date(2025, 2, 15)} // 15 de marzo de 2025
+    />
   }
 >
 ```tsx
@@ -257,8 +226,7 @@ Personaliza cualquier parte del calendario usando las propiedades de className c
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <Calendar 
+    <Calendar 
         className="border-2 border-purple-300 dark:border-purple-700 rounded-xl shadow-lg shadow-purple-200 dark:shadow-purple-900/30"
         headerClassName="mb-6"
         weekdaysClassName="gap-2 mb-4"
@@ -269,8 +237,7 @@ Personaliza cualquier parte del calendario usando las propiedades de className c
         navigationButtonClassName="text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-800/50"
         monthTitleClassName="text-2xl text-purple-800 dark:text-purple-300"
         variant="secondary"
-      />
-    </div>
+    />
   }
 >
 ```tsx
@@ -327,13 +294,11 @@ export default function CalendarCustomClassesDemo() {
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con fecha mínima", href: "#fecha-minima" },
       { title: "Con fecha máxima", href: "#fecha-maxima" },
       { title: "Variantes", href: "#variantes" },
