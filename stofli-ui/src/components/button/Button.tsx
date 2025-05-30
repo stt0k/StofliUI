@@ -192,7 +192,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       sm: "rounded-[0.25rem]",
       md: "rounded-[0.375rem]",
       lg: "rounded-lg",
-      full: size === "icon" ? "rounded-full" : "rounded-xl",
+      full: "rounded-full",
     };
 
     // Construir la clase CSS combinada
