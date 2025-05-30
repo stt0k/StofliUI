@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 import Head from "next/head"; // Importa Head de Next
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 
 // Cargar las fuentes de forma global
 const geistSans = localFont({
@@ -46,6 +48,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
+          <SpeedInsights />
         </body>
       </html>
     </>
