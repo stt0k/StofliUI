@@ -6,51 +6,22 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion lucide-react clsx tailwind-merge
-
-# Instalar el componente
-npx @stofli/ui add number-input
-```
-
-Si no tienes la utilidad `cn`, necesitarás crear un archivo `lib/utils.ts` con el siguiente contenido:
-
-```tsx
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { NumberInput } from "@stofli/ui"
 ```
 
   </div>
 
+  
   <div>
-    <HeadingAnchor id="uso">Uso Básico</HeadingAnchor>
+    <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { NumberInput } from "@stofli/ui";
-
-export default function App() {
-  return <NumberInput label="Cantidad" defaultValue={10} min={0} max={100} />;
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
-
+Muestra un input numérico con un valor predeterminado de 10, un rango mínimo de 0 y un rango máximo de 100.
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-8 pt-8">
+    <div className="flex flex-col gap-8">
       <NumberInput label="Cantidad" defaultValue={10} min={0} max={100} />
     </div>
   }
@@ -63,7 +34,6 @@ export default function NumberInputDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="variantes" level={3} >Variantes</HeadingAnchor>
@@ -72,7 +42,7 @@ El componente NumberInput ofrece distintas variantes para adaptarse a diferentes
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput variant="default" label="Default" defaultValue={5} />
       <NumberInput variant="primary" label="Primary" defaultValue={5} />
       <NumberInput variant="secondary" label="Secondary" defaultValue={5} />
@@ -108,7 +78,7 @@ Puedes elegir entre diferentes tamaños para el input numérico.
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput size="sm" label="Pequeño" defaultValue={5} />
       <NumberInput size="md" label="Mediano" defaultValue={5} />
       <NumberInput size="lg" label="Grande" defaultValue={5} />
@@ -138,7 +108,7 @@ Puedes personalizar el radio de los bordes del input para adaptarlo a tu diseño
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput 
         label="Sin bordes redondeados" 
         radius="none"
@@ -210,7 +180,7 @@ Puedes elegir diferentes posiciones para los controles de incremento/decremento.
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput controlsPosition="right" label="Controles a la derecha" defaultValue={5} />
       <NumberInput controlsPosition="both" label="Controles en ambos lados" defaultValue={5} />
     </div>
@@ -238,7 +208,7 @@ El componente ofrece diferentes estilos de layout para los controles.
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput controlsLayout="default" label="Layout predeterminado" defaultValue={5} />
       <NumberInput controlsLayout="compact" label="Layout compacto" defaultValue={5} />
     </div>
@@ -266,7 +236,7 @@ Puedes elegir entre diferentes estilos de iconos para los controles.
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput iconSet="chevron" label="Iconos chevron" defaultValue={5} />
       <NumberInput iconSet="plusminus" label="Iconos plus/minus" defaultValue={5} />
     </div>
@@ -294,7 +264,7 @@ El componente incluye diferentes estilos de animación cuando el valor cambia.
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput animationStyle="slide" label="Animación deslizar" defaultValue={5} />
       <NumberInput animationStyle="pulse" label="Animación pulso" defaultValue={5} />
       <NumberInput animationStyle="scale" label="Animación escala" defaultValue={5} />
@@ -326,7 +296,7 @@ Puedes establecer valores mínimos y máximos, así como el paso de incremento/d
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput 
         label="Temperatura (°C)" 
         defaultValue={25} 
@@ -360,7 +330,7 @@ export default function NumberInputLimitsDemo() {
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput 
         label="Deshabilitado" 
         defaultValue={42} 
@@ -404,7 +374,7 @@ Muestra un mensaje de error cuando se cumple una condición, en este caso, cuand
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput 
         label="Precio" 
         defaultValue={-10} 
@@ -438,7 +408,7 @@ export default function NumberInputErrorDemo() {
 
 <DemoTabs
   preview={
-    <div className="flex flex-col gap-4 pt-8">
+    <div className="flex flex-col gap-4">
       <NumberInput 
         label="Cantidad" 
         defaultValue={5} 
@@ -537,18 +507,23 @@ export default function NumberInputCustomClassDemo() {
 | `onChange`                | `(value: number) => void`                                                     | -                 | Función que se ejecuta al cambiar el valor                |
 | `onFocus`                 | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -                 | Función que se ejecuta cuando el input recibe el foco     |
 | `onBlur`                  | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -                 | Función que se ejecuta cuando el input pierde el foco     |
+| `aria-label`              | `string`                                                                      | -                 | Etiqueta ARIA personalizada                               |
+| `aria-describedby`        | `string`                                                                      | -                 | ID del elemento que describe el input                     |
+| `description`             | `string`                                                                      | -                 | Texto descriptivo para el input                           |
+| `errorId`                 | `string`                                                                      | -                 | ID personalizado para el mensaje de error                 |
+| `descriptionId`           | `string`                                                                      | -                 | ID personalizado para la descripción                      |
+| `hideLabel`               | `boolean`                                                                     | `false`           | Oculta visualmente la etiqueta pero la mantiene accesible |
+| `autoComplete`            | `string`                                                                      | -                 | Valor para el atributo autoComplete del input             |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso Básico", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Variantes", href: "#variantes" },
       { title: "Tamaños", href: "#tamanos" },
       { title: "Radios de borde", href: "#radios-de-borde" },
