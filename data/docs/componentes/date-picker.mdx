@@ -6,14 +6,10 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install date-fns framer-motion @react-aria/i18n lucide-react tailwind-merge
-
-# Instalar el componente
-npx @stofli/ui add date-picker
+import { DatePicker } from "@stofli/ui";
 ```
 
   </div>
@@ -21,30 +17,12 @@ npx @stofli/ui add date-picker
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
 
-```tsx
-import { DatePicker } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <DatePicker onChange={(date) => console.log("Fecha seleccionada:", date)} />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
-
 Un selector de fechas básico que muestra un campo de entrada con un calendario emergente.
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker />
       </div>
     </div>
@@ -58,7 +36,6 @@ export default function DatePickerDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="con-etiqueta-y-requerido" level={3} >Con Etiqueta y Requerido</HeadingAnchor>
@@ -67,8 +44,8 @@ Usando las props `label` y `required` para mostrar una etiqueta descriptiva e in
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker 
           label="Fecha de nacimiento" 
           required 
@@ -101,8 +78,8 @@ Usando la prop `errorMessage` para mostrar un mensaje de error debajo del campo.
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker 
           label="Fecha límite" 
           errorMessage="La fecha es obligatoria" 
@@ -135,8 +112,8 @@ Seis estilos diferentes usando la prop `variant`: default, primary, secondary, s
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="flex w-full">
+      <div className="max-w-md flex flex-col gap-4">
         <DatePicker variant="default" label="Default" />
         <DatePicker variant="primary" label="Primary" />
         <DatePicker variant="secondary" label="Secondary" />
@@ -152,7 +129,7 @@ import { DatePicker } from "@stofli/ui";
 
 export default function DatePickerVariantsDemo() {
   return (
-    <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="max-w-md flex flex-col gap-4">
       <DatePicker variant="default" label="Default" />
       <DatePicker variant="primary" label="Primary" />
       <DatePicker variant="secondary" label="Secondary" />
@@ -173,8 +150,8 @@ Tres tamaños disponibles usando la prop `size`: sm, md, y lg.
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="flex w-full">
+      <div className="max-w-md flex flex-col gap-4">
         <DatePicker size="sm" label="Pequeño" />
         <DatePicker size="md" label="Mediano" />
         <DatePicker size="lg" label="Grande" />
@@ -187,7 +164,7 @@ import { DatePicker } from "@stofli/ui";
 
 export default function DatePickerSizesDemo() {
   return (
-    <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="max-w-md flex flex-col gap-4">
       <DatePicker size="sm" label="Pequeño" />
       <DatePicker size="md" label="Mediano" />
       <DatePicker size="lg" label="Grande" />
@@ -205,8 +182,8 @@ Cuatro opciones de redondeo usando la prop `radius`: none, sm, md y full.
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="flex w-full">
+      <div className="max-w-md flex flex-col gap-4">
         <DatePicker radius="none" label="Sin redondeo" />
         <DatePicker radius="sm" label="Redondeo pequeño" />
         <DatePicker radius="md" label="Redondeo mediano" />
@@ -220,7 +197,7 @@ import { DatePicker } from "@stofli/ui";
 
 export default function DatePickerRadiusDemo() {
   return (
-    <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="max-w-md flex flex-col gap-4">
       <DatePicker radius="none" label="Sin redondeo" />
       <DatePicker radius="sm" label="Redondeo pequeño" />
       <DatePicker radius="md" label="Redondeo mediano" />
@@ -239,8 +216,8 @@ Usando `disabled={true}` para mostrar un campo deshabilitado que no permite inte
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker 
           disabled 
           label="Campo deshabilitado" 
@@ -273,8 +250,8 @@ Usando `readOnly={true}` para mostrar un campo de solo lectura que no permite mo
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker 
           readOnly 
           label="Campo de solo lectura" 
@@ -307,8 +284,8 @@ Usando la prop `minValue` para limitar la selección de fechas a partir de una f
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker 
           label="Fecha con mínimo" 
           minValue={new Date()} // Fecha actual como mínima
@@ -339,8 +316,8 @@ Usando la prop `maxValue` para limitar la selección de fechas hasta una fecha e
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker 
           label="Fecha con máximo" 
           maxValue={new Date()} // Fecha actual como máxima
@@ -371,8 +348,8 @@ Usando la prop `format` para personalizar el formato de visualización de la fec
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="flex w-full">
+      <div className="max-w-md flex flex-col gap-4">
         <DatePicker 
           label="Formato por defecto (dd/MM/yyyy)" 
           value={new Date(2024, 3, 15)}
@@ -401,8 +378,8 @@ import { DatePicker } from "@stofli/ui";
 
 export default function DatePickerFormatDemo() {
   return (
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="flex w-full">
+      <div className="max-w-md flex flex-col gap-4">
         <DatePicker 
           label="Formato por defecto (dd/MM/yyyy)" 
           value={new Date(2024, 3, 15)}
@@ -437,8 +414,8 @@ Utilizando las props `calendar` y `locale` para mostrar diferentes sistemas de c
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="flex w-full">
+      <div className="max-w-md flex flex-col gap-4">
         <DatePicker 
           label="Calendario chino" 
           calendar="chinese"
@@ -463,7 +440,7 @@ import { DatePicker } from "@stofli/ui";
 
 export default function DatePickerCalendarSystemsDemo() {
   return (
-    <div className="max-w-md mx-auto flex flex-col gap-4">
+    <div className="max-w-md flex flex-col gap-4">
       <DatePicker 
         label="Calendario chino" 
         calendar="chinese"
@@ -493,8 +470,8 @@ Personaliza cualquier parte del DatePicker usando las propiedades de className c
 
 <DemoTabs
   preview={
-    <div className="flex justify-center w-full">
-      <div className="max-w-md mx-auto">
+    <div className="flex w-full">
+      <div className="max-w-md">
         <DatePicker 
           label="Selecciona una fecha"
           labelClassName="text-slate-700 dark:text-slate-200 font-medium tracking-wide mb-2"
@@ -571,18 +548,19 @@ export default function DatePickerCustomClassesDemo() {
 | `required`                | `boolean`                                                                                                                                                                                            | `false`             | Indica si el campo es obligatorio          |
 | `calendar`                | `"buddhist" \| "ethiopic" \| "ethioaa" \| "coptic" \| "hebrew" \| "indian" \| "islamic-civil" \| "islamic-tbla" \| "islamic-umalqura" \| "japanese" \| "persian" \| "roc" \| "gregory" \| "chinese"` | `"gregory"`         | Sistema de calendario                      |
 | `locale`                  | `string`                                                                                                                                                                                             | `"es"`              | Código de idioma (ej: "es", "en", "zh-CN") |
+| `id`                      | `string`                                                                                                                                                                                             | -                   | ID personalizado para el componente        |
+| `name`                    | `string`                                                                                                                                                                                             | -                   | Nombre del campo para formularios          |
+| `aria-describedby`        | `string`                                                                                                                                                                                             | -                   | ID del elemento que describe el campo       |
 
   </div>
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       { title: "Con Etiqueta y Requerido", href: "#con-etiqueta-y-requerido" },
       { title: "Con Mensaje de Error", href: "#con-mensaje-de-error" },
       { title: "Variantes", href: "#variantes" },
