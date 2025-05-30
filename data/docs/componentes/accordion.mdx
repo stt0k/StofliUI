@@ -6,53 +6,15 @@ description: >-
 
 <div className="mt-10 space-y-8">
   <div>
-    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+    <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```bash
-# Instalar dependencias necesarias
-npm install framer-motion lucide-react
-
-# Instalar el componente
-npx @stofli/ui add accordion
+import { Accordion } from "@stofli/ui";
 ```
-
-  </div>
+</div>
 
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
-El componente Accordion acepta un array de items con título y contenido, y opcionalmente puede configurarse para permitir múltiples secciones abiertas.
-
-```tsx
-import { Accordion } from "@stofli/ui";
-
-export default function App() {
-  return (
-    <Accordion
-      items={[
-        {
-          title: "¿Qué es un Accordion?",
-          content:
-            "Un accordion es un componente que permite mostrar y ocultar contenido...",
-        },
-        {
-          title: "¿Cuándo debería usarlo?",
-          content:
-            "Los accordions son útiles cuando necesitas presentar mucha información...",
-        },
-      ]}
-    />
-  );
-}
-```
-
-  </div>
-
-  <div>
-    <HeadingAnchor id="ejemplos">Ejemplos</HeadingAnchor>
-
-    <div className="mt-4">
-      <HeadingAnchor id="basico" level={3} >Básico</HeadingAnchor>
 
 Un acordeón simple que muestra una lista de preguntas frecuentes.
 
@@ -93,7 +55,6 @@ export default function AccordionDemo() {
 }
 ```
 </DemoTabs>
-    </div>
 
     <div className="mt-6">
       <HeadingAnchor id="multiples-secciones" level={3} >Con múltiples secciones abiertas</HeadingAnchor>
@@ -301,13 +262,11 @@ export default function AccordionCustomClassesDemo() {
 </div>
 
 export const toc = [
-  { title: "Instalación", href: "#instalacion" },
-  { title: "Uso", href: "#uso" },
+  { title: "Import", href: "#import" },
   {
-    title: "Ejemplos",
-    href: "#ejemplos",
+    title: "Uso",
+    href: "#uso",
     children: [
-      { title: "Básico", href: "#basico" },
       {
         title: "Con múltiples secciones abiertas",
         href: "#multiples-secciones",
