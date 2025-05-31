@@ -286,117 +286,69 @@
   }
 }
 
-/* Tema personalizado de Prism */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #e4e4e7; /* zinc-200 */
-  background: none;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-  tab-size: 4;
-  hyphens: none;
-}
-
-pre[class*="language-"] {
-  background: #18181b; /* zinc-900 */
-  border: 1px solid #27272a; /* zinc-800 */
+/* Estilos para rehype-pretty-code */
+pre {
+  overflow-x: auto;
+  padding: 1rem 0;
+  margin: 1.5rem 0;
   border-radius: 0.5rem;
+  border: 1px solid rgba(82, 82, 89, 0.48);
+  background-color: #000000 !important; /* Fondo negro forzado */
 }
 
-/* Tokens */
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: #71717a; /* zinc-500 */
-  font-style: italic;
+pre > code {
+  display: grid;
+  background: transparent !important; /* Asegurar que el código sea transparente */
 }
 
-.token.namespace {
-  opacity: 0.7;
+pre [data-line] {
+  padding: 0 1rem;
 }
 
-.token.string,
-.token.attr-value {
-  color: #22c55e; /* green-500 */
+pre [data-highlighted-line] {
+  background-color: rgba(55, 65, 81, 0.5);
+  border-left: 2px solid #61afef;
 }
 
-.token.punctuation,
-.token.operator {
-  color: #a1a1aa; /* zinc-400 */
+pre [data-highlighted-chars] {
+  background-color: rgba(55, 65, 81, 0.5);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.2rem;
+  box-decoration-break: clone;
 }
 
-.token.boolean,
-.token.number {
-  color: #f59e0b; /* amber-500 */
+/* Para números de línea */
+code[data-line-numbers] {
+  counter-reset: line;
 }
 
-.token.property,
-.token.tag,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  color: #ef4444; /* red-500 */
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: #636e7b;
 }
 
-.token.selector,
-.token.attr-name,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: #3b82f6; /* blue-500 */
+/* Para títulos de código */
+[data-rehype-pretty-code-title] {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-family: var(--font-geist-mono), monospace;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border: 1px solid rgba(82, 82, 89, 0.48);
+  background-color: #000000; /* Cambiar el fondo del título a negro también */
+  color: #abb2bf;
 }
 
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string,
-.token.variable {
-  color: #ec4899; /* pink-500 */
+/* Ajustes cuando hay un título */
+[data-rehype-pretty-code-title] + pre {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
 }
 
-.token.atrule,
-.token.attr-value,
-.token.function,
-.token.class-name {
-  color: #8b5cf6; /* violet-500 */
-}
-
-.token.keyword {
-  color: #0ea5e9; /* sky-500 */
-}
-
-.token.regex,
-.token.important {
-  color: #f97316; /* orange-500 */
-}
-
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-
-.token.italic {
-  font-style: italic;
-}
-
-/* Línea resaltada */
-.line-highlight {
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 3px solid #3b82f6; /* blue-500 */
-}
-
-/* Números de línea */
-.line-numbers .line-numbers-rows {
-  border-right: 1px solid #27272a; /* zinc-800 */
-}
-
-.line-numbers-rows > span:before {
-  color: #52525b; /* zinc-600 */
-}
