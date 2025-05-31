@@ -21,37 +21,23 @@ const sections: Section[] = [
     id: "install",
     title: "Instalación",
     description:
-      "Comienza instalando StofliUI en tu proyecto mediante npm, yarn o pnpm. Compatible con React, Next.js y otros frameworks modernos.",
+      "Comienza instalando StofliUI en tu proyecto mediante npm, yarn, bun o pnpm. Compatible con React, Next.js y otros frameworks modernos.",
     caption: "Instala la librería usando tu gestor de paquetes preferido",
     codeExample:
-      "npm install stofli-ui\n# o\nyarn add stofli-ui\n# o\npnpm add stofli-ui",
+      "npm install stofli-ui\n# o\nyarn add stofli-uio\n# o\nbun add stofli-ui\n# o\npnpm add stofli-ui",
     image:
       "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1170&auto=format&fit=crop",
     color: "#B3AEF5",
     lightColor: "#9F91F2",
   },
   {
-    id: "setup",
-    title: "Configuración",
-    description:
-      "Configura StofliUI en tu aplicación importando los estilos base y estableciendo el proveedor del tema en tu componente raíz.",
-    caption:
-      "Configura el proveedor de tema para acceder a todos los componentes",
-    codeExample:
-      "// En tu archivo principal\nimport { StofliProvider } from 'stofli-ui';\nimport 'stofli-ui/styles.css';\n\nfunction App() {\n  return (\n    <StofliProvider theme=\"dark\">\n      <YourApp />\n    </StofliProvider>\n  );\n}",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1170&auto=format&fit=crop",
-    color: "#E5C8C8",
-    lightColor: "#D2B6B6",
-  },
-  {
     id: "use",
     title: "Uso básico",
     description:
-      "Importa y utiliza cualquiera de nuestros componentes en tus páginas o aplicaciones. Todos los componentes son totalmente tipados y documentados.",
+      "Importa y utiliza cualquiera de nuestros componentes en tus páginas o aplicaciones. Todos los componentes están totalmente tipados y documentados.",
     caption: "Importa los componentes que necesites y personalízalos",
     codeExample:
-      "import { Button, Card } from 'stofli-ui';\n\nfunction MyComponent() {\n  return (\n    <div>\n      <Card>\n        <h2>¡Hola StofliUI!</h2>\n        <p>Este es un componente de tarjeta básico</p>\n        <Button variant=\"primary\">Acción</Button>\n      </Card>\n    </div>\n  );\n}",
+      'import { Tabs } from "stofli-ui";\n \nexport default function TabsDemo() {\n  return (\n    <Tabs\n      tabs={[\n        {\n          label: "Cuenta",\n          content: <p className="text-zinc-600 dark:text-zinc-400">\n          Configuración de tu cuenta y preferencias.</p>\n        },\n        {\n          label: "Contraseña",\n          content: <p className="text-zinc-600 dark:text-zinc-400">\n          Gestiona la seguridad de tu cuenta.</p>\n        },\n        {\n          label: "Notificaciones",\n          content: <p className="text-zinc-600 dark:text-zinc-400">\n          Configura cómo y cuándo recibir alertas.</p>\n        }\n      ]}\n    />\n  );\n}',
     image:
       "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1031&auto=format&fit=crop",
     color: "#EAA879",
@@ -64,7 +50,7 @@ const sections: Section[] = [
       "Personaliza los componentes con tus propios estilos y temas. StofliUI se adapta perfectamente a la identidad visual de tu proyecto.",
     caption: "Adapta los componentes a tu marca con facilidad",
     codeExample:
-      "// Configura tu tema personalizado\nconst myTheme = {\n  colors: {\n    primary: '#3366FF',\n    secondary: '#FF6347',\n    accent: '#FFD700',\n  },\n  fonts: {\n    body: 'Inter, sans-serif',\n    heading: 'Poppins, sans-serif',\n  },\n};\n\n<StofliProvider theme={myTheme}>\n  <YourApp />\n</StofliProvider>",
+      'import { Badge } from "stofli-ui";\n \nexport default function BadgeCustomClassesDemo() {\n  return (\n      <Badge \n        withDot \n        dotClassName="bg-yellow-300 animate-pulse h-3 w-3"\n        className="bg-zinc-800 text-white"\n      >\n        Animado\n      </Badge>\n  );\n}',
     image:
       "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?q=80&w=1064&auto=format&fit=crop",
     color: "#A8D5BA",
@@ -83,6 +69,442 @@ const ScrollProgressSection = () => {
 
   // Refs para cada sección
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Función para formatear el código con colores de sintaxis mejorados
+  const formatCode = (code: string) => {
+    const lines = code.split("\n");
+
+    return lines.map((line, i) => {
+      // Para líneas de importación
+      if (line.includes("import")) {
+        // Enfoque completamente nuevo para las importaciones
+        return (
+          <div key={i} className="mb-1">
+            {(() => {
+              const regex =
+                /(import\s+)(\{[^}]*\}|\w+)(\s+from\s+)("[^"]+"|'[^']+')/g;
+              const match = regex.exec(line);
+
+              if (match) {
+                return (
+                  <>
+                    <span className="text-violet-600 dark:text-[#C678DD]">
+                      {match[1]}
+                    </span>
+                    {match[2].startsWith("{") ? (
+                      <>
+                        <span className="text-zinc-500 dark:text-[#ABB2BF]">
+                          {"{"}
+                        </span>
+                        <span className="text-sky-500 dark:text-[#61AFEF]">
+                          {match[2].substring(1, match[2].length - 1)}
+                        </span>
+                        <span className="text-zinc-500 dark:text-[#ABB2BF]">
+                          {"}"}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-sky-500 dark:text-[#61AFEF]">
+                        {match[2]}
+                      </span>
+                    )}
+                    <span className="text-violet-600 dark:text-[#C678DD]">
+                      {match[3]}
+                    </span>
+                    <span className="text-emerald-500 dark:text-[#98C379]">
+                      {match[4]}
+                    </span>
+                  </>
+                );
+              }
+
+              // Si el regex no coincide, fallback para cualquier línea con "import"
+              return (
+                <span className="text-violet-600 dark:text-[#C678DD]">
+                  {line}
+                </span>
+              );
+            })()}
+          </div>
+        );
+      }
+
+      // Para líneas con export/function
+      if (line.includes("export default") || line.includes("function")) {
+        const parts = line.split(/(export default|function|\(|\)|\{)/g);
+        return (
+          <div key={i} className="mb-1">
+            {parts.map((part, j) => {
+              if (part === "export default") {
+                return (
+                  <span key={j} className="text-violet-600 dark:text-[#C678DD]">
+                    {part}
+                  </span>
+                );
+              } else if (part === "function") {
+                return (
+                  <span key={j} className="text-violet-600 dark:text-[#C678DD]">
+                    {" "}
+                    function
+                  </span>
+                );
+              } else if (part === "(" || part === ")" || part === "{") {
+                return (
+                  <span key={j} className="text-zinc-500 dark:text-[#ABB2BF]">
+                    {part}
+                  </span>
+                );
+              } else if (
+                part.trim() &&
+                !part.includes("export") &&
+                !part.includes("function")
+              ) {
+                return (
+                  <span key={j} className="text-yellow-500 dark:text-[#E5C07B]">
+                    {part}
+                  </span>
+                );
+              }
+              return <span key={j}>{part}</span>;
+            })}
+          </div>
+        );
+      }
+
+      // Para líneas con return
+      if (line.includes("return")) {
+        return (
+          <div key={i} className="mb-1">
+            <span className="text-violet-600 dark:text-[#C678DD]">return</span>
+            <span className="text-zinc-700 dark:text-[#ABB2BF]">
+              {line.replace("return", "")}
+            </span>
+          </div>
+        );
+      }
+
+      // Para JSX y elementos con etiquetas
+      if ((line.includes("<") && line.includes(">")) || line.includes("</")) {
+        // Identificar y colorear partes JSX
+        const processJsxLine = (text: string) => {
+          // Nueva implementación más precisa para JSX
+          const parts = [];
+          let currentPos = 0;
+
+          // Regex para diferentes partes del JSX
+          const tagRegex = /<\/?([A-Z][a-zA-Z0-9]*|[a-z][a-zA-Z0-9]*)/g; // Etiquetas incluyendo componentes React con mayúscula
+          const attrRegex = /\s+([a-zA-Z0-9]+)=(".*?"|{.*?})/g; // Atributos con sus valores
+
+          // Procesar etiquetas de apertura o cierre
+          let tagMatch;
+          while ((tagMatch = tagRegex.exec(text)) !== null) {
+            // Texto antes de la etiqueta
+            if (tagMatch.index > currentPos) {
+              parts.push({
+                text: text.substring(currentPos, tagMatch.index),
+                type: "text",
+              });
+            }
+
+            // La etiqueta completa (< o </ seguido del nombre)
+            parts.push({
+              text: tagMatch[0],
+              type: "tag",
+            });
+
+            currentPos = tagMatch.index + tagMatch[0].length;
+          }
+
+          // Resetear para otros patrones
+          tagRegex.lastIndex = 0;
+          currentPos = 0;
+
+          // Procesar atributos
+          let attrMatch;
+          while ((attrMatch = attrRegex.exec(text)) !== null) {
+            const attrName = attrMatch[1];
+            const attrValue = attrMatch[2];
+
+            // Encontrar la posición en el array parts para insertar
+            let i = 0;
+            let foundPos = 0;
+            while (i < parts.length && foundPos < attrMatch.index) {
+              foundPos += parts[i].text.length;
+              i++;
+            }
+
+            // Si es un atributo className o similar
+            if (attrName.toLowerCase().includes("class")) {
+              parts.splice(i, 0, {
+                text: attrMatch[0].substring(0, attrName.length + 1), // incluye el signo =
+                type: "attr-class-name",
+              });
+              parts.splice(i + 1, 0, {
+                text: attrValue,
+                type: "attr-class-value",
+              });
+            } else {
+              parts.splice(i, 0, {
+                text: attrMatch[0].substring(0, attrName.length + 1),
+                type: "attr-name",
+              });
+              parts.splice(i + 1, 0, {
+                text: attrValue,
+                type: "attr-value",
+              });
+            }
+
+            currentPos = attrMatch.index + attrMatch[0].length;
+          }
+
+          // Resetear
+          attrRegex.lastIndex = 0;
+
+          // Si partes está vacío, usar un enfoque simplificado que al menos coloree bien las etiquetas
+          if (parts.length === 0) {
+            // Enfoque simplificado: al menos colorear las etiquetas
+            return text.split(/(<\/?\w+[^>]*>)/).map((part, j) => {
+              if (part.startsWith("<") && part.endsWith(">")) {
+                // Intentar colorear el componente/tag
+                const tagName = part.match(
+                  /<\/?([A-Z][a-zA-Z0-9]*|[a-z][a-zA-Z0-9]*)/
+                )?.[1];
+
+                if (tagName) {
+                  // Es una etiqueta de React con mayúscula inicial
+                  if (tagName[0] === tagName[0].toUpperCase()) {
+                    return (
+                      <span key={j}>
+                        <span className="text-rose-500 dark:text-[#E06C75]">{`<${
+                          part.includes("/") ? "/" : ""
+                        }`}</span>
+                        <span className="text-yellow-500 dark:text-[#E5C07B]">
+                          {tagName}
+                        </span>
+                        {part.includes("className=") ? (
+                          <span className="text-sky-400 dark:text-[#56B6C2]">
+                            {part.substring(
+                              tagName.length + 1 + (part.includes("/") ? 1 : 0),
+                              part.length - 1
+                            )}
+                          </span>
+                        ) : (
+                          <span className="text-rose-500 dark:text-[#E06C75]">
+                            {part.substring(
+                              tagName.length + 1 + (part.includes("/") ? 1 : 0),
+                              part.length
+                            )}
+                          </span>
+                        )}
+                      </span>
+                    );
+                  } else {
+                    // Es una etiqueta HTML normal
+                    return (
+                      <span
+                        key={j}
+                        className="text-rose-500 dark:text-[#E06C75]"
+                      >
+                        {part}
+                      </span>
+                    );
+                  }
+                }
+
+                return (
+                  <span key={j} className="text-rose-500 dark:text-[#E06C75]">
+                    {part}
+                  </span>
+                );
+              }
+
+              // Para className y su valor
+              if (
+                part.includes('className="') ||
+                part.includes("className={")
+              ) {
+                const classParts = part.split(/(className=)(".*?"|{.*?})/);
+                return (
+                  <span key={j}>
+                    {classParts.map((classPart, k) => {
+                      if (classPart === "className=") {
+                        return (
+                          <span
+                            key={k}
+                            className="text-sky-400 dark:text-[#56B6C2]"
+                          >
+                            {classPart}
+                          </span>
+                        );
+                      } else if (
+                        (classPart.startsWith('"') &&
+                          classPart.endsWith('"')) ||
+                        (classPart.startsWith("{") && classPart.endsWith("}"))
+                      ) {
+                        return (
+                          <span
+                            key={k}
+                            className="text-amber-500 dark:text-[#D19A66]"
+                          >
+                            {classPart}
+                          </span>
+                        );
+                      }
+                      return <span key={k}>{classPart}</span>;
+                    })}
+                  </span>
+                );
+              }
+
+              // Para atributos y su valor
+              if (part.includes('="') || part.includes("={")) {
+                const attrParts = part.split(/([\w-]+=)(".*?"|{.*?})/g);
+                return (
+                  <span key={j}>
+                    {attrParts.map((attrPart, k) => {
+                      if (attrPart.endsWith("=")) {
+                        return (
+                          <span
+                            key={k}
+                            className="text-sky-400 dark:text-[#56B6C2]"
+                          >
+                            {attrPart}
+                          </span>
+                        );
+                      } else if (
+                        (attrPart.startsWith('"') && attrPart.endsWith('"')) ||
+                        (attrPart.startsWith("{") && attrPart.endsWith("}"))
+                      ) {
+                        return (
+                          <span
+                            key={k}
+                            className="text-amber-500 dark:text-[#D19A66]"
+                          >
+                            {attrPart}
+                          </span>
+                        );
+                      }
+                      return <span key={k}>{attrPart}</span>;
+                    })}
+                  </span>
+                );
+              }
+
+              return <span key={j}>{part}</span>;
+            });
+          }
+
+          // Renderizar las partes con sus estilos correspondientes
+          return parts.map((part, j) => {
+            switch (part.type) {
+              case "tag":
+                return (
+                  <span key={j} className="text-rose-500 dark:text-[#E06C75]">
+                    {part.text}
+                  </span>
+                );
+              case "attr-name":
+              case "attr-class-name":
+                return (
+                  <span key={j} className="text-sky-400 dark:text-[#56B6C2]">
+                    {part.text}
+                  </span>
+                );
+              case "attr-value":
+              case "attr-class-value":
+                return (
+                  <span key={j} className="text-amber-500 dark:text-[#D19A66]">
+                    {part.text}
+                  </span>
+                );
+              default:
+                return <span key={j}>{part.text}</span>;
+            }
+          });
+        };
+
+        return (
+          <div key={i} className="mb-1">
+            {processJsxLine(line)}
+          </div>
+        );
+      }
+
+      // Para comentarios
+      if (line.startsWith("//") || line.startsWith("#")) {
+        return (
+          <div key={i} className="mb-1">
+            <span className="text-zinc-500 dark:text-[#5C6370]">{line}</span>
+          </div>
+        );
+      }
+
+      // Para definiciones de constantes
+      if (
+        line.includes("const ") ||
+        line.includes("let ") ||
+        line.includes("var ")
+      ) {
+        const parts = line.split(/(const|let|var|\{|\}|=|:)/g);
+        return (
+          <div key={i} className="mb-1">
+            {parts.map((part, j) => {
+              if (part === "const" || part === "let" || part === "var") {
+                return (
+                  <span key={j} className="text-violet-600 dark:text-[#C678DD]">
+                    {part}
+                  </span>
+                );
+              } else if (
+                part === "=" ||
+                part === ":" ||
+                part === "{" ||
+                part === "}"
+              ) {
+                return (
+                  <span key={j} className="text-zinc-500 dark:text-[#ABB2BF]">
+                    {part}
+                  </span>
+                );
+              } else if (
+                part.includes("'") ||
+                part.includes('"') ||
+                part.includes("`") ||
+                part.includes("#")
+              ) {
+                return (
+                  <span
+                    key={j}
+                    className="text-emerald-500 dark:text-[#98C379]"
+                  >
+                    {part}
+                  </span>
+                );
+              } else if (
+                part.trim() &&
+                !part.includes("const") &&
+                !part.includes("let")
+              ) {
+                return (
+                  <span key={j} className="text-amber-500 dark:text-[#D19A66]">
+                    {part}
+                  </span>
+                );
+              }
+              return <span key={j}>{part}</span>;
+            })}
+          </div>
+        );
+      }
+
+      // Línea normal si no coincide con ningún patrón específico
+      return (
+        <div key={i} className="mb-1">
+          {line}
+        </div>
+      );
+    });
+  };
 
   // Función para asignar refs
   const setSectionRef = (el: HTMLDivElement | null, index: number) => {
@@ -206,8 +628,9 @@ const ScrollProgressSection = () => {
                     <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></div>
                   </div>
                   <div className="text-xs text-zinc-700 dark:text-white/70 bg-zinc-200/80 dark:bg-zinc-800/50 backdrop-blur-md rounded-md px-2 py-0.5 flex-1 text-center border border-zinc-300/30 dark:border-white/5 ml-2 truncate">
-                    {sections[activeSection].id}.
-                    {sections[activeSection].id === "install" ? "sh" : "tsx"}
+                    {sections[activeSection].id === "install"
+                      ? "terminal"
+                      : `${sections[activeSection].id}.tsx`}
                   </div>
                 </div>
 
@@ -233,42 +656,38 @@ const ScrollProgressSection = () => {
 
                       {/* Código sintético más pequeño */}
                       <pre className="font-mono text-[10px] text-zinc-800 dark:text-white/90 whitespace-pre-wrap rounded p-2 bg-white/60 dark:bg-zinc-900/80 backdrop-blur-sm overflow-auto max-h-[150px] border-l-2 border-zinc-300 dark:border-zinc-700/50">
-                        <code>
-                          {section.codeExample.split("\n").map((line, i) => (
-                            <div key={i} className="mb-1">
-                              {line.includes("import") ? (
-                                <span className="text-blue-600 dark:text-blue-400">
-                                  {line}
-                                </span>
-                              ) : line.includes("function") ||
-                                line.includes("return") ||
-                                line.includes("const") ? (
-                                <span className="text-purple-600 dark:text-purple-400">
-                                  {line}
-                                </span>
-                              ) : line.includes("<") && line.includes(">") ? (
-                                <span className="text-orange-600 dark:text-orange-400">
-                                  {line}
-                                </span>
-                              ) : line.startsWith("#") ? (
-                                <span className="text-zinc-500 dark:text-gray-500">
-                                  {line}
-                                </span>
-                              ) : line.includes(":") && !line.includes("<") ? (
-                                <span className="text-amber-600 dark:text-yellow-400">
-                                  {line}
-                                </span>
-                              ) : (
-                                line
-                              )}
-                            </div>
-                          ))}
-                        </code>
+                        <code>{formatCode(section.codeExample)}</code>
                       </pre>
 
                       <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-3">
                         {section.description}
                       </p>
+
+                      {/* Enlace a documentación para móvil */}
+                      <div className="mt-2">
+                        <a
+                          href="/docs/"
+                          className="flex items-center text-[10px] font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        >
+                          <span>Ver documentación</span>
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="ml-1"
+                          >
+                            <path
+                              d="M6 12L10 8L6 4"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </a>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -319,12 +738,12 @@ const ScrollProgressSection = () => {
                   5 min
                 </div>
                 <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70">
-                  <div className="w-1 h-1 rounded-full mr-1 bg-[#E5C8C8]"></div>
-                  Principiante
-                </div>
-                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70">
                   <div className="w-1 h-1 rounded-full mr-1 bg-[#EAA879]"></div>
                   React/Next
+                </div>
+                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70">
+                  <div className="w-1 h-1 rounded-full mr-1 bg-[#A8D5BA]"></div>
+                  TypeScript
                 </div>
               </div>
             </div>
@@ -371,8 +790,9 @@ const ScrollProgressSection = () => {
                       <div className="w-3 h-3 rounded-full bg-[#28c840]"></div>
                     </div>
                     <div className="text-xs text-zinc-700 dark:text-white/70 bg-zinc-200/80 dark:bg-zinc-800/50 backdrop-blur-md rounded-md px-2 py-1 flex-1 text-center border border-zinc-300/50 dark:border-white/5 ml-2 truncate">
-                      {sections[activeSection].id}.
-                      {sections[activeSection].id === "install" ? "sh" : "tsx"}
+                      {sections[activeSection].id === "install"
+                        ? "terminal"
+                        : `${sections[activeSection].id}.tsx`}
                     </div>
                   </div>
 
@@ -419,37 +839,12 @@ const ScrollProgressSection = () => {
                         {/* Bloques de código con sintaxis coloreada */}
                         <pre className="font-mono text-xs xs:text-sm text-zinc-800 dark:text-white/90 whitespace-pre-wrap rounded p-1 xs:p-2 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-sm overflow-auto max-h-[250px] xs:max-h-[400px]">
                           <code>
-                            {section.codeExample.split("\n").map((line, i) => (
+                            {formatCode(section.codeExample).map((line, i) => (
                               <div
                                 key={i}
                                 className="mb-1 pl-2 xs:pl-4 border-l-2 border-zinc-300 dark:border-zinc-700/50"
                               >
-                                {line.includes("import") ? (
-                                  <span className="text-blue-600 dark:text-blue-400">
-                                    {line}
-                                  </span>
-                                ) : line.includes("function") ||
-                                  line.includes("return") ||
-                                  line.includes("const") ? (
-                                  <span className="text-purple-600 dark:text-purple-400">
-                                    {line}
-                                  </span>
-                                ) : line.includes("<") && line.includes(">") ? (
-                                  <span className="text-orange-600 dark:text-orange-400">
-                                    {line}
-                                  </span>
-                                ) : line.startsWith("#") ? (
-                                  <span className="text-zinc-500 dark:text-gray-500">
-                                    {line}
-                                  </span>
-                                ) : line.includes(":") &&
-                                  !line.includes("<") ? (
-                                  <span className="text-amber-600 dark:text-yellow-400">
-                                    {line}
-                                  </span>
-                                ) : (
-                                  line
-                                )}
+                                {line}
                               </div>
                             ))}
                           </code>
@@ -496,10 +891,6 @@ const ScrollProgressSection = () => {
                   <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70 hover:bg-white/70 hover:text-zinc-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
                     <div className="w-1.5 h-1.5 rounded-full mr-1 xs:mr-1.5 bg-[#B3AEF5]"></div>
                     Tiempo: 5 min
-                  </div>
-                  <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70 hover:bg-white/70 hover:text-zinc-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
-                    <div className="w-1.5 h-1.5 rounded-full mr-1 xs:mr-1.5 bg-[#E5C8C8]"></div>
-                    Principiante
                   </div>
                   <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70 hover:bg-white/70 hover:text-zinc-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
                     <div className="w-1.5 h-1.5 rounded-full mr-1 xs:mr-1.5 bg-[#EAA879]"></div>
@@ -611,24 +1002,29 @@ const ScrollProgressSection = () => {
 
                                 {/* Línea de "Ver documentación" */}
                                 {isActive && (
-                                  <div className="flex items-center mt-2 xs:mt-3 text-[10px] xs:text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer">
-                                    <span>Ver documentación</span>
-                                    <svg
-                                      width="14"
-                                      height="14"
-                                      viewBox="0 0 16 16"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="ml-1"
+                                  <div className="flex items-center mt-2 xs:mt-3">
+                                    <a
+                                      href="/docs/"
+                                      className="flex items-center text-[10px] xs:text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                                     >
-                                      <path
-                                        d="M6 12L10 8L6 4"
-                                        stroke="currentColor"
-                                        strokeWidth="1.5"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
+                                      <span>Ver documentación</span>
+                                      <svg
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="ml-1"
+                                      >
+                                        <path
+                                          d="M6 12L10 8L6 4"
+                                          stroke="currentColor"
+                                          strokeWidth="1.5"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                        />
+                                      </svg>
+                                    </a>
                                   </div>
                                 )}
                               </motion.div>
