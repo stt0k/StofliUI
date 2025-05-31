@@ -65,6 +65,11 @@ const Header = () => {
       setOpenSubmenu(openSubmenu === title ? null : title);
     };
 
+    // Filtrar los elementos que no queremos mostrar en móvil
+    const filteredHeaderData = headerData.filter(
+      (item) => item.title !== "Docs" && item.title !== "Componentes"
+    );
+
     return (
       <div className="h-full py-6 px-4 overflow-y-auto">
         <div className="space-y-4">
@@ -82,7 +87,7 @@ const Header = () => {
               Navegación
             </h2>
             <div className="space-y-1">
-              {headerData.map((data) => (
+              {filteredHeaderData.map((data) => (
                 <div key={data.title} className="w-full">
                   {data.submenu ? (
                     <div className="w-full">
@@ -142,26 +147,6 @@ const Header = () => {
                                 </div>
                               )
                             )}
-
-                          {data.submenu.links && (
-                            <div className="space-y-1">
-                              {data.submenu.links.map(
-                                (
-                                  item: { title: string; href: string },
-                                  index: number
-                                ) => (
-                                  <Link
-                                    key={index}
-                                    href={item.href}
-                                    onClick={closeMobileMenu}
-                                    className="block p-2 rounded-md text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm"
-                                  >
-                                    {item.title}
-                                  </Link>
-                                )
-                              )}
-                            </div>
-                          )}
                         </div>
                       )}
                     </div>
