@@ -3,8 +3,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import {
   BookOpen,
   PanelLeft,
-  User,
-  Building2,
   Code,
   Layout,
   CreditCard,
@@ -15,11 +13,6 @@ import {
   BadgeCheck,
   UserCircle,
   LucideIcon,
-  LayoutTemplate,
-  Lightbulb,
-  Rocket,
-  Compass,
-  Zap,
   ArrowRight,
   Columns,
 } from "lucide-react";
@@ -136,28 +129,12 @@ const HeadLinks = ({
     if (lowerTitle.includes("accordion")) return PanelLeft;
     if (lowerTitle.includes("card")) return CreditCard;
     if (lowerTitle.includes("tabs")) return Columns;
-    if (lowerTitle.includes("button")) return Layout;
     if (lowerTitle.includes("checkbox")) return CheckSquare;
     if (lowerTitle.includes("input")) return TextCursorInput;
     if (lowerTitle.includes("dropdown")) return ListFilter;
     if (lowerTitle.includes("calendar")) return Calendar;
     if (lowerTitle.includes("badge")) return BadgeCheck;
     if (lowerTitle.includes("avatar")) return UserCircle;
-
-    // Company/Docs sections
-    if (lowerTitle.includes("about") || lowerTitle.includes("team"))
-      return User;
-    if (lowerTitle.includes("career")) return Building2;
-    if (lowerTitle.includes("developer") || lowerTitle.includes("api"))
-      return Code;
-    if (lowerTitle.includes("doc")) return BookOpen;
-
-    // Learning sections
-    if (lowerTitle.includes("quick")) return Zap;
-    if (lowerTitle.includes("tutorial")) return Lightbulb;
-    if (lowerTitle.includes("dashboard")) return LayoutTemplate;
-    if (lowerTitle.includes("landing")) return Rocket;
-    if (lowerTitle.includes("admin")) return Compass;
 
     return Layout; // Default icon
   };
@@ -294,10 +271,10 @@ const HeadLinks = ({
                           <span>Astro</span>
                         </Link>
                         <Link
-                          href="/docs/frameworks/react"
+                          href="/docs/frameworks/laravel"
                           className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
-                          <span>React</span>
+                          <span>Laravel</span>
                         </Link>
                       </div>
                     </div>
