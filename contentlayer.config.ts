@@ -1,5 +1,5 @@
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
-import rehypePrism from 'rehype-prism-plus';
+import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 
 export const Doc = defineDocumentType(() => ({
@@ -39,6 +39,20 @@ export const Doc = defineDocumentType(() => ({
   },
 }));
 
+// Tipos para los nodos de rehype-pretty-code
+interface LineElement {
+  properties: {
+    className: string[];
+  };
+  children: Array<{type: string; value?: string}>;
+}
+
+interface CharsElement {
+  properties: {
+    className: string[];
+  };
+}
+
 export default makeSource({ 
   contentDirPath: 'data',
   documentTypes: [Doc],
@@ -46,7 +60,23 @@ export default makeSource({
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
-      [rehypePrism, { showLineNumbers: true }]
+      [rehypePrettyCode, { 
+        theme: 'one-dark-pro',
+        keepBackground: false,
+        grid: true,
+        onVisitLine(node: LineElement) {
+          // Agregar espacio para líneas vacías
+          if (node.children.length === 0) {
+            node.children = [{type: 'text', value: ' '}];
+          }
+        },
+        onVisitHighlightedLine(node: LineElement) {
+          node.properties.className.push('highlighted-line');
+        },
+        onVisitHighlightedChars(node: CharsElement) {
+          node.properties.className.push('highlighted-chars');
+        },
+      }]
     ]
   }
 });
