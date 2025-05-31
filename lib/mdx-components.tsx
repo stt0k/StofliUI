@@ -401,12 +401,22 @@ const components: MDXComponents = {
       {...props}
     />
   ),
-  code: (props) => (
-    <code
-      className="dark:bg-zinc-800 bg-zinc-100 rounded px-1.5 py-0.5 text-sm font-mono dark:text-zinc-200 text-zinc-800"
-      {...props}
-    />
-  ),
+  code: (props) => {
+    // Si el elemento tiene atributos de rehype-pretty-code, no aplicar clases adicionales
+    const hasLanguage = 'data-language' in props;
+    const hasTheme = 'data-theme' in props;
+    
+    if (hasLanguage || hasTheme) {
+      return <code {...props} />;
+    }
+    // Aplicar clases solo para código inline que no sea procesado por rehype-pretty-code
+    return (
+      <code
+        className="dark:bg-zinc-800 bg-zinc-100 rounded px-1.5 py-0.5 text-sm font-mono dark:text-zinc-200 text-zinc-800"
+        {...props}
+      />
+    );
+  },
   pre: (props) => <CodeBlock {...props} />,
   a: (props) => (
     <a
