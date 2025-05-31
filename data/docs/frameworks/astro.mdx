@@ -1,17 +1,198 @@
 ---
-title: Astro
-description: Install and configure Astro.
+    title: 'Astro'
+    description: >-
+        'Guía para instalar y usar StofliUI en proyectos Astro'
 ---
 
-# 🛠️ Install and Configure Astro
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="requisitos">Requisitos</HeadingAnchor>
 
-## Create Project
+<ul className="pl-5 list-disc space-y-2 mt-4 text-zinc-900 dark:text-zinc-100">
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">React</span> 17 o superior</span>
+  </li>
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Tailwind CSS</span> 3 o superior</span>
+  </li>
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Astro</span> 5.2 o superior</span>
+  </li>
+</ul>
 
-Start by creating a new Astro project:
+  </div>
 
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+
+<Steps className="mt-2">
+  <Step title="Crear un proyecto Astro" stepNumber={1}>
+    Si aún no tienes un proyecto Astro, puedes crear uno nuevo:
 
 ```bash
-npm create astro@latest
+npm create astro@latest mi-proyecto-stofli
+cd mi-proyecto-stofli
 ```
 
+Si estás configurando un nuevo proyecto, ten en cuenta que el proceso de instalación de Tailwind CSS varía según la versión que utilices.
+  </Step>
 
+  <Step title="Instalar StofliUI" stepNumber={2}>
+    Instala StofliUI:
+
+```bash
+npm install stofli-ui
+```
+  </Step>
+
+  <Step title="Configurar Tailwind CSS" stepNumber={3}>
+    <div className="px-4 py-3 mb-6 border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/30 dark:border-amber-400">
+      <p className="text-amber-800 dark:text-amber-300">
+        <strong>Nota:</strong> La instalación y configuración de Tailwind CSS varía significativamente entre la versión 3 y la versión 4.
+      </p>
+    </div>
+
+    <HeadingAnchor id="tailwind-v3" level={3}>Instalación para Tailwind CSS v3</HeadingAnchor>
+
+    Para Tailwind CSS v3, puedes usar el comando integrado de Astro para instalar Tailwind:
+
+```bash
+npx astro add tailwind
+```
+
+Este comando instalará todas las dependencias necesarias y creará la configuración básica.
+
+Asegúrate de que tu archivo `tailwind.config.mjs` o `tailwind.config.cjs` incluya los archivos de StofliUI:
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+    './node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+    <HeadingAnchor id="tailwind-v4" level={3}>Instalación para Tailwind CSS v4</HeadingAnchor>
+
+    Para Tailwind CSS v4, el proceso es diferente. Instala Tailwind y el plugin de Vite específico:
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+Configura el plugin de Vite en tu archivo `astro.config.mjs`:
+
+```js
+import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
+```
+
+Luego, crea un archivo CSS global (por ejemplo, en `src/styles/global.css`) con la nueva sintaxis de importación:
+
+```css
+@import 'tailwindcss';
+
+/* Opcional: usar la directiva @source para especificar archivos a escanear */
+@source '../node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}';
+```
+
+Si decides usar un archivo `tailwind.config.js` con Tailwind CSS v4, no necesitas usar la directiva `@source`, pero debes importar el archivo de configuración en tu CSS y asegurarte de que incluya StofliUI en la propiedad `content`:
+
+```css
+@import 'tailwindcss';
+@import '../tailwind.config';
+```
+
+```js
+// tailwind.config.js (opcional en v4)
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+    './node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+}
+```
+
+Y asegúrate de importar este archivo CSS global en tus páginas Astro:
+
+```astro
+---
+import '../styles/global.css';
+---
+```
+  </Step>
+
+  <Step title="Configurar React en Astro" stepNumber={4}>
+    Como StofliUI está basado en React, necesitas añadir la integración de React en Astro:
+
+```bash
+npx astro add react
+```
+
+Esto instalará y configurará automáticamente React en tu proyecto Astro.
+  </Step>
+
+  <Step title="Usar componentes de StofliUI" stepNumber={5}>
+    Ahora puedes importar y usar los componentes de StofliUI en tus archivos Astro:
+
+```astro
+---
+// src/pages/index.astro
+import { Button } from 'stofli-ui';
+// Si usas Tailwind CSS v4, asegúrate de importar tu CSS global:
+// import '../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>StofliUI en Astro</title>
+  </head>
+  <body>
+    <main>
+      <h1>Bienvenido a mi proyecto con StofliUI</h1>
+      <Button client:load>Haz clic</Button>
+    </main>
+  </body>
+</html>
+```
+
+Nota: Debes usar la directiva `client:load` (u otra directiva de hidratación como `client:visible` o `client:idle`) cuando uses componentes de React que incluyan interactividad.
+  </Step>
+
+</Steps>
+
+  </div>
+
+</div>
+
+export const toc = [
+  { title: "Requisitos", href: "#requisitos" },
+  { 
+    title: "Instalación", 
+    href: "#instalacion",
+    children: [
+      { title: "Tailwind CSS v3", href: "#tailwind-v3" },
+      { title: "Tailwind CSS v4", href: "#tailwind-v4" },
+    ],
+  },
+];   
