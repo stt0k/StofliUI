@@ -105,6 +105,7 @@ export default function ExamplesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Dashboard example */}
           <ExampleSection
+            id="dashboard"
             title="Dashboard"
             description="Un dashboard completo con estadísticas, gráficos y navegación."
           >
@@ -266,6 +267,7 @@ export default function ExamplesPage() {
 
           {/* Authentication example */}
           <ExampleSection
+            id="authentication"
             title="Authentication"
             description="Formularios para registro, inicio de sesión y gestión de acceso."
           >
@@ -426,6 +428,7 @@ export default function ExamplesPage() {
 
           {/* Cards example */}
           <ExampleSection
+            id="cards"
             title="Cards"
             description="Diseños de tarjetas para diferentes casos de uso."
           >
@@ -627,6 +630,7 @@ export default function ExamplesPage() {
 
           {/* Perfil Social example */}
           <ExampleSection
+            id="perfil-social"
             title="Perfil Social"
             description="Perfil de red social con banner, información del usuario y publicaciones."
           >
@@ -893,6 +897,7 @@ export default function ExamplesPage() {
 
           {/* FAQ example */}
           <ExampleSection
+            id="faq"
             title="FAQ"
             description="Componente de preguntas frecuentes con acordeón expandible."
           >
@@ -918,10 +923,12 @@ export default function ExamplesPage() {
 
 // Componente de sección de ejemplo
 function ExampleSection({
+  id,
   title,
   description,
   children,
 }: {
+  id: string;
   title: string;
   description: string;
   children: React.ReactNode;
@@ -929,7 +936,9 @@ function ExampleSection({
   return (
     <section className="mb-12 md:mb-16">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">{title}</h2>
+        <h2 id={id} className="text-2xl font-bold mb-2">
+          {title}
+        </h2>
         <p className="text-gray-600 dark:text-zinc-400">{description}</p>
       </div>
       <div className="overflow-x-auto">{children}</div>
@@ -941,7 +950,7 @@ function ExampleSection({
 function OverviewTabContent() {
   // Valores predeterminados para las alturas de las barras
   const barHeights = [45, 65, 35, 80, 55, 70, 60, 40, 75, 50, 90, 65];
-  
+
   return (
     <div className="p-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
