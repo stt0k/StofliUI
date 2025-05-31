@@ -1,6 +1,7 @@
 ---
     title: 'Next.js'
-    description: 'Guía para instalar y usar StofliUI en proyectos Next.js'
+    description: >-
+      'Guía para instalar y usar StofliUI en proyectos Next.js'
 ---
 
 <div className="mt-10 space-y-8">
@@ -45,7 +46,15 @@ npm install stofli-ui
   </Step>
 
   <Step title="Configurar Tailwind CSS" stepNumber={3}>
-    Asegúrate de que tu archivo `tailwind.config.js` esté configurado correctamente:
+    <div className="px-4 py-3 mb-6 border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/30 dark:border-amber-400">
+      <p className="text-amber-800 dark:text-amber-300">
+        <strong>Nota:</strong> La instalación y configuración de Tailwind CSS varía entre la versión 3 y la versión 4.
+      </p>
+    </div>
+
+    <HeadingAnchor id="tailwind-v3" level={3}>Configuración para Tailwind CSS v3</HeadingAnchor>
+
+    Asegúrate de que tu archivo `tailwind.config.js` esté configurado correctamente para incluir los archivos de StofliUI:
 
 ```js
 /** @type {import('tailwindcss').Config} */
@@ -64,13 +73,47 @@ module.exports = {
 }
 ```
 
-Si estás usando Tailwind CSS v4 sin `tailwind.config.js`, debes incluir lo siguiente en tu archivo `globals.css` (ajusta la ruta según tu estructura de proyecto):
+    <HeadingAnchor id="tailwind-v4" level={3}>Configuración para Tailwind CSS v4</HeadingAnchor>
+
+    Con Tailwind CSS v4, tienes dos opciones:
+
+    1. **Sin archivo de configuración**: Si prefieres no usar un archivo de configuración, puedes usar la directiva `@source` en tu archivo `globals.css` para indicar dónde buscar las clases de Tailwind, incluyendo StofliUI:
 
 ```css
 @import 'tailwindcss';
 
+/* Usar la directiva @source para especificar archivos a escanear */
+@source './app';
+@source './components';
+@source './pages';
 @source '../node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}';
 ```
+
+    2. **Con archivo de configuración**: Si prefieres seguir usando un archivo de configuración, mantén tu `tailwind.config.js` actualizado y asegúrate de importarlo en tu archivo CSS:
+
+```js
+// tailwind.config.js (opcional en v4)
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'class', 
+  theme: {
+    extend: {},
+  },
+}
+```
+
+```css
+@import 'tailwindcss';
+@import '../tailwind.config';
+```
+
+En este caso, no necesitas usar las directivas `@source` ya que la detección de clases se hará a través de la propiedad `content` del archivo de configuración.
   </Step>
 
   <Step title="Usar componentes de StofliUI" stepNumber={4}>
@@ -80,7 +123,7 @@ Si estás usando Tailwind CSS v4 sin `tailwind.config.js`, debes incluir lo sigu
 // app/page.tsx
 'use client';
 
-import { Button } from "@stofli/ui";
+import { Button } from "stofli-ui";
 
 export default function Page() {
   return (
@@ -100,7 +143,14 @@ Ten en cuenta que muchos componentes de StofliUI utilizan hooks y eventos, por l
 
 export const toc = [
   { title: "Requisitos", href: "#requisitos" },
-  { title: "Instalación", href: "#instalacion" },
+  { 
+    title: "Instalación", 
+    href: "#instalacion",
+    children: [
+      { title: "Tailwind CSS v3", href: "#tailwind-v3" },
+      { title: "Tailwind CSS v4", href: "#tailwind-v4" },
+    ],
+  },
 ];
 
 
