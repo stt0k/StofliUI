@@ -45,6 +45,20 @@
 }
 
 @layer utilities {
+  /* Animaciones personalizadas */
+  @keyframes brightness {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-brightness {
+    animation: brightness 2.2s linear infinite;
+  }
+
   /* Variables de color */
   :root {
     --background: #ffffff;
@@ -351,4 +365,3 @@ code[data-line-numbers] > [data-line]::before {
   border-top-right-radius: 0;
   border-top: none;
 }
-
