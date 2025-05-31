@@ -7,11 +7,17 @@ import { AnimatePresence, motion } from "framer-motion";
 interface CodeBlockProps {
   children?: React.ReactNode;
   className?: string;
+  'data-language'?: string;
+  'data-theme'?: string;
 }
 
-const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
+const CodeBlock: React.FC<CodeBlockProps> = (props) => {
+  const { children, className, ...rest } = props;
   const [isCopied, setIsCopied] = useState(false);
   const preRef = useRef<HTMLPreElement>(null);
+  
+  // Verifica si el componente está siendo procesado por rehype-pretty-code
+  const isProcessedByPrettyCode = rest['data-language'] || rest['data-theme'];
 
   const copyToClipboard = async () => {
     try {
@@ -30,11 +36,16 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
     <div className="relative group">
       <pre
         ref={preRef}
-        className={`${className} bg-zinc-900 rounded-lg p-4 overflow-x-auto mb-4`}
+        className={isProcessedByPrettyCode ? className : `${className} bg-black rounded-lg p-4 overflow-x-auto mb-4`}
+        {...rest}
       >
-        <code className={className}>
-          {typeof children === "string" ? children.trim() : children}
-        </code>
+        {isProcessedByPrettyCode ? (
+          children
+        ) : (
+          <code className={className}>
+            {typeof children === "string" ? children.trim() : children}
+          </code>
+        )}
       </pre>
       <motion.button
         onClick={copyToClipboard}
