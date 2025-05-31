@@ -9,7 +9,7 @@
     <a href="https://www.npmjs.com/package/stofli-ui">
     <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
   </a>
-  <a href="https://github.com/username/stofli-ui/blob/main/LICENSE">
+  <a href="https://github.com/stt0k/StofliUI/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/username/stofli-ui" alt="Licencia" />
   </a>
   </div>
