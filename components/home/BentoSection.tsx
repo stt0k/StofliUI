@@ -185,7 +185,7 @@ const BentoSection = () => {
               </p>
               <Button
                 variant="ghost"
-                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-0 group"
+                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
                 rightIcon={
                   <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                 }
@@ -244,7 +244,7 @@ const BentoSection = () => {
               </p>
               <Button
                 variant="ghost"
-                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-0 group"
+                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
                 rightIcon={
                   <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                 }
@@ -398,7 +398,7 @@ const BentoSection = () => {
               </p>
               <Button
                 variant="ghost"
-                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-0 group"
+                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
                 rightIcon={
                   <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                 }
