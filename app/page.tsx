@@ -25,7 +25,9 @@ import GovSection from "@/components/home/GovSection";
 import BentoSection from "@/components/home/BentoSection";
 import ScrollProgressSection from "@/components/home/ScrollProgressSection";
 import ProjectSection from "@/components/home/ProjectSection";
+import { ButtonGlitchBrightness } from "@/components/home/ButtonGlitchBrightness";
 import Image from "next/image";
+import CodeBlock from "@/components/mdx/CodeBlock";
 
 // Importar los componentes de Recharts de forma dinámica para evitar problemas de SSR
 const RechartsComponents = dynamic(
@@ -122,20 +124,13 @@ export default function Page() {
             </p>
 
             {/* Botones más pequeños y modernos */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-20">
-              <a
-                href="/signup"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg bg-gradient-to-r from-[#B3AEF5] via-[#E5C8C8] to-[#EAA879] text-black shadow-lg hover:shadow-xl transition-all duration-300 scale-100 hover:scale-95"
-              >
-                Prueba Stofli UI Gratis
-              </a>
-              <a
-                href="/demo"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg bg-transparent border border-zinc-400/50 dark:border-white/20 text-zinc-800 dark:text-white backdrop-blur-sm hover:bg-zinc-100/50 dark:hover:bg-white/10 transition-all duration-300 relative group"
-              >
-                Solicita una Demo
-                <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#B3AEF5]/20 via-[#E5C8C8]/20 to-[#EAA879]/20 blur-md -z-10"></div>
-              </a>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">
+              <ButtonGlitchBrightness href="/" text="Empieza ahora" />
+              <div className="w-[230px] h-10">
+                <CodeBlock className="inline-flex">
+                  npm install stofli-ui
+                </CodeBlock>
+              </div>
             </div>
 
             {/* Dashboard moderno inspirado en la imagen de referencia */}
