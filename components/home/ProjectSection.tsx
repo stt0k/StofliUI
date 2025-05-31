@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const ProjectSection = () => {
   return (
@@ -41,15 +42,16 @@ const ProjectSection = () => {
                         Categorías
                       </span>
                       <div className="flex items-center space-x-2">
-                        <div className="flex items-center px-2 py-1 bg-indigo-50 dark:bg-indigo-900/30 rounded-md text-indigo-600 dark:text-indigo-300 text-xs font-medium">
-                          <span className="w-2 h-2 mr-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400"></span>
-                          Core
-                        </div>
-                        <div className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-zinc-300 text-xs font-medium">
+                        <div className="flex items-center px-2 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-md text-blue-600 dark:text-blue-300 text-xs font-medium">
+                          <span className="w-2 h-2 mr-1.5 rounded-full bg-blue-500 dark:bg-blue-400"></span>
                           React
                         </div>
+                        <div className="flex items-center px-2 py-1 bg-sky-50 dark:bg-sky-900/30 rounded-md text-sky-600 dark:text-sky-300 text-xs font-medium">
+                          <span className="w-2 h-2 mr-1.5 rounded-full bg-sky-500 dark:bg-sky-400"></span>
+                          Tailwind CSS
+                        </div>
                         <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-400 text-xs">
-                          45
+                          +
                         </div>
                       </div>
                     </div>
@@ -60,13 +62,21 @@ const ProjectSection = () => {
                         Frameworks
                       </span>
                       <div className="flex items-center space-x-2">
-                        <div className="flex items-center px-2 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-md text-blue-600 dark:text-blue-300 text-xs font-medium">
-                          <span className="w-2 h-2 mr-1.5 rounded-full bg-blue-500 dark:bg-blue-400"></span>
+                        <div className="flex items-center px-2 py-1 bg-zinc-50 dark:bg-zinc-800 rounded-md text-zinc-600 dark:text-zinc-300 text-xs font-medium">
+                          <span className="w-2 h-2 mr-1.5 rounded-full bg-zinc-500 dark:bg-zinc-400"></span>
                           Next.js
                         </div>
-                        <div className="flex items-center px-2 py-1 bg-green-50 dark:bg-green-900/30 rounded-md text-green-600 dark:text-green-300 text-xs font-medium">
-                          <span className="w-2 h-2 mr-1.5 rounded-full bg-green-500 dark:bg-green-400"></span>
-                          Vue
+                        <div className="flex items-center px-2 py-1 bg-indigo-50 dark:bg-indigo-900/30 rounded-md text-indigo-600 dark:text-indigo-300 text-xs font-medium">
+                          <span className="w-2 h-2 mr-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400"></span>
+                          Vite
+                        </div>
+                        <div className="flex items-center px-2 py-1 bg-purple-50 dark:bg-purple-900/30 rounded-md text-purple-600 dark:text-purple-300 text-xs font-medium">
+                          <span className="w-2 h-2 mr-1.5 rounded-full bg-purple-500 dark:bg-purple-400"></span>
+                          Astro
+                        </div>
+                        <div className="flex items-center px-2 py-1 bg-orange-50 dark:bg-orange-900/30 rounded-md text-orange-600 dark:text-orange-300 text-xs font-medium">
+                          <span className="w-2 h-2 mr-1.5 rounded-full bg-orange-500 dark:bg-orange-400"></span>
+                          Laravel
                         </div>
                       </div>
                     </div>
@@ -79,24 +89,24 @@ const ProjectSection = () => {
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <span className="w-2 h-2 mr-2 rounded-full bg-indigo-500 dark:bg-indigo-400"></span>
+                            <span className="w-2 h-2 mr-2 rounded-full bg-green-500 dark:bg-green-400"></span>
                             <span className="text-sm text-zinc-700 dark:text-zinc-200">
-                              Descargas
+                              Rendimiento
                             </span>
                           </div>
                           <span className="text-xs text-green-600 dark:text-green-400 font-medium">
-                            15.4K
+                            100%
                           </span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <span className="w-2 h-2 mr-2 rounded-full bg-indigo-500 dark:bg-indigo-400"></span>
                             <span className="text-sm text-zinc-700 dark:text-zinc-200">
-                              Satisfacción
+                              Accesibilidad
                             </span>
                           </div>
                           <span className="text-xs text-zinc-600 dark:text-zinc-400">
-                            98% de 237
+                            WCAG 2.1 & ARIA
                           </span>
                         </div>
                         <div className="flex items-center justify-between">
@@ -107,7 +117,7 @@ const ProjectSection = () => {
                             </span>
                           </div>
                           <span className="text-xs text-zinc-600 dark:text-zinc-400">
-                            12KB min
+                            68,2KB min + gzip
                           </span>
                         </div>
                       </div>
@@ -181,12 +191,12 @@ const ProjectSection = () => {
                         <div className="flex-1">
                           <div className="flex items-center mb-1">
                             <span className="text-sm font-medium text-indigo-600 dark:text-indigo-300">
-                              Nuevos componentes
+                              Lanzamiento inicial
                             </span>
                           </div>
                           <p className="text-sm text-zinc-700 dark:text-zinc-100">
-                            Acaba de lanzarse Tabs, Popover y Tooltip con todas
-                            sus variantes
+                            Ya esta disponible StofliUI con 21 componentes
+                            nuevos personalizables para utilizar.
                           </p>
                         </div>
                       </div>
@@ -194,7 +204,7 @@ const ProjectSection = () => {
 
                     <div className="flex justify-between items-center">
                       <div className="text-sm text-zinc-600 dark:text-zinc-400">
-                        28 Oct 2023
+                        8 Abr 2025
                       </div>
                       <button className="flex items-center text-xs font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors">
                         Changelog <ChevronRight className="w-3.5 h-3.5 ml-1" />
@@ -335,12 +345,18 @@ const ProjectSection = () => {
                           </span>
                         </p>
                         <div className="flex items-center justify-center space-x-2 mt-4">
-                          <button className="px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 rounded-md text-xs font-medium text-white transition-colors">
+                          <Link
+                            href="/docs/"
+                            className="px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 rounded-md text-xs font-medium text-white transition-colors"
+                          >
                             Ver documentación
-                          </button>
-                          <button className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-md text-xs font-medium text-gray-700 dark:text-zinc-300 transition-colors">
+                          </Link>
+                          <Link
+                            href="/docs/componentes/button"
+                            className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-md text-xs font-medium text-gray-700 dark:text-zinc-300 transition-colors"
+                          >
                             Demo
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
