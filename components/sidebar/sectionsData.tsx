@@ -12,7 +12,7 @@ export const sections = [
       { href: "/docs/frameworks/nextjs", label: "Next.js" },
       { href: "/docs/frameworks/astro", label: "Astro" },
       { href: "/docs/frameworks/vite", label: "Vite" },
-      { href: "/docs/frameworks/react", label: "React" },
+      { href: "/docs/frameworks/laravel", label: "Laravel" },
     ],
   },
   {
