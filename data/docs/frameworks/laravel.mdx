@@ -1,0 +1,260 @@
+---
+    title: 'Laravel'
+    description: >-
+      'Guía para instalar y usar StofliUI en proyectos Laravel'
+---
+
+<div className="mt-10 space-y-8">
+  <div>
+    <HeadingAnchor id="requisitos">Requisitos</HeadingAnchor>
+
+<ul className="pl-5 list-disc space-y-2 mt-4 text-zinc-900 dark:text-zinc-100">
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">React</span> 17 o superior</span>
+  </li>
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Tailwind CSS</span> 3 o superior</span>
+  </li>
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">PHP</span> 8.1 o superior</span>
+  </li>
+  <li className="pl-2">
+    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Laravel</span> 10 o superior</span>
+  </li>
+</ul>
+
+  </div>
+
+  <div>
+    <HeadingAnchor id="instalacion">Instalación</HeadingAnchor>
+
+<Steps className="mt-2">
+  <Step title="Crear un proyecto Laravel" stepNumber={1}>
+    Si aún no tienes un proyecto Laravel, puedes crear uno nuevo:
+
+```bash
+composer create-project laravel/laravel mi-proyecto-stofli
+cd mi-proyecto-stofli
+```
+
+  </Step>
+
+  <Step title="Instalar StofliUI" stepNumber={2}>
+    Instala StofliUI:
+
+```bash
+npm install stofli-ui
+```
+  </Step>
+
+  <Step title="Configurar Vite" stepNumber={3}>
+    Laravel 10+ utiliza Vite para gestionar los assets. Asegúrate de que tu archivo `vite.config.js` esté configurado correctamente:
+
+```js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+        react(),
+    ],
+});
+```
+
+Si no tienes instalado el plugin de React, puedes instalarlo:
+
+```bash
+npm install --save-dev @vitejs/plugin-react
+```
+  </Step>
+
+  <Step title="Configurar Tailwind CSS" stepNumber={4}>
+    <div className="px-4 py-3 mb-6 border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/30 dark:border-amber-400">
+      <p className="text-amber-800 dark:text-amber-300">
+        <strong>Nota:</strong> La instalación y configuración de Tailwind CSS varía significativamente entre la versión 3 y la versión 4.
+      </p>
+    </div>
+
+    <HeadingAnchor id="tailwind-v3" level={3}>Instalación para Tailwind CSS v3</HeadingAnchor>
+
+    Instala Tailwind CSS v3 y sus dependencias:
+
+```bash
+npm install -D tailwindcss@3 postcss autoprefixer
+npx tailwindcss init -p
+```
+
+Configura tu archivo `tailwind.config.js`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.jsx",
+    "./resources/**/*.tsx",
+    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Actualiza tu archivo CSS principal (por ejemplo, `resources/css/app.css`) con las directivas de Tailwind v3:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+    <HeadingAnchor id="tailwind-v4" level={3}>Instalación para Tailwind CSS v4</HeadingAnchor>
+
+    Para Tailwind CSS v4, el proceso es diferente. Instala Tailwind y el plugin de Vite específico:
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+Tienes dos opciones para configurar Tailwind CSS v4 en tu proyecto Laravel:
+
+1. **Sin archivo de configuración**: Actualiza tu archivo CSS principal (por ejemplo, `resources/css/app.css`) con la nueva sintaxis de importación de Tailwind v4 y usa la directiva `@source` para incluir StofliUI:
+
+```css
+@import "tailwindcss";
+
+/* Usar la directiva @source para especificar archivos a escanear */
+@source "./resources/js";
+@source "./resources/views";
+@source "../node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}";
+```
+
+2. **Con archivo de configuración**: Puedes optar por seguir usando un archivo `tailwind.config.js`:
+
+```js
+// tailwind.config.js (opcional en v4)
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.jsx",
+    "./resources/**/*.tsx",
+    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+}
+```
+
+Si usas el archivo de configuración, debes importarlo en tu CSS:
+
+```css
+@import "tailwindcss";
+@import "../tailwind.config";
+```
+
+Y actualiza tu configuración de Vite para incluir el plugin de Tailwind CSS v4:
+
+```js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.js'],
+            refresh: true,
+        }),
+        react(),
+        tailwindcss(),
+    ],
+});
+```
+  </Step>
+
+  <Step title="Configurar el layout de Blade" stepNumber={5}>
+    Asegúrate de incluir las directivas de Vite en tu plantilla principal de Blade:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel con StofliUI</title>
+    @viteReactRefresh
+    @vite(['resources/js/app.js'])
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
+```
+  </Step>
+
+  <Step title="Usar componentes de StofliUI" stepNumber={6}>
+    Importa los componentes que necesites desde `stofli-ui` en tus archivos React:
+
+```jsx
+// resources/js/components/Example.jsx
+import React from 'react';
+import { Button } from "stofli-ui";
+
+export default function Example() {
+    return (
+        <div className="p-4">
+            <Button>Botón</Button>
+        </div>
+    );
+}
+```
+
+Y configura tu punto de entrada principal:
+
+```jsx
+// resources/js/app.js
+import './bootstrap';
+import '../css/app.css';
+
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import Example from './components/Example';
+
+const root = createRoot(document.getElementById('app'));
+root.render(<Example />);
+```
+  </Step>
+
+</Steps>
+
+  </div>
+
+</div>
+
+export const toc = [
+  { title: "Requisitos", href: "#requisitos" },
+  { 
+    title: "Instalación", 
+    href: "#instalacion",
+    children: [
+      { title: "Tailwind CSS v3", href: "#tailwind-v3" },
+      { title: "Tailwind CSS v4", href: "#tailwind-v4" },
+    ],
+  },
+];
+
+
