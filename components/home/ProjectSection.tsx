@@ -37,11 +37,11 @@ const ProjectSection = () => {
 
                   {/* Properties Row */}
                   <div className="flex flex-col space-y-5">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                       <span className="text-sm text-zinc-600 dark:text-zinc-400">
                         Categorías
                       </span>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         <div className="flex items-center px-2 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-md text-blue-600 dark:text-blue-300 text-xs font-medium">
                           <span className="w-2 h-2 mr-1.5 rounded-full bg-blue-500 dark:bg-blue-400"></span>
                           React
@@ -57,11 +57,11 @@ const ProjectSection = () => {
                     </div>
 
                     {/* Resources Row */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                       <span className="text-sm text-zinc-600 dark:text-zinc-400">
                         Frameworks
                       </span>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         <div className="flex items-center px-2 py-1 bg-zinc-50 dark:bg-zinc-800 rounded-md text-zinc-600 dark:text-zinc-300 text-xs font-medium">
                           <span className="w-2 h-2 mr-1.5 rounded-full bg-zinc-500 dark:bg-zinc-400"></span>
                           Next.js
