@@ -18,7 +18,7 @@ export default function PricingPage() {
             Planes y Precios
           </h1>
           <p className="text-base md:text-xl text-gray-600 dark:text-zinc-400 leading-relaxed">
-            Elige el plan perfecto para tu camino
+            Elige el plan perfecto para tu camino.
           </p>
         </div>
 
