@@ -9,6 +9,7 @@ interface CodeBlockProps {
   className?: string;
   "data-language"?: string;
   "data-theme"?: string;
+  excludeFromCopy?: boolean;
 }
 
 const CodeBlock: React.FC<CodeBlockProps> = (props) => {
@@ -26,8 +27,24 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
   const copyToClipboard = async () => {
     try {
       if (preRef.current) {
-        const text = preRef.current.textContent || "";
-        await navigator.clipboard.writeText(text);
+        // Enfoque simple: buscar específicamente el comando npm sin el símbolo $
+        let textToCopy = '';
+        
+        // Si estamos en la página de inicio con el comando npm
+        if (isHomePage && preRef.current.textContent?.includes('npm install')) {
+          // Extraer solo el comando npm, ignorando el símbolo $
+          const match = preRef.current.textContent.match(/\$?\s*(npm install.*)/);
+          if (match && match[1]) {
+            textToCopy = match[1].trim();
+          } else {
+            textToCopy = preRef.current.textContent.trim();
+          }
+        } else {
+          // Para otros bloques de código, usar todo el contenido
+          textToCopy = preRef.current.textContent || '';
+        }
+        
+        await navigator.clipboard.writeText(textToCopy);
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
       }
