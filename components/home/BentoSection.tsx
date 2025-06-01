@@ -5,15 +5,20 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Shield,
-  Zap,
   Paintbrush,
   Code,
   Layers,
   Settings,
   BarChart,
   Users,
+  FileText,
 } from "lucide-react";
 import Button from "@/components/sections/Button";
+import Link from "next/link";
+import { FaReact, FaBox} from "react-icons/fa6";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { SiBento } from "react-icons/si";
+
 
 const BentoSection = () => {
   return (
@@ -62,12 +67,15 @@ const BentoSection = () => {
                   lectores de pantalla y contrastes adecuados.
                 </p>
                 <div className="flex flex-wrap gap-3 mt-auto">
+                  <Link href="/docs/">
                   <Button
                     variant="default"
                     className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white font-medium rounded-full text-sm px-4 py-1.5 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
                   >
                     Ver documentación
                   </Button>
+                  </Link>
+                  <Link href="/docs/componentes/">
                   <Button
                     variant="ghost"
                     className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white text-sm group"
@@ -77,6 +85,7 @@ const BentoSection = () => {
                   >
                     Explorar componentes
                   </Button>
+                  </Link>
                 </div>
               </div>
               <div className="md:w-1/2 p-6 flex items-center justify-center">
@@ -177,12 +186,13 @@ const BentoSection = () => {
           >
             <div className="p-6">
               <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
-                Rendimiento optimizado
+                Tamaño optimizado
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 mb-4">
                 Componentes con código altamente optimizado y tree-shaking
                 integrado para reducir significativamente el tamaño del bundle.
               </p>
+              <Link href="https://bundlephobia.com/package/stofli-ui" target="_blank" rel="noopener noreferrer">
               <Button
                 variant="ghost"
                 className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
@@ -190,14 +200,15 @@ const BentoSection = () => {
                   <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                 }
               >
-                Ver métricas de rendimiento
+                Ver detalles del tamaño del bundle
               </Button>
+              </Link>
             </div>
             <div className="p-4">
               <div className="bg-zinc-100/60 dark:bg-black/40 rounded-lg p-3">
                 <div className="flex items-center mb-3">
                   <span className="bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white text-xs px-2 py-0.5 rounded mr-2">
-                    &lt;5KB
+                    &lt;9KB
                   </span>
                   <span className="text-zinc-900 dark:text-white text-sm">
                     Tamaño promedio por componente
@@ -238,19 +249,8 @@ const BentoSection = () => {
                 Personalización avanzada
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                Sistema de diseño flexible con variables CSS y soporte para
-                temas que permite adaptar los componentes a tu marca sin
-                sacrificar funcionalidad.
+                Flexibilidad total mediante props de className que te permiten personalizar cada parte de los componentes sin sacrificar funcionalidad ni accesibilidad.
               </p>
-              <Button
-                variant="ghost"
-                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
-                rightIcon={
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                }
-              >
-                Ver guía de estilos
-              </Button>
             </div>
             <div className="p-4 flex flex-col items-center justify-center relative h-48 transition-all duration-500">
               {/* Contenedor principal del stack con mejor organización visual */}
@@ -286,24 +286,20 @@ const BentoSection = () => {
                         <Paintbrush className="text-indigo-400" />
                       </div>
                       <span className="font-medium text-zinc-900 dark:text-white text-sm group-hover:text-indigo-900 dark:group-hover:text-indigo-50 transition-colors duration-300">
-                        Sistema de tokens
+                        Personaliza con className
                       </span>
                     </div>
                     <span className="text-xs text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors duration-300">
-                      Actualizado
+                      Flexible
                     </span>
                   </div>
 
                   <div className="p-3.5 group-hover:bg-zinc-50/80 dark:group-hover:bg-zinc-800/80 transition-all duration-500">
                     <p className="text-sm text-zinc-900 dark:text-white leading-snug">
-                      <span className="font-medium text-amber-600 dark:text-amber-400 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-300">
-                        @tokens
-                      </span>{" "}
-                      Más de 150 variables CSS personalizables para crear{" "}
+                      Cada componente tiene sus propias <strong className="font-bold">props</strong> de className para que puedas personalizar cada parte del componente y conseguir una{" "}
                       <span className="text-zinc-700 dark:text-zinc-300 group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
-                        temas coherentes
-                      </span>{" "}
-                      en toda tu aplicación
+                        apariencia única.
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -323,15 +319,13 @@ const BentoSection = () => {
               <div className="flex items-start mb-3">
                 <div>
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
-                    Componentes primitivos
+                    Componentes listos para usar
                   </h3>
                 </div>
               </div>
 
               <p className="text-zinc-600 dark:text-zinc-400 mt-2">
-                Nuestra arquitectura se basa en componentes primitivos altamente
-                personalizables que puedes combinar para crear interfaces
-                complejas.
+                Nuestra biblioteca de componentes está diseñada para integrarse fácilmente en tu proyecto de React con una simple instalación del paquete.
               </p>
 
               <div className="mt-6 space-y-3">
@@ -341,10 +335,10 @@ const BentoSection = () => {
                   </div>
                   <div>
                     <div className="font-medium text-zinc-900 dark:text-white text-sm">
-                      Componentes modulares
+                      Fácil instalación
                     </div>
                     <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
-                      Diseñados para funcionar juntos o por separado.
+                      npm install stofli-ui y listo para usar.
                     </p>
                   </div>
                 </div>
@@ -355,10 +349,10 @@ const BentoSection = () => {
                   </div>
                   <div>
                     <div className="font-medium text-zinc-900 dark:text-white text-sm">
-                      API consistente
+                      Importación sencilla
                     </div>
                     <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
-                      Patrones predecibles a través de todos los componentes.
+                      import &#123; Button &#125; from "stofli-ui"
                     </p>
                   </div>
                 </div>
@@ -369,10 +363,10 @@ const BentoSection = () => {
                   </div>
                   <div>
                     <div className="font-medium text-zinc-900 dark:text-white text-sm">
-                      Composables
+                      Compatibilidad con frameworks
                     </div>
                     <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
-                      APIs de bajo nivel para máxima flexibilidad.
+                      Next.js, Astro Vite y Laravel.
                     </p>
                   </div>
                 </div>
@@ -390,21 +384,22 @@ const BentoSection = () => {
           >
             <div className="p-6">
               <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
-                Herramientas para desarrolladores
+                Documentación completa
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                Amplia documentación, consejos en tiempo real y utilidades que
-                facilitan el uso de nuestros componentes en cualquier proyecto.
+                Guías detalladas, ejemplos de código y propiedades documentadas para ayudarte a implementar cada componente fácilmente.
               </p>
-              <Button
-                variant="ghost"
-                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
-                rightIcon={
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                }
-              >
-                Ver herramientas
-              </Button>
+              <Link href="/docs/primeros-pasos/introduccion">
+                <Button
+                  variant="ghost"
+                  className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
+                  rightIcon={
+                    <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                  }
+                >
+                  Explorar documentación
+                </Button>
+              </Link>
             </div>
             <div className="p-4 relative h-48 overflow-hidden flex items-center">
               <div className="w-full">
@@ -415,43 +410,16 @@ const BentoSection = () => {
                   <div className="flex space-x-2 animate-infinite-scroll whitespace-nowrap">
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <BarChart className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
                       </div>
                       <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        CLI
+                        Rendimiento
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
-                      </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        IntelliSense
-                      </span>
-                    </div>
-
-                    <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
-                      <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
-                      </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        DevTools
-                      </span>
-                    </div>
-
-                    <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
-                      <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
-                      </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        Linting
-                      </span>
-                    </div>
-
-                    <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
-                      <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <Code className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
                       </div>
                       <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
                         TypeScript
@@ -460,62 +428,91 @@ const BentoSection = () => {
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <FileText className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
                       </div>
                       <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        Snippets
+                        Guías
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <Settings className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
                       </div>
                       <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        Storybook
+                        Props
+                      </span>
+                    </div>
+
+                    <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
+                      <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
+                        <RiTailwindCssFill className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                      </div>
+                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                        Tailwind
+                      </span>
+                    </div>
+
+                    <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
+                      <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
+                        <FaReact className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                      </div>
+                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                        React
+                      </span>
+                    </div>
+
+                    <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
+                      <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
+                        <Users className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                      </div>
+                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                        Accesibilidad
                       </span>
                     </div>
 
                     {/* Duplicación exacta para asegurar continuidad en el desplazamiento */}
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <FaBox className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
                       </div>
                       <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        CLI
+                        Frameworks
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <Code className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
                       </div>
                       <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        IntelliSense
+                        TypeScript
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Zap className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <FileText className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
                       </div>
                       <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
-                        DevTools
+                        Guías
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-6 flex justify-center">
+                <Link href="/docs/ejemplos">
+                <div className="mt-6 flex justify-center cursor-pointer">
                   <div className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-lg py-2 px-4 flex items-center space-x-2.5 transition-colors">
                     <div className="w-5 h-5 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                      <BarChart className="h-3 w-3 text-zinc-800 dark:text-white" />
+                      <SiBento className="h-3 w-3 text-zinc-800 dark:text-white" />
                     </div>
                     <span className="text-sm text-zinc-800 dark:text-white font-medium">
-                      Análisis de rendimiento integrado
+                      Ejemplos interactivos
                     </span>
                   </div>
                 </div>
+                </Link>
               </div>
             </div>
 
