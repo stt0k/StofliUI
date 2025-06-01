@@ -114,7 +114,7 @@ const Tabs: React.FC<TabsProps> = ({
       updateTabDimensions();
     }, 50);
     return () => clearTimeout(timer);
-  }, []);
+  }, [updateTabDimensions]);
 
   // Actualizar la posición del indicador cuando cambian las dimensiones o la pestaña activa
   useEffect(() => {
