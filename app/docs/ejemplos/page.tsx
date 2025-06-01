@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Mail,
   Lock,
@@ -84,7 +85,7 @@ export default function ExamplesPage() {
         {/* Hero section centrado */}
         <div className="text-center mb-20">
           <h1 className="scroll-m-20 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
-            Ejemplos de componentes <br /> para interfaces StofliUI
+            Ejemplos <span className="hidden md:inline">de componentes <br /> para interfaces StofliUI</span>
           </h1>
           <p className="text-base md:text-xl text-gray-600 dark:text-zinc-400 leading-relaxed max-w-3xl mx-auto">
             Explora diferentes componentes y patrones de UI construidos con
@@ -92,12 +93,16 @@ export default function ExamplesPage() {
           </p>
 
           <div className="flex gap-4 mt-6 justify-center">
+            <Link href="/docs/componentes">
             <Button variant="primary" className="h-10 px-6">
-              Browse components
+              Explorar componentes
             </Button>
-            <Button variant="outline" className="h-10 px-6">
-              Add component
-            </Button>
+            </Link>
+            <Link href="https://github.com/stt0k/StofliUI" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="h-10 px-6">
+                Agregar componente
+              </Button>
+            </Link>
           </div>
         </div>
 
