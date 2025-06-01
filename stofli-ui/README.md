@@ -1,7 +1,7 @@
 # StofliUI
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/username/stofli-ui/main/assets/logo.png" alt="StofliUI Logo" width="150" />
+  <img src="https://github.com/stt0k/StofliUI/blob/main/public/home.png" alt="StofliUI Logo" width="150" />
   
   <p>Librería de componentes UI accesibles y personalizables para React</p>
   
@@ -9,7 +9,7 @@
     <a href="https://www.npmjs.com/package/stofli-ui">
     <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
   </a>
-  <a href="https://github.com/username/stofli-ui/blob/main/LICENSE">
+  <a href="https://github.com/stt0k/StofliUI/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/username/stofli-ui" alt="Licencia" />
   </a>
   </div>
@@ -54,6 +54,21 @@ Cada componente incluye:
 - Opciones de tamaño (sm, md, lg)
 - Personalización completa de estilo mediante props
 - Compatibilidad total con Tailwind CSS
+- Animaciones con Framer Motion
+
+## 🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas! Si deseas contribuir a StofliUI:
+
+1. Revisa las [issues abiertas](https://github.com/stt0k/StofliUI/issues) o crea una nueva
+2. Haz fork del repositorio
+3. Crea una rama para tu feature (`git checkout -b feature/amazing-feature`)
+4. Realiza tus cambios
+5. Haz commit de tus cambios (`git commit -m 'Add some amazing feature'`)
+6. Haz push a la rama (`git push origin feature/amazing-feature`)
+7. Abre un Pull Request
+
+Para más detalles, consulta nuestra [guía de contribución](https://github.com/stt0k/StofliUI/blob/main/CONTRIBUTING.md).
 
 ## 📄 Licencia
 
