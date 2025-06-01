@@ -123,6 +123,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   const pathname = usePathname();
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const totalPages = allPages.length;
+  
+  // Verificar si la página actual es un changelog
+  const isChangelog = pathname?.includes('/changelog');
 
   useEffect(() => {
     // Encontrar el índice de la página actual en nuestra lista unificada
@@ -179,8 +182,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({
       <Header />
       <div className="flex-1 min-h-[calc(100vh-4.5rem)] pt-16">
         <div className="container mx-auto">
-          <Sidebar />
-          <div className="md:ml-[220px] lg:ml-[240px] px-4 md:px-6">
+          {!isChangelog && <Sidebar />}
+          <div className={`${isChangelog ? '' : 'md:ml-[220px] lg:ml-[240px]'} px-4 md:px-6`}>
             <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
               <div className="mx-auto w-full min-w-0 min-h-[calc(100vh-12rem)]">
                 {children} {/* Aquí va el contenido dinámico que pasas */}
