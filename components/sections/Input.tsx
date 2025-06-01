@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useId } from "react";
+import React, { useState, useRef, useEffect, useId, useCallback } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 
@@ -125,75 +125,39 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [error, success]);
 
-    // Efecto para validar valores iniciales si hay reglas de validación
-    useEffect(() => {
-      const hasValidationRules =
-        pattern || validate || type === "email" || type === "url";
-
-      // Si hay reglas de validación y hay un valor inicial, validarlo
-      if (
-        hasValidationRules &&
-        inputValue &&
-        !touched &&
-        !validationError &&
-        !isValid
-      ) {
-        // Establecer touched para que la validación funcione
-        setTouched(true);
-        // Validar el valor inicial
-        validateInput(inputValue);
-      }
-    }, [pattern, validate, type, inputValue, touched, validationError, isValid]);
-
-    useEffect(() => {
-      // No realizamos validación automática si:
-      // - El componente está siendo controlado externamente a través del prop success, o
-      // - Es un error externo sin reglas de validación
-      const hasValidationRules =
-        pattern || validate || type === "email" || type === "url";
-      const shouldValidate =
-        success === undefined &&
-        touched &&
-        (!errorIsExternal || (errorIsExternal && hasValidationRules));
-
-      if (shouldValidate) {
-        validateInput(inputValue);
-      }
-    }, [inputValue, touched, success, errorIsExternal, pattern, validate, type]);
-
-    // Función para procesar reglas de validación comunes basadas en cadenas
-    const processStringValidation = (
-      value: string,
-      rule: string
-    ): string | undefined => {
-      switch (rule) {
-        case "email":
-          return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-            ? "Introduce un correo electrónico válido"
-            : undefined;
-        case "url":
-          return !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
-            value
-          )
-            ? "Introduce una URL válida"
-            : undefined;
-        case "min:8":
-          return value.length < 8
-            ? "Debe tener al menos 8 caracteres"
-            : undefined;
-        default:
-          if (rule.startsWith("min:")) {
-            const min = parseInt(rule.split(":")[1]);
-            return value.length < min
-              ? `Debe tener al menos ${min} caracteres`
-              : undefined;
-          }
-          return undefined;
-      }
-    };
-
     // Validar el valor actual
-    const validateInput = (value: string) => {
+    const validateInput = useCallback((value: string) => {
+      // Función para procesar reglas de validación comunes basadas en cadenas
+      const processStringValidation = (
+        value: string,
+        rule: string
+      ): string | undefined => {
+        switch (rule) {
+          case "email":
+            return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+              ? "Introduce un correo electrónico válido"
+              : undefined;
+          case "url":
+            return !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
+              value
+            )
+              ? "Introduce una URL válida"
+              : undefined;
+          case "min:8":
+            return value.length < 8
+              ? "Debe tener al menos 8 caracteres"
+              : undefined;
+          default:
+            if (rule.startsWith("min:")) {
+              const min = parseInt(rule.split(":")[1]);
+              return value.length < min
+                ? `Debe tener al menos ${min} caracteres`
+                : undefined;
+            }
+            return undefined;
+        }
+      };
+
       // Eliminamos esta restricción para permitir validación en cualquier momento
       // if (!touched) return;
 
@@ -292,7 +256,43 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (hasValidationRules && passedValidation) {
         setIsValid(true);
       }
-    };
+    }, [pattern, validate, type, required, errorIsExternal]);
+
+    // Efecto para validar valores iniciales si hay reglas de validación
+    useEffect(() => {
+      const hasValidationRules =
+        pattern || validate || type === "email" || type === "url";
+
+      // Si hay reglas de validación y hay un valor inicial, validarlo
+      if (
+        hasValidationRules &&
+        inputValue &&
+        !touched &&
+        !validationError &&
+        !isValid
+      ) {
+        // Establecer touched para que la validación funcione
+        setTouched(true);
+        // Validar el valor inicial
+        validateInput(inputValue);
+      }
+    }, [pattern, validate, type, inputValue, touched, validationError, isValid, validateInput]);
+
+    useEffect(() => {
+      // No realizamos validación automática si:
+      // - El componente está siendo controlado externamente a través del prop success, o
+      // - Es un error externo sin reglas de validación
+      const hasValidationRules =
+        pattern || validate || type === "email" || type === "url";
+      const shouldValidate =
+        success === undefined &&
+        touched &&
+        (!errorIsExternal || (errorIsExternal && hasValidationRules));
+
+      if (shouldValidate) {
+        validateInput(inputValue);
+      }
+    }, [inputValue, touched, success, errorIsExternal, pattern, validate, type, validateInput]);
 
     // Generar IDs únicos para accesibilidad
     const uniqueIdBase = useId();
