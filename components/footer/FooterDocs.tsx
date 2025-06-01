@@ -7,7 +7,7 @@ const Footer = () => {
     >
       <div className="container mx-auto flex flex-col items-center">
         <p className="text-sm">
-          &copy; {new Date().getFullYear()} stofli/ui. Todos los derechos
+          &copy; {new Date().getFullYear()} StofliUI. Todos los derechos
           reservados.
         </p>
       </div>
