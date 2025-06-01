@@ -17,7 +17,7 @@ export const headerData = [
               href: "/docs/introduccion",
             },
             {
-              title: "Guia",
+              title: "Guía de instalación",
               href: "/docs/instalacion",
             },
           ],
@@ -90,9 +90,9 @@ export const headerData = [
               href: "/docs/ejemplos/#dashboard",
             },
             {
-              title: "Authentication",
-              description: "Sistema de inicio de sesión",
-              href: "/docs/ejemplos/#authentication",
+              title: "Autenticación",
+              description: "Sistemas de login y registro",
+              href: "/docs/ejemplos/#autenticacion",
             },
             {
               title: "Cards",
