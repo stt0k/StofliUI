@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export interface DropdownItem {
   label: React.ReactNode;
@@ -450,6 +451,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   // Determine list item classes
   const getItemClasses = (isSelected: boolean, isDisabled: boolean) => {
+    // Clases para elementos seleccionados sin usar !important
     const selectedClasses = {
       default: "bg-zinc-400 dark:bg-zinc-800 text-zinc-50 dark:text-zinc-200",
       primary: "bg-blue-400 dark:bg-blue-800 text-white",
@@ -459,51 +461,68 @@ const Dropdown: React.FC<DropdownProps> = ({
       danger: "bg-red-400 dark:bg-red-800 text-white",
     };
 
+    // Clases para hover en elementos seleccionados
+    const selectedHoverClasses = {
+      default: "hover:bg-zinc-400 dark:hover:bg-zinc-800",
+      primary: "hover:bg-blue-400 dark:hover:bg-blue-800",
+      secondary: "hover:bg-purple-400 dark:hover:bg-purple-800",
+      success: "hover:bg-green-400 dark:hover:bg-green-800",
+      warning: "hover:bg-amber-400 dark:hover:bg-amber-800",
+      danger: "hover:bg-red-400 dark:hover:bg-red-800",
+    };
+
     // Primero aplicamos las clases base
     const sizeTextClass = "text-sm";
     const baseClasses = "rounded mx-1.5 my-0.5 transition-colors duration-200";
     const sizeClasses = avatarOnly ? "py-2 px-3" : "py-2 px-3";
 
-    // Luego aplicamos las clases para el estado no seleccionado
-    const nonSelectedClasses =
-      "text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white";
+    // Construir las clases finales
+    const classes = [
+      sizeTextClass,
+      baseClasses,
+      sizeClasses
+    ];
 
-    // Luego aplicamos las clases para el estado habilitado/deshabilitado
-    const disabledClasses =
-      "opacity-50 cursor-not-allowed pointer-events-none !text-zinc-400/70 dark:!text-zinc-600";
-    const enabledClasses =
-      "cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800";
-
-    // Finalmente, aplicamos las clases de selección con la máxima prioridad
-    let activeClasses = "";
-    if (isSelected && selectable) {
-      if (activeColor) {
-        if (
-          activeColor.startsWith("#") ||
-          activeColor.startsWith("rgb") ||
-          activeColor.startsWith("hsl")
-        ) {
-          // No aplicamos clases en este caso, se aplicará via style
-          activeClasses = "";
+    // Aplicar clases según el estado
+    if (isDisabled) {
+      classes.push("opacity-50 cursor-not-allowed pointer-events-none text-zinc-400/70 dark:text-zinc-600");
+    } else {
+      classes.push("cursor-pointer");
+      
+      // Aplicar clases según si está seleccionado o no
+      if (isSelected && selectable) {
+        if (activeColor) {
+          if (
+            activeColor.startsWith("#") ||
+            activeColor.startsWith("rgb") ||
+            activeColor.startsWith("hsl")
+          ) {
+            // No aplicamos clases en este caso, se aplicará via style
+          } else {
+            // Si es una clase de Tailwind, la aplicamos
+            classes.push(activeColor);
+            // Y también añadimos el hover correspondiente
+            classes.push(selectedHoverClasses[variant]);
+          }
         } else {
-          // Si es una clase de Tailwind, la aplicamos con la mayor prioridad
-          activeClasses = activeColor;
+          // Aplicar clases de selección y hover para elementos seleccionados
+          classes.push(selectedClasses[variant]);
+          classes.push(selectedHoverClasses[variant]);
         }
       } else {
-        activeClasses = selectedClasses[variant];
+        // Clases para elementos no seleccionados
+        classes.push("text-zinc-700 dark:text-zinc-300");
+        classes.push("hover:text-zinc-900 dark:hover:text-white");
+        classes.push("hover:bg-zinc-200 dark:hover:bg-zinc-800");
       }
     }
 
-    return cn(
-      sizeTextClass,
-      baseClasses,
-      sizeClasses,
-      !isSelected && nonSelectedClasses,
-      isDisabled ? disabledClasses : enabledClasses,
-      itemClassName,
-      // Las clases de activeColor se aplican al final para tener mayor prioridad
-      activeClasses
-    );
+    // Añadir clases personalizadas al final
+    if (itemClassName) {
+      classes.push(itemClassName);
+    }
+
+    return cn(...classes);
   };
 
   // Define check colors based on variant
@@ -630,12 +649,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         aria-expanded={isOpen}
           aria-labelledby={label ? labelId : undefined}
           aria-label={!label ? (ariaLabel || "Selector desplegable") : undefined}
-          aria-describedby={cn(
-            errorMessage ? errorId : null,
-            ariaDescribedby
-          )}
-          aria-invalid={!!errorMessage}
-          aria-required={required}
+          aria-describedby={ariaDescribedby}
       >
         <span
             id={`${componentId}-value`}
@@ -645,9 +659,15 @@ const Dropdown: React.FC<DropdownProps> = ({
           )}
         >
             {buttonAvatarSrc && (
-              <img
+              <Image
                 src={buttonAvatarSrc}
                 alt={buttonAvatarAlt}
+                width={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                       avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                       avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
+                height={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                        avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                        avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
                 className={cn(
                   avatarSizeClasses[avatarSize],
                   "rounded-full"
@@ -724,7 +744,16 @@ const Dropdown: React.FC<DropdownProps> = ({
                       onMouseLeave={() => setActiveIndex(-1)}
                       className={cn(
                         getItemClasses(isSelected, Boolean(item.disabled)),
-                        isHighlighted && !item.disabled && "bg-zinc-100 dark:bg-zinc-800"
+                        // Modificar las clases de resaltado para que no afecten a elementos ya seleccionados
+                        isHighlighted && !item.disabled && !isSelected && "bg-zinc-100 dark:bg-zinc-800",
+                        isHighlighted && !item.disabled && isSelected && selectable && {
+                          "default": "bg-zinc-400 dark:bg-zinc-800", // Mantener el mismo color que cuando está seleccionado
+                          "primary": "bg-blue-400 dark:bg-blue-800",
+                          "secondary": "bg-purple-400 dark:bg-purple-800",
+                          "success": "bg-green-400 dark:bg-green-800",
+                          "warning": "bg-amber-400 dark:bg-amber-800",
+                          "danger": "bg-red-400 dark:bg-red-800"
+                        }[variant]
                       )}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -743,9 +772,15 @@ const Dropdown: React.FC<DropdownProps> = ({
                         )}
                       >
                           {item.avatarSrc && (
-                            <img
+                            <Image
                               src={item.avatarSrc}
                               alt={item.avatarAlt || ""}
+                              width={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                                    avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                                    avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
+                              height={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                                     avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                                     avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
                               className={cn(
                                 avatarSizeClasses[avatarSize],
                                 "rounded-full"
