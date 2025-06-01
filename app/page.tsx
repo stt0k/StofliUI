@@ -79,10 +79,10 @@ export default function Page() {
 
         <div className="container mx-auto px-4 z-20 relative">
           {/* Contenido principal */}
-          <div className="max-w-6xl mx-auto text-center mt-10">
+          <div className="max-w-6xl mx-auto text-center mt-0 md:mt-10">
             {/* Tag más moderno */}
             <a
-              href="/portal"
+              href="/docs/changelog"
               className="inline-flex items-center px-3 py-1.5 mb-8 text-xs font-medium bg-white/80 dark:bg-transparent backdrop-blur-sm rounded-full border border-zinc-300/80 dark:border-zinc-700/50 transition-all duration-300 relative group shadow-sm hover:shadow-md"
             >
               <span
@@ -95,7 +95,7 @@ export default function Page() {
                   backgroundClip: "text",
                 }}
               >
-                New Stofli UI Portal
+                StofliUI ya disponible
               </span>
               <span
                 className="font-semibold hidden dark:inline"
@@ -107,7 +107,7 @@ export default function Page() {
                   backgroundClip: "text",
                 }}
               >
-                New Stofli UI Portal
+                StofliUI ya disponible
               </span>
               <ArrowRight className="w-3 h-3 ml-1.5 inline text-black dark:text-white" />
               <div className="absolute inset-0 rounded-full transition-all duration-300 group-hover:shadow-[0_0_10px_1px_rgba(179,174,245,0.5),0_0_15px_2px_rgba(234,168,121,0.3)] group-hover:border-indigo-200 dark:group-hover:border-white/20"></div>
@@ -117,23 +117,30 @@ export default function Page() {
               Build Modern UI Designs
             </h1>
 
-            <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12">
-              Una biblioteca de componentes UI rápida, moderna y fácil de usar
+            <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12 hidden md:block">
+              Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar
               para todos tus proyectos web. Optimizada para rendimiento,
               accesibilidad y personalización.
             </p>
 
+            <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12 block md:hidden">
+              Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar.
+            </p>
+
             {/* Botones más pequeños y modernos */}
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">
-              <ButtonGlitchBrightness href="/" text="Empieza ahora" />
-              <div className="w-[230px] h-10">
-                <CodeBlock className="inline-flex">
-                  npm install stofli-ui
+              <ButtonGlitchBrightness href="/docs" text="Empieza ahora" />
+              <div className="w-[246px] h-10">
+                <CodeBlock className="inline-flex items-center">
+                  <code>
+                    <span data-no-copy="true" className="select-none text-gray-500 mr-2">$</span>
+                    npm install stofli-ui
+                  </code>
                 </CodeBlock>
               </div>
             </div>
 
-            {/* Dashboard moderno inspirado en la imagen de referencia */}
+            {/* Dashboard moderno */}
             <div className="relative mx-auto max-w-5xl">
               {/* Efecto glass mejorado estilo macOS */}
               <div className="absolute -inset-5 bg-gray-100/60 dark:bg-zinc-800/30 rounded-3xl border border-gray-400/50 dark:border-white/10 shadow-xl"></div>
@@ -234,17 +241,17 @@ export default function Page() {
                               icon: <LayoutDashboard size={16} />,
                             },
                             {
-                              label: "Rendimiento",
+                              label: "Performance",
                               content: null,
                               icon: <BarChart3 size={16} />,
                             },
                             {
-                              label: "Estadísticas",
+                              label: "Stats",
                               content: null,
                               icon: <PieChart size={16} />,
                             },
                             {
-                              label: "Usuarios",
+                              label: "Users",
                               content: null,
                               icon: <Users size={16} />,
                             },
@@ -640,7 +647,7 @@ export default function Page() {
                         {/* Ver más */}
                         <div className="mt-3 mb-3 flex justify-between items-center px-3">
                           <span className="text-[10px] text-zinc-500">
-                            Ranking completo
+                            Full ranking
                           </span>
                           <Button
                             size="xs"
@@ -648,7 +655,7 @@ export default function Page() {
                             className="border border-zinc-600 text-white hover:bg-zinc-800"
                             rightIcon={<ChevronRight className="w-3 h-3" />}
                           >
-                            Ver
+                            View
                           </Button>
                         </div>
                       </div>
