@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useId } from "react";
+import React, { useState, useRef, useEffect, useId, useCallback } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 
@@ -95,6 +95,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [isValid, setIsValid] = useState(success);
     const [touched, setTouched] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
+    // Estado para controlar la visibilidad de la contraseña
+    const [showPassword, setShowPassword] = useState(false);
+    // Tipo de input efectivo (para alternar entre password y text)
+    const effectiveType = type === "password" && showPassword ? "text" : type;
 
     // Determinar si el input es controlado o no controlado - esto no debe cambiar durante el ciclo de vida
     const isControlled = value !== undefined;
@@ -125,75 +129,39 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [error, success]);
 
-    // Efecto para validar valores iniciales si hay reglas de validación
-    useEffect(() => {
-      const hasValidationRules =
-        pattern || validate || type === "email" || type === "url";
-
-      // Si hay reglas de validación y hay un valor inicial, validarlo
-      if (
-        hasValidationRules &&
-        inputValue &&
-        !touched &&
-        !validationError &&
-        !isValid
-      ) {
-        // Establecer touched para que la validación funcione
-        setTouched(true);
-        // Validar el valor inicial
-        validateInput(inputValue);
-      }
-    }, [pattern, validate, type, inputValue, touched, validationError, isValid]);
-
-    useEffect(() => {
-      // No realizamos validación automática si:
-      // - El componente está siendo controlado externamente a través del prop success, o
-      // - Es un error externo sin reglas de validación
-      const hasValidationRules =
-        pattern || validate || type === "email" || type === "url";
-      const shouldValidate =
-        success === undefined &&
-        touched &&
-        (!errorIsExternal || (errorIsExternal && hasValidationRules));
-
-      if (shouldValidate) {
-        validateInput(inputValue);
-      }
-    }, [inputValue, touched, success, errorIsExternal, pattern, validate, type]);
-
-    // Función para procesar reglas de validación comunes basadas en cadenas
-    const processStringValidation = (
-      value: string,
-      rule: string
-    ): string | undefined => {
-      switch (rule) {
-        case "email":
-          return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-            ? "Introduce un correo electrónico válido"
-            : undefined;
-        case "url":
-          return !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
-            value
-          )
-            ? "Introduce una URL válida"
-            : undefined;
-        case "min:8":
-          return value.length < 8
-            ? "Debe tener al menos 8 caracteres"
-            : undefined;
-        default:
-          if (rule.startsWith("min:")) {
-            const min = parseInt(rule.split(":")[1]);
-            return value.length < min
-              ? `Debe tener al menos ${min} caracteres`
-              : undefined;
-          }
-          return undefined;
-      }
-    };
-
     // Validar el valor actual
-    const validateInput = (value: string) => {
+    const validateInput = useCallback((value: string) => {
+      // Función para procesar reglas de validación comunes basadas en cadenas
+      const processStringValidation = (
+        value: string,
+        rule: string
+      ): string | undefined => {
+        switch (rule) {
+          case "email":
+            return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+              ? "Introduce un correo electrónico válido"
+              : undefined;
+          case "url":
+            return !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
+              value
+            )
+              ? "Introduce una URL válida"
+              : undefined;
+          case "min:8":
+            return value.length < 8
+              ? "Debe tener al menos 8 caracteres"
+              : undefined;
+          default:
+            if (rule.startsWith("min:")) {
+              const min = parseInt(rule.split(":")[1]);
+              return value.length < min
+                ? `Debe tener al menos ${min} caracteres`
+                : undefined;
+            }
+            return undefined;
+        }
+      };
+
       // Eliminamos esta restricción para permitir validación en cualquier momento
       // if (!touched) return;
 
@@ -292,7 +260,43 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (hasValidationRules && passedValidation) {
         setIsValid(true);
       }
-    };
+    }, [pattern, validate, type, required, errorIsExternal]);
+
+    // Efecto para validar valores iniciales si hay reglas de validación
+    useEffect(() => {
+      const hasValidationRules =
+        pattern || validate || type === "email" || type === "url";
+
+      // Si hay reglas de validación y hay un valor inicial, validarlo
+      if (
+        hasValidationRules &&
+        inputValue &&
+        !touched &&
+        !validationError &&
+        !isValid
+      ) {
+        // Establecer touched para que la validación funcione
+        setTouched(true);
+        // Validar el valor inicial
+        validateInput(inputValue);
+      }
+    }, [pattern, validate, type, inputValue, touched, validationError, isValid, validateInput]);
+
+    useEffect(() => {
+      // No realizamos validación automática si:
+      // - El componente está siendo controlado externamente a través del prop success, o
+      // - Es un error externo sin reglas de validación
+      const hasValidationRules =
+        pattern || validate || type === "email" || type === "url";
+      const shouldValidate =
+        success === undefined &&
+        touched &&
+        (!errorIsExternal || (errorIsExternal && hasValidationRules));
+
+      if (shouldValidate) {
+        validateInput(inputValue);
+      }
+    }, [inputValue, touched, success, errorIsExternal, pattern, validate, type, validateInput]);
 
     // Generar IDs únicos para accesibilidad
     const uniqueIdBase = useId();
@@ -544,7 +548,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           <input
             ref={ref || inputRef}
-            type={type}
+            type={effectiveType}
             id={inputId}
             name={name}
             className={cn(
@@ -557,6 +561,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 ? "opacity-60 cursor-not-allowed"
                 : "focus:outline-none ring-inset transition-all duration-200 ease-in-out",
               "min-h-[44px]",
+              // Si es password, añadir padding derecho para el icono del ojo
+              type === "password" ? "pr-10" : "",
               inputClassName
             )}
             placeholder={placeholder}
@@ -609,6 +615,58 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 className: iconSizeClasses[size],
               })}
             </div>
+          )}
+
+          {/* Icono de ojo para mostrar/ocultar contraseña */}
+          {type === "password" && !disabled && (
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className={cn(
+                "absolute top-1/2 transform -translate-y-1/2 right-3.5",
+                "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300",
+                "transition-colors duration-200 focus:outline-none"
+              )}
+              aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              tabIndex={-1}
+            >
+              {showPassword ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className={iconSizeClasses[size]}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className={iconSizeClasses[size]}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              )}
+            </button>
           )}
         </div>
 
