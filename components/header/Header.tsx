@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, XIcon } from "lucide-react";
-import { FaXTwitter, FaGithub } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa6";
 import HeadLinks from "./HeadLinks";
 import { headerData } from "./HeaderData";
 import Tag from "@/components/Tags";
@@ -75,8 +75,8 @@ const Header = () => {
         <div className="space-y-4">
           <div className="w-fit">
             <Link href="/">
-              <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">
-                Stofli/UI
+              <h2 className="mb-2 px-2 text-xl font-bold tracking-tight text-zinc-950/90 dark:text-zinc-50">
+                StofliUI
               </h2>
             </Link>
           </div>
@@ -205,14 +205,16 @@ const Header = () => {
           ))}
           <div className="flex items-center justify-between px-2 py-2">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <FaGithub className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
-                <span className="sr-only">GitHub</span>
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <FaXTwitter className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
-                <span className="sr-only">Twitter</span>
-              </Button>
+              <Link
+                href="https://github.com/stt0k/StofliUI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <FaGithub className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
+                  <span className="sr-only">GitHub</span>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -272,8 +274,8 @@ const Header = () => {
             {/* Logo a la izquierda - visible solo en desktop */}
             <div className="hidden md:flex flex-shrink-0 basis-0 mr-4">
               <Link className="flex items-center space-x-2" href="/">
-                <span className="font-bold text-black dark:text-white">
-                  Stofli/UI
+                <span className="font-bold text-black dark:text-white text-xl">
+                  StofliUI
                 </span>
               </Link>
             </div>
@@ -306,6 +308,11 @@ const Header = () => {
 
               {/* GitHub - visible solo en desktop */}
               <div className="hidden md:flex items-center">
+                <Link
+                href="https://github.com/stt0k/StofliUI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button
                   variant="ghost"
                   size="icon"
@@ -313,7 +320,7 @@ const Header = () => {
                 >
                   <FaGithub className="h-5 w-5 text-zinc-950 dark:text-white" />
                   <span className="sr-only">GitHub</span>
-                </Button>
+                </Button></Link>
               </div>
 
               {/* Toggle de tema - visible en ambos */}
