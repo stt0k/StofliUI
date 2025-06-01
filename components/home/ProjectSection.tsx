@@ -204,7 +204,7 @@ const ProjectSection = () => {
 
                     <div className="flex justify-between items-center">
                       <div className="text-sm text-zinc-600 dark:text-zinc-400">
-                        8 Abr 2025
+                        1 Jun 2025
                       </div>
                       <button className="flex items-center text-xs font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors">
                         Changelog <ChevronRight className="w-3.5 h-3.5 ml-1" />
