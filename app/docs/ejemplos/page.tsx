@@ -35,17 +35,17 @@ export default function ExamplesPage() {
   const [activeTab] = useState(0);
 
   const dashboardTabs = [
-    { label: "Overview", content: <OverviewTabContent /> },
+    { label: "Resumen", content: <OverviewTabContent /> },
     {
-      label: "Analytics",
-      content: <div className="p-4">Contenido de analytics</div>,
+      label: "Análisis",
+      content: <div className="p-4">Contenido de análisis</div>,
     },
     {
-      label: "Reports",
+      label: "Reportes",
       content: <div className="p-4">Contenido de reportes</div>,
     },
     {
-      label: "Notifications",
+      label: "Notificaciones",
       content: <div className="p-4">Contenido de notificaciones</div>,
     },
   ];
@@ -54,12 +54,12 @@ export default function ExamplesPage() {
     {
       title: "¿Qué es StofliUI?",
       content:
-        "StofliUI es una biblioteca de componentes modernos para desarrollar interfaces de usuario con un enfoque en diseño y usabilidad.",
+        "StofliUI es una biblioteca de componentes modernos para desarrollar interfaces de usuario con un enfoque en diseño, usabilidad, rendimiento y accesibilidad.",
     },
     {
       title: "¿Cómo instalar StofliUI?",
       content:
-        "Puedes instalar StofliUI usando npm o yarn con el comando: npm install stofli-ui",
+        "Puedes instalar StofliUI usando npm, yarn, bun o pnpm con el comando: npm install stofli-ui",
     },
     {
       title: "¿Es compatible con otros frameworks?",
@@ -84,7 +84,7 @@ export default function ExamplesPage() {
         {/* Hero section centrado */}
         <div className="text-center mb-20">
           <h1 className="scroll-m-20 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
-            Building blocks for <br /> StofliUI interfaces
+            Ejemplos de componentes <br /> para interfaces StofliUI
           </h1>
           <p className="text-base md:text-xl text-gray-600 dark:text-zinc-400 leading-relaxed max-w-3xl mx-auto">
             Explora diferentes componentes y patrones de UI construidos con
@@ -128,19 +128,19 @@ export default function ExamplesPage() {
                       },
                       {
                         icon: <BarChart className="h-4 w-4 mr-2" />,
-                        label: "Analytics",
+                        label: "Análisis",
                       },
                       {
                         icon: <Users className="h-4 w-4 mr-2" />,
-                        label: "Customers",
+                        label: "Clientes",
                       },
                       {
                         icon: <FileText className="h-4 w-4 mr-2" />,
-                        label: "Reports",
+                        label: "Reportes",
                       },
                       {
                         icon: <Layers className="h-4 w-4 mr-2" />,
-                        label: "Projects",
+                        label: "Proyectos",
                       },
                     ].map((item, i) => (
                       <div
@@ -160,11 +160,16 @@ export default function ExamplesPage() {
 
                 <div className="flex-1 min-h-[400px] lg:min-h-[600px]">
                   <div className="p-4 border-b border-gray-200 dark:border-zinc-800">
-                    <div className="flex justify-between items-center">
-                      <h2 className="font-semibold text-lg">Dashboard</h2>
+                    <div className="flex items-center justify-between">
+                      <div className="flex-shrink-0 mr-4">
+                        <h2 className="font-semibold text-lg">Dashboard</h2>
+                      </div>
+                      
+                      {/* Spacer para empujar los elementos de la derecha */}
+                      <div className="flex-grow"></div>
 
                       {/* Versión móvil: Solo iconos de notificación y perfil */}
-                      <div className="flex items-center gap-2 sm:hidden">
+                      <div className="flex sm:hidden items-center gap-2">
                         <Button variant="ghost" size="icon">
                           <Bell className="h-5 w-5" />
                         </Button>
@@ -197,8 +202,9 @@ export default function ExamplesPage() {
                         />
                       </div>
 
-                      {/* Versión desktop: Todo en una línea */}
-                      <div className="hidden sm:flex items-center space-x-2">
+                      {/* Versión desktop: Buscador, campana y avatar a la derecha */}
+                      <div className="hidden sm:flex items-center gap-3">
+                        {/* Buscador justo antes de la campana */}
                         <div className="relative w-64">
                           <Search className="h-4 w-4 text-gray-400 dark:text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
                           <input
@@ -216,6 +222,7 @@ export default function ExamplesPage() {
                           avatarSize="md"
                           variant="default"
                           placement="left"
+                          className="w-auto"
                           items={[
                             {
                               label: "Carlos Rodríguez",
@@ -268,7 +275,7 @@ export default function ExamplesPage() {
           {/* Authentication example */}
           <ExampleSection
             id="authentication"
-            title="Authentication"
+            title="Autenticación"
             description="Formularios para registro, inicio de sesión y gestión de acceso."
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -400,7 +407,7 @@ export default function ExamplesPage() {
                   </div>
 
                   <div className="flex items-center">
-                    <Checkbox checked={true} />
+                    <Checkbox defaultChecked />
                     <label className="text-sm text-gray-700 dark:text-zinc-300 ml-2">
                       Acepto los{" "}
                       <Button variant="link" size="sm" className="h-auto p-0">
@@ -496,28 +503,28 @@ export default function ExamplesPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h3 className="text-xl font-semibold">Pro Plan</h3>
-                    <p className="text-gray-500 dark:text-zinc-400 text-sm">
-                      All the basics for starting a new business
+                    <p className="text-gray-500 dark:text-zinc-400 text-sm mt-1">
+                      Todos los fundamentos para iniciar un nuevo negocio
                     </p>
                   </div>
                   <Badge variant="primary">Popular</Badge>
                 </div>
 
                 <div className="mb-4">
-                  <span className="text-3xl font-bold">$15</span>
+                  <span className="text-3xl font-bold">€15</span>
                   <span className="text-gray-500 dark:text-zinc-400 text-sm">
-                    /month
+                    /mes
                   </span>
                 </div>
 
                 <div className="border-t border-gray-200 dark:border-zinc-800 my-4 pt-4">
                   <ul className="space-y-3">
                     {[
-                      "Unlimited products",
-                      "Custom domains",
-                      "Analytics platform",
-                      "24/7 support",
-                      "Email marketing",
+                      "Productos ilimitados",
+                      "Dominios personalizados",
+                      "Plataforma de análisis",
+                      "Soporte 24/7",
+                      "Marketing por correo electrónico",
                     ].map((feature, i) => (
                       <li key={i} className="flex items-center text-sm">
                         <div className="mr-2 text-emerald-500">
@@ -542,7 +549,7 @@ export default function ExamplesPage() {
                 </div>
 
                 <Button variant="primary" className="w-full mt-2">
-                  Get Started
+                  Comienza
                 </Button>
               </Card>
 
@@ -550,12 +557,12 @@ export default function ExamplesPage() {
               <Card className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 overflow-hidden p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-semibold">Notifications</h3>
-                    <p className="text-gray-500 dark:text-zinc-400 text-sm">
-                      You have 3 unread messages
+                    <h3 className="text-xl font-semibold">Notificaciones</h3>
+                    <p className="text-gray-500 dark:text-zinc-400 text-sm mt-1">
+                      Tienes 3 mensajes sin leer
                     </p>
                   </div>
-                  <Badge variant="secondary">New</Badge>
+                  <Badge variant="secondary">Nuevo</Badge>
                 </div>
 
                 <div className="space-y-4">
@@ -563,20 +570,20 @@ export default function ExamplesPage() {
                     {
                       name: "Olivia Martin",
                       email: "olivia.martin@email.com",
-                      message: "Just sent you the new contract",
-                      time: "5m ago",
+                      message: "Te ha enviado el nuevo contrato",
+                      time: "5m",
                     },
                     {
                       name: "Jackson Lee",
                       email: "jackson.lee@email.com",
-                      message: "Sent you documents to sign",
-                      time: "2h ago",
+                      message: "Te ha enviado documentos para firmar",
+                      time: "2h",
                     },
                     {
                       name: "Isabella Nguyen",
                       email: "isabella.nguyen@email.com",
-                      message: "Please review the latest changes",
-                      time: "1d ago",
+                      message: "Por favor revisa los últimos cambios",
+                      time: "1d",
                     },
                   ].map((notification, i) => (
                     <div
@@ -620,7 +627,7 @@ export default function ExamplesPage() {
                   className="w-full mt-4 flex items-center justify-center text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-white transition-colors"
                 >
                   <span className="flex items-center">
-                    View all
+                    Ver todos
                     <ArrowRight className="h-3 w-3 ml-1" />
                   </span>
                 </Button>
@@ -962,7 +969,7 @@ function OverviewTabContent() {
             <Badge variant="success">+12.5%</Badge>
           </div>
           <p className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            $15,231.89
+            €15,231.89
           </p>
           <p className="text-gray-500 dark:text-zinc-400 text-sm">
             Comparado al mes anterior
