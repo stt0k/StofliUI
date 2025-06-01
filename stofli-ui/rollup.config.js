@@ -177,4 +177,7 @@ const componentConfigs = componentFolders
   .filter(Boolean)
   .flat();
 
-export default [...mainConfig, ...componentConfigs];
+// Combinar las configuraciones en una variable
+const config = [...mainConfig, ...componentConfigs];
+
+export default config;
