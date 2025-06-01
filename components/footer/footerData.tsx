@@ -1,13 +1,7 @@
-import { FaXTwitter, FaGithub } from "react-icons/fa6";
-
-export const socials = [
-  { icon: FaXTwitter, name: "Twitter", href: "#" },
-  { icon: FaGithub, name: "Github", href: "#" },
-];
 
 export const linksHeader = [
   { name: "Docs", href: "/docs/introduccion" },
-  { name: "Componentes", href: "/docs/componentes/accordion" },
+  { name: "Componentes", href: "/docs/componentes" },
   { name: "Ejemplos", href: "/docs/ejemplos" },
   { name: "Changelog", href: "/docs/changelog" },
   { name: "Pricing", href: "/docs/pricing" },
@@ -20,8 +14,8 @@ export const linksDocs = [
 ];
 
 export const linksFrameworks = [
-  { name: "Next.js", href: "#" },
-  { name: "Astro", href: "#" },
-  { name: "Vite", href: "#" },
-  { name: "React", href: "#" },
+  { name: "Next.js", href: "/docs/frameworks/nextjs" },
+  { name: "Astro", href: "/docs/frameworks/astro" },
+  { name: "Vite", href: "/docs/frameworks/vite" },
+  { name: "Laravel", href: "/docs/frameworks/laravel" },
 ];
