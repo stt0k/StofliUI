@@ -34,7 +34,7 @@ function ColorsPageContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 md:mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4 md:mb-6 text-center md:text-left"
               >
                 Paleta de Colores
               </m.h1>
@@ -42,12 +42,14 @@ function ColorsPageContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-base md:text-xl text-gray-600 dark:text-zinc-400 max-w-3xl mb-6 md:mb-8 leading-relaxed"
+                className="text-base md:text-xl text-gray-600 dark:text-zinc-400 max-w-3xl mb-6 md:mb-8 leading-relaxed text-center md:text-left"
               >
                 Explora la paleta completa de colores de Tailwind CSS en
-                diferentes formatos: HEX, RGB, HSL y OKLCH. Estos colores han
-                sido cuidadosamente seleccionados para funcionar armoniosamente
-                en cualquier proyecto.
+                diferentes formatos: HEX, RGB, HSL y OKLCH. 
+                <span className="hidden md:inline">
+                  {" "}Estos colores han sido cuidadosamente seleccionados para 
+                  funcionar armoniosamente en cualquier proyecto.
+                </span>
               </m.p>
             </div>
             <m.div
