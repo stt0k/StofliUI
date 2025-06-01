@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect, useCallback } from "react";
 import {
   BookOpen,
-  PanelLeft,
+  ListCollapse,
   Code,
   Layout,
   CreditCard,
@@ -14,7 +14,10 @@ import {
   UserCircle,
   LucideIcon,
   ArrowRight,
-  Columns,
+  AppWindow,
+  SquarePlay,
+  KeyRound,
+  MessageCircleMore,
 } from "lucide-react";
 
 type NavSubmenu = {
@@ -126,15 +129,19 @@ const HeadLinks = ({
     const lowerTitle = title.toLowerCase();
 
     // UI Components
-    if (lowerTitle.includes("accordion")) return PanelLeft;
+    if (lowerTitle.includes("accordion")) return ListCollapse;
+    if (lowerTitle.includes("button")) return SquarePlay;
     if (lowerTitle.includes("card")) return CreditCard;
-    if (lowerTitle.includes("tabs")) return Columns;
+    if (lowerTitle.includes("tabs")) return AppWindow;
     if (lowerTitle.includes("checkbox")) return CheckSquare;
     if (lowerTitle.includes("input")) return TextCursorInput;
     if (lowerTitle.includes("dropdown")) return ListFilter;
     if (lowerTitle.includes("calendar")) return Calendar;
     if (lowerTitle.includes("badge")) return BadgeCheck;
     if (lowerTitle.includes("avatar")) return UserCircle;
+    if (lowerTitle.includes("faq")) return ListCollapse;
+    if (lowerTitle.includes("autenticación")) return KeyRound;
+    if (lowerTitle.includes("perfil")) return MessageCircleMore;
 
     return Layout; // Default icon
   };
