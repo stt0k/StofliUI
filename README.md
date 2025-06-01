@@ -10,11 +10,11 @@
     <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=flat" alt="Tailwind CSS Badge" />
     <img src="https://img.shields.io/badge/NextJs-000000?style=flat&logo=next.js&logoColor=white" alt="Next.js Badge" />
     <a href="https://www.npmjs.com/package/stofli-ui">
-    <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
-  </a>
-  <a href="https://github.com/stt0k/StofliUI/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/username/stofli-ui" alt="Licencia MIT" />
-  </a>
+      <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
+    </a>
+    <a href="https://github.com/stt0k/StofliUI/blob/main/LICENSE">
+      <img src="https://img.shields.io/github/license/username/stofli-ui" alt="Licencia MIT" />
+    </a>
   </div>
 </div>
 
