@@ -9,7 +9,7 @@ description: >-
     <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```tsx
-import { Tabs } from "@stofli/ui"
+import { Tabs } from "stofli-ui"
 ```
 
   </div>
@@ -42,7 +42,7 @@ Muestra un componente de pestañas básico.
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 
 export default function TabsDemo() {
   return (
@@ -96,7 +96,7 @@ Añade íconos a las pestañas.
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 import { UserIcon, MessageSquareIcon, SettingsIcon } from "lucide-react";
 
 export default function TabsWithIconsDemo() {
@@ -157,7 +157,7 @@ Usando `hoverEffect={true}` para mostrar una animación al pasar el ratón por e
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 
 export default function TabsHoverEffectDemo() {
   return (
@@ -247,7 +247,7 @@ Usando la prop `variant`: default, primary, secondary, success, warning y danger
 >
 
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 
 export default function TabsVariantsDemo() {
   return (
@@ -308,7 +308,7 @@ Usando la prop `size`: sm, md y lg.
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 
 export default function TabsSizesDemo() {
   return (
@@ -381,7 +381,7 @@ Usando la prop `radius`: none, sm, md y full.
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 
 export default function TabsRadiusDemo() {
   return (
@@ -439,7 +439,7 @@ Usando la prop `fullWidth` para expandir las pestañas al ancho completo del con
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 
 export default function TabsFullWidthDemo() {
   return (
@@ -492,7 +492,7 @@ Puedes personalizar cualquier parte del componente usando las propiedades de cla
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 import { HomeIcon, BarChartIcon, SettingsIcon } from "lucide-react";
 
 export default function TabsCustomClassDemo() {
@@ -543,16 +543,16 @@ Un ejemplo de diseño de pestañas con estilo moderno y minimalista.
           content: <div className="mt-2">
             <div className="grid grid-cols-3 gap-4">
               <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
-                <h3 className="text-sm font-semibold mb-1">Total de usuarios</h3>
-                <p className="text-2xl font-bold">12,493</p>
+                <h3 className="text-xs md:text-sm font-semibold mb-1">Total de usuarios</h3>
+                <p className="text-md md:text-2xl font-bold">12,493</p>
               </div>
               <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
-                <h3 className="text-sm font-semibold mb-1">Nuevos hoy</h3>
-                <p className="text-2xl font-bold">249</p>
+                <h3 className="text-xs md:text-sm font-semibold mb-1">Nuevos hoy</h3>
+                <p className="text-md md:text-2xl font-bold">249</p>
               </div>
               <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
-                <h3 className="text-sm font-semibold mb-1">Activos</h3>
-                <p className="text-2xl font-bold">8,751</p>
+                <h3 className="text-xs md:text-sm font-semibold mb-1">Activos</h3>
+                <p className="text-md md:text-2xl font-bold">8,751</p>
               </div>
             </div>
           </div>
@@ -593,7 +593,7 @@ Un ejemplo de diseño de pestañas con estilo moderno y minimalista.
   }
 >
 ```tsx
-import { Tabs } from "@stofli/ui";
+import { Tabs } from "stofli-ui";
 import { LineChartIcon, PieChartIcon, FileTextIcon, FileIcon } from "lucide-react";
 
 export default function ModernTabsDemo() {
@@ -606,16 +606,16 @@ export default function ModernTabsDemo() {
           content: <div className="mt-2">
             <div className="grid grid-cols-3 gap-4">
               <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
-                <h3 className="text-sm font-semibold mb-1">Total de usuarios</h3>
-                <p className="text-2xl font-bold">12,493</p>
+                <h3 className="text-xs md:text-sm font-semibold mb-1">Total de usuarios</h3>
+                <p className="text-md md:text-2xl font-bold">12,493</p>
               </div>
               <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
-                <h3 className="text-sm font-semibold mb-1">Nuevos hoy</h3>
-                <p className="text-2xl font-bold">249</p>
+                <h3 className="text-xs md:text-sm font-semibold mb-1">Nuevos hoy</h3>
+                <p className="text-md md:text-2xl font-bold">249</p>
               </div>
               <div className="p-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800">
-                <h3 className="text-sm font-semibold mb-1">Activos</h3>
-                <p className="text-2xl font-bold">8,751</p>
+                <h3 className="text-xs md:text-sm font-semibold mb-1">Activos</h3>
+                <p className="text-md md:text-2xl font-bold">8,751</p>
               </div>
             </div>
           </div>

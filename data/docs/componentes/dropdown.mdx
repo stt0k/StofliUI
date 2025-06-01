@@ -9,7 +9,7 @@ description: >-
     <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 ```
 
   </div>
@@ -34,7 +34,7 @@ Un dropdown básico con varias opciones.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownDemo() {
   return (
@@ -88,7 +88,7 @@ Añade íconos a las opciones del dropdown para hacerlas más visuales.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 import { UserIcon, MessageSquareIcon, BellIcon, LogOutIcon } from "lucide-react";
 
 export default function DropdownWithIconsDemo() {
@@ -184,7 +184,7 @@ Diferentes variantes de estilo para el dropdown.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownVariantsDemo() {
   return (
@@ -257,7 +257,7 @@ El dropdown está disponible en 4 tamaños: pequeño, mediano, grande y extra gr
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownSizesDemo() {
   return (
@@ -330,7 +330,7 @@ Puedes ocultar la flecha del dropdown con la prop `showArrow`.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownNoArrowDemo() {
   return (
@@ -381,7 +381,7 @@ Permite seleccionar varias opciones al mismo tiempo con la prop `multiSelect`.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownMultiSelectDemo() {
   return (
@@ -423,7 +423,7 @@ Puedes crear un dropdown que solo muestre opciones pero no permita seleccionarla
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownNonSelectableDemo() {
   return (
@@ -477,7 +477,7 @@ Usa avatares en el dropdown y en sus opciones.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownWithAvatarDemo() {
   return (
@@ -593,7 +593,7 @@ Puedes usar diferentes tamaños de avatar con la prop `avatarSize`.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownAvatarSizesDemo() {
   return (
@@ -721,7 +721,7 @@ Puedes mostrar solo un avatar como botón del dropdown usando `avatarOnly={true}
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function AvatarOnlyDropdownDemo() {
   return (
@@ -810,7 +810,7 @@ Puedes controlar dónde aparece el menú desplegable con la prop `placement`.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownPlacementDemo() {
   return (
@@ -857,7 +857,7 @@ Puedes definir un valor seleccionado por defecto.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownDefaultValueDemo() {
   return (
@@ -903,7 +903,7 @@ Puedes definir un ancho fijo para el dropdown usando la prop `width`.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownFixedWidthDemo() {
   return (
@@ -950,7 +950,7 @@ Usando la prop `fullWidth` para que el dropdown ocupe todo el ancho disponible.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownFullWidthDemo() {
   return (
@@ -988,7 +988,7 @@ Puedes deshabilitar opciones específicas del dropdown.
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function DropdownDisabledOptionsDemo() {
   return (
@@ -1042,7 +1042,7 @@ El modo `avatarOnly` también funciona perfectamente con opciones que tienen ava
   }
 >
 ```tsx
-import { Dropdown } from "@stofli/ui";
+import { Dropdown } from "stofli-ui";
 
 export default function AvatarOnlyWithAvatarItemsDemo() {
   return (
@@ -1072,13 +1072,6 @@ export default function AvatarOnlyWithAvatarItemsDemo() {
 }
 ```
 </DemoTabs>
-
-<ul className="leading-relaxed dark:text-zinc-400 text-zinc-600">
-  <li>Con `avatarOnly={true}`, cuando selecciones un usuario, su avatar aparecerá en el botón dropdown</li>
-  <li>El tamaño del dropdown se ajusta automáticamente según el tamaño del avatar</li>
-  <li>El menú desplegable tiene un ancho mínimo para evitar que los elementos queden cortados</li>
-  <li>Todos los elementos mantienen un estilo coherente y funcional</li>
-</ul>
     </div>
 
     <div className="mt-6">
@@ -1088,7 +1081,7 @@ export default function AvatarOnlyWithAvatarItemsDemo() {
 
       <DemoTabs
         preview={
-          <div className="flex justify-center">
+          <div>
             <Dropdown
               className="max-w-md"
               buttonClassName="bg-blue-50 border-blue-300 text-blue-700 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-300"
@@ -1114,7 +1107,7 @@ export default function AvatarOnlyWithAvatarItemsDemo() {
         }
       >
       ```tsx
-      import { Dropdown } from "@stofli/ui";
+      import { Dropdown } from "stofli-ui";
 
       export default function DropdownCustomClassesDemo() {
         return (
@@ -1201,6 +1194,7 @@ export default function AvatarOnlyWithAvatarItemsDemo() {
     | `disabled`  | `boolean`   | Si la opción está deshabilitada  |
     | `avatarSrc` | `string`    | URL de la imagen para el avatar  |
     | `avatarAlt` | `string`    | Texto alternativo para el avatar |
+    | `description` | `string`  | Descripción adicional para la opción |
 
   </div>
 </div>
