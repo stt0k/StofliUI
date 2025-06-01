@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export interface DropdownItem {
   label: React.ReactNode;
@@ -462,12 +463,12 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     // Clases para hover en elementos seleccionados
     const selectedHoverClasses = {
-      default: "hover:bg-zinc-500 dark:hover:bg-zinc-700",
-      primary: "hover:bg-blue-500 dark:hover:bg-blue-700",
-      secondary: "hover:bg-purple-500 dark:hover:bg-purple-700",
-      success: "hover:bg-green-500 dark:hover:bg-green-700",
-      warning: "hover:bg-amber-500 dark:hover:bg-amber-700",
-      danger: "hover:bg-red-500 dark:hover:bg-red-700",
+      default: "hover:bg-zinc-400 dark:hover:bg-zinc-800",
+      primary: "hover:bg-blue-400 dark:hover:bg-blue-800",
+      secondary: "hover:bg-purple-400 dark:hover:bg-purple-800",
+      success: "hover:bg-green-400 dark:hover:bg-green-800",
+      warning: "hover:bg-amber-400 dark:hover:bg-amber-800",
+      danger: "hover:bg-red-400 dark:hover:bg-red-800",
     };
 
     // Primero aplicamos las clases base
@@ -648,12 +649,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         aria-expanded={isOpen}
           aria-labelledby={label ? labelId : undefined}
           aria-label={!label ? (ariaLabel || "Selector desplegable") : undefined}
-          aria-describedby={cn(
-            errorMessage ? errorId : null,
-            ariaDescribedby
-          )}
-          aria-invalid={!!errorMessage}
-          aria-required={required}
+          aria-describedby={ariaDescribedby}
       >
         <span
             id={`${componentId}-value`}
@@ -663,9 +659,15 @@ const Dropdown: React.FC<DropdownProps> = ({
           )}
         >
             {buttonAvatarSrc && (
-              <img
+              <Image
                 src={buttonAvatarSrc}
                 alt={buttonAvatarAlt}
+                width={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                       avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                       avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
+                height={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                        avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                        avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
                 className={cn(
                   avatarSizeClasses[avatarSize],
                   "rounded-full"
@@ -742,15 +744,15 @@ const Dropdown: React.FC<DropdownProps> = ({
                       onMouseLeave={() => setActiveIndex(-1)}
                       className={cn(
                         getItemClasses(isSelected, Boolean(item.disabled)),
-                        // Aplicar clases de resaltado específicas según estado y variante
+                        // Modificar las clases de resaltado para que no afecten a elementos ya seleccionados
                         isHighlighted && !item.disabled && !isSelected && "bg-zinc-100 dark:bg-zinc-800",
-                        isHighlighted && !item.disabled && isSelected && {
-                          "default": "bg-zinc-500 dark:bg-zinc-700",
-                          "primary": "bg-blue-500 dark:bg-blue-700",
-                          "secondary": "bg-purple-500 dark:bg-purple-700",
-                          "success": "bg-green-500 dark:bg-green-700",
-                          "warning": "bg-amber-500 dark:bg-amber-700",
-                          "danger": "bg-red-500 dark:bg-red-700"
+                        isHighlighted && !item.disabled && isSelected && selectable && {
+                          "default": "bg-zinc-400 dark:bg-zinc-800", // Mantener el mismo color que cuando está seleccionado
+                          "primary": "bg-blue-400 dark:bg-blue-800",
+                          "secondary": "bg-purple-400 dark:bg-purple-800",
+                          "success": "bg-green-400 dark:bg-green-800",
+                          "warning": "bg-amber-400 dark:bg-amber-800",
+                          "danger": "bg-red-400 dark:bg-red-800"
                         }[variant]
                       )}
                     initial={{ opacity: 0, y: 10 }}
@@ -770,9 +772,15 @@ const Dropdown: React.FC<DropdownProps> = ({
                         )}
                       >
                           {item.avatarSrc && (
-                            <img
+                            <Image
                               src={item.avatarSrc}
                               alt={item.avatarAlt || ""}
+                              width={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                                    avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                                    avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
+                              height={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
+                                     avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
+                                     avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
                               className={cn(
                                 avatarSizeClasses[avatarSize],
                                 "rounded-full"
