@@ -1,10 +1,10 @@
 # StofliUI
 
+<p>Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar para todos tus proyectos web. <strong>Optimizada para rendimiento, accesibilidad y personalización.</strong> Con Tailwind CSS y Framer Motion</p>
 <div align="center">
-  <img src="https://github.com/stt0k/StofliUI/blob/main/public/home.png" alt="StofliUI Logo" width="150" />
+  <img src="https://github.com/stt0k/StofliUI/blob/main/public/home.png" alt="StofliUI Logo" />
   
-  <p>Librería de componentes UI accesibles y personalizables para React</p>
-  
+  ##
   <div>
     <a href="https://www.npmjs.com/package/stofli-ui">
     <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
