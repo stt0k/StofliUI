@@ -24,7 +24,7 @@ const sections: Section[] = [
       "Comienza instalando StofliUI en tu proyecto mediante npm, yarn, bun o pnpm. Compatible con React, Next.js y otros frameworks modernos.",
     caption: "Instala la librería usando tu gestor de paquetes preferido",
     codeExample:
-      "npm install stofli-ui\n# o\nyarn add stofli-uio\n# o\nbun add stofli-ui\n# o\npnpm add stofli-ui",
+      "npm install stofli-ui\n# o\nyarn add stofli-ui\n# o\nbun add stofli-ui\n# o\npnpm add stofli-ui",
     image:
       "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1170&auto=format&fit=crop",
     color: "#B3AEF5",
@@ -207,12 +207,35 @@ const ScrollProgressSection = () => {
             }
 
             // La etiqueta completa (< o </ seguido del nombre)
-            parts.push({
-              text: tagMatch[0],
-              type: "tag",
-            });
-
-            currentPos = tagMatch.index + tagMatch[0].length;
+            // Comprobar si estamos en el paso 3 (customize) y es la etiqueta de cierre Badge
+            if (sections[activeSection]?.id === "customize" && 
+                tagMatch[0] === "</Badge") {
+              // Para la etiqueta de cierre Badge, vamos a procesar también el ">"
+              const remainingText = text.substring(tagMatch.index + tagMatch[0].length);
+              const closeTagEnd = remainingText.indexOf(">") + 1;
+              
+              if (closeTagEnd > 0) {
+                parts.push({
+                  text: tagMatch[0] + remainingText.substring(0, closeTagEnd),
+                  type: "tag-badge-close",
+                });
+                
+                currentPos = tagMatch.index + tagMatch[0].length + closeTagEnd;
+              } else {
+                parts.push({
+                  text: tagMatch[0],
+                  type: "tag-badge-close",
+                });
+                currentPos = tagMatch.index + tagMatch[0].length;
+              }
+            } else {
+              parts.push({
+                text: tagMatch[0],
+                type: "tag",
+              });
+              
+              currentPos = tagMatch.index + tagMatch[0].length;
+            }
           }
 
           // Resetear para otros patrones
@@ -837,7 +860,7 @@ const ScrollProgressSection = () => {
                         )}
 
                         {/* Bloques de código con sintaxis coloreada */}
-                        <pre className="font-mono text-xs xs:text-sm text-zinc-800 dark:text-white/90 whitespace-pre-wrap rounded p-1 xs:p-2 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-sm overflow-auto max-h-[250px] xs:max-h-[400px]">
+                        <pre className="font-mono text-xs xs:text-sm text-white/90 whitespace-pre-wrap rounded p-1 xs:p-2 bg-white/60 dark:bg-zinc-900/50 backdrop-blur-sm overflow-auto max-h-[250px] xs:max-h-[400px]">
                           <code>
                             {formatCode(section.codeExample).map((line, i) => (
                               <div
