@@ -131,7 +131,7 @@ export default function Page() {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">
               <ButtonGlitchBrightness href="/docs" text="Empieza ahora" />
               <div className="w-[246px] h-10">
-                <CodeBlock className="inline-flex items-center">
+                <CodeBlock className="inline-flex items-center px-3">
                   <code>
                     <span data-no-copy="true" className="select-none text-gray-500 mr-2">$</span>
                     npm install stofli-ui
