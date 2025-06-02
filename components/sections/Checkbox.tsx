@@ -89,7 +89,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === ' ' || event.key === 'Enter') {
+    if (event.key === " " || event.key === "Enter") {
       event.preventDefault();
       handleClick();
     }
@@ -202,7 +202,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     "ml-2",
     labelSizeClasses[size],
     disabled
-      ? "text-zinc-400 dark:text-zinc-600"
+      ? "text-zinc-400 dark:text-neutral-600"
       : "text-zinc-900 dark:text-zinc-100",
     labelClassName
   );
@@ -214,7 +214,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   );
 
   return (
-    <div 
+    <div
       className={wrapperClasses}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -248,8 +248,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
           whileTap={!disabled ? { scale: 0.95 } : undefined}
           role="presentation"
         >
-          <motion.svg 
-            className={svgClasses} 
+          <motion.svg
+            className={svgClasses}
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
@@ -268,26 +268,19 @@ const Checkbox: React.FC<CheckboxProps> = ({
         </motion.div>
       </div>
       {label && (
-        <label 
+        <label
           htmlFor={checkboxId}
           className={labelClasses}
           onClick={(e) => e.stopPropagation()}
         >
           {label}
           {required && (
-            <span 
-              className="text-red-500 ml-0.5" 
-              aria-hidden="true"
-            >
+            <span className="text-red-500 ml-0.5" aria-hidden="true">
               *
             </span>
           )}
-          {required && (
-            <span className="sr-only">
-              (requerido)
-        </span>
-      )}
-    </label>
+          {required && <span className="sr-only">(requerido)</span>}
+        </label>
       )}
       {errorMessage && (
         <div
