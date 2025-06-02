@@ -58,7 +58,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 }) => {
   const variantClasses = {
     default:
-      "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200",
+      "text-zinc-500 hover:text-zinc-700 dark:text-neutral-400 dark:hover:text-zinc-200",
     primary:
       "text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-200",
     secondary:
@@ -87,7 +87,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   };
 
   const nonCurrentClasses = {
-    default: "text-zinc-500 dark:text-zinc-400",
+    default: "text-zinc-500 dark:text-neutral-400",
     primary: "text-blue-500 dark:text-blue-400",
     secondary: "text-purple-500 dark:text-purple-400",
     success: "text-green-500 dark:text-green-400",
@@ -96,7 +96,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   };
 
   const separatorClasses = {
-    default: "text-zinc-400 dark:text-zinc-600",
+    default: "text-zinc-400 dark:text-neutral-600",
     primary: "text-blue-300 dark:text-blue-700",
     secondary: "text-purple-300 dark:text-purple-700",
     success: "text-green-300 dark:text-green-700",
@@ -115,7 +115,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         aria-label={navAriaLabel}
       >
         {homeIcon && (
-          <li 
+          <li
             className={cn("flex items-center", itemClassName)}
             role="listitem"
           >
@@ -182,8 +182,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         )}
 
         {items.map((item, index) => (
-          <li 
-            key={index} 
+          <li
+            key={index}
             className={cn("flex items-center", itemClassName)}
             role="listitem"
           >
@@ -214,7 +214,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 aria-label={item.ariaLabel || `Página actual: ${item.label}`}
               >
                 {item.icon && (
-                  <span 
+                  <span
                     className="inline-flex items-center mr-1"
                     aria-hidden="true"
                   >
@@ -235,7 +235,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 aria-label={item.ariaLabel || `Ir a ${item.label}`}
               >
                 {item.icon && (
-                  <span 
+                  <span
                     className="inline-flex items-center mr-1"
                     aria-hidden="true"
                   >
@@ -255,7 +255,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 aria-label={item.ariaLabel || item.label}
               >
                 {item.icon && (
-                  <span 
+                  <span
                     className="inline-flex items-center mr-1"
                     aria-hidden="true"
                   >
