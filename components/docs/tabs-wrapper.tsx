@@ -89,7 +89,7 @@ export function ModernTabsDemo() {
               <h3 className="text-sm font-semibold mb-3">
                 Análisis de comportamiento
               </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 Los datos de análisis estarán disponibles pronto.
               </p>
             </div>
