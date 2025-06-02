@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import Tag from "@/components/Tags";
 
 type SidebarLinkProps = {
@@ -20,10 +19,9 @@ const SidebarLink = ({ href, label, isActive, tag }: SidebarLinkProps) => {
   };
 
   return (
-    <Link href={href}>
-      <Button
-        variant="ghost"
-        className={`w-full justify-start font-normal cursor-pointer transition duration-200 hover:translate-x-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
+    <Link href={href} className="block">
+      <button
+        className={`w-full text-left flex items-center pl-2 py-2 rounded-md text-sm transition-all duration-300 ease-in-out disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 dark:hover:bg-zinc-800 justify-start font-normal cursor-pointer hover:translate-x-1 dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
           isActive
             ? "hover:text-zinc-950/85 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
             : ""
@@ -31,7 +29,7 @@ const SidebarLink = ({ href, label, isActive, tag }: SidebarLinkProps) => {
       >
         <span className="truncate">{tag ? truncateText(label) : label}</span>
         {tag && <Tag text={tag} />}
-      </Button>
+      </button>
     </Link>
   );
 };
