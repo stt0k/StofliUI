@@ -117,7 +117,7 @@ const ProjectSection = () => {
                             </span>
                           </div>
                           <span className="text-xs text-zinc-600 dark:text-zinc-400">
-                            68,2KB min + gzip
+                            68,8KB min + gzip
                           </span>
                         </div>
                       </div>
@@ -204,7 +204,7 @@ const ProjectSection = () => {
 
                     <div className="flex justify-between items-center">
                       <div className="text-sm text-zinc-600 dark:text-zinc-400">
-                        1 Jun 2025
+                        2 Jun 2025
                       </div>
                       <button className="flex items-center text-xs font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors">
                         Changelog <ChevronRight className="w-3.5 h-3.5 ml-1" />
