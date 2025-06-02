@@ -118,22 +118,28 @@ export default function Page() {
             </h1>
 
             <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12 hidden md:block">
-              Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar
-              para todos tus proyectos web. Optimizada para rendimiento,
-              accesibilidad y personalización.
+              Una biblioteca de componentes React UI rápida, moderna y fácil de
+              utilizar para todos tus proyectos web. Optimizada para
+              rendimiento, accesibilidad y personalización.
             </p>
 
             <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12 block md:hidden">
-              Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar.
+              Una biblioteca de componentes React UI rápida, moderna y fácil de
+              utilizar.
             </p>
 
             {/* Botones más pequeños y modernos */}
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">
               <ButtonGlitchBrightness href="/docs" text="Empieza ahora" />
-              <div className="w-[246px] h-10">
-                <CodeBlock className="inline-flex items-center px-3">
+              <div className="w-[250px] h-10">
+                <CodeBlock className="inline-flex items-center">
                   <code>
-                    <span data-no-copy="true" className="select-none text-gray-500 mr-2">$</span>
+                    <span
+                      data-no-copy="true"
+                      className="select-none text-gray-500 mr-2"
+                    >
+                      $
+                    </span>
                     npm install stofli-ui
                   </code>
                 </CodeBlock>
