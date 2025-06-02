@@ -127,7 +127,7 @@ export default function ChangelogPage() {
           </h1>
           
           <p className="w-full max-w-6xl text-lg text-gray-600 dark:text-zinc-400 leading-relaxed mb-16 text-center md:text-left">
-            Sigue la evolución de StofliUI, descubre las últimas novedades mejoras y características.
+            Sigue la evolución de StofliUI, descubre las últimas novedades, mejoras y correcciones de errores.
           </p>
 
           {/* Changelog Timeline */}
