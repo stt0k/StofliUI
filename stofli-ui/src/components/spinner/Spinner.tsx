@@ -163,7 +163,7 @@ const Spinner: React.FC<SpinnerProps> = ({
 
   // Clases para el texto del label
   const labelClasses = {
-    default: "text-zinc-600 dark:text-zinc-300",
+    default: "text-neutral-600 dark:text-zinc-300",
     primary: "text-blue-600 dark:text-blue-400",
     secondary: "text-purple-600 dark:text-purple-400",
     success: "text-green-600 dark:text-green-400",
@@ -525,8 +525,8 @@ const Spinner: React.FC<SpinnerProps> = ({
         );
       case "dots":
         return (
-          <div 
-            className={cn("flex space-x-1", spinnerClassName)} 
+          <div
+            className={cn("flex space-x-1", spinnerClassName)}
             role="status"
             aria-busy="true"
           >
@@ -559,11 +559,7 @@ const Spinner: React.FC<SpinnerProps> = ({
         );
       case "grow":
         return (
-          <div 
-            className={cn(spinnerClassName)} 
-            role="status"
-            aria-busy="true"
-          >
+          <div className={cn(spinnerClassName)} role="status" aria-busy="true">
             <style>{dotKeyframes}</style>
             <div
               className={cn(
@@ -614,11 +610,7 @@ const Spinner: React.FC<SpinnerProps> = ({
         );
       case "lines":
         return (
-          <div 
-            className={cn(spinnerClassName)} 
-            role="status"
-            aria-busy="true"
-          >
+          <div className={cn(spinnerClassName)} role="status" aria-busy="true">
             <style>{dotKeyframes}</style>
             <svg
               className={cn(
@@ -766,10 +758,7 @@ const Spinner: React.FC<SpinnerProps> = ({
 
   if (!label) {
     return (
-      <div 
-        className={cn(className)}
-        aria-live={ariaLive}
-      >
+      <div className={cn(className)} aria-live={ariaLive}>
         {spinnerElement}
         <span className="sr-only">{ariaLabel || "Cargando"}</span>
       </div>
