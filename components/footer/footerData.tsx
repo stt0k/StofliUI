@@ -1,11 +1,10 @@
-
 export const linksHeader = [
   { name: "Docs", href: "/docs/introduccion" },
   { name: "Componentes", href: "/docs/componentes" },
-  { name: "Ejemplos", href: "/docs/ejemplos" },
-  { name: "Changelog", href: "/docs/changelog" },
-  { name: "Pricing", href: "/docs/pricing" },
-  { name: "Colores", href: "/docs/colores" },
+  { name: "Ejemplos", href: "/ejemplos" },
+  { name: "Changelog", href: "/changelog" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "Colores", href: "/colores" },
 ];
 
 export const linksDocs = [
