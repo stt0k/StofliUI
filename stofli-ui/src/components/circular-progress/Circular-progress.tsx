@@ -121,7 +121,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         labelPosition === "top" ? "-top-6" : "-bottom-6",
         "left-1/2 -translate-x-1/2",
         labelSize,
-        "font-medium dark:text-zinc-400 text-zinc-600 whitespace-nowrap",
+        "font-medium dark:text-neutral-400 text-neutral-600 whitespace-nowrap",
         "min-contrast-[4.5]", // Asegura contraste mínimo WCAG AA
         labelClassName
       )}
@@ -163,7 +163,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         variants={spinVariants}
         aria-hidden="true"
       >
-        {(spin || indeterminate) ? (
+        {spin || indeterminate ? (
           <>
             <circle
               className={cn(
@@ -238,7 +238,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
         )}
       </motion.svg>
       {showValue && (
-        <div 
+        <div
           className="absolute inset-0 flex items-center justify-center"
           id={valueId}
           aria-hidden="true"
