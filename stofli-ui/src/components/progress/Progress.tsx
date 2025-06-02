@@ -57,7 +57,9 @@ const Progress: React.FC<ProgressProps> = ({
   id,
   valueText,
 }) => {
-  const percentage = indeterminate ? null : Math.min(100, Math.max(0, (value / max) * 100));
+  const percentage = indeterminate
+    ? null
+    : Math.min(100, Math.max(0, (value / max) * 100));
   const [announcement, setAnnouncement] = useState<string>("");
   const [prevValue, setPrevValue] = useState<number | null>(null);
   const uniqueIdBase = useId();
@@ -69,7 +71,11 @@ const Progress: React.FC<ProgressProps> = ({
 
   // Anunciar cambios significativos en el valor
   useEffect(() => {
-    if (prevValue !== null && percentage !== null && Math.abs((percentage - prevValue)) >= 10) {
+    if (
+      prevValue !== null &&
+      percentage !== null &&
+      Math.abs(percentage - prevValue) >= 10
+    ) {
       // Sólo anunciar cuando hay un cambio significativo (10% o más)
       if (valueText) {
         setAnnouncement(valueText);
@@ -129,7 +135,8 @@ const Progress: React.FC<ProgressProps> = ({
     ? {
         width: "50%",
         left: "-50%",
-        animation: "indeterminate-progress 1.5s infinite cubic-bezier(0.65, 0.815, 0.735, 0.395)",
+        animation:
+          "indeterminate-progress 1.5s infinite cubic-bezier(0.65, 0.815, 0.735, 0.395)",
       }
     : {};
 
@@ -184,7 +191,7 @@ const Progress: React.FC<ProgressProps> = ({
   `;
 
   return (
-    <div 
+    <div
       id={progressId}
       className={cn("w-full", containerClassName)}
       aria-label={ariaLabel || label || "Barra de progreso"}
@@ -195,10 +202,10 @@ const Progress: React.FC<ProgressProps> = ({
       <style>{animationKeyframes}</style>
 
       {/* Región live para anuncios de accesibilidad */}
-      <div 
-        className="sr-only" 
-        role="status" 
-        aria-live="polite" 
+      <div
+        className="sr-only"
+        role="status"
+        aria-live="polite"
         aria-atomic="true"
       >
         {announcement}
@@ -230,7 +237,7 @@ const Progress: React.FC<ProgressProps> = ({
               id={valueId}
               className={cn(
                 labelSizeClasses[size],
-                "dark:text-zinc-400 text-zinc-600",
+                "dark:text-neutral-400 text-neutral-600",
                 valueClassName
               )}
             >
@@ -258,25 +265,25 @@ const Progress: React.FC<ProgressProps> = ({
             )}
             style={{
               ...stripedStyle,
-              ...indeterminateAnimation
+              ...indeterminateAnimation,
             }}
           />
         ) : (
-        <motion.div
-          className={cn(
-            "h-full",
-            variantClasses[variant],
-            radiusClasses[radius],
-            progressBarClassName
-          )}
-          initial={animate ? { width: 0 } : { width: `${percentage}%` }}
-          animate={{ width: `${percentage}%` }}
-          transition={{
-            duration: animate ? 0.5 : 0,
-            ease: "easeOut",
-          }}
-          style={stripedStyle}
-        />
+          <motion.div
+            className={cn(
+              "h-full",
+              variantClasses[variant],
+              radiusClasses[radius],
+              progressBarClassName
+            )}
+            initial={animate ? { width: 0 } : { width: `${percentage}%` }}
+            animate={{ width: `${percentage}%` }}
+            transition={{
+              duration: animate ? 0.5 : 0,
+              ease: "easeOut",
+            }}
+            style={stripedStyle}
+          />
         )}
       </div>
     </div>
