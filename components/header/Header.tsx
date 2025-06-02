@@ -23,6 +23,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const isDocsRoute = pathname.includes("/docs/");
 
   // Nueva función para verificar si una ruta está activa usando relatedPaths
   const isLinkActive = (item: (typeof headerData)[0]) => {
@@ -130,7 +131,7 @@ const Header = () => {
                               ) => (
                                 <div key={groupIndex} className="py-1">
                                   {group.title && (
-                                    <h3 className="px-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                                    <h3 className="px-2 text-xs font-medium text-zinc-500 dark:text-neutral-400">
                                       {group.title}
                                     </h3>
                                   )}
@@ -223,27 +224,39 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed top-6 left-0 right-0 z-50">
-      <div className="mx-3">
+    <div
+      className={`fixed ${isDocsRoute ? "top-0" : "top-6"} left-0 right-0 z-50`}
+    >
+      <div
+        className={`${isDocsRoute ? "" : "mx-3"} ${
+          !isDocsRoute ? "max-w-6xl mx-auto" : ""
+        }`}
+      >
         <header
           className={`
-            container 
-            bg-white/20 
-            dark:bg-black/20 
+            ${
+              isDocsRoute
+                ? "container px-2 rounded-none max-w-7xl mx-auto border-0"
+                : "w-full max-w-6xl rounded-lg border"
+            } 
+            bg-white/60 
+            dark:bg-black/60
             backdrop-blur-md 
-            rounded-xl 
-            border 
             shadow-none
             transition-all duration-300 ease-in-out
             ${RemoveScroll.classNames.zeroRight}
             ${
-              isScrolled
+              isScrolled && !isDocsRoute
                 ? "border-neutral-200 dark:border-neutral-900 shadow-[0px_5px_18px_rgba(204,_204,_204,_0.2)] dark:shadow-[0px_5px_18px_rgba(204,_204,_204,_0.1)]"
                 : "border-transparent"
             }
           `}
         >
-          <div className="container flex h-16 items-center">
+          <div
+            className={`${
+              isDocsRoute ? "px-2 flex justify-between" : "px-4 flex"
+            } py-3 items-center`}
+          >
             {/* Menú hamburguesa para móvil - visible solo en móvil */}
             <div className="md:hidden flex items-center">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
@@ -271,56 +284,93 @@ const Header = () => {
               </Sheet>
             </div>
 
-            {/* Logo a la izquierda - visible solo en desktop */}
-            <div className="hidden md:flex flex-shrink-0 basis-0 mr-4">
-              <Link className="flex items-center space-x-2" href="/">
-                <span className="font-bold text-black dark:text-white text-xl">
-                  StofliUI
-                </span>
-              </Link>
-            </div>
+            {isDocsRoute ? (
+              <>
+                {/* Logo y navegación agrupados para docs */}
+                <div className="flex items-center gap-10">
+                  {/* Logo a la izquierda - visible solo en desktop */}
+                  <div className="hidden md:flex flex-shrink-0 basis-0">
+                    <Link className="flex items-center space-x-2" href="/">
+                      <span className="font-bold text-black dark:text-white text-base">
+                        StofliUI
+                      </span>
+                    </Link>
+                  </div>
 
-            {/* Espacio flexible en móvil */}
-            <div className="flex md:hidden flex-1"></div>
+                  {/* Enlaces en el centro - solo visible en desktop */}
+                  <div className="hidden md:flex justify-start">
+                    <nav className="flex items-center space-x-8 text-sm font-medium">
+                      {headerData.map((data) => (
+                        <HeadLinks
+                          key={data.title}
+                          href={data.link}
+                          title={data.title}
+                          isActive={isLinkActive(data)}
+                          hidden={data.hidden ? true : false}
+                          submenu={undefined}
+                        />
+                      ))}
+                    </nav>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Logo a la izquierda - visible solo en desktop */}
+                <div className="hidden md:flex flex-shrink-0 basis-0 mr-4">
+                  <Link className="flex items-center space-x-2" href="/">
+                    <span className="font-bold text-black dark:text-white text-base">
+                      StofliUI
+                    </span>
+                  </Link>
+                </div>
 
-            {/* Enlaces en el centro - solo visible en desktop */}
-            <div className="hidden md:flex flex-grow basis-0 justify-center">
-              <nav className="flex items-center space-x-10 text-base font-medium">
-                {headerData.map((data) => (
-                  <HeadLinks
-                    key={data.title}
-                    href={data.link}
-                    title={data.title}
-                    isActive={isLinkActive(data)}
-                    hidden={data.hidden ? true : false}
-                    submenu={data.submenu}
-                  />
-                ))}
-              </nav>
-            </div>
+                {/* Espacio flexible en móvil */}
+                <div className="flex md:hidden flex-1"></div>
+
+                {/* Enlaces en el centro - solo visible en desktop */}
+                <div className="hidden md:flex flex-grow basis-0 justify-center">
+                  <nav className="flex items-center space-x-10 text-sm font-medium">
+                    {headerData.map((data) => (
+                      <HeadLinks
+                        key={data.title}
+                        href={data.link}
+                        title={data.title}
+                        isActive={isLinkActive(data)}
+                        hidden={data.hidden ? true : false}
+                        submenu={data.submenu}
+                      />
+                    ))}
+                  </nav>
+                </div>
+              </>
+            )}
 
             {/* Área derecha - botones de búsqueda y tema */}
-            <div className="flex items-center justify-end space-x-2 flex-shrink-0 basis-0">
+            <div
+              className={`flex items-center justify-end space-x-2 flex-shrink-0 basis-0`}
+            >
               {/* Búsqueda - visible en ambos (desktop y móvil) */}
-              <div className="mr-1">
+              <div className="mr-2">
                 <SearchCommand />
               </div>
 
               {/* GitHub - visible solo en desktop */}
               <div className="hidden md:flex items-center">
                 <Link
-                href="https://github.com/stt0k/StofliUI"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-md h-9 w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  href="https://github.com/stt0k/StofliUI"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <FaGithub className="h-5 w-5 text-zinc-950 dark:text-white" />
-                  <span className="sr-only">GitHub</span>
-                </Button></Link>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-md h-9 w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  >
+                    <FaGithub className="h-5 w-5 text-zinc-950 dark:text-white" />
+                    <span className="sr-only">GitHub</span>
+                  </Button>
+                </Link>
               </div>
 
               {/* Toggle de tema - visible en ambos */}
