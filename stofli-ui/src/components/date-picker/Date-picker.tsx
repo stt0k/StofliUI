@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback, useMemo, useId } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  useId,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Calendar as CalendarIcon } from "lucide-react";
 import { format, isValid, parse } from "date-fns";
@@ -109,12 +116,15 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const dayRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
-  
-  const segmentRefs = useMemo(() => ({
-    day: dayRef,
-    month: monthRef,
-    year: yearRef
-  }), []);
+
+  const segmentRefs = useMemo(
+    () => ({
+      day: dayRef,
+      month: monthRef,
+      year: yearRef,
+    }),
+    []
+  );
 
   const uniqueIdBase = useId();
   const uniqueId = `datepicker-${uniqueIdBase.replace(/:/g, "")}`;
@@ -131,24 +141,24 @@ const DatePicker: React.FC<DatePickerProps> = ({
   // Parsear el formato proporcionado para determinar el orden de los segmentos
   const getFormatSegments = () => {
     const format = dateFormat.toLowerCase();
-    
+
     // Encontrar las posiciones de cada segmento en el formato
     const dayPos = format.indexOf("d");
     const monthPos = format.indexOf("m");
     const yearPos = format.indexOf("y");
-    
+
     // Crear un array de segmentos ordenados por posición en el formato
     const positions = [
       { segment: "day", pos: dayPos },
       { segment: "month", pos: monthPos },
-      { segment: "year", pos: yearPos }
-    ].filter(item => item.pos !== -1);
-    
+      { segment: "year", pos: yearPos },
+    ].filter((item) => item.pos !== -1);
+
     // Ordenar por posición en el formato
     positions.sort((a, b) => a.pos - b.pos);
-    
+
     // Extraer solo los nombres de los segmentos en el orden correcto
-    return positions.map(item => item.segment as DateSegment);
+    return positions.map((item) => item.segment as DateSegment);
   };
 
   const formatSegments = getFormatSegments();
@@ -156,11 +166,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
   // Determinar los placeholders según el formato
   const getPlaceholders = useCallback(() => {
     const format = dateFormat.toLowerCase();
-    
+
     let dayPlaceholder = "dd";
     let monthPlaceholder = "MM";
     let yearPlaceholder = "yyyy";
-    
+
     if (format.startsWith("yyyy") || format.includes("yyyy-")) {
       // Formato ISO: yyyy-MM-dd
       dayPlaceholder = "dd";
@@ -171,44 +181,54 @@ const DatePicker: React.FC<DatePickerProps> = ({
       dayPlaceholder = "dd";
       monthPlaceholder = "MM";
       yearPlaceholder = "yyyy";
-    } else if (format.startsWith("mm") && format.includes("dd") && format.includes("yyyy")) {
+    } else if (
+      format.startsWith("mm") &&
+      format.includes("dd") &&
+      format.includes("yyyy")
+    ) {
       // Formato MM/dd/yyyy (americano)
       dayPlaceholder = "dd";
       monthPlaceholder = "MM";
       yearPlaceholder = "yyyy";
     }
-    
+
     return { dayPlaceholder, monthPlaceholder, yearPlaceholder };
   }, [dateFormat]);
-  
-  const { dayPlaceholder, monthPlaceholder, yearPlaceholder } = getPlaceholders();
+
+  const { dayPlaceholder, monthPlaceholder, yearPlaceholder } =
+    getPlaceholders();
 
   // Función para obtener el separador del formato
   const getFormatSeparator = useCallback(() => {
     const format = dateFormat.toLowerCase();
-    
+
     // Para formatos específicos, usar sus separadores adecuados
     if (format.startsWith("yyyy") || format.includes("yyyy-")) {
       return "-"; // Para formato ISO
     } else if (format.includes("mmmm") || format.includes("'de'")) {
       return " de "; // Para formato de texto con "de"
-    } else if (format.startsWith("mm") && format.includes("dd") && format.includes("yyyy")) {
+    } else if (
+      format.startsWith("mm") &&
+      format.includes("dd") &&
+      format.includes("yyyy")
+    ) {
       return "/"; // Para formato MM/dd/yyyy (americano)
     }
-    
+
     // Para otros formatos, detectar el separador automáticamente
     const separators = dateFormat.match(/[^a-zA-Z0-9']/g);
     return separators ? separators[0] : "/";
   }, [dateFormat]);
 
   const separator = getFormatSeparator();
-  
+
   // Para formatos complejos, usamos un formato interno simple para el procesamiento
-  const isComplexFormat = dateFormat.includes("'") || 
-                         dateFormat.includes("MMMM") || 
-                         dateFormat.includes("MMM") ||
-                         dateFormat.includes("do");
-  
+  const isComplexFormat =
+    dateFormat.includes("'") ||
+    dateFormat.includes("MMMM") ||
+    dateFormat.includes("MMM") ||
+    dateFormat.includes("do");
+
   // Obtener el separador interno para parseo
   const internalSeparator = isComplexFormat ? "/" : separator;
 
@@ -219,17 +239,22 @@ const DatePicker: React.FC<DatePickerProps> = ({
   }, []);
 
   // Formatear fechas según el formato personalizado
-  const getFormattedDateWithCustomFormat = useCallback((date: Date | null) => {
-    if (!date || !isValid(date)) return "";
-    return format(date, dateFormat, { locale: es });
-  }, [dateFormat]);
+  const getFormattedDateWithCustomFormat = useCallback(
+    (date: Date | null) => {
+      if (!date || !isValid(date)) return "";
+      return format(date, dateFormat, { locale: es });
+    },
+    [dateFormat]
+  );
 
   // Texto de ayuda para el rango de fechas
   const getDateRangeText = useCallback(() => {
     const parts = [];
     if (minValue) parts.push(`mínimo ${getFormattedDate(minValue)}`);
     if (maxValue) parts.push(`máximo ${getFormattedDate(maxValue)}`);
-    return parts.length > 0 ? `Rango de fechas permitido: ${parts.join(", ")}` : "";
+    return parts.length > 0
+      ? `Rango de fechas permitido: ${parts.join(", ")}`
+      : "";
   }, [minValue, maxValue, getFormattedDate]);
 
   // Añadir una referencia para rastrear si estamos en el primer tecleo después de enfocar
@@ -243,189 +268,334 @@ const DatePicker: React.FC<DatePickerProps> = ({
   }, []);
 
   // Manejador de navegación por teclado entre segmentos
-  const handleSegmentKeyDown = useCallback((e: React.KeyboardEvent, segment: DateSegment) => {
-    // Navegación entre segmentos con teclas de flecha
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      const currentIndex = formatSegments.indexOf(segment);
-      if (currentIndex > 0) {
-        setActiveSegment(formatSegments[currentIndex - 1]);
-        // Reiniciamos el flag para permitir reemplazo
-        firstKeyPressRef.current = true;
-      }
-    } else if (e.key === "ArrowRight") {
-      e.preventDefault();
-      const currentIndex = formatSegments.indexOf(segment);
-      if (currentIndex < formatSegments.length - 1) {
-        setActiveSegment(formatSegments[currentIndex + 1]);
-        // Reiniciamos el flag para permitir reemplazo
-        firstKeyPressRef.current = true;
-      }
-    } else if (e.key === "Backspace" || e.key === "Delete") {
-      // Cuando se presiona Backspace o Delete, desactivamos el modo de reemplazo
-      firstKeyPressRef.current = false;
-      
-      let currentValue = "";
-      
-      if (segment === "day") currentValue = day;
-      else if (segment === "month") currentValue = month;
-      else if (segment === "year") currentValue = year;
-      
-      // Si hay contenido, permitir borrar caracteres
-      if (currentValue.length > 0) {
+  const handleSegmentKeyDown = useCallback(
+    (e: React.KeyboardEvent, segment: DateSegment) => {
+      // Navegación entre segmentos con teclas de flecha
+      if (e.key === "ArrowLeft") {
         e.preventDefault();
-        const newValue = currentValue.slice(0, -1);
-        
-        if (segment === "day") setDay(newValue);
-        else if (segment === "month") setMonth(newValue);
-        else if (segment === "year") setYear(newValue);
-        
-        // Si hemos borrado todo, moverse al segmento anterior
-        if (newValue === "") {
-          const currentIndex = formatSegments.indexOf(segment);
-          if (currentIndex > 0) {
-            setTimeout(() => {
-              setActiveSegment(formatSegments[currentIndex - 1]);
-              // Marcar como primer keypress para permitir reemplazo en el segmento anterior
-              firstKeyPressRef.current = true;
-            }, 10);
-          }
-        }
-      }
-      // Si está vacío, moverse al segmento anterior
-      else {
         const currentIndex = formatSegments.indexOf(segment);
         if (currentIndex > 0) {
-          e.preventDefault();
           setActiveSegment(formatSegments[currentIndex - 1]);
-          // Marcar como primer keypress para permitir reemplazo en el segmento anterior
+          // Reiniciamos el flag para permitir reemplazo
           firstKeyPressRef.current = true;
         }
-      }
-    } else if (/^[0-9]$/.test(e.key)) { 
-      // Solo reemplazar el contenido con el primer dígito si firstKeyPressRef.current es true
-      if (firstKeyPressRef.current) {
+      } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        
-        // Si es el primer tecleo, reemplazar todo el contenido
-        if (segment === "day") {
-          const numValue = parseInt(e.key, 10);
-          if (numValue >= 4) {
-            // Si es 4-9, añadir 0 delante y pasar al siguiente segmento
-            setDay(`0${e.key}`);
-            // Pasar al siguiente segmento
-            const nextSegment = formatSegments[formatSegments.indexOf("day") + 1];
-            if (nextSegment) {
+        const currentIndex = formatSegments.indexOf(segment);
+        if (currentIndex < formatSegments.length - 1) {
+          setActiveSegment(formatSegments[currentIndex + 1]);
+          // Reiniciamos el flag para permitir reemplazo
+          firstKeyPressRef.current = true;
+        }
+      } else if (e.key === "Backspace" || e.key === "Delete") {
+        // Cuando se presiona Backspace o Delete, desactivamos el modo de reemplazo
+        firstKeyPressRef.current = false;
+
+        let currentValue = "";
+
+        if (segment === "day") currentValue = day;
+        else if (segment === "month") currentValue = month;
+        else if (segment === "year") currentValue = year;
+
+        // Si hay contenido, permitir borrar caracteres
+        if (currentValue.length > 0) {
+          e.preventDefault();
+          const newValue = currentValue.slice(0, -1);
+
+          if (segment === "day") setDay(newValue);
+          else if (segment === "month") setMonth(newValue);
+          else if (segment === "year") setYear(newValue);
+
+          // Si hemos borrado todo, moverse al segmento anterior
+          if (newValue === "") {
+            const currentIndex = formatSegments.indexOf(segment);
+            if (currentIndex > 0) {
               setTimeout(() => {
-                setActiveSegment(nextSegment);
+                setActiveSegment(formatSegments[currentIndex - 1]);
+                // Marcar como primer keypress para permitir reemplazo en el segmento anterior
                 firstKeyPressRef.current = true;
+              }, 10);
+            }
+          }
+        }
+        // Si está vacío, moverse al segmento anterior
+        else {
+          const currentIndex = formatSegments.indexOf(segment);
+          if (currentIndex > 0) {
+            e.preventDefault();
+            setActiveSegment(formatSegments[currentIndex - 1]);
+            // Marcar como primer keypress para permitir reemplazo en el segmento anterior
+            firstKeyPressRef.current = true;
+          }
+        }
+      } else if (/^[0-9]$/.test(e.key)) {
+        // Solo reemplazar el contenido con el primer dígito si firstKeyPressRef.current es true
+        if (firstKeyPressRef.current) {
+          e.preventDefault();
+
+          // Si es el primer tecleo, reemplazar todo el contenido
+          if (segment === "day") {
+            const numValue = parseInt(e.key, 10);
+            if (numValue >= 4) {
+              // Si es 4-9, añadir 0 delante y pasar al siguiente segmento
+              setDay(`0${e.key}`);
+              // Pasar al siguiente segmento
+              const nextSegment =
+                formatSegments[formatSegments.indexOf("day") + 1];
+              if (nextSegment) {
+                setTimeout(() => {
+                  setActiveSegment(nextSegment);
+                  firstKeyPressRef.current = true;
+                }, 10);
+              }
+            } else {
+              // Si es 0-3, simplemente actualizar y esperar el segundo dígito
+              setDay(e.key);
+            }
+          } else if (segment === "month") {
+            const numValue = parseInt(e.key, 10);
+            if (numValue >= 2) {
+              // Si es 2-9, añadir 0 delante y pasar al siguiente segmento
+              const newMonth = `0${e.key}`;
+              setMonth(newMonth);
+
+              if (newMonth === "02" && day === "29") {
+                setDay("28");
+              }
+
+              // Pasar al siguiente segmento
+              const nextSegment =
+                formatSegments[formatSegments.indexOf("month") + 1];
+              if (nextSegment) {
+                setTimeout(() => {
+                  setActiveSegment(nextSegment);
+                  firstKeyPressRef.current = true;
+                }, 10);
+              }
+            } else {
+              // Si es 0-1, simplemente actualizar y esperar el segundo dígito
+              setMonth(e.key);
+            }
+          } else if (segment === "year") {
+            setYear(e.key);
+          }
+
+          // Ya no es el primer tecleo
+          firstKeyPressRef.current = false;
+        }
+      }
+    },
+    [formatSegments, day, month, year]
+  );
+
+  // Anunciar fecha seleccionada para lectores de pantalla
+  const announceSelectedDate = useCallback(
+    (date: Date) => {
+      // Para formatos complejos, usar el formato personalizado en la visualización
+      const displayDate = isComplexFormat
+        ? getFormattedDateWithCustomFormat(date)
+        : getFormattedDate(date);
+
+      const announcement = `Fecha seleccionada: ${displayDate}`;
+      const liveRegion = document.getElementById(`${componentId}-live`);
+      if (liveRegion) {
+        liveRegion.textContent = announcement;
+      }
+    },
+    [
+      componentId,
+      getFormattedDate,
+      getFormattedDateWithCustomFormat,
+      isComplexFormat,
+    ]
+  );
+
+  const handleSegmentChange = useCallback(
+    (segment: DateSegment, value: string) => {
+      // Actualizar el segmento correspondiente
+      if (segment === "day") {
+        // Lógica especial para el campo de día
+        const numValue = parseInt(value, 10);
+
+        // Si es vacío o no es un número, simplemente actualizar
+        if (value === "" || isNaN(numValue)) {
+          setDay(value);
+          return;
+        }
+
+        if (value.length === 1) {
+          // Si el valor es 4-9, añadir 0 delante y pasar al siguiente segmento
+          if (numValue >= 4) {
+            setDay(`0${value}`);
+            // Pasar al siguiente segmento
+            const currentIndex = formatSegments.indexOf("day");
+            if (currentIndex < formatSegments.length - 1) {
+              const nextSegment = formatSegments[currentIndex + 1];
+              if (nextSegment) {
+                setTimeout(() => {
+                  setActiveSegment(nextSegment);
+                  firstKeyPressRef.current = true;
+                }, 10);
+              }
+            } else {
+              // Si es el último segmento, quitar el foco
+              setTimeout(() => {
+                if (document.activeElement instanceof HTMLElement) {
+                  document.activeElement.blur();
+                }
+                setActiveSegment(null);
+                setIsFocused(false);
               }, 10);
             }
           } else {
             // Si es 0-3, simplemente actualizar y esperar el segundo dígito
-            setDay(e.key);
+            setDay(value);
           }
-        } else if (segment === "month") {
-          const numValue = parseInt(e.key, 10);
+        } else if (value.length === 2) {
+          // Validar que el día sea válido
+          if (numValue > 0 && numValue <= 31) {
+            // Validación adicional para febrero
+            if (numValue === 29 && month === "02") {
+              setDay("28");
+            } else {
+              setDay(value);
+            }
+
+            // Comprobar si es el último segmento según el formato
+            const currentIndex = formatSegments.indexOf("day");
+            if (currentIndex < formatSegments.length - 1) {
+              // Pasar al siguiente segmento
+              const nextSegment = formatSegments[currentIndex + 1];
+              if (nextSegment) {
+                setTimeout(() => {
+                  setActiveSegment(nextSegment);
+                  firstKeyPressRef.current = true;
+                }, 10);
+              }
+            } else {
+              // Si es el último segmento, quitar el foco
+              setTimeout(() => {
+                if (document.activeElement instanceof HTMLElement) {
+                  document.activeElement.blur();
+                }
+                setActiveSegment(null);
+                setIsFocused(false);
+              }, 10);
+            }
+          } else {
+            // Si el valor no es válido, mantener sólo el primer dígito
+            setDay(value[0]);
+          }
+        }
+
+        // Si se borró el último caracter y el campo está vacío, mover al anterior
+        if (value === "" && day.length === 1) {
+          const currentIndex = formatSegments.indexOf("day");
+          if (currentIndex > 0) {
+            setActiveSegment(formatSegments[currentIndex - 1]);
+            firstKeyPressRef.current = true; // Reiniciar el flag para el nuevo segmento
+          }
+        }
+      } else if (segment === "month") {
+        // Lógica especial para el campo de mes
+        const numValue = parseInt(value, 10);
+
+        // Si es vacío o no es un número, simplemente actualizar
+        if (value === "" || isNaN(numValue)) {
+          setMonth(value);
+          return;
+        }
+
+        if (value.length === 1) {
+          // Si el valor es 2-9, añadir 0 delante y pasar al siguiente segmento
           if (numValue >= 2) {
-            // Si es 2-9, añadir 0 delante y pasar al siguiente segmento
-            const newMonth = `0${e.key}`;
+            // Si este es febrero (02) y el día es 29, cambiarlo a 28
+            const newMonth = `0${value}`;
             setMonth(newMonth);
-            
+
             if (newMonth === "02" && day === "29") {
               setDay("28");
             }
-            
-            // Pasar al siguiente segmento
-            const nextSegment = formatSegments[formatSegments.indexOf("month") + 1];
-            if (nextSegment) {
+
+            // Comprobar si hay siguiente segmento según el formato
+            const currentIndex = formatSegments.indexOf("month");
+            if (currentIndex < formatSegments.length - 1) {
+              // Pasar al siguiente segmento
+              const nextSegment = formatSegments[currentIndex + 1];
+              if (nextSegment) {
+                setTimeout(() => {
+                  setActiveSegment(nextSegment);
+                  firstKeyPressRef.current = true;
+                }, 10);
+              }
+            } else {
+              // Si es el último segmento, quitar el foco
               setTimeout(() => {
-                setActiveSegment(nextSegment);
-                firstKeyPressRef.current = true;
+                if (document.activeElement instanceof HTMLElement) {
+                  document.activeElement.blur();
+                }
+                setActiveSegment(null);
+                setIsFocused(false);
               }, 10);
             }
           } else {
             // Si es 0-1, simplemente actualizar y esperar el segundo dígito
-            setMonth(e.key);
+            setMonth(value);
           }
-        } else if (segment === "year") {
-          setYear(e.key);
-        }
-        
-        // Ya no es el primer tecleo
-        firstKeyPressRef.current = false;
-      }
-    }
-  }, [formatSegments, day, month, year]);
+        } else if (value.length === 2) {
+          // Validar que el mes sea válido
+          if (numValue > 0 && numValue <= 12) {
+            setMonth(value);
 
-  // Anunciar fecha seleccionada para lectores de pantalla
-  const announceSelectedDate = useCallback((date: Date) => {
-    // Para formatos complejos, usar el formato personalizado en la visualización
-    const displayDate = isComplexFormat 
-      ? getFormattedDateWithCustomFormat(date) 
-      : getFormattedDate(date);
-      
-    const announcement = `Fecha seleccionada: ${displayDate}`;
-    const liveRegion = document.getElementById(`${componentId}-live`);
-    if (liveRegion) {
-      liveRegion.textContent = announcement;
-    }
-  }, [componentId, getFormattedDate, getFormattedDateWithCustomFormat, isComplexFormat]);
+            // Si este es febrero (02) y el día es 29, cambiarlo a 28
+            if (value === "02" && day === "29") {
+              setDay("28");
+            }
 
-  const handleSegmentChange = useCallback((segment: DateSegment, value: string) => {
-    // Actualizar el segmento correspondiente
-    if (segment === "day") {
-      // Lógica especial para el campo de día
-      const numValue = parseInt(value, 10);
-      
-      // Si es vacío o no es un número, simplemente actualizar
-      if (value === "" || isNaN(numValue)) {
-        setDay(value);
-        return;
-      }
-      
-      if (value.length === 1) {
-        // Si el valor es 4-9, añadir 0 delante y pasar al siguiente segmento
-        if (numValue >= 4) {
-          setDay(`0${value}`);
-          // Pasar al siguiente segmento
-          const currentIndex = formatSegments.indexOf("day");
-          if (currentIndex < formatSegments.length - 1) {
-            const nextSegment = formatSegments[currentIndex + 1];
-            if (nextSegment) {
+            // Comprobar si hay siguiente segmento según el formato
+            const currentIndex = formatSegments.indexOf("month");
+            if (currentIndex < formatSegments.length - 1) {
+              // Pasar al siguiente segmento
+              const nextSegment = formatSegments[currentIndex + 1];
+              if (nextSegment) {
+                setTimeout(() => {
+                  setActiveSegment(nextSegment);
+                  firstKeyPressRef.current = true;
+                }, 10);
+              }
+            } else {
+              // Si es el último segmento, quitar el foco
               setTimeout(() => {
-                setActiveSegment(nextSegment);
-                firstKeyPressRef.current = true;
+                if (document.activeElement instanceof HTMLElement) {
+                  document.activeElement.blur();
+                }
+                setActiveSegment(null);
+                setIsFocused(false);
               }, 10);
             }
           } else {
-            // Si es el último segmento, quitar el foco
-            setTimeout(() => {
-              if (document.activeElement instanceof HTMLElement) {
-                document.activeElement.blur();
-              }
-              setActiveSegment(null);
-              setIsFocused(false);
-            }, 10);
+            // Si el valor no es válido, mantener sólo el primer dígito
+            setMonth(value[0]);
           }
-        } else {
-          // Si es 0-3, simplemente actualizar y esperar el segundo dígito
-          setDay(value);
         }
-      } else if (value.length === 2) {
-        // Validar que el día sea válido
-        if (numValue > 0 && numValue <= 31) {
-          // Validación adicional para febrero
-          if (numValue === 29 && month === "02") {
-            setDay("28");
-          } else {
-            setDay(value);
+
+        // Si se borró el último caracter y el campo está vacío, mover al anterior
+        if (value === "" && month.length === 1) {
+          const currentIndex = formatSegments.indexOf("month");
+          if (currentIndex > 0) {
+            setActiveSegment(formatSegments[currentIndex - 1]);
+            firstKeyPressRef.current = true; // Reiniciar el flag para el nuevo segmento
           }
-          
+        }
+      } else if (segment === "year") {
+        setYear(value);
+
+        // Si se completó el año con 4 dígitos
+        if (value.length === 4) {
           // Comprobar si es el último segmento según el formato
-          const currentIndex = formatSegments.indexOf("day");
+          const currentIndex = formatSegments.indexOf("year");
           if (currentIndex < formatSegments.length - 1) {
-            // Pasar al siguiente segmento
+            // Si no es el último, pasar al siguiente segmento
             const nextSegment = formatSegments[currentIndex + 1];
             if (nextSegment) {
               setTimeout(() => {
@@ -434,7 +604,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               }, 10);
             }
           } else {
-            // Si es el último segmento, quitar el foco
+            // Solo si es el último segmento, quitar el foco
             setTimeout(() => {
               if (document.activeElement instanceof HTMLElement) {
                 document.activeElement.blur();
@@ -443,160 +613,31 @@ const DatePicker: React.FC<DatePickerProps> = ({
               setIsFocused(false);
             }, 10);
           }
-        } else {
-          // Si el valor no es válido, mantener sólo el primer dígito
-          setDay(value[0]);
         }
-      }
-      
-      // Si se borró el último caracter y el campo está vacío, mover al anterior
-      if (value === "" && day.length === 1) {
-        const currentIndex = formatSegments.indexOf("day");
-        if (currentIndex > 0) {
-          setActiveSegment(formatSegments[currentIndex - 1]);
-          firstKeyPressRef.current = true; // Reiniciar el flag para el nuevo segmento
+
+        // Si se escribió un 5º dígito en el año, hacer comportamiento circular
+        if (value.length > 4) {
+          setYear(value.substring(1));
         }
-      }
-    } else if (segment === "month") {
-      // Lógica especial para el campo de mes
-      const numValue = parseInt(value, 10);
-      
-      // Si es vacío o no es un número, simplemente actualizar
-      if (value === "" || isNaN(numValue)) {
-        setMonth(value);
-        return;
-      }
-      
-      if (value.length === 1) {
-        // Si el valor es 2-9, añadir 0 delante y pasar al siguiente segmento
-        if (numValue >= 2) {
-          // Si este es febrero (02) y el día es 29, cambiarlo a 28
-          const newMonth = `0${value}`;
-          setMonth(newMonth);
-          
-          if (newMonth === "02" && day === "29") {
-            setDay("28");
+
+        // Si se borró el último caracter y el campo está vacío, mover al anterior
+        if (value === "" && year.length === 1) {
+          const currentIndex = formatSegments.indexOf("year");
+          if (currentIndex > 0) {
+            setActiveSegment(formatSegments[currentIndex - 1]);
+            firstKeyPressRef.current = true; // Reiniciar el flag para el nuevo segmento
           }
-          
-          // Comprobar si hay siguiente segmento según el formato
-          const currentIndex = formatSegments.indexOf("month");
-          if (currentIndex < formatSegments.length - 1) {
-            // Pasar al siguiente segmento
-            const nextSegment = formatSegments[currentIndex + 1];
-            if (nextSegment) {
-              setTimeout(() => {
-                setActiveSegment(nextSegment);
-                firstKeyPressRef.current = true;
-              }, 10);
-            }
-          } else {
-            // Si es el último segmento, quitar el foco
-            setTimeout(() => {
-              if (document.activeElement instanceof HTMLElement) {
-                document.activeElement.blur();
-              }
-              setActiveSegment(null);
-              setIsFocused(false);
-            }, 10);
-          }
-        } else {
-          // Si es 0-1, simplemente actualizar y esperar el segundo dígito
-          setMonth(value);
-        }
-      } else if (value.length === 2) {
-        // Validar que el mes sea válido
-        if (numValue > 0 && numValue <= 12) {
-          setMonth(value);
-          
-          // Si este es febrero (02) y el día es 29, cambiarlo a 28
-          if (value === "02" && day === "29") {
-            setDay("28");
-          }
-          
-          // Comprobar si hay siguiente segmento según el formato
-          const currentIndex = formatSegments.indexOf("month");
-          if (currentIndex < formatSegments.length - 1) {
-            // Pasar al siguiente segmento
-            const nextSegment = formatSegments[currentIndex + 1];
-            if (nextSegment) {
-              setTimeout(() => {
-                setActiveSegment(nextSegment);
-                firstKeyPressRef.current = true;
-              }, 10);
-            }
-          } else {
-            // Si es el último segmento, quitar el foco
-            setTimeout(() => {
-              if (document.activeElement instanceof HTMLElement) {
-                document.activeElement.blur();
-              }
-              setActiveSegment(null);
-              setIsFocused(false);
-            }, 10);
-          }
-        } else {
-          // Si el valor no es válido, mantener sólo el primer dígito
-          setMonth(value[0]);
         }
       }
-      
-      // Si se borró el último caracter y el campo está vacío, mover al anterior
-      if (value === "" && month.length === 1) {
-        const currentIndex = formatSegments.indexOf("month");
-        if (currentIndex > 0) {
-          setActiveSegment(formatSegments[currentIndex - 1]);
-          firstKeyPressRef.current = true; // Reiniciar el flag para el nuevo segmento
-        }
-      }
-    } else if (segment === "year") {
-      setYear(value);
-      
-      // Si se completó el año con 4 dígitos
-      if (value.length === 4) {
-        // Comprobar si es el último segmento según el formato
-        const currentIndex = formatSegments.indexOf("year");
-        if (currentIndex < formatSegments.length - 1) {
-          // Si no es el último, pasar al siguiente segmento
-          const nextSegment = formatSegments[currentIndex + 1];
-          if (nextSegment) {
-            setTimeout(() => {
-              setActiveSegment(nextSegment);
-              firstKeyPressRef.current = true;
-            }, 10);
-          }
-        } else {
-          // Solo si es el último segmento, quitar el foco
-          setTimeout(() => {
-            if (document.activeElement instanceof HTMLElement) {
-              document.activeElement.blur();
-            }
-            setActiveSegment(null);
-            setIsFocused(false);
-          }, 10);
-        }
-      }
-      
-      // Si se escribió un 5º dígito en el año, hacer comportamiento circular
-      if (value.length > 4) {
-        setYear(value.substring(1));
-      }
-      
-      // Si se borró el último caracter y el campo está vacío, mover al anterior
-      if (value === "" && year.length === 1) {
-        const currentIndex = formatSegments.indexOf("year");
-        if (currentIndex > 0) {
-          setActiveSegment(formatSegments[currentIndex - 1]);
-          firstKeyPressRef.current = true; // Reiniciar el flag para el nuevo segmento
-        }
-      }
-    }
-  }, [formatSegments, day, month, year]);
+    },
+    [formatSegments, day, month, year]
+  );
 
   // Actualizamos el useEffect para manejar correctamente el foco
   useEffect(() => {
     if (activeSegment && segmentRefs[activeSegment]?.current) {
       segmentRefs[activeSegment].current?.focus();
-      
+
       // No mostramos cursor pero el primer keypress seguirá siendo true para reemplazar
       const input = segmentRefs[activeSegment].current;
       if (input) {
@@ -614,19 +655,19 @@ const DatePicker: React.FC<DatePickerProps> = ({
       isUpdatingFromDateChangeRef.current = false;
       return;
     }
-    
+
     if (selectedDate && isValid(selectedDate)) {
       // Marcar que estamos actualizando desde un cambio de fecha
       isUpdatingFromDateChangeRef.current = true;
-      
+
       // Actualizar segmentos con el formato correcto
       const formattedDay = format(selectedDate, "dd");
       const formattedMonth = format(selectedDate, "MM");
-      
+
       // Para el año, no formateamos con ceros iniciales
       const fullYear = format(selectedDate, "yyyy");
       const yearWithoutLeadingZeros = String(parseInt(fullYear, 10));
-      
+
       setDay(formattedDay);
       setMonth(formattedMonth);
       setYear(yearWithoutLeadingZeros);
@@ -652,8 +693,9 @@ const DatePicker: React.FC<DatePickerProps> = ({
     if (day === "29" && month === "02") {
       const yearNum = parseInt(year, 10);
       // Comprobar si es año bisiesto
-      const isLeapYear = (yearNum % 4 === 0 && yearNum % 100 !== 0) || (yearNum % 400 === 0);
-      
+      const isLeapYear =
+        (yearNum % 4 === 0 && yearNum % 100 !== 0) || yearNum % 400 === 0;
+
       // Si no es año bisiesto, cambiar a 28 de febrero
       if (!isLeapYear) {
         setDay("28");
@@ -671,17 +713,23 @@ const DatePicker: React.FC<DatePickerProps> = ({
       // Solo para el procesamiento, no para la visualización
       let processedYear = year;
       if (year.length < 4) {
-        processedYear = year.padStart(4, '0');
+        processedYear = year.padStart(4, "0");
       }
 
       // Para formatos complejos, usar el formato interno
       const dateString = `${day}${internalSeparator}${month}${internalSeparator}${processedYear}`;
       const formatPattern = `dd${internalSeparator}MM${internalSeparator}yyyy`;
-      const parsedDate = parse(dateString, formatPattern, new Date(), { locale: es });
+      const parsedDate = parse(dateString, formatPattern, new Date(), {
+        locale: es,
+      });
 
       if (isValid(parsedDate)) {
         // Si la fecha es diferente, actualizar
-        if (!selectedDate || format(parsedDate, 'yyyy-MM-dd') !== format(selectedDate, 'yyyy-MM-dd')) {
+        if (
+          !selectedDate ||
+          format(parsedDate, "yyyy-MM-dd") !==
+            format(selectedDate, "yyyy-MM-dd")
+        ) {
           isUpdatingFromDateChangeRef.current = true;
           setSelectedDate(parsedDate);
           onChange?.(parsedDate);
@@ -691,7 +739,15 @@ const DatePicker: React.FC<DatePickerProps> = ({
     } catch (error) {
       // Si no se puede parsear, no hacemos nada
     }
-  }, [day, month, year, selectedDate, onChange, internalSeparator, announceSelectedDate]);
+  }, [
+    day,
+    month,
+    year,
+    selectedDate,
+    onChange,
+    internalSeparator,
+    announceSelectedDate,
+  ]);
 
   // Efecto para actualizar la fecha cuando cambian los segmentos
   useEffect(() => {
@@ -709,7 +765,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
       setSelectedDate(null);
       // Si se limpia la fecha, no hay razón para mostrar formato complejo
       setShowingComplexFormat(false);
-    } else if (value && (!selectedDate || format(value, 'yyyy-MM-dd') !== format(selectedDate, 'yyyy-MM-dd'))) {
+    } else if (
+      value &&
+      (!selectedDate ||
+        format(value, "yyyy-MM-dd") !== format(selectedDate, "yyyy-MM-dd"))
+    ) {
       setSelectedDate(value);
       // Al recibir una fecha nueva desde props, mostrar el formato complejo si aplica
       if (isComplexFormat) {
@@ -735,53 +795,57 @@ const DatePicker: React.FC<DatePickerProps> = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [handleClickOutside]);
-  
+
   // Optimizamos las funciones de manejo de eventos con useCallback
-  const handleDateChange = useCallback((date: Date) => {
-    // Establecer la fecha seleccionada directamente
-    isUpdatingFromDateChangeRef.current = true;
-    
-    // Realizar todas las actualizaciones de estado juntas
-    const formattedDay = format(date, "dd");
-    const formattedMonth = format(date, "MM");
-    const fullYear = format(date, "yyyy");
-    const yearWithoutLeadingZeros = String(parseInt(fullYear, 10));
-    
-    // Cerrar el calendario inmediatamente antes de actualizar los otros estados
-    setIsOpen(false);
-    
-    // Actualizar todos los estados sin setTimeout para evitar efectos visuales no deseados
-    setSelectedDate(date);
-    setDay(formattedDay);
-    setMonth(formattedMonth);
-    setYear(yearWithoutLeadingZeros);
-    // Quitar el foco completamente
-    setActiveSegment(null);
-    setIsFocused(false);
-    // Si hay algún elemento activo, quitarle el foco
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-    // Si es formato complejo, mostrar el formato completo después de seleccionar
-    if (isComplexFormat) {
-      setShowingComplexFormat(true);
-    }
-    onChange?.(date);
-    announceSelectedDate(date);
-  }, [onChange, announceSelectedDate, isComplexFormat]);
+  const handleDateChange = useCallback(
+    (date: Date) => {
+      // Establecer la fecha seleccionada directamente
+      isUpdatingFromDateChangeRef.current = true;
+
+      // Realizar todas las actualizaciones de estado juntas
+      const formattedDay = format(date, "dd");
+      const formattedMonth = format(date, "MM");
+      const fullYear = format(date, "yyyy");
+      const yearWithoutLeadingZeros = String(parseInt(fullYear, 10));
+
+      // Cerrar el calendario inmediatamente antes de actualizar los otros estados
+      setIsOpen(false);
+
+      // Actualizar todos los estados sin setTimeout para evitar efectos visuales no deseados
+      setSelectedDate(date);
+      setDay(formattedDay);
+      setMonth(formattedMonth);
+      setYear(yearWithoutLeadingZeros);
+      // Quitar el foco completamente
+      setActiveSegment(null);
+      setIsFocused(false);
+      // Si hay algún elemento activo, quitarle el foco
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      // Si es formato complejo, mostrar el formato completo después de seleccionar
+      if (isComplexFormat) {
+        setShowingComplexFormat(true);
+      }
+      onChange?.(date);
+      announceSelectedDate(date);
+    },
+    [onChange, announceSelectedDate, isComplexFormat]
+  );
 
   const toggleCalendar = () => {
     if (!disabled && !readOnly) {
       const newIsOpen = !isOpen;
       setIsOpen(newIsOpen);
-      
+
       if (newIsOpen) {
         // Si estamos abriendo el calendario, anunciar y dar foco al primer segmento
         const liveRegion = document.getElementById(`${componentId}-live`);
         if (liveRegion) {
-          liveRegion.textContent = "Calendario abierto. Use las teclas de flecha para navegar por las fechas.";
+          liveRegion.textContent =
+            "Calendario abierto. Use las teclas de flecha para navegar por las fechas.";
         }
-        
+
         // Activar el primer segmento si no hay ninguno activo
         if (!activeSegment && formatSegments.length > 0) {
           setActiveSegment(formatSegments[0]);
@@ -845,7 +909,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   // Clases para el color del ícono según la variante
   const iconColorClasses = {
-    default: "text-zinc-500 dark:text-zinc-400",
+    default: "text-zinc-500 dark:text-neutral-400",
     primary: "text-blue-500 dark:text-blue-400",
     secondary: "text-purple-500 dark:text-purple-400",
     success: "text-green-500 dark:text-green-400",
@@ -873,14 +937,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   // Necesitamos una variable para controlar si se está mostrando el formato completo
   const [showingComplexFormat, setShowingComplexFormat] = useState(true);
-  
+
   // Cada vez que cambia el activeSegment, debemos mostrar los segmentos individuales
   useEffect(() => {
     if (activeSegment) {
       setShowingComplexFormat(false);
     }
   }, [activeSegment]);
-  
+
   // Cuando se pierde el foco, volvemos a mostrar el formato complejo si corresponde
   useEffect(() => {
     if (!isFocused && isComplexFormat && selectedDate) {
@@ -914,7 +978,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
       <div id={helpTextId} className="sr-only">
         {getDateRangeText()}
         Use las teclas de flecha para navegar por el calendario una vez abierto.
-        Presione Enter para seleccionar una fecha o Escape para cerrar el calendario.
+        Presione Enter para seleccionar una fecha o Escape para cerrar el
+        calendario.
       </div>
 
       {label && (
@@ -931,7 +996,9 @@ const DatePicker: React.FC<DatePickerProps> = ({
           {label}
           {required && (
             <>
-              <span aria-hidden="true" className="text-red-500 ml-1">*</span>
+              <span aria-hidden="true" className="text-red-500 ml-1">
+                *
+              </span>
               <span className="sr-only">(requerido)</span>
             </>
           )}
@@ -964,7 +1031,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         >
           <div
             className={cn(
-              "flex-grow flex items-center pl-3",
+              "flex-grow flex items-center pl-3"
               // Quitamos cursor-pointer de aquí para aplicarlo solo a los iconos
             )}
           >
@@ -978,14 +1045,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
               aria-hidden="true"
               onClick={toggleCalendar}
             />
-            
+
             {/* Volvemos a un enfoque simple que funciona correctamente */}
             <div
               id={inputId}
-              className={cn(
-                "flex items-center gap-1",
-                inputClassName
-              )}
+              className={cn("flex items-center gap-1", inputClassName)}
               role="group"
               aria-label={label || "Selector de fecha"}
               aria-describedby={cn(
@@ -996,12 +1060,19 @@ const DatePicker: React.FC<DatePickerProps> = ({
               tabIndex={-1}
             >
               {/* Si es un formato complejo, hay una fecha válida seleccionada y no estamos editando, mostrar el formato completo */}
-              {isComplexFormat && selectedDate && isValid(selectedDate) && showingComplexFormat ? (
-                <div 
-                  id={formatSegments[0] === "day" ? dayInputId : formatSegments[0] === "month" ? monthInputId : yearInputId}
-                  className={cn(
-                    "px-2 py-1 w-full cursor-pointer"
-                  )}
+              {isComplexFormat &&
+              selectedDate &&
+              isValid(selectedDate) &&
+              showingComplexFormat ? (
+                <div
+                  id={
+                    formatSegments[0] === "day"
+                      ? dayInputId
+                      : formatSegments[0] === "month"
+                      ? monthInputId
+                      : yearInputId
+                  }
+                  className={cn("px-2 py-1 w-full cursor-pointer")}
                   onClick={() => {
                     // Al hacer clic en el formato completo, activar el primer segmento y mostrar la edición segmentada
                     setShowingComplexFormat(false);
@@ -1018,7 +1089,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                   // Determinamos qué valor y placeholder mostrar
                   let value = "";
                   let placeholder = "";
-                  
+
                   if (segment === "day") {
                     value = day;
                     placeholder = dayPlaceholder;
@@ -1029,9 +1100,9 @@ const DatePicker: React.FC<DatePickerProps> = ({
                     value = year;
                     placeholder = yearPlaceholder;
                   }
-                  
+
                   const isActive = activeSegment === segment;
-                  
+
                   // Ajustamos la anchura según el segmento y el tamaño del datepicker
                   let width;
                   if (segment === "year") {
@@ -1039,14 +1110,20 @@ const DatePicker: React.FC<DatePickerProps> = ({
                   } else {
                     width = size === "lg" ? "w-9" : "w-7";
                   }
-                  
+
                   // Para soportar formato yyyy-MM-dd, necesitamos mostrar segmentos en orden correcto
                   return (
                     <React.Fragment key={segment}>
                       <input
                         ref={segmentRefs[segment]}
                         type="text"
-                        id={segment === "day" ? dayInputId : segment === "month" ? monthInputId : yearInputId}
+                        id={
+                          segment === "day"
+                            ? dayInputId
+                            : segment === "month"
+                            ? monthInputId
+                            : yearInputId
+                        }
                         className={cn(
                           "border-0 p-0 bg-transparent focus:ring-0 focus:outline-none",
                           width,
@@ -1071,11 +1148,13 @@ const DatePicker: React.FC<DatePickerProps> = ({
                           if (firstKeyPressRef.current) {
                             return;
                           }
-                          
+
                           // Capturar cambios manuales en los inputs y limitar caracteres
                           const maxLength = segment === "year" ? 4 : 2;
-                          const newValue = e.target.value.replace(/\D/g, '').substring(0, maxLength);
-                          
+                          const newValue = e.target.value
+                            .replace(/\D/g, "")
+                            .substring(0, maxLength);
+
                           handleSegmentChange(segment, newValue);
                         }}
                         onClick={() => {
@@ -1084,16 +1163,22 @@ const DatePicker: React.FC<DatePickerProps> = ({
                           handleSegmentClick(segment);
                         }}
                         aria-label={
-                          segment === "day" ? "Día" : segment === "month" ? "Mes" : "Año"
+                          segment === "day"
+                            ? "Día"
+                            : segment === "month"
+                            ? "Mes"
+                            : "Año"
                         }
                         aria-invalid={!!errorMessage}
                       />
-                      
+
                       {index < formatSegments.length - 1 && (
-                        <span className={cn(
-                          "text-zinc-500 dark:text-zinc-400",
-                          separator.includes("de") && "px-1" // Añadir padding si el separador contiene "de"
-                        )}>
+                        <span
+                          className={cn(
+                            "text-zinc-500 dark:text-neutral-400",
+                            separator.includes("de") && "px-1" // Añadir padding si el separador contiene "de"
+                          )}
+                        >
                           {separator}
                         </span>
                       )}
@@ -1138,11 +1223,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              transition={{ 
-                type: "spring", 
-                damping: 25, 
+              transition={{
+                type: "spring",
+                damping: 25,
                 stiffness: 350,
-                duration: 0.2
+                duration: 0.2,
               }}
               className="absolute z-50 mt-1 left-1/2 transform -translate-x-1/2 shadow-xl"
               style={{
