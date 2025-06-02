@@ -178,13 +178,17 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 
   // Función auxiliar para encontrar la siguiente opción habilitada
-  const findNextEnabledOption = (currentIndex: number, direction: 'next' | 'prev', options: AutocompleteOption[]): number => {
+  const findNextEnabledOption = (
+    currentIndex: number,
+    direction: "next" | "prev",
+    options: AutocompleteOption[]
+  ): number => {
     let nextIndex = currentIndex;
-    const increment = direction === 'next' ? 1 : -1;
+    const increment = direction === "next" ? 1 : -1;
 
     while (true) {
       nextIndex += increment;
-      
+
       // Verificar límites
       if (nextIndex < 0 || nextIndex >= options.length) {
         return currentIndex;
@@ -405,13 +409,18 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const filteredOptionsArray = Object.values(groupedOptions).flat();
 
-    if (!isOpen && (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ")) {
+    if (
+      !isOpen &&
+      (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ")
+    ) {
       e.preventDefault();
       setIsOpen(true);
-      
+
       // Si abrimos con flecha abajo, focalizamos la primera opción no deshabilitada
       if (e.key === "ArrowDown") {
-        const firstEnabledIndex = filteredOptionsArray.findIndex(opt => !opt.disabled);
+        const firstEnabledIndex = filteredOptionsArray.findIndex(
+          (opt) => !opt.disabled
+        );
         setFocusedIndex(firstEnabledIndex >= 0 ? firstEnabledIndex : -1);
       }
       return;
@@ -427,27 +436,29 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 
         case "ArrowDown":
           e.preventDefault();
-          setFocusedIndex(current => {
+          setFocusedIndex((current) => {
             // Si no hay opción focada, empezar por la primera habilitada
             if (current === -1) {
-              const firstEnabledIndex = filteredOptionsArray.findIndex(opt => !opt.disabled);
+              const firstEnabledIndex = filteredOptionsArray.findIndex(
+                (opt) => !opt.disabled
+              );
               return firstEnabledIndex >= 0 ? firstEnabledIndex : -1;
             }
             // Encontrar la siguiente opción habilitada
-            return findNextEnabledOption(current, 'next', filteredOptionsArray);
+            return findNextEnabledOption(current, "next", filteredOptionsArray);
           });
           break;
 
         case "ArrowUp":
           e.preventDefault();
-          setFocusedIndex(current => {
+          setFocusedIndex((current) => {
             if (current === -1) {
               // Si no hay opción focada, empezar por la última habilitada
               const lastEnabledIndex = filteredOptionsArray.length - 1;
               return lastEnabledIndex >= 0 ? lastEnabledIndex : -1;
             }
             // Encontrar la opción habilitada anterior
-            return findNextEnabledOption(current, 'prev', filteredOptionsArray);
+            return findNextEnabledOption(current, "prev", filteredOptionsArray);
           });
           break;
 
@@ -486,7 +497,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         onSelect={() => handleSelect(option)}
         className={cn(
           itemClassName,
-          focusedIndex === index && !option.disabled && "bg-zinc-100 dark:bg-zinc-800"
+          focusedIndex === index &&
+            !option.disabled &&
+            "bg-zinc-100 dark:bg-zinc-800"
         )}
       />
     </div>
@@ -522,7 +535,11 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               )}
             >
               {title}
-              {required && <span className="text-red-500 ml-0.5" aria-label="requerido">*</span>}
+              {required && (
+                <span className="text-red-500 ml-0.5" aria-label="requerido">
+                  *
+                </span>
+              )}
             </label>
           </div>
         )}
@@ -546,7 +563,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           role="textbox"
           aria-autocomplete="list"
           aria-controls={listboxId}
-          aria-activedescendant={selectedOption ? `option-${selectedOption.value}` : undefined}
+          aria-activedescendant={
+            selectedOption ? `option-${selectedOption.value}` : undefined
+          }
           aria-required={required}
           aria-disabled={disabled}
         />
@@ -593,7 +612,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
             )}
             onClick={toggleDropdown}
             disabled={disabled}
-            aria-label={isOpen ? "Cerrar lista de opciones" : "Abrir lista de opciones"}
+            aria-label={
+              isOpen ? "Cerrar lista de opciones" : "Abrir lista de opciones"
+            }
             aria-expanded={isOpen}
           >
             <ChevronsUpDown className="h-4 w-4" aria-hidden="true" />
@@ -618,7 +639,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
             id={listboxId}
             aria-label="Lista de opciones"
           >
-            <div 
+            <div
               className={cn(
                 "overflow-y-auto max-h-60",
                 "scrollbar-none",
@@ -633,16 +654,20 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
                       title={group}
                       titleClassName={sectionTitleClassName}
                     >
-                      {groupOptions.map((option, index) => renderOption(option, index))}
+                      {groupOptions.map((option, index) =>
+                        renderOption(option, index)
+                      )}
                     </AutocompleteSection>
                   )}
                   {group === "default" &&
-                    groupOptions.map((option, index) => renderOption(option, index))}
+                    groupOptions.map((option, index) =>
+                      renderOption(option, index)
+                    )}
                 </React.Fragment>
               ))}
               {filteredOptions.length === 0 && (
-                <div 
-                  className="px-3 py-2 text-sm text-zinc-500 dark:text-zinc-400"
+                <div
+                  className="px-3 py-2 text-sm text-zinc-500 dark:text-neutral-400"
                   role="alert"
                 >
                   No se encontraron resultados
