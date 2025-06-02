@@ -29,7 +29,7 @@ const frameworkPages = [
   { name: "next.js", path: "/docs/frameworks/nextjs", section: "frameworks" },
   { name: "astro", path: "/docs/frameworks/astro", section: "frameworks" },
   { name: "vite", path: "/docs/frameworks/vite", section: "frameworks" },
-  { name: "react", path: "/docs/frameworks/react", section: "frameworks" },
+  { name: "laravel", path: "/docs/frameworks/laravel", section: "frameworks" },
 ];
 
 // Componentes (se ordenarán alfabéticamente)
@@ -124,9 +124,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const totalPages = allPages.length;
   
-  // Verificar si la página actual es un changelog
-  const isChangelog = pathname?.includes('/changelog');
-
   useEffect(() => {
     // Encontrar el índice de la página actual en nuestra lista unificada
     const currentIndex = allPages.findIndex((page) => {
@@ -182,8 +179,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({
       <Header />
       <div className="flex-1 min-h-[calc(100vh-4.5rem)] pt-16">
         <div className="container mx-auto">
-          {!isChangelog && <Sidebar />}
-          <div className={`${isChangelog ? '' : 'md:ml-[220px] lg:ml-[240px]'} px-4 md:px-6`}>
+          <Sidebar />
+          <div className="md:ml-[220px] lg:ml-[240px] px-4 md:px-6">
             <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
               <div className="mx-auto w-full min-w-0 min-h-[calc(100vh-12rem)]">
                 {children} {/* Aquí va el contenido dinámico que pasas */}
