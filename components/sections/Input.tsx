@@ -130,137 +130,140 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }, [error, success]);
 
     // Validar el valor actual
-    const validateInput = useCallback((value: string) => {
-      // Función para procesar reglas de validación comunes basadas en cadenas
-      const processStringValidation = (
-        value: string,
-        rule: string
-      ): string | undefined => {
-        switch (rule) {
-          case "email":
-            return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-              ? "Introduce un correo electrónico válido"
-              : undefined;
-          case "url":
-            return !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
-              value
-            )
-              ? "Introduce una URL válida"
-              : undefined;
-          case "min:8":
-            return value.length < 8
-              ? "Debe tener al menos 8 caracteres"
-              : undefined;
-          default:
-            if (rule.startsWith("min:")) {
-              const min = parseInt(rule.split(":")[1]);
-              return value.length < min
-                ? `Debe tener al menos ${min} caracteres`
+    const validateInput = useCallback(
+      (value: string) => {
+        // Función para procesar reglas de validación comunes basadas en cadenas
+        const processStringValidation = (
+          value: string,
+          rule: string
+        ): string | undefined => {
+          switch (rule) {
+            case "email":
+              return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+                ? "Introduce un correo electrónico válido"
                 : undefined;
-            }
-            return undefined;
-        }
-      };
-
-      // Eliminamos esta restricción para permitir validación en cualquier momento
-      // if (!touched) return;
-
-      // Detectar si hay reglas de validación específicas
-      const hasValidationRules =
-        pattern || validate || type === "email" || type === "url";
-
-      // No reiniciar validación si es un error externo y no hay reglas de validación
-      if (!(errorIsExternal && !hasValidationRules)) {
-        // Reiniciar validación
-        setValidationError(undefined);
-        setIsValid(false);
-      }
-
-      // Validar si está requerido y está vacío
-      if (required && !value) {
-        setValidationError("Este campo es obligatorio");
-        return;
-      }
-
-      // Si no hay reglas de validación, no marcar como válido automáticamente
-      if (!hasValidationRules) {
-        return;
-      }
-
-      // Si no hay valor y no es requerido, no continuar con la validación
-      if (!value) {
-        return;
-      }
-
-      let passedValidation = true;
-
-      // Validar patrón si existe
-      if (pattern && value) {
-        const regex = new RegExp(pattern);
-        if (!regex.test(value)) {
-          if (type === "email") {
-            setValidationError("Introduce un correo electrónico válido");
-          } else if (type === "url") {
-            setValidationError("Introduce una URL válida");
-          } else {
-            setValidationError("El formato introducido no es válido");
+            case "url":
+              return !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
+                value
+              )
+                ? "Introduce una URL válida"
+                : undefined;
+            case "min:8":
+              return value.length < 8
+                ? "Debe tener al menos 8 caracteres"
+                : undefined;
+            default:
+              if (rule.startsWith("min:")) {
+                const min = parseInt(rule.split(":")[1]);
+                return value.length < min
+                  ? `Debe tener al menos ${min} caracteres`
+                  : undefined;
+              }
+              return undefined;
           }
-          passedValidation = false;
+        };
+
+        // Eliminamos esta restricción para permitir validación en cualquier momento
+        // if (!touched) return;
+
+        // Detectar si hay reglas de validación específicas
+        const hasValidationRules =
+          pattern || validate || type === "email" || type === "url";
+
+        // No reiniciar validación si es un error externo y no hay reglas de validación
+        if (!(errorIsExternal && !hasValidationRules)) {
+          // Reiniciar validación
+          setValidationError(undefined);
+          setIsValid(false);
+        }
+
+        // Validar si está requerido y está vacío
+        if (required && !value) {
+          setValidationError("Este campo es obligatorio");
           return;
         }
-      }
 
-      // Validación de tipos específicos
-      if (value) {
-        if (type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          setValidationError("Introduce un correo electrónico válido");
-          passedValidation = false;
-          return;
-        } else if (
-          type === "url" &&
-          !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
-            value
-          )
-        ) {
-          setValidationError("Introduce una URL válida");
-          passedValidation = false;
+        // Si no hay reglas de validación, no marcar como válido automáticamente
+        if (!hasValidationRules) {
           return;
         }
-      }
 
-      // Función de validación personalizada o regla en cadena
-      if (validate && value) {
-        if (typeof validate === "string") {
-          // Si es una cadena, procesamos la regla predefinida
-          const stringError = processStringValidation(value, validate);
-          if (stringError) {
-            setValidationError(stringError);
+        // Si no hay valor y no es requerido, no continuar con la validación
+        if (!value) {
+          return;
+        }
+
+        let passedValidation = true;
+
+        // Validar patrón si existe
+        if (pattern && value) {
+          const regex = new RegExp(pattern);
+          if (!regex.test(value)) {
+            if (type === "email") {
+              setValidationError("Introduce un correo electrónico válido");
+            } else if (type === "url") {
+              setValidationError("Introduce una URL válida");
+            } else {
+              setValidationError("El formato introducido no es válido");
+            }
             passedValidation = false;
             return;
           }
-        } else if (typeof validate === "function") {
-          // Si es una función, la ejecutamos (debe ser marcada con 'use server' en el cliente)
-          try {
-            const customError = validate(value);
-            if (customError) {
-              setValidationError(customError);
+        }
+
+        // Validación de tipos específicos
+        if (value) {
+          if (type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            setValidationError("Introduce un correo electrónico válido");
+            passedValidation = false;
+            return;
+          } else if (
+            type === "url" &&
+            !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
+              value
+            )
+          ) {
+            setValidationError("Introduce una URL válida");
+            passedValidation = false;
+            return;
+          }
+        }
+
+        // Función de validación personalizada o regla en cadena
+        if (validate && value) {
+          if (typeof validate === "string") {
+            // Si es una cadena, procesamos la regla predefinida
+            const stringError = processStringValidation(value, validate);
+            if (stringError) {
+              setValidationError(stringError);
               passedValidation = false;
               return;
             }
-          } catch (err) {
-            console.error("Error al ejecutar la validación:", err);
-            setValidationError("Error de validación");
-            passedValidation = false;
-            return;
+          } else if (typeof validate === "function") {
+            // Si es una función, la ejecutamos (debe ser marcada con 'use server' en el cliente)
+            try {
+              const customError = validate(value);
+              if (customError) {
+                setValidationError(customError);
+                passedValidation = false;
+                return;
+              }
+            } catch (err) {
+              console.error("Error al ejecutar la validación:", err);
+              setValidationError("Error de validación");
+              passedValidation = false;
+              return;
+            }
           }
         }
-      }
 
-      // Solo marcar como válido si hay reglas de validación y pasaron todas
-      if (hasValidationRules && passedValidation) {
-        setIsValid(true);
-      }
-    }, [pattern, validate, type, required, errorIsExternal]);
+        // Solo marcar como válido si hay reglas de validación y pasaron todas
+        if (hasValidationRules && passedValidation) {
+          setIsValid(true);
+        }
+      },
+      [pattern, validate, type, required, errorIsExternal]
+    );
 
     // Efecto para validar valores iniciales si hay reglas de validación
     useEffect(() => {
@@ -280,7 +283,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         // Validar el valor inicial
         validateInput(inputValue);
       }
-    }, [pattern, validate, type, inputValue, touched, validationError, isValid, validateInput]);
+    }, [
+      pattern,
+      validate,
+      type,
+      inputValue,
+      touched,
+      validationError,
+      isValid,
+      validateInput,
+    ]);
 
     useEffect(() => {
       // No realizamos validación automática si:
@@ -296,14 +308,24 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (shouldValidate) {
         validateInput(inputValue);
       }
-    }, [inputValue, touched, success, errorIsExternal, pattern, validate, type, validateInput]);
+    }, [
+      inputValue,
+      touched,
+      success,
+      errorIsExternal,
+      pattern,
+      validate,
+      type,
+      validateInput,
+    ]);
 
     // Generar IDs únicos para accesibilidad
     const uniqueIdBase = useId();
     const uniqueId = `input-${uniqueIdBase.replace(/:/g, "")}`;
     const inputId = id || name || uniqueId;
     const errorMessageId = customErrorId || `${inputId}-error`;
-    const descriptionMessageId = customDescriptionId || `${inputId}-description`;
+    const descriptionMessageId =
+      customDescriptionId || `${inputId}-description`;
     const labelId = `${inputId}-label`;
 
     // Estado para manejar el anuncio de cambios para lectores de pantalla
@@ -334,7 +356,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         setTouched(true);
       }
 
-      const hasValidationRules = pattern || validate || type === "email" || type === "url";
+      const hasValidationRules =
+        pattern || validate || type === "email" || type === "url";
       if (!errorIsExternal || (errorIsExternal && hasValidationRules)) {
         validateInput(newValue);
       }
@@ -362,7 +385,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       setIsFocused(false);
       setTouched(true);
 
-      const hasValidationRules = pattern || validate || type === "email" || type === "url";
+      const hasValidationRules =
+        pattern || validate || type === "email" || type === "url";
       if (!errorIsExternal || (errorIsExternal && hasValidationRules)) {
         validateInput(e.target.value);
       }
@@ -400,7 +424,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const paddingClasses = {
       sm: icon ? (iconPosition === "left" ? "pl-7 pr-3" : "pl-3 pr-7") : "px-3",
       md: icon ? (iconPosition === "left" ? "pl-9 pr-4" : "pl-4 pr-9") : "px-4",
-      lg: icon ? (iconPosition === "left" ? "pl-10 pr-5" : "pl-5 pr-10") : "px-5",
+      lg: icon
+        ? iconPosition === "left"
+          ? "pl-10 pr-5"
+          : "pl-5 pr-10"
+        : "px-5",
     };
 
     const radiusClasses = {
@@ -442,36 +470,46 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const variantClasses = {
       default: {
         base: "border-zinc-400 dark:border-zinc-800 hover:border-zinc-500 dark:hover:border-zinc-700 transition-colors duration-200",
-        focused: "border-zinc-700 dark:border-zinc-300 ring-1 ring-zinc-700/30 dark:ring-zinc-300/30",
+        focused:
+          "border-zinc-700 dark:border-zinc-300 ring-1 ring-zinc-700/30 dark:ring-zinc-300/30",
       },
       primary: {
         base: "border-blue-400 dark:border-blue-800 hover:border-blue-500 dark:hover:border-blue-700 transition-colors duration-200",
-        focused: "border-blue-700 dark:border-blue-300 ring-1 ring-blue-700/30 dark:ring-blue-300/30",
+        focused:
+          "border-blue-700 dark:border-blue-300 ring-1 ring-blue-700/30 dark:ring-blue-300/30",
       },
       secondary: {
         base: "border-purple-400 dark:border-purple-800 hover:border-purple-500 dark:hover:border-purple-700 transition-colors duration-200",
-        focused: "border-purple-700 dark:border-purple-300 ring-1 ring-purple-700/30 dark:ring-purple-300/30",
+        focused:
+          "border-purple-700 dark:border-purple-300 ring-1 ring-purple-700/30 dark:ring-purple-300/30",
       },
       success: {
         base: "border-green-400 dark:border-green-800 hover:border-green-500 dark:hover:border-green-700 transition-colors duration-200",
-        focused: "border-green-700 dark:border-green-300 ring-1 ring-green-700/30 dark:ring-green-300/30",
+        focused:
+          "border-green-700 dark:border-green-300 ring-1 ring-green-700/30 dark:ring-green-300/30",
       },
       warning: {
         base: "border-amber-400 dark:border-amber-800 hover:border-amber-500 dark:hover:border-amber-700 transition-colors duration-200",
-        focused: "border-amber-700 dark:border-amber-300 ring-1 ring-amber-700/30 dark:ring-amber-300/30",
+        focused:
+          "border-amber-700 dark:border-amber-300 ring-1 ring-amber-700/30 dark:ring-amber-300/30",
       },
       danger: {
         base: "border-red-400 dark:border-red-800 hover:border-red-500 dark:hover:border-red-700 transition-colors duration-200",
-        focused: "border-red-700 dark:border-red-300 ring-1 ring-red-700/30 dark:ring-red-300/30",
-      }
+        focused:
+          "border-red-700 dark:border-red-300 ring-1 ring-red-700/30 dark:ring-red-300/30",
+      },
     };
 
     // Estilos de estados de validación (independientes de la variante)
     const validationClasses = {
-      error: "border-red-500 dark:border-red-500 ring-1 ring-red-500/20 dark:ring-red-500/20",
-      errorFocused: "border-red-700 dark:border-red-400 ring-1 ring-red-700/30 dark:ring-red-400/30",
-      success: "border-green-500 dark:border-green-500 ring-1 ring-green-500/20 dark:ring-green-500/20",
-      successFocused: "border-green-700 dark:border-green-300 ring-1 ring-green-700/30 dark:ring-green-300/30"
+      error:
+        "border-red-500 dark:border-red-500 ring-1 ring-red-500/20 dark:ring-red-500/20",
+      errorFocused:
+        "border-red-700 dark:border-red-400 ring-1 ring-red-700/30 dark:ring-red-400/30",
+      success:
+        "border-green-500 dark:border-green-500 ring-1 ring-green-500/20 dark:ring-green-500/20",
+      successFocused:
+        "border-green-700 dark:border-green-300 ring-1 ring-green-700/30 dark:ring-green-300/30",
     };
 
     // Determinar la clase de borde a usar
@@ -479,7 +517,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     // Aplicar estados de validación o focus
     if (validationError) {
-      borderClass = isFocused ? validationClasses.errorFocused : validationClasses.error;
+      borderClass = isFocused
+        ? validationClasses.errorFocused
+        : validationClasses.error;
     } else if (
       isValid &&
       (pattern ||
@@ -488,7 +528,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         type === "url" ||
         success !== undefined)
     ) {
-      borderClass = isFocused ? validationClasses.successFocused : validationClasses.success;
+      borderClass = isFocused
+        ? validationClasses.successFocused
+        : validationClasses.success;
     } else if (isFocused) {
       borderClass = variantClasses[variant].focused;
     }
@@ -520,7 +562,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               hideLabel ? "sr-only" : "block mb-1.5 font-medium",
               labelSizeClasses[size],
               disabled
-                ? "text-zinc-400 dark:text-zinc-600"
+                ? "text-zinc-400 dark:text-neutral-600"
                 : "text-zinc-900 dark:text-zinc-100",
               labelClassName
             )}
@@ -528,7 +570,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {label}
             {required && (
               <>
-                <span aria-hidden="true" className="text-red-500 ml-0.5">*</span>
+                <span aria-hidden="true" className="text-red-500 ml-0.5">
+                  *
+                </span>
                 <span className="sr-only">(requerido)</span>
               </>
             )}
@@ -539,7 +583,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {description && (
           <div
             id={descriptionMessageId}
-            className="text-sm text-zinc-500 dark:text-zinc-400 mb-1"
+            className="text-sm text-zinc-500 dark:text-neutral-400 mb-1"
           >
             {description}
           </div>
@@ -590,7 +634,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 "absolute top-1/2 transform -translate-y-1/2",
                 iconPositionClasses[size][iconPosition],
                 disabled
-                  ? "text-zinc-400 dark:text-zinc-600"
+                  ? "text-zinc-400 dark:text-neutral-600"
                   : validationError
                   ? "text-red-500 dark:text-red-400"
                   : isValid &&
@@ -606,7 +650,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     }-500 dark:text-${
                       variant === "default" ? "zinc" : variant
                     }-400`
-                  : "text-zinc-500 dark:text-zinc-400",
+                  : "text-zinc-500 dark:text-neutral-400",
                 "transition-colors duration-200"
               )}
               aria-hidden="true"
@@ -624,10 +668,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               onClick={() => setShowPassword(!showPassword)}
               className={cn(
                 "absolute top-1/2 transform -translate-y-1/2 right-3.5",
-                "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300",
+                "text-zinc-500 hover:text-zinc-700 dark:text-neutral-400 dark:hover:text-zinc-300",
                 "transition-colors duration-200 focus:outline-none"
               )}
-              aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              aria-label={
+                showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+              }
               tabIndex={-1}
             >
               {showPassword ? (
