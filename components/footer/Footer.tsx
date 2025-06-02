@@ -13,7 +13,7 @@ const Footer = () => {
             <h2 className="text-2xl font-semibold text-black dark:text-white">
               StofliUI
             </h2>
-            <p className="mt-2 text-gray-600 dark:text-zinc-400">
+            <p className="mt-2 text-gray-600 dark:text-neutral-400">
               Creando el futuro de las interfaces de usuario.
             </p>
           </div>
@@ -24,7 +24,7 @@ const Footer = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    className="text-neutral-600 hover:text-slate-950 dark:text-neutral-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                   >
                     {item.name}
                   </a>
@@ -35,7 +35,7 @@ const Footer = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    className="text-neutral-600 hover:text-slate-950 dark:text-neutral-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                   >
                     {item.name}
                   </a>
@@ -46,7 +46,7 @@ const Footer = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-zinc-600 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                    className="text-neutral-600 hover:text-slate-950 dark:text-neutral-400 dark:hover:text-zinc-300 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                   >
                     {item.name}
                   </a>
