@@ -155,7 +155,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
     const newValue =
       (currentValue !== undefined ? currentValue : startValue) + step;
-    
+
     // Si está en el límite máximo, anunciar
     if (max !== undefined && newValue > max) {
       announceChange(`Valor máximo alcanzado: ${max}`);
@@ -177,7 +177,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
     const newValue =
       (currentValue !== undefined ? currentValue : startValue) - step;
-    
+
     // Si está en el límite mínimo, anunciar
     if (min !== undefined && newValue < min) {
       announceChange(`Valor mínimo alcanzado: ${min}`);
@@ -355,12 +355,12 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
     switch (e.key) {
       case "ArrowUp":
-      e.preventDefault();
-      increment();
+        e.preventDefault();
+        increment();
         break;
       case "ArrowDown":
-      e.preventDefault();
-      decrement();
+        e.preventDefault();
+        decrement();
         break;
       case "Home":
         if (min !== undefined) {
@@ -379,7 +379,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
       case "PageUp":
         e.preventDefault();
         const bigStepUp = step * 10;
-        const newValueUp = currentValue !== undefined ? currentValue + bigStepUp : bigStepUp;
+        const newValueUp =
+          currentValue !== undefined ? currentValue + bigStepUp : bigStepUp;
         if (max === undefined || newValueUp <= max) {
           updateValue(newValueUp, "up");
         } else {
@@ -389,7 +390,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
       case "PageDown":
         e.preventDefault();
         const bigStepDown = step * 10;
-        const newValueDown = currentValue !== undefined ? currentValue - bigStepDown : -bigStepDown;
+        const newValueDown =
+          currentValue !== undefined
+            ? currentValue - bigStepDown
+            : -bigStepDown;
         if (min === undefined || newValueDown >= min) {
           updateValue(newValueDown, "down");
         } else {
@@ -480,8 +484,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
   // Clases para los estilos de validación (independientes de la variante)
   const validationClasses = {
-    error: "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500 ring-1 ring-red-500/20 dark:ring-red-500/20",
-    errorFocused: "border-red-700 dark:border-red-400 focus:border-red-700 dark:focus:border-red-400 ring-1 ring-red-700/30 dark:ring-red-400/30",
+    error:
+      "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500 ring-1 ring-red-500/20 dark:ring-red-500/20",
+    errorFocused:
+      "border-red-700 dark:border-red-400 focus:border-red-700 dark:focus:border-red-400 ring-1 ring-red-700/30 dark:ring-red-400/30",
   };
 
   // Clases para los estilos de variantes
@@ -573,15 +579,31 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const renderIcon = (direction: "up" | "down") => {
     if (iconSet === "chevron") {
       return direction === "up" ? (
-        <ChevronUp size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
+        <ChevronUp
+          size={sizeClasses[size].icon}
+          className="stroke-[2.5px]"
+          aria-hidden="true"
+        />
       ) : (
-        <ChevronDown size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
+        <ChevronDown
+          size={sizeClasses[size].icon}
+          className="stroke-[2.5px]"
+          aria-hidden="true"
+        />
       );
     } else {
       return direction === "up" ? (
-        <Plus size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
+        <Plus
+          size={sizeClasses[size].icon}
+          className="stroke-[2.5px]"
+          aria-hidden="true"
+        />
       ) : (
-        <Minus size={sizeClasses[size].icon} className="stroke-[2.5px]" aria-hidden="true" />
+        <Minus
+          size={sizeClasses[size].icon}
+          className="stroke-[2.5px]"
+          aria-hidden="true"
+        />
       );
     }
   };
@@ -590,19 +612,22 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const renderControls = () => {
     if (!showControls) return null;
 
-    const isAtMax = max !== undefined && currentValue !== undefined && currentValue >= max;
-    const isAtMin = min !== undefined && currentValue !== undefined && currentValue <= min;
+    const isAtMax =
+      max !== undefined && currentValue !== undefined && currentValue >= max;
+    const isAtMin =
+      min !== undefined && currentValue !== undefined && currentValue <= min;
 
     const controlButton = (direction: "up" | "down") => {
       // Ajustar el tamaño del botón para el layout compacto
-      const buttonSizeClass = controlsLayout === "compact" ? 
-        {
-          sm: "w-5 h-3",
-          md: "w-8 h-5",
-          lg: "w-10 h-6"
-        }[size] : 
-        sizeClasses[size].button;
-        
+      const buttonSizeClass =
+        controlsLayout === "compact"
+          ? {
+              sm: "w-5 h-3",
+              md: "w-8 h-5",
+              lg: "w-10 h-6",
+            }[size]
+          : sizeClasses[size].button;
+
       return (
         <button
           type="button"
@@ -625,9 +650,11 @@ const NumberInput: React.FC<NumberInputProps> = ({
             "shadow-sm",
             controlButtonClassName
           )}
-          aria-label={direction === "up" ? 
-            `Aumentar valor${isAtMax ? " (valor máximo alcanzado)" : ""}` : 
-            `Disminuir valor${isAtMin ? " (valor mínimo alcanzado)" : ""}`}
+          aria-label={
+            direction === "up"
+              ? `Aumentar valor${isAtMax ? " (valor máximo alcanzado)" : ""}`
+              : `Disminuir valor${isAtMin ? " (valor mínimo alcanzado)" : ""}`
+          }
           aria-controls={inputId}
           aria-disabled={direction === "up" ? isAtMax : isAtMin}
           tabIndex={0}
@@ -735,7 +762,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
           {label}
           {required && (
             <>
-              <span aria-hidden="true" className="text-red-500 ml-0.5">*</span>
+              <span aria-hidden="true" className="text-red-500 ml-0.5">
+                *
+              </span>
               <span className="sr-only">(requerido)</span>
             </>
           )}
@@ -746,7 +775,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
       {description && (
         <div
           id={descriptionMessageId}
-          className="text-sm text-zinc-500 dark:text-zinc-400 mb-1"
+          className="text-sm text-zinc-500 dark:text-neutral-400 mb-1"
         >
           {description}
         </div>
@@ -784,9 +813,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
               paddingClass,
               sizeClasses[size].input,
               radiusClasses[radius],
-              error
-                ? validationClasses.error
-                : variantClasses[variant].input,
+              error ? validationClasses.error : variantClasses[variant].input,
               "transition-all duration-200",
               disabled && "opacity-60 cursor-not-allowed",
               readonly && "opacity-80 cursor-default",
