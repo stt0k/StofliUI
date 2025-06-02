@@ -44,8 +44,8 @@ const Avatar: React.FC<AvatarProps> = ({
     online: "En línea",
     offline: "Desconectado",
     away: "Ausente",
-    busy: "Ocupado"
-  }
+    busy: "Ocupado",
+  },
 }) => {
   const [imageError, setImageError] = React.useState(!src);
 
@@ -104,15 +104,12 @@ const Avatar: React.FC<AvatarProps> = ({
   };
 
   return (
-    <div 
+    <div
       className="relative inline-block"
       role="img"
       aria-label={getAriaLabel()}
     >
-      <div 
-        className={classes}
-        aria-hidden="true"
-      >
+      <div className={classes} aria-hidden="true">
         {!imageError && src ? (
           <Image
             src={src}
@@ -126,7 +123,7 @@ const Avatar: React.FC<AvatarProps> = ({
         ) : (
           <span
             className={cn(
-              "font-medium text-zinc-500 dark:text-zinc-400",
+              "font-medium text-zinc-500 dark:text-neutral-400",
               fallbackClassName
             )}
             aria-hidden="true"
