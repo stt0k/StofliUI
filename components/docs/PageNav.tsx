@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState, useCallback, useRef } from "react";
+import PremiumCard from "./PremiumCard";
 
 interface NavLink {
   title: string;
@@ -30,31 +31,31 @@ export default function PageNav({ links }: PageNavProps) {
     // Detectar si es scroll manual comparando con la posición anterior
     const currentScrollPos = window.scrollY;
     const scrollDiff = Math.abs(currentScrollPos - lastScrollPosRef.current);
-    
+
     // Si el usuario está scrolleando manualmente (diferencia significativa en poco tiempo)
     if (scrollDiff > 5) {
       isUserScrollingRef.current = true;
-      
+
       // Si estaba bloqueado por un clic, desbloquearlo inmediatamente
       if (clickTimeoutRef.current) {
         clearTimeout(clickTimeoutRef.current);
         clickedIdRef.current = null;
       }
     }
-    
+
     // Actualizar posición de scroll para la próxima comparación
     lastScrollPosRef.current = currentScrollPos;
-    
+
     // Si se acaba de hacer clic en un ID y no es scroll manual, dar prioridad a ese ID
     if (clickedIdRef.current && !isUserScrollingRef.current) {
       return;
     }
-    
+
     // Obtener todos los IDs válidos de los enlaces en el TOC
     const validIds = new Set<string>();
     const extractIds = (navLinks: NavLink[]) => {
-      navLinks.forEach(link => {
-        if (link.href && link.href.startsWith('#')) {
+      navLinks.forEach((link) => {
+        if (link.href && link.href.startsWith("#")) {
           validIds.add(link.href.substring(1));
         }
         if (link.children && link.children.length > 0) {
@@ -63,32 +64,32 @@ export default function PageNav({ links }: PageNavProps) {
       });
     };
     extractIds(links);
-    
+
     // Buscar encabezados que coincidan con los IDs en el TOC
     const headings: HTMLElement[] = [];
-    validIds.forEach(id => {
+    validIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) {
         headings.push(element);
       }
     });
-    
+
     if (headings.length === 0) return;
-    
+
     // Ordenar encabezados por posición vertical
     headings.sort((a, b) => {
       const rectA = a.getBoundingClientRect();
       const rectB = b.getBoundingClientRect();
       return rectA.top - rectB.top;
     });
-    
+
     // Umbrales ajustados para mejor detección
     const topOffset = 100; // Umbral superior más pequeño para ser más sensible
     const bottomOffset = -100; // Umbral inferior para elementos que ya pasaron
-    
+
     // Buscar el primer encabezado visible (dentro del umbral)
     let activeHeading: HTMLElement | null = null;
-    
+
     // Primero intentar encontrar un encabezado dentro del umbral ideal
     for (const heading of headings) {
       const rect = heading.getBoundingClientRect();
@@ -97,7 +98,7 @@ export default function PageNav({ links }: PageNavProps) {
         break;
       }
     }
-    
+
     // Si no encontramos uno en el umbral ideal, buscar el último encabezado que haya pasado
     if (!activeHeading) {
       for (let i = headings.length - 1; i >= 0; i--) {
@@ -108,12 +109,12 @@ export default function PageNav({ links }: PageNavProps) {
         }
       }
     }
-    
+
     // Como último recurso, usar el primer encabezado que está por encima de la vista
     if (!activeHeading) {
       let closestAbove: HTMLElement | null = null;
       let closestAboveDistance = -Infinity;
-      
+
       for (const heading of headings) {
         const rect = heading.getBoundingClientRect();
         if (rect.top <= 0 && rect.top > closestAboveDistance) {
@@ -121,7 +122,7 @@ export default function PageNav({ links }: PageNavProps) {
           closestAboveDistance = rect.top;
         }
       }
-      
+
       if (closestAbove) {
         activeHeading = closestAbove;
       } else {
@@ -129,7 +130,7 @@ export default function PageNav({ links }: PageNavProps) {
         activeHeading = headings[0];
       }
     }
-    
+
     if (activeHeading && activeHeading.id) {
       const newActiveId = normalizeHash(activeHeading.id);
       setActiveId(newActiveId);
@@ -137,49 +138,57 @@ export default function PageNav({ links }: PageNavProps) {
   }, [links, normalizeHash]);
 
   // Función para verificar si un ID está en el TOC
-  const isValidTocId = useCallback((navLinks: NavLink[], id: string): boolean => {
-    for (const link of navLinks) {
-      const linkId = link.href.startsWith('#') ? link.href.substring(1) : link.href;
-      if (linkId === id) {
-        return true;
-      }
-      if (link.children && link.children.length > 0) {
-        if (isValidTocId(link.children, id)) {
+  const isValidTocId = useCallback(
+    (navLinks: NavLink[], id: string): boolean => {
+      for (const link of navLinks) {
+        const linkId = link.href.startsWith("#")
+          ? link.href.substring(1)
+          : link.href;
+        if (linkId === id) {
           return true;
         }
+        if (link.children && link.children.length > 0) {
+          if (isValidTocId(link.children, id)) {
+            return true;
+          }
+        }
       }
-    }
-    return false;
-  }, []);
+      return false;
+    },
+    []
+  );
 
   // Función para manejar el scroll inicial cuando se carga con un hash
   const handleInitialScroll = useCallback(() => {
     if (initialScrollDoneRef.current) return;
-    
+
     const hash = window.location.hash || "";
     if (!hash) return;
-    
+
     // Normalizar el hash
     const normalizedHash = normalizeHash(hash);
     const hashId = normalizedHash.substring(1); // Quitar el # inicial
-    
+
     // Solo procesar si es un ID válido del TOC
     if (!isValidTocId(links, hashId)) return;
-    
+
     initialScrollDoneRef.current = true;
-    
+
     // Establecer el hash como ID activo
     setActiveId(normalizedHash);
-    
+
     // Asegurarse de que todos los iframes y las imágenes se hayan cargado antes de intentar scrollear
     setTimeout(() => {
       const targetElement = document.getElementById(hashId);
-      
+
       if (targetElement) {
         // Scroll al elemento con un pequeño offset para mejor visualización
         window.scrollTo({
-          top: targetElement.getBoundingClientRect().top + window.pageYOffset - 100,
-          behavior: "instant"
+          top:
+            targetElement.getBoundingClientRect().top +
+            window.pageYOffset -
+            100,
+          behavior: "instant",
         });
       }
     }, 500);
@@ -189,11 +198,11 @@ export default function PageNav({ links }: PageNavProps) {
   const handleHashChange = useCallback(() => {
     const hash = window.location.hash || "";
     if (!hash) return;
-    
+
     // Normalizar el hash
     const normalizedHash = normalizeHash(hash);
     const hashId = normalizedHash.substring(1); // Quitar el # inicial
-    
+
     // Solo actualizar el ID activo si es un ID válido del TOC
     if (isValidTocId(links, hashId)) {
       setActiveId(normalizedHash);
@@ -236,10 +245,10 @@ export default function PageNav({ links }: PageNavProps) {
 
       // Resetear la bandera de scroll manual
       isUserScrollingRef.current = false;
-      
+
       // Actualizar inmediatamente el ID activo
       setActiveId(normalizedHref);
-      
+
       // Establecer el ID clickeado como activo (para el scroll automático inicial)
       clickedIdRef.current = normalizedHref;
 
@@ -247,7 +256,7 @@ export default function PageNav({ links }: PageNavProps) {
       if (clickTimeoutRef.current) {
         clearTimeout(clickTimeoutRef.current);
       }
-      
+
       // Solo bloquear brevemente para permitir que el scroll automático llegue a su destino
       clickTimeoutRef.current = setTimeout(() => {
         clickedIdRef.current = null;
@@ -296,15 +305,15 @@ export default function PageNav({ links }: PageNavProps) {
     // Guardar referencias a los timeouts actuales
     const scrollTimeoutRefValue = scrollTimeoutRef.current;
     const clickTimeoutRefValue = clickTimeoutRef.current;
-    
+
     // Verificar primero si hay un hash en la URL y manejarlo
     if (window.location.hash) {
       handleInitialScroll();
     }
-    
+
     // Iniciar con un scan para establecer el enlace activo inicial
     updateActiveIdFromScroll();
-    
+
     // Verificar periódicamente (útil para contenido que se carga dinámicamente)
     const intervalId = setInterval(() => {
       updateActiveIdFromScroll();
@@ -313,13 +322,13 @@ export default function PageNav({ links }: PageNavProps) {
     // Configurar eventos
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("hashchange", handleHashChange);
-    
+
     // Limpieza
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("hashchange", handleHashChange);
       clearInterval(intervalId);
-      
+
       if (scrollTimeoutRefValue) {
         clearTimeout(scrollTimeoutRefValue);
       }
@@ -331,7 +340,7 @@ export default function PageNav({ links }: PageNavProps) {
     handleInitialScroll,
     updateActiveIdFromScroll,
     handleScroll,
-    handleHashChange
+    handleHashChange,
   ]);
 
   // Renderizar un enlace de navegación
@@ -343,7 +352,7 @@ export default function PageNav({ links }: PageNavProps) {
       const isCurrentActive = normalizedHref === normalizedActiveId;
 
       const hasChildren = link.children && link.children.length > 0;
-      
+
       // Solo mostrar el punto para enlaces de nivel secundario o superior
       const showDot = depth > 0 && isCurrentActive;
 
@@ -381,13 +390,36 @@ export default function PageNav({ links }: PageNavProps) {
   );
 
   return (
-    <div className="hidden xl:block fixed top-[8.5rem] w-48 z-20 py-2 max-h-[calc(100vh-120px)] overflow-y-auto">
+    <div className="hidden xl:block fixed top-[6.5rem] w-52 z-20 py-2 max-h-[calc(100vh-150px)] overflow-y-auto ml-27 scrollbar-hide">
+      <div className="max-h-[calc(100vh-330px)] overflow-y-auto pr-2 scrollbar-hide">
         <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
           En esta página
         </h3>
         <ul className="space-y-[2px]">
           {links.map((link) => renderNavLink(link))}
         </ul>
+      </div>
+      <div className="mt-6">
+        <PremiumCard />
+      </div>
     </div>
   );
+}
+
+// CSS personalizado para ocultar scrollbar
+const scrollbarHideStyle = `
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+`;
+
+// Añadir estilos al documento
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = scrollbarHideStyle;
+  document.head.appendChild(style);
 }
