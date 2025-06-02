@@ -37,7 +37,7 @@ const sections: Section[] = [
       "Importa y utiliza cualquiera de nuestros componentes en tus páginas o aplicaciones. Todos los componentes están totalmente tipados y documentados.",
     caption: "Importa los componentes que necesites y personalízalos",
     codeExample:
-      'import { Tabs } from "stofli-ui";\n \nexport default function TabsDemo() {\n  return (\n    <Tabs\n      tabs={[\n        {\n          label: "Cuenta",\n          content: <p className="text-zinc-600 dark:text-zinc-400">\n          Configuración de tu cuenta y preferencias.</p>\n        },\n        {\n          label: "Contraseña",\n          content: <p className="text-zinc-600 dark:text-zinc-400">\n          Gestiona la seguridad de tu cuenta.</p>\n        },\n        {\n          label: "Notificaciones",\n          content: <p className="text-zinc-600 dark:text-zinc-400">\n          Configura cómo y cuándo recibir alertas.</p>\n        }\n      ]}\n    />\n  );\n}',
+      'import { Tabs } from "stofli-ui";\n \nexport default function TabsDemo() {\n  return (\n    <Tabs\n      tabs={[\n        {\n          label: "Cuenta",\n          content: <p className="text-neutral-600 dark:text-neutral-400">\n          Configuración de tu cuenta y preferencias.</p>\n        },\n        {\n          label: "Contraseña",\n          content: <p className="text-neutral-600 dark:text-neutral-400">\n          Gestiona la seguridad de tu cuenta.</p>\n        },\n        {\n          label: "Notificaciones",\n          content: <p className="text-neutral-600 dark:text-neutral-400">\n          Configura cómo y cuándo recibir alertas.</p>\n        }\n      ]}\n    />\n  );\n}',
     image:
       "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1031&auto=format&fit=crop",
     color: "#EAA879",
@@ -208,18 +208,22 @@ const ScrollProgressSection = () => {
 
             // La etiqueta completa (< o </ seguido del nombre)
             // Comprobar si estamos en el paso 3 (customize) y es la etiqueta de cierre Badge
-            if (sections[activeSection]?.id === "customize" && 
-                tagMatch[0] === "</Badge") {
+            if (
+              sections[activeSection]?.id === "customize" &&
+              tagMatch[0] === "</Badge"
+            ) {
               // Para la etiqueta de cierre Badge, vamos a procesar también el ">"
-              const remainingText = text.substring(tagMatch.index + tagMatch[0].length);
+              const remainingText = text.substring(
+                tagMatch.index + tagMatch[0].length
+              );
               const closeTagEnd = remainingText.indexOf(">") + 1;
-              
+
               if (closeTagEnd > 0) {
                 parts.push({
                   text: tagMatch[0] + remainingText.substring(0, closeTagEnd),
                   type: "tag-badge-close",
                 });
-                
+
                 currentPos = tagMatch.index + tagMatch[0].length + closeTagEnd;
               } else {
                 parts.push({
@@ -233,7 +237,7 @@ const ScrollProgressSection = () => {
                 text: tagMatch[0],
                 type: "tag",
               });
-              
+
               currentPos = tagMatch.index + tagMatch[0].length;
             }
           }
@@ -615,7 +619,7 @@ const ScrollProgressSection = () => {
                 <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">
                   Tutorial de instalación
                 </h2>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-2">
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
                   Sigue estos {sections.length} sencillos pasos para comenzar
                   con StofliUI
                 </p>
@@ -682,7 +686,7 @@ const ScrollProgressSection = () => {
                         <code>{formatCode(section.codeExample)}</code>
                       </pre>
 
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-3">
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-3">
                         {section.description}
                       </p>
 
@@ -690,7 +694,7 @@ const ScrollProgressSection = () => {
                       <div className="mt-2">
                         <a
                           href="/docs/"
-                          className="flex items-center text-[10px] font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                          className="flex items-center text-[10px] font-medium text-zinc-500 dark:text-neutral-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                         >
                           <span>Ver documentación</span>
                           <svg
@@ -744,7 +748,7 @@ const ScrollProgressSection = () => {
                         className={`text-sm font-medium ${
                           isActive
                             ? "text-zinc-900 dark:text-white"
-                            : "text-zinc-600 dark:text-zinc-500"
+                            : "text-neutral-600 dark:text-zinc-500"
                         }`}
                       >
                         {section.title}
@@ -874,7 +878,7 @@ const ScrollProgressSection = () => {
                         </pre>
 
                         {/* Descripción debajo del código */}
-                        <div className="mt-4 text-xs xs:text-sm text-zinc-600 dark:text-zinc-400">
+                        <div className="mt-4 text-xs xs:text-sm text-neutral-600 dark:text-neutral-400">
                           <p>{section.description}</p>
                         </div>
 
@@ -998,7 +1002,7 @@ const ScrollProgressSection = () => {
                                 className={`text-base xs:text-lg md:text-xl font-bold mb-1 xs:mb-2 transition-all duration-500 ${
                                   isActive
                                     ? "text-zinc-900 dark:text-white"
-                                    : "text-zinc-600 dark:text-zinc-400"
+                                    : "text-neutral-600 dark:text-neutral-400"
                                 }`}
                                 style={{
                                   textShadow: isActive
@@ -1028,7 +1032,7 @@ const ScrollProgressSection = () => {
                                   <div className="flex items-center mt-2 xs:mt-3">
                                     <a
                                       href="/docs/"
-                                      className="flex items-center text-[10px] xs:text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                                      className="flex items-center text-[10px] xs:text-xs font-medium text-zinc-500 dark:text-neutral-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                                     >
                                       <span>Ver documentación</span>
                                       <svg
