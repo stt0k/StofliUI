@@ -239,7 +239,7 @@ const HeadLinks = ({
                     {/* Bloque de Primeros pasos */}
                     <div className="bg-gray-50 dark:bg-zinc-950/20 rounded-xl p-4 border border-gray-200 dark:border-zinc-800/50">
                       <h3 className="text-gray-800 dark:text-zinc-200 font-semibold text-sm mb-3 flex items-center">
-                        <BookOpen className="h-4 w-4 mr-2 text-gray-500 dark:text-zinc-400" />
+                        <BookOpen className="h-4 w-4 mr-2 text-gray-500 dark:text-neutral-400" />
                         Primeros pasos
                       </h3>
                       <div className="space-y-2">
@@ -261,7 +261,7 @@ const HeadLinks = ({
                     {/* Bloque de Frameworks */}
                     <div className="bg-gray-50 dark:bg-zinc-950/20 rounded-xl p-4 border border-gray-200 dark:border-zinc-800/50">
                       <h3 className="text-gray-800 dark:text-zinc-200 font-semibold text-sm mb-3 flex items-center">
-                        <Code className="h-4 w-4 mr-2 text-gray-500 dark:text-zinc-400" />
+                        <Code className="h-4 w-4 mr-2 text-gray-500 dark:text-neutral-400" />
                         Frameworks
                       </h3>
                       <div className="space-y-2">
@@ -336,7 +336,7 @@ const HeadLinks = ({
                                 <div
                                   className={`absolute inset-0 bg-gradient-to-br ${menuStyle.iconGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                                 ></div>
-                                <IconComponent className="h-5 w-5 text-gray-500 dark:text-zinc-400 group-hover:text-gray-700 dark:group-hover:text-white relative z-10 transition-colors duration-300" />
+                                <IconComponent className="h-5 w-5 text-gray-500 dark:text-neutral-400 group-hover:text-gray-700 dark:group-hover:text-white relative z-10 transition-colors duration-300" />
                               </div>
                               <div>
                                 <p
@@ -367,9 +367,9 @@ const HeadLinks = ({
                   href={
                     title === "Componentes"
                       ? "/docs/componentes/accordion"
-                      : "/docs/ejemplos"
+                      : "/ejemplos"
                   }
-                  className="text-xs text-gray-500 dark:text-zinc-400 flex items-center hover:text-gray-900 dark:hover:text-white transition-colors group"
+                  className="text-xs text-gray-500 dark:text-neutral-400 flex items-center hover:text-gray-900 dark:hover:text-white transition-colors group"
                 >
                   <span>
                     {title === "Componentes"
