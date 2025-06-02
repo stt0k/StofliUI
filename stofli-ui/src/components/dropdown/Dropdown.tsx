@@ -310,7 +310,11 @@ const Dropdown: React.FC<DropdownProps> = ({
     const liveRegion = document.getElementById(`${componentId}-live`);
     if (liveRegion) {
       const message = multiSelect
-        ? `${item.label} ${currentValues.includes(item.value) ? "deseleccionado" : "seleccionado"}`
+        ? `${item.label} ${
+            currentValues.includes(item.value)
+              ? "deseleccionado"
+              : "seleccionado"
+          }`
         : `${item.label} seleccionado`;
       liveRegion.textContent = message;
     }
@@ -477,18 +481,16 @@ const Dropdown: React.FC<DropdownProps> = ({
     const sizeClasses = avatarOnly ? "py-2 px-3" : "py-2 px-3";
 
     // Construir las clases finales
-    const classes = [
-      sizeTextClass,
-      baseClasses,
-      sizeClasses
-    ];
+    const classes = [sizeTextClass, baseClasses, sizeClasses];
 
     // Aplicar clases según el estado
     if (isDisabled) {
-      classes.push("opacity-50 cursor-not-allowed pointer-events-none text-zinc-400/70 dark:text-zinc-600");
+      classes.push(
+        "opacity-50 cursor-not-allowed pointer-events-none text-zinc-400/70 dark:text-neutral-600"
+      );
     } else {
       classes.push("cursor-pointer");
-      
+
       // Aplicar clases según si está seleccionado o no
       if (isSelected && selectable) {
         if (activeColor) {
@@ -543,7 +545,9 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     if (selectedItems.length === 0) {
       return (
-        <span className="text-zinc-500 dark:text-zinc-400">{placeholder}</span>
+        <span className="text-zinc-500 dark:text-neutral-400">
+          {placeholder}
+        </span>
       );
     }
 
@@ -614,64 +618,93 @@ const Dropdown: React.FC<DropdownProps> = ({
           {label}
           {required && (
             <>
-              <span aria-hidden="true" className="text-red-500 ml-1">*</span>
+              <span aria-hidden="true" className="text-red-500 ml-1">
+                *
+              </span>
               <span className="sr-only">(requerido)</span>
             </>
           )}
         </label>
       )}
 
-    <div
-      ref={dropdownRef}
-      className={cn(
-        "relative",
-          fullWidth && !avatarOnly ? "w-full" : "inline-block"
-      )}
-    >
-      <button
-          id={buttonId}
-        type="button"
-        disabled={disabled}
-        onClick={() => !disabled && setIsOpen(!isOpen)}
-          onKeyDown={handleKeyDown}
+      <div
+        ref={dropdownRef}
         className={cn(
-          avatarOnly
-            ? `flex items-center justify-center ${avatarOnlyButtonSizeClasses[adjustedSize]} ${avatarOnlySizeClasses[adjustedSize]}`
-            : `flex items-center justify-between w-full ${buttonSizeClasses[adjustedSize]} ${sizeClasses[adjustedSize]}`,
-          radiusClasses[avatarOnly ? "full" : radius],
-          variantClasses[variant],
-          disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
-            errorMessage && "border-red-500 dark:border-red-400",
-          "transition-colors duration-200",
-          buttonClassName
+          "relative",
+          fullWidth && !avatarOnly ? "w-full" : "inline-block"
         )}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-          aria-labelledby={label ? labelId : undefined}
-          aria-label={!label ? (ariaLabel || "Selector desplegable") : undefined}
-          aria-describedby={ariaDescribedby}
       >
-        <span
-            id={`${componentId}-value`}
+        <button
+          id={buttonId}
+          type="button"
+          disabled={disabled}
+          onClick={() => !disabled && setIsOpen(!isOpen)}
+          onKeyDown={handleKeyDown}
           className={cn(
-            "flex items-center gap-2",
-            avatarOnly ? "" : "truncate"
+            avatarOnly
+              ? `flex items-center justify-center ${avatarOnlyButtonSizeClasses[adjustedSize]} ${avatarOnlySizeClasses[adjustedSize]}`
+              : `flex items-center justify-between w-full ${buttonSizeClasses[adjustedSize]} ${sizeClasses[adjustedSize]}`,
+            radiusClasses[avatarOnly ? "full" : radius],
+            variantClasses[variant],
+            disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+            errorMessage && "border-red-500 dark:border-red-400",
+            "transition-colors duration-200",
+            buttonClassName
           )}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-labelledby={label ? labelId : undefined}
+          aria-label={!label ? ariaLabel || "Selector desplegable" : undefined}
+          aria-describedby={ariaDescribedby}
         >
+          <span
+            id={`${componentId}-value`}
+            className={cn(
+              "flex items-center gap-2",
+              avatarOnly ? "" : "truncate"
+            )}
+          >
             {buttonAvatarSrc && (
               <Image
                 src={buttonAvatarSrc}
                 alt={buttonAvatarAlt}
-                width={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
-                       avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
-                       avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
-                height={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
-                        avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
-                        avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
-                className={cn(
-                  avatarSizeClasses[avatarSize],
-                  "rounded-full"
-                )}
+                width={
+                  avatarSizeClasses[avatarSize]
+                    .split(" ")[0]
+                    .replace("h-", "")
+                    .includes("6")
+                    ? 24
+                    : avatarSizeClasses[avatarSize]
+                        .split(" ")[0]
+                        .replace("h-", "")
+                        .includes("8")
+                    ? 32
+                    : avatarSizeClasses[avatarSize]
+                        .split(" ")[0]
+                        .replace("h-", "")
+                        .includes("10")
+                    ? 40
+                    : 48
+                }
+                height={
+                  avatarSizeClasses[avatarSize]
+                    .split(" ")[0]
+                    .replace("h-", "")
+                    .includes("6")
+                    ? 24
+                    : avatarSizeClasses[avatarSize]
+                        .split(" ")[0]
+                        .replace("h-", "")
+                        .includes("8")
+                    ? 32
+                    : avatarSizeClasses[avatarSize]
+                        .split(" ")[0]
+                        .replace("h-", "")
+                        .includes("10")
+                    ? 40
+                    : 48
+                }
+                className={cn(avatarSizeClasses[avatarSize], "rounded-full")}
               />
             )}
             {icon && !avatarOnly && (
@@ -679,65 +712,71 @@ const Dropdown: React.FC<DropdownProps> = ({
                 {icon}
               </span>
             )}
-          {!avatarOnly && renderSelectedContent()}
-        </span>
+            {!avatarOnly && renderSelectedContent()}
+          </span>
 
-        {showArrow && !avatarOnly && (
-          <ChevronDown
-            className={cn(
-              "ml-2 h-4 w-4 flex-shrink-0 transition-transform duration-200",
-              isOpen ? "rotate-180" : "",
-              arrowIconClassName
-            )}
+          {showArrow && !avatarOnly && (
+            <ChevronDown
+              className={cn(
+                "ml-2 h-4 w-4 flex-shrink-0 transition-transform duration-200",
+                isOpen ? "rotate-180" : "",
+                arrowIconClassName
+              )}
               aria-hidden="true"
-          />
-        )}
-      </button>
+            />
+          )}
+        </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
               role="presentation"
-            className={cn(
-              "absolute z-50 min-w-[8rem]",
-              placementStyles[placement],
-              radiusClasses[radius],
-              "border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1 shadow-lg",
-              dropdownClassName
-            )}
-            style={dropdownWidthStyle}
+              className={cn(
+                "absolute z-50 min-w-[8rem]",
+                placementStyles[placement],
+                radiusClasses[radius],
+                "border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 py-1 shadow-lg",
+                dropdownClassName
+              )}
+              style={dropdownWidthStyle}
               initial={{ opacity: 0, ...placementAnimation[placement] }}
               animate={{ opacity: 1, y: 0, x: 0 }}
               exit={{ opacity: 0, ...placementAnimation[placement] }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-          >
-            <motion.ul
+            >
+              <motion.ul
                 ref={listRef}
                 id={listboxId}
-              role="listbox"
+                role="listbox"
                 aria-multiselectable={multiSelect}
                 aria-labelledby={buttonId}
-              className={cn(
-                "overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
-                listClassName
-              )}
-              style={{ maxHeight: getMaxHeight() }}
+                className={cn(
+                  "overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+                  listClassName
+                )}
+                style={{ maxHeight: getMaxHeight() }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.1, delay: 0.05 }}
-            >
-              {items.map((item, index) => {
-                const isSelected = currentValues.includes(item.value);
+              >
+                {items.map((item, index) => {
+                  const isSelected = currentValues.includes(item.value);
                   const isHighlighted = index === activeIndex;
 
-                return (
-                  <motion.li
-                    key={index}
-                    role="option"
-                    aria-selected={isSelected}
-                    aria-disabled={item.disabled}
-                      aria-label={typeof item.label === 'string' ? item.label : undefined}
-                      aria-describedby={item.description ? `${componentId}-desc-${index}` : undefined}
+                  return (
+                    <motion.li
+                      key={index}
+                      role="option"
+                      aria-selected={isSelected}
+                      aria-disabled={item.disabled}
+                      aria-label={
+                        typeof item.label === "string" ? item.label : undefined
+                      }
+                      aria-describedby={
+                        item.description
+                          ? `${componentId}-desc-${index}`
+                          : undefined
+                      }
                       tabIndex={-1}
                       onClick={() => !item.disabled && handleItemClick(item)}
                       onMouseEnter={() => setActiveIndex(index)}
@@ -745,99 +784,134 @@ const Dropdown: React.FC<DropdownProps> = ({
                       className={cn(
                         getItemClasses(isSelected, Boolean(item.disabled)),
                         // Modificar las clases de resaltado para que no afecten a elementos ya seleccionados
-                        isHighlighted && !item.disabled && !isSelected && "bg-zinc-100 dark:bg-zinc-800",
-                        isHighlighted && !item.disabled && isSelected && selectable && {
-                          "default": "bg-zinc-400 dark:bg-zinc-800", // Mantener el mismo color que cuando está seleccionado
-                          "primary": "bg-blue-400 dark:bg-blue-800",
-                          "secondary": "bg-purple-400 dark:bg-purple-800",
-                          "success": "bg-green-400 dark:bg-green-800",
-                          "warning": "bg-amber-400 dark:bg-amber-800",
-                          "danger": "bg-red-400 dark:bg-red-800"
-                        }[variant]
+                        isHighlighted &&
+                          !item.disabled &&
+                          !isSelected &&
+                          "bg-zinc-100 dark:bg-zinc-800",
+                        isHighlighted &&
+                          !item.disabled &&
+                          isSelected &&
+                          selectable &&
+                          {
+                            default: "bg-zinc-400 dark:bg-zinc-800", // Mantener el mismo color que cuando está seleccionado
+                            primary: "bg-blue-400 dark:bg-blue-800",
+                            secondary: "bg-purple-400 dark:bg-purple-800",
+                            success: "bg-green-400 dark:bg-green-800",
+                            warning: "bg-amber-400 dark:bg-amber-800",
+                            danger: "bg-red-400 dark:bg-red-800",
+                          }[variant]
                       )}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.15, delay: index * 0.03 }}
-                  >
-                    <div
-                      className={cn(
-                        "flex items-center w-full justify-between",
-                        itemContentClassName
-                      )}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.15, delay: index * 0.03 }}
                     >
                       <div
                         className={cn(
-                          "flex items-center gap-2",
-                          itemLabelClassName
+                          "flex items-center w-full justify-between",
+                          itemContentClassName
                         )}
                       >
+                        <div
+                          className={cn(
+                            "flex items-center gap-2",
+                            itemLabelClassName
+                          )}
+                        >
                           {item.avatarSrc && (
                             <Image
                               src={item.avatarSrc}
                               alt={item.avatarAlt || ""}
-                              width={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
-                                    avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
-                                    avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
-                              height={avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("6") ? 24 : 
-                                     avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("8") ? 32 : 
-                                     avatarSizeClasses[avatarSize].split(" ")[0].replace("h-", "").includes("10") ? 40 : 48}
+                              width={
+                                avatarSizeClasses[avatarSize]
+                                  .split(" ")[0]
+                                  .replace("h-", "")
+                                  .includes("6")
+                                  ? 24
+                                  : avatarSizeClasses[avatarSize]
+                                      .split(" ")[0]
+                                      .replace("h-", "")
+                                      .includes("8")
+                                  ? 32
+                                  : avatarSizeClasses[avatarSize]
+                                      .split(" ")[0]
+                                      .replace("h-", "")
+                                      .includes("10")
+                                  ? 40
+                                  : 48
+                              }
+                              height={
+                                avatarSizeClasses[avatarSize]
+                                  .split(" ")[0]
+                                  .replace("h-", "")
+                                  .includes("6")
+                                  ? 24
+                                  : avatarSizeClasses[avatarSize]
+                                      .split(" ")[0]
+                                      .replace("h-", "")
+                                      .includes("8")
+                                  ? 32
+                                  : avatarSizeClasses[avatarSize]
+                                      .split(" ")[0]
+                                      .replace("h-", "")
+                                      .includes("10")
+                                  ? 40
+                                  : 48
+                              }
                               className={cn(
                                 avatarSizeClasses[avatarSize],
                                 "rounded-full"
                               )}
                             />
                           )}
-                        {item.icon && (
-                          <span
-                            className={cn("flex-shrink-0", itemIconClassName)}
+                          {item.icon && (
+                            <span
+                              className={cn("flex-shrink-0", itemIconClassName)}
                               aria-hidden="true"
-                          >
-                            {item.icon}
-                          </span>
-                        )}
-                        {item.label}
+                            >
+                              {item.icon}
+                            </span>
+                          )}
+                          {item.label}
+                        </div>
+                        {isSelected &&
+                          showSelectedIcon &&
+                          !item.disabled &&
+                          selectable && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className={cn(
+                                "flex-shrink-0",
+                                checkVariantColors[variant],
+                                checkIconClassName
+                              )}
+                              aria-hidden="true"
+                            >
+                              <Check size={16} />
+                            </motion.div>
+                          )}
                       </div>
-                      {isSelected &&
-                        showSelectedIcon &&
-                        !item.disabled &&
-                        selectable && (
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className={cn(
-                              "flex-shrink-0",
-                              checkVariantColors[variant],
-                              checkIconClassName
-                            )}
-                              aria-hidden="true"
-                          >
-                            <Check size={16} />
-                          </motion.div>
-                        )}
-                    </div>
                       {item.description && (
                         <div
                           id={`${componentId}-desc-${index}`}
-                          className="text-sm text-zinc-500 dark:text-zinc-400 mt-1"
+                          className="text-sm text-zinc-500 dark:text-neutral-400 mt-1"
                         >
                           {item.description}
                         </div>
                       )}
-                  </motion.li>
-                );
-              })}
-            </motion.ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {errorMessage && (
         <p
           id={errorId}
-          className={cn(
-            "mt-1 text-sm text-red-500 dark:text-red-400"
-          )}
+          className={cn("mt-1 text-sm text-red-500 dark:text-red-400")}
           role="alert"
         >
           {errorMessage}
