@@ -244,7 +244,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
       {calendarName && (
         <div
           className={cn(
-            "text-sm text-center mb-2 text-zinc-500 dark:text-zinc-400",
+            "text-sm text-center mb-2 text-zinc-500 dark:text-neutral-400",
             calendarTitleClassName
           )}
           id={`${calendarId}-title`}
@@ -296,7 +296,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
         </motion.button>
       </div>
 
-      <div 
+      <div
         className={cn("grid grid-cols-7 gap-1 mb-2", weekdaysClassName)}
         role="row"
         aria-label="Días de la semana"
@@ -305,7 +305,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
           <div
             key={day}
             className={cn(
-              "text-center text-sm font-medium text-zinc-500 dark:text-zinc-400",
+              "text-center text-sm font-medium text-zinc-500 dark:text-neutral-400",
               weekdayClassName
             )}
             role="columnheader"
@@ -351,11 +351,11 @@ const CalendarContent: React.FC<CalendarProps> = ({
                 : isCurrentMonth
                 ? isDisabled
                   ? cn(
-                      "bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-zinc-600 cursor-not-allowed",
+                      "bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-neutral-600 cursor-not-allowed",
                       disabledDayClassName
                     )
                   : variantClasses[variant]
-                : "text-zinc-300 dark:text-zinc-600"
+                : "text-zinc-300 dark:text-neutral-600"
             );
 
             return (
@@ -371,7 +371,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
                   !isDisabled && {
                     onClick: () => handleDateSelect(day),
                     onKeyDown: (e: React.KeyboardEvent) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
+                      if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         handleDateSelect(day);
                       }
