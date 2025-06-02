@@ -76,8 +76,8 @@ export const headerData = [
   },
   {
     title: "Ejemplos",
-    link: "/docs/ejemplos",
-    relatedPaths: ["/docs/ejemplos"],
+    link: "/ejemplos",
+    relatedPaths: ["/ejemplos"],
     hidden: true,
     submenu: {
       columns: [
@@ -87,27 +87,27 @@ export const headerData = [
             {
               title: "Dashboard",
               description: "Panel de análisis y monitoreo",
-              href: "/docs/ejemplos/#dashboard",
+              href: "/ejemplos/#dashboard",
             },
             {
               title: "Autenticación",
               description: "Sistemas de login y registro",
-              href: "/docs/ejemplos/#autenticacion",
+              href: "/ejemplos/#autenticacion",
             },
             {
               title: "Cards",
               description: "Diseños con tarjetas interactivas",
-              href: "/docs/ejemplos/#cards",
+              href: "/ejemplos/#cards",
             },
             {
               title: "Perfil Social",
               description: "Perfiles de usuario y redes sociales",
-              href: "/docs/ejemplos/#perfil-social",
+              href: "/ejemplos/#perfil-social",
             },
             {
               title: "FAQ",
               description: "Preguntas frecuentes expansibles",
-              href: "/docs/ejemplos/#faq",
+              href: "/ejemplos/#faq",
             },
           ],
         },
@@ -116,11 +116,11 @@ export const headerData = [
         {
           title: "Ejemplos populares",
           items: [
-            { title: "Dashboard", href: "/docs/ejemplos/#dashboard" },
-            { title: "Authentication", href: "/docs/ejemplos/#authentication" },
-            { title: "Cards", href: "/docs/ejemplos/#cards" },
-            { title: "Perfil Social", href: "/docs/ejemplos/#perfil-social" },
-            { title: "FAQ", href: "/docs/ejemplos/#faq" },
+            { title: "Dashboard", href: "/ejemplos/#dashboard" },
+            { title: "Authentication", href: "/ejemplos/#authentication" },
+            { title: "Cards", href: "/ejemplos/#cards" },
+            { title: "Perfil Social", href: "/ejemplos/#perfil-social" },
+            { title: "FAQ", href: "/ejemplos/#faq" },
           ],
         },
       ],
@@ -128,18 +128,18 @@ export const headerData = [
   },
   {
     title: "Changelog",
-    link: "/docs/changelog",
-    relatedPaths: ["/docs/changelog"],
+    link: "/changelog",
+    relatedPaths: ["/changelog"],
   },
   {
     title: "Pricing",
-    link: "/docs/pricing",
+    link: "/pricing",
     relatedPaths: ["/pricing"],
   },
   {
     title: "Colores",
-    link: "/docs/colores",
+    link: "/colores",
     hidden: true,
-    relatedPaths: ["/docs/colores"],
+    relatedPaths: ["/colores"],
   },
 ];
