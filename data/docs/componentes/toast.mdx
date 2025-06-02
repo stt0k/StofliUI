@@ -9,15 +9,13 @@ description: >-
     <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```tsx
-import { ToastProvider, useToast } from "stofli-ui"
+import { ToastProvider, useToast } from "stofli-ui";
 ```
 
   </div>
 
-
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
 
 Un toast simple con título y descripción.
 
@@ -41,23 +39,24 @@ export default function ToastDemo() {
 }
 
 function ToastContent() {
-  const { open } = useToast();
-  
-  return (
-    <Button 
-      variant="default"
-      onClick={() => 
-        open({
-          title: "Notificación",
-          description: "Este es un toast de ejemplo"
-        })
-      }
-    >
-      Mostrar notificación
-    </Button>
-  );
-}
-```
+const { open } = useToast();
+
+return (
+
+<Button
+  variant="default"
+  onClick={() =>
+    open({
+      title: "Notificación",
+      description: "Este es un toast de ejemplo",
+    })
+  }
+>
+  Mostrar notificación
+</Button>
+); }
+
+````
 </DemoTabs>
 
     <div className="mt-6">
@@ -86,13 +85,13 @@ export default function ToastVariantsDemo() {
 
 function VariantsContent() {
   const { open } = useToast();
-  
+
   return (
     <div className="flex flex-wrap gap-2">
       <Button
         variant="default"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Default",
             description: "Toast con estilo por defecto",
@@ -102,11 +101,11 @@ function VariantsContent() {
       >
         Default
       </Button>
-      
+
       <Button
         variant="primary"
         size="sm"
-        onClick={() => 
+        onClick={() =>
           open({
             title: "Primary",
             description: "Toast con estilo primario",
@@ -175,7 +174,8 @@ function VariantsContent() {
     </div>
   );
 }
-```
+````
+
 </DemoTabs>
     </div>
 
@@ -206,24 +206,24 @@ export default function ToastPositionsDemo() {
 }
 
 function PositionsContent() {
-  const { open } = useToast();
+const { open } = useToast();
 
-  return (
-    <div className="grid grid-cols-3 gap-2">
-      <Button
-        variant="primary"
-        size="sm"
-        onClick={() =>
-          open({
-            title: "Superior izquierda",
-            description: "top-left",
-            position: "top-left",
-            variant: "primary"
-          })
-        }
-      >
-        Superior izquierda
-      </Button>
+return (
+
+<div className="grid grid-cols-3 gap-2">
+<Button
+variant="primary"
+size="sm"
+onClick={() =>
+open({
+title: "Superior izquierda",
+description: "top-left",
+position: "top-left",
+variant: "primary"
+})
+} >
+Superior izquierda
+</Button>
 
       <Button
         variant="primary"
@@ -300,9 +300,11 @@ function PositionsContent() {
         Inferior derecha
       </Button>
     </div>
-  );
+
+);
 }
-```
+
+````
 
 </DemoTabs>
     </div>
@@ -403,7 +405,8 @@ function IconsContent() {
     </div>
   );
 }
-```
+````
+
 </DemoTabs>
     </div>
 
@@ -432,24 +435,24 @@ export default function ToastDurationDemo() {
 }
 
 function DurationContent() {
-  const { open } = useToast();
+const { open } = useToast();
 
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Button
-        variant="primary"
-        size="sm"
-        onClick={() =>
-          open({
-            title: "Desaparece rápido",
-            description: "Este toast desaparece en 2 segundos",
-            variant: "primary",
-            duration: 2000
-          })
-        }
-      >
-        2 segundos
-      </Button>
+return (
+
+<div className="flex flex-wrap gap-2">
+<Button
+variant="primary"
+size="sm"
+onClick={() =>
+open({
+title: "Desaparece rápido",
+description: "Este toast desaparece en 2 segundos",
+variant: "primary",
+duration: 2000
+})
+} >
+2 segundos
+</Button>
 
       <Button
         variant="success"
@@ -481,9 +484,11 @@ function DurationContent() {
         Infinito
       </Button>
     </div>
-  );
+
+);
 }
-```
+
+````
 
 </DemoTabs>
     </div>
@@ -588,7 +593,7 @@ function MultipleContent() {
     </div>
   );
 }
-```
+````
 
 </DemoTabs>
     </div>
@@ -619,33 +624,33 @@ export default function ToastCustomDemo() {
 }
 
 function CustomContent() {
-  const { open } = useToast();
+const { open } = useToast();
 
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Button
-        onClick={() =>
-          open({
-            title: "Actualización completada",
-            description: "El sistema se ha actualizado correctamente",
-            variant: "default",
-            icon: <BellIcon className="h-5 w-5" />,
-            containerClassName: "max-w-md",
-            toastClassName:
-              "bg-white border border-zinc-300 text-zinc-900 rounded-xl shadow-lg px-4 py-3 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100",
-            titleClassName: "font-semibold text-base text-zinc-900 dark:text-white",
-            descriptionClassName: "text-zinc-600 dark:text-zinc-400",
-            iconContainerClassName:
-              "bg-blue-100 p-2 rounded-full text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
-            closeButtonClassName:
-              "hover:bg-zinc-100 p-1 rounded-full opacity-100 dark:hover:bg-zinc-800",
-          })
-        }
-        variant="default"
-        size="sm"
-      >
-        Modo Claro/Oscuro
-      </Button>
+return (
+
+<div className="flex flex-wrap gap-2">
+<Button
+onClick={() =>
+open({
+title: "Actualización completada",
+description: "El sistema se ha actualizado correctamente",
+variant: "default",
+icon: <BellIcon className="h-5 w-5" />,
+containerClassName: "max-w-md",
+toastClassName:
+"bg-white border border-zinc-300 text-zinc-900 rounded-xl shadow-lg px-4 py-3 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100",
+titleClassName: "font-semibold text-base text-zinc-900 dark:text-white",
+descriptionClassName: "text-neutral-600 dark:text-neutral-400",
+iconContainerClassName:
+"bg-blue-100 p-2 rounded-full text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+closeButtonClassName:
+"hover:bg-zinc-100 p-1 rounded-full opacity-100 dark:hover:bg-zinc-800",
+})
+}
+variant="default"
+size="sm" >
+Modo Claro/Oscuro
+</Button>
 
       <Button
         onClick={() =>
@@ -693,9 +698,11 @@ function CustomContent() {
         Estilo Oscuro
       </Button>
     </div>
-  );
+
+);
 }
-```
+
+````
 
 </DemoTabs>
     </div>
@@ -750,7 +757,7 @@ function ToastButton() {
     </div>
   );
 }
-```
+````
 
     </div>
 
@@ -761,7 +768,7 @@ function ToastButton() {
 
 | Prop                     | Tipo                                                                                              | Default          | Descripción                                                                               |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
-| `id`                     | `string`                                                                                          | -                | ID único para el toast                                                                     |
+| `id`                     | `string`                                                                                          | -                | ID único para el toast                                                                    |
 | `open`                   | `boolean`                                                                                         | -                | Estado controlado del toast                                                               |
 | `defaultOpen`            | `boolean`                                                                                         | `false`          | Estado inicial del toast si no es controlado                                              |
 | `onOpenChange`           | `(open: boolean) => void`                                                                         | -                | Función llamada cuando cambia el estado                                                   |
