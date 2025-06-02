@@ -1,17 +1,20 @@
 # StofliUI
 
+<p>Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar para todos tus proyectos web. <strong>Optimizada para rendimiento, accesibilidad y personalización.</strong> Con Tailwind CSS y Framer Motion</p>
 <div align="center">
-  <img src="https://github.com/stt0k/StofliUI/blob/main/public/home.png" alt="StofliUI Logo" width="150" />
+  <img src="https://github.com/stt0k/StofliUI/blob/main/public/home.png" alt="StofliUI Logo" />
   
-  <p>Librería de componentes UI accesibles y personalizables para React</p>
-  
-  <div>
+  <p></p>
+  <div align="center">
+    <img src="https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff&style=flat" alt="Vercel Badge" />
+    <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=flat" alt="Tailwind CSS Badge" />
+    <img src="https://img.shields.io/badge/NextJs-000000?style=flat&logo=next.js&logoColor=white" alt="Next.js Badge" />
     <a href="https://www.npmjs.com/package/stofli-ui">
-    <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
-  </a>
-  <a href="https://github.com/stt0k/StofliUI/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/username/stofli-ui" alt="Licencia" />
-  </a>
+      <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
+    </a>
+    <a href="https://github.com/stt0k/StofliUI/blob/main/LICENSE">
+      <img src="https://img.shields.io/github/license/username/stofli-ui" alt="Licencia MIT" />
+    </a>
   </div>
 </div>
 
