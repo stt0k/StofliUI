@@ -69,7 +69,7 @@ const Card: React.FC<CardProps> = ({
   const descriptionId = `${cardId}-description`;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (interactive && (e.key === 'Enter' || e.key === ' ')) {
+    if (interactive && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault();
       onClick?.();
     }
@@ -129,7 +129,8 @@ const Card: React.FC<CardProps> = ({
     variantClasses[variant],
     radiusClasses[radius],
     hoverClasses[hover],
-    interactive && "cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2",
+    interactive &&
+      "cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2",
     interactive && variant === "default" && "focus:ring-zinc-500",
     interactive && variant === "primary" && "focus:ring-blue-500",
     interactive && variant === "secondary" && "focus:ring-purple-500",
@@ -147,7 +148,7 @@ const Card: React.FC<CardProps> = ({
   );
 
   const descriptionClasses = cn(
-    "text-zinc-600 dark:text-zinc-400 mb-4",
+    "text-neutral-600 dark:text-neutral-400 mb-4",
     descriptionClassName
   );
 
@@ -180,16 +181,13 @@ const Card: React.FC<CardProps> = ({
       id={cardId}
     >
       {header && (
-        <div 
-          className={headerClasses}
-          role="presentation"
-        >
+        <div className={headerClasses} role="presentation">
           {header}
         </div>
       )}
 
       {image && (
-        <div 
+        <div
           className={imageContainerClasses}
           role="img"
           aria-label={imageAlt || title || "Imagen de la tarjeta"}
@@ -205,7 +203,7 @@ const Card: React.FC<CardProps> = ({
         </div>
       )}
 
-      <div 
+      <div
         className={contentClasses}
         role="region"
         aria-label="Contenido principal"
@@ -238,10 +236,7 @@ const Card: React.FC<CardProps> = ({
       </div>
 
       {footer && (
-        <div 
-          className={footerClasses}
-          role="contentinfo"
-        >
+        <div className={footerClasses} role="contentinfo">
           {footer}
         </div>
       )}
