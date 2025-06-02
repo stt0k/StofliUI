@@ -82,7 +82,7 @@ export default function Page() {
           <div className="max-w-6xl mx-auto text-center mt-0 md:mt-10">
             {/* Tag más moderno */}
             <a
-              href="/docs/changelog"
+              href="/changelog"
               className="inline-flex items-center px-3 py-1.5 mb-8 text-xs font-medium bg-white/80 dark:bg-transparent backdrop-blur-sm rounded-full border border-zinc-300/80 dark:border-zinc-700/50 transition-all duration-300 relative group shadow-sm hover:shadow-md"
             >
               <span
@@ -117,13 +117,13 @@ export default function Page() {
               Build Modern UI Designs
             </h1>
 
-            <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12 hidden md:block">
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12 hidden md:block">
               Una biblioteca de componentes React UI rápida, moderna y fácil de
               utilizar para todos tus proyectos web. Optimizada para
               rendimiento, accesibilidad y personalización.
             </p>
 
-            <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12 block md:hidden">
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12 block md:hidden">
               Una biblioteca de componentes React UI rápida, moderna y fácil de
               utilizar.
             </p>
@@ -147,7 +147,7 @@ export default function Page() {
             </div>
 
             {/* Dashboard moderno */}
-            <div className="relative mx-auto max-w-5xl">
+            <div className="relative mx-auto max-w-6xl">
               {/* Efecto glass mejorado estilo macOS */}
               <div className="absolute -inset-5 bg-gray-100/60 dark:bg-zinc-800/30 rounded-3xl border border-gray-400/50 dark:border-white/10 shadow-xl"></div>
 
@@ -184,16 +184,16 @@ export default function Page() {
                         <Grid size={16} className="text-white" />
                       </div>
                       <div className="w-8 h-8 rounded-md flex items-center justify-center">
-                        <Monitor size={16} className="text-zinc-600" />
+                        <Monitor size={16} className="text-neutral-600" />
                       </div>
                       <div className="w-8 h-8 rounded-md flex items-center justify-center">
-                        <Clock size={16} className="text-zinc-600" />
+                        <Clock size={16} className="text-neutral-600" />
                       </div>
                       <div className="w-8 h-8 rounded-md flex items-center justify-center">
-                        <Award size={16} className="text-zinc-600" />
+                        <Award size={16} className="text-neutral-600" />
                       </div>
                       <div className="w-8 h-8 rounded-md flex items-center justify-center">
-                        <Circle size={16} className="text-zinc-600" />
+                        <Circle size={16} className="text-neutral-600" />
                       </div>
                     </div>
 
@@ -615,7 +615,7 @@ export default function Page() {
                               key={index}
                               className="flex items-center justify-between p-1.5"
                             >
-                              <div className="flex items-center">
+                              <div className="flex items-center justify-center">
                                 <Avatar
                                   src={player.avatarSrc}
                                   alt={player.name}
@@ -624,10 +624,10 @@ export default function Page() {
                                   fallback={player.name.charAt(0)}
                                 />
                                 <div>
-                                  <div className="text-[10px] font-medium text-white text-start">
+                                  <div className="text-[14px] font-medium text-white text-start">
                                     {player.name}
                                   </div>
-                                  <div className="text-[8px] text-zinc-500 text-start">
+                                  <div className="text-[11px] text-zinc-500 text-start">
                                     {player.role}
                                   </div>
                                 </div>
@@ -635,14 +635,14 @@ export default function Page() {
                               <div className="flex items-center">
                                 {player.trend === "up" ? (
                                   <span className="text-white mr-1.5">
-                                    <ChevronUp size={12} />
+                                    <ChevronUp size={14} />
                                   </span>
                                 ) : (
                                   <span className="text-zinc-500 mr-1.5">
                                     <span className="inline-block w-2 h-px bg-zinc-500"></span>
                                   </span>
                                 )}
-                                <span className="text-[10px] font-semibold text-white">
+                                <span className="text-[12px] font-semibold text-white">
                                   {player.score}
                                 </span>
                               </div>
