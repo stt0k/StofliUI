@@ -14,7 +14,7 @@ export function SwitchControlledDemo() {
         label={isChecked ? "Activado" : "Desactivado"}
         variant="primary"
       />
-      <p className="text-sm text-gray-600 dark:text-gray-400">
+      <p className="text-sm text-gray-600 dark:text-neutral-400">
         El switch está actualmente:{" "}
         <strong>{isChecked ? "Encendido" : "Apagado"}</strong>
       </p>
