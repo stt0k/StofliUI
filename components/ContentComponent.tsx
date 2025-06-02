@@ -36,7 +36,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
         <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
           {title}
         </h1>
-        <p className="text-lg text-zinc-600 dark:text-zinc-400">
+        <p className="text-lg text-gray-500 dark:text-neutral-400">
           {description}
         </p>
       </div>
