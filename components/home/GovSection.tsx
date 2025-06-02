@@ -49,7 +49,7 @@ const GovSection = () => {
             />
             <CardSpotlight
               icon={<DatabaseZap className="w-4 h-4" />}
-              label="68,2kb "
+              label="68,8kb "
               sublabel="Min + Gzip"
             />
             <CardSpotlight
