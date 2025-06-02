@@ -15,10 +15,9 @@ import {
 } from "lucide-react";
 import Button from "@/components/sections/Button";
 import Link from "next/link";
-import { FaReact, FaBox} from "react-icons/fa6";
+import { FaReact, FaBox } from "react-icons/fa6";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { SiBento } from "react-icons/si";
-
 
 const BentoSection = () => {
   return (
@@ -40,7 +39,7 @@ const BentoSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto "
+            className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto "
           >
             Nuestra biblioteca de componentes está diseñada con enfoque en
             accesibilidad, rendimiento y experiencia de desarrollo
@@ -61,30 +60,30 @@ const BentoSection = () => {
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
                   Accesibilidad integrada desde el principio
                 </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+                <p className="text-neutral-600 dark:text-neutral-400 mb-4">
                   Todos nuestros componentes cumplen con las directrices WCAG
                   2.1 AA, incluyendo navegación por teclado, soporte para
                   lectores de pantalla y contrastes adecuados.
                 </p>
                 <div className="flex flex-wrap gap-3 mt-auto">
                   <Link href="/docs/">
-                  <Button
-                    variant="default"
-                    className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white font-medium rounded-full text-sm px-4 py-1.5 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
-                  >
-                    Ver documentación
-                  </Button>
+                    <Button
+                      variant="default"
+                      className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white font-medium rounded-full text-sm px-4 py-1.5 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
+                    >
+                      Ver documentación
+                    </Button>
                   </Link>
                   <Link href="/docs/componentes/">
-                  <Button
-                    variant="ghost"
-                    className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white text-sm group"
-                    rightIcon={
-                      <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    }
-                  >
-                    Explorar componentes
-                  </Button>
+                    <Button
+                      variant="ghost"
+                      className="text-neutral-600 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-white text-sm group"
+                      rightIcon={
+                        <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                      }
+                    >
+                      Explorar componentes
+                    </Button>
                   </Link>
                 </div>
               </div>
@@ -188,20 +187,24 @@ const BentoSection = () => {
               <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
                 Tamaño optimizado
               </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
                 Componentes con código altamente optimizado y tree-shaking
                 integrado para reducir significativamente el tamaño del bundle.
               </p>
-              <Link href="https://bundlephobia.com/package/stofli-ui" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="ghost"
-                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
-                rightIcon={
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                }
+              <Link
+                href="https://bundlephobia.com/package/stofli-ui"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Ver detalles del tamaño del bundle
-              </Button>
+                <Button
+                  variant="ghost"
+                  className="text-neutral-600 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-white mt-3 px-3 group"
+                  rightIcon={
+                    <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                  }
+                >
+                  Ver detalles del tamaño del bundle
+                </Button>
               </Link>
             </div>
             <div className="p-4">
@@ -248,8 +251,10 @@ const BentoSection = () => {
               <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
                 Personalización avanzada
               </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                Flexibilidad total mediante props de className que te permiten personalizar cada parte de los componentes sin sacrificar funcionalidad ni accesibilidad.
+              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                Flexibilidad total mediante props de className que te permiten
+                personalizar cada parte de los componentes sin sacrificar
+                funcionalidad ni accesibilidad.
               </p>
             </div>
             <div className="p-4 flex flex-col items-center justify-center relative h-48 transition-all duration-500">
@@ -289,14 +294,17 @@ const BentoSection = () => {
                         Personaliza con className
                       </span>
                     </div>
-                    <span className="text-xs text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors duration-300">
+                    <span className="text-xs text-zinc-500 dark:text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-zinc-300 transition-colors duration-300">
                       Flexible
                     </span>
                   </div>
 
                   <div className="p-3.5 group-hover:bg-zinc-50/80 dark:group-hover:bg-zinc-800/80 transition-all duration-500">
                     <p className="text-sm text-zinc-900 dark:text-white leading-snug">
-                      Cada componente tiene sus propias <strong className="font-bold">props</strong> de className para que puedas personalizar cada parte del componente y conseguir una{" "}
+                      Cada componente tiene sus propias{" "}
+                      <strong className="font-bold">props</strong> de className
+                      para que puedas personalizar cada parte del componente y
+                      conseguir una{" "}
                       <span className="text-zinc-700 dark:text-zinc-300 group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
                         apariencia única.
                       </span>
@@ -324,8 +332,10 @@ const BentoSection = () => {
                 </div>
               </div>
 
-              <p className="text-zinc-600 dark:text-zinc-400 mt-2">
-                Nuestra biblioteca de componentes está diseñada para integrarse fácilmente en tu proyecto de React con una simple instalación del paquete.
+              <p className="text-neutral-600 dark:text-neutral-400 mt-2">
+                Nuestra biblioteca de componentes está diseñada para integrarse
+                fácilmente en tu proyecto de React con una simple instalación
+                del paquete.
               </p>
 
               <div className="mt-6 space-y-3">
@@ -337,7 +347,7 @@ const BentoSection = () => {
                     <div className="font-medium text-zinc-900 dark:text-white text-sm">
                       Fácil instalación
                     </div>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
                       npm install stofli-ui y listo para usar.
                     </p>
                   </div>
@@ -351,7 +361,7 @@ const BentoSection = () => {
                     <div className="font-medium text-zinc-900 dark:text-white text-sm">
                       Importación sencilla
                     </div>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
                       import &#123; Button &#125; from "stofli-ui"
                     </p>
                   </div>
@@ -365,7 +375,7 @@ const BentoSection = () => {
                     <div className="font-medium text-zinc-900 dark:text-white text-sm">
                       Compatibilidad con frameworks
                     </div>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
                       Next.js, Astro Vite y Laravel.
                     </p>
                   </div>
@@ -386,13 +396,14 @@ const BentoSection = () => {
               <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
                 Documentación completa
               </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-                Guías detalladas, ejemplos de código y propiedades documentadas para ayudarte a implementar cada componente fácilmente.
+              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                Guías detalladas, ejemplos de código y propiedades documentadas
+                para ayudarte a implementar cada componente fácilmente.
               </p>
               <Link href="/docs/primeros-pasos/introduccion">
                 <Button
                   variant="ghost"
-                  className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white mt-3 px-3 group"
+                  className="text-neutral-600 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-white mt-3 px-3 group"
                   rightIcon={
                     <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                   }
@@ -501,17 +512,17 @@ const BentoSection = () => {
                   </div>
                 </div>
 
-                <Link href="/docs/ejemplos">
-                <div className="mt-6 flex justify-center cursor-pointer">
-                  <div className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-lg py-2 px-4 flex items-center space-x-2.5 transition-colors">
-                    <div className="w-5 h-5 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                      <SiBento className="h-3 w-3 text-zinc-800 dark:text-white" />
+                <Link href="/ejemplos">
+                  <div className="mt-6 flex justify-center cursor-pointer">
+                    <div className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-lg py-2 px-4 flex items-center space-x-2.5 transition-colors">
+                      <div className="w-5 h-5 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
+                        <SiBento className="h-3 w-3 text-zinc-800 dark:text-white" />
+                      </div>
+                      <span className="text-sm text-zinc-800 dark:text-white font-medium">
+                        Ejemplos interactivos
+                      </span>
                     </div>
-                    <span className="text-sm text-zinc-800 dark:text-white font-medium">
-                      Ejemplos interactivos
-                    </span>
                   </div>
-                </div>
                 </Link>
               </div>
             </div>
