@@ -25,7 +25,7 @@ const ProjectSection = () => {
                 <h3 className="text-xl md:text-2xl font-bold text-zinc-800 dark:text-white mb-3">
                   Biblioteca de componentes completa
                 </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+                <p className="text-neutral-600 dark:text-neutral-400 mb-6">
                   Accede a una colección extensa de componentes UI modernos y
                   personalizables para tu próximo proyecto web.
                 </p>
@@ -38,7 +38,7 @@ const ProjectSection = () => {
                   {/* Properties Row */}
                   <div className="flex flex-col space-y-5">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                      <span className="text-sm text-zinc-600 dark:text-zinc-400">
+                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
                         Categorías
                       </span>
                       <div className="flex flex-wrap items-center gap-2">
@@ -50,7 +50,7 @@ const ProjectSection = () => {
                           <span className="w-2 h-2 mr-1.5 rounded-full bg-sky-500 dark:bg-sky-400"></span>
                           Tailwind CSS
                         </div>
-                        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-400 text-xs">
+                        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-neutral-400 text-xs">
                           +
                         </div>
                       </div>
@@ -58,11 +58,11 @@ const ProjectSection = () => {
 
                     {/* Resources Row */}
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                      <span className="text-sm text-zinc-600 dark:text-zinc-400">
+                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
                         Frameworks
                       </span>
                       <div className="flex flex-wrap items-center gap-2">
-                        <div className="flex items-center px-2 py-1 bg-zinc-50 dark:bg-zinc-800 rounded-md text-zinc-600 dark:text-zinc-300 text-xs font-medium">
+                        <div className="flex items-center px-2 py-1 bg-zinc-50 dark:bg-zinc-800 rounded-md text-neutral-600 dark:text-zinc-300 text-xs font-medium">
                           <span className="w-2 h-2 mr-1.5 rounded-full bg-zinc-500 dark:bg-zinc-400"></span>
                           Next.js
                         </div>
@@ -83,7 +83,7 @@ const ProjectSection = () => {
 
                     {/* Milestones Row */}
                     <div className="flex flex-col space-y-3">
-                      <span className="text-sm text-zinc-600 dark:text-zinc-400">
+                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
                         Estadísticas
                       </span>
                       <div className="space-y-3">
@@ -105,7 +105,7 @@ const ProjectSection = () => {
                               Accesibilidad
                             </span>
                           </div>
-                          <span className="text-xs text-zinc-600 dark:text-zinc-400">
+                          <span className="text-xs text-neutral-600 dark:text-neutral-400">
                             WCAG 2.1 & ARIA
                           </span>
                         </div>
@@ -116,7 +116,7 @@ const ProjectSection = () => {
                               Tamaño
                             </span>
                           </div>
-                          <span className="text-xs text-zinc-600 dark:text-zinc-400">
+                          <span className="text-xs text-neutral-600 dark:text-neutral-400">
                             68,8KB min + gzip
                           </span>
                         </div>
@@ -139,7 +139,7 @@ const ProjectSection = () => {
                 <h3 className="text-xl md:text-2xl font-bold text-zinc-800 dark:text-white mb-3">
                   Actualizaciones y roadmap
                 </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+                <p className="text-neutral-600 dark:text-neutral-400 mb-6">
                   Mantente al día con las últimas mejoras y nuevas
                   características disponibles en Stofli UI.
                 </p>
@@ -150,7 +150,7 @@ const ProjectSection = () => {
 
                   <div className="bg-white dark:bg-zinc-900/90 rounded-lg p-5 relative z-20 backdrop-blur-sm border border-gray-200 dark:border-zinc-800/80 shadow-sm dark:shadow-none">
                     <div className="flex justify-between items-start mb-4">
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                      <div className="text-sm text-neutral-600 dark:text-neutral-400">
                         Versión
                       </div>
                       <div className="flex items-center">
@@ -203,10 +203,10 @@ const ProjectSection = () => {
                     </div>
 
                     <div className="flex justify-between items-center">
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                      <div className="text-sm text-neutral-600 dark:text-neutral-400">
                         2 Jun 2025
                       </div>
-                      <button className="flex items-center text-xs font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors">
+                      <button className="flex items-center text-xs font-medium text-neutral-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors">
                         Changelog <ChevronRight className="w-3.5 h-3.5 ml-1" />
                       </button>
                     </div>
@@ -259,7 +259,7 @@ const ProjectSection = () => {
                     <div className="flex items-center px-4 py-2 border-b border-gray-200 dark:border-zinc-800/50 bg-gray-50 dark:bg-black">
                       <div className="px-2 py-1 bg-gray-200 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-zinc-300 text-xs font-medium flex items-center">
                         <svg
-                          className="w-3.5 h-3.5 mr-1 text-gray-600 dark:text-gray-400"
+                          className="w-3.5 h-3.5 mr-1 text-gray-600 dark:text-neutral-400"
                           viewBox="0 0 24 24"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
@@ -288,13 +288,13 @@ const ProjectSection = () => {
                         </svg>
                         Componentes
                       </div>
-                      <div className="text-gray-500 dark:text-zinc-400 text-xs mx-1">
+                      <div className="text-gray-500 dark:text-neutral-400 text-xs mx-1">
                         /
                       </div>
                       <div className="px-2 py-1 bg-gray-200 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-zinc-300 text-xs font-medium">
                         Buttons
                       </div>
-                      <div className="ml-auto text-gray-500 dark:text-zinc-400 text-xs">
+                      <div className="ml-auto text-gray-500 dark:text-neutral-400 text-xs">
                         ···
                       </div>
                     </div>
@@ -338,7 +338,7 @@ const ProjectSection = () => {
                           </div>
                           Accesibilidad incorporada
                         </h3>
-                        <p className="text-zinc-600 dark:text-zinc-400 text-sm max-w-xs mx-auto">
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm max-w-xs mx-auto">
                           Todos los componentes cumplen con
                           <span className="inline-block bg-purple-100 dark:bg-purple-900/40 px-1.5 py-0.5 rounded text-purple-700 dark:text-purple-300 text-sm ml-1">
                             @WCAG 2.1
