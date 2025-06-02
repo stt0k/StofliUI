@@ -32,7 +32,7 @@ const GovSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
-          className="text-lg text-zinc-600 dark:text-zinc-400 text-center max-w-2xl mx-auto mb-10 md:mb-16 px-2"
+          className="text-lg text-neutral-600 dark:text-neutral-400 text-center max-w-2xl mx-auto mb-10 md:mb-16 px-2"
         >
           StofliUI es una biblioteca moderna que integra componentes UI potentes
           con estilos avanzados, ofreciendo precisión a nivel de píxel y una
@@ -130,14 +130,14 @@ const CardSpotlight = ({
         className="bg-white shadow-sm dark:shadow-none dark:bg-zinc-900/40 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800/50 rounded-lg p-3 md:p-4 flex items-center cursor-default transition-colors duration-500"
         tabIndex={0}
       >
-        <div className="mr-3 p-1.5 md:p-2 rounded-md bg-zinc-100 dark:bg-black/50 text-zinc-600 dark:text-zinc-400">
+        <div className="mr-3 p-1.5 md:p-2 rounded-md bg-zinc-100 dark:bg-black/50 text-neutral-600 dark:text-neutral-400">
           {icon}
         </div>
         <div>
           <div className="text-sm font-semibold text-zinc-900 dark:text-white">
             {label}
           </div>
-          <div className="text-xs text-zinc-600 dark:text-zinc-500">
+          <div className="text-xs text-neutral-600 dark:text-zinc-500">
             {sublabel}
           </div>
         </div>
