@@ -59,8 +59,9 @@ export function ToastCustomDemo() {
             containerClassName: "max-w-md",
             toastClassName:
               "bg-white border border-zinc-300 text-zinc-900 rounded-xl shadow-lg px-4 py-3 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100",
-            titleClassName: "font-semibold text-base text-zinc-900 dark:text-white",
-            descriptionClassName: "text-zinc-600 dark:text-zinc-400",
+            titleClassName:
+              "font-semibold text-base text-zinc-900 dark:text-white",
+            descriptionClassName: "text-neutral-600 dark:text-neutral-400",
             iconContainerClassName:
               "bg-blue-100 p-2 rounded-full text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
             closeButtonClassName:
