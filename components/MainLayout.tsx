@@ -123,7 +123,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   const pathname = usePathname();
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const totalPages = allPages.length;
-  
+
   useEffect(() => {
     // Encontrar el índice de la página actual en nuestra lista unificada
     const currentIndex = allPages.findIndex((page) => {
@@ -177,12 +177,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   return (
     <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
       <Header />
-      <div className="flex-1 min-h-[calc(100vh-4.5rem)] pt-16">
+      <div className="flex-1 min-h-[calc(100vh-4.5rem)] pt-8">
         <div className="container mx-auto">
           <Sidebar />
           <div className="md:ml-[220px] lg:ml-[240px] px-4 md:px-6">
             <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-              <div className="mx-auto w-full min-w-0 min-h-[calc(100vh-12rem)]">
+              <div className="mx-auto max-w-2xl min-w-0 min-h-[calc(100vh-12rem)]">
                 {children} {/* Aquí va el contenido dinámico que pasas */}
                 {/* Paginación unificada para todas las secciones */}
                 {currentPageIndex > 0 && (
