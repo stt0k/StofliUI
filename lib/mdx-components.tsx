@@ -378,34 +378,34 @@ const components: MDXComponents = {
   ),
   p: (props) => (
     <p
-      className="mb-4 leading-relaxed dark:text-zinc-400 text-zinc-600"
+      className="mb-4 leading-relaxed dark:text-neutral-400 text-neutral-600"
       {...props}
     />
   ),
   ul: (props) => (
     <ul
-      className="pl-6 mb-4 space-y-2 list-disc dark:text-zinc-400 text-zinc-600"
+      className="pl-6 mb-4 space-y-2 list-disc dark:text-neutral-400 text-neutral-600"
       {...props}
     />
   ),
   ol: (props) => (
     <ol
-      className="pl-6 mb-4 space-y-2 list-decimal dark:text-zinc-400 text-zinc-600"
+      className="pl-6 mb-4 space-y-2 list-decimal dark:text-neutral-400 text-neutral-600"
       {...props}
     />
   ),
   li: (props) => <li className="mb-1" {...props} />,
   blockquote: (props) => (
     <blockquote
-      className="pl-4 my-4 italic border-l-4 dark:border-zinc-700 border-zinc-300 dark:text-zinc-400 text-zinc-600"
+      className="pl-4 my-4 italic border-l-4 dark:border-zinc-700 border-zinc-300 dark:text-neutral-400 text-neutral-600"
       {...props}
     />
   ),
   code: (props) => {
     // Si el elemento tiene atributos de rehype-pretty-code, no aplicar clases adicionales
-    const hasLanguage = 'data-language' in props;
-    const hasTheme = 'data-theme' in props;
-    
+    const hasLanguage = "data-language" in props;
+    const hasTheme = "data-theme" in props;
+
     if (hasLanguage || hasTheme) {
       return <code {...props} />;
     }
@@ -442,7 +442,7 @@ const components: MDXComponents = {
   ),
   td: (props) => (
     <td
-      className="px-4 py-2 border-t dark:border-zinc-700 border-zinc-200 dark:text-zinc-400 text-zinc-600"
+      className="px-4 py-2 border-t dark:border-zinc-700 border-zinc-200 dark:text-neutral-400 text-neutral-600"
       {...props}
     />
   ),
