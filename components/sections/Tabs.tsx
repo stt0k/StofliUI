@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -68,26 +74,28 @@ const Tabs: React.FC<TabsProps> = ({
     width: 0,
   });
   // State para almacenar las dimensiones de cada pestaña
-  const [tabDimensions, setTabDimensions] = useState<{ width: number; left: number }[]>([]);
+  const [tabDimensions, setTabDimensions] = useState<
+    { width: number; left: number }[]
+  >([]);
   // Referencia para el contenedor de pestañas
   const tabsContainerRef = useRef<HTMLDivElement | null>(null);
-  
+
   // Generar un ID estable basado en props
   const baseId = useMemo(() => {
     if (id) return id;
     // Usar una cadena estable basada en las etiquetas de las pestañas
-    const tabsSignature = tabs.map(tab => tab.label).join('_');
-    return `tabs-${tabsSignature.replace(/\s+/g, '-').toLowerCase()}`;
+    const tabsSignature = tabs.map((tab) => tab.label).join("_");
+    return `tabs-${tabsSignature.replace(/\s+/g, "-").toLowerCase()}`;
   }, [id, tabs]);
 
   // Función para actualizar las dimensiones de todas las pestañas
   const updateTabDimensions = useCallback(() => {
     if (tabsRef.current.length > 0) {
-      const dimensions = tabsRef.current.map(tabEl => {
+      const dimensions = tabsRef.current.map((tabEl) => {
         if (tabEl) {
           return {
             width: tabEl.offsetWidth,
-            left: tabEl.offsetLeft
+            left: tabEl.offsetLeft,
           };
         }
         return { width: 0, left: 0 };
@@ -168,40 +176,43 @@ const Tabs: React.FC<TabsProps> = ({
       }
     }
   }, [activeTab]);
-  
+
   // Manejar la navegación con teclado
-  const handleKeyDown = useCallback((e: React.KeyboardEvent, index: number) => {
-    const tabCount = tabs.length;
-    let nextTab = index;
-    
-    switch (e.key) {
-      case 'ArrowRight':
-        e.preventDefault();
-        nextTab = (index + 1) % tabCount;
-        break;
-      case 'ArrowLeft':
-        e.preventDefault();
-        nextTab = (index - 1 + tabCount) % tabCount;
-        break;
-      case 'Home':
-        e.preventDefault();
-        nextTab = 0;
-        break;
-      case 'End':
-        e.preventDefault();
-        nextTab = tabCount - 1;
-        break;
-      default:
-        return;
-    }
-    
-    setActiveTab(nextTab);
-    tabsRef.current[nextTab]?.focus();
-  }, [tabs.length]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent, index: number) => {
+      const tabCount = tabs.length;
+      let nextTab = index;
+
+      switch (e.key) {
+        case "ArrowRight":
+          e.preventDefault();
+          nextTab = (index + 1) % tabCount;
+          break;
+        case "ArrowLeft":
+          e.preventDefault();
+          nextTab = (index - 1 + tabCount) % tabCount;
+          break;
+        case "Home":
+          e.preventDefault();
+          nextTab = 0;
+          break;
+        case "End":
+          e.preventDefault();
+          nextTab = tabCount - 1;
+          break;
+        default:
+          return;
+      }
+
+      setActiveTab(nextTab);
+      tabsRef.current[nextTab]?.focus();
+    },
+    [tabs.length]
+  );
 
   const variantClasses = {
     default:
-      "bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300",
+      "bg-transparent text-neutral-600 dark:text-neutral-400 hover:text-zinc-700 dark:hover:text-zinc-300",
     primary:
       "bg-transparent text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300",
     secondary:
@@ -244,15 +255,21 @@ const Tabs: React.FC<TabsProps> = ({
     md: "rounded-[0.375rem]",
     full: "rounded-full",
   };
-  
+
   // Clases para el estado de foco según variante
   const focusClasses = {
-    default: "focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
-    primary: "focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
-    secondary: "focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
-    success: "focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
-    warning: "focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
-    danger: "focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    default:
+      "focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    primary:
+      "focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    secondary:
+      "focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    success:
+      "focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    warning:
+      "focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
+    danger:
+      "focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
   };
 
   const handleTabClick = (index: number) => {
@@ -334,12 +351,12 @@ const Tabs: React.FC<TabsProps> = ({
               {tabs.map((tab, index) => {
                 const isActive = activeTab === index;
                 // Usar un ancho estable basado en el estado tabDimensions
-                const stableWidth = tabDimensions[index]?.width || 'auto';
-                
+                const stableWidth = tabDimensions[index]?.width || "auto";
+
                 // ID único para el tab y su panel
                 const tabId = `${baseId}-tab-${index}`;
                 const panelId = `${baseId}-panel-${index}`;
-                
+
                 // Crear clase base para las pestañas
                 const baseTabClasses = cn(
                   "relative z-10 font-medium whitespace-nowrap",
@@ -385,11 +402,14 @@ const Tabs: React.FC<TabsProps> = ({
                     style={{
                       // El ancho se mantiene estable incluso al cambiar de estado activo
                       // Solo aplicamos un ancho mínimo si tenemos dimensiones calculadas
-                      minWidth: typeof stableWidth === 'number' ? `${stableWidth}px` : undefined,
+                      minWidth:
+                        typeof stableWidth === "number"
+                          ? `${stableWidth}px`
+                          : undefined,
                     }}
                   >
                     {tab.icon && (
-                      <span 
+                      <span
                         className={cn("flex-shrink-0", tabIconClassName)}
                         aria-hidden="true"
                       >
