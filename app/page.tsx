@@ -120,7 +120,7 @@ export default function Page() {
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12 hidden md:block">
               Una biblioteca de componentes React UI rápida, moderna y fácil de
               utilizar para todos tus proyectos web. Optimizada para
-              rendimiento, accesibilidad y personalización.
+              <strong> rendimiento</strong>, <strong>accesibilidad</strong> y <strong>personalización</strong>.
             </p>
 
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12 block md:hidden">
