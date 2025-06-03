@@ -195,8 +195,8 @@ const ProjectSection = () => {
                             </span>
                           </div>
                           <p className="text-sm text-zinc-700 dark:text-zinc-100">
-                            Ya esta disponible StofliUI con 21 componentes
-                            nuevos personalizables para utilizar.
+                            Ya está disponible StofliUI, con 21 componentes
+                            nuevos listos para utilizar.
                           </p>
                         </div>
                       </div>
