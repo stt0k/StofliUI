@@ -51,7 +51,7 @@ export default function ChangelogPage() {
       date: "Junio 2, 2025",
       title: "Lanzamiento Inicial",
       description:
-        "El primer lanzamiento público de StofliUI: una librería de componentes moderna, personalizable y accesible.",
+        "<p>El primer lanzamiento público de StofliUI: Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar.<p/> <p>Optimizada para <strong>rendimiento</strong>, <strong>accesibilidad</strong> y <strong>personalización</strong>. Con Tailwind CSS y Framer Motion.<p/>",
       features: [
         "20+ componentes esenciales",
         "Compatibles con Tailwind CSS v3 y v4",
@@ -62,12 +62,12 @@ export default function ChangelogPage() {
       icon: <Rocket className="w-5 h-5" />,
       authors: [
         {
-          name: "stt0k",
+          name: "Iván Vázquez",
           username: "@stt0k",
           image: "https://avatars.githubusercontent.com/u/110210725?v=4",
         },
         {
-          name: "hctor12",
+          name: "Héctor Gil",
           username: "@hctor12",
           image: "https://avatars.githubusercontent.com/u/148352976?v=4",
         },
@@ -201,9 +201,10 @@ export default function ChangelogPage() {
                       <h3 className="text-2xl font-bold mb-4">
                         {release.title}
                       </h3>
-                      <p className="text-gray-700 dark:text-gray-300 mb-6">
-                        {release.description}
-                      </p>
+                      <div 
+                        className="text-gray-700 dark:text-gray-300 mb-6 flex flex-col gap-2"
+                        dangerouslySetInnerHTML={{ __html: release.description }}
+                      />
                     </div>
 
                     {/* What's new section */}
