@@ -76,7 +76,7 @@ const Header = () => {
         <div className="space-y-4">
           <div className="w-fit">
             <Link href="/">
-              <h2 className="mb-2 px-2 text-xl font-bold tracking-tight text-zinc-950/90 dark:text-zinc-50">
+              <h2 className="mb-2 px-2 text-base font-bold tracking-tight text-zinc-950/90 dark:text-zinc-50">
                 StofliUI
               </h2>
             </Link>
@@ -84,7 +84,7 @@ const Header = () => {
 
           {/* Elementos del header en móvil */}
           <div className="py-2">
-            <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
+            <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
               Navegación
             </h2>
             <div className="space-y-1">
@@ -172,7 +172,7 @@ const Header = () => {
           {/* Secciones del sidebar original */}
           {sections.map((section) => (
             <div key={section.title} className="py-1">
-              <h2 className="mb-2 px-2 text-base font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
+              <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
                 {section.title}
               </h2>
               <div className="space-y-1 dark:text-zinc-50/60 text-zinc-950/60">
@@ -184,7 +184,7 @@ const Header = () => {
                   >
                     <Button
                       variant="ghost"
-                      className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-zinc-50/80 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
+                      className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-zinc-50/80 px-2 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
                         isActive(link.href)
                           ? "hover:text-zinc-950/85 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
                           : ""
@@ -236,12 +236,14 @@ const Header = () => {
           className={`
             ${
               isDocsRoute
-                ? "container px-2 rounded-none max-w-7xl mx-auto border-0"
+                ? "px-12 sm:px-2 rounded-none max-w-[88rem] mx-auto border-0"
                 : "w-full max-w-6xl rounded-lg border"
-            } 
-            bg-white/60 
-            dark:bg-black/60
-            backdrop-blur-md 
+            }
+            backdrop-blur 
+            flex-none 
+            duration-500 
+            supports-backdrop-blur:bg-background-light/60 
+            dark:bg-transparent
             shadow-none
             transition-all duration-300 ease-in-out
             ${RemoveScroll.classNames.zeroRight}
@@ -254,8 +256,8 @@ const Header = () => {
         >
           <div
             className={`${
-              isDocsRoute ? "px-2 flex justify-between" : "px-4 flex"
-            } py-3 items-center`}
+              isDocsRoute ? "px-0 sm:px-1 flex justify-between" : "px-4 flex"
+            } py-2 items-center`}
           >
             {/* Menú hamburguesa para móvil - visible solo en móvil */}
             <div className="md:hidden flex items-center">
@@ -264,9 +266,9 @@ const Header = () => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="mr-2 cursor-pointer px-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-950 dark:text-white"
+                    className="mr-1 cursor-pointer px-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-950 dark:text-white h-8 w-8"
                   >
-                    <MenuIcon className="h-5 w-5" />
+                    <MenuIcon className="h-4 w-4" />
                     <span className="sr-only">Toggle Menu</span>
                   </Button>
                 </SheetTrigger>
@@ -286,31 +288,46 @@ const Header = () => {
 
             {isDocsRoute ? (
               <>
-                {/* Logo y navegación agrupados para docs */}
-                <div className="flex items-center gap-10">
-                  {/* Logo a la izquierda - visible solo en desktop */}
-                  <div className="hidden md:flex flex-shrink-0 basis-0">
-                    <Link className="flex items-center space-x-2" href="/">
-                      <span className="font-bold text-black dark:text-white text-base">
+                {/* Logo y buscador para docs */}
+                <div className="flex items-center justify-between w-full">
+                  {/* Logo a la izquierda */}
+                  <div className="flex-shrink-0">
+                    <Link className="flex items-center space-x-1" href="/">
+                      <span className="font-bold text-black dark:text-white text-sm">
                         StofliUI
                       </span>
                     </Link>
                   </div>
 
-                  {/* Enlaces en el centro - solo visible en desktop */}
-                  <div className="hidden md:flex justify-start">
-                    <nav className="flex items-center space-x-8 text-sm font-medium">
-                      {headerData.map((data) => (
-                        <HeadLinks
-                          key={data.title}
-                          href={data.link}
-                          title={data.title}
-                          isActive={isLinkActive(data)}
-                          hidden={data.hidden ? true : false}
-                          submenu={undefined}
-                        />
-                      ))}
-                    </nav>
+                  {/* Buscador en el centro */}
+                  <div className="flex-1 flex justify-center max-w-[150px] xs:max-w-xs sm:max-w-sm md:max-w-md mx-auto px-1 sm:px-4">
+                    <div className="w-full">
+                      <SearchCommand isDocsRoute={true} />
+                    </div>
+                  </div>
+
+                  {/* Área derecha - GitHub y tema */}
+                  <div className="flex items-center space-x-1 sm:space-x-2">
+                    {/* GitHub - visible solo en tablet y desktop */}
+                    <div className="hidden sm:flex items-center">
+                      <Link
+                        href="https://github.com/stt0k/StofliUI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="rounded-md h-8 w-8 sm:h-9 sm:w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                        >
+                          <FaGithub className="h-4 w-4 sm:h-5 sm:w-5 text-zinc-950 dark:text-white" />
+                          <span className="sr-only">GitHub</span>
+                        </Button>
+                      </Link>
+                    </div>
+
+                    {/* Toggle de tema */}
+                    <ModeToggle className="h-8 w-8 sm:h-9 sm:w-9" />
                   </div>
                 </div>
               </>
@@ -343,39 +360,39 @@ const Header = () => {
                     ))}
                   </nav>
                 </div>
+
+                {/* Área derecha - botones de búsqueda y tema */}
+                <div
+                  className={`flex items-center justify-end space-x-2 flex-shrink-0 basis-0`}
+                >
+                  {/* Búsqueda - visible en ambos (desktop y móvil) */}
+                  <div className="mr-2">
+                    <SearchCommand />
+                  </div>
+
+                  {/* GitHub - visible solo en desktop */}
+                  <div className="hidden md:flex items-center">
+                    <Link
+                      href="https://github.com/stt0k/StofliUI"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="rounded-md h-9 w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                      >
+                        <FaGithub className="h-5 w-5 text-zinc-950 dark:text-white" />
+                        <span className="sr-only">GitHub</span>
+                      </Button>
+                    </Link>
+                  </div>
+
+                  {/* Toggle de tema - visible en ambos */}
+                  <ModeToggle />
+                </div>
               </>
             )}
-
-            {/* Área derecha - botones de búsqueda y tema */}
-            <div
-              className={`flex items-center justify-end space-x-2 flex-shrink-0 basis-0`}
-            >
-              {/* Búsqueda - visible en ambos (desktop y móvil) */}
-              <div className="mr-2">
-                <SearchCommand />
-              </div>
-
-              {/* GitHub - visible solo en desktop */}
-              <div className="hidden md:flex items-center">
-                <Link
-                  href="https://github.com/stt0k/StofliUI"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="rounded-md h-9 w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                  >
-                    <FaGithub className="h-5 w-5 text-zinc-950 dark:text-white" />
-                    <span className="sr-only">GitHub</span>
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Toggle de tema - visible en ambos */}
-              <ModeToggle />
-            </div>
           </div>
         </header>
       </div>
