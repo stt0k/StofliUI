@@ -131,9 +131,9 @@ export default function Page() {
             {/* Botones más pequeños y modernos */}
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">
               <ButtonGlitchBrightness href="/docs" text="Empieza ahora" />
-              <div className="w-[250px] h-10">
+              <div className="w-auto h-10">
                 <CodeBlock className="inline-flex items-center">
-                  <code>
+                  <code className="pe-12">
                     <span
                       data-no-copy="true"
                       className="select-none text-gray-500 mr-2"
