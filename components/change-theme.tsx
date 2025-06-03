@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Monitor, MoonIcon, Sun, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +15,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function ModeToggle() {
+interface ModeToggleProps {
+  className?: string;
+}
+
+export function ModeToggle({ className }: ModeToggleProps) {
   const { setTheme } = useTheme();
 
   return (
@@ -23,7 +28,10 @@ export function ModeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="relative z-10 space-x-0 focus:outline-none cursor-pointer bg-transparent hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
+          className={cn(
+            "relative z-10 space-x-0 focus:outline-none cursor-pointer bg-transparent hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50",
+            className
+          )}
           aria-label="Change theme"
           name="Change theme"
         >
