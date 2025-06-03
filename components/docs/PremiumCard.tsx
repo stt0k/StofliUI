@@ -4,18 +4,18 @@ import Link from "next/link";
 const PremiumCard = () => {
   return (
     <div className="w-full">
-      <div className="bg-black dark:bg-black rounded-xl p-4 text-white shadow-lg border border-neutral-800/60 backdrop-blur-sm">
-        <h3 className="text-base font-medium mb-2 text-white/90">
+      <div className="dark:bg-black rounded-xl p-4 text-black/90 dark:text-white shadow-md border border-neutral-800/60 backdrop-blur-sm">
+        <h3 className="text-base font-medium mb-2">
           Componentes Pro
         </h3>
 
-        <p className="text-xs text-zinc-400 mb-3 leading-relaxed">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3 leading-relaxed">
           Accede a nuestra biblioteca exclusiva de componentes diseñados para
           casos de uso profesionales.
         </p>
 
-        <p className="text-xs text-zinc-500 mb-5">
-          Tablas avanzadas, gráficos interactivos y dashboards empresariales.
+        <p className="text-xs text-zinc-600 dark:text-zinc-500 mb-5">
+          Tablas avanzadas, gráficos interativos y dashboards empresariales.
         </p>
 
         <Link
