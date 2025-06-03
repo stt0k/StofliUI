@@ -2,21 +2,25 @@ import React from "react";
 import SidebarLink from "./SidebarLink";
 
 type SidebarSectionProps = {
-  title: string;
+  title?: string;
   links: {
     href: string;
     label: string;
     tag?: string;
+    icon?: React.ReactNode;
+    isMainLink?: boolean;
   }[];
   currentPath: string;
 };
 
 const SidebarSection = ({ title, links, currentPath }: SidebarSectionProps) => (
   <div className="py-1">
-    <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">
-      {title}
-    </h2>
-    <div className="space-y-1">
+    {title && (
+      <h2 className="mb-3 text-sm font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">
+        {title}
+      </h2>
+    )}
+    <div className="flex flex-col">
       {links.map((link) => (
         <SidebarLink
           key={link.href}
@@ -24,6 +28,8 @@ const SidebarSection = ({ title, links, currentPath }: SidebarSectionProps) => (
           label={link.label}
           isActive={currentPath === link.href}
           tag={link.tag}
+          icon={link.icon}
+          isMainLink={link.isMainLink}
         />
       ))}
     </div>
