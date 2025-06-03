@@ -302,8 +302,8 @@ const BentoSection = () => {
                   <div className="p-3.5 group-hover:bg-zinc-50/80 dark:group-hover:bg-zinc-800/80 transition-all duration-500">
                     <p className="text-sm text-zinc-900 dark:text-white leading-snug">
                       Cada componente tiene sus propias{" "}
-                      <strong className="font-bold">props</strong> de className
-                      para que puedas personalizar cada parte del componente y
+                      <strong className="font-bold">props</strong> de <strong className="font-bold">className</strong>
+                      {" "}para que puedas personalizar cada parte del componente y
                       conseguir una{" "}
                       <span className="text-zinc-700 dark:text-zinc-300 group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
                         apariencia única.
