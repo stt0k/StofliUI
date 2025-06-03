@@ -390,7 +390,7 @@ export default function PageNav({ links }: PageNavProps) {
   );
 
   return (
-    <div className="hidden xl:block fixed top-[6.5rem] w-52 z-20 py-2 max-h-[calc(100vh-150px)] overflow-y-auto ml-27 scrollbar-hide">
+    <div className="hidden xl:block fixed top-[6.5rem] w-52 z-20 py-2 max-h-[calc(100vh-150px)] overflow-y-auto ml-15 scrollbar-hide">
       <div className="max-h-[calc(100vh-330px)] overflow-y-auto pr-2 scrollbar-hide">
         <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
           En esta página
