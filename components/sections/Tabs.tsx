@@ -212,7 +212,7 @@ const Tabs: React.FC<TabsProps> = ({
 
   const variantClasses = {
     default:
-      "bg-transparent text-neutral-600 dark:text-neutral-400 hover:text-zinc-700 dark:hover:text-zinc-300",
+      "bg-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300",
     primary:
       "bg-transparent text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300",
     secondary:
@@ -226,7 +226,7 @@ const Tabs: React.FC<TabsProps> = ({
   };
 
   const activeVariantClasses = {
-    default: "text-zinc-900 dark:text-white",
+    default: "text-neutral-900 dark:text-white",
     primary: "text-blue-700 dark:text-blue-300",
     secondary: "text-purple-700 dark:text-purple-300",
     success: "text-green-700 dark:text-green-300",

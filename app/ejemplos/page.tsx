@@ -336,7 +336,7 @@ export default function ExamplesPage() {
                         checked={rememberMe}
                         onChange={() => setRememberMe(!rememberMe)}
                       />
-                      <label className="text-sm text-gray-700 dark:text-zinc-300 ml-2">
+                      <label className="text-sm text-gray-700 dark:text-neutral-300 ml-2">
                         Recordarme durante 30 días
                       </label>
                     </div>
@@ -420,7 +420,7 @@ export default function ExamplesPage() {
 
                   <div className="flex items-center">
                     <Checkbox defaultChecked />
-                    <label className="text-sm text-gray-700 dark:text-zinc-300 ml-2">
+                    <label className="text-sm text-gray-700 dark:text-neutral-300 ml-2">
                       Acepto los{" "}
                       <Button variant="link" size="sm" className="h-auto p-0">
                         términos y condiciones
@@ -493,7 +493,7 @@ export default function ExamplesPage() {
                   </div>
 
                   <div className="border-t border-gray-200 dark:border-zinc-800 pt-4">
-                    <p className="text-sm text-gray-700 dark:text-zinc-300 mb-4">
+                    <p className="text-sm text-gray-700 dark:text-neutral-300 mb-4">
                       Diseñadora de producto especializada en interfaces para
                       aplicaciones móviles y web.
                     </p>
@@ -626,7 +626,7 @@ export default function ExamplesPage() {
                         </p>
                         <p className="text-sm mt-1">{notification.message}</p>
                       </div>
-                      <span className="text-xs text-gray-500 dark:text-zinc-500">
+                      <span className="text-xs text-gray-500 dark:text-neutral-500">
                         {notification.time}
                       </span>
                     </div>
@@ -742,7 +742,7 @@ export default function ExamplesPage() {
                       className={`px-3 sm:px-6 py-3 font-medium whitespace-nowrap cursor-pointer ${
                         index === 0
                           ? "text-blue-600 dark:text-white border-b-2 border-blue-500"
-                          : "text-gray-500 dark:text-neutral-400 hover:text-gray-700 dark:hover:text-zinc-200"
+                          : "text-gray-500 dark:text-neutral-400 hover:text-gray-700 dark:hover:text-neutral-200"
                       }`}
                     >
                       {tab}
@@ -852,7 +852,7 @@ export default function ExamplesPage() {
                           <span className="text-gray-500 dark:text-neutral-400 text-xs sm:text-sm">
                             {post.username}
                           </span>
-                          <span className="text-gray-500 dark:text-zinc-500 text-xs ml-1 sm:ml-2">
+                          <span className="text-gray-500 dark:text-neutral-500 text-xs ml-1 sm:ml-2">
                             · {post.time}
                           </span>
                         </div>
@@ -876,26 +876,26 @@ export default function ExamplesPage() {
 
                     {/* Botones de interacción estilo Twitter */}
                     <div className="flex justify-around py-2">
-                      <button className="flex items-center space-x-1 sm:space-x-1.5 text-gray-500 dark:text-zinc-500 hover:text-blue-500 transition-colors">
+                      <button className="flex items-center space-x-1 sm:space-x-1.5 text-gray-500 dark:text-neutral-500 hover:text-blue-500 transition-colors">
                         <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                         <span className="text-xs">{post.comments}</span>
                       </button>
 
-                      <button className="flex items-center space-x-1 sm:space-x-1.5 text-gray-500 dark:text-zinc-500 hover:text-green-500 transition-colors">
+                      <button className="flex items-center space-x-1 sm:space-x-1.5 text-gray-500 dark:text-neutral-500 hover:text-green-500 transition-colors">
                         <Repeat className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                         <span className="text-xs">{post.shares}</span>
                       </button>
 
-                      <button className="flex items-center space-x-1 sm:space-x-1.5 text-gray-500 dark:text-zinc-500 hover:text-red-500 transition-colors">
+                      <button className="flex items-center space-x-1 sm:space-x-1.5 text-gray-500 dark:text-neutral-500 hover:text-red-500 transition-colors">
                         <Heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                         <span className="text-xs">{post.likes}</span>
                       </button>
 
-                      <button className="text-gray-500 dark:text-zinc-500 hover:text-yellow-500 transition-colors">
+                      <button className="text-gray-500 dark:text-neutral-500 hover:text-yellow-500 transition-colors">
                         <Bookmark className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       </button>
 
-                      <button className="text-gray-500 dark:text-zinc-500 hover:text-blue-400 transition-colors">
+                      <button className="text-gray-500 dark:text-neutral-500 hover:text-blue-400 transition-colors">
                         <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       </button>
                     </div>
@@ -975,7 +975,7 @@ function OverviewTabContent() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <Card className="p-4 bg-white/80 dark:bg-zinc-900/80 border border-gray-200 dark:border-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 transition-all duration-300">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-gray-700 dark:text-zinc-300 font-medium">
+            <h3 className="text-gray-700 dark:text-neutral-300 font-medium">
               Ingresos
             </h3>
             <Badge variant="success">+12.5%</Badge>
@@ -989,7 +989,7 @@ function OverviewTabContent() {
         </Card>
         <Card className="p-4 bg-white/80 dark:bg-zinc-900/80 border border-gray-200 dark:border-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 transition-all duration-300">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-gray-700 dark:text-zinc-300 font-medium">
+            <h3 className="text-gray-700 dark:text-neutral-300 font-medium">
               Usuarios
             </h3>
             <Badge variant="primary">+24.8%</Badge>
@@ -1003,7 +1003,7 @@ function OverviewTabContent() {
         </Card>
         <Card className="p-4 bg-white/80 dark:bg-zinc-900/80 border border-gray-200 dark:border-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 transition-all duration-300">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-gray-700 dark:text-zinc-300 font-medium">
+            <h3 className="text-gray-700 dark:text-neutral-300 font-medium">
               Conversión
             </h3>
             <Badge variant="warning">-2.3%</Badge>

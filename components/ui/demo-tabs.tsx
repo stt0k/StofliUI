@@ -19,13 +19,13 @@ export default function DemoTabs({
       <TabsList className="inline-flex gap-x-4 bg-transparent p-0">
         <TabsTrigger
           value="preview"
-          className="rounded-none border-b-2 border-transparent bg-transparent px-2 py-2 font-medium text-zinc-500 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-zinc-100 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-zinc-900 dark:data-[state=active]:text-zinc-100 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+          className="rounded-none border-b-2 border-transparent bg-transparent px-2 py-2 font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-neutral-900 dark:data-[state=active]:text-neutral-100 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
           Preview
         </TabsTrigger>
         <TabsTrigger
           value="code"
-          className="rounded-none border-b-2 border-transparent bg-transparent px-2 py-2 font-medium text-zinc-500 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-zinc-100 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-zinc-900 dark:data-[state=active]:text-zinc-100 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+          className="rounded-none border-b-2 border-transparent bg-transparent px-2 py-2 font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-neutral-900 dark:data-[state=active]:text-neutral-100 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
         >
           Code
         </TabsTrigger>

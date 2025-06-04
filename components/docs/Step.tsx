@@ -19,11 +19,11 @@ const Step: React.FC<StepProps> = ({
     <div
       className={`border-l-2 border-zinc-200 dark:border-zinc-800 pl-6 relative ${className}`}
     >
-      <div className="absolute -left-4 -top-0 flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-white text-base font-bold shadow-md border-2 border-zinc-200 dark:border-zinc-900">
+      <div className="absolute -left-4 -top-0 flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-neutral-800 dark:text-white text-base font-bold shadow-md border-2 border-zinc-200 dark:border-zinc-900">
         {stepNumber}
       </div>
       <div className="flex items-center min-h-[32px]">
-        <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+        <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
           {title}
         </h3>
       </div>

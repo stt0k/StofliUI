@@ -175,7 +175,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   const { previous, next } = getPrevNextTitles();
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
+    <div className="flex flex-col min-h-screen bg-white text-neutral-950 dark:bg-black dark:text-neutral-50">
       <Header />
       <div className="flex-1 min-h-[calc(100vh-4.5rem)] pt-8">
         <div className="container mx-auto">

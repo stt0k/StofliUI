@@ -163,7 +163,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
   };
 
   const selectedVariantClasses = {
-    default: "bg-zinc-900 dark:bg-white text-white dark:text-zinc-900",
+    default: "bg-zinc-900 dark:bg-white text-white dark:text-neutral-900",
     primary: "bg-blue-500 dark:bg-blue-400 text-white",
     secondary: "bg-purple-500 dark:bg-purple-400 text-white",
     success: "bg-green-500 dark:bg-green-400 text-white",
@@ -244,7 +244,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
       {calendarName && (
         <div
           className={cn(
-            "text-sm text-center mb-2 text-zinc-500 dark:text-neutral-400",
+            "text-sm text-center mb-2 text-neutral-500 dark:text-neutral-400",
             calendarTitleClassName
           )}
           id={`${calendarId}-title`}
@@ -305,7 +305,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
           <div
             key={day}
             className={cn(
-              "text-center text-sm font-medium text-zinc-500 dark:text-neutral-400",
+              "text-center text-sm font-medium text-neutral-500 dark:text-neutral-400",
               weekdayClassName
             )}
             role="columnheader"
@@ -351,11 +351,11 @@ const CalendarContent: React.FC<CalendarProps> = ({
                 : isCurrentMonth
                 ? isDisabled
                   ? cn(
-                      "bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-400 dark:text-neutral-600 cursor-not-allowed",
+                      "bg-zinc-100/50 dark:bg-zinc-800/50 text-neutral-400 dark:text-neutral-600 cursor-not-allowed",
                       disabledDayClassName
                     )
                   : variantClasses[variant]
-                : "text-zinc-300 dark:text-neutral-600"
+                : "text-neutral-300 dark:text-neutral-600"
             );
 
             return (

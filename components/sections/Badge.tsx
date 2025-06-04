@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 // Definición de clases para las diferentes variantes
 const variantClasses = {
   default:
-    "bg-zinc-400 text-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 hover:bg-zinc-800 dark:hover:bg-zinc-600",
+    "bg-zinc-400 text-neutral-50 dark:bg-zinc-800 dark:text-neutral-200 hover:bg-zinc-800 dark:hover:bg-zinc-600",
   primary:
     "bg-blue-400 text-white dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-500",
   secondary:
@@ -115,7 +115,8 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         return {
           role: "button",
           tabIndex: 0,
-          "aria-label": ariaLabel || (typeof children === "string" ? children : undefined),
+          "aria-label":
+            ariaLabel || (typeof children === "string" ? children : undefined),
           "aria-pressed": undefined,
           onKeyDown: handleKeyDown,
           id: baseId,
@@ -132,10 +133,11 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     const ariaAttributes = getAriaAttributes();
 
     // Clases base para el badge
-    const baseClasses = "inline-flex items-center justify-center text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-900";
-    
+    const baseClasses =
+      "inline-flex items-center justify-center text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-900";
+
     // Clases condicionales para el cursor
-    const cursorClasses = (dismissible || onClick) ? "cursor-pointer" : "";
+    const cursorClasses = dismissible || onClick ? "cursor-pointer" : "";
 
     return (
       <motion.div
@@ -172,7 +174,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
           />
         )}
         {icon && (
-          <span 
+          <span
             id={iconId}
             className={cn("mr-1", iconClassName)}
             role="presentation"
@@ -181,7 +183,9 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
             {icon}
           </span>
         )}
-        <span id={contentId} className={cn(contentClassName)}>{children}</span>
+        <span id={contentId} className={cn(contentClassName)}>
+          {children}
+        </span>
         {dismissible && (
           <span
             id={dismissId}

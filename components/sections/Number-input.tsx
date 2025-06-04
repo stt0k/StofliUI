@@ -494,17 +494,17 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const variantClasses = {
     default: {
       input:
-        "bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700 focus:border-zinc-500 dark:focus:border-zinc-400 text-zinc-900 dark:text-zinc-100",
+        "bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700 focus:border-zinc-500 dark:focus:border-zinc-400 text-neutral-900 dark:text-neutral-100",
       button:
-        "bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border-zinc-300 dark:border-zinc-700",
+        "bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-neutral-700 dark:text-neutral-300 border-zinc-300 dark:border-zinc-700",
       active: "bg-zinc-200 dark:bg-zinc-700",
-      text: "text-zinc-700 dark:text-zinc-300",
+      text: "text-neutral-700 dark:text-neutral-300",
       focus:
         "ring-zinc-500/30 dark:ring-zinc-400/30 border-zinc-500 dark:border-zinc-400",
     },
     primary: {
       input:
-        "bg-white dark:bg-zinc-900 border-blue-300 dark:border-blue-700 focus:border-blue-500 dark:focus:border-blue-400 text-zinc-900 dark:text-zinc-100",
+        "bg-white dark:bg-zinc-900 border-blue-300 dark:border-blue-700 focus:border-blue-500 dark:focus:border-blue-400 text-neutral-900 dark:text-neutral-100",
       button:
         "bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-800/50 text-blue-600 dark:text-blue-300 border-blue-300 dark:border-blue-700",
       active: "bg-blue-100 dark:bg-blue-800/50",
@@ -514,7 +514,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
     },
     secondary: {
       input:
-        "bg-white dark:bg-zinc-900 border-purple-300 dark:border-purple-700 focus:border-purple-500 dark:focus:border-purple-400 text-zinc-900 dark:text-zinc-100",
+        "bg-white dark:bg-zinc-900 border-purple-300 dark:border-purple-700 focus:border-purple-500 dark:focus:border-purple-400 text-neutral-900 dark:text-neutral-100",
       button:
         "bg-purple-50 dark:bg-purple-900/30 hover:bg-purple-100 dark:hover:bg-purple-800/50 text-purple-600 dark:text-purple-300 border-purple-300 dark:border-purple-700",
       active: "bg-purple-100 dark:bg-purple-800/50",
@@ -524,7 +524,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
     },
     success: {
       input:
-        "bg-white dark:bg-zinc-900 border-green-300 dark:border-green-700 focus:border-green-500 dark:focus:border-green-400 text-zinc-900 dark:text-zinc-100",
+        "bg-white dark:bg-zinc-900 border-green-300 dark:border-green-700 focus:border-green-500 dark:focus:border-green-400 text-neutral-900 dark:text-neutral-100",
       button:
         "bg-green-50 dark:bg-green-900/30 hover:bg-green-100 dark:hover:bg-green-800/50 text-green-600 dark:text-green-300 border-green-300 dark:border-green-700",
       active: "bg-green-100 dark:bg-green-800/50",
@@ -534,7 +534,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
     },
     warning: {
       input:
-        "bg-white dark:bg-zinc-900 border-amber-300 dark:border-amber-700 focus:border-amber-500 dark:focus:border-amber-400 text-zinc-900 dark:text-zinc-100",
+        "bg-white dark:bg-zinc-900 border-amber-300 dark:border-amber-700 focus:border-amber-500 dark:focus:border-amber-400 text-neutral-900 dark:text-neutral-100",
       button:
         "bg-amber-50 dark:bg-amber-900/30 hover:bg-amber-100 dark:hover:bg-amber-800/50 text-amber-600 dark:text-amber-300 border-amber-300 dark:border-amber-700",
       active: "bg-amber-100 dark:bg-amber-800/50",
@@ -544,7 +544,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
     },
     danger: {
       input:
-        "bg-white dark:bg-zinc-900 border-red-300 dark:border-red-700 focus:border-red-500 dark:focus:border-red-400 text-zinc-900 dark:text-zinc-100",
+        "bg-white dark:bg-zinc-900 border-red-300 dark:border-red-700 focus:border-red-500 dark:focus:border-red-400 text-neutral-900 dark:text-neutral-100",
       button:
         "bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-800/50 text-red-600 dark:text-red-300 border-red-300 dark:border-red-700",
       active: "bg-red-100 dark:bg-red-800/50",
@@ -775,7 +775,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
       {description && (
         <div
           id={descriptionMessageId}
-          className="text-sm text-zinc-500 dark:text-neutral-400 mb-1"
+          className="text-sm text-neutral-500 dark:text-neutral-400 mb-1"
         >
           {description}
         </div>

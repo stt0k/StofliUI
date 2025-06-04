@@ -16,7 +16,7 @@ type SidebarSectionProps = {
 const SidebarSection = ({ title, links, currentPath }: SidebarSectionProps) => (
   <div className="py-1">
     {title && (
-      <h2 className="mb-3 text-sm font-medium tracking-tight text-zinc-950/90 dark:text-zinc-50">
+      <h2 className="mb-3 text-sm font-medium tracking-tight text-neutral-950/90 dark:text-neutral-50">
         {title}
       </h2>
     )}

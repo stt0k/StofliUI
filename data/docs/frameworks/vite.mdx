@@ -8,15 +8,21 @@
   <div>
     <HeadingAnchor id="requisitos">Requisitos</HeadingAnchor>
 
-<ul className="pl-5 list-disc space-y-2 mt-4 text-zinc-900 dark:text-zinc-100">
+<ul className="pl-5 list-disc space-y-2 mt-4 text-neutral-900 dark:text-neutral-100">
   <li className="pl-2">
-    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">React</span> 17 o superior</span>
+    <span className="text-neutral-900 dark:text-neutral-100">
+      <span className="font-bold">React</span> 17 o superior
+    </span>
   </li>
   <li className="pl-2">
-    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Tailwind CSS</span> 3 o superior</span>
+    <span className="text-neutral-900 dark:text-neutral-100">
+      <span className="font-bold">Tailwind CSS</span> 3 o superior
+    </span>
   </li>
   <li className="pl-2">
-    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Vite</span> 4 o superior</span>
+    <span className="text-neutral-900 dark:text-neutral-100">
+      <span className="font-bold">Vite</span> 4 o superior
+    </span>
   </li>
 </ul>
 
@@ -35,6 +41,7 @@ cd mi-proyecto-stofli
 ```
 
 Sigue las instrucciones en pantalla para completar la configuración inicial.
+
   </Step>
 
   <Step title="Instalar StofliUI" stepNumber={2}>
@@ -43,6 +50,7 @@ Sigue las instrucciones en pantalla para completar la configuración inicial.
 ```bash
 npm install stofli-ui
 ```
+
   </Step>
 
   <Step title="Instalar y configurar Tailwind CSS" stepNumber={3}>
@@ -71,12 +79,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 ```
 
 Crea o actualiza tu archivo CSS principal (por ejemplo, `src/index.css`) con las directivas de Tailwind v3:
@@ -90,14 +98,12 @@ Crea o actualiza tu archivo CSS principal (por ejemplo, `src/index.css`) con las
 Y asegúrate de que tu `vite.config.js` tenga configurado el plugin de React:
 
 ```js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  plugins: [
-    react(),
-  ],
-})
+  plugins: [react()],
+});
 ```
 
     <HeadingAnchor id="tailwind-v4" level={3}>Instalación para Tailwind CSS v4</HeadingAnchor>
@@ -111,16 +117,13 @@ npm install tailwindcss @tailwindcss/vite
 Actualiza tu `vite.config.js` para incluir el plugin de Tailwind CSS v4:
 
 ```js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-})
+  plugins: [react(), tailwindcss()],
+});
 ```
 
 Y crea o actualiza tu archivo CSS principal (por ejemplo, `src/index.css`) con la nueva sintaxis de importación de Tailwind v4:
@@ -149,11 +152,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {},
   },
-}
+};
 ```
 
 Si optas por usar el archivo de configuración, debes importarlo en tu CSS:
@@ -164,6 +167,7 @@ Si optas por usar el archivo de configuración, debes importarlo en tu CSS:
 ```
 
 En este caso, no necesitas usar la directiva `@source` ya que la detección de clases se hará a través de la propiedad `content` del archivo de configuración.
+
   </Step>
 
   <Step title="Usar componentes de StofliUI" stepNumber={4}>
@@ -183,6 +187,7 @@ function App() {
 
 export default App;
 ```
+
   </Step>
 
 </Steps>
@@ -193,8 +198,8 @@ export default App;
 
 export const toc = [
   { title: "Requisitos", href: "#requisitos" },
-  { 
-    title: "Instalación", 
+  {
+    title: "Instalación",
     href: "#instalacion",
     children: [
       { title: "Tailwind CSS v3", href: "#tailwind-v3" },
@@ -202,4 +207,3 @@ export const toc = [
     ],
   },
 ];
-

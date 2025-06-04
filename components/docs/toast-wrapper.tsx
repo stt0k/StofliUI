@@ -58,9 +58,9 @@ export function ToastCustomDemo() {
             icon: <BellIcon className="h-5 w-5" />,
             containerClassName: "max-w-md",
             toastClassName:
-              "bg-white border border-zinc-300 text-zinc-900 rounded-xl shadow-lg px-4 py-3 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100",
+              "bg-white border border-zinc-300 text-neutral-900 rounded-xl shadow-lg px-4 py-3 dark:bg-zinc-900 dark:border-zinc-700 dark:text-neutral-100",
             titleClassName:
-              "font-semibold text-base text-zinc-900 dark:text-white",
+              "font-semibold text-base text-neutral-900 dark:text-white",
             descriptionClassName: "text-neutral-600 dark:text-neutral-400",
             iconContainerClassName:
               "bg-blue-100 p-2 rounded-full text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
@@ -108,7 +108,7 @@ export function ToastCustomDemo() {
             toastClassName:
               "bg-black text-white border border-zinc-800 shadow-lg rounded-2xl px-4 py-3",
             titleClassName: "font-semibold text-white",
-            descriptionClassName: "text-zinc-400",
+            descriptionClassName: "text-neutral-400",
             iconContainerClassName: "bg-yellow-500 p-2 rounded-full text-black",
             closeButtonClassName:
               "hover:bg-zinc-800 p-1 rounded-full text-white",

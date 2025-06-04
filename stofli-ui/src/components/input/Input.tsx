@@ -562,8 +562,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               hideLabel ? "sr-only" : "block mb-1.5 font-medium",
               labelSizeClasses[size],
               disabled
-                ? "text-zinc-400 dark:text-neutral-600"
-                : "text-zinc-900 dark:text-zinc-100",
+                ? "text-neutral-400 dark:text-neutral-600"
+                : "text-neutral-900 dark:text-neutral-100",
               labelClassName
             )}
           >
@@ -583,7 +583,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {description && (
           <div
             id={descriptionMessageId}
-            className="text-sm text-zinc-500 dark:text-neutral-400 mb-1"
+            className="text-sm text-neutral-500 dark:text-neutral-400 mb-1"
           >
             {description}
           </div>
@@ -634,7 +634,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 "absolute top-1/2 transform -translate-y-1/2",
                 iconPositionClasses[size][iconPosition],
                 disabled
-                  ? "text-zinc-400 dark:text-neutral-600"
+                  ? "text-neutral-400 dark:text-neutral-600"
                   : validationError
                   ? "text-red-500 dark:text-red-400"
                   : isValid &&
@@ -650,7 +650,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     }-500 dark:text-${
                       variant === "default" ? "zinc" : variant
                     }-400`
-                  : "text-zinc-500 dark:text-neutral-400",
+                  : "text-neutral-500 dark:text-neutral-400",
                 "transition-colors duration-200"
               )}
               aria-hidden="true"
@@ -668,7 +668,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               onClick={() => setShowPassword(!showPassword)}
               className={cn(
                 "absolute top-1/2 transform -translate-y-1/2 right-3.5",
-                "text-zinc-500 hover:text-zinc-700 dark:text-neutral-400 dark:hover:text-zinc-300",
+                "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300",
                 "transition-colors duration-200 focus:outline-none"
               )}
               aria-label={

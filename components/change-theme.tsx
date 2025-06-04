@@ -29,7 +29,7 @@ export function ModeToggle({ className }: ModeToggleProps) {
           variant="ghost"
           size="icon"
           className={cn(
-            "relative z-10 space-x-0 focus:outline-none cursor-pointer bg-transparent hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50",
+            "relative z-10 space-x-0 focus:outline-none cursor-pointer bg-transparent hover:text-neutral-950/70 text-neutral-950/90 dark:hover:text-neutral-50/80 dark:text-neutral-50",
             className
           )}
           aria-label="Change theme"

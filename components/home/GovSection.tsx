@@ -21,7 +21,7 @@ const GovSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-extrabold text-center mb-4 md:mb-6 text-zinc-800 dark:text-white max-w-3xl mx-auto leading-tight tracking-tight px-2"
+          className="text-3xl md:text-4xl font-extrabold text-center mb-4 md:mb-6 text-neutral-800 dark:text-white max-w-3xl mx-auto leading-tight tracking-tight px-2"
         >
           Diseñado para desarrolladores y diseñadores
         </motion.h2>
@@ -134,10 +134,10 @@ const CardSpotlight = ({
           {icon}
         </div>
         <div>
-          <div className="text-sm font-semibold text-zinc-900 dark:text-white">
+          <div className="text-sm font-semibold text-neutral-900 dark:text-white">
             {label}
           </div>
-          <div className="text-xs text-neutral-600 dark:text-zinc-500">
+          <div className="text-xs text-neutral-600 dark:text-neutral-500">
             {sublabel}
           </div>
         </div>

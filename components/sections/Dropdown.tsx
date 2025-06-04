@@ -372,7 +372,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const variantClasses = {
     default:
-      "border border-zinc-400 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800",
+      "border border-zinc-400 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-neutral-800 dark:text-neutral-200 hover:bg-zinc-50 dark:hover:bg-zinc-800",
     primary:
       "border border-blue-400 dark:border-blue-800 bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20",
     secondary:
@@ -457,7 +457,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   const getItemClasses = (isSelected: boolean, isDisabled: boolean) => {
     // Clases para elementos seleccionados sin usar !important
     const selectedClasses = {
-      default: "bg-zinc-400 dark:bg-zinc-800 text-zinc-50 dark:text-zinc-200",
+      default:
+        "bg-zinc-400 dark:bg-zinc-800 text-neutral-50 dark:text-neutral-200",
       primary: "bg-blue-400 dark:bg-blue-800 text-white",
       secondary: "bg-purple-400 dark:bg-purple-800 text-white",
       success: "bg-green-400 dark:bg-green-800 text-white",
@@ -486,7 +487,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     // Aplicar clases según el estado
     if (isDisabled) {
       classes.push(
-        "opacity-50 cursor-not-allowed pointer-events-none text-zinc-400/70 dark:text-neutral-600"
+        "opacity-50 cursor-not-allowed pointer-events-none text-neutral-400/70 dark:text-neutral-600"
       );
     } else {
       classes.push("cursor-pointer");
@@ -513,8 +514,8 @@ const Dropdown: React.FC<DropdownProps> = ({
         }
       } else {
         // Clases para elementos no seleccionados
-        classes.push("text-zinc-700 dark:text-zinc-300");
-        classes.push("hover:text-zinc-900 dark:hover:text-white");
+        classes.push("text-neutral-700 dark:text-neutral-300");
+        classes.push("hover:text-neutral-900 dark:hover:text-white");
         classes.push("hover:bg-zinc-200 dark:hover:bg-zinc-800");
       }
     }
@@ -529,7 +530,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   // Define check colors based on variant
   const checkVariantColors = {
-    default: "text-zinc-50 dark:text-zinc-200",
+    default: "text-neutral-50 dark:text-neutral-200",
     primary: "text-white",
     secondary: "text-white",
     success: "text-white",
@@ -545,7 +546,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     if (selectedItems.length === 0) {
       return (
-        <span className="text-zinc-500 dark:text-neutral-400">
+        <span className="text-neutral-500 dark:text-neutral-400">
           {placeholder}
         </span>
       );
@@ -612,7 +613,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             "block text-sm font-medium mb-1",
             errorMessage
               ? "text-red-500 dark:text-red-400"
-              : "text-zinc-700 dark:text-zinc-300"
+              : "text-neutral-700 dark:text-neutral-300"
           )}
         >
           {label}
@@ -894,7 +895,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                       {item.description && (
                         <div
                           id={`${componentId}-desc-${index}`}
-                          className="text-sm text-zinc-500 dark:text-neutral-400 mt-1"
+                          className="text-sm text-neutral-500 dark:text-neutral-400 mt-1"
                         >
                           {item.description}
                         </div>

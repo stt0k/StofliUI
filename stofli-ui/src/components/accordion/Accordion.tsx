@@ -54,7 +54,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         >
           <span
             className={cn(
-              "text-sm font-medium text-zinc-900 dark:text-zinc-100",
+              "text-sm font-medium text-neutral-900 dark:text-neutral-100",
               titleClassName
             )}
           >
@@ -62,7 +62,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           </span>
           <ChevronDown
             className={cn(
-              "h-5 w-5 text-zinc-500 transition-transform duration-200",
+              "h-5 w-5 text-neutral-500 transition-transform duration-200",
               isOpen && "rotate-180",
               iconClassName
             )}

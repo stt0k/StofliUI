@@ -66,7 +66,8 @@ const Switch: React.FC<SwitchProps> = ({
   const [isChecked, setIsChecked] = useState(checked);
   const uniqueIdBase = useId();
   const uniqueId = id || `switch-${uniqueIdBase.replace(/:/g, "")}`;
-  const uniqueDescriptionId = descriptionId || (description ? `desc-${uniqueId}` : undefined);
+  const uniqueDescriptionId =
+    descriptionId || (description ? `desc-${uniqueId}` : undefined);
 
   // Sincronizar con el prop checked
   useEffect(() => {
@@ -102,10 +103,10 @@ const Switch: React.FC<SwitchProps> = ({
       activeBg: "bg-zinc-600 dark:bg-zinc-400",
       circle: "bg-white dark:bg-zinc-200",
       activeCircle: "bg-white dark:bg-white",
-      icon: "text-zinc-700 dark:text-zinc-800",
+      icon: "text-neutral-700 dark:text-neutral-800",
       hover: "hover:border-zinc-300 dark:hover:border-zinc-600",
       activeHover: "hover:bg-zinc-700 dark:hover:bg-zinc-500",
-      label: "text-zinc-700 dark:text-zinc-300",
+      label: "text-neutral-700 dark:text-neutral-300",
     },
     primary: {
       bg: "bg-blue-200 dark:bg-blue-950",
@@ -240,7 +241,8 @@ const Switch: React.FC<SwitchProps> = ({
   const focusRingColors = {
     default: "focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400",
     primary: "focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400",
-    secondary: "focus-visible:ring-purple-500 dark:focus-visible:ring-purple-400",
+    secondary:
+      "focus-visible:ring-purple-500 dark:focus-visible:ring-purple-400",
     success: "focus-visible:ring-green-500 dark:focus-visible:ring-green-400",
     warning: "focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400",
     danger: "focus-visible:ring-red-500 dark:focus-visible:ring-red-400",
@@ -390,8 +392,8 @@ const Switch: React.FC<SwitchProps> = ({
           aria-describedby={uniqueDescriptionId}
         />
 
-        <div 
-          className={getWrapperClasses()} 
+        <div
+          className={getWrapperClasses()}
           onClick={handleChange}
           aria-hidden="true"
         >
@@ -431,7 +433,7 @@ const Switch: React.FC<SwitchProps> = ({
           </motion.div>
         </div>
       </div>
-      
+
       {description && (
         <div id={uniqueDescriptionId} className="sr-only">
           {description}

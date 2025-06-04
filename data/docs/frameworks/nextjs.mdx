@@ -8,15 +8,21 @@
   <div>
     <HeadingAnchor id="requisitos">Requisitos</HeadingAnchor>
 
-<ul className="pl-5 list-disc space-y-2 mt-4 text-zinc-900 dark:text-zinc-100">
+<ul className="pl-5 list-disc space-y-2 mt-4 text-neutral-900 dark:text-neutral-100">
   <li className="pl-2">
-    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">React</span> 17 o superior</span>
+    <span className="text-neutral-900 dark:text-neutral-100">
+      <span className="font-bold">React</span> 17 o superior
+    </span>
   </li>
   <li className="pl-2">
-    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Tailwind CSS</span> 3 o superior</span>
+    <span className="text-neutral-900 dark:text-neutral-100">
+      <span className="font-bold">Tailwind CSS</span> 3 o superior
+    </span>
   </li>
   <li className="pl-2">
-    <span className="text-zinc-900 dark:text-zinc-100"><span className="font-bold">Next.js</span> 13 o superior</span>
+    <span className="text-neutral-900 dark:text-neutral-100">
+      <span className="font-bold">Next.js</span> 13 o superior
+    </span>
   </li>
 </ul>
 
@@ -35,6 +41,7 @@ cd mi-proyecto-stofli
 ```
 
 Asegúrate de seleccionar Tailwind CSS cuando se te pregunte durante la configuración.
+
   </Step>
 
   <Step title="Instalar StofliUI" stepNumber={2}>
@@ -43,6 +50,7 @@ Asegúrate de seleccionar Tailwind CSS cuando se te pregunte durante la configur
 ```bash
 npm install stofli-ui
 ```
+
   </Step>
 
   <Step title="Configurar Tailwind CSS" stepNumber={3}>
@@ -60,17 +68,17 @@ npm install stofli-ui
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class', 
+  darkMode: "class",
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 ```
 
     <HeadingAnchor id="tailwind-v4" level={3}>Configuración para Tailwind CSS v4</HeadingAnchor>
@@ -80,7 +88,7 @@ module.exports = {
     1. **Sin archivo de configuración**: Si prefieres no usar un archivo de configuración, puedes usar la directiva `@source` en tu archivo `globals.css` para indicar dónde buscar las clases de Tailwind, incluyendo StofliUI:
 
 ```css
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Usar la directiva @source para especificar archivos a escanear */
 @source './app';
@@ -96,24 +104,25 @@ module.exports = {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class', 
+  darkMode: "class",
   theme: {
     extend: {},
   },
-}
+};
 ```
 
 ```css
-@import 'tailwindcss';
-@import '../tailwind.config';
+@import "tailwindcss";
+@import "../tailwind.config";
 ```
 
 En este caso, no necesitas usar las directivas `@source` ya que la detección de clases se hará a través de la propiedad `content` del archivo de configuración.
+
   </Step>
 
   <Step title="Usar componentes de StofliUI" stepNumber={4}>
@@ -121,18 +130,17 @@ En este caso, no necesitas usar las directivas `@source` ya que la detección de
 
 ```tsx
 // app/page.tsx
-'use client';
+"use client";
 
 import { Button } from "stofli-ui";
 
 export default function Page() {
-  return (
-    <Button>Botón</Button>
-  );
+  return <Button>Botón</Button>;
 }
 ```
 
 Ten en cuenta que muchos componentes de StofliUI utilizan hooks y eventos, por lo que necesitarás usar la directiva `'use client'` en los archivos donde los importes.
+
   </Step>
 
 </Steps>
@@ -143,8 +151,8 @@ Ten en cuenta que muchos componentes de StofliUI utilizan hooks y eventos, por l
 
 export const toc = [
   { title: "Requisitos", href: "#requisitos" },
-  { 
-    title: "Instalación", 
+  {
+    title: "Instalación",
     href: "#instalacion",
     children: [
       { title: "Tailwind CSS v3", href: "#tailwind-v3" },
@@ -152,6 +160,3 @@ export const toc = [
     ],
   },
 ];
-
-
-

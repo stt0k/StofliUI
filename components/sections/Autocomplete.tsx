@@ -60,7 +60,7 @@ export const AutocompleteSection: React.FC<AutocompleteSectionProps> = ({
     <div className={cn("py-2", className)}>
       <div
         className={cn(
-          "px-3 py-1.5 text-sm font-medium text-zinc-400 dark:text-zinc-500",
+          "px-3 py-1.5 text-sm font-medium text-neutral-400 dark:text-neutral-500",
           titleClassName
         )}
       >
@@ -80,14 +80,14 @@ export const AutocompleteItem: React.FC<AutocompleteItemProps> = ({
   // Determinar las clases según el estado
   const getItemClasses = () => {
     if (option.disabled) {
-      return "opacity-50 bg-zinc-50 dark:bg-zinc-800/30 text-zinc-400 dark:text-zinc-500 cursor-not-allowed";
+      return "opacity-50 bg-zinc-50 dark:bg-zinc-800/30 text-neutral-400 dark:text-neutral-500 cursor-not-allowed";
     }
 
     if (isSelected) {
-      return "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium cursor-pointer";
+      return "bg-zinc-100 dark:bg-zinc-800 text-neutral-900 dark:text-neutral-100 font-medium cursor-pointer";
     }
 
-    return "hover:bg-zinc-50 dark:hover:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 cursor-pointer";
+    return "hover:bg-zinc-50 dark:hover:bg-zinc-800/50 text-neutral-700 dark:text-neutral-300 cursor-pointer";
   };
 
   // Manejar el clic solo si la opción no está deshabilitada
@@ -111,7 +111,7 @@ export const AutocompleteItem: React.FC<AutocompleteItemProps> = ({
     >
       <span>{option.label}</span>
       {isSelected && !option.disabled && (
-        <Check className="h-5 w-5 text-zinc-800 dark:text-zinc-200" />
+        <Check className="h-5 w-5 text-neutral-800 dark:text-neutral-200" />
       )}
     </motion.div>
   );
@@ -390,7 +390,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   // Obtener colores del título por variante
   const getTitleColorClasses = () => {
     const colors = {
-      default: "text-zinc-700 dark:text-zinc-300",
+      default: "text-neutral-700 dark:text-neutral-300",
       primary: "text-blue-600 dark:text-blue-400",
       secondary: "text-purple-600 dark:text-purple-400",
       success: "text-green-600 dark:text-green-400",
@@ -550,7 +550,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           className={cn(
             `w-full px-3 pr-20`,
             title ? "pt-0 pb-1.5" : "py-2",
-            `bg-transparent text-sm text-zinc-900 dark:text-zinc-100 
+            `bg-transparent text-sm text-neutral-900 dark:text-neutral-100 
             placeholder-zinc-500 dark:placeholder-zinc-400 outline-none disabled:cursor-not-allowed`,
             inputClassName
           )}
@@ -667,7 +667,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
               ))}
               {filteredOptions.length === 0 && (
                 <div
-                  className="px-3 py-2 text-sm text-zinc-500 dark:text-neutral-400"
+                  className="px-3 py-2 text-sm text-neutral-500 dark:text-neutral-400"
                   role="alert"
                 >
                   No se encontraron resultados

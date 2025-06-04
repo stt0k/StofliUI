@@ -92,7 +92,8 @@ const Pagination: React.FC<PaginationProps> = ({
   const uniqueId = `pagination-${uniqueIdBase.replace(/:/g, "")}`;
   const instanceId = id || uniqueId;
   const liveRegionId = `${instanceId}-live`;
-  const paginationLabel = ariaLabel || customText.navigationLabel || "Paginación";
+  const paginationLabel =
+    ariaLabel || customText.navigationLabel || "Paginación";
 
   useEffect(() => {
     setPage(currentPage);
@@ -170,7 +171,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const variantClasses = {
     default:
-      "bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:bg-zinc-300 dark:active:bg-zinc-600 transition-colors duration-150",
+      "bg-white dark:bg-zinc-900 text-neutral-800 dark:text-neutral-200 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:bg-zinc-300 dark:active:bg-zinc-600 transition-colors duration-150",
     primary:
       "bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-800/60 active:bg-blue-200 dark:active:bg-blue-700 transition-colors duration-150",
     secondary:
@@ -205,7 +206,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   // Color de texto para la página activa según variante
   const activeTextClasses = {
-    default: "text-zinc-900 dark:text-white",
+    default: "text-neutral-900 dark:text-white",
     primary: "text-blue-700 dark:text-blue-300",
     secondary: "text-purple-700 dark:text-purple-300",
     success: "text-green-700 dark:text-green-300",
@@ -326,7 +327,9 @@ const Pagination: React.FC<PaginationProps> = ({
             pageButtonClassName
           )}
           aria-current={isActive ? "page" : undefined}
-          aria-label={`${pageLabel} ${numericItem}${isActive ? " (página actual)" : ""}`}
+          aria-label={`${pageLabel} ${numericItem}${
+            isActive ? " (página actual)" : ""
+          }`}
           tabIndex={0}
         >
           {item}
@@ -402,7 +405,11 @@ const Pagination: React.FC<PaginationProps> = ({
         >
           <span className="flex items-center">
             <ChevronLeft size={iconSizes[size]} aria-hidden="true" />
-            <ChevronLeft size={iconSizes[size]} className="-ml-3" aria-hidden="true" />
+            <ChevronLeft
+              size={iconSizes[size]}
+              className="-ml-3"
+              aria-hidden="true"
+            />
             {withText && <span className="mx-1">{customText.first}</span>}
           </span>
         </button>
@@ -505,7 +512,11 @@ const Pagination: React.FC<PaginationProps> = ({
           <span className="flex items-center">
             {withText && <span className="mx-1">{customText.last}</span>}
             <ChevronRight size={iconSizes[size]} aria-hidden="true" />
-            <ChevronRight size={iconSizes[size]} className="-ml-3" aria-hidden="true" />
+            <ChevronRight
+              size={iconSizes[size]}
+              className="-ml-3"
+              aria-hidden="true"
+            />
           </span>
         </button>
       )}

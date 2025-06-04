@@ -9,15 +9,13 @@ description: >-
     <HeadingAnchor id="import">Import</HeadingAnchor>
 
 ```tsx
-import { Input } from "stofli-ui"
+import { Input } from "stofli-ui";
 ```
 
   </div>
 
-
   <div>
     <HeadingAnchor id="uso">Uso</HeadingAnchor>
-
 
 Ejemplos básicos para diferentes usos.
 
@@ -608,7 +606,7 @@ Ejemplo de un formulario de contacto con validación integrada.
 <DemoTabs
   preview={
     <div className="w-full max-w-lg mx-auto p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-6">
-      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">Formulario de Contacto</h2>
+      <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-4">Formulario de Contacto</h2>
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <Input 
@@ -666,7 +664,7 @@ import { UserIcon, MailIcon, PhoneIcon } from "lucide-react";
 export default function ContactFormDemo() {
   return (
     <div className="w-full max-w-lg mx-auto p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 space-y-6">
-      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">Formulario de Contacto</h2>
+      <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-4">Formulario de Contacto</h2>
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <Input 
@@ -857,42 +855,42 @@ export default function InputCustomClassesDemo() {
   <div>
     <HeadingAnchor id="props">Props</HeadingAnchor>
 
-| Prop             | Tipo                                                                          | Default     | Descripción                                                                                                                                            |
-| ---------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `label`          | `string`                                                                      | -           | Etiqueta para el campo de entrada                                                                                                                      |
-| `placeholder`    | `string`                                                                      | `""`        | Texto de marcador de posición                                                                                                                          |
-| `type`           | `string`                                                                      | `"text"`    | Tipo de input (text, password, email, etc.)                                                                                                            |
-| `defaultValue`   | `string`                                                                      | `""`        | Valor por defecto para inputs no controlados. No debe usarse junto con `value`                                                                         |
-| `value`          | `string`                                                                      | -           | Valor controlado del input. No debe usarse junto con `defaultValue`                                                                                    |
-| `name`           | `string`                                                                      | -           | Nombre del campo para formularios                                                                                                                      |
-| `id`             | `string`                                                                      | -           | ID del elemento input                                                                                                                                  |
-| `disabled`       | `boolean`                                                                     | `false`     | Deshabilita el input                                                                                                                                   |
-| `required`       | `boolean`                                                                     | `false`     | Marca el campo como requerido                                                                                                                          |
-| `error`          | `string`                                                                      | -           | Mensaje de error para mostrar                                                                                                                          |
-| `success`        | `boolean`                                                                     | `false`     | Indica si el campo tiene un valor válido                                                                                                               |
-| `pattern`        | `string`                                                                      | -           | Patrón de expresión regular para validación                                                                                                            |
-| `validate`       | `string \| ((value: string) => string \| undefined)`                          | -           | Regla de validación predefinida o función personalizada. Las reglas disponibles son: "email", "url", "min:N" donde N es el número mínimo de caracteres |
-| `successMessage` | `string`                                                                      | -           | Mensaje a mostrar cuando el input es válido                                                                                                            |
-| `icon`           | `ReactNode`                                                                   | -           | Ícono para mostrar junto al input                                                                                                                      |
-| `iconPosition`   | `"left" \| "right"`                                                           | `"left"`    | Posición del ícono                                                                                                                                     |
-| `variant`        | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                                                                                                                                     |
-| `size`           | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del input                                                                                                                                       |
-| `radius`         | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                                                                                                                                  |
-| `fullWidth`      | `boolean`                                                                     | `false`     | Hace que el input ocupe todo el ancho disponible                                                                                                       |
-| `className`      | `string`                                                                      | -           | Clases adicionales para el contenedor                                                                                                                  |
-| `inputClassName` | `string`                                                                      | -           | Clases adicionales para el elemento input                                                                                                              |
-| `labelClassName` | `string`                                                                      | -           | Clases adicionales para la etiqueta                                                                                                                    |
-| `onChange`       | `(e: React.ChangeEvent<HTMLInputElement>) => void`                            | -           | Función llamada al cambiar el valor                                                                                                                    |
-| `onFocus`        | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al enfocar el input                                                                                                                    |
-| `onBlur`         | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al perder el foco                                                                                                                      |
-| `aria-label`     | `string`                                                                      | -           | Etiqueta ARIA personalizada                                                                                                                            |
-| `aria-describedby` | `string`                                                                    | -           | ID del elemento que describe el input                                                                                                                  |
-| `description`    | `string`                                                                      | -           | Texto descriptivo para el input                                                                                                                        |
-| `errorId`        | `string`                                                                      | -           | ID personalizado para el mensaje de error                                                                                                              |
-| `descriptionId`  | `string`                                                                      | -           | ID personalizado para la descripción                                                                                                                   |
-| `hideLabel`      | `boolean`                                                                     | `false`     | Oculta visualmente la etiqueta pero la mantiene accesible para lectores de pantalla                                                                    |
-| `autoComplete`   | `string`                                                                      | -           | Valor para el atributo autoComplete del input                                                                                                          |
-| `readOnly`       | `boolean`                                                                     | `false`     | Establece el input en modo solo lectura                                                                                                                |
+| Prop               | Tipo                                                                          | Default     | Descripción                                                                                                                                            |
+| ------------------ | ----------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `label`            | `string`                                                                      | -           | Etiqueta para el campo de entrada                                                                                                                      |
+| `placeholder`      | `string`                                                                      | `""`        | Texto de marcador de posición                                                                                                                          |
+| `type`             | `string`                                                                      | `"text"`    | Tipo de input (text, password, email, etc.)                                                                                                            |
+| `defaultValue`     | `string`                                                                      | `""`        | Valor por defecto para inputs no controlados. No debe usarse junto con `value`                                                                         |
+| `value`            | `string`                                                                      | -           | Valor controlado del input. No debe usarse junto con `defaultValue`                                                                                    |
+| `name`             | `string`                                                                      | -           | Nombre del campo para formularios                                                                                                                      |
+| `id`               | `string`                                                                      | -           | ID del elemento input                                                                                                                                  |
+| `disabled`         | `boolean`                                                                     | `false`     | Deshabilita el input                                                                                                                                   |
+| `required`         | `boolean`                                                                     | `false`     | Marca el campo como requerido                                                                                                                          |
+| `error`            | `string`                                                                      | -           | Mensaje de error para mostrar                                                                                                                          |
+| `success`          | `boolean`                                                                     | `false`     | Indica si el campo tiene un valor válido                                                                                                               |
+| `pattern`          | `string`                                                                      | -           | Patrón de expresión regular para validación                                                                                                            |
+| `validate`         | `string \| ((value: string) => string \| undefined)`                          | -           | Regla de validación predefinida o función personalizada. Las reglas disponibles son: "email", "url", "min:N" donde N es el número mínimo de caracteres |
+| `successMessage`   | `string`                                                                      | -           | Mensaje a mostrar cuando el input es válido                                                                                                            |
+| `icon`             | `ReactNode`                                                                   | -           | Ícono para mostrar junto al input                                                                                                                      |
+| `iconPosition`     | `"left" \| "right"`                                                           | `"left"`    | Posición del ícono                                                                                                                                     |
+| `variant`          | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Variante de estilo                                                                                                                                     |
+| `size`             | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Tamaño del input                                                                                                                                       |
+| `radius`           | `"none" \| "sm" \| "md" \| "full"`                                            | `"md"`      | Radio de las esquinas                                                                                                                                  |
+| `fullWidth`        | `boolean`                                                                     | `false`     | Hace que el input ocupe todo el ancho disponible                                                                                                       |
+| `className`        | `string`                                                                      | -           | Clases adicionales para el contenedor                                                                                                                  |
+| `inputClassName`   | `string`                                                                      | -           | Clases adicionales para el elemento input                                                                                                              |
+| `labelClassName`   | `string`                                                                      | -           | Clases adicionales para la etiqueta                                                                                                                    |
+| `onChange`         | `(e: React.ChangeEvent<HTMLInputElement>) => void`                            | -           | Función llamada al cambiar el valor                                                                                                                    |
+| `onFocus`          | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al enfocar el input                                                                                                                    |
+| `onBlur`           | `(e: React.FocusEvent<HTMLInputElement>) => void`                             | -           | Función llamada al perder el foco                                                                                                                      |
+| `aria-label`       | `string`                                                                      | -           | Etiqueta ARIA personalizada                                                                                                                            |
+| `aria-describedby` | `string`                                                                      | -           | ID del elemento que describe el input                                                                                                                  |
+| `description`      | `string`                                                                      | -           | Texto descriptivo para el input                                                                                                                        |
+| `errorId`          | `string`                                                                      | -           | ID personalizado para el mensaje de error                                                                                                              |
+| `descriptionId`    | `string`                                                                      | -           | ID personalizado para la descripción                                                                                                                   |
+| `hideLabel`        | `boolean`                                                                     | `false`     | Oculta visualmente la etiqueta pero la mantiene accesible para lectores de pantalla                                                                    |
+| `autoComplete`     | `string`                                                                      | -           | Valor para el atributo autoComplete del input                                                                                                          |
+| `readOnly`         | `boolean`                                                                     | `false`     | Establece el input en modo solo lectura                                                                                                                |
 
   </div>
 </div>

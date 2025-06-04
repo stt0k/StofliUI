@@ -19,7 +19,7 @@ export function TabsCustomClassDemo() {
           label: "Dashboard",
           icon: <HomeIcon className="h-4 w-4" />,
           content: (
-            <p className="text-zinc-700 dark:text-zinc-300">
+            <p className="text-neutral-700 dark:text-neutral-300">
               Panel principal de control
             </p>
           ),
@@ -28,7 +28,7 @@ export function TabsCustomClassDemo() {
           label: "Analytics",
           icon: <BarChartIcon className="h-4 w-4" />,
           content: (
-            <p className="text-zinc-700 dark:text-zinc-300">
+            <p className="text-neutral-700 dark:text-neutral-300">
               Estadísticas y análisis
             </p>
           ),
@@ -37,7 +37,7 @@ export function TabsCustomClassDemo() {
           label: "Settings",
           icon: <SettingsIcon className="h-4 w-4" />,
           content: (
-            <p className="text-zinc-700 dark:text-zinc-300">
+            <p className="text-neutral-700 dark:text-neutral-300">
               Configuración de la aplicación
             </p>
           ),
@@ -102,28 +102,28 @@ export function ModernTabsDemo() {
             <div className="mt-2">
               <div className="space-y-3">
                 <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900 flex items-center gap-3 border border-zinc-200 dark:border-zinc-800">
-                  <FileIcon className="h-5 w-5 text-zinc-500" />
+                  <FileIcon className="h-5 w-5 text-neutral-500" />
                   <div>
                     <p className="font-medium">Informe de ventas Q2 2023</p>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-neutral-500">
                       Actualizado hace 2 días
                     </p>
                   </div>
                 </div>
                 <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900 flex items-center gap-3 border border-zinc-200 dark:border-zinc-800">
-                  <FileIcon className="h-5 w-5 text-zinc-500" />
+                  <FileIcon className="h-5 w-5 text-neutral-500" />
                   <div>
                     <p className="font-medium">Estrategia de marketing</p>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-neutral-500">
                       Actualizado hace 1 semana
                     </p>
                   </div>
                 </div>
                 <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-900 flex items-center gap-3 border border-zinc-200 dark:border-zinc-800">
-                  <FileIcon className="h-5 w-5 text-zinc-500" />
+                  <FileIcon className="h-5 w-5 text-neutral-500" />
                   <div>
                     <p className="font-medium">Presupuesto 2023</p>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-neutral-500">
                       Actualizado hace 1 mes
                     </p>
                   </div>

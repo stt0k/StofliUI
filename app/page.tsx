@@ -36,7 +36,7 @@ const RechartsComponents = dynamic(
     ssr: false,
     loading: () => (
       <div className="h-44 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/80 rounded-md p-3 flex items-center justify-center">
-        <p className="text-zinc-400 text-sm">Cargando gráfico...</p>
+        <p className="text-neutral-400 text-sm">Cargando gráfico...</p>
       </div>
     ),
   }
@@ -120,7 +120,8 @@ export default function Page() {
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12 hidden md:block">
               Una biblioteca de componentes React UI rápida, moderna y fácil de
               utilizar para todos tus proyectos web. Optimizada para
-              <strong> rendimiento</strong>, <strong>accesibilidad</strong> y <strong>personalización</strong>.
+              <strong> rendimiento</strong>, <strong>accesibilidad</strong> y{" "}
+              <strong>personalización</strong>.
             </p>
 
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mb-12 block md:hidden">
@@ -217,11 +218,11 @@ export default function Page() {
                       <h2 className="text-xl font-bold text-white">Overview</h2>
                       <div className="flex items-center gap-4">
                         <div className="relative">
-                          <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-500" />
+                          <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500" />
                           <input
                             type="text"
                             placeholder="Search"
-                            className="bg-black border border-zinc-800/60 rounded-md py-1.5 pl-9 pr-3 text-xs text-zinc-300 w-60"
+                            className="bg-black border border-zinc-800/60 rounded-md py-1.5 pl-9 pr-3 text-xs text-neutral-300 w-60"
                           />
                         </div>
                         <Button
@@ -268,7 +269,7 @@ export default function Page() {
                           radius="md"
                           hoverEffect={true}
                           className="mt-1"
-                          tabClassName="px-4 text-zinc-400 hover:text-zinc-200"
+                          tabClassName="px-4 text-neutral-400 hover:text-neutral-200"
                           contentClassName="px-0"
                         />
                       </div>
@@ -280,7 +281,7 @@ export default function Page() {
                         <span className="text-2xl font-bold text-white mb-0.5">
                           4
                         </span>
-                        <span className="text-[10px] text-zinc-400">
+                        <span className="text-[10px] text-neutral-400">
                           Battles
                         </span>
                       </div>
@@ -288,7 +289,7 @@ export default function Page() {
                         <span className="text-2xl font-bold text-white mb-0.5">
                           23
                         </span>
-                        <span className="text-[10px] text-zinc-400">
+                        <span className="text-[10px] text-neutral-400">
                           Players
                         </span>
                       </div>
@@ -309,7 +310,7 @@ export default function Page() {
                             </span>
                           </div>
                         </div>
-                        <span className="text-[10px] text-zinc-400">
+                        <span className="text-[10px] text-neutral-400">
                           Global NR
                         </span>
                       </div>
@@ -317,7 +318,7 @@ export default function Page() {
                         <span className="text-2xl font-bold text-white mb-0.5">
                           243
                         </span>
-                        <span className="text-[10px] text-zinc-400">
+                        <span className="text-[10px] text-neutral-400">
                           Questions
                         </span>
                       </div>
@@ -325,7 +326,7 @@ export default function Page() {
                         <span className="text-2xl font-bold text-white mb-0.5">
                           489
                         </span>
-                        <span className="text-[10px] text-zinc-400">
+                        <span className="text-[10px] text-neutral-400">
                           Topics
                         </span>
                       </div>
@@ -343,13 +344,13 @@ export default function Page() {
                             <div className="flex items-center gap-4">
                               <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-white"></span>
-                                <span className="text-xs text-zinc-400">
+                                <span className="text-xs text-neutral-400">
                                   Unitary
                                 </span>
                               </div>
                               <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-zinc-500"></span>
-                                <span className="text-xs text-zinc-400">
+                                <span className="text-xs text-neutral-400">
                                   Average
                                 </span>
                               </div>
@@ -364,7 +365,7 @@ export default function Page() {
                                 size="sm"
                                 variant="default"
                                 className="min-w-0"
-                                buttonClassName="!bg-black/80 !border-zinc-800/60 !text-zinc-400"
+                                buttonClassName="!bg-black/80 !border-zinc-800/60 !text-neutral-400"
                                 width="90px"
                               />
                             </div>
@@ -464,25 +465,25 @@ export default function Page() {
                               <div className="space-y-3 flex-1">
                                 <div className="flex items-center gap-2">
                                   <span className="w-3 h-3 rounded-full bg-green-600"></span>
-                                  <span className="text-xs text-zinc-300">
+                                  <span className="text-xs text-neutral-300">
                                     Digital marketing
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <span className="w-3 h-3 rounded-full bg-blue-500"></span>
-                                  <span className="text-xs text-zinc-300">
+                                  <span className="text-xs text-neutral-300">
                                     Water theory
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <span className="w-3 h-3 rounded-full bg-yellow-500"></span>
-                                  <span className="text-xs text-zinc-300">
+                                  <span className="text-xs text-neutral-300">
                                     Customer X
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <span className="w-3 h-3 rounded-full bg-red-500"></span>
-                                  <span className="text-xs text-zinc-300">
+                                  <span className="text-xs text-neutral-300">
                                     Product design
                                   </span>
                                 </div>
@@ -507,7 +508,7 @@ export default function Page() {
                                 size="sm"
                                 variant="default"
                                 className="min-w-0"
-                                buttonClassName="!bg-black/80 !border-zinc-800/60 !text-zinc-400"
+                                buttonClassName="!bg-black/80 !border-zinc-800/60 !text-neutral-400"
                                 width="90px"
                               />
                             </div>
@@ -525,7 +526,7 @@ export default function Page() {
                                     } rounded-sm transition-all hover:from-white/50 hover:to-white/80`}
                                     style={{ height: `${height * 10}px` }}
                                   ></div>
-                                  <span className="mt-1 text-[10px] text-zinc-400">
+                                  <span className="mt-1 text-[10px] text-neutral-400">
                                     {
                                       [
                                         "Mon",
@@ -558,7 +559,7 @@ export default function Page() {
                               <div className="p-1.5 text-white font-medium flex-1">
                                 Points
                               </div>
-                              <div className="p-1.5 text-zinc-400 flex-1">
+                              <div className="p-1.5 text-neutral-400 flex-1">
                                 Response time
                               </div>
                             </div>
@@ -627,7 +628,7 @@ export default function Page() {
                                   <div className="text-[14px] font-medium text-white text-start">
                                     {player.name}
                                   </div>
-                                  <div className="text-[11px] text-zinc-500 text-start">
+                                  <div className="text-[11px] text-neutral-500 text-start">
                                     {player.role}
                                   </div>
                                 </div>
@@ -638,7 +639,7 @@ export default function Page() {
                                     <ChevronUp size={14} />
                                   </span>
                                 ) : (
-                                  <span className="text-zinc-500 mr-1.5">
+                                  <span className="text-neutral-500 mr-1.5">
                                     <span className="inline-block w-2 h-px bg-zinc-500"></span>
                                   </span>
                                 )}
@@ -652,7 +653,7 @@ export default function Page() {
 
                         {/* Ver más */}
                         <div className="mt-3 mb-3 flex justify-between items-center px-3">
-                          <span className="text-[10px] text-zinc-500">
+                          <span className="text-[10px] text-neutral-500">
                             Full ranking
                           </span>
                           <Button

@@ -49,7 +49,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
-  
+
   const uniqueIdBase = useId();
   const tooltipId = id || `tooltip-${uniqueIdBase.replace(/:/g, "")}`;
 
@@ -122,7 +122,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   // Actualizar visibilidad basada en hover y focus (pero no cuando hacemos clic)
   useEffect(() => {
     // Solo mostrar si tenemos hover o focus (pero no mouseDown que indica click)
-    if ((isHovered || (isFocused && !mouseDown))) {
+    if (isHovered || (isFocused && !mouseDown)) {
       showTooltip();
     } else {
       hideTooltip();
@@ -132,24 +132,24 @@ const Tooltip: React.FC<TooltipProps> = ({
   // Manejadores de eventos
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
-  
+
   // Para soporte de teclado (WCAG)
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => {
     setIsFocused(false);
     setMouseDown(false);
   };
-  
+
   // Detectar clicks para ocultar el tooltip
   const handleMouseDown = () => setMouseDown(true);
   const handleMouseUp = () => {
     // Pequeño retraso antes de restaurar para asegurar que el tooltip se oculta en click
     setTimeout(() => setMouseDown(false), 300);
   };
-  
+
   // Manejar escape para cerrar el tooltip (accesibilidad)
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape' && isVisible) {
+    if (e.key === "Escape" && isVisible) {
       hideTooltip();
     }
   };
@@ -181,7 +181,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   }, [isVisible, calculatePosition]);
 
   const variantClasses = {
-    default: "bg-zinc-800 text-zinc-100 dark:bg-zinc-700",
+    default: "bg-zinc-800 text-neutral-100 dark:bg-zinc-700",
     primary: "bg-blue-500 text-white dark:bg-blue-600",
     secondary: "bg-purple-500 text-white dark:bg-purple-600",
     success: "bg-green-500 text-white dark:bg-green-600",

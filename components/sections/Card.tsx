@@ -143,7 +143,7 @@ const Card: React.FC<CardProps> = ({
   const contentClasses = cn("p-4", contentClassName);
 
   const titleClasses = cn(
-    "text-lg font-semibold mb-2 dark:text-zinc-100",
+    "text-lg font-semibold mb-2 dark:text-neutral-100",
     titleClassName
   );
 

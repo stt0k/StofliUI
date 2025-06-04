@@ -15,7 +15,7 @@ const HeadingAnchor: React.FC<HeadingAnchorProps> = ({
 }) => {
   // Base classes without layout properties
   const baseClasses =
-    "scroll-m-20 pb-2 font-semibold tracking-tight dark:text-zinc-100 text-zinc-900";
+    "scroll-m-20 pb-2 font-semibold tracking-tight dark:text-neutral-100 text-neutral-900";
 
   // Classes specific to heading level
   const levelClasses = {

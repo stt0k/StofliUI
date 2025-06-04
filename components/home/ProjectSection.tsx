@@ -22,7 +22,7 @@ const ProjectSection = () => {
               className="bg-zinc-50 dark:bg-black border-b-2 border-r-2 border-t-2 border-gray-200 dark:border-zinc-800/50 p-6 md:p-10"
             >
               <div className="max-w-md">
-                <h3 className="text-xl md:text-2xl font-bold text-zinc-800 dark:text-white mb-3">
+                <h3 className="text-xl md:text-2xl font-bold text-neutral-800 dark:text-white mb-3">
                   Biblioteca de componentes completa
                 </h3>
                 <p className="text-neutral-600 dark:text-neutral-400 mb-6">
@@ -31,7 +31,7 @@ const ProjectSection = () => {
                 </p>
 
                 <div className="bg-white dark:bg-zinc-900/90 rounded-lg p-6 backdrop-blur-sm border border-gray-200 dark:border-zinc-800/80 shadow-sm dark:shadow-none">
-                  <h4 className="text-lg font-bold text-zinc-800 dark:text-white mb-5">
+                  <h4 className="text-lg font-bold text-neutral-800 dark:text-white mb-5">
                     Biblioteca Stofli
                   </h4>
 
@@ -62,7 +62,7 @@ const ProjectSection = () => {
                         Frameworks
                       </span>
                       <div className="flex flex-wrap items-center gap-2">
-                        <div className="flex items-center px-2 py-1 bg-zinc-50 dark:bg-zinc-800 rounded-md text-neutral-600 dark:text-zinc-300 text-xs font-medium">
+                        <div className="flex items-center px-2 py-1 bg-zinc-50 dark:bg-zinc-800 rounded-md text-neutral-600 dark:text-neutral-300 text-xs font-medium">
                           <span className="w-2 h-2 mr-1.5 rounded-full bg-zinc-500 dark:bg-zinc-400"></span>
                           Next.js
                         </div>
@@ -90,7 +90,7 @@ const ProjectSection = () => {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <span className="w-2 h-2 mr-2 rounded-full bg-green-500 dark:bg-green-400"></span>
-                            <span className="text-sm text-zinc-700 dark:text-zinc-200">
+                            <span className="text-sm text-neutral-700 dark:text-neutral-200">
                               Rendimiento
                             </span>
                           </div>
@@ -101,7 +101,7 @@ const ProjectSection = () => {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <span className="w-2 h-2 mr-2 rounded-full bg-indigo-500 dark:bg-indigo-400"></span>
-                            <span className="text-sm text-zinc-700 dark:text-zinc-200">
+                            <span className="text-sm text-neutral-700 dark:text-neutral-200">
                               Accesibilidad
                             </span>
                           </div>
@@ -112,7 +112,7 @@ const ProjectSection = () => {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <span className="w-2 h-2 mr-2 rounded-full bg-amber-500 dark:bg-amber-400"></span>
-                            <span className="text-sm text-zinc-700 dark:text-zinc-200">
+                            <span className="text-sm text-neutral-700 dark:text-neutral-200">
                               Tamaño
                             </span>
                           </div>
@@ -136,7 +136,7 @@ const ProjectSection = () => {
               className="bg-zinc-50 dark:bg-black border-b-2 border-t-2 border-gray-200 dark:border-zinc-800/50 p-6 md:p-10 relative"
             >
               <div className="max-w-md">
-                <h3 className="text-xl md:text-2xl font-bold text-zinc-800 dark:text-white mb-3">
+                <h3 className="text-xl md:text-2xl font-bold text-neutral-800 dark:text-white mb-3">
                   Actualizaciones y roadmap
                 </h3>
                 <p className="text-neutral-600 dark:text-neutral-400 mb-6">
@@ -160,7 +160,7 @@ const ProjectSection = () => {
                             Estable
                           </div>
                         </div>
-                        <div className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-zinc-300 text-xs font-medium">
+                        <div className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-neutral-300 text-xs font-medium">
                           v1.0.0
                         </div>
                       </div>
@@ -194,7 +194,7 @@ const ProjectSection = () => {
                               Lanzamiento inicial
                             </span>
                           </div>
-                          <p className="text-sm text-zinc-700 dark:text-zinc-100">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-100">
                             Ya está disponible StofliUI, con 21 componentes
                             nuevos listos para utilizar.
                           </p>
@@ -206,7 +206,7 @@ const ProjectSection = () => {
                       <div className="text-sm text-neutral-600 dark:text-neutral-400">
                         2 Jun 2025
                       </div>
-                      <button className="flex items-center text-xs font-medium text-neutral-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors">
+                      <button className="flex items-center text-xs font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white transition-colors">
                         Changelog <ChevronRight className="w-3.5 h-3.5 ml-1" />
                       </button>
                     </div>
@@ -225,7 +225,7 @@ const ProjectSection = () => {
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
                 <div className="max-w-md">
-                  <h3 className="text-xl md:text-2xl font-bold text-zinc-800 dark:text-white mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-neutral-800 dark:text-white mb-6">
                     Construye interfaces modernas con StofliUI
                   </h3>
 
@@ -233,21 +233,21 @@ const ProjectSection = () => {
                   <div className="space-y-5 pt-2">
                     <div className="flex items-center">
                       <div className="w-1 h-6 bg-indigo-500 dark:bg-indigo-400 rounded-full mr-4"></div>
-                      <span className="text-md font-medium text-zinc-800 dark:text-white">
+                      <span className="text-md font-medium text-neutral-800 dark:text-white">
                         Componentes reutilizables
                       </span>
                     </div>
 
                     <div className="flex items-center">
                       <div className="w-1 h-6 bg-purple-500 dark:bg-purple-400 rounded-full mr-4"></div>
-                      <span className="text-md font-medium text-zinc-800 dark:text-white">
+                      <span className="text-md font-medium text-neutral-800 dark:text-white">
                         Diseño responsivo integrado
                       </span>
                     </div>
 
                     <div className="flex items-center">
                       <div className="w-1 h-6 bg-green-500 dark:bg-green-400 rounded-full mr-4"></div>
-                      <span className="text-md font-medium text-zinc-800 dark:text-white">
+                      <span className="text-md font-medium text-neutral-800 dark:text-white">
                         Modos claro y oscuro nativos
                       </span>
                     </div>
@@ -257,7 +257,7 @@ const ProjectSection = () => {
                 <div className="flex-1 max-w-lg">
                   <div className="bg-white dark:bg-black border border-gray-200 dark:border-zinc-800/50 rounded-lg overflow-hidden shadow-sm dark:shadow-none">
                     <div className="flex items-center px-4 py-2 border-b border-gray-200 dark:border-zinc-800/50 bg-gray-50 dark:bg-black">
-                      <div className="px-2 py-1 bg-gray-200 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-zinc-300 text-xs font-medium flex items-center">
+                      <div className="px-2 py-1 bg-gray-200 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-neutral-300 text-xs font-medium flex items-center">
                         <svg
                           className="w-3.5 h-3.5 mr-1 text-gray-600 dark:text-neutral-400"
                           viewBox="0 0 24 24"
@@ -291,7 +291,7 @@ const ProjectSection = () => {
                       <div className="text-gray-500 dark:text-neutral-400 text-xs mx-1">
                         /
                       </div>
-                      <div className="px-2 py-1 bg-gray-200 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-zinc-300 text-xs font-medium">
+                      <div className="px-2 py-1 bg-gray-200 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-neutral-300 text-xs font-medium">
                         Buttons
                       </div>
                       <div className="ml-auto text-gray-500 dark:text-neutral-400 text-xs">
@@ -332,7 +332,7 @@ const ProjectSection = () => {
                       </div>
 
                       <div className="space-y-2 mb-3">
-                        <h3 className="text-lg font-bold text-zinc-800 dark:text-white">
+                        <h3 className="text-lg font-bold text-neutral-800 dark:text-white">
                           <div className="inline-block bg-indigo-100 dark:bg-indigo-800 px-1.5 py-0.5 rounded text-indigo-700 dark:text-indigo-200 text-sm mr-1">
                             new
                           </div>
@@ -353,7 +353,7 @@ const ProjectSection = () => {
                           </Link>
                           <Link
                             href="/docs/componentes/button"
-                            className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-md text-xs font-medium text-gray-700 dark:text-zinc-300 transition-colors"
+                            className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-md text-xs font-medium text-gray-700 dark:text-neutral-300 transition-colors"
                           >
                             Demo
                           </Link>

@@ -58,7 +58,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 }) => {
   const variantClasses = {
     default:
-      "text-zinc-500 hover:text-zinc-700 dark:text-neutral-400 dark:hover:text-zinc-200",
+      "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200",
     primary:
       "text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-200",
     secondary:
@@ -78,7 +78,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   };
 
   const currentClasses = {
-    default: "text-zinc-800 dark:text-zinc-200 font-medium",
+    default: "text-neutral-800 dark:text-neutral-200 font-medium",
     primary: "text-blue-700 dark:text-blue-300 font-medium",
     secondary: "text-purple-700 dark:text-purple-300 font-medium",
     success: "text-green-700 dark:text-green-300 font-medium",
@@ -87,7 +87,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   };
 
   const nonCurrentClasses = {
-    default: "text-zinc-500 dark:text-neutral-400",
+    default: "text-neutral-500 dark:text-neutral-400",
     primary: "text-blue-500 dark:text-blue-400",
     secondary: "text-purple-500 dark:text-purple-400",
     success: "text-green-500 dark:text-green-400",
@@ -96,7 +96,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   };
 
   const separatorClasses = {
-    default: "text-zinc-400 dark:text-neutral-600",
+    default: "text-neutral-400 dark:text-neutral-600",
     primary: "text-blue-300 dark:text-blue-700",
     secondary: "text-purple-300 dark:text-purple-700",
     success: "text-green-300 dark:text-green-700",

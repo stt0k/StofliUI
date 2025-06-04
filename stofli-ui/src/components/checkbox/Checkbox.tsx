@@ -124,7 +124,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const checkedClasses = {
     default:
-      "bg-zinc-400 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-800 text-zinc-50 dark:text-zinc-200",
+      "bg-zinc-400 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-800 text-neutral-50 dark:text-neutral-200",
     primary:
       "bg-blue-400 dark:bg-blue-800 border-blue-400 dark:border-blue-800 text-white ring-2 ring-blue-100 dark:ring-blue-900/20",
     secondary:
@@ -202,14 +202,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
     "ml-2",
     labelSizeClasses[size],
     disabled
-      ? "text-zinc-400 dark:text-neutral-600"
-      : "text-zinc-900 dark:text-zinc-100",
+      ? "text-neutral-400 dark:text-neutral-600"
+      : "text-neutral-900 dark:text-neutral-100",
     labelClassName
   );
 
   const svgClasses = cn(
     "w-[80%] h-[80%]",
-    variant === "default" ? "text-white dark:text-zinc-200" : "text-white",
+    variant === "default" ? "text-white dark:text-neutral-200" : "text-white",
     className
   );
 

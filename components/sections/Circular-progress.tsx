@@ -246,7 +246,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
           <span
             className={cn(
               fontSize,
-              "font-medium dark:text-zinc-300 text-zinc-700",
+              "font-medium dark:text-neutral-300 text-neutral-700",
               "min-contrast-[4.5]", // Asegura contraste mínimo WCAG AA
               valueClassName
             )}

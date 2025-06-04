@@ -28,12 +28,14 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
     try {
       if (preRef.current) {
         // Enfoque simple: buscar específicamente el comando npm sin el símbolo $
-        let textToCopy = '';
-        
+        let textToCopy = "";
+
         // Si estamos en la página de inicio con el comando npm
-        if (isHomePage && preRef.current.textContent?.includes('npm install')) {
+        if (isHomePage && preRef.current.textContent?.includes("npm install")) {
           // Extraer solo el comando npm, ignorando el símbolo $
-          const match = preRef.current.textContent.match(/\$?\s*(npm install.*)/);
+          const match = preRef.current.textContent.match(
+            /\$?\s*(npm install.*)/
+          );
           if (match && match[1]) {
             textToCopy = match[1].trim();
           } else {
@@ -41,9 +43,9 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
           }
         } else {
           // Para otros bloques de código, usar todo el contenido
-          textToCopy = preRef.current.textContent || '';
+          textToCopy = preRef.current.textContent || "";
         }
-        
+
         await navigator.clipboard.writeText(textToCopy);
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
@@ -106,7 +108,7 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="absolute inset-0 flex items-center justify-center text-zinc-400"
+                className="absolute inset-0 flex items-center justify-center text-neutral-400"
               >
                 <Check className="h-4 w-4" />
               </motion.div>
@@ -117,7 +119,7 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="absolute inset-0 flex items-center justify-center text-zinc-400 hover:text-zinc-300"
+                className="absolute inset-0 flex items-center justify-center text-neutral-400 hover:text-neutral-300"
               >
                 <Copy className="h-4 w-4" />
               </motion.div>
@@ -135,7 +137,7 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
             transition={{ duration: 0.2 }}
             className={`absolute ${
               isHomePage ? "bottom-[-30px]" : "top-14"
-            } right-3 bg-zinc-800 text-zinc-300 text-xs font-medium px-2.5 py-1 rounded shadow-lg z-50`}
+            } right-3 bg-zinc-800 text-neutral-300 text-xs font-medium px-2.5 py-1 rounded shadow-lg z-50`}
           >
             ¡Copiado!
           </motion.div>

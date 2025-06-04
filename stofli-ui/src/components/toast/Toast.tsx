@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback, useId, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useId,
+  useContext,
+} from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -92,7 +99,7 @@ const Toast: React.FC<ToastProps> = ({
     if (!isOpen || duration === Number.POSITIVE_INFINITY) return;
 
     let timer: NodeJS.Timeout;
-    
+
     const startTimer = () => {
       timer = setTimeout(() => {
         handleClose();
@@ -110,33 +117,36 @@ const Toast: React.FC<ToastProps> = ({
 
     const toastElement = toastRef.current;
     if (toastElement) {
-      toastElement.addEventListener('focus', handleFocus, true);
-      toastElement.addEventListener('blur', handleBlur, true);
-      toastElement.addEventListener('mouseenter', handleMouseEnter);
-      toastElement.addEventListener('mouseleave', handleMouseLeave);
+      toastElement.addEventListener("focus", handleFocus, true);
+      toastElement.addEventListener("blur", handleBlur, true);
+      toastElement.addEventListener("mouseenter", handleMouseEnter);
+      toastElement.addEventListener("mouseleave", handleMouseLeave);
     }
 
     return () => {
       clearTimeout(timer);
       if (toastElement) {
-        toastElement.removeEventListener('focus', handleFocus, true);
-        toastElement.removeEventListener('blur', handleBlur, true);
-        toastElement.removeEventListener('mouseenter', handleMouseEnter);
-        toastElement.removeEventListener('mouseleave', handleMouseLeave);
+        toastElement.removeEventListener("focus", handleFocus, true);
+        toastElement.removeEventListener("blur", handleBlur, true);
+        toastElement.removeEventListener("mouseenter", handleMouseEnter);
+        toastElement.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
   }, [isOpen, duration, handleClose]);
 
   // Manejo de teclado para el toast
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      handleClose();
-    }
-  }, [handleClose]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClose();
+      }
+    },
+    [handleClose]
+  );
 
   const variantClasses = {
     default:
-      "bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-800/90 dark:to-zinc-700/90 text-zinc-800 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-700/50 backdrop-blur-sm shadow-sm",
+      "bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-800/90 dark:to-zinc-700/90 text-neutral-800 dark:text-neutral-100 border border-zinc-300 dark:border-zinc-700/50 backdrop-blur-sm shadow-sm",
     primary:
       "bg-gradient-to-r from-blue-400 to-blue-500 dark:from-blue-800/90 dark:to-blue-700/90 text-white dark:text-blue-50 border border-blue-400 dark:border-blue-700/50 backdrop-blur-sm shadow-sm",
     secondary:
@@ -179,14 +189,14 @@ const Toast: React.FC<ToastProps> = ({
   const getAriaTitle = () => {
     const baseTitle = title || "";
     const variantName = {
-      "default": "",
-      "primary": "Información: ",
-      "secondary": "Nota: ",
-      "success": "Éxito: ",
-      "warning": "Advertencia: ",
-      "danger": "Error: "
+      default: "",
+      primary: "Información: ",
+      secondary: "Nota: ",
+      success: "Éxito: ",
+      warning: "Advertencia: ",
+      danger: "Error: ",
     };
-    
+
     return `${variantName[variant]}${baseTitle}`;
   };
 
@@ -222,7 +232,10 @@ const Toast: React.FC<ToastProps> = ({
           >
             <div className={cn("flex items-start gap-3")}>
               {icon && (
-                <div className={cn("shrink-0 mt-0.5", iconContainerClassName)} aria-hidden="true">
+                <div
+                  className={cn("shrink-0 mt-0.5", iconContainerClassName)}
+                  aria-hidden="true"
+                >
                   {icon}
                 </div>
               )}
@@ -290,7 +303,7 @@ export const ToastProvider: React.FC<{
     props: Omit<ToastProps, "open" | "defaultOpen" | "onOpenChange" | "id">
   ) => {
     const uniqueId = `toast-${toastIdBase}-${toasts.length}`;
-    
+
     // Determinar automáticamente el role basado en la variante
     let role: "status" | "alert" = props.role || "status";
     if (!props.role) {
@@ -298,8 +311,11 @@ export const ToastProvider: React.FC<{
         role = "alert";
       }
     }
-    
-    setToasts((prev) => [...prev, { ...props, id: uniqueId, open: true, role }]);
+
+    setToasts((prev) => [
+      ...prev,
+      { ...props, id: uniqueId, open: true, role },
+    ]);
 
     if (props.duration !== Number.POSITIVE_INFINITY) {
       const duration = props.duration || 5000;
@@ -339,15 +355,15 @@ export const ToastProvider: React.FC<{
   // Asegurar que los toasts no bloqueen el contenido WCAG 2.1 SC 2.2.1
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && toasts.length > 0) {
+      if (e.key === "Escape" && toasts.length > 0) {
         // Cerrar el último toast
         const lastToastId = toasts[toasts.length - 1].id;
         closeToast(lastToastId);
       }
     };
-    
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [toasts]);
 
   return (

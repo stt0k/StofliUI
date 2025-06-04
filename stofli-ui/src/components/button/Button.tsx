@@ -98,7 +98,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (ariaLabel) {
         return ariaLabel;
       }
-      if (typeof children === 'string') {
+      if (typeof children === "string") {
         return children;
       }
       return undefined;
@@ -158,7 +158,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Estilos por variante
     const variantStyles = {
       default:
-        "bg-zinc-600 text-zinc-50 dark:bg-zinc-800 dark:text-zinc-200 hover:bg-zinc-700 dark:hover:bg-zinc-600 focus:ring-zinc-500",
+        "bg-zinc-600 text-neutral-50 dark:bg-zinc-800 dark:text-neutral-200 hover:bg-zinc-700 dark:hover:bg-zinc-600 focus:ring-zinc-500",
       primary:
         "bg-blue-600 text-white dark:bg-blue-800 hover:bg-blue-700 dark:hover:bg-blue-500 focus:ring-blue-400",
       secondary:
@@ -170,10 +170,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       danger:
         "bg-red-600 text-white dark:bg-red-800 hover:bg-red-700 dark:hover:bg-red-500 focus:ring-red-400",
       outline:
-        "bg-transparent border-2 border-zinc-300 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
+        "bg-transparent border-2 border-zinc-300 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:bg-zinc-800 text-neutral-900 dark:text-neutral-100",
       ghost:
-        "bg-transparent border-0 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100",
-      link: "bg-transparent border-0 underline-offset-4 hover:underline text-zinc-900 dark:text-zinc-100 hover:bg-transparent dark:hover:bg-transparent p-0 h-auto",
+        "bg-transparent border-0 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-neutral-900 dark:text-neutral-100",
+      link: "bg-transparent border-0 underline-offset-4 hover:underline text-neutral-900 dark:text-neutral-100 hover:bg-transparent dark:hover:bg-transparent p-0 h-auto",
     };
 
     // Estilos por tamaño
@@ -311,7 +311,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
 
         {!isLoading && leftIcon && (
-          <span 
+          <span
             className={cn("mr-2 relative z-10", leftIconClassName)}
             aria-hidden="true"
           >
@@ -332,7 +332,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {!isLoading && withArrow && (
           <span
             className={cn(
-              "ml-1 relative z-10 transition-transform duration-200 group-hover:translate-x-1", 
+              "ml-1 relative z-10 transition-transform duration-200 group-hover:translate-x-1",
               arrowClassName
             )}
             aria-hidden="true"
@@ -342,7 +342,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
 
         {!isLoading && rightIcon && !withArrow && (
-          <span 
+          <span
             className={cn("ml-2 relative z-10", rightIconClassName)}
             aria-hidden="true"
           >

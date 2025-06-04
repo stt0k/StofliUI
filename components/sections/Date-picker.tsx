@@ -909,7 +909,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   // Clases para el color del ícono según la variante
   const iconColorClasses = {
-    default: "text-zinc-500 dark:text-neutral-400",
+    default: "text-neutral-500 dark:text-neutral-400",
     primary: "text-blue-500 dark:text-blue-400",
     secondary: "text-purple-500 dark:text-purple-400",
     success: "text-green-500 dark:text-green-400",
@@ -989,7 +989,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             "block text-sm font-medium mb-1",
             errorMessage
               ? "text-red-500 dark:text-red-400"
-              : "text-zinc-700 dark:text-zinc-300",
+              : "text-neutral-700 dark:text-neutral-300",
             labelClassName
           )}
         >
@@ -1128,7 +1128,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                           "border-0 p-0 bg-transparent focus:ring-0 focus:outline-none",
                           width,
                           "text-center",
-                          !value && "text-zinc-400 dark:text-zinc-500",
+                          !value && "text-neutral-400 dark:text-neutral-500",
                           isActive && "bg-zinc-100 dark:bg-zinc-800 rounded",
                           "caret-transparent" // Ocultar el cursor de texto
                         )}
@@ -1175,7 +1175,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                       {index < formatSegments.length - 1 && (
                         <span
                           className={cn(
-                            "text-zinc-500 dark:text-neutral-400",
+                            "text-neutral-500 dark:text-neutral-400",
                             separator.includes("de") && "px-1" // Añadir padding si el separador contiene "de"
                           )}
                         >

@@ -34,7 +34,7 @@ export function NumberInputPercentageDemo() {
         max={100}
         onChange={setValue}
       />
-      <div className="absolute right-12 top-[38px] text-sm text-zinc-500">
+      <div className="absolute right-12 top-[38px] text-sm text-neutral-500">
         %
       </div>
     </div>
@@ -54,7 +54,7 @@ export function NumberInputCurrencyDemo() {
         step={0.01}
         onChange={setValue}
       />
-      <div className="absolute right-12 top-[38px] text-sm text-zinc-500">
+      <div className="absolute right-12 top-[38px] text-sm text-neutral-500">
         €
       </div>
     </div>
@@ -69,7 +69,7 @@ export function NumberInputSignedDemo() {
 
   return (
     <div>
-      <label className="block mb-1 font-medium text-sm text-zinc-700 dark:text-zinc-300">
+      <label className="block mb-1 font-medium text-sm text-neutral-700 dark:text-neutral-300">
         Valor con signo
       </label>
       <div className="flex items-center gap-2">

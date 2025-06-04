@@ -30,7 +30,7 @@ const BentoSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+            className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4"
           >
             Características Principales
           </motion.h2>
@@ -57,7 +57,7 @@ const BentoSection = () => {
           >
             <div className="flex flex-col md:flex-row h-full">
               <div className="p-6 md:w-1/2 flex flex-col">
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
+                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
                   Accesibilidad integrada desde el principio
                 </h3>
                 <p className="text-neutral-600 dark:text-neutral-400 mb-4">
@@ -77,7 +77,7 @@ const BentoSection = () => {
                   <Link href="/docs/componentes/">
                     <Button
                       variant="ghost"
-                      className="text-neutral-600 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-white text-sm group"
+                      className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white text-sm group"
                       rightIcon={
                         <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                       }
@@ -93,10 +93,10 @@ const BentoSection = () => {
                     <div className="mb-2">
                       <Users size={24} className="text-blue-400" />
                     </div>
-                    <div className="text-xs font-medium text-zinc-900 dark:text-white">
+                    <div className="text-xs font-medium text-neutral-900 dark:text-white">
                       Navegación por teclado
                     </div>
-                    <div className="text-xs text-zinc-500 mt-1">
+                    <div className="text-xs text-neutral-500 mt-1">
                       Soporte completo
                     </div>
                   </div>
@@ -105,10 +105,10 @@ const BentoSection = () => {
                     <div className="mb-2">
                       <Shield size={24} className="text-green-400" />
                     </div>
-                    <div className="text-xs font-medium text-zinc-900 dark:text-white">
+                    <div className="text-xs font-medium text-neutral-900 dark:text-white">
                       ARIA
                     </div>
-                    <div className="text-xs text-zinc-500 mt-1">
+                    <div className="text-xs text-neutral-500 mt-1">
                       Atributos integrados
                     </div>
                   </div>
@@ -136,10 +136,12 @@ const BentoSection = () => {
                         />
                       </svg>
                     </div>
-                    <div className="text-xs font-medium text-zinc-900 dark:text-white">
+                    <div className="text-xs font-medium text-neutral-900 dark:text-white">
                       WCAG 2.1
                     </div>
-                    <div className="text-xs text-zinc-500 mt-1">Nivel AA+</div>
+                    <div className="text-xs text-neutral-500 mt-1">
+                      Nivel AA+
+                    </div>
                   </div>
 
                   <div className="bg-zinc-100/80 dark:bg-black/60 rounded-lg border border-zinc-200/80 dark:border-zinc-800 p-4 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors shadow-md">
@@ -163,10 +165,10 @@ const BentoSection = () => {
                         />
                       </svg>
                     </div>
-                    <div className="text-xs font-medium text-zinc-900 dark:text-white">
+                    <div className="text-xs font-medium text-neutral-900 dark:text-white">
                       Estados enfocados
                     </div>
-                    <div className="text-xs text-zinc-500 mt-1">
+                    <div className="text-xs text-neutral-500 mt-1">
                       Visualización clara
                     </div>
                   </div>
@@ -184,7 +186,7 @@ const BentoSection = () => {
             className="col-span-1 bg-white dark:bg-black rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/40 shadow-sm dark:shadow-xl"
           >
             <div className="p-6">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
+              <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
                 Tamaño optimizado
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 mb-4">
@@ -198,7 +200,7 @@ const BentoSection = () => {
               >
                 <Button
                   variant="ghost"
-                  className="text-neutral-600 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-white mt-3 px-3 group"
+                  className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white mt-3 px-3 group"
                   rightIcon={
                     <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                   }
@@ -210,10 +212,10 @@ const BentoSection = () => {
             <div className="p-4">
               <div className="bg-zinc-100/60 dark:bg-black/40 rounded-lg p-3">
                 <div className="flex items-center mb-3">
-                  <span className="bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white text-xs px-2 py-0.5 rounded mr-2">
+                  <span className="bg-zinc-200 dark:bg-zinc-800 text-neutral-900 dark:text-white text-xs px-2 py-0.5 rounded mr-2">
                     &lt;9KB
                   </span>
-                  <span className="text-zinc-900 dark:text-white text-sm">
+                  <span className="text-neutral-900 dark:text-white text-sm">
                     Tamaño promedio por componente
                   </span>
                 </div>
@@ -222,7 +224,7 @@ const BentoSection = () => {
                     <div className="w-6 h-6 rounded-full bg-blue-500 mr-2 flex items-center justify-center">
                       <span className="text-xs text-white">JS</span>
                     </div>
-                    <span className="text-xs text-zinc-900 dark:text-white">
+                    <span className="text-xs text-neutral-900 dark:text-white">
                       Tree-shaking completo
                     </span>
                   </div>
@@ -230,7 +232,7 @@ const BentoSection = () => {
                     <div className="w-6 h-6 rounded-full bg-red-400 mr-2 flex items-center justify-center">
                       <span className="text-xs text-white">RT</span>
                     </div>
-                    <span className="text-xs text-zinc-900 dark:text-white">
+                    <span className="text-xs text-neutral-900 dark:text-white">
                       100/100 en Lighthouse
                     </span>
                   </div>
@@ -248,7 +250,7 @@ const BentoSection = () => {
             className="col-span-1 bg-white dark:bg-black rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/40 shadow-sm dark:shadow-xl transition-all duration-500"
           >
             <div className="p-6">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
+              <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
                 Personalización avanzada
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 mb-4">
@@ -290,22 +292,23 @@ const BentoSection = () => {
                       <div className="flex-shrink-0 w-5 h-5 rounded overflow-hidden mr-2 transition-transform duration-500 group-hover:scale-110">
                         <Paintbrush className="text-indigo-400" />
                       </div>
-                      <span className="font-medium text-zinc-900 dark:text-white text-sm group-hover:text-indigo-900 dark:group-hover:text-indigo-50 transition-colors duration-300">
+                      <span className="font-medium text-neutral-900 dark:text-white text-sm group-hover:text-indigo-900 dark:group-hover:text-indigo-50 transition-colors duration-300">
                         Personaliza con className
                       </span>
                     </div>
-                    <span className="text-xs text-zinc-500 dark:text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-zinc-300 transition-colors duration-300">
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors duration-300">
                       Flexible
                     </span>
                   </div>
 
                   <div className="p-3.5 group-hover:bg-zinc-50/80 dark:group-hover:bg-zinc-800/80 transition-all duration-500">
-                    <p className="text-sm text-zinc-900 dark:text-white leading-snug">
+                    <p className="text-sm text-neutral-900 dark:text-white leading-snug">
                       Cada componente tiene sus propias{" "}
-                      <strong className="font-bold">props</strong> de <strong className="font-bold">className</strong>
-                      {" "}para que puedas personalizar cada parte del componente y
-                      conseguir una{" "}
-                      <span className="text-zinc-700 dark:text-zinc-300 group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
+                      <strong className="font-bold">props</strong> de{" "}
+                      <strong className="font-bold">className</strong> para que
+                      puedas personalizar cada parte del componente y conseguir
+                      una{" "}
+                      <span className="text-neutral-700 dark:text-neutral-300 group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
                         apariencia única.
                       </span>
                     </p>
@@ -326,7 +329,7 @@ const BentoSection = () => {
             <div className="p-6 h-full flex flex-col">
               <div className="flex items-start mb-3">
                 <div>
-                  <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
                     Componentes listos para usar
                   </h3>
                 </div>
@@ -344,7 +347,7 @@ const BentoSection = () => {
                     <Layers className="h-4 w-4 text-indigo-400" />
                   </div>
                   <div>
-                    <div className="font-medium text-zinc-900 dark:text-white text-sm">
+                    <div className="font-medium text-neutral-900 dark:text-white text-sm">
                       Fácil instalación
                     </div>
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
@@ -358,7 +361,7 @@ const BentoSection = () => {
                     <Code className="h-4 w-4 text-green-400" />
                   </div>
                   <div>
-                    <div className="font-medium text-zinc-900 dark:text-white text-sm">
+                    <div className="font-medium text-neutral-900 dark:text-white text-sm">
                       Importación sencilla
                     </div>
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
@@ -372,7 +375,7 @@ const BentoSection = () => {
                     <Settings className="h-4 w-4 text-blue-400" />
                   </div>
                   <div>
-                    <div className="font-medium text-zinc-900 dark:text-white text-sm">
+                    <div className="font-medium text-neutral-900 dark:text-white text-sm">
                       Compatibilidad con frameworks
                     </div>
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
@@ -393,7 +396,7 @@ const BentoSection = () => {
             className="col-span-1 bg-white dark:bg-black rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/40 shadow-sm dark:shadow-xl relative"
           >
             <div className="p-6">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
+              <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
                 Documentación completa
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 mb-4">
@@ -403,7 +406,7 @@ const BentoSection = () => {
               <Link href="/docs/primeros-pasos/introduccion">
                 <Button
                   variant="ghost"
-                  className="text-neutral-600 hover:text-zinc-900 dark:text-neutral-400 dark:hover:text-white mt-3 px-3 group"
+                  className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white mt-3 px-3 group"
                   rightIcon={
                     <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                   }
@@ -421,63 +424,63 @@ const BentoSection = () => {
                   <div className="flex space-x-2 animate-infinite-scroll whitespace-nowrap">
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 rounded-full flex items-center justify-center">
-                        <BarChart className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <BarChart className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         Rendimiento
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Code className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <Code className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         TypeScript
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <FileText className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <FileText className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         Guías
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Settings className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <Settings className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         Props
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <RiTailwindCssFill className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <RiTailwindCssFill className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         Tailwind
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <FaReact className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <FaReact className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         React
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Users className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <Users className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         Accesibilidad
                       </span>
                     </div>
@@ -485,27 +488,27 @@ const BentoSection = () => {
                     {/* Duplicación exacta para asegurar continuidad en el desplazamiento */}
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 rounded-full flex items-center justify-center">
-                        <FaBox className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <FaBox className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         Frameworks
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <Code className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <Code className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         TypeScript
                       </span>
                     </div>
 
                     <div className="flex-shrink-0 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-full py-1.5 px-3 flex items-center space-x-1.5 transition-colors">
                       <div className="w-4 h-4 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <FileText className="h-2.5 w-2.5 text-zinc-800 dark:text-white" />
+                        <FileText className="h-2.5 w-2.5 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-xs text-zinc-800 dark:text-white font-medium tracking-tight">
+                      <span className="text-xs text-neutral-800 dark:text-white font-medium tracking-tight">
                         Guías
                       </span>
                     </div>
@@ -516,9 +519,9 @@ const BentoSection = () => {
                   <div className="mt-6 flex justify-center cursor-pointer">
                     <div className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-lg py-2 px-4 flex items-center space-x-2.5 transition-colors">
                       <div className="w-5 h-5 bg-zinc-200 dark:bg-zinc-900 rounded-full flex items-center justify-center">
-                        <SiBento className="h-3 w-3 text-zinc-800 dark:text-white" />
+                        <SiBento className="h-3 w-3 text-neutral-800 dark:text-white" />
                       </div>
-                      <span className="text-sm text-zinc-800 dark:text-white font-medium">
+                      <span className="text-sm text-neutral-800 dark:text-white font-medium">
                         Ejemplos interactivos
                       </span>
                     </div>

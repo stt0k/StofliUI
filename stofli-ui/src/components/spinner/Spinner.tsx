@@ -163,7 +163,7 @@ const Spinner: React.FC<SpinnerProps> = ({
 
   // Clases para el texto del label
   const labelClasses = {
-    default: "text-neutral-600 dark:text-zinc-300",
+    default: "text-neutral-600 dark:text-neutral-300",
     primary: "text-blue-600 dark:text-blue-400",
     secondary: "text-purple-600 dark:text-purple-400",
     success: "text-green-600 dark:text-green-400",

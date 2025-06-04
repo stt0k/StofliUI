@@ -76,7 +76,7 @@ const Header = () => {
         <div className="space-y-4">
           <div className="w-fit">
             <Link href="/">
-              <h2 className="mb-2 px-2 text-base font-bold tracking-tight text-zinc-950/90 dark:text-zinc-50">
+              <h2 className="mb-2 px-2 text-base font-bold tracking-tight text-neutral-950/90 dark:text-neutral-50">
                 StofliUI
               </h2>
             </Link>
@@ -84,7 +84,7 @@ const Header = () => {
 
           {/* Elementos del header en móvil */}
           <div className="py-2">
-            <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
+            <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-neutral-950 dark:text-neutral-50">
               Navegación
             </h2>
             <div className="space-y-1">
@@ -97,7 +97,7 @@ const Header = () => {
                         className={`w-full flex items-center justify-between p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm ${
                           isLinkActive(data)
                             ? "text-cyan-600 dark:text-cyan-500"
-                            : "text-zinc-900 dark:text-zinc-100"
+                            : "text-neutral-900 dark:text-neutral-100"
                         }`}
                       >
                         <span>{data.title}</span>
@@ -131,7 +131,7 @@ const Header = () => {
                               ) => (
                                 <div key={groupIndex} className="py-1">
                                   {group.title && (
-                                    <h3 className="px-2 text-xs font-medium text-zinc-500 dark:text-neutral-400">
+                                    <h3 className="px-2 text-xs font-medium text-neutral-500 dark:text-neutral-400">
                                       {group.title}
                                     </h3>
                                   )}
@@ -140,7 +140,7 @@ const Header = () => {
                                       key={itemIndex}
                                       href={item.href}
                                       onClick={closeMobileMenu}
-                                      className="block p-2 rounded-md text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm"
+                                      className="block p-2 rounded-md text-neutral-900 dark:text-neutral-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm"
                                     >
                                       {item.title}
                                     </Link>
@@ -158,7 +158,7 @@ const Header = () => {
                       className={`block p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm ${
                         isLinkActive(data)
                           ? "text-cyan-600 dark:text-cyan-500"
-                          : "text-zinc-900 dark:text-zinc-100"
+                          : "text-neutral-900 dark:text-neutral-100"
                       }`}
                     >
                       {data.title}
@@ -172,10 +172,10 @@ const Header = () => {
           {/* Secciones del sidebar original */}
           {sections.map((section) => (
             <div key={section.title} className="py-1">
-              <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
+              <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-neutral-950 dark:text-neutral-50">
                 {section.title}
               </h2>
-              <div className="space-y-1 dark:text-zinc-50/60 text-zinc-950/60">
+              <div className="space-y-1 dark:text-neutral-50/60 text-neutral-950/60">
                 {section.links.map((link) => (
                   <Link
                     key={link.href}
@@ -184,9 +184,9 @@ const Header = () => {
                   >
                     <Button
                       variant="ghost"
-                      className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-zinc-50/80 px-2 dark:text-zinc-50/60 text-zinc-950/60 hover:text-zinc-950/85 ${
+                      className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-neutral-50/80 px-2 dark:text-neutral-50/60 text-neutral-950/60 hover:text-neutral-950/85 ${
                         isActive(link.href)
-                          ? "hover:text-zinc-950/85 text-zinc-950 dark:hover:text-zinc-50/80 dark:text-zinc-50 hover:translate-x-0"
+                          ? "hover:text-neutral-950/85 text-neutral-950 dark:hover:text-neutral-50/80 dark:text-neutral-50 hover:translate-x-0"
                           : ""
                       }`}
                     >
@@ -212,7 +212,7 @@ const Header = () => {
                 rel="noopener noreferrer"
               >
                 <Button variant="ghost" size="icon" className="rounded-full">
-                  <FaGithub className="h-5 w-5 text-zinc-950 dark:text-zinc-50" />
+                  <FaGithub className="h-5 w-5 text-neutral-950 dark:text-neutral-50" />
                   <span className="sr-only">GitHub</span>
                 </Button>
               </Link>
@@ -268,7 +268,7 @@ const Header = () => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="mr-1 cursor-pointer px-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-950 dark:text-white h-8 w-8"
+                    className="mr-1 cursor-pointer px-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-neutral-950 dark:text-white h-8 w-8"
                   >
                     <MenuIcon className="h-4 w-4" />
                     <span className="sr-only">Toggle Menu</span>
@@ -280,7 +280,7 @@ const Header = () => {
                 >
                   <SideBar />
 
-                  <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-400 disabled:pointer-events-none text-zinc-950 dark:text-white">
+                  <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-400 disabled:pointer-events-none text-neutral-950 dark:text-white">
                     <XIcon className="h-4 w-4" />
                     <span className="sr-only">Close</span>
                   </SheetClose>
@@ -322,7 +322,7 @@ const Header = () => {
                           size="icon"
                           className="rounded-md h-8 w-8 sm:h-9 sm:w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                         >
-                          <FaGithub className="h-4 w-4 sm:h-5 sm:w-5 text-zinc-950 dark:text-white" />
+                          <FaGithub className="h-4 w-4 sm:h-5 sm:w-5 text-neutral-950 dark:text-white" />
                           <span className="sr-only">GitHub</span>
                         </Button>
                       </Link>
@@ -384,7 +384,7 @@ const Header = () => {
                         size="icon"
                         className="rounded-md h-9 w-9 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                       >
-                        <FaGithub className="h-5 w-5 text-zinc-950 dark:text-white" />
+                        <FaGithub className="h-5 w-5 text-neutral-950 dark:text-white" />
                         <span className="sr-only">GitHub</span>
                       </Button>
                     </Link>

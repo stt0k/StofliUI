@@ -123,7 +123,7 @@ const Avatar: React.FC<AvatarProps> = ({
         ) : (
           <span
             className={cn(
-              "font-medium text-zinc-500 dark:text-neutral-400",
+              "font-medium text-neutral-500 dark:text-neutral-400",
               fallbackClassName
             )}
             aria-hidden="true"

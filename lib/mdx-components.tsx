@@ -353,26 +353,26 @@ const components: MDXComponents = {
   // Componentes básicos de Markdown
   h1: (props) => (
     <h1
-      className="mt-8 mb-4 text-4xl font-bold tracking-tight dark:text-zinc-100 text-zinc-900"
+      className="mt-8 mb-4 text-4xl font-bold tracking-tight dark:text-neutral-100 text-neutral-900"
       {...props}
     />
   ),
   h2: (props) => (
     <HeadingLink
       as="h2"
-      className="mt-6 mb-3 text-3xl font-bold tracking-tight dark:text-zinc-100 text-zinc-900"
+      className="mt-6 mb-3 text-3xl font-bold tracking-tight dark:text-neutral-100 text-neutral-900"
       {...props}
     />
   ),
   h3: (props) => (
     <h3
-      className="mt-5 mb-3 text-2xl font-bold tracking-tight dark:text-zinc-200 text-zinc-800"
+      className="mt-5 mb-3 text-2xl font-bold tracking-tight dark:text-neutral-200 text-neutral-800"
       {...props}
     />
   ),
   h4: (props) => (
     <h4
-      className="mt-4 mb-2 text-xl font-bold tracking-tight dark:text-zinc-200 text-zinc-800"
+      className="mt-4 mb-2 text-xl font-bold tracking-tight dark:text-neutral-200 text-neutral-800"
       {...props}
     />
   ),
@@ -412,7 +412,7 @@ const components: MDXComponents = {
     // Aplicar clases solo para código inline que no sea procesado por rehype-pretty-code
     return (
       <code
-        className="dark:bg-zinc-800 bg-zinc-100 rounded px-1.5 py-0.5 text-sm font-mono dark:text-zinc-200 text-zinc-800"
+        className="dark:bg-zinc-800 bg-zinc-100 rounded px-1.5 py-0.5 text-sm font-mono dark:text-neutral-200 text-neutral-800"
         {...props}
       />
     );
@@ -436,7 +436,7 @@ const components: MDXComponents = {
   ),
   th: (props) => (
     <th
-      className="px-4 py-2 font-semibold dark:bg-zinc-800 bg-zinc-100 dark:text-zinc-200 text-zinc-800"
+      className="px-4 py-2 font-semibold dark:bg-zinc-800 bg-zinc-100 dark:text-neutral-200 text-neutral-800"
       {...props}
     />
   ),

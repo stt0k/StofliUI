@@ -189,7 +189,7 @@ const HeadLinks = ({
         className={`transition-colors ${
           isActive
             ? "text-cyan-600 dark:text-cyan-500"
-            : "hover:text-zinc-950/70 text-zinc-950/90 dark:hover:text-zinc-50/80 dark:text-zinc-50"
+            : "hover:text-neutral-950/70 text-neutral-950/90 dark:hover:text-neutral-50/80 dark:text-neutral-50"
         }`}
       >
         <span className="flex items-center">
@@ -238,20 +238,20 @@ const HeadLinks = ({
                   <div className="grid grid-cols-2 gap-4">
                     {/* Bloque de Primeros pasos */}
                     <div className="bg-gray-50 dark:bg-zinc-950/20 rounded-xl p-4 border border-gray-200 dark:border-zinc-800/50">
-                      <h3 className="text-gray-800 dark:text-zinc-200 font-semibold text-sm mb-3 flex items-center">
+                      <h3 className="text-gray-800 dark:text-neutral-200 font-semibold text-sm mb-3 flex items-center">
                         <BookOpen className="h-4 w-4 mr-2 text-gray-500 dark:text-neutral-400" />
                         Primeros pasos
                       </h3>
                       <div className="space-y-2">
                         <Link
                           href="/docs/introduccion"
-                          className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
+                          className="block p-2 text-gray-700 dark:text-neutral-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
                           <span>Introducción</span>
                         </Link>
                         <Link
                           href="/docs/instalacion"
-                          className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
+                          className="block p-2 text-gray-700 dark:text-neutral-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
                           <span>Instalación</span>
                         </Link>
@@ -260,26 +260,26 @@ const HeadLinks = ({
 
                     {/* Bloque de Frameworks */}
                     <div className="bg-gray-50 dark:bg-zinc-950/20 rounded-xl p-4 border border-gray-200 dark:border-zinc-800/50">
-                      <h3 className="text-gray-800 dark:text-zinc-200 font-semibold text-sm mb-3 flex items-center">
+                      <h3 className="text-gray-800 dark:text-neutral-200 font-semibold text-sm mb-3 flex items-center">
                         <Code className="h-4 w-4 mr-2 text-gray-500 dark:text-neutral-400" />
                         Frameworks
                       </h3>
                       <div className="space-y-2">
                         <Link
                           href="/docs/frameworks/nextjs"
-                          className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
+                          className="block p-2 text-gray-700 dark:text-neutral-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
                           <span>Next.js</span>
                         </Link>
                         <Link
                           href="/docs/frameworks/astro"
-                          className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
+                          className="block p-2 text-gray-700 dark:text-neutral-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
                           <span>Astro</span>
                         </Link>
                         <Link
                           href="/docs/frameworks/laravel"
-                          className="block p-2 text-gray-700 dark:text-zinc-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
+                          className="block p-2 text-gray-700 dark:text-neutral-300 hover:bg-gray-200/50 dark:hover:bg-zinc-600/10 rounded-md text-sm transition-colors"
                         >
                           <span>Laravel</span>
                         </Link>
@@ -340,12 +340,12 @@ const HeadLinks = ({
                               </div>
                               <div>
                                 <p
-                                  className={`text-gray-700 dark:text-zinc-200 font-medium text-sm ${menuStyle.textHover} transition-colors duration-300`}
+                                  className={`text-gray-700 dark:text-neutral-200 font-medium text-sm ${menuStyle.textHover} transition-colors duration-300`}
                                 >
                                   {item.title}
                                 </p>
                                 {item.description && (
-                                  <p className="text-gray-500 dark:text-zinc-500 text-xs mt-1">
+                                  <p className="text-gray-500 dark:text-neutral-500 text-xs mt-1">
                                     {item.description}
                                   </p>
                                 )}
@@ -389,7 +389,7 @@ const HeadLinks = ({
                     <Link
                       key={index}
                       href={item.href}
-                      className={`flex items-center p-2 rounded-md text-gray-700 dark:text-zinc-200 ${menuStyle.itemHover} transition-colors group`}
+                      className={`flex items-center p-2 rounded-md text-gray-700 dark:text-neutral-200 ${menuStyle.itemHover} transition-colors group`}
                     >
                       <span>{item.title}</span>
                     </Link>

@@ -3,7 +3,7 @@ import Header from "@/components/header/Header";
 
 const notFoundPage = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-zinc-950 dark:bg-black dark:text-zinc-50">
+    <div className="flex flex-col min-h-screen bg-white text-neutral-950 dark:bg-black dark:text-neutral-50">
       <Header />
       <div className="grow flex items-center justify-center">
         <div className="mx-auto w-full min-w-0 flex gap-5 items-center justify-center pt-52">

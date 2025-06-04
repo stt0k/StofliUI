@@ -93,13 +93,13 @@ const ScrollProgressSection = () => {
                     </span>
                     {match[2].startsWith("{") ? (
                       <>
-                        <span className="text-zinc-500 dark:text-[#ABB2BF]">
+                        <span className="text-neutral-500 dark:text-[#ABB2BF]">
                           {"{"}
                         </span>
                         <span className="text-sky-500 dark:text-[#61AFEF]">
                           {match[2].substring(1, match[2].length - 1)}
                         </span>
-                        <span className="text-zinc-500 dark:text-[#ABB2BF]">
+                        <span className="text-neutral-500 dark:text-[#ABB2BF]">
                           {"}"}
                         </span>
                       </>
@@ -150,7 +150,10 @@ const ScrollProgressSection = () => {
                 );
               } else if (part === "(" || part === ")" || part === "{") {
                 return (
-                  <span key={j} className="text-zinc-500 dark:text-[#ABB2BF]">
+                  <span
+                    key={j}
+                    className="text-neutral-500 dark:text-[#ABB2BF]"
+                  >
                     {part}
                   </span>
                 );
@@ -176,7 +179,7 @@ const ScrollProgressSection = () => {
         return (
           <div key={i} className="mb-1">
             <span className="text-violet-600 dark:text-[#C678DD]">return</span>
-            <span className="text-zinc-700 dark:text-[#ABB2BF]">
+            <span className="text-neutral-700 dark:text-[#ABB2BF]">
               {line.replace("return", "")}
             </span>
           </div>
@@ -461,7 +464,7 @@ const ScrollProgressSection = () => {
       if (line.startsWith("//") || line.startsWith("#")) {
         return (
           <div key={i} className="mb-1">
-            <span className="text-zinc-500 dark:text-[#5C6370]">{line}</span>
+            <span className="text-neutral-500 dark:text-[#5C6370]">{line}</span>
           </div>
         );
       }
@@ -489,7 +492,10 @@ const ScrollProgressSection = () => {
                 part === "}"
               ) {
                 return (
-                  <span key={j} className="text-zinc-500 dark:text-[#ABB2BF]">
+                  <span
+                    key={j}
+                    className="text-neutral-500 dark:text-[#ABB2BF]"
+                  >
                     {part}
                   </span>
                 );
@@ -616,7 +622,7 @@ const ScrollProgressSection = () => {
             <div className="flex flex-col max-w-md mx-auto">
               {/* Título y descripción */}
               <div className="mb-6 text-center">
-                <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">
+                <h2 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">
                   Tutorial de instalación
                 </h2>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
@@ -639,7 +645,7 @@ const ScrollProgressSection = () => {
                 </div>
 
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <span className="inline-block px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#EAA879]/10 to-[#B3AEF5]/10 dark:from-[#EAA879]/20 dark:to-[#B3AEF5]/20 text-zinc-800 dark:text-white/70 backdrop-blur-sm border border-zinc-300/30 dark:border-white/10">
+                  <span className="inline-block px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#EAA879]/10 to-[#B3AEF5]/10 dark:from-[#EAA879]/20 dark:to-[#B3AEF5]/20 text-neutral-800 dark:text-white/70 backdrop-blur-sm border border-zinc-300/30 dark:border-white/10">
                     Paso {activeSection + 1}/{sections.length}
                   </span>
                 </div>
@@ -654,7 +660,7 @@ const ScrollProgressSection = () => {
                     <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></div>
                     <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></div>
                   </div>
-                  <div className="text-xs text-zinc-700 dark:text-white/70 bg-zinc-200/80 dark:bg-zinc-800/50 backdrop-blur-md rounded-md px-2 py-0.5 flex-1 text-center border border-zinc-300/30 dark:border-white/5 ml-2 truncate">
+                  <div className="text-xs text-neutral-700 dark:text-white/70 bg-zinc-200/80 dark:bg-zinc-800/50 backdrop-blur-md rounded-md px-2 py-0.5 flex-1 text-center border border-zinc-300/30 dark:border-white/5 ml-2 truncate">
                     {sections[activeSection].id === "install"
                       ? "terminal"
                       : `${sections[activeSection].id}.tsx`}
@@ -677,12 +683,12 @@ const ScrollProgressSection = () => {
                       }}
                     >
                       {/* Título móvil */}
-                      <h3 className="font-bold text-zinc-900 dark:text-white mb-2">
+                      <h3 className="font-bold text-neutral-900 dark:text-white mb-2">
                         {section.title}
                       </h3>
 
                       {/* Código sintético más pequeño */}
-                      <pre className="font-mono text-[10px] text-zinc-800 dark:text-white/90 whitespace-pre-wrap rounded p-2 bg-white/60 dark:bg-zinc-900/80 backdrop-blur-sm overflow-auto max-h-[150px] border-l-2 border-zinc-300 dark:border-zinc-700/50">
+                      <pre className="font-mono text-[10px] text-neutral-800 dark:text-white/90 whitespace-pre-wrap rounded p-2 bg-white/60 dark:bg-zinc-900/80 backdrop-blur-sm overflow-auto max-h-[150px] border-l-2 border-zinc-300 dark:border-zinc-700/50">
                         <code>{formatCode(section.codeExample)}</code>
                       </pre>
 
@@ -694,7 +700,7 @@ const ScrollProgressSection = () => {
                       <div className="mt-2">
                         <a
                           href="/docs/"
-                          className="flex items-center text-[10px] font-medium text-zinc-500 dark:text-neutral-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                          className="flex items-center text-[10px] font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                         >
                           <span>Ver documentación</span>
                           <svg
@@ -747,8 +753,8 @@ const ScrollProgressSection = () => {
                       <h4
                         className={`text-sm font-medium ${
                           isActive
-                            ? "text-zinc-900 dark:text-white"
-                            : "text-neutral-600 dark:text-zinc-500"
+                            ? "text-neutral-900 dark:text-white"
+                            : "text-neutral-600 dark:text-neutral-500"
                         }`}
                       >
                         {section.title}
@@ -760,15 +766,15 @@ const ScrollProgressSection = () => {
 
               {/* Etiquetas compactas */}
               <div className="flex flex-wrap gap-1.5 justify-center">
-                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70">
+                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-neutral-700 dark:text-white/70">
                   <div className="w-1 h-1 rounded-full mr-1 bg-[#B3AEF5]"></div>
                   5 min
                 </div>
-                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70">
+                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-neutral-700 dark:text-white/70">
                   <div className="w-1 h-1 rounded-full mr-1 bg-[#EAA879]"></div>
                   React/Next
                 </div>
-                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70">
+                <div className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-neutral-700 dark:text-white/70">
                   <div className="w-1 h-1 rounded-full mr-1 bg-[#A8D5BA]"></div>
                   TypeScript
                 </div>
@@ -787,10 +793,10 @@ const ScrollProgressSection = () => {
                   transition={{ delay: 0.2 }}
                 >
                   <div className="inline-flex items-center gap-2">
-                    <span className="inline-block px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#EAA879]/10 to-[#B3AEF5]/10 dark:from-[#EAA879]/20 dark:to-[#B3AEF5]/20 text-zinc-800 dark:text-white/70 backdrop-blur-sm border border-zinc-300/30 dark:border-white/10">
+                    <span className="inline-block px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#EAA879]/10 to-[#B3AEF5]/10 dark:from-[#EAA879]/20 dark:to-[#B3AEF5]/20 text-neutral-800 dark:text-white/70 backdrop-blur-sm border border-zinc-300/30 dark:border-white/10">
                       Paso {activeSection + 1}/{sections.length}
                     </span>
-                    <span className="hidden xs:inline-block text-xs uppercase tracking-wider text-zinc-500 dark:text-white/60">
+                    <span className="hidden xs:inline-block text-xs uppercase tracking-wider text-neutral-500 dark:text-white/60">
                       Tutorial StofliUI
                     </span>
                   </div>
@@ -816,7 +822,7 @@ const ScrollProgressSection = () => {
                       <div className="w-3 h-3 rounded-full bg-[#febc2e]"></div>
                       <div className="w-3 h-3 rounded-full bg-[#28c840]"></div>
                     </div>
-                    <div className="text-xs text-zinc-700 dark:text-white/70 bg-zinc-200/80 dark:bg-zinc-800/50 backdrop-blur-md rounded-md px-2 py-1 flex-1 text-center border border-zinc-300/50 dark:border-white/5 ml-2 truncate">
+                    <div className="text-xs text-neutral-700 dark:text-white/70 bg-zinc-200/80 dark:bg-zinc-800/50 backdrop-blur-md rounded-md px-2 py-1 flex-1 text-center border border-zinc-300/50 dark:border-white/5 ml-2 truncate">
                       {sections[activeSection].id === "install"
                         ? "terminal"
                         : `${sections[activeSection].id}.tsx`}
@@ -856,7 +862,7 @@ const ScrollProgressSection = () => {
                         {/* Título con prompt de terminal en casos de instalación */}
                         {section.id === "install" && (
                           <div className="flex items-center mb-3 font-mono text-green-600 dark:text-green-400">
-                            <span className="text-zinc-500 dark:text-white/70">
+                            <span className="text-neutral-500 dark:text-white/70">
                               $
                             </span>
                             <span className="ml-2">StofliUI ~</span>
@@ -915,15 +921,15 @@ const ScrollProgressSection = () => {
 
                 {/* Etiquetas informativas sobre el tutorial */}
                 <div className="mt-3 xs:mt-5 pl-1 flex flex-wrap gap-1.5 xs:gap-2">
-                  <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70 hover:bg-white/70 hover:text-zinc-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
+                  <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-neutral-700 dark:text-white/70 hover:bg-white/70 hover:text-neutral-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
                     <div className="w-1.5 h-1.5 rounded-full mr-1 xs:mr-1.5 bg-[#B3AEF5]"></div>
                     Tiempo: 5 min
                   </div>
-                  <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70 hover:bg-white/70 hover:text-zinc-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
+                  <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-neutral-700 dark:text-white/70 hover:bg-white/70 hover:text-neutral-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
                     <div className="w-1.5 h-1.5 rounded-full mr-1 xs:mr-1.5 bg-[#EAA879]"></div>
                     React/Next
                   </div>
-                  <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-zinc-700 dark:text-white/70 hover:bg-white/70 hover:text-zinc-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
+                  <div className="inline-flex items-center rounded-full px-2 py-0.5 xs:px-2.5 xs:py-1 text-[10px] xs:text-xs bg-white/50 dark:bg-black/20 backdrop-blur border border-zinc-300/30 dark:border-white/10 text-neutral-700 dark:text-white/70 hover:bg-white/70 hover:text-neutral-900 dark:hover:bg-black/40 dark:hover:text-white transition-colors">
                     <div className="w-1.5 h-1.5 rounded-full mr-1 xs:mr-1.5 bg-[#A8D5BA]"></div>
                     TypeScript
                   </div>
@@ -1001,7 +1007,7 @@ const ScrollProgressSection = () => {
                               <h3
                                 className={`text-base xs:text-lg md:text-xl font-bold mb-1 xs:mb-2 transition-all duration-500 ${
                                   isActive
-                                    ? "text-zinc-900 dark:text-white"
+                                    ? "text-neutral-900 dark:text-white"
                                     : "text-neutral-600 dark:text-neutral-400"
                                 }`}
                                 style={{
@@ -1023,7 +1029,7 @@ const ScrollProgressSection = () => {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                               >
-                                <p className="text-xs xs:text-sm text-zinc-700 dark:text-zinc-300 mt-1 xs:mt-2">
+                                <p className="text-xs xs:text-sm text-neutral-700 dark:text-neutral-300 mt-1 xs:mt-2">
                                   {section.description}
                                 </p>
 
@@ -1032,7 +1038,7 @@ const ScrollProgressSection = () => {
                                   <div className="flex items-center mt-2 xs:mt-3">
                                     <a
                                       href="/docs/"
-                                      className="flex items-center text-[10px] xs:text-xs font-medium text-zinc-500 dark:text-neutral-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                                      className="flex items-center text-[10px] xs:text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                                     >
                                       <span>Ver documentación</span>
                                       <svg
