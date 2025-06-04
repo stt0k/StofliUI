@@ -228,7 +228,7 @@ const Header = () => {
       className={`fixed ${isDocsRoute ? "top-0" : "top-6"} left-0 right-0 z-50`}
     >
       <div
-        className={`${isDocsRoute ? "" : "mx-3"} ${
+        className={`${isDocsRoute ? "px-3 sm:px-4 w-full" : "mx-3"} ${
           !isDocsRoute ? "max-w-6xl mx-auto" : ""
         }`}
       >
@@ -236,7 +236,7 @@ const Header = () => {
           className={`
             ${
               isDocsRoute
-                ? "px-12 sm:px-2 rounded-none max-w-[88rem] mx-auto border-0"
+                ? "rounded-none border-0 w-full"
                 : "w-full max-w-6xl rounded-lg border"
             }
             backdrop-blur 
@@ -256,7 +256,9 @@ const Header = () => {
         >
           <div
             className={`${
-              isDocsRoute ? "px-0 sm:px-1 flex justify-between" : "px-4 flex"
+              isDocsRoute
+                ? "px-4 flex justify-between w-full max-w-7xl xl:max-w-[88rem] mx-auto"
+                : "px-4 flex"
             } py-2 items-center`}
           >
             {/* Menú hamburguesa para móvil - visible solo en móvil */}
@@ -291,7 +293,7 @@ const Header = () => {
                 {/* Logo y buscador para docs */}
                 <div className="flex items-center justify-between w-full">
                   {/* Logo a la izquierda */}
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 hidden md:flex">
                     <Link className="flex items-center space-x-1" href="/">
                       <span className="font-bold text-black dark:text-white text-sm">
                         StofliUI
