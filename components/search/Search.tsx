@@ -8,7 +8,12 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -114,7 +119,9 @@ export function SearchCommand({ isDocsRoute, ...props }: SearchCommandProps) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="overflow-hidden p-0">
           <DialogTitle className="sr-only">Buscador</DialogTitle>
-          <DialogDescription className="sr-only">Buscar componentes y documentación</DialogDescription>
+          <DialogDescription className="sr-only">
+            Buscar componentes y documentación
+          </DialogDescription>
           <Command className="rounded-lg border shadow-md md:min-w-[450px]">
             <CommandInput placeholder="Buscar componentes, frameworks, etc..." />
             <CommandList>
