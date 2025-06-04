@@ -62,7 +62,7 @@ const Sidebar = () => {
               links={mainLinks}
               currentPath={pathname as string}
             />
-            
+
             {/* Secciones regulares */}
             {processedSections.map((section) => (
               <SidebarSection
