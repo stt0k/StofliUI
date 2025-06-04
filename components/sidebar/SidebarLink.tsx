@@ -36,7 +36,7 @@ const SidebarLink = ({
           ? "mb-1"
           : `border-s-[1px] py-1 ${
               isActive
-                ? "border-cyan-400 dark:border-cyan-500"
+                ? "border-cyan-600 dark:border-cyan-500"
                 : "border-neutral-200 dark:border-white/20 hover:border-neutral-400 dark:hover:border-white/80"
             }`
       }`}
@@ -48,7 +48,7 @@ const SidebarLink = ({
             ? "gap-2 mb-2.5 dark:text-neutral-50 text-neutral-950"
             : ` ${
                 isActive
-                  ? "text-cyan-400 dark:text-cyan-500 group-hover:text-cyan-400 group-hover:dark:text-cyan-500 pl-3 pr-2"
+                  ? "text-cyan-600 dark:text-cyan-500 group-hover:text-cyan-400 group-hover:dark:text-cyan-500 pl-3 pr-2"
                   : "pl-3 pr-2 dark:text-neutral-50/60 text-neutral-950/60 group-hover:text-neutral-950/85 group-hover:dark:text-neutral-50/90 hover:bg-transparent"
               }`
         }`}
