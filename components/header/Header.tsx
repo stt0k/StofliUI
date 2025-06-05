@@ -169,40 +169,47 @@ const Header = () => {
           </div>
 
           {/* Secciones del sidebar original */}
-          {sections.map((section) => (
-            <div key={section.title} className="py-1">
-              <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-neutral-950 dark:text-neutral-50">
-                {section.title}
-              </h2>
-              <div className="space-y-1 dark:text-neutral-50/60 text-neutral-950/60">
-                {section.links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={closeMobileMenu}
-                  >
-                    <Button
-                      variant="ghost"
-                      className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-neutral-50/80 px-2 dark:text-neutral-50/60 text-neutral-950/60 hover:text-neutral-950/85 ${
-                        isActive(link.href)
-                          ? "hover:text-neutral-950/85 text-neutral-950 dark:hover:text-neutral-50/80 dark:text-neutral-50 hover:translate-x-0"
-                          : ""
-                      }`}
+          {sections.map((section) => {
+            // Ordenar alfabéticamente los enlaces de la sección "Componentes"
+            const sectionLinks = section.title === "Componentes" 
+              ? [...section.links].sort((a, b) => a.label.localeCompare(b.label))
+              : section.links;
+              
+            return (
+              <div key={section.title} className="py-1">
+                <h2 className="mb-2 px-2 text-sm font-medium tracking-tight text-neutral-950 dark:text-neutral-50">
+                  {section.title}
+                </h2>
+                <div className="space-y-1 dark:text-neutral-50/60 text-neutral-950/60">
+                  {sectionLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={closeMobileMenu}
                     >
-                      <span className="truncate">
-                        {link.tag
-                          ? link.label.length > 11
-                            ? link.label.substring(0, 11) + "..."
-                            : link.label
-                          : link.label}
-                      </span>
-                      {link.tag && <Tag text={link.tag} />}
-                    </Button>
-                  </Link>
-                ))}
+                      <Button
+                        variant="ghost"
+                        className={`w-full justify-start font-normal transition duration-200 hover:translate-x-1 cursor-pointer dark:hover:text-neutral-50/80 px-2 dark:text-neutral-50/60 text-neutral-950/60 hover:text-neutral-950/85 ${
+                          isActive(link.href)
+                            ? "hover:text-neutral-950/85 text-neutral-950 dark:hover:text-neutral-50/80 dark:text-neutral-50 hover:translate-x-0"
+                            : ""
+                        }`}
+                      >
+                        <span className="truncate">
+                          {link.tag
+                            ? link.label.length > 11
+                              ? link.label.substring(0, 11) + "..."
+                              : link.label
+                            : link.label}
+                        </span>
+                        {link.tag && <Tag text={link.tag} />}
+                      </Button>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           <div className="flex items-center justify-between px-2 py-2">
             <div className="flex items-center space-x-4">
               <Link
