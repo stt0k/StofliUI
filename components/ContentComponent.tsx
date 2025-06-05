@@ -23,7 +23,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
   });
 
   return (
-    <div className="flex flex-col ms-6">
+    <div className="flex flex-col">
       <div className="mb-4 mt-11">
         <Breadcrumbs
           items={breadcrumbItems}
