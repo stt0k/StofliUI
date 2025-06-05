@@ -257,45 +257,18 @@ const Header = () => {
           <div
             className={`${
               isDocsRoute
-                ? "px-4 flex justify-between w-full max-w-7xl xl:max-w-[88rem] mx-auto"
-                : "px-4 flex"
+                ? "px-4 flex justify-between w-full max-w-7xl xl:max-w-[92rem] mx-auto"
+                : "md:px-4 flex"
             } py-2 items-center`}
           >
-            {/* Menú hamburguesa para móvil - visible solo en móvil */}
-            <div className="md:hidden flex items-center">
-              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="mr-1 cursor-pointer px-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-neutral-950 dark:text-white h-8 w-8"
-                  >
-                    <MenuIcon className="h-4 w-4" />
-                    <span className="sr-only">Toggle Menu</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent
-                  side="left"
-                  className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
-                >
-                  <SideBar />
-
-                  <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-zinc-400 disabled:pointer-events-none text-neutral-950 dark:text-white">
-                    <XIcon className="h-4 w-4" />
-                    <span className="sr-only">Close</span>
-                  </SheetClose>
-                </SheetContent>
-              </Sheet>
-            </div>
-
             {isDocsRoute ? (
               <>
                 {/* Logo y buscador para docs */}
                 <div className="flex items-center justify-between w-full">
                   {/* Logo a la izquierda */}
-                  <div className="flex-shrink-0 hidden md:flex">
+                  <div className="flex-shrink-0">
                     <Link className="flex items-center space-x-1" href="/">
-                      <span className="font-bold text-black dark:text-white text-sm">
+                      <span className="font-bold text-black dark:text-white text-base">
                         StofliUI
                       </span>
                     </Link>
@@ -310,6 +283,49 @@ const Header = () => {
 
                   {/* Área derecha - GitHub y tema */}
                   <div className="flex items-center space-x-1 sm:space-x-2">
+                    {/* Botón Premium - visible solo en desktop */}
+                    <div className="hidden sm:flex items-center">
+                      <Link
+                        href="/pricing"
+                        className="group relative px-1 text-xs text-cyan-800 dark:text-cyan-400 h-5 sm:h-6 flex items-center mx-1"
+                      >
+                        <span className="absolute inset-0 border border-dashed border-cyan-600/60 bg-cyan-600/10 group-hover:bg-cyan-600/15 dark:border-cyan-500/30 dark:bg-cyan-500/10 dark:group-hover:bg-cyan-500/15"></span>
+                        <span className="relative px-0.5">Premium</span>
+                        <svg
+                          width="5"
+                          height="5"
+                          viewBox="0 0 5 5"
+                          className="absolute top-[-2px] left-[-2px] fill-cyan-600 dark:fill-cyan-500/70"
+                        >
+                          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+                        </svg>
+                        <svg
+                          width="5"
+                          height="5"
+                          viewBox="0 0 5 5"
+                          className="absolute top-[-2px] right-[-2px] fill-cyan-600 dark:fill-cyan-500/70"
+                        >
+                          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+                        </svg>
+                        <svg
+                          width="5"
+                          height="5"
+                          viewBox="0 0 5 5"
+                          className="absolute bottom-[-2px] left-[-2px] fill-cyan-600 dark:fill-cyan-500/70"
+                        >
+                          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+                        </svg>
+                        <svg
+                          width="5"
+                          height="5"
+                          viewBox="0 0 5 5"
+                          className="absolute right-[-2px] bottom-[-2px] fill-cyan-600 dark:fill-cyan-500/70"
+                        >
+                          <path d="M2 0h1v2h2v1h-2v2h-1v-2h-2v-1h2z"></path>
+                        </svg>
+                      </Link>
+                    </div>
+
                     {/* GitHub - visible solo en tablet y desktop */}
                     <div className="hidden sm:flex items-center">
                       <Link
@@ -329,8 +345,41 @@ const Header = () => {
                     </div>
 
                     {/* Toggle de tema */}
-                    <ModeToggle className="h-8 w-8 sm:h-9 sm:w-9" />
+                    <ModeToggle className="h-8 w-8 sm:h-9 sm:w-9 hidden md:flex items-center" />
                   </div>
+                </div>
+
+                {/* Menú hamburguesa para móvil - visible solo en móvil */}
+                <div className="md:hidden flex items-center">
+                  <Sheet
+                    open={isMobileMenuOpen}
+                    onOpenChange={setIsMobileMenuOpen}
+                  >
+                    <SheetTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="mr-1 cursor-pointer px-0 hover:bg-transparent text-neutral-950 dark:text-white h-8 w-8"
+                      >
+                        <MenuIcon className="h-5 w-5" />
+                        <span className="sr-only">Toggle Menu</span>
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent
+                      side="left"
+                      className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
+                    >
+                      <SideBar />
+
+                      <div className="absolute right-11 top-[13px]">
+                        <ModeToggle className="h-5 w-5 scale-75" />
+                      </div>
+                      <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none text-neutral-950 dark:text-white">
+                        <XIcon className="h-4 w-4" />
+                        <span className="sr-only">Close</span>
+                      </SheetClose>
+                    </SheetContent>
+                  </Sheet>
                 </div>
               </>
             ) : (
@@ -344,8 +393,60 @@ const Header = () => {
                   </Link>
                 </div>
 
-                {/* Espacio flexible en móvil */}
-                <div className="flex md:hidden flex-1"></div>
+                {/* En móvil: Logo a la izquierda y buscador en el centro */}
+                <div className="flex md:hidden items-center justify-between w-[calc(100%-3rem)] mx-6">
+                  {/* Logo a la izquierda - visible en móvil */}
+                  <div className="flex-shrink-0">
+                    <Link className="flex items-center space-x-1" href="/">
+                      <span className="font-bold text-black dark:text-white text-sm">
+                        StofliUI
+                      </span>
+                    </Link>
+                  </div>
+
+                  {/* Buscador en el centro - visible en móvil */}
+                  <div className="flex-1 flex justify-center max-w-[180px] xs:max-w-xs mx-auto px-2">
+                    <div className="w-full">
+                      <SearchCommand isDocsRoute={true} />
+                    </div>
+                  </div>
+
+                  {/* Menú hamburguesa en móvil */}
+                  <div className="flex items-center">
+                    <Sheet
+                      open={isMobileMenuOpen}
+                      onOpenChange={setIsMobileMenuOpen}
+                    >
+                      <SheetTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="cursor-pointer px-0 hover:bg-transparent text-neutral-950 dark:text-white h-8 w-8"
+                        >
+                          <MenuIcon className="h-5 w-5" />
+                          <span className="sr-only">Toggle Menu</span>
+                        </Button>
+                      </SheetTrigger>
+                      <SheetContent
+                        side="left"
+                        className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
+                      >
+                        <SideBar />
+
+                        <div className="absolute right-11 top-[13px]">
+                          <ModeToggle className="h-5 w-5 scale-75" />
+                        </div>
+                        <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none text-neutral-950 dark:text-white">
+                          <XIcon className="h-4 w-4" />
+                          <span className="sr-only">Close</span>
+                        </SheetClose>
+                      </SheetContent>
+                    </Sheet>
+                  </div>
+                </div>
+
+                {/* Espacio flexible en móvil - ya no es necesario */}
+                {/* <div className="flex md:hidden flex-1"></div> */}
 
                 {/* Enlaces en el centro - solo visible en desktop */}
                 <div className="hidden md:flex flex-grow basis-0 justify-center">
@@ -363,17 +464,17 @@ const Header = () => {
                   </nav>
                 </div>
 
-                {/* Área derecha - botones de búsqueda y tema */}
+                {/* Área derecha - botones de búsqueda y tema - solo desktop */}
                 <div
-                  className={`flex items-center justify-end space-x-2 flex-shrink-0 basis-0`}
+                  className={`hidden md:flex items-center justify-end space-x-2 flex-shrink-0 basis-0`}
                 >
-                  {/* Búsqueda - visible en ambos (desktop y móvil) */}
+                  {/* Búsqueda - visible solo en desktop */}
                   <div className="mr-2">
-                    <SearchCommand />
+                    <SearchCommand isDocsRoute={false} />
                   </div>
 
                   {/* GitHub - visible solo en desktop */}
-                  <div className="hidden md:flex items-center">
+                  <div className="flex items-center">
                     <Link
                       href="https://github.com/stt0k/StofliUI"
                       target="_blank"
@@ -390,7 +491,7 @@ const Header = () => {
                     </Link>
                   </div>
 
-                  {/* Toggle de tema - visible en ambos */}
+                  {/* Toggle de tema - visible en desktop */}
                   <ModeToggle />
                 </div>
               </>
