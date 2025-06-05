@@ -225,10 +225,10 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed ${isDocsRoute ? "top-0" : "top-6"} left-0 right-0 z-50`}
+      className={`fixed ${isDocsRoute ? "top-0" : "top-4 sm:top-6"} left-0 right-0 z-50`}
     >
       <div
-        className={`${isDocsRoute ? "px-3 sm:px-4 w-full" : "mx-3"} ${
+        className={`${isDocsRoute ? "px-3 sm:px-4 w-full" : "mx-3 px-4 sm:px-0"} ${
           !isDocsRoute ? "max-w-6xl mx-auto" : ""
         }`}
       >
@@ -242,7 +242,7 @@ const Header = () => {
             backdrop-blur 
             flex-none 
             duration-500 
-            supports-backdrop-blur:bg-background-light/60 
+            bg-white/60 
             dark:bg-transparent
             shadow-none
             transition-all duration-300 ease-in-out
