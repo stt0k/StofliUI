@@ -180,13 +180,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({
       <div className="flex-1 min-h-[calc(100vh-4.5rem)] pt-8">
         <div className="container mx-auto">
           <Sidebar />
-          <div className="md:ml-[255px] lg:ml-[275px] px-4 md:px-6">
-            <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-              <div className="mx-auto max-w-2xl min-w-0 min-h-[calc(100vh-12rem)]">
+          <div className="md:ml-[175px] lg:ml-[195px] px-4 md:px-6">
+            <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_171px]">
+              <div className="mx-auto md:px-12 px-0 max-w-2xl min-w-full min-h-[calc(100vh-12rem)]">
                 {children} {/* Aquí va el contenido dinámico que pasas */}
                 {/* Paginación unificada para todas las secciones */}
                 {currentPageIndex > 0 && (
-                  <div className="mt-20 pb-8 px-2 ms-6">
+                  <div className="mt-20 pb-8 px-2">
                     <Pagination
                       totalPages={totalPages}
                       currentPage={currentPageIndex}
