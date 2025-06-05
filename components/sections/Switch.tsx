@@ -106,7 +106,7 @@ const Switch: React.FC<SwitchProps> = ({
       icon: "text-neutral-700 dark:text-neutral-800",
       hover: "hover:border-zinc-300 dark:hover:border-zinc-600",
       activeHover: "hover:bg-zinc-700 dark:hover:bg-zinc-500",
-      label: "text-neutral-700 dark:text-neutral-300",
+      label: "text-neutral-900 dark:text-neutral-100",
     },
     primary: {
       bg: "bg-blue-200 dark:bg-blue-950",
