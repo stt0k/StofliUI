@@ -113,7 +113,7 @@ export default function Page() {
               <div className="absolute inset-0 rounded-full transition-all duration-300 group-hover:shadow-[0_0_10px_1px_rgba(179,174,245,0.5),0_0_15px_2px_rgba(234,168,121,0.3)] group-hover:border-indigo-200 dark:group-hover:border-white/20"></div>
             </a>
 
-            <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-700 dark:from-white dark:to-zinc-300">
+            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-700 dark:from-white dark:to-zinc-300">
               Build Modern UI Designs
             </h1>
 
