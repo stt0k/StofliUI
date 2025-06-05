@@ -3,25 +3,25 @@ import { FileCode, Palette, CreditCard, Clock } from "lucide-react";
 
 export const mainLinks = [
   {
-    href: "/docs/ejemplos",
+    href: "/ejemplos",
     label: "Ejemplos",
     icon: <FileCode className="w-5 h-5" />,
     isMainLink: true,
   },
   {
-    href: "/docs/pricing",
+    href: "/pricing",
     label: "Pricing",
     icon: <CreditCard className="w-5 h-5" />,
     isMainLink: true,
   },
   {
-    href: "/docs/changelog",
+    href: "/changelog",
     label: "Changelog",
     icon: <Clock className="w-5 h-5" />,
     isMainLink: true,
   },
   {
-    href: "/docs/colores",
+    href: "/colores",
     label: "Colores",
     icon: <Palette className="w-5 h-5" />,
     isMainLink: true,
