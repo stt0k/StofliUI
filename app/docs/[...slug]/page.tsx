@@ -82,7 +82,7 @@ export default function DocPage({ params }: DocPageProps) {
         title={doc.title || "Título no disponible"}
         description={doc.description || "Descripción no disponible"}
       />
-      <div className="prose prose-invert max-w-none ms-6">
+      <div className="prose prose-invert max-w-none">
         <Content components={components} />
       </div>
     </MainLayout>
