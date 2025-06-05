@@ -6,10 +6,9 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetClose,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import HeadLinks from "./HeadLinks";
 import { headerData } from "./HeaderData";
@@ -348,39 +347,6 @@ const Header = () => {
                     <ModeToggle className="h-8 w-8 sm:h-9 sm:w-9 hidden md:flex items-center" />
                   </div>
                 </div>
-
-                {/* Menú hamburguesa para móvil - visible solo en móvil */}
-                <div className="md:hidden flex items-center">
-                  <Sheet
-                    open={isMobileMenuOpen}
-                    onOpenChange={setIsMobileMenuOpen}
-                  >
-                    <SheetTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="mr-1 cursor-pointer px-0 hover:bg-transparent text-neutral-950 dark:text-white h-8 w-8"
-                      >
-                        <MenuIcon className="h-5 w-5" />
-                        <span className="sr-only">Toggle Menu</span>
-                      </Button>
-                    </SheetTrigger>
-                    <SheetContent
-                      side="left"
-                      className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
-                    >
-                      <SideBar />
-
-                      <div className="absolute right-11 top-[13px]">
-                        <ModeToggle className="h-5 w-5 scale-75" />
-                      </div>
-                      <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none text-neutral-950 dark:text-white">
-                        <XIcon className="h-4 w-4" />
-                        <span className="sr-only">Close</span>
-                      </SheetClose>
-                    </SheetContent>
-                  </Sheet>
-                </div>
               </>
             ) : (
               <>
@@ -433,13 +399,9 @@ const Header = () => {
                       >
                         <SideBar />
 
-                        <div className="absolute right-11 top-[13px]">
-                          <ModeToggle className="h-5 w-5 scale-75" />
+                        <div className="absolute right-12 top-2 p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 flex items-center justify-center rounded-md">
+                          <ModeToggle className="h-5 w-5" />
                         </div>
-                        <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none text-neutral-950 dark:text-white">
-                          <XIcon className="h-4 w-4" />
-                          <span className="sr-only">Close</span>
-                        </SheetClose>
                       </SheetContent>
                     </Sheet>
                   </div>
