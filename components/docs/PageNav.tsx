@@ -365,7 +365,7 @@ export default function PageNav({ links }: PageNavProps) {
               depth > 0 ? "pl-4" : ""
             } ${
               isCurrentActive
-                ? "font-medium text-black dark:text-white"
+                ? "font-normal text-black dark:text-white"
                 : isActive
                 ? "text-neutral-800 dark:text-neutral-300"
                 : "text-neutral-500 dark:text-neutral-400 hover:opacity-80"
@@ -390,9 +390,9 @@ export default function PageNav({ links }: PageNavProps) {
   );
 
   return (
-    <div className="hidden xl:block fixed top-[6.5rem] w-52 z-20 py-2 max-h-[calc(100vh-150px)] overflow-y-auto ml-15 scrollbar-hide">
+    <div className="hidden xl:block fixed top-[6.5rem] w-52 z-20 py-2 max-h-[calc(100vh-150px)] -ml-9 overflow-y-auto scrollbar-hide">
       <div className="max-h-[calc(100vh-330px)] overflow-y-auto pr-2 scrollbar-hide">
-        <h3 className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-500 mb-4">
+        <h3 className="text-xs uppercase tracking-wider font-normal text-neutral-400 dark:text-neutral-500 mb-4">
           En esta página
         </h3>
         <ul className="space-y-[2px]">
