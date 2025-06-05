@@ -1,6 +1,6 @@
 # StofliUI
 
-<p>Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar para todos tus proyectos web. <strong>Optimizada para rendimiento, accesibilidad y personalización.</strong> Con Tailwind CSS y Framer Motion</p>
+<p>Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar para todos tus proyectos web. <strong>Optimizada para rendimiento, accesibilidad y personalización.</strong> Con Tailwind CSS y Framer Motion.</p>
 <div align="center">
   <img src="https://github.com/stt0k/StofliUI/blob/main/public/home.png" alt="StofliUI Logo" />
   
