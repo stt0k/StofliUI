@@ -1,10 +1,10 @@
 import {
   File,
   Component,
-  PanelsTopLeft,
-  ChartBar,
+  FileCode,
+  Clock,
   Palette,
-  DollarSign,
+  CreditCard,
   Circle,
 } from "lucide-react";
 
@@ -16,9 +16,9 @@ export const links = [
     label: "Componentes",
     link: "/docs/componentes/accordion",
   },
-  { icon: PanelsTopLeft, label: "Ejemplos", link: "/ejemplos" },
-  { icon: ChartBar, label: "Changelog", link: "/changelog" },
-  { icon: DollarSign, label: "Pricing", link: "/pricing" },
+  { icon: FileCode, label: "Ejemplos", link: "/ejemplos" },
+    { icon: CreditCard, label: "Pricing", link: "/pricing" },
+  { icon: Clock, label: "Changelog", link: "/changelog" },
   { icon: Palette, label: "Colores", link: "/colores" },
 ];
 
@@ -27,25 +27,21 @@ export const frameworks = [
   {
     icon: Circle,
     label: "Next.js",
-    shortcut: "⌘N",
     link: "/docs/frameworks/nextjs",
   },
   {
     icon: Circle,
     label: "Astro",
-    shortcut: "⌘A",
     link: "/docs/frameworks/astro",
   },
   {
     icon: Circle,
     label: "Vite",
-    shortcut: "⌘V",
     link: "/docs/frameworks/vite",
   },
   {
     icon: Circle,
     label: "Laravel",
-    shortcut: "⌘L",
     link: "/docs/frameworks/laravel",
   },
 ];
