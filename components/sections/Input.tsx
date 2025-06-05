@@ -607,6 +607,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "min-h-[44px]",
               // Si es password, añadir padding derecho para el icono del ojo
               type === "password" ? "pr-10" : "",
+              "text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-600 dark:placeholder:text-neutral-400",
               inputClassName
             )}
             placeholder={placeholder}
