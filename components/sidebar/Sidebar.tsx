@@ -49,13 +49,13 @@ const Sidebar = () => {
     <div className="md:block hidden">
       <aside
         ref={sidebarRef}
-        className={`fixed top-[6.5rem] w-[290px] lg:w-[310px] overflow-y-auto [&::-webkit-scrollbar]:hidden hover:[&::-webkit-scrollbar]:block [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb] hover:[&::-webkit-scrollbar-thumb] ${
+        className={`fixed top-[6.5rem] w-[210px] lg:w-[230px] overflow-y-auto [&::-webkit-scrollbar]:hidden hover:[&::-webkit-scrollbar]:block [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb] hover:[&::-webkit-scrollbar-thumb] ${
           isFooterVisible
             ? "h-[calc(100vh-6rem-7rem)]"
             : "h-[calc(100vh-10rem-2.5rem)]"
         }`}
       >
-        <div className="pl-11.5">
+        <div className="pl-3.5">
           <div className="space-y-6">
             {/* Enlaces principales con iconos */}
             <SidebarSection
