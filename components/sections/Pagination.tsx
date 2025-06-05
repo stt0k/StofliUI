@@ -171,7 +171,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const variantClasses = {
     default:
-      "bg-white dark:bg-zinc-900 text-neutral-800 dark:text-neutral-200 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:bg-zinc-300 dark:active:bg-zinc-600 transition-colors duration-150",
+      "bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-100 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 active:bg-zinc-300 dark:active:bg-zinc-600 transition-colors duration-150",
     primary:
       "bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-800/60 active:bg-blue-200 dark:active:bg-blue-700 transition-colors duration-150",
     secondary:
