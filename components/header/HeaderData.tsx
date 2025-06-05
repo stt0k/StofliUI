@@ -126,15 +126,15 @@ export const headerData = [
       ],
     },
   },
+    {
+    title: "Pricing",
+    link: "/pricing",
+    relatedPaths: ["/pricing"],
+  },
   {
     title: "Changelog",
     link: "/changelog",
     relatedPaths: ["/changelog"],
-  },
-  {
-    title: "Pricing",
-    link: "/pricing",
-    relatedPaths: ["/pricing"],
   },
   {
     title: "Colores",
