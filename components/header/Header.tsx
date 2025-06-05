@@ -354,6 +354,34 @@ const Header = () => {
                     <ModeToggle className="h-8 w-8 sm:h-9 sm:w-9 hidden md:flex items-center" />
                   </div>
                 </div>
+                {/* Menú hamburguesa para móvil - visible solo en móvil */}
+                <div className="md:hidden flex items-center">
+                  <Sheet
+                    open={isMobileMenuOpen}
+                    onOpenChange={setIsMobileMenuOpen}
+                  >
+                    <SheetTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="cursor-pointer px-0 hover:bg-transparent text-neutral-950 dark:text-white h-8 w-8"
+                      >
+                        <MenuIcon className="h-5 w-5" />
+                        <span className="sr-only">Toggle Menu</span>
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent
+                      side="left"
+                      className={`w-[300px] sm:w-[400px] bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-800 p-0 ${RemoveScroll.classNames.zeroRight}`}
+                    >
+                      <SideBar />
+
+                      <div className="absolute right-12 top-2 p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 flex items-center justify-center rounded-md">
+                          <ModeToggle className="h-5 w-5" />
+                        </div>
+                    </SheetContent>
+                  </Sheet>
+                </div>
               </>
             ) : (
               <>
