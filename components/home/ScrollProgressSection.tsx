@@ -688,8 +688,17 @@ const ScrollProgressSection = () => {
                       </h3>
 
                       {/* Código sintético más pequeño */}
-                      <pre className="font-mono text-[10px] text-neutral-800 dark:text-white/90 whitespace-pre-wrap rounded p-2 bg-white/60 dark:bg-zinc-900/80 backdrop-blur-sm overflow-auto max-h-[150px] border-l-2 border-zinc-300 dark:border-zinc-700/50">
-                        <code>{formatCode(section.codeExample)}</code>
+                      <pre className="font-mono text-[10px] whitespace-pre-wrap rounded p-2 bg-white/60 dark:bg-zinc-900/80 backdrop-blur-sm overflow-auto max-h-[150px]">
+                        <code>
+                          {formatCode(section.codeExample).map((line, i) => (
+                            <div
+                              key={i}
+                              className="mb-1 pl-2 border-l-2 border-zinc-300 dark:border-zinc-700/50"
+                            >
+                              {line}
+                            </div>
+                          ))}
+                        </code>
                       </pre>
 
                       <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-3">
