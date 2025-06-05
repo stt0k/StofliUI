@@ -38,7 +38,7 @@ export default function PricingPage() {
               </div>
 
               <Link
-                href="/#"
+                href="/docs/componentes"
                 className="bg-gray-200 dark:bg-zinc-800 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-zinc-700 w-full py-2 px-4 font-medium transition mb-8 block text-center"
               >
                 Comenzar
@@ -99,7 +99,7 @@ export default function PricingPage() {
               </div>
 
               <Link
-                href="/#"
+                href="mailto:info@stofliui.com?subject=Interés%20en%20Plan%20Componentes%20Pro&body=Hola%20equipo%20de%20StofliUI%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20Componentes%20Pro.%20Me%20gustaría%20recibir%20más%20información%20sobre%20este%20servicio%20y%20cómo%20podemos%20comenzar%20a%20trabajar%20juntos.%0A%0AGracias."
                 className="w-full py-2 px-4 bg-teal-500 text-black font-medium hover:bg-teal-400 transition mb-8 block text-center"
               >
                 Seleccionar plan
@@ -176,7 +176,7 @@ export default function PricingPage() {
               </div>
 
               <Link
-                href="/#"
+                href="mailto:info@stofliui.com?subject=Interés%20en%20Plan%20Páginas&body=Hola%20equipo%20de%20StofliUI%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20Páginas.%20Me%20gustaría%20recibir%20más%20información%20sobre%20este%20servicio%20y%20cómo%20podemos%20comenzar%20a%20trabajar%20juntos.%0A%0AGracias."
                 className="w-full py-2 px-4 bg-teal-500 text-black font-medium hover:bg-teal-400 transition mb-8 block text-center"
               >
                 Seleccionar plan
@@ -265,7 +265,7 @@ export default function PricingPage() {
               </div>
 
               <Link
-                href="/#"
+                href="mailto:info@stofliui.com?subject=Interés%20en%20Plan%20Aplicaciones%20Web&body=Hola%20equipo%20de%20StofliUI%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20Aplicaciones%20Web.%20Me%20gustaría%20recibir%20más%20información%20sobre%20este%20servicio%20y%20cómo%20podemos%20comenzar%20a%20trabajar%20juntos.%0A%0AGracias."
                 className="w-full py-2 px-4 bg-teal-500 text-black font-medium hover:bg-teal-400 transition mb-8 block text-center"
               >
                 Seleccionar plan
