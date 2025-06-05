@@ -517,7 +517,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     >
       <div
         className={cn(
-          `relative flex flex-col group`,
+          `relative flex flex-col group bg-white dark:bg-black`,
           getVariantClasses(),
           getStateClasses(),
           disabled && "opacity-50 cursor-not-allowed",
@@ -526,7 +526,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         )}
       >
         {title && (
-          <div className="px-3 pt-1.5 pb-0">
+          <div className="px-3 pt-1.5 pb-0 rounded-lg">
             <label
               htmlFor={inputId}
               className={cn(
@@ -550,8 +550,8 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           className={cn(
             `w-full px-3 pr-20`,
             title ? "pt-0 pb-1.5" : "py-2",
-            `bg-transparent text-sm text-neutral-900 dark:text-neutral-100 
-            placeholder-zinc-500 dark:placeholder-zinc-400 outline-none disabled:cursor-not-allowed`,
+            `rounded-lg text-sm text-neutral-900 dark:text-neutral-100 
+            placeholder-neutral-600 dark:placeholder-neutral-400 outline-none disabled:cursor-not-allowed`,
             inputClassName
           )}
           placeholder={placeholder}
@@ -630,7 +630,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
             className={cn(
-              `absolute z-50 w-full mt-1 bg-white dark:bg-zinc-900 
+              `absolute z-50 w-full mt-1 bg-white dark:bg-black 
               rounded-lg shadow-lg overflow-hidden max-h-60
               border border-zinc-200 dark:border-zinc-800`,
               dropdownClassName
