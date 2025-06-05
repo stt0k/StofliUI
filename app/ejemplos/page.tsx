@@ -187,17 +187,12 @@ export default function ExamplesPage() {
                         </Button>
                         <Dropdown
                           avatarOnly
-                          avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+                          avatarSrc="https://i.pravatar.cc/300?u=md"
                           avatarSize="md"
                           variant="default"
                           placement="left"
+                          selectable={false}
                           items={[
-                            {
-                              label: "Carlos Rodríguez",
-                              value: "profile",
-                              avatarSrc:
-                                "https://randomuser.me/api/portraits/men/32.jpg",
-                            },
                             {
                               label: "Configuración",
                               value: "settings",
@@ -230,18 +225,13 @@ export default function ExamplesPage() {
                         </Button>
                         <Dropdown
                           avatarOnly
-                          avatarSrc="https://randomuser.me/api/portraits/men/32.jpg"
+                          avatarSrc="https://i.pravatar.cc/300?u=md"
                           avatarSize="md"
                           variant="default"
                           placement="left"
                           className="w-auto"
+                          selectable={false}
                           items={[
-                            {
-                              label: "Carlos Rodríguez",
-                              value: "profile",
-                              avatarSrc:
-                                "https://randomuser.me/api/portraits/men/32.jpg",
-                            },
                             {
                               label: "Configuración",
                               value: "settings",
