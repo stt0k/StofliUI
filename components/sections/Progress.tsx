@@ -225,7 +225,7 @@ const Progress: React.FC<ProgressProps> = ({
               id={labelId}
               className={cn(
                 labelSizeClasses[size],
-                "font-medium dark:text-neutral-200 text-neutral-800",
+                "font-medium dark:text-neutral-100 text-neutral-900",
                 labelClassName
               )}
             >
