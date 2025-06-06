@@ -43,7 +43,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
       <h3>
         <button
           className={cn(
-            "flex w-full items-center justify-between py-4 text-left",
+            "flex w-full items-center justify-between py-4 text-left text-neutral-900 dark:text-neutral-100",
             buttonClassName
           )}
           onClick={onClick}
@@ -142,7 +142,7 @@ const Accordion: React.FC<AccordionProps> = ({
   return (
     <div
       className={cn(
-        "divide-y divide-zinc-200 dark:divide-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-800",
+        "divide-y divide-zinc-200 dark:divide-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black",
         className
       )}
       role="presentation"
