@@ -323,7 +323,7 @@ const Tabs: React.FC<TabsProps> = ({
                   radiusClasses[radius],
                   "z-0",
                   indicatorBgClasses[variant],
-                  "dark:bg-zinc-900 shadow-sm dark:border dark:border-zinc-800/60",
+                  "shadow-sm dark:border dark:border-zinc-800/60",
                   indicatorClassName
                 )}
                 initial={false}
