@@ -550,7 +550,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           className={cn(
             `w-full px-3 pr-20`,
             title ? "pt-0 pb-1.5" : "py-2",
-            `rounded-lg text-sm text-neutral-900 dark:text-neutral-100 
+            `bg-white dark:bg-black rounded-lg text-sm text-neutral-900 dark:text-neutral-100 
             placeholder-neutral-600 dark:placeholder-neutral-400 outline-none disabled:cursor-not-allowed`,
             inputClassName
           )}
@@ -576,16 +576,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
                 type="button"
                 onClick={handleClear}
                 className={cn(
-                  `h-4 w-4 text-${
-                    variant === "default" ? "zinc" : variant
-                  }-400 hover:text-${
-                    variant === "default" ? "zinc" : variant
-                  }-600 
-                  dark:text-${
-                    variant === "default" ? "zinc" : variant
-                  }-500 dark:hover:text-${
-                    variant === "default" ? "zinc" : variant
-                  }-300 
+                  `h-4 w-4 text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 
                   opacity-0 group-hover:opacity-100 transition-opacity`,
                   iconClassName
                 )}
@@ -599,15 +590,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           <button
             type="button"
             className={cn(
-              `flex items-center justify-center w-8 h-full`,
-              `text-${variant === "default" ? "zinc" : variant}-500 dark:text-${
-                variant === "default" ? "zinc" : variant
-              }-400 transition-colors`,
-              `hover:text-${
-                variant === "default" ? "zinc" : variant
-              }-700 dark:hover:text-${
-                variant === "default" ? "zinc" : variant
-              }-300`,
+              `flex items-center justify-center w-8 h-full
+              text-neutral-500 dark:text-neutral-400 transition-colors
+              hover:text-neutral-700 dark:hover:text-neutral-300`,
               iconClassName
             )}
             onClick={toggleDropdown}
