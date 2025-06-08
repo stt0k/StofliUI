@@ -254,7 +254,7 @@ const CalendarContent: React.FC<CalendarProps> = ({
       )}
       <div
         className={cn(
-          "flex items-center justify-between mb-4",
+          "flex items-center justify-between mb-4 text-neutral-900 dark:text-neutral-100",
           headerClassName
         )}
         role="group"
@@ -333,14 +333,14 @@ const CalendarContent: React.FC<CalendarProps> = ({
             const dayId = `${calendarId}-day-${index}`;
 
             const baseClasses = cn(
-              "aspect-square flex items-center justify-center text-sm",
+              "text-neutral-900 dark:text-neutral-100 aspect-square flex items-center justify-center text-sm",
               radiusClasses[radius],
               !isDisabled && !readOnly ? "cursor-pointer" : "cursor-default",
               "transition-colors duration-200",
               !isSelected &&
                 !isDisabled &&
                 !readOnly &&
-                "hover:text-black dark:hover:text-white"
+                "hover:text-neutral-900 dark:hover:text-neutral-100"
             );
 
             const combinedDayClassName = cn(
