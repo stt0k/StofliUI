@@ -1049,7 +1049,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
             {/* Volvemos a un enfoque simple que funciona correctamente */}
             <div
               id={inputId}
-              className={cn("flex items-center gap-1", inputClassName)}
+              className={cn(
+                "flex items-center gap-1 text-neutral-900 dark:text-neutral-100",
+                inputClassName
+              )}
               role="group"
               aria-label={label || "Selector de fecha"}
               aria-describedby={cn(
