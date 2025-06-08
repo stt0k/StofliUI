@@ -83,6 +83,7 @@ const Switch: React.FC<SwitchProps> = ({
       label: "text-sm",
       padding: "px-0.5",
       translateX: { on: "14px", off: "0px" },
+      top: "top-[2px]", // Posición vertical específica para sm
     },
     md: {
       wrapper: "h-5 w-10",
@@ -91,6 +92,7 @@ const Switch: React.FC<SwitchProps> = ({
       label: "text-base",
       padding: "px-0.5",
       translateX: { on: "20px", off: "0px" },
+      top: "top-[2px]", // Posición vertical específica para md
     },
     lg: {
       wrapper: "h-7 w-14",
@@ -99,6 +101,7 @@ const Switch: React.FC<SwitchProps> = ({
       label: "text-lg",
       padding: "px-0.5",
       translateX: { on: "28px", off: "0px" },
+      top: "top-[2px]", // Posición vertical específica para lg
     },
   };
 
@@ -303,7 +306,8 @@ const Switch: React.FC<SwitchProps> = ({
     const baseClasses = [
       sizeClasses[size].circle,
       "rounded-full shadow-md flex items-center justify-center z-10",
-      "absolute top-1/2 -translate-y-1/2 left-0.5",
+      "absolute left-0.5",
+      sizeClasses[size].top, // Usar la posición vertical específica para cada tamaño
     ];
 
     // Determinar clases según el estado
