@@ -6,6 +6,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import dts from "rollup-plugin-dts";
 import fs from "fs";
 import preserveUseClientDirective from "rollup-plugin-preserve-use-client";
+import replace from "@rollup/plugin-replace";
 
 // Leer el archivo package.json
 const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf8"));
@@ -17,6 +18,15 @@ const terserConfig = {
     preserve_annotations: true
   }
 };
+
+// Configuración de replace para eliminar process.env
+const replaceProcessEnv = replace({
+  preventAssignment: true,
+  values: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    // Puedes agregar más variables de entorno que necesites reemplazar aquí
+  }
+});
 
 // Función para crear configuración para un componente
 const createComponentConfig = (componentName) => {
@@ -48,6 +58,7 @@ const createComponentConfig = (componentName) => {
         peerDepsExternal(),
         resolve(),
         commonjs(),
+        replaceProcessEnv,
         preserveUseClientDirective(),
         typescript({
           tsconfig: "./tsconfig.json",
@@ -105,6 +116,7 @@ const mainConfig = [
       peerDepsExternal(),
       resolve(),
       commonjs(),
+      replaceProcessEnv,
       preserveUseClientDirective(),
       typescript({
         tsconfig: "./tsconfig.json",
@@ -151,6 +163,7 @@ const mainConfig = [
       peerDepsExternal(),
       resolve(),
       commonjs(),
+      replaceProcessEnv,
       typescript({
         tsconfig: "./tsconfig.json",
         declaration: false,
