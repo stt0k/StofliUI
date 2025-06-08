@@ -576,16 +576,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
                 type="button"
                 onClick={handleClear}
                 className={cn(
-                  `h-4 w-4 text-${
-                    variant === "default" ? "neutral" : variant
-                  }-400 hover:text-${
-                    variant === "default" ? "neutral" : variant
-                  }-600 
-                  dark:text-${
-                    variant === "default" ? "neutral" : variant
-                  }-500 dark:hover:text-${
-                    variant === "default" ? "neutral" : variant
-                  }-300 
+                  `h-4 w-4 text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 
                   opacity-0 group-hover:opacity-100 transition-opacity`,
                   iconClassName
                 )}
@@ -599,17 +590,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           <button
             type="button"
             className={cn(
-              `flex items-center justify-center w-8 h-full`,
-              `text-${
-                variant === "default" ? "neutral" : variant
-              }-500 dark:text-${
-                variant === "default" ? "neutral" : variant
-              }-400 transition-colors`,
-              `hover:text-${
-                variant === "default" ? "neutral" : variant
-              }-700 dark:hover:text-${
-                variant === "default" ? "neutral" : variant
-              }-300`,
+              `flex items-center justify-center w-8 h-full
+              text-neutral-500 dark:text-neutral-400 transition-colors
+              hover:text-neutral-700 dark:hover:text-neutral-300`,
               iconClassName
             )}
             onClick={toggleDropdown}
