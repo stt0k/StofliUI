@@ -81,18 +81,27 @@ const Switch: React.FC<SwitchProps> = ({
       circle: "h-3 w-3",
       iconSize: "h-2 w-2",
       label: "text-sm",
+      padding: "px-0.5",
+      translateX: { on: "14px", off: "0px" },
+      top: "top-[2px]", // Posición vertical específica para sm
     },
     md: {
       wrapper: "h-5 w-10",
       circle: "h-4 w-4",
       iconSize: "h-2.5 w-2.5",
       label: "text-base",
+      padding: "px-0.5",
+      translateX: { on: "20px", off: "0px" },
+      top: "top-[2px]", // Posición vertical específica para md
     },
     lg: {
       wrapper: "h-7 w-14",
       circle: "h-6 w-6",
       iconSize: "h-3.5 w-3.5",
       label: "text-lg",
+      padding: "px-0.5",
+      translateX: { on: "28px", off: "0px" },
+      top: "top-[2px]", // Posición vertical específica para lg
     },
   };
 
@@ -253,6 +262,7 @@ const Switch: React.FC<SwitchProps> = ({
     // Clases base compartidas
     const baseClasses = [
       sizeClasses[size].wrapper,
+      sizeClasses[size].padding,
       "rounded-full",
       disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
       "transition-all duration-300 ease-out relative overflow-hidden",
@@ -296,7 +306,8 @@ const Switch: React.FC<SwitchProps> = ({
     const baseClasses = [
       sizeClasses[size].circle,
       "rounded-full shadow-md flex items-center justify-center z-10",
-      "absolute top-1/2 transform -translate-y-1/2",
+      "absolute left-0.5",
+      sizeClasses[size].top, // Usar la posición vertical específica para cada tamaño
     ];
 
     // Determinar clases según el estado
@@ -327,20 +338,6 @@ const Switch: React.FC<SwitchProps> = ({
         );
       }
     }
-  };
-
-  // Calcular las posiciones del círculo según el tamaño
-  const getCirclePositions = () => {
-    const sizes = {
-      sm: { active: "calc(100% - 2px)", inactive: "2px" },
-      md: { active: "calc(100% - 2px)", inactive: "2px" },
-      lg: { active: "calc(100% - 2px)", inactive: "2px" },
-    };
-
-    return {
-      left: isChecked ? sizes[size].active : sizes[size].inactive,
-      translateX: isChecked ? "-100%" : "0%",
-    };
   };
 
   return (
@@ -420,12 +417,12 @@ const Switch: React.FC<SwitchProps> = ({
             className={getCircleClasses()}
             initial={false}
             animate={{
-              ...getCirclePositions(),
-              scale: 1,
+              x: isChecked ? sizeClasses[size].translateX.on : sizeClasses[size].translateX.off,
             }}
             transition={{
-              duration: 0.3,
-              ease: [0.4, 0.0, 0.2, 1],
+              type: "spring",
+              stiffness: 500,
+              damping: 30,
             }}
             aria-hidden="true"
           >
