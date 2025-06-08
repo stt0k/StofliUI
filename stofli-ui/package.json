@@ -1,6 +1,6 @@
 {
   "name": "stofli-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Biblioteca moderna de componentes UI para React con Tailwind CSS y Framer Motion",
   "main": "dist/index.js",
