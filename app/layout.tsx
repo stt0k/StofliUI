@@ -10,7 +10,7 @@ const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
-  display: "swap", // Asegúrate de agregar display: swap
+  display: "swap", 
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "StofliUI",
     description: "Librería de componentes UI accesibles y personalizables para React",
-    url: "https://stofliui.com",
+    url: "https://stofli-ui.vercel.app/",
     siteName: "StofliUI",
     images: [
       {
