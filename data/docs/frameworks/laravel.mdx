@@ -72,7 +72,10 @@ export default defineConfig({
     }),
     react(),
   ],
-});
+  define: {
+      'process.env': {}
+    },
+})
 ```
 
 Si no tienes instalado el plugin de React, puedes instalarlo:
@@ -109,7 +112,7 @@ export default {
     "./resources/**/*.js",
     "./resources/**/*.jsx",
     "./resources/**/*.tsx",
-    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/stofli-ui/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -141,11 +144,7 @@ Tienes dos opciones para configurar Tailwind CSS v4 en tu proyecto Laravel:
 
 ```css
 @import "tailwindcss";
-
-/* Usar la directiva @source para especificar archivos a escanear */
-@source "./resources/js";
-@source "./resources/views";
-@source "../node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}";
+@source "../node_modules/stofli-ui/dist/**/*.{js,ts,jsx,tsx}";
 ```
 
 2. **Con archivo de configuración**: Puedes optar por seguir usando un archivo `tailwind.config.js`:
@@ -159,7 +158,7 @@ export default {
     "./resources/**/*.js",
     "./resources/**/*.jsx",
     "./resources/**/*.tsx",
-    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/stofli-ui/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -172,7 +171,7 @@ Si usas el archivo de configuración, debes importarlo en tu CSS:
 
 ```css
 @import "tailwindcss";
-@import "../tailwind.config";
+@config "../tailwind.config.js";
 ```
 
 Y actualiza tu configuración de Vite para incluir el plugin de Tailwind CSS v4:
