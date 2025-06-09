@@ -47,8 +47,8 @@ export default function ChangelogPage() {
 
   const releases: Release[] = [
     {
-      version: "v1.0.0",
-      date: "Junio 2, 2025",
+      version: "v1.0.1",
+      date: "Junio 9, 2025",
       title: "Lanzamiento Inicial",
       description:
         "<p>El primer lanzamiento público de StofliUI: Una biblioteca de componentes React UI rápida, moderna y fácil de utilizar.<p/> <p>Optimizada para <strong>rendimiento</strong>, <strong>accesibilidad</strong> y <strong>personalización</strong>. Con Tailwind CSS y Framer Motion.<p/>",
