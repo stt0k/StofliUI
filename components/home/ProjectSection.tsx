@@ -161,7 +161,7 @@ const ProjectSection = () => {
                           </div>
                         </div>
                         <div className="px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded-md text-gray-700 dark:text-neutral-300 text-xs font-medium">
-                          v1.0.0
+                          v1.0.1
                         </div>
                       </div>
                     </div>
@@ -204,7 +204,7 @@ const ProjectSection = () => {
 
                     <div className="flex justify-between items-center">
                       <div className="text-sm text-neutral-600 dark:text-neutral-400">
-                        2 Jun 2025
+                        9 Jun 2025
                       </div>
                       <button className="flex items-center text-xs font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white transition-colors">
                         Changelog <ChevronRight className="w-3.5 h-3.5 ml-1" />
