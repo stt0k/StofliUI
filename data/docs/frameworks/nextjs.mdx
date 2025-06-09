@@ -71,7 +71,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/stofli-ui/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -89,12 +89,7 @@ module.exports = {
 
 ```css
 @import "tailwindcss";
-
-/* Usar la directiva @source para especificar archivos a escanear */
-@source './app';
-@source './components';
-@source './pages';
-@source '../node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}';
+@source '../node_modules/stofli-ui/dist/**/*.{js,ts,jsx,tsx}';
 ```
 
     2. **Con archivo de configuración**: Si prefieres seguir usando un archivo de configuración, mantén tu `tailwind.config.js` actualizado y asegúrate de importarlo en tu archivo CSS:
@@ -107,7 +102,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/stofli-ui/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/stofli-ui/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -118,7 +113,7 @@ module.exports = {
 
 ```css
 @import "tailwindcss";
-@import "../tailwind.config";
+@config "../tailwind.config.js";
 ```
 
 En este caso, no necesitas usar las directivas `@source` ya que la detección de clases se hará a través de la propiedad `content` del archivo de configuración.
