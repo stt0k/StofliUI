@@ -1,5 +1,5 @@
 // layout.tsx (o layout.js)
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -18,6 +18,16 @@ const geistMono = localFont({
   weight: "100 900",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  // Agregar soporte para PWA
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   title: "StofliUI",
@@ -44,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "StofliUI",
     images: [
       {
-        url: "/home.png",
+        url: "https://stofli-ui.vercel.app/home.png",
         width: 1200,
         height: 630,
         alt: "StofliUI - Librería de componentes UI para React",
@@ -57,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "StofliUI",
     description: "Librería de componentes UI accesibles y personalizables para React",
-    images: ["/home.png"],
+    images: ["https://stofli-ui.vercel.app/home.png"],
     creator: "@stofliui",
   },
   appleWebApp: {
@@ -66,7 +76,9 @@ export const metadata: Metadata = {
     title: "StofliUI",
   },
   applicationName: "StofliUI",
-  themeColor: "#ffffff",
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export default function RootLayout({
@@ -76,6 +88,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
