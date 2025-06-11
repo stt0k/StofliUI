@@ -13,7 +13,7 @@
       <img src="https://img.shields.io/npm/v/stofli-ui" alt="Versión npm" />
     </a>
     <a href="https://github.com/stt0k/StofliUI/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/username/stofli-ui" alt="Licencia MIT" />
+      <img src="https://img.shields.io/npm/l/stofli-ui?style=flat" alt="Licencia MIT" />
     </a>
   </div>
 </div>
